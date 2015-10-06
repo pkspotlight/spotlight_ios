@@ -7,13 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8849A1E31BA0CB8400511DD5 /* SignUpTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8849A1E21BA0CB8400511DD5 /* SignUpTableViewController.m */; };
+		8849A1E61BA0CC7A00511DD5 /* SignUpInputTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8849A1E51BA0CC7A00511DD5 /* SignUpInputTableViewCell.m */; };
+		8849A1E91BA2590800511DD5 /* IntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8849A1E81BA2590800511DD5 /* IntroViewController.m */; };
 		88A736DA1B91318D00093B27 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A736D91B91318D00093B27 /* main.m */; };
 		88A736DD1B91318D00093B27 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A736DC1B91318D00093B27 /* AppDelegate.m */; };
-		88A736E01B91318D00093B27 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A736DF1B91318D00093B27 /* ViewController.m */; };
 		88A736E31B91318D00093B27 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88A736E11B91318D00093B27 /* Main.storyboard */; };
 		88A736E51B91318D00093B27 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88A736E41B91318D00093B27 /* Images.xcassets */; };
 		88A736E81B91318D00093B27 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88A736E61B91318D00093B27 /* LaunchScreen.xib */; };
 		88A736F41B91318D00093B27 /* SpotlightTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A736F31B91318D00093B27 /* SpotlightTests.m */; };
+		88E002D51BB2D44200AA5433 /* CreateSpotlightTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E002D41BB2D44200AA5433 /* CreateSpotlightTableViewController.m */; settings = {ASSET_TAGS = (); }; };
+		88E98E891BAF508400292B14 /* Softball.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 88E98E861BAF508400292B14 /* Softball.JPG */; };
+		88E98E8A1BAF508400292B14 /* hockey.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 88E98E871BAF508400292B14 /* hockey.jpg */; };
+		88E98E8B1BAF508400292B14 /* fielding ground ball.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 88E98E881BAF508400292B14 /* fielding ground ball.jpg */; };
+		88EE2CC61B9E08B2002DDB99 /* SpotlightFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88EE2CC51B9E08B2002DDB99 /* SpotlightFeedViewController.m */; };
+		C2B409966BE212B335038003 /* libPods-Spotlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F03B672A3CAD95AD6DB192BE /* libPods-Spotlight.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,19 +35,33 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		17139AE8364E5B9890F4FCBC /* Pods-Spotlight.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spotlight.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Spotlight/Pods-Spotlight.debug.xcconfig"; sourceTree = "<group>"; };
+		4FDDD1185B6B67FED774A599 /* Pods-Spotlight.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spotlight.release.xcconfig"; path = "Pods/Target Support Files/Pods-Spotlight/Pods-Spotlight.release.xcconfig"; sourceTree = "<group>"; };
+		8849A1E11BA0CB8400511DD5 /* SignUpTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpTableViewController.h; sourceTree = "<group>"; };
+		8849A1E21BA0CB8400511DD5 /* SignUpTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpTableViewController.m; sourceTree = "<group>"; };
+		8849A1E41BA0CC7A00511DD5 /* SignUpInputTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpInputTableViewCell.h; sourceTree = "<group>"; };
+		8849A1E51BA0CC7A00511DD5 /* SignUpInputTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpInputTableViewCell.m; sourceTree = "<group>"; };
+		8849A1E71BA2590800511DD5 /* IntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroViewController.h; sourceTree = "<group>"; };
+		8849A1E81BA2590800511DD5 /* IntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroViewController.m; sourceTree = "<group>"; };
 		88A736D41B91318D00093B27 /* Spotlight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spotlight.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88A736D81B91318D00093B27 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88A736D91B91318D00093B27 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		88A736DB1B91318D00093B27 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		88A736DC1B91318D00093B27 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		88A736DE1B91318D00093B27 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		88A736DF1B91318D00093B27 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		88A736E21B91318D00093B27 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		88A736E41B91318D00093B27 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		88A736E71B91318D00093B27 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		88A736ED1B91318D00093B27 /* SpotlightTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpotlightTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		88A736F21B91318D00093B27 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88A736F31B91318D00093B27 /* SpotlightTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpotlightTests.m; sourceTree = "<group>"; };
+		88E002D31BB2D44200AA5433 /* CreateSpotlightTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateSpotlightTableViewController.h; sourceTree = "<group>"; };
+		88E002D41BB2D44200AA5433 /* CreateSpotlightTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateSpotlightTableViewController.m; sourceTree = "<group>"; };
+		88E98E861BAF508400292B14 /* Softball.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Softball.JPG; sourceTree = "<group>"; };
+		88E98E871BAF508400292B14 /* hockey.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = hockey.jpg; sourceTree = "<group>"; };
+		88E98E881BAF508400292B14 /* fielding ground ball.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "fielding ground ball.jpg"; sourceTree = "<group>"; };
+		88EE2CC41B9E08B2002DDB99 /* SpotlightFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotlightFeedViewController.h; sourceTree = "<group>"; };
+		88EE2CC51B9E08B2002DDB99 /* SpotlightFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotlightFeedViewController.m; sourceTree = "<group>"; };
+		F03B672A3CAD95AD6DB192BE /* libPods-Spotlight.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Spotlight.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2B409966BE212B335038003 /* libPods-Spotlight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,12 +83,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4C8670A663CEB02CAA8F6223 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F03B672A3CAD95AD6DB192BE /* libPods-Spotlight.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		521BF6B11B45F7B248EE7844 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				17139AE8364E5B9890F4FCBC /* Pods-Spotlight.debug.xcconfig */,
+				4FDDD1185B6B67FED774A599 /* Pods-Spotlight.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		88A736CB1B91318D00093B27 = {
 			isa = PBXGroup;
 			children = (
 				88A736D61B91318D00093B27 /* Spotlight */,
 				88A736F01B91318D00093B27 /* SpotlightTests */,
 				88A736D51B91318D00093B27 /* Products */,
+				521BF6B11B45F7B248EE7844 /* Pods */,
+				4C8670A663CEB02CAA8F6223 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -83,8 +125,16 @@
 			children = (
 				88A736DB1B91318D00093B27 /* AppDelegate.h */,
 				88A736DC1B91318D00093B27 /* AppDelegate.m */,
-				88A736DE1B91318D00093B27 /* ViewController.h */,
-				88A736DF1B91318D00093B27 /* ViewController.m */,
+				8849A1E11BA0CB8400511DD5 /* SignUpTableViewController.h */,
+				8849A1E21BA0CB8400511DD5 /* SignUpTableViewController.m */,
+				88EE2CC41B9E08B2002DDB99 /* SpotlightFeedViewController.h */,
+				88EE2CC51B9E08B2002DDB99 /* SpotlightFeedViewController.m */,
+				88E002D31BB2D44200AA5433 /* CreateSpotlightTableViewController.h */,
+				88E002D41BB2D44200AA5433 /* CreateSpotlightTableViewController.m */,
+				8849A1E41BA0CC7A00511DD5 /* SignUpInputTableViewCell.h */,
+				8849A1E51BA0CC7A00511DD5 /* SignUpInputTableViewCell.m */,
+				8849A1E71BA2590800511DD5 /* IntroViewController.h */,
+				8849A1E81BA2590800511DD5 /* IntroViewController.m */,
 				88A736E11B91318D00093B27 /* Main.storyboard */,
 				88A736E41B91318D00093B27 /* Images.xcassets */,
 				88A736E61B91318D00093B27 /* LaunchScreen.xib */,
@@ -96,6 +146,7 @@
 		88A736D71B91318D00093B27 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				88E98E851BAF507700292B14 /* Images */,
 				88A736D81B91318D00093B27 /* Info.plist */,
 				88A736D91B91318D00093B27 /* main.m */,
 			);
@@ -119,6 +170,16 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		88E98E851BAF507700292B14 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				88E98E861BAF508400292B14 /* Softball.JPG */,
+				88E98E871BAF508400292B14 /* hockey.jpg */,
+				88E98E881BAF508400292B14 /* fielding ground ball.jpg */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -126,9 +187,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 88A736F71B91318D00093B27 /* Build configuration list for PBXNativeTarget "Spotlight" */;
 			buildPhases = (
+				C44A0772023A2D7CE8F7F1D5 /* Check Pods Manifest.lock */,
 				88A736D01B91318D00093B27 /* Sources */,
 				88A736D11B91318D00093B27 /* Frameworks */,
 				88A736D21B91318D00093B27 /* Resources */,
+				1B0E6BB741D293639D84CBA3 /* Copy Pods Resources */,
+				8849A1E01B9FB6CA00511DD5 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -163,7 +227,7 @@
 		88A736CC1B91318D00093B27 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = Spotlight;
 				TargetAttributes = {
 					88A736D31B91318D00093B27 = {
@@ -201,7 +265,10 @@
 			files = (
 				88A736E31B91318D00093B27 /* Main.storyboard in Resources */,
 				88A736E81B91318D00093B27 /* LaunchScreen.xib in Resources */,
+				88E98E891BAF508400292B14 /* Softball.JPG in Resources */,
+				88E98E8B1BAF508400292B14 /* fielding ground ball.jpg in Resources */,
 				88A736E51B91318D00093B27 /* Images.xcassets in Resources */,
+				88E98E8A1BAF508400292B14 /* hockey.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,14 +281,64 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1B0E6BB741D293639D84CBA3 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Spotlight/Pods-Spotlight-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8849A1E01B9FB6CA00511DD5 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/Fabric.framework/run\" 1f3dc97cb296c416a691168cae8634f266e98641 ca2e2e6269a77a78e209a012d8dd69f84b0edbd92ebb3f443d2a6f08938ae991";
+		};
+		C44A0772023A2D7CE8F7F1D5 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		88A736D01B91318D00093B27 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				88A736E01B91318D00093B27 /* ViewController.m in Sources */,
+				88EE2CC61B9E08B2002DDB99 /* SpotlightFeedViewController.m in Sources */,
+				8849A1E91BA2590800511DD5 /* IntroViewController.m in Sources */,
 				88A736DD1B91318D00093B27 /* AppDelegate.m in Sources */,
+				88E002D51BB2D44200AA5433 /* CreateSpotlightTableViewController.m in Sources */,
 				88A736DA1B91318D00093B27 /* main.m in Sources */,
+				8849A1E31BA0CB8400511DD5 /* SignUpTableViewController.m in Sources */,
+				8849A1E61BA0CC7A00511DD5 /* SignUpInputTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,6 +401,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -347,20 +465,24 @@
 		};
 		88A736F81B91318D00093B27 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 17139AE8364E5B9890F4FCBC /* Pods-Spotlight.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Spotlight/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.spotlight.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
 		88A736F91B91318D00093B27 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4FDDD1185B6B67FED774A599 /* Pods-Spotlight.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Spotlight/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.spotlight.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -379,6 +501,7 @@
 				);
 				INFOPLIST_FILE = SpotlightTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.spotlight.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Spotlight.app/Spotlight";
 			};
@@ -394,6 +517,7 @@
 				);
 				INFOPLIST_FILE = SpotlightTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.spotlight.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Spotlight.app/Spotlight";
 			};
@@ -418,6 +542,7 @@
 				88A736F91B91318D00093B27 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		88A736FA1B91318D00093B27 /* Build configuration list for PBXNativeTarget "SpotlightTests" */ = {
 			isa = XCConfigurationList;
@@ -426,6 +551,7 @@
 				88A736FC1B91318D00093B27 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -8,6 +8,10 @@
 
 #import "AppDelegate.h"
 
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
+#import <Parse.h>
+
 @interface AppDelegate ()
 
 @end
@@ -17,6 +21,17 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [Fabric with:@[[Crashlytics class]]];
+    [Parse setApplicationId:@"nuNuhBJQp4cYfeUnWlNFo27QUCKeAgWBX5D74r4F"
+                  clientKey:@"vMH2XfoFKQAy8vbOYzgXZtJrRJ8LjCD5933k3kPF"];
+    if (![PFUser currentUser]){
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"
+                                                                 bundle: nil];
+        
+        UIViewController *controller = [mainStoryboard instantiateViewControllerWithIdentifier: @"IntroNavigationController"];
+        [self.window setRootViewController:controller];
+    }
+    
     return YES;
 }
 

@@ -1,0 +1,22 @@
+dependencies: \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/PFRole.m \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/PFRole.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Parse/PFNullability.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Parse/PFObject.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Bolts/BFTask.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Bolts/BFCancellationToken.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Bolts/BFCancellationTokenRegistration.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Parse/PFACL.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Parse/PFConstants.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Parse/PFSubclassing.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFAssert.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFMacros.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/PFObject+Subclass.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/Object/PFObjectPrivate.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFDecoder.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFEncoder.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFMulticastDelegate.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/Object/Controller/PFObjectControlling.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/PFQuery.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Parse/PFGeoPoint.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Parse/PFUser.h

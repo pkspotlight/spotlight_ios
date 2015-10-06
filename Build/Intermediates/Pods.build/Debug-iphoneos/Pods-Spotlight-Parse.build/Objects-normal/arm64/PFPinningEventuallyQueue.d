@@ -1,0 +1,33 @@
+dependencies: \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFPinningEventuallyQueue.m \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFPinningEventuallyQueue.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFEventuallyQueue.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFMacros.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFNetworkCommand.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Bolts/BFExecutor.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Bolts/BFTaskCompletionSource.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/BFTask+Private.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Bolts/BFTask.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Bolts/BFCancellationToken.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Bolts/BFCancellationTokenRegistration.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFInternalUtils.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Parse/PFConstants.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Parse/PFNullability.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/Push/PFPushPrivate.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Parse/PFPush.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFEncoder.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFAssert.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFCommandResult.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFErrorUtilities.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFEventuallyPin.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/PFObject.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Parse/PFACL.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/PFSubclassing.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFEventuallyQueue_Private.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/Object/PFObjectPrivate.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFDecoder.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFMulticastDelegate.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/Object/Controller/PFObjectControlling.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/Object/OperationSet/PFOperationSet.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/Commands/PFRESTCommand.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFTaskQueue.h

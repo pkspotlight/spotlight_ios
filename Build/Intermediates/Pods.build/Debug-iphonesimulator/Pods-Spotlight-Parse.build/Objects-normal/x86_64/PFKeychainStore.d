@@ -1,0 +1,33 @@
+dependencies: \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFKeychainStore.m \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFKeychainStore.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFAssert.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFMacros.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFLogging.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Parse/PFConstants.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Parse/PFNullability.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFLogger.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Parse.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Parse/PFACL.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Parse/PFAnalytics.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Bolts/BFTask.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Bolts/BFCancellationToken.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Bolts/BFCancellationTokenRegistration.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Parse/PFAnonymousUtils.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Parse/PFUser.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Parse/PFObject.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Parse/PFSubclassing.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Parse/PFCloud.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Parse/PFConfig.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Parse/PFFile.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Parse/PFGeoPoint.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Parse/PFObject+Subclass.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Parse/PFQuery.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Parse/PFRelation.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Parse/PFRole.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Parse/PFSession.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Parse/PFInstallation.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Parse/PFPush.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Parse/PFNetworkActivityIndicatorManager.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Parse/PFProduct.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Parse/PFPurchase.h

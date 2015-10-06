@@ -1,0 +1,25 @@
+dependencies: \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/Push/ChannelsController/PFPushChannelsController.m \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/Push/ChannelsController/PFPushChannelsController.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFCoreDataProvider.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/BFTask+Private.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Bolts/BFExecutor.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Bolts/BFTask.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Bolts/BFCancellationToken.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Bolts/BFCancellationTokenRegistration.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFInternalUtils.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Parse/PFConstants.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Parse/PFNullability.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/Push/PFPushPrivate.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Parse/PFPush.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFMacros.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFEncoder.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFAssert.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/Installation/CurrentInstallationController/PFCurrentInstallationController.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/Object/CurrentController/PFCurrentObjectControlling.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFDataProvider.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFErrorUtilities.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/PFInstallation.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Parse/PFObject.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Parse/PFACL.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Build/Parse/PFSubclassing.h

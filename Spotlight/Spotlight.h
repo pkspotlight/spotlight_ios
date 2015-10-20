@@ -15,7 +15,8 @@
 
 + (NSString *)parseClassName;
 
-@property (strong, nonatomic) NSArray* mediaFiles;
-
+//returns array of urls
+- (void)allImageUrls:(void (^)(NSArray *urls, NSError *error))completion;
+- (void)allThumbnailUrls:(void (^)(NSArray *urls, NSError *error))completion;
 
 @end

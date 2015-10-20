@@ -11,6 +11,7 @@
 #import "Spotlight.h"
 #import "SpotlightTableViewCell.h"
 #import "SpotlightMedia.h"
+#import <AFNetworking/UIImageView+AFNetworking.h>
 
 @interface SpotlightFeedViewController ()
 
@@ -55,8 +56,27 @@
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     SpotlightTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SpotlightTableViewCell" forIndexPath:indexPath];
-    SpotlightMedia* spotlight = self.spotlights[indexPath.row];
+    [cell.mainImageView setImage:nil];
+    NSUInteger tag = indexPath.row;
+    [cell setTag:tag];
+    Spotlight* spotlight = self.spotlights[indexPath.row];
     [cell.titleLabel setText:spotlight[@"title"]];
+    [spotlight allThumbnailUrls:^(NSArray *urls, NSError *error) {
+        if (urls && !error) {
+            NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[urls firstObject]]];
+            [cell.mainImageView
+             setImageWithURLRequest:request
+             placeholderImage:nil
+             success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, UIImage * _Nonnull image) {
+                 if (cell.tag == tag) {
+                     [cell.mainImageView setImage:image];
+                 }
+             } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, NSError * _Nonnull error) {
+                 NSLog(@"fuck thumbnail failure");
+             }];
+        }
+    }];
+    
     return cell;
 }
 
@@ -66,16 +86,13 @@
     [query whereKey:@"spotlightParticipant" equalTo:[[PFUser currentUser] objectId]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
-            // The find succeeded.
-            NSLog(@"Successfully retrieved %lu scores.", (unsigned long)objects.count);
-            // Do something with the found objects
+            NSLog(@"Successfully retrieved %lu Spotlights.", (unsigned long)objects.count);
             for (PFObject *object in objects) {
                 NSLog(@"%@", object.objectId);
             }
             self.spotlights = objects;
             [self.tableView reloadData];
         } else {
-            // Log details of the failure
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     }];

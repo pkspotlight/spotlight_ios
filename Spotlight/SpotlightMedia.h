@@ -12,13 +12,13 @@
 
 @interface SpotlightMedia : PFObject <PFSubclassing>
 
-- (instancetype)initWithVideoData:(NSData*)data;
+- (instancetype)initWithVideoPath:(NSString*)path;
 - (instancetype)initWithImage:(UIImage*)image;
-
 
 + (NSString *)parseClassName;
 
-
 @property (strong, nonatomic) PFFile *mediaFile;
+@property (strong, nonatomic) PFFile *thumbnailImageFile;
+@property (assign, nonatomic) BOOL isVideo;
 
 @end

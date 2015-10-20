@@ -104,10 +104,6 @@
 
 #pragma mark - UIImagePickerControllerDelegate
 
-// This method is called when an image has been chosen from the library or taken from the camera.
-//- (void)elcImagePickerController:(ELCImagePickerController *)picker
-//   didFinishPickingMediaWithInfo:(NSArray *)infoArray {
-
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)infoDict {
     
     //   for (NSDictionary* infoDict in infoArray) {
@@ -118,24 +114,19 @@
         [mediaType isEqualToString:(NSString *)kUTTypeMovie]){
         
         NSURL *videoUrl=(NSURL*)[infoDict objectForKey:UIImagePickerControllerMediaURL];
-        NSString *moviePath = [videoUrl path];
+        NSString *videoPath = [videoUrl path];
+        media = [[SpotlightMedia alloc] initWithVideoPath:videoPath];
         
-        if (UIVideoAtPathIsCompatibleWithSavedPhotosAlbum (moviePath)) {
-            NSData *videoData = [[NSFileManager defaultManager] contentsAtPath:moviePath];
-            media = [[SpotlightMedia alloc] initWithVideoData:videoData];
-            
-        }
     } else if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
         UIImage *image = [infoDict valueForKey:UIImagePickerControllerOriginalImage];
         media = [[SpotlightMedia alloc] initWithImage:image];
-        [self.mediaView setImage:image];
     }
     [self.mediaFiles addObject:media];
     media[@"parent"] = self.spotlight;
-    //    }
-    
-    //    [self.capturedImages addObject:image];
-    
+    PFFile* thumbFile = media.thumbnailImageFile;
+    [thumbFile getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
+        [self.mediaView setImage:[UIImage imageWithData:data]];
+    }];
     [self finishAndUpdate];
 }
 

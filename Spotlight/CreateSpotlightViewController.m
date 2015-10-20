@@ -10,7 +10,7 @@
 #import "Spotlight.h"
 #import "SpotlightMedia.h"
 #import <MobileCoreServices/UTCoreTypes.h>
-
+#import <MBProgressHUD.h>
 
 @interface CreateSpotlightViewController ()
 
@@ -45,7 +45,8 @@
         //imagePickerController.imagePickerDelegate = self;
         imagePickerController.delegate = self;
         imagePickerController.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeMovie, (NSString *)kUTTypeImage, nil];
-        imagePickerController.videoQuality = UIImagePickerControllerQualityTypeLow;
+        imagePickerController.videoMaximumDuration = 15;
+        //imagePickerController.videoQuality = UIImagePickerControllerQualityTypeLow;
         [imagePickerController setAllowsEditing:YES];
         
         self.imagePickerController = imagePickerController;
@@ -57,50 +58,42 @@
 - (void)finishAndUpdate
 {
     [self dismissViewControllerAnimated:YES completion:nil];
-    //
-    //    if ([self.capturedImages count] > 0)
-    //    {
-    //        if ([self.capturedImages count] == 1)
-    //        {
-    //            // Camera took a single picture.
-    //            [self.imageView setImage:[self.capturedImages objectAtIndex:0]];
-    //        }
-    //        else
-    //        {
-    //            // Camera took multiple pictures; use the list of images for animation.
-    //            self.imageView.animationImages = self.capturedImages;
-    //            self.imageView.animationDuration = 5.0;    // Show each captured photo for 5 seconds.
-    //            self.imageView.animationRepeatCount = 0;   // Animate forever (show all photos).
-    //            [self.imageView startAnimating];
-    //        }
-    //
-    //        // To be ready to start again, clear the captured images array.
-    //        [self.capturedImages removeAllObjects];
-    //    }
-    //
     self.imagePickerController = nil;
 }
 
 - (IBAction)cancelButtonPressed:(id)sender {
-    [self.spotlight deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-        
-    }];
-    [self.navigationController dismissViewControllerAnimated:YES completion:^{
-        
-    }];
+//    [self.spotlight deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+//        
+//    }];
+//    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+//        
+//    }];
 }
 - (IBAction)saveButtonPressed:(id)sender {
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [hud setLabelText:@"Creating Spotlight..."];
     self.spotlight[@"title"] = self.titleTextField.text;
     PFUser* user = [PFUser currentUser];
     PFRelation *participantRelation = [self.spotlight relationForKey:@"spotlightParticipant"];
     [participantRelation addObject:user];
     [self.spotlight saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-        
-    }];
-    [self.navigationController dismissViewControllerAnimated:YES completion:^{
-        
+        if (succeeded) {
+            [self performSegueWithIdentifier:@"DoneCreatingSegue" sender:sender];
+            //[self performSelector:@selector(dismissView:) withObject:hud afterDelay:1.5];
+        }
+        if (error) {
+            NSLog(@"fuck: %@", [error localizedDescription]);
+        }
     }];
 }
+
+- (void)dismissView:(MBProgressHUD*)hud {
+    [hud hide:YES afterDelay:1.5];
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+
+    }];
+}
+
 
 #pragma mark - UIImagePickerControllerDelegate
 
@@ -123,6 +116,11 @@
     }
     [self.mediaFiles addObject:media];
     media[@"parent"] = self.spotlight;
+    [media saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"fuck: %@", [error localizedDescription]);
+        }
+    }];
     PFFile* thumbFile = media.thumbnailImageFile;
     [thumbFile getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
         [self.mediaView setImage:[UIImage imageWithData:data]];

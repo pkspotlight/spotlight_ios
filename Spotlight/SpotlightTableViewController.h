@@ -11,7 +11,7 @@
 #import "Spotlight.h"
 #import "MWPhotoBrowser.h"
 
-@interface SpotlightTableViewController : UITableViewController <MWPhotoBrowserDelegate>
+@interface SpotlightTableViewController : UITableViewController <MWPhotoBrowserDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (strong, nonatomic) Spotlight* spotlight;
 

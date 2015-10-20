@@ -8,10 +8,14 @@
 
 #import "SpotlightTableViewController.h"
 #import "SpotlightMediaTableViewCell.h"
+#import <MobileCoreServices/UTCoreTypes.h>
+
+#import <MBProgressHUD.h>
 
 @interface SpotlightTableViewController ()
 
 @property (strong, nonatomic) NSArray* mediaList;
+@property (strong, nonatomic) UIImagePickerController* imagePickerController;
 
 @end
 
@@ -71,6 +75,20 @@
     [self.navigationController pushViewController:browser animated:YES];
 }
 
+- (IBAction)addMediaButtonPressed:(id)sender {
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
+    {
+        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+        imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
+        imagePickerController.delegate = self;
+        imagePickerController.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeMovie, (NSString *)kUTTypeImage, nil];
+        imagePickerController.videoMaximumDuration = 15;
+        [imagePickerController setAllowsEditing:YES];
+        
+        self.imagePickerController = imagePickerController;
+        [self.navigationController presentViewController:self.imagePickerController animated:YES completion:nil];
+    }
+}
 
 /*
 #pragma mark - Navigation
@@ -102,6 +120,52 @@
     } else {
         return [MWPhoto photoWithURL:[NSURL URLWithString:media.mediaFile.url]];
     }
+}
+
+
+#pragma mark - UIImagePickerControllerDelegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)infoDict {
+    
+    //   for (NSDictionary* infoDict in infoArray) {
+    SpotlightMedia *media;
+    NSString *mediaType = [infoDict objectForKey: UIImagePickerControllerMediaType];
+    
+    if ([mediaType isEqualToString:(NSString *)kUTTypeVideo] ||
+        [mediaType isEqualToString:(NSString *)kUTTypeMovie]){
+        
+        NSURL *videoUrl=(NSURL*)[infoDict objectForKey:UIImagePickerControllerMediaURL];
+        NSString *videoPath = [videoUrl path];
+        media = [[SpotlightMedia alloc] initWithVideoPath:videoPath];
+        
+    } else if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
+        UIImage *image = [infoDict valueForKey:UIImagePickerControllerOriginalImage];
+        media = [[SpotlightMedia alloc] initWithImage:image];
+    }
+    MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [hud setLabelText:@"Adding Media..."];
+    media[@"parent"] = self.spotlight;
+    [media saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"fuck: %@", [error localizedDescription]);
+        } else {
+            
+            [self.spotlight allMedia:^(NSArray *media, NSError *error) {
+            
+                self.mediaList = media;
+                [self.tableView reloadData];
+                [hud hide:YES];
+            }];
+        }
+    }];
+    [self dismissViewControllerAnimated:YES completion:nil];
+    self.imagePickerController = nil;
+}
+
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 @end

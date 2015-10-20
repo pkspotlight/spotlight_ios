@@ -25,6 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.spotlights = [NSArray array];
+    [self loadSpotlights];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -35,7 +36,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self loadSpotlights];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -88,6 +88,7 @@
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             NSLog(@"Successfully retrieved %lu Spotlights.", (unsigned long)objects.count);
+            
             for (PFObject *object in objects) {
                 NSLog(@"%@", object.objectId);
             }
@@ -98,6 +99,15 @@
         }
     }];
 
+}
+//
+//- (IBAction)unwindThing:(UIStoryboardSegue*)sender {
+//    
+//}
+
+- (IBAction)unwindCreation:(UIStoryboardSegue*)sender {
+    
+    [self loadSpotlights];
 }
 
 /*

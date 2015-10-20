@@ -6,6 +6,7 @@ target 'Spotlight' do
   pod 'ELCImagePickerController', '~> 0.2'
   pod "MWPhotoBrowser"
   pod "AFNetworking", "~> 2.0"
+  pod 'MBProgressHUD', '~> 0.9'
 end
 
 target 'SpotlightTests' do

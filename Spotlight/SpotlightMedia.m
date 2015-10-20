@@ -20,11 +20,10 @@
     
     if ( (self = [super init]) ) {
         UIImage* thumbImage = [self generateThumbImage:path];
-        self.thumbnailImageFile = [PFFile fileWithName:@"thumb.jpg" data:UIImageJPEGRepresentation(thumbImage, 1)];
+        self.thumbnailImageFile = [PFFile fileWithName:@"thumb.jpg" data:UIImageJPEGRepresentation(thumbImage, .7)];
         NSData *videoData = [[NSFileManager defaultManager] contentsAtPath:path];
         self.isVideo = YES;
         self.mediaFile = [PFFile fileWithName:@"video.mov" data:videoData];
-        [self saveInBackground];
     }
     return self;
 }
@@ -33,7 +32,7 @@
     
     if ( (self = [super init]) ) {
         self.isVideo = NO;
-        self.thumbnailImageFile = [PFFile fileWithName:@"thumb.jpg" data:UIImageJPEGRepresentation(image, .6)];
+        self.thumbnailImageFile = [PFFile fileWithName:@"thumb.jpg" data:UIImageJPEGRepresentation(image, .5)];
         self.mediaFile = [PFFile fileWithName:@"image.png" data:UIImageJPEGRepresentation(image, .8)];
         [self saveInBackground];
     }

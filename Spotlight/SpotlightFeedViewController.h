@@ -10,4 +10,6 @@
 
 @interface SpotlightFeedViewController : UITableViewController
 
+- (void)loadSpotlights;
+
 @end

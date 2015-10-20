@@ -37,6 +37,7 @@ PODS:
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
   - ELCImagePickerController (~> 0.2)
+  - MBProgressHUD (~> 0.9)
   - MWPhotoBrowser
   - Parse
 

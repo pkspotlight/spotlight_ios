@@ -26,7 +26,7 @@
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Dym-Zq-erh">
                                             <rect key="frame" x="8" y="30" width="169" height="110"/>
                                             <animations/>
-                                            <color key="backgroundColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" red="1" green="0.96078437569999997" blue="0.96078437569999997" alpha="1" colorSpace="deviceRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="169" id="5pD-W0-la8"/>
                                                 <constraint firstAttribute="height" constant="110" id="xgL-FR-CIb"/>
@@ -141,7 +141,11 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Spotlight" id="3CJ-iR-Rbk">
-                        <barButtonItem key="rightBarButtonItem" title="Add Media" id="893-cJ-J7F"/>
+                        <barButtonItem key="rightBarButtonItem" title="Add Media" id="893-cJ-J7F">
+                            <connections>
+                                <action selector="addMediaButtonPressed:" destination="IYy-0v-yez" id="eLJ-zu-X21"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JLo-nJ-m3G" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -187,7 +191,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardType="namePhonePad"/>
                             </textField>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sMr-0K-oFF">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sMr-0K-oFF">
                                 <rect key="frame" x="180" y="132" width="240" height="128"/>
                                 <animations/>
                                 <constraints>
@@ -216,11 +220,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Create Spotlight" id="h02-wa-TPK">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="T8L-J9-Stv">
-                            <connections>
-                                <action selector="cancelButtonPressed:" destination="GLg-es-57z" id="dIh-GE-SIl"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="T8L-J9-Stv"/>
                         <barButtonItem key="rightBarButtonItem" title="Save" id="Vga-Yb-mAA">
                             <connections>
                                 <action selector="saveButtonPressed:" destination="GLg-es-57z" id="EoT-Gh-aFQ"/>
@@ -230,11 +230,13 @@
                     <connections>
                         <outlet property="mediaView" destination="sMr-0K-oFF" id="srM-UJ-w2c"/>
                         <outlet property="titleTextField" destination="skc-Ed-7Rg" id="2LW-Qj-s21"/>
+                        <segue destination="F0j-fT-Bsn" kind="unwind" identifier="DoneCreatingSegue" unwindAction="unwindCreation:" id="vFy-6P-I0f"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4XU-OC-dXp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="F0j-fT-Bsn" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2937" y="840"/>
+            <point key="canvasLocation" x="2903" y="840"/>
         </scene>
         <!--Intro View Controller-->
         <scene sceneID="nrt-5o-vV7">

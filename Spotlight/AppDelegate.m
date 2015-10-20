@@ -11,6 +11,8 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 #import <Parse.h>
+#import "Spotlight.h"
+#import "SpotlightMedia.h"
 
 @interface AppDelegate ()
 
@@ -22,6 +24,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [Fabric with:@[[Crashlytics class]]];
+    [Spotlight registerSubclass];
+    [SpotlightMedia registerSubclass];
     [Parse setApplicationId:@"nuNuhBJQp4cYfeUnWlNFo27QUCKeAgWBX5D74r4F"
                   clientKey:@"vMH2XfoFKQAy8vbOYzgXZtJrRJ8LjCD5933k3kPF"];
     if (![PFUser currentUser]){

@@ -6,9 +6,9 @@ dependencies: \
   /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/PFNullability.h \
   /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/Push/PFPushPrivate.h \
   /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/PFPush.h \
-  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Private/Bolts/BFTask.h \
-  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Private/Bolts/BFCancellationToken.h \
-  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Private/Bolts/BFCancellationTokenRegistration.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Bolts/Bolts/Common/BFTask.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Bolts/Bolts/Common/BFCancellationToken.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Bolts/Bolts/Common/BFCancellationTokenRegistration.h \
   /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFMacros.h \
   /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFEncoder.h \
   /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/ACL/PFACLPrivate.h \
@@ -16,7 +16,7 @@ dependencies: \
   /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFAssert.h \
   /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFDateFormatter.h \
   /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/BFTask+Private.h \
-  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Private/Bolts/BFExecutor.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Bolts/Bolts/Common/BFExecutor.h \
   /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/FieldOperation/PFFieldOperation.h \
   /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/File/PFFile_Private.h \
   /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/PFFile.h \

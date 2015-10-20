@@ -7,8 +7,14 @@
 //
 
 #import "SpotlightFeedViewController.h"
+#import "Parse.h"
+#import "Spotlight.h"
+#import "SpotlightTableViewCell.h"
+#import "SpotlightMedia.h"
 
 @interface SpotlightFeedViewController ()
+
+@property (strong, nonatomic) NSArray *spotlights;
 
 @end
 
@@ -16,13 +22,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.spotlights = [NSArray array];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self loadSpotlights];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -31,15 +43,43 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return self.spotlights.count;
+}
+
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    SpotlightTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SpotlightTableViewCell" forIndexPath:indexPath];
+    SpotlightMedia* spotlight = self.spotlights[indexPath.row];
+    [cell.titleLabel setText:spotlight[@"title"]];
+    return cell;
+}
+
+- (void)loadSpotlights {
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"Spotlight"];
+    [query whereKey:@"spotlightParticipant" equalTo:[[PFUser currentUser] objectId]];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            // The find succeeded.
+            NSLog(@"Successfully retrieved %lu scores.", (unsigned long)objects.count);
+            // Do something with the found objects
+            for (PFObject *object in objects) {
+                NSLog(@"%@", object.objectId);
+            }
+            self.spotlights = objects;
+            [self.tableView reloadData];
+        } else {
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
+
 }
 
 /*

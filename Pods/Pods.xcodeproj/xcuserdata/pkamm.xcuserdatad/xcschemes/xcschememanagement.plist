@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>ELCImagePickerController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Parse.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -22,17 +27,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>7B3A20A0F8FCD74EE6E795C6F145E8F2</key>
+		<key>1923D3614BAAB0EBF81EEC04BD369BF0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>94FD560782ECE2C91DA57F0745401EB0</key>
+		<key>4CD92797A96766670A60AE5197C5FB82</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>99C81AC6F82FB112944DAEB1506FCF25</key>
+		<key>859BCFC6B3FF26CF5B1CB32BAC63C183</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CEBC9306C712296F387745058F3335F7</key>
 		<dict>
 			<key>primary</key>
 			<true/>

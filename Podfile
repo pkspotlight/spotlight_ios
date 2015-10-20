@@ -2,9 +2,8 @@
 platform :ios, '8.0'
 
 target 'Spotlight' do
-  pod 'Fabric'
-  pod 'Crashlytics'  
   pod 'Parse'
+  pod 'ELCImagePickerController', '~> 0.2'
 end
 
 target 'SpotlightTests' do

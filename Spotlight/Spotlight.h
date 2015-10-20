@@ -15,7 +15,7 @@
 
 + (NSString *)parseClassName;
 
-//returns array of urls
+- (void)allMedia:(void (^)(NSArray *media, NSError *error))completion;
 - (void)allImageUrls:(void (^)(NSArray *urls, NSError *error))completion;
 - (void)allThumbnailUrls:(void (^)(NSArray *urls, NSError *error))completion;
 

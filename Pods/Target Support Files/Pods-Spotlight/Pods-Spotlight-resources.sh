@@ -64,6 +64,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "ELCImagePickerController/Classes/ELCImagePicker/Resources/Overlay.png"
   install_resource "ELCImagePickerController/Classes/ELCImagePicker/Resources/Overlay@2x.png"
   install_resource "Parse/Parse/Resources/en.lproj"
+  install_resource "${BUILT_PRODUCTS_DIR}/MWPhotoBrowser.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "ELCImagePickerController/Classes/ELCImagePicker/Resources/ELCAlbumPickerController.xib"
@@ -72,6 +73,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "ELCImagePickerController/Classes/ELCImagePicker/Resources/Overlay.png"
   install_resource "ELCImagePickerController/Classes/ELCImagePicker/Resources/Overlay@2x.png"
   install_resource "Parse/Parse/Resources/en.lproj"
+  install_resource "${BUILT_PRODUCTS_DIR}/MWPhotoBrowser.bundle"
 fi
 
 mkdir -p "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"

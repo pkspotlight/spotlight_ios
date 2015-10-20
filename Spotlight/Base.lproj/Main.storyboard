@@ -61,7 +61,7 @@
                                 <connections>
                                     <outlet property="mainImageView" destination="Dym-Zq-erh" id="37p-Fe-WfZ"/>
                                     <outlet property="titleLabel" destination="EWh-61-ZE3" id="9lV-ip-myK"/>
-                                    <segue destination="IYy-0v-yez" kind="show" id="bSb-ui-7co"/>
+                                    <segue destination="IYy-0v-yez" kind="show" identifier="SpotlightSegue" id="bSb-ui-7co"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -84,25 +84,54 @@
             </objects>
             <point key="canvasLocation" x="1522" y="840"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Spotlight-->
         <scene sceneID="aAF-Uc-rMV">
             <objects>
-                <tableViewController id="IYy-0v-yez" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="MnM-fs-rrI">
+                <tableViewController id="IYy-0v-yez" customClass="SpotlightTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="200" sectionHeaderHeight="28" sectionFooterHeight="28" id="MnM-fs-rrI">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="RWk-lU-y8P">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SpotlightMediaTableViewCell" rowHeight="200" id="RWk-lU-y8P" customClass="SpotlightMediaTableViewCell">
+                                <rect key="frame" x="0.0" y="92" width="600" height="200"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RWk-lU-y8P" id="zC2-e0-kFQ">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="199.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mcY-1q-Ae6">
+                                            <rect key="frame" x="8" y="8" width="584" height="152"/>
+                                            <animations/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="afT-mY-x7t">
+                                            <rect key="frame" x="8" y="168" width="160" height="21"/>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="8O3-Ch-bVK"/>
+                                                <constraint firstAttribute="width" constant="160" id="t7e-Yo-aBk"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                     <animations/>
+                                    <constraints>
+                                        <constraint firstItem="afT-mY-x7t" firstAttribute="leading" secondItem="zC2-e0-kFQ" secondAttribute="leadingMargin" id="1ea-6y-eX2"/>
+                                        <constraint firstItem="mcY-1q-Ae6" firstAttribute="leading" secondItem="zC2-e0-kFQ" secondAttribute="leadingMargin" id="GEq-hl-6WV"/>
+                                        <constraint firstItem="mcY-1q-Ae6" firstAttribute="trailing" secondItem="zC2-e0-kFQ" secondAttribute="trailingMargin" id="NkF-Xh-FVO"/>
+                                        <constraint firstItem="afT-mY-x7t" firstAttribute="top" secondItem="mcY-1q-Ae6" secondAttribute="bottom" constant="8" id="R1U-gu-8r2"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="mcY-1q-Ae6" secondAttribute="bottom" constant="32" id="Uhw-t8-BHh"/>
+                                        <constraint firstItem="mcY-1q-Ae6" firstAttribute="top" secondItem="zC2-e0-kFQ" secondAttribute="topMargin" id="wLl-xw-aLB"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <animations/>
+                                <connections>
+                                    <outlet property="dateLabel" destination="afT-mY-x7t" id="CYb-QU-ZyH"/>
+                                    <outlet property="mediaImageView" destination="mcY-1q-Ae6" id="MQo-9G-bm5"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -110,6 +139,10 @@
                             <outlet property="delegate" destination="IYy-0v-yez" id="B85-8E-EJn"/>
                         </connections>
                     </tableView>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Spotlight" id="3CJ-iR-Rbk">
+                        <barButtonItem key="rightBarButtonItem" title="Add Media" id="893-cJ-J7F"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JLo-nJ-m3G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

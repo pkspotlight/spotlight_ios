@@ -25,6 +25,8 @@
 		88E9E8F31BD557F00065AA0C /* CreateSpotlightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E9E8F21BD557F00065AA0C /* CreateSpotlightViewController.m */; settings = {ASSET_TAGS = (); }; };
 		88E9E8F61BD5791E0065AA0C /* SpotlightMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E9E8F51BD5791E0065AA0C /* SpotlightMedia.m */; settings = {ASSET_TAGS = (); }; };
 		88E9E8F91BD5C46D0065AA0C /* SpotlightTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E9E8F81BD5C46D0065AA0C /* SpotlightTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		88E9E8FC1BD6A3480065AA0C /* SpotlightTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E9E8FB1BD6A3480065AA0C /* SpotlightTableViewController.m */; settings = {ASSET_TAGS = (); }; };
+		88E9E8FF1BD6A6470065AA0C /* SpotlightMediaTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E9E8FE1BD6A6470065AA0C /* SpotlightMediaTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		88EE2CC61B9E08B2002DDB99 /* SpotlightFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88EE2CC51B9E08B2002DDB99 /* SpotlightFeedViewController.m */; };
 		C2B409966BE212B335038003 /* libPods-Spotlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F03B672A3CAD95AD6DB192BE /* libPods-Spotlight.a */; };
 /* End PBXBuildFile section */
@@ -72,6 +74,10 @@
 		88E9E8F51BD5791E0065AA0C /* SpotlightMedia.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotlightMedia.m; sourceTree = "<group>"; };
 		88E9E8F71BD5C46D0065AA0C /* SpotlightTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotlightTableViewCell.h; sourceTree = "<group>"; };
 		88E9E8F81BD5C46D0065AA0C /* SpotlightTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotlightTableViewCell.m; sourceTree = "<group>"; };
+		88E9E8FA1BD6A3480065AA0C /* SpotlightTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotlightTableViewController.h; sourceTree = "<group>"; };
+		88E9E8FB1BD6A3480065AA0C /* SpotlightTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotlightTableViewController.m; sourceTree = "<group>"; };
+		88E9E8FD1BD6A6470065AA0C /* SpotlightMediaTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotlightMediaTableViewCell.h; sourceTree = "<group>"; };
+		88E9E8FE1BD6A6470065AA0C /* SpotlightMediaTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotlightMediaTableViewCell.m; sourceTree = "<group>"; };
 		88EE2CC41B9E08B2002DDB99 /* SpotlightFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotlightFeedViewController.h; sourceTree = "<group>"; };
 		88EE2CC51B9E08B2002DDB99 /* SpotlightFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotlightFeedViewController.m; sourceTree = "<group>"; };
 		F03B672A3CAD95AD6DB192BE /* libPods-Spotlight.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Spotlight.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -152,12 +158,16 @@
 				8849A1E51BA0CC7A00511DD5 /* SignUpInputTableViewCell.m */,
 				8849A1E71BA2590800511DD5 /* IntroViewController.h */,
 				8849A1E81BA2590800511DD5 /* IntroViewController.m */,
+				88E9E8FA1BD6A3480065AA0C /* SpotlightTableViewController.h */,
+				88E9E8FB1BD6A3480065AA0C /* SpotlightTableViewController.m */,
 				887FF4CC1BD530B400F3679D /* Spotlight.h */,
 				887FF4CD1BD530B400F3679D /* Spotlight.m */,
 				88E9E8F41BD5791E0065AA0C /* SpotlightMedia.h */,
 				88E9E8F51BD5791E0065AA0C /* SpotlightMedia.m */,
 				88E9E8F71BD5C46D0065AA0C /* SpotlightTableViewCell.h */,
 				88E9E8F81BD5C46D0065AA0C /* SpotlightTableViewCell.m */,
+				88E9E8FD1BD6A6470065AA0C /* SpotlightMediaTableViewCell.h */,
+				88E9E8FE1BD6A6470065AA0C /* SpotlightMediaTableViewCell.m */,
 				88A736E11B91318D00093B27 /* Main.storyboard */,
 				88A736E41B91318D00093B27 /* Images.xcassets */,
 				88A736E61B91318D00093B27 /* LaunchScreen.xib */,
@@ -378,9 +388,11 @@
 				88E9E8F61BD5791E0065AA0C /* SpotlightMedia.m in Sources */,
 				88E9E8F31BD557F00065AA0C /* CreateSpotlightViewController.m in Sources */,
 				88A736DD1B91318D00093B27 /* AppDelegate.m in Sources */,
+				88E9E8FC1BD6A3480065AA0C /* SpotlightTableViewController.m in Sources */,
 				887FF4CE1BD530B400F3679D /* Spotlight.m in Sources */,
 				88E9E8F91BD5C46D0065AA0C /* SpotlightTableViewCell.m in Sources */,
 				88A736DA1B91318D00093B27 /* main.m in Sources */,
+				88E9E8FF1BD6A6470065AA0C /* SpotlightMediaTableViewCell.m in Sources */,
 				8849A1E31BA0CB8400511DD5 /* SignUpTableViewController.m in Sources */,
 				8849A1E61BA0CC7A00511DD5 /* SignUpInputTableViewCell.m in Sources */,
 			);

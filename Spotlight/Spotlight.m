@@ -11,6 +11,18 @@
 
 @implementation Spotlight
 
+
+- (void)allMedia:(void (^)(NSArray *media, NSError *error))completion {
+    PFQuery *query = [PFQuery queryWithClassName:@"SpotlightMedia"];
+    [query whereKey:@"parent" equalTo:self];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (error) {
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+        if (completion) completion(objects, error);
+    }];
+}
+
 - (void)allImageUrls:(void (^)(NSArray *urls, NSError *error))completion {
     PFQuery *query = [PFQuery queryWithClassName:@"SpotlightMedia"];
     [query whereKey:@"parent" equalTo:self];

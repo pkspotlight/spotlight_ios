@@ -15,6 +15,9 @@
 
 + (NSString *)parseClassName;
 
+@property(strong, nonatomic) NSString*  creatorName;
+@property(strong, nonatomic) NSString*  title;
+
 - (void)allMedia:(void (^)(NSArray *media, NSError *error))completion;
 - (void)allImageUrls:(void (^)(NSArray *urls, NSError *error))completion;
 - (void)allThumbnailUrls:(void (^)(NSArray *urls, NSError *error))completion;

@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Spotlight.h"
 
 @interface SpotlightTableViewCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *mainImageView;
+- (void)formatForSpotlight:(Spotlight*)spotlight;
 
 @end

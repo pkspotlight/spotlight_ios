@@ -7,7 +7,6 @@
 //
 
 #import "SpotlightFeedViewController.h"
-#import "Parse.h"
 #import "Spotlight.h"
 #import "SpotlightTableViewCell.h"
 #import "SpotlightMedia.h"
@@ -25,12 +24,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.spotlights = [NSArray array];
+    if (self.user) {
+
+    } else {
+        self.user = [PFUser currentUser];
+        UIBarButtonItem* friendsButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Conference Call-32"] style:UIBarButtonItemStylePlain target:self action:@selector(showFriends:)];
+        self.navigationItem.leftBarButtonItem = friendsButton;
+    }
     [self loadSpotlights];
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)showFriends:(id)sender {
+    
+    [self performSegueWithIdentifier:@"friendsVCSegue" sender:sender];
     
 }
 
@@ -57,34 +64,14 @@
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     SpotlightTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SpotlightTableViewCell" forIndexPath:indexPath];
-    [cell.mainImageView setImage:nil];
-    NSUInteger tag = indexPath.row;
-    [cell setTag:tag];
-    Spotlight* spotlight = self.spotlights[indexPath.row];
-    [cell.titleLabel setText:spotlight[@"title"]];
-    [spotlight allThumbnailUrls:^(NSArray *urls, NSError *error) {
-        if (urls && !error) {
-            NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[urls firstObject]]];
-            [cell.mainImageView
-             setImageWithURLRequest:request
-             placeholderImage:nil
-             success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, UIImage * _Nonnull image) {
-                 if (cell.tag == tag) {
-                     [cell.mainImageView setImage:image];
-                 }
-             } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, NSError * _Nonnull error) {
-                 NSLog(@"fuck thumbnail failure");
-             }];
-        }
-    }];
-    
+    [cell formatForSpotlight:self.spotlights[indexPath.row]];
     return cell;
 }
 
 - (void)loadSpotlights {
     
     PFQuery *query = [PFQuery queryWithClassName:@"Spotlight"];
-    [query whereKey:@"spotlightParticipant" equalTo:[[PFUser currentUser] objectId]];
+    [query whereKey:@"spotlightParticipant" equalTo:[self.user objectId]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             NSLog(@"Successfully retrieved %lu Spotlights.", (unsigned long)objects.count);

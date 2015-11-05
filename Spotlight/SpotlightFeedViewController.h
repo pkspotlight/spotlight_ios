@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Parse.h"
 
 @interface SpotlightFeedViewController : UITableViewController
 
 - (void)loadSpotlights;
+
+@property(strong, nonatomic) PFUser* user;
 
 @end

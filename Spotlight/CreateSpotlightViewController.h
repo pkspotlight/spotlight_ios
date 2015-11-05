@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <ContactsUI/ContactsUI.h>
+
 #import "ELCImagePickerController.h"
 
-@interface CreateSpotlightViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate>
+@interface CreateSpotlightViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, CNContactPickerDelegate>
 
 @end

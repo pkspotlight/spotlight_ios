@@ -3,9 +3,9 @@ dependencies: \
   /Users/pkamm/Documents/ios/Spotlight/Pods/Target\ Support\ Files/Parse/Parse-prefix.pch \
   /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/User/AuthenticationProviders/Controller/PFUserAuthenticationController.h \
   /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/User/AuthenticationProviders/Providers/PFAuthenticationProvider.h \
-  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Private/Bolts/BFTask.h \
-  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Private/Bolts/BFCancellationToken.h \
-  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Private/Bolts/BFCancellationTokenRegistration.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Bolts/Bolts/Common/BFTask.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Bolts/Bolts/Common/BFCancellationToken.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Bolts/Bolts/Common/BFCancellationTokenRegistration.h \
   /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFMacros.h \
   /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/User/PFUserPrivate.h \
   /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/PFUser.h \

@@ -7,8 +7,12 @@
 //
 
 #import "IntroViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface IntroViewController ()
+
+@property (weak, nonatomic) IBOutlet UIButton *signupButton;
+@property (weak, nonatomic) IBOutlet UIButton *loginButton;
 
 @end
 
@@ -16,8 +20,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
 
+    [self.signupButton.layer setCornerRadius:7];
+    [self.loginButton.layer setCornerRadius:7];
 
 }
 

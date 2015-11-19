@@ -10,9 +10,9 @@ dependencies: \
   /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/HTTPRequest/PFHTTPRequest.h \
   /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/Query/PFQueryPrivate.h \
   /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/PFQuery.h \
-  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Private/Bolts/BFTask.h \
-  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Private/Bolts/BFCancellationToken.h \
-  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Private/Bolts/BFCancellationTokenRegistration.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Bolts/Bolts/Common/BFTask.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Bolts/Bolts/Common/BFCancellationToken.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Bolts/Bolts/Common/BFCancellationTokenRegistration.h \
   /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/PFConstants.h \
   /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/PFNullability.h \
   /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/PFGeoPoint.h \

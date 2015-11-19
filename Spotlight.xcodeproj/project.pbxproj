@@ -13,12 +13,23 @@
 		8849A1E61BA0CC7A00511DD5 /* SignUpInputTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8849A1E51BA0CC7A00511DD5 /* SignUpInputTableViewCell.m */; };
 		8849A1E91BA2590800511DD5 /* IntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8849A1E81BA2590800511DD5 /* IntroViewController.m */; };
 		887FF4CE1BD530B400F3679D /* Spotlight.m in Sources */ = {isa = PBXBuildFile; fileRef = 887FF4CD1BD530B400F3679D /* Spotlight.m */; };
+		8893FD711BFC1B5900711779 /* spotlight@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8893FD701BFC1B5900711779 /* spotlight@3x.png */; };
+		8893FD731BFC1C4600711779 /* profile@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8893FD721BFC1C4600711779 /* profile@3x.png */; };
+		8893FD751BFC1CF600711779 /* friends@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8893FD741BFC1CF600711779 /* friends@3x.png */; };
+		8893FD771BFC1E0400711779 /* teams@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8893FD761BFC1E0400711779 /* teams@3x.png */; };
+		8893FD7A1BFCCC2100711779 /* Team.m in Sources */ = {isa = PBXBuildFile; fileRef = 8893FD791BFCCC2100711779 /* Team.m */; };
+		8893FD7D1BFD1FCB00711779 /* FieldEntryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8893FD7C1BFD1FCB00711779 /* FieldEntryTableViewCell.m */; };
 		88A736DA1B91318D00093B27 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A736D91B91318D00093B27 /* main.m */; };
 		88A736DD1B91318D00093B27 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A736DC1B91318D00093B27 /* AppDelegate.m */; };
 		88A736E31B91318D00093B27 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88A736E11B91318D00093B27 /* Main.storyboard */; };
 		88A736E51B91318D00093B27 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88A736E41B91318D00093B27 /* Images.xcassets */; };
 		88A736E81B91318D00093B27 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88A736E61B91318D00093B27 /* LaunchScreen.xib */; };
 		88A736F41B91318D00093B27 /* SpotlightTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A736F31B91318D00093B27 /* SpotlightTests.m */; };
+		88BDFC521BFD22B8007A3EBB /* CreateTeamTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88BDFC511BFD22B8007A3EBB /* CreateTeamTableViewController.m */; };
+		88BDFC5A1BFD33E0007A3EBB /* TeamsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88BDFC591BFD33E0007A3EBB /* TeamsTableViewController.m */; };
+		88BDFC5D1BFD3635007A3EBB /* TeamTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88BDFC5C1BFD3635007A3EBB /* TeamTableViewCell.m */; };
+		88BDFC601BFD4602007A3EBB /* ProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88BDFC5F1BFD4602007A3EBB /* ProfileTableViewController.m */; };
+		88CAE8D71BFB9AF30099A733 /* landingBg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 88CAE8D61BFB9AF20099A733 /* landingBg.jpg */; };
 		88E953411BEB7ED50094F73D /* Contacts-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 88E953401BEB7ED50094F73D /* Contacts-50.png */; };
 		88E953431BEB7FDF0094F73D /* Conference_call-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 88E953421BEB7FDF0094F73D /* Conference_call-100.png */; };
 		88E953461BEB8B7D0094F73D /* FriendsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E953451BEB8B7D0094F73D /* FriendsTableViewController.m */; };
@@ -57,6 +68,14 @@
 		8849A1E81BA2590800511DD5 /* IntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroViewController.m; sourceTree = "<group>"; };
 		887FF4CC1BD530B400F3679D /* Spotlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Spotlight.h; sourceTree = "<group>"; };
 		887FF4CD1BD530B400F3679D /* Spotlight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Spotlight.m; sourceTree = "<group>"; };
+		8893FD701BFC1B5900711779 /* spotlight@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "spotlight@3x.png"; sourceTree = "<group>"; };
+		8893FD721BFC1C4600711779 /* profile@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile@3x.png"; sourceTree = "<group>"; };
+		8893FD741BFC1CF600711779 /* friends@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "friends@3x.png"; sourceTree = "<group>"; };
+		8893FD761BFC1E0400711779 /* teams@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "teams@3x.png"; sourceTree = "<group>"; };
+		8893FD781BFCCC2100711779 /* Team.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Team.h; sourceTree = "<group>"; };
+		8893FD791BFCCC2100711779 /* Team.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Team.m; sourceTree = "<group>"; };
+		8893FD7B1BFD1FCB00711779 /* FieldEntryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FieldEntryTableViewCell.h; sourceTree = "<group>"; };
+		8893FD7C1BFD1FCB00711779 /* FieldEntryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FieldEntryTableViewCell.m; sourceTree = "<group>"; };
 		88A736D41B91318D00093B27 /* Spotlight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spotlight.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88A736D81B91318D00093B27 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88A736D91B91318D00093B27 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -68,6 +87,15 @@
 		88A736ED1B91318D00093B27 /* SpotlightTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpotlightTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		88A736F21B91318D00093B27 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88A736F31B91318D00093B27 /* SpotlightTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpotlightTests.m; sourceTree = "<group>"; };
+		88BDFC501BFD22B8007A3EBB /* CreateTeamTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateTeamTableViewController.h; sourceTree = "<group>"; };
+		88BDFC511BFD22B8007A3EBB /* CreateTeamTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateTeamTableViewController.m; sourceTree = "<group>"; };
+		88BDFC581BFD33E0007A3EBB /* TeamsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamsTableViewController.h; sourceTree = "<group>"; };
+		88BDFC591BFD33E0007A3EBB /* TeamsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamsTableViewController.m; sourceTree = "<group>"; };
+		88BDFC5B1BFD3635007A3EBB /* TeamTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamTableViewCell.h; sourceTree = "<group>"; };
+		88BDFC5C1BFD3635007A3EBB /* TeamTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamTableViewCell.m; sourceTree = "<group>"; };
+		88BDFC5E1BFD4602007A3EBB /* ProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileTableViewController.h; sourceTree = "<group>"; };
+		88BDFC5F1BFD4602007A3EBB /* ProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileTableViewController.m; sourceTree = "<group>"; };
+		88CAE8D61BFB9AF20099A733 /* landingBg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = landingBg.jpg; sourceTree = "<group>"; };
 		88E953401BEB7ED50094F73D /* Contacts-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Contacts-50.png"; sourceTree = "<group>"; };
 		88E953421BEB7FDF0094F73D /* Conference_call-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Conference_call-100.png"; sourceTree = "<group>"; };
 		88E953441BEB8B7D0094F73D /* FriendsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsTableViewController.h; sourceTree = "<group>"; };
@@ -155,28 +183,14 @@
 			children = (
 				88A736DB1B91318D00093B27 /* AppDelegate.h */,
 				88A736DC1B91318D00093B27 /* AppDelegate.m */,
-				8849A1E11BA0CB8400511DD5 /* SignUpTableViewController.h */,
-				8849A1E21BA0CB8400511DD5 /* SignUpTableViewController.m */,
-				88EE2CC41B9E08B2002DDB99 /* SpotlightFeedViewController.h */,
-				88EE2CC51B9E08B2002DDB99 /* SpotlightFeedViewController.m */,
-				88E9E8F11BD557F00065AA0C /* CreateSpotlightViewController.h */,
-				88E9E8F21BD557F00065AA0C /* CreateSpotlightViewController.m */,
-				8849A1E41BA0CC7A00511DD5 /* SignUpInputTableViewCell.h */,
-				8849A1E51BA0CC7A00511DD5 /* SignUpInputTableViewCell.m */,
-				8849A1E71BA2590800511DD5 /* IntroViewController.h */,
-				8849A1E81BA2590800511DD5 /* IntroViewController.m */,
-				88E9E8FA1BD6A3480065AA0C /* SpotlightTableViewController.h */,
-				88E9E8FB1BD6A3480065AA0C /* SpotlightTableViewController.m */,
-				887FF4CC1BD530B400F3679D /* Spotlight.h */,
-				887FF4CD1BD530B400F3679D /* Spotlight.m */,
-				88E9E8F41BD5791E0065AA0C /* SpotlightMedia.h */,
-				88E9E8F51BD5791E0065AA0C /* SpotlightMedia.m */,
-				88E9E8F71BD5C46D0065AA0C /* SpotlightTableViewCell.h */,
-				88E9E8F81BD5C46D0065AA0C /* SpotlightTableViewCell.m */,
-				88E9E8FD1BD6A6470065AA0C /* SpotlightMediaTableViewCell.h */,
-				88E9E8FE1BD6A6470065AA0C /* SpotlightMediaTableViewCell.m */,
-				88E953441BEB8B7D0094F73D /* FriendsTableViewController.h */,
-				88E953451BEB8B7D0094F73D /* FriendsTableViewController.m */,
+				88BDFC561BFD3314007A3EBB /* Spotlight */,
+				88BDFC551BFD32E3007A3EBB /* SignUp */,
+				88BDFC541BFD32D0007A3EBB /* Team */,
+				88BDFC571BFD3370007A3EBB /* Friends */,
+				8893FD7B1BFD1FCB00711779 /* FieldEntryTableViewCell.h */,
+				8893FD7C1BFD1FCB00711779 /* FieldEntryTableViewCell.m */,
+				88BDFC5E1BFD4602007A3EBB /* ProfileTableViewController.h */,
+				88BDFC5F1BFD4602007A3EBB /* ProfileTableViewController.m */,
 				88A736E11B91318D00093B27 /* Main.storyboard */,
 				88A736E41B91318D00093B27 /* Images.xcassets */,
 				88A736E61B91318D00093B27 /* LaunchScreen.xib */,
@@ -212,9 +226,72 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		88BDFC541BFD32D0007A3EBB /* Team */ = {
+			isa = PBXGroup;
+			children = (
+				8893FD781BFCCC2100711779 /* Team.h */,
+				8893FD791BFCCC2100711779 /* Team.m */,
+				88BDFC581BFD33E0007A3EBB /* TeamsTableViewController.h */,
+				88BDFC591BFD33E0007A3EBB /* TeamsTableViewController.m */,
+				88BDFC501BFD22B8007A3EBB /* CreateTeamTableViewController.h */,
+				88BDFC511BFD22B8007A3EBB /* CreateTeamTableViewController.m */,
+				88BDFC5B1BFD3635007A3EBB /* TeamTableViewCell.h */,
+				88BDFC5C1BFD3635007A3EBB /* TeamTableViewCell.m */,
+			);
+			name = Team;
+			sourceTree = "<group>";
+		};
+		88BDFC551BFD32E3007A3EBB /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				8849A1E11BA0CB8400511DD5 /* SignUpTableViewController.h */,
+				8849A1E21BA0CB8400511DD5 /* SignUpTableViewController.m */,
+				8849A1E41BA0CC7A00511DD5 /* SignUpInputTableViewCell.h */,
+				8849A1E51BA0CC7A00511DD5 /* SignUpInputTableViewCell.m */,
+				8849A1E71BA2590800511DD5 /* IntroViewController.h */,
+				8849A1E81BA2590800511DD5 /* IntroViewController.m */,
+			);
+			name = SignUp;
+			sourceTree = "<group>";
+		};
+		88BDFC561BFD3314007A3EBB /* Spotlight */ = {
+			isa = PBXGroup;
+			children = (
+				887FF4CC1BD530B400F3679D /* Spotlight.h */,
+				887FF4CD1BD530B400F3679D /* Spotlight.m */,
+				88EE2CC41B9E08B2002DDB99 /* SpotlightFeedViewController.h */,
+				88EE2CC51B9E08B2002DDB99 /* SpotlightFeedViewController.m */,
+				88E9E8F11BD557F00065AA0C /* CreateSpotlightViewController.h */,
+				88E9E8F21BD557F00065AA0C /* CreateSpotlightViewController.m */,
+				88E9E8FA1BD6A3480065AA0C /* SpotlightTableViewController.h */,
+				88E9E8FB1BD6A3480065AA0C /* SpotlightTableViewController.m */,
+				88E9E8F41BD5791E0065AA0C /* SpotlightMedia.h */,
+				88E9E8F51BD5791E0065AA0C /* SpotlightMedia.m */,
+				88E9E8F71BD5C46D0065AA0C /* SpotlightTableViewCell.h */,
+				88E9E8F81BD5C46D0065AA0C /* SpotlightTableViewCell.m */,
+				88E9E8FD1BD6A6470065AA0C /* SpotlightMediaTableViewCell.h */,
+				88E9E8FE1BD6A6470065AA0C /* SpotlightMediaTableViewCell.m */,
+			);
+			name = Spotlight;
+			sourceTree = "<group>";
+		};
+		88BDFC571BFD3370007A3EBB /* Friends */ = {
+			isa = PBXGroup;
+			children = (
+				88E953441BEB8B7D0094F73D /* FriendsTableViewController.h */,
+				88E953451BEB8B7D0094F73D /* FriendsTableViewController.m */,
+			);
+			name = Friends;
+			sourceTree = "<group>";
+		};
 		88E98E851BAF507700292B14 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8893FD761BFC1E0400711779 /* teams@3x.png */,
+				8893FD721BFC1C4600711779 /* profile@3x.png */,
+				8893FD741BFC1CF600711779 /* friends@3x.png */,
+				8893FD701BFC1B5900711779 /* spotlight@3x.png */,
+				88CAE8D61BFB9AF20099A733 /* landingBg.jpg */,
 				88E953421BEB7FDF0094F73D /* Conference_call-100.png */,
 				88E953401BEB7ED50094F73D /* Contacts-50.png */,
 				88E98E861BAF508400292B14 /* Softball.JPG */,
@@ -312,12 +389,17 @@
 			files = (
 				88A736E31B91318D00093B27 /* Main.storyboard in Resources */,
 				88A736E81B91318D00093B27 /* LaunchScreen.xib in Resources */,
+				8893FD731BFC1C4600711779 /* profile@3x.png in Resources */,
 				88E98E891BAF508400292B14 /* Softball.JPG in Resources */,
+				8893FD771BFC1E0400711779 /* teams@3x.png in Resources */,
 				88E98E8B1BAF508400292B14 /* fielding ground ball.jpg in Resources */,
 				88E953431BEB7FDF0094F73D /* Conference_call-100.png in Resources */,
 				88A736E51B91318D00093B27 /* Images.xcassets in Resources */,
 				88E98E8A1BAF508400292B14 /* hockey.jpg in Resources */,
 				88E953411BEB7ED50094F73D /* Contacts-50.png in Resources */,
+				8893FD751BFC1CF600711779 /* friends@3x.png in Resources */,
+				8893FD711BFC1B5900711779 /* spotlight@3x.png in Resources */,
+				88CAE8D71BFB9AF30099A733 /* landingBg.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,15 +481,21 @@
 				88EE2CC61B9E08B2002DDB99 /* SpotlightFeedViewController.m in Sources */,
 				88E953461BEB8B7D0094F73D /* FriendsTableViewController.m in Sources */,
 				8849A1E91BA2590800511DD5 /* IntroViewController.m in Sources */,
+				8893FD7D1BFD1FCB00711779 /* FieldEntryTableViewCell.m in Sources */,
+				88BDFC5A1BFD33E0007A3EBB /* TeamsTableViewController.m in Sources */,
 				88E9E8F61BD5791E0065AA0C /* SpotlightMedia.m in Sources */,
 				88E9E8F31BD557F00065AA0C /* CreateSpotlightViewController.m in Sources */,
 				88A736DD1B91318D00093B27 /* AppDelegate.m in Sources */,
 				88E9E8FC1BD6A3480065AA0C /* SpotlightTableViewController.m in Sources */,
 				887FF4CE1BD530B400F3679D /* Spotlight.m in Sources */,
+				88BDFC5D1BFD3635007A3EBB /* TeamTableViewCell.m in Sources */,
+				88BDFC601BFD4602007A3EBB /* ProfileTableViewController.m in Sources */,
 				88E9E8F91BD5C46D0065AA0C /* SpotlightTableViewCell.m in Sources */,
 				88A736DA1B91318D00093B27 /* main.m in Sources */,
 				88E9E8FF1BD6A6470065AA0C /* SpotlightMediaTableViewCell.m in Sources */,
+				88BDFC521BFD22B8007A3EBB /* CreateTeamTableViewController.m in Sources */,
 				8849A1E31BA0CB8400511DD5 /* SignUpTableViewController.m in Sources */,
+				8893FD7A1BFCCC2100711779 /* Team.m in Sources */,
 				8849A1E61BA0CC7A00511DD5 /* SignUpInputTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -547,7 +635,7 @@
 				);
 				INFOPLIST_FILE = Spotlight/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.myspotlight.Spotlight;
+				PRODUCT_BUNDLE_IDENTIFIER = com.myspotlight.spotlight;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Spotlight/Spotlight-Bridging-Header.h";
@@ -561,15 +649,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Spotlight/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.myspotlight.Spotlight;
+				PRODUCT_BUNDLE_IDENTIFIER = com.myspotlight.spotlight;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Spotlight/Spotlight-Bridging-Header.h";

@@ -33,6 +33,7 @@ PODS:
   - SDWebImage (3.7.3):
     - SDWebImage/Core (= 3.7.3)
   - SDWebImage/Core (3.7.3)
+  - TPKeyboardAvoiding (1.2.9)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
@@ -40,6 +41,7 @@ DEPENDENCIES:
   - MBProgressHUD (~> 0.9)
   - MWPhotoBrowser
   - Parse
+  - TPKeyboardAvoiding (~> 1.2)
 
 SPEC CHECKSUMS:
   AFNetworking: 79f7eb1a0fcfa7beb409332b2ca49afe9ce53b05
@@ -50,5 +52,6 @@ SPEC CHECKSUMS:
   MWPhotoBrowser: ba0d0c09ffda3a7ea10093518738c502c1c7141c
   Parse: 188601c6cd91fae55906badd283b513104a3a8c9
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
+  TPKeyboardAvoiding: ff1ee4e5a5a0c119b965552af8f183868ea20207
 
 COCOAPODS: 0.39.0

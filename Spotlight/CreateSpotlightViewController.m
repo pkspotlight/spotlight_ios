@@ -69,6 +69,7 @@
         
     }];
 }
+
 - (IBAction)saveButtonPressed:(id)sender {
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [hud setLabelText:@"Creating Spotlight..."];
@@ -94,6 +95,7 @@
 
     }];
 }
+
 - (IBAction)addParticipantButtonPressed:(id)sender {
 //    CNContactPickerViewController *contactVC = [[CNContactPickerViewController alloc] init];
     //    [contactVC setPredicateForEnablingContact:[NSPredicate predicateWithFormat:@"emailAddresses != nil"]];

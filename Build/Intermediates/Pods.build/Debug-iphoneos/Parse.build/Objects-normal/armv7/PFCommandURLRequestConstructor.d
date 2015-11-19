@@ -15,9 +15,9 @@ dependencies: \
   /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/PFNullability.h \
   /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/Push/PFPushPrivate.h \
   /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/PFPush.h \
-  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Private/Bolts/BFTask.h \
-  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Private/Bolts/BFCancellationToken.h \
-  /Users/pkamm/Documents/ios/Spotlight/Pods/Headers/Private/Bolts/BFCancellationTokenRegistration.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Bolts/Bolts/Common/BFTask.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Bolts/Bolts/Common/BFCancellationToken.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Bolts/Bolts/Common/BFCancellationTokenRegistration.h \
   /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFEncoder.h \
   /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/Commands/PFRESTCommand.h \
   /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFNetworkCommand.h \

@@ -24,15 +24,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.spotlights = [NSArray array];
-    if (self.user) {
-
-    } else {
-        self.user = [PFUser currentUser];
-        UIBarButtonItem* friendsButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Conference Call-32"] style:UIBarButtonItemStylePlain target:self action:@selector(showFriends:)];
-        self.navigationItem.leftBarButtonItem = friendsButton;
-    }
+    if (!self.user) self.user = [PFUser currentUser];
     [self loadSpotlights];
-    
 }
 
 - (void)showFriends:(id)sender {
@@ -52,12 +45,10 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
     return self.spotlights.count;
 }
 

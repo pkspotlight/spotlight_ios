@@ -90,6 +90,10 @@
     }
 }
 
+-(BOOL)hidesBottomBarWhenPushed {
+    return YES;
+}
+
 /*
 #pragma mark - Navigation
 

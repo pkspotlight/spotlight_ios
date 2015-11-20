@@ -16,4 +16,7 @@
 
 + (NSString *)parseClassName;
 
+@property (strong, nonatomic) NSString* teamName;
+
+
 @end

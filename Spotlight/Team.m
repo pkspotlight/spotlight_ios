@@ -10,8 +10,7 @@
 
 @implementation Team
 
-
-
+@dynamic teamName;
 
 
 #pragma mark - Parse Stuff

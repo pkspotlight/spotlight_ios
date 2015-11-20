@@ -11,6 +11,10 @@
 
 #import "ELCImagePickerController.h"
 
+@class Team;
+
 @interface CreateSpotlightViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, CNContactPickerDelegate>
+
+@property (strong, nonatomic) Team* team;
 
 @end

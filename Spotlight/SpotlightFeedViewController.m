@@ -23,15 +23,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    UIRefreshControl* refresh = [[UIRefreshControl alloc] init];
+    [refresh addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
+    [self setRefreshControl:refresh];
     self.spotlights = [NSArray array];
     if (!self.user) self.user = [PFUser currentUser];
-    [self loadSpotlights];
+    [self loadSpotlights:nil];
 }
 
-- (void)showFriends:(id)sender {
+- (void)refresh:(id)sender {
     
-    [self performSegueWithIdentifier:@"friendsVCSegue" sender:sender];
-    
+    [self loadSpotlights:(UIRefreshControl*)sender];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -59,7 +61,7 @@
     return cell;
 }
 
-- (void)loadSpotlights {
+- (void)loadSpotlights:(UIRefreshControl*)sender {
     
     PFQuery *query = [PFQuery queryWithClassName:@"Spotlight"];
     [query whereKey:@"spotlightParticipant" equalTo:[self.user objectId]];
@@ -72,20 +74,17 @@
             }
             self.spotlights = objects;
             [self.tableView reloadData];
+            [sender endRefreshing];
         } else {
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     }];
 
 }
-//
-//- (IBAction)unwindThing:(UIStoryboardSegue*)sender {
-//    
-//}
 
 - (IBAction)unwindCreation:(UIStoryboardSegue*)sender {
     
-    [self loadSpotlights];
+    [self loadSpotlights:nil];
 }
 
 /*

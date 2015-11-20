@@ -9,7 +9,11 @@
 #import "TeamsTableViewController.h"
 #import "TeamTableViewCell.h"
 #import "Team.h"
+
+#import "BasicHeaderView.h"
 #import "Parse.h"
+
+static CGFloat const BasicHeaderHeight = 50;
 
 @interface TeamsTableViewController ()
 
@@ -22,6 +26,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.tableView registerNib:[UINib nibWithNibName:@"BasicHeaderView" bundle:nil]
+forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     self.allTeams = [NSArray array];
     self.myTeams = [NSArray array];
     [self loadMyTeams];
@@ -80,8 +86,18 @@
     
     TeamTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TeamTableViewCell" forIndexPath:indexPath];
     Team* team = (indexPath.section == 0) ? self.myTeams[indexPath.row] : self.allTeams[indexPath.row];
-    [cell formatForTeam:team];
+    [cell formatForTeam:team isFollowing:(indexPath.section == 0)];
     return cell;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    BasicHeaderView *cell = [self.tableView dequeueReusableHeaderFooterViewWithIdentifier:@"BasicHeaderView"];
+    cell.headerTitleLabel.text = (section == 0) ? @"My Teams" : @"Add Teams";
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return BasicHeaderHeight;
 }
 
 /*

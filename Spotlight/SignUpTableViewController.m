@@ -8,6 +8,7 @@
 
 #import "SignUpTableViewController.h"
 #import "SpotlightFeedViewController.h"
+#import "MainTabBarController.h"
 #import <Parse.h>
 
 
@@ -67,6 +68,13 @@
     return cell;
 }
 
+- (void)loadMainTabBar {
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    MainTabBarController *mainTabBarController = [storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
+    [[UIApplication sharedApplication].delegate.window setRootViewController:mainTabBarController];
+
+}
+
 - (IBAction)createAccountButtonPressed:(id)sender {
     
     if (self.pendingInputDict[@"email"] &&
@@ -85,10 +93,7 @@
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {   // Hooray! Let them use the app now.
             NSLog(@"sweet");
-            UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            SpotlightFeedViewController *feedVC = [storyboard instantiateViewControllerWithIdentifier:@"SpotlightFeedViewController"];
-            [self.navigationController pushViewController:feedVC animated:YES];
-            
+            [self loadMainTabBar];
         } else {
             NSString *errorString = [error userInfo][@"error"];
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Nope" message:errorString preferredStyle:UIAlertControllerStyleAlert];
@@ -116,9 +121,7 @@
                                     block:^(PFUser *user, NSError *error) {
                                         if (user) {
                                             NSLog(@"sweet");
-                                            UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                                            SpotlightFeedViewController *feedVC = [storyboard instantiateViewControllerWithIdentifier:@"SpotlightFeedViewController"];
-                                            [self.navigationController pushViewController:feedVC animated:YES];
+                                            [self loadMainTabBar];
                                         } else {
                                             NSString *errorString = [error userInfo][@"error"];
                                             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Nope" message:errorString preferredStyle:UIAlertControllerStyleAlert];

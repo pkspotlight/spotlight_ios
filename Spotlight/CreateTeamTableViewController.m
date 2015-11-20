@@ -22,7 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.teamPropertyArray = @[ @"name", @"town", @"sport"];
+    self.teamPropertyArray = @[ @"teamName", @"town", @"sport"];
     self.pendingFieldDictionary = [self newPendingFieldDictionary];
     
     // Uncomment the following line to preserve selection between presentations.

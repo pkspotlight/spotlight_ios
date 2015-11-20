@@ -29,6 +29,15 @@
 		88BDFC5A1BFD33E0007A3EBB /* TeamsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88BDFC591BFD33E0007A3EBB /* TeamsTableViewController.m */; };
 		88BDFC5D1BFD3635007A3EBB /* TeamTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88BDFC5C1BFD3635007A3EBB /* TeamTableViewCell.m */; };
 		88BDFC601BFD4602007A3EBB /* ProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88BDFC5F1BFD4602007A3EBB /* ProfileTableViewController.m */; };
+		88BDFC631BFD4BFB007A3EBB /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88BDFC621BFD4BFB007A3EBB /* MainTabBarController.m */; };
+		88BDFC651BFD4FD2007A3EBB /* BasicHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88BDFC641BFD4FD2007A3EBB /* BasicHeaderView.xib */; };
+		88BDFC681BFD5034007A3EBB /* BasicHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88BDFC671BFD5034007A3EBB /* BasicHeaderView.m */; };
+		88BDFC6A1BFD53BD007A3EBB /* gb.png in Resources */ = {isa = PBXBuildFile; fileRef = 88BDFC691BFD53BD007A3EBB /* gb.png */; };
+		88BDFC701BFD60B5007A3EBB /* SpotlightCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88BDFC6F1BFD60B5007A3EBB /* SpotlightCollectionViewController.m */; };
+		88BDFC731BFF6A38007A3EBB /* TeamSelectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88BDFC721BFF6A38007A3EBB /* TeamSelectTableViewController.m */; };
+		88BDFC761BFF70E6007A3EBB /* CreateSpotlightTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88BDFC751BFF70E6007A3EBB /* CreateSpotlightTableViewController.m */; };
+		88BDFC791BFF82FD007A3EBB /* SpotlightHeaderCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88BDFC781BFF82FD007A3EBB /* SpotlightHeaderCollectionReusableView.m */; };
+		88BDFC7C1BFF8ABB007A3EBB /* SpotlightMediaCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88BDFC7B1BFF8ABB007A3EBB /* SpotlightMediaCollectionViewCell.m */; };
 		88CAE8D71BFB9AF30099A733 /* landingBg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 88CAE8D61BFB9AF20099A733 /* landingBg.jpg */; };
 		88E953411BEB7ED50094F73D /* Contacts-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 88E953401BEB7ED50094F73D /* Contacts-50.png */; };
 		88E953431BEB7FDF0094F73D /* Conference_call-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 88E953421BEB7FDF0094F73D /* Conference_call-100.png */; };
@@ -39,7 +48,6 @@
 		88E9E8F31BD557F00065AA0C /* CreateSpotlightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E9E8F21BD557F00065AA0C /* CreateSpotlightViewController.m */; };
 		88E9E8F61BD5791E0065AA0C /* SpotlightMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E9E8F51BD5791E0065AA0C /* SpotlightMedia.m */; };
 		88E9E8F91BD5C46D0065AA0C /* SpotlightTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E9E8F81BD5C46D0065AA0C /* SpotlightTableViewCell.m */; };
-		88E9E8FC1BD6A3480065AA0C /* SpotlightTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E9E8FB1BD6A3480065AA0C /* SpotlightTableViewController.m */; };
 		88E9E8FF1BD6A6470065AA0C /* SpotlightMediaTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E9E8FE1BD6A6470065AA0C /* SpotlightMediaTableViewCell.m */; };
 		88EE2CC61B9E08B2002DDB99 /* SpotlightFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88EE2CC51B9E08B2002DDB99 /* SpotlightFeedViewController.m */; };
 		C2B409966BE212B335038003 /* libPods-Spotlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F03B672A3CAD95AD6DB192BE /* libPods-Spotlight.a */; };
@@ -95,6 +103,22 @@
 		88BDFC5C1BFD3635007A3EBB /* TeamTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamTableViewCell.m; sourceTree = "<group>"; };
 		88BDFC5E1BFD4602007A3EBB /* ProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileTableViewController.h; sourceTree = "<group>"; };
 		88BDFC5F1BFD4602007A3EBB /* ProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileTableViewController.m; sourceTree = "<group>"; };
+		88BDFC611BFD4BFB007A3EBB /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
+		88BDFC621BFD4BFB007A3EBB /* MainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
+		88BDFC641BFD4FD2007A3EBB /* BasicHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BasicHeaderView.xib; sourceTree = "<group>"; };
+		88BDFC661BFD5034007A3EBB /* BasicHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicHeaderView.h; sourceTree = "<group>"; };
+		88BDFC671BFD5034007A3EBB /* BasicHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicHeaderView.m; sourceTree = "<group>"; };
+		88BDFC691BFD53BD007A3EBB /* gb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gb.png; sourceTree = "<group>"; };
+		88BDFC6E1BFD60B5007A3EBB /* SpotlightCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotlightCollectionViewController.h; sourceTree = "<group>"; };
+		88BDFC6F1BFD60B5007A3EBB /* SpotlightCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotlightCollectionViewController.m; sourceTree = "<group>"; };
+		88BDFC711BFF6A38007A3EBB /* TeamSelectTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamSelectTableViewController.h; sourceTree = "<group>"; };
+		88BDFC721BFF6A38007A3EBB /* TeamSelectTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamSelectTableViewController.m; sourceTree = "<group>"; };
+		88BDFC741BFF70E6007A3EBB /* CreateSpotlightTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateSpotlightTableViewController.h; sourceTree = "<group>"; };
+		88BDFC751BFF70E6007A3EBB /* CreateSpotlightTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateSpotlightTableViewController.m; sourceTree = "<group>"; };
+		88BDFC771BFF82FD007A3EBB /* SpotlightHeaderCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotlightHeaderCollectionReusableView.h; sourceTree = "<group>"; };
+		88BDFC781BFF82FD007A3EBB /* SpotlightHeaderCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotlightHeaderCollectionReusableView.m; sourceTree = "<group>"; };
+		88BDFC7A1BFF8ABB007A3EBB /* SpotlightMediaCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotlightMediaCollectionViewCell.h; sourceTree = "<group>"; };
+		88BDFC7B1BFF8ABB007A3EBB /* SpotlightMediaCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotlightMediaCollectionViewCell.m; sourceTree = "<group>"; };
 		88CAE8D61BFB9AF20099A733 /* landingBg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = landingBg.jpg; sourceTree = "<group>"; };
 		88E953401BEB7ED50094F73D /* Contacts-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Contacts-50.png"; sourceTree = "<group>"; };
 		88E953421BEB7FDF0094F73D /* Conference_call-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Conference_call-100.png"; sourceTree = "<group>"; };
@@ -109,8 +133,6 @@
 		88E9E8F51BD5791E0065AA0C /* SpotlightMedia.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotlightMedia.m; sourceTree = "<group>"; };
 		88E9E8F71BD5C46D0065AA0C /* SpotlightTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotlightTableViewCell.h; sourceTree = "<group>"; };
 		88E9E8F81BD5C46D0065AA0C /* SpotlightTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotlightTableViewCell.m; sourceTree = "<group>"; };
-		88E9E8FA1BD6A3480065AA0C /* SpotlightTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotlightTableViewController.h; sourceTree = "<group>"; };
-		88E9E8FB1BD6A3480065AA0C /* SpotlightTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotlightTableViewController.m; sourceTree = "<group>"; };
 		88E9E8FD1BD6A6470065AA0C /* SpotlightMediaTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotlightMediaTableViewCell.h; sourceTree = "<group>"; };
 		88E9E8FE1BD6A6470065AA0C /* SpotlightMediaTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotlightMediaTableViewCell.m; sourceTree = "<group>"; };
 		88EE2CC41B9E08B2002DDB99 /* SpotlightFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotlightFeedViewController.h; sourceTree = "<group>"; };
@@ -183,6 +205,8 @@
 			children = (
 				88A736DB1B91318D00093B27 /* AppDelegate.h */,
 				88A736DC1B91318D00093B27 /* AppDelegate.m */,
+				88BDFC611BFD4BFB007A3EBB /* MainTabBarController.h */,
+				88BDFC621BFD4BFB007A3EBB /* MainTabBarController.m */,
 				88BDFC561BFD3314007A3EBB /* Spotlight */,
 				88BDFC551BFD32E3007A3EBB /* SignUp */,
 				88BDFC541BFD32D0007A3EBB /* Team */,
@@ -191,6 +215,9 @@
 				8893FD7C1BFD1FCB00711779 /* FieldEntryTableViewCell.m */,
 				88BDFC5E1BFD4602007A3EBB /* ProfileTableViewController.h */,
 				88BDFC5F1BFD4602007A3EBB /* ProfileTableViewController.m */,
+				88BDFC641BFD4FD2007A3EBB /* BasicHeaderView.xib */,
+				88BDFC661BFD5034007A3EBB /* BasicHeaderView.h */,
+				88BDFC671BFD5034007A3EBB /* BasicHeaderView.m */,
 				88A736E11B91318D00093B27 /* Main.storyboard */,
 				88A736E41B91318D00093B27 /* Images.xcassets */,
 				88A736E61B91318D00093B27 /* LaunchScreen.xib */,
@@ -235,6 +262,8 @@
 				88BDFC591BFD33E0007A3EBB /* TeamsTableViewController.m */,
 				88BDFC501BFD22B8007A3EBB /* CreateTeamTableViewController.h */,
 				88BDFC511BFD22B8007A3EBB /* CreateTeamTableViewController.m */,
+				88BDFC711BFF6A38007A3EBB /* TeamSelectTableViewController.h */,
+				88BDFC721BFF6A38007A3EBB /* TeamSelectTableViewController.m */,
 				88BDFC5B1BFD3635007A3EBB /* TeamTableViewCell.h */,
 				88BDFC5C1BFD3635007A3EBB /* TeamTableViewCell.m */,
 			);
@@ -259,18 +288,24 @@
 			children = (
 				887FF4CC1BD530B400F3679D /* Spotlight.h */,
 				887FF4CD1BD530B400F3679D /* Spotlight.m */,
+				88E9E8F41BD5791E0065AA0C /* SpotlightMedia.h */,
+				88E9E8F51BD5791E0065AA0C /* SpotlightMedia.m */,
 				88EE2CC41B9E08B2002DDB99 /* SpotlightFeedViewController.h */,
 				88EE2CC51B9E08B2002DDB99 /* SpotlightFeedViewController.m */,
 				88E9E8F11BD557F00065AA0C /* CreateSpotlightViewController.h */,
 				88E9E8F21BD557F00065AA0C /* CreateSpotlightViewController.m */,
-				88E9E8FA1BD6A3480065AA0C /* SpotlightTableViewController.h */,
-				88E9E8FB1BD6A3480065AA0C /* SpotlightTableViewController.m */,
-				88E9E8F41BD5791E0065AA0C /* SpotlightMedia.h */,
-				88E9E8F51BD5791E0065AA0C /* SpotlightMedia.m */,
+				88BDFC741BFF70E6007A3EBB /* CreateSpotlightTableViewController.h */,
+				88BDFC751BFF70E6007A3EBB /* CreateSpotlightTableViewController.m */,
+				88BDFC6E1BFD60B5007A3EBB /* SpotlightCollectionViewController.h */,
+				88BDFC6F1BFD60B5007A3EBB /* SpotlightCollectionViewController.m */,
 				88E9E8F71BD5C46D0065AA0C /* SpotlightTableViewCell.h */,
 				88E9E8F81BD5C46D0065AA0C /* SpotlightTableViewCell.m */,
+				88BDFC7A1BFF8ABB007A3EBB /* SpotlightMediaCollectionViewCell.h */,
+				88BDFC7B1BFF8ABB007A3EBB /* SpotlightMediaCollectionViewCell.m */,
 				88E9E8FD1BD6A6470065AA0C /* SpotlightMediaTableViewCell.h */,
 				88E9E8FE1BD6A6470065AA0C /* SpotlightMediaTableViewCell.m */,
+				88BDFC771BFF82FD007A3EBB /* SpotlightHeaderCollectionReusableView.h */,
+				88BDFC781BFF82FD007A3EBB /* SpotlightHeaderCollectionReusableView.m */,
 			);
 			name = Spotlight;
 			sourceTree = "<group>";
@@ -287,6 +322,7 @@
 		88E98E851BAF507700292B14 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				88BDFC691BFD53BD007A3EBB /* gb.png */,
 				8893FD761BFC1E0400711779 /* teams@3x.png */,
 				8893FD721BFC1C4600711779 /* profile@3x.png */,
 				8893FD741BFC1CF600711779 /* friends@3x.png */,
@@ -387,12 +423,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88BDFC6A1BFD53BD007A3EBB /* gb.png in Resources */,
 				88A736E31B91318D00093B27 /* Main.storyboard in Resources */,
 				88A736E81B91318D00093B27 /* LaunchScreen.xib in Resources */,
 				8893FD731BFC1C4600711779 /* profile@3x.png in Resources */,
 				88E98E891BAF508400292B14 /* Softball.JPG in Resources */,
 				8893FD771BFC1E0400711779 /* teams@3x.png in Resources */,
 				88E98E8B1BAF508400292B14 /* fielding ground ball.jpg in Resources */,
+				88BDFC651BFD4FD2007A3EBB /* BasicHeaderView.xib in Resources */,
 				88E953431BEB7FDF0094F73D /* Conference_call-100.png in Resources */,
 				88A736E51B91318D00093B27 /* Images.xcassets in Resources */,
 				88E98E8A1BAF508400292B14 /* hockey.jpg in Resources */,
@@ -484,15 +522,21 @@
 				8893FD7D1BFD1FCB00711779 /* FieldEntryTableViewCell.m in Sources */,
 				88BDFC5A1BFD33E0007A3EBB /* TeamsTableViewController.m in Sources */,
 				88E9E8F61BD5791E0065AA0C /* SpotlightMedia.m in Sources */,
+				88BDFC7C1BFF8ABB007A3EBB /* SpotlightMediaCollectionViewCell.m in Sources */,
+				88BDFC631BFD4BFB007A3EBB /* MainTabBarController.m in Sources */,
 				88E9E8F31BD557F00065AA0C /* CreateSpotlightViewController.m in Sources */,
 				88A736DD1B91318D00093B27 /* AppDelegate.m in Sources */,
-				88E9E8FC1BD6A3480065AA0C /* SpotlightTableViewController.m in Sources */,
 				887FF4CE1BD530B400F3679D /* Spotlight.m in Sources */,
 				88BDFC5D1BFD3635007A3EBB /* TeamTableViewCell.m in Sources */,
+				88BDFC681BFD5034007A3EBB /* BasicHeaderView.m in Sources */,
 				88BDFC601BFD4602007A3EBB /* ProfileTableViewController.m in Sources */,
 				88E9E8F91BD5C46D0065AA0C /* SpotlightTableViewCell.m in Sources */,
 				88A736DA1B91318D00093B27 /* main.m in Sources */,
+				88BDFC761BFF70E6007A3EBB /* CreateSpotlightTableViewController.m in Sources */,
 				88E9E8FF1BD6A6470065AA0C /* SpotlightMediaTableViewCell.m in Sources */,
+				88BDFC791BFF82FD007A3EBB /* SpotlightHeaderCollectionReusableView.m in Sources */,
+				88BDFC731BFF6A38007A3EBB /* TeamSelectTableViewController.m in Sources */,
+				88BDFC701BFD60B5007A3EBB /* SpotlightCollectionViewController.m in Sources */,
 				88BDFC521BFD22B8007A3EBB /* CreateTeamTableViewController.m in Sources */,
 				8849A1E31BA0CB8400511DD5 /* SignUpTableViewController.m in Sources */,
 				8893FD7A1BFCCC2100711779 /* Team.m in Sources */,

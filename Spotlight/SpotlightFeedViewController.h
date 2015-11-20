@@ -11,7 +11,7 @@
 
 @interface SpotlightFeedViewController : UITableViewController
 
-- (void)loadSpotlights;
+//- (void)loadSpotlights;
 
 @property(strong, nonatomic) PFUser* user;
 

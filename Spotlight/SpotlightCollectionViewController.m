@@ -1,32 +1,41 @@
 //
-//  SpotlightTableViewController.m
+//  SpotlightCollectionViewController.m
 //  Spotlight
 //
-//  Created by Peter Kamm on 10/20/15.
+//  Created by Peter Kamm on 11/18/15.
 //  Copyright © 2015 Spotlight. All rights reserved.
 //
 
-#import "SpotlightTableViewController.h"
-#import "SpotlightMediaTableViewCell.h"
-#import <MobileCoreServices/UTCoreTypes.h>
+#import "SpotlightCollectionViewController.h"
+#import "SpotlightHeaderCollectionReusableView.h"
+#import "SpotlightMediaCollectionViewCell.h"
+#import "SpotlightMedia.h"
 
+#import <MobileCoreServices/UTCoreTypes.h>
 #import <MBProgressHUD.h>
 
-@interface SpotlightTableViewController ()
+
+@interface SpotlightCollectionViewController ()
 
 @property (strong, nonatomic) NSArray* mediaList;
 @property (strong, nonatomic) UIImagePickerController* imagePickerController;
+@property (weak, nonatomic) IBOutlet UIImageView *teamImageView;
+@property (weak, nonatomic) IBOutlet UILabel *teamNameLabel;
 
 @end
 
-@implementation SpotlightTableViewController
+@implementation SpotlightCollectionViewController
+
+static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.spotlight allMedia:^(NSArray *media, NSError *error) {
         self.mediaList = media;
-        [self.tableView reloadData];
+        [self.collectionView reloadData];
     }];
+    
+    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {
@@ -34,25 +43,94 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+-(BOOL)hidesBottomBarWhenPushed {
+    return YES;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+#pragma mark <UICollectionViewDataSource>
+
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return [self.mediaList count];
 }
 
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    SpotlightMediaTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SpotlightMediaTableViewCell" forIndexPath:indexPath];
-    [cell formatWithSpotlightMedia:self.mediaList[indexPath.row]];
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    SpotlightMediaCollectionViewCell *cell = (SpotlightMediaCollectionViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    SpotlightMedia* media = self.mediaList[indexPath.row];
+    [cell formatCellForSpotlightMedia:media];
+    
     return cell;
 }
 
+#pragma mark <UICollectionViewDelegate>
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
+           viewForSupplementaryElementOfKind:(NSString *)kind
+                                 atIndexPath:(NSIndexPath *)indexPath
+{
+    
+    SpotlightHeaderCollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:
+                                   UICollectionElementKindSectionHeader withReuseIdentifier:@"SpotlightHeaderCollectionReusableView" forIndexPath:indexPath];
+    [self updateSectionHeader:headerView forIndexPath:indexPath];
+    
+    return headerView;
+}
+
+- (void)updateSectionHeader:(UICollectionReusableView *)header forIndexPath:(NSIndexPath *)indexPath
+{
+//    NSString *text = [NSString stringWithFormat:@"header #%i", indexPath.row];
+//    header.label.text = text;
+}
+
+
+/*
+// Uncomment this method to specify if the specified item should be highlighted during tracking
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
+	return YES;
+}
+*/
+
+/*
+// Uncomment this method to specify if the specified item should be selected
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+*/
+
+/*
+// Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath {
+	return NO;
+}
+
+- (BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
+	return NO;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
+	
+}
+*/
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    CGFloat width = self.collectionView.bounds.size.width/2;
+    return CGSizeMake(width, width);
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
     // Create browser (must be done each time photo browser is
     // displayed. Photo browser objects cannot be re-used)
@@ -67,7 +145,7 @@
     browser.enableGrid = YES; // Whether to allow the viewing of all the photo thumbnails on a grid (defaults to YES)
     browser.startOnGrid = NO; // Whether to start on the grid of thumbnails instead of the first photo (defaults to NO)
     browser.autoPlayOnAppear = YES; // Auto-play first video
-
+    
     // Optionally set the current visible photo before displaying
     [browser setCurrentPhotoIndex:indexPath.row];
     
@@ -90,19 +168,6 @@
     }
 }
 
--(BOOL)hidesBottomBarWhenPushed {
-    return YES;
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
     return self.mediaList.count;
@@ -125,6 +190,7 @@
         return [MWPhoto photoWithURL:[NSURL URLWithString:media.mediaFile.url]];
     }
 }
+
 
 
 #pragma mark - UIImagePickerControllerDelegate
@@ -155,9 +221,9 @@
         } else {
             
             [self.spotlight allMedia:^(NSArray *media, NSError *error) {
-            
+                
                 self.mediaList = media;
-                [self.tableView reloadData];
+                [self.collectionView reloadData];
                 [hud hide:YES];
             }];
         }

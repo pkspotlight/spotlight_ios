@@ -12,6 +12,9 @@
 
 @interface TeamTableViewCell : UITableViewCell
 
-- (void)formatForTeam:(Team*)team;
+- (void)formatForTeam:(Team*)team isFollowing:(BOOL)isFollowing;
+
+@property (readonly, nonatomic) Team* team;
+
 
 @end

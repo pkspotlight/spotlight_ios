@@ -9,8 +9,8 @@
 #import "SpotlightFeedViewController.h"
 #import "Spotlight.h"
 #import "SpotlightTableViewCell.h"
+#import "SpotlightCollectionViewController.h"
 #import "SpotlightMedia.h"
-#import "SpotlightTableViewController.h"
 #import <AFNetworking/UIImageView+AFNetworking.h>
 
 @interface SpotlightFeedViewController ()
@@ -63,15 +63,20 @@
 
 - (void)loadSpotlights:(UIRefreshControl*)sender {
     
-    PFQuery *query = [PFQuery queryWithClassName:@"Spotlight"];
-    [query whereKey:@"spotlightParticipant" equalTo:[self.user objectId]];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    PFQuery *teamQuery = [PFQuery queryWithClassName:@"Team"];
+    [teamQuery whereKey:@"teamParticipants" equalTo:[self.user objectId]];
+    [teamQuery includeKey:@"teamLogoMedia"];
+    [teamQuery includeKey:@"thumbnailImageFile"];
+
+    PFQuery *spotlightQuery = [PFQuery queryWithClassName:@"Spotlight"];
+    [spotlightQuery includeKey:@"team"];
+    [spotlightQuery includeKey:@"teamLogoMedia"];
+    [spotlightQuery includeKey:@"thumbnailImageFile"];
+
+    [spotlightQuery whereKey:@"team" matchesKey:@"objectId" inQuery:teamQuery];
+    [spotlightQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             NSLog(@"Successfully retrieved %lu Spotlights.", (unsigned long)objects.count);
-            
-            for (PFObject *object in objects) {
-                NSLog(@"%@", object.objectId);
-            }
             self.spotlights = objects;
             [self.tableView reloadData];
             [sender endRefreshing];
@@ -79,7 +84,23 @@
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     }];
-
+    
+//    PFQuery *query = [PFQuery queryWithClassName:@"Spotlight"];
+//    [query whereKey:@"spotlightParticipant" equalTo:[self.user objectId]];
+//    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//        if (!error) {
+//            NSLog(@"Successfully retrieved %lu Spotlights.", (unsigned long)objects.count);
+//            
+//            for (PFObject *object in objects) {
+//                NSLog(@"%@", object.objectId);
+//            }
+//            self.spotlights = objects;
+//            [self.tableView reloadData];
+//            [sender endRefreshing];
+//        } else {
+//            NSLog(@"Error: %@ %@", error, [error userInfo]);
+//        }
+//    }];
 }
 
 - (IBAction)unwindCreation:(UIStoryboardSegue*)sender {
@@ -87,49 +108,6 @@
     [self loadSpotlights:nil];
 }
 
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
-}
-*/
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 
 #pragma mark - Navigation
@@ -137,7 +115,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([[segue identifier] isEqualToString:@"SpotlightSegue"]) {
-        [(SpotlightTableViewController*)[segue destinationViewController] setSpotlight:self.spotlights[[self.tableView indexPathForCell:sender].row]];
+        [(SpotlightCollectionViewController*)[segue destinationViewController] setSpotlight:self.spotlights[[self.tableView indexPathForCell:sender].row]];
     }
 }
 

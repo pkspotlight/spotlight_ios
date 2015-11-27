@@ -9,16 +9,10 @@
 #import <Parse.h>
 #import <Parse/PFObject.h>
 #import <Parse/PFObject+Subclass.h>
+#import "MediaObject.h"
 
-@interface SpotlightMedia : PFObject <PFSubclassing>
-
-- (instancetype)initWithVideoPath:(NSString*)path;
-- (instancetype)initWithImage:(UIImage*)image;
+@interface SpotlightMedia : MediaObject <PFSubclassing>
 
 + (NSString *)parseClassName;
-
-@property (strong, nonatomic) PFFile *mediaFile;
-@property (strong, nonatomic) PFFile *thumbnailImageFile;
-@property (assign, nonatomic) BOOL isVideo;
 
 @end

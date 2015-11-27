@@ -11,7 +11,7 @@
 
 @class FieldEntryTableViewCell;
 
-@protocol SEMAccountTextFieldCellDelegate <NSObject>
+@protocol FieldEntryTextFieldCellDelegate <NSObject>
 
 - (void)accountTextFieldCell:(FieldEntryTableViewCell *)cell didChangeToValue:(NSString *)text;
 - (void)accountTextFieldCellDidReturn:(FieldEntryTableViewCell *)cell;
@@ -33,6 +33,6 @@
 // showProtectedValues:(BOOL)showProtectedFields
 //showImportPasswordButton:(BOOL)showImport;
 
-@property (weak, nonatomic) id<SEMAccountTextFieldCellDelegate> delegate;
+@property (weak, nonatomic) id<FieldEntryTextFieldCellDelegate> delegate;
 
 @end

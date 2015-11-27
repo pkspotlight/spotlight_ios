@@ -43,6 +43,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 - (void)loadMyTeams {
     PFQuery *query = [PFQuery queryWithClassName:@"Team"];
     [query whereKey:@"teamParticipants" equalTo:[PFUser currentUser].objectId];
+    [query includeKey:@"teamLogoMedia"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             NSLog(@"Successfully retrieved my %lu Teams.", (unsigned long)objects.count);

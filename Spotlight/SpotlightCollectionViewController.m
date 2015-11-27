@@ -10,8 +10,10 @@
 #import "SpotlightHeaderCollectionReusableView.h"
 #import "SpotlightMediaCollectionViewCell.h"
 #import "SpotlightMedia.h"
+#import "Team.h"
 
 #import <MobileCoreServices/UTCoreTypes.h>
+#import <AFNetworking/UIImageView+AFNetworking.h>
 #import <MBProgressHUD.h>
 
 
@@ -19,8 +21,6 @@
 
 @property (strong, nonatomic) NSArray* mediaList;
 @property (strong, nonatomic) UIImagePickerController* imagePickerController;
-@property (weak, nonatomic) IBOutlet UIImageView *teamImageView;
-@property (weak, nonatomic) IBOutlet UILabel *teamNameLabel;
 
 @end
 
@@ -30,6 +30,7 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     [self.spotlight allMedia:^(NSArray *media, NSError *error) {
         self.mediaList = media;
         [self.collectionView reloadData];
@@ -90,6 +91,21 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
 
 - (void)updateSectionHeader:(UICollectionReusableView *)header forIndexPath:(NSIndexPath *)indexPath
 {
+    Team *team = self.spotlight.team;
+    [[(SpotlightHeaderCollectionReusableView*)header teamNameLabel] setText:team.teamName];
+    [team.teamLogoMedia fetchIfNeeded];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:team.teamLogoMedia.thumbnailImageFile.url]];
+    [[(SpotlightHeaderCollectionReusableView*)header teamImageView]
+     setImageWithURLRequest:request
+     placeholderImage:nil
+     success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, UIImage * _Nonnull image) {
+         [[(SpotlightHeaderCollectionReusableView*)header teamImageView] setImage:image];
+     } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, NSError * _Nonnull error) {
+         NSLog(@"fuck thumbnail failure");
+     }];
+    
+
+    
 //    NSString *text = [NSString stringWithFormat:@"header #%i", indexPath.row];
 //    header.label.text = text;
 }

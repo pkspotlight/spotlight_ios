@@ -44,8 +44,11 @@
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [hud setLabelText:@"Creating Spotlight..."];
     PFUser* user = [PFUser currentUser];
-    PFRelation *participantRelation = [self.spotlight relationForKey:@"spotlightParticipant"];
+    PFRelation *participantRelation = [self.spotlight relationForKey:@"creator"];
     [participantRelation addObject:user];
+//    PFRelation *teamRelation = [self.spotlight relationForKey:@"team"];
+//    [teamRelation addObject:self.team];
+    [self.spotlight setTeam:self.team];
     [self.spotlight setCreatorName:user.username];
     [self.spotlight saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         [self.navigationController dismissViewControllerAnimated:YES completion:^{

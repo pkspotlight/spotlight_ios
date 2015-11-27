@@ -11,7 +11,7 @@
 @implementation Team
 
 @dynamic teamName;
-
+@dynamic teamLogoMedia;
 
 #pragma mark - Parse Stuff
 + (void)load {

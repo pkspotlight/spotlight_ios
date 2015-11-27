@@ -7,14 +7,19 @@
 //
 
 #import "CreateTeamTableViewController.h"
-#import "FieldEntryTableViewCell.h"
 #import "Team.h"
+#import "TeamLogoMedia.h"
+#import "SpotlightMedia.h"
 #import <MBProgressHUD.h>
+#import <MobileCoreServices/UTCoreTypes.h>
 
 @interface CreateTeamTableViewController ()
 
 @property (strong, nonatomic) NSArray* teamPropertyArray;
+@property (strong, nonatomic) TeamLogoMedia* teamLogo;
 @property (strong, nonatomic) NSMutableDictionary *pendingFieldDictionary;
+@property (strong, nonatomic) UIImagePickerController* imagePickerController;
+@property (weak, nonatomic) IBOutlet UIButton *addTeamLogoButton;
 
 @end
 
@@ -25,11 +30,6 @@
     self.teamPropertyArray = @[ @"teamName", @"town", @"sport"];
     self.pendingFieldDictionary = [self newPendingFieldDictionary];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (NSMutableDictionary *)newPendingFieldDictionary {
@@ -58,13 +58,13 @@
     [hud setLabelText:@"Creating Team..."];
 
     PFObject *team = [PFObject objectWithClassName:@"Team" dictionary:self.pendingFieldDictionary];
+    team[@"teamLogoMedia"] = self.teamLogo;
     PFUser* user = [PFUser currentUser];
     PFRelation *participantRelation = [team relationForKey:@"teamParticipants"];
     [participantRelation addObject:user];
     
     [team saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
-            
             [self dismissViewControllerAnimated:YES completion:nil];
 
         }
@@ -135,6 +135,57 @@
 
 - (IBAction)cancelButtonPressed:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)editPhotoButtonPressed:(id)sender {
+    
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
+    {
+        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+        imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
+        imagePickerController.delegate = self;
+        imagePickerController.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeMovie, (NSString *)kUTTypeImage, nil];
+        imagePickerController.videoMaximumDuration = 15;
+        [imagePickerController setAllowsEditing:YES];
+        
+        self.imagePickerController = imagePickerController;
+        [self.navigationController presentViewController:self.imagePickerController animated:YES completion:nil];
+    }
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)infoDict {
+    
+    NSString *mediaType = [infoDict objectForKey: UIImagePickerControllerMediaType];
+    
+    if ([mediaType isEqualToString:(NSString *)kUTTypeVideo] ||
+        [mediaType isEqualToString:(NSString *)kUTTypeMovie]){
+        
+        NSURL *videoUrl=(NSURL*)[infoDict objectForKey:UIImagePickerControllerMediaURL];
+        NSString *videoPath = [videoUrl path];
+        self.teamLogo = [[TeamLogoMedia alloc] initWithVideoPath:videoPath];
+        
+    } else if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
+        UIImage *image = [infoDict valueForKey:UIImagePickerControllerOriginalImage];
+        self.teamLogo = [[TeamLogoMedia alloc] initWithImage:image];
+    }
+    [self.teamLogo saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"fuck: %@", [error localizedDescription]);
+        }
+    }];
+    PFFile* thumbFile = self.teamLogo.thumbnailImageFile;
+    [thumbFile getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
+        [self.addTeamLogoButton setImage:[UIImage imageWithData:data] forState:UIControlStateNormal];
+    }];
+    [self.imagePickerController dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 /*

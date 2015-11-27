@@ -7,6 +7,7 @@
 //
 
 #import "SpotlightTableViewCell.h"
+#import "Team.h"
 
 #import <AFNetworking/UIImageView+AFNetworking.h>
 
@@ -36,7 +37,7 @@
     
     [self.mainImageView setImage:nil];
     [self.mainImageView cancelImageRequestOperation];
-    [self.titleLabel setText:spotlight[@"title"]];
+    [self.titleLabel setText:spotlight.team.teamName];
     [self.createdByLabel setText:[NSString stringWithFormat:@"by %@", spotlight.creatorName]];
     [spotlight allThumbnailUrls:^(NSArray *urls, NSError *error) {
         if (urls && !error) {

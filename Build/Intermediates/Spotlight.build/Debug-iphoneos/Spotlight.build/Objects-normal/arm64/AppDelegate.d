@@ -13,4 +13,5 @@ dependencies: \
   /Users/pkamm/Documents/ios/Spotlight/Crashlytics.framework/Headers/Crashlytics.h \
   /Users/pkamm/Documents/ios/Spotlight/Crashlytics.framework/Modules/module.modulemap \
   /Users/pkamm/Documents/ios/Spotlight/Spotlight/Spotlight.h \
-  /Users/pkamm/Documents/ios/Spotlight/Spotlight/SpotlightMedia.h
+  /Users/pkamm/Documents/ios/Spotlight/Spotlight/SpotlightMedia.h \
+  /Users/pkamm/Documents/ios/Spotlight/Spotlight/MediaObject.h

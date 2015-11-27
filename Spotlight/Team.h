@@ -10,6 +10,7 @@
 #import "PFObject.h"
 #import <Parse.h>
 #import <Parse/PFObject+Subclass.h>
+#import "TeamLogoMedia.h"
 
 
 @interface Team : PFObject <PFSubclassing>
@@ -17,6 +18,7 @@
 + (NSString *)parseClassName;
 
 @property (strong, nonatomic) NSString* teamName;
+@property (strong, nonatomic) TeamLogoMedia* teamLogoMedia;
 
 
 @end

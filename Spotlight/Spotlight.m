@@ -13,6 +13,7 @@
 
 @dynamic creatorName;
 @dynamic title;
+@dynamic team;
 
 - (void)allMedia:(void (^)(NSArray *media, NSError *error))completion {
     PFQuery *query = [PFQuery queryWithClassName:@"SpotlightMedia"];

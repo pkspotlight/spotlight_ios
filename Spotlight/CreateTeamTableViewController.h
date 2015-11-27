@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FieldEntryTableViewCell.h"
 
-@interface CreateTeamTableViewController : UITableViewController
+@interface CreateTeamTableViewController : UITableViewController <FieldEntryTextFieldCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate>
 
 @end

@@ -11,12 +11,15 @@
 #import <Parse/PFObject+Subclass.h>
 
 
+@class Team;
+
 @interface Spotlight : PFObject <PFSubclassing>
 
 + (NSString *)parseClassName;
 
 @property(strong, nonatomic) NSString*  creatorName;
 @property(strong, nonatomic) NSString*  title;
+@property(strong, nonatomic) Team* team;
 
 - (void)allMedia:(void (^)(NSArray *media, NSError *error))completion;
 - (void)allImageUrls:(void (^)(NSArray *urls, NSError *error))completion;

@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse.h>
 
-@interface ProfileTableViewController : UITableViewController
+@interface ProfileTableViewController : UITableViewController  <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate>
+
+@property(strong, nonatomic) PFUser* user;
 
 @end

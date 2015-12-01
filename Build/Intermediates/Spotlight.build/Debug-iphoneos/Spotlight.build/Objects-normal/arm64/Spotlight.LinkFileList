@@ -1,4 +1,5 @@
 /Users/pkamm/Documents/ios/Spotlight/Build/Intermediates/Spotlight.build/Debug-iphoneos/Spotlight.build/Objects-normal/arm64/SpotlightFeedViewController.o
+/Users/pkamm/Documents/ios/Spotlight/Build/Intermediates/Spotlight.build/Debug-iphoneos/Spotlight.build/Objects-normal/arm64/ProfilePictureMedia.o
 /Users/pkamm/Documents/ios/Spotlight/Build/Intermediates/Spotlight.build/Debug-iphoneos/Spotlight.build/Objects-normal/arm64/FriendsTableViewController.o
 /Users/pkamm/Documents/ios/Spotlight/Build/Intermediates/Spotlight.build/Debug-iphoneos/Spotlight.build/Objects-normal/arm64/IntroViewController.o
 /Users/pkamm/Documents/ios/Spotlight/Build/Intermediates/Spotlight.build/Debug-iphoneos/Spotlight.build/Objects-normal/arm64/FieldEntryTableViewCell.o
@@ -17,6 +18,7 @@
 /Users/pkamm/Documents/ios/Spotlight/Build/Intermediates/Spotlight.build/Debug-iphoneos/Spotlight.build/Objects-normal/arm64/main.o
 /Users/pkamm/Documents/ios/Spotlight/Build/Intermediates/Spotlight.build/Debug-iphoneos/Spotlight.build/Objects-normal/arm64/CreateSpotlightTableViewController.o
 /Users/pkamm/Documents/ios/Spotlight/Build/Intermediates/Spotlight.build/Debug-iphoneos/Spotlight.build/Objects-normal/arm64/SpotlightMediaTableViewCell.o
+/Users/pkamm/Documents/ios/Spotlight/Build/Intermediates/Spotlight.build/Debug-iphoneos/Spotlight.build/Objects-normal/arm64/FriendTableViewCell.o
 /Users/pkamm/Documents/ios/Spotlight/Build/Intermediates/Spotlight.build/Debug-iphoneos/Spotlight.build/Objects-normal/arm64/TeamDetailsTableViewController.o
 /Users/pkamm/Documents/ios/Spotlight/Build/Intermediates/Spotlight.build/Debug-iphoneos/Spotlight.build/Objects-normal/arm64/SpotlightHeaderCollectionReusableView.o
 /Users/pkamm/Documents/ios/Spotlight/Build/Intermediates/Spotlight.build/Debug-iphoneos/Spotlight.build/Objects-normal/arm64/TeamSelectTableViewController.o
@@ -25,4 +27,5 @@
 /Users/pkamm/Documents/ios/Spotlight/Build/Intermediates/Spotlight.build/Debug-iphoneos/Spotlight.build/Objects-normal/arm64/SignUpTableViewController.o
 /Users/pkamm/Documents/ios/Spotlight/Build/Intermediates/Spotlight.build/Debug-iphoneos/Spotlight.build/Objects-normal/arm64/Team.o
 /Users/pkamm/Documents/ios/Spotlight/Build/Intermediates/Spotlight.build/Debug-iphoneos/Spotlight.build/Objects-normal/arm64/SignUpInputTableViewCell.o
+/Users/pkamm/Documents/ios/Spotlight/Build/Intermediates/Spotlight.build/Debug-iphoneos/Spotlight.build/Objects-normal/arm64/FriendProfileViewController.o
 /Users/pkamm/Documents/ios/Spotlight/Build/Intermediates/Spotlight.build/Debug-iphoneos/Spotlight.build/Objects-normal/arm64/MediaObject.o

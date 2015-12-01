@@ -52,6 +52,11 @@
 		88E9E8F61BD5791E0065AA0C /* SpotlightMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E9E8F51BD5791E0065AA0C /* SpotlightMedia.m */; };
 		88E9E8F91BD5C46D0065AA0C /* SpotlightTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E9E8F81BD5C46D0065AA0C /* SpotlightTableViewCell.m */; };
 		88E9E8FF1BD6A6470065AA0C /* SpotlightMediaTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E9E8FE1BD6A6470065AA0C /* SpotlightMediaTableViewCell.m */; };
+		88EC50241C0DB72500077E85 /* FriendProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88EC50231C0DB72500077E85 /* FriendProfileViewController.m */; };
+		88EC50261C0DC98D00077E85 /* icon-edit-avatar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 88EC50251C0DC98D00077E85 /* icon-edit-avatar@2x.png */; };
+		88EC50281C0DCC2C00077E85 /* unknown_user.png in Resources */ = {isa = PBXBuildFile; fileRef = 88EC50271C0DCC2C00077E85 /* unknown_user.png */; };
+		88EC502B1C0DCE5200077E85 /* ProfilePictureMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = 88EC502A1C0DCE5200077E85 /* ProfilePictureMedia.m */; };
+		88EC502E1C0E041F00077E85 /* FriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88EC502D1C0E041F00077E85 /* FriendTableViewCell.m */; };
 		88EE2CC61B9E08B2002DDB99 /* SpotlightFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88EE2CC51B9E08B2002DDB99 /* SpotlightFeedViewController.m */; };
 		C2B409966BE212B335038003 /* libPods-Spotlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F03B672A3CAD95AD6DB192BE /* libPods-Spotlight.a */; };
 /* End PBXBuildFile section */
@@ -144,6 +149,14 @@
 		88E9E8F81BD5C46D0065AA0C /* SpotlightTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotlightTableViewCell.m; sourceTree = "<group>"; };
 		88E9E8FD1BD6A6470065AA0C /* SpotlightMediaTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotlightMediaTableViewCell.h; sourceTree = "<group>"; };
 		88E9E8FE1BD6A6470065AA0C /* SpotlightMediaTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotlightMediaTableViewCell.m; sourceTree = "<group>"; };
+		88EC50221C0DB72500077E85 /* FriendProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendProfileViewController.h; sourceTree = "<group>"; };
+		88EC50231C0DB72500077E85 /* FriendProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendProfileViewController.m; sourceTree = "<group>"; };
+		88EC50251C0DC98D00077E85 /* icon-edit-avatar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-edit-avatar@2x.png"; sourceTree = "<group>"; };
+		88EC50271C0DCC2C00077E85 /* unknown_user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unknown_user.png; sourceTree = "<group>"; };
+		88EC50291C0DCE5200077E85 /* ProfilePictureMedia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfilePictureMedia.h; sourceTree = "<group>"; };
+		88EC502A1C0DCE5200077E85 /* ProfilePictureMedia.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfilePictureMedia.m; sourceTree = "<group>"; };
+		88EC502C1C0E041F00077E85 /* FriendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendTableViewCell.h; sourceTree = "<group>"; };
+		88EC502D1C0E041F00077E85 /* FriendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendTableViewCell.m; sourceTree = "<group>"; };
 		88EE2CC41B9E08B2002DDB99 /* SpotlightFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotlightFeedViewController.h; sourceTree = "<group>"; };
 		88EE2CC51B9E08B2002DDB99 /* SpotlightFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotlightFeedViewController.m; sourceTree = "<group>"; };
 		F03B672A3CAD95AD6DB192BE /* libPods-Spotlight.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Spotlight.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -226,6 +239,8 @@
 				8893FD7C1BFD1FCB00711779 /* FieldEntryTableViewCell.m */,
 				88BDFC5E1BFD4602007A3EBB /* ProfileTableViewController.h */,
 				88BDFC5F1BFD4602007A3EBB /* ProfileTableViewController.m */,
+				88EC50291C0DCE5200077E85 /* ProfilePictureMedia.h */,
+				88EC502A1C0DCE5200077E85 /* ProfilePictureMedia.m */,
 				88BDFC641BFD4FD2007A3EBB /* BasicHeaderView.xib */,
 				88BDFC661BFD5034007A3EBB /* BasicHeaderView.h */,
 				88BDFC671BFD5034007A3EBB /* BasicHeaderView.m */,
@@ -330,6 +345,10 @@
 			children = (
 				88E953441BEB8B7D0094F73D /* FriendsTableViewController.h */,
 				88E953451BEB8B7D0094F73D /* FriendsTableViewController.m */,
+				88EC50221C0DB72500077E85 /* FriendProfileViewController.h */,
+				88EC50231C0DB72500077E85 /* FriendProfileViewController.m */,
+				88EC502C1C0E041F00077E85 /* FriendTableViewCell.h */,
+				88EC502D1C0E041F00077E85 /* FriendTableViewCell.m */,
 			);
 			name = Friends;
 			sourceTree = "<group>";
@@ -337,6 +356,8 @@
 		88E98E851BAF507700292B14 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				88EC50271C0DCC2C00077E85 /* unknown_user.png */,
+				88EC50251C0DC98D00077E85 /* icon-edit-avatar@2x.png */,
 				88BDFC691BFD53BD007A3EBB /* gb.png */,
 				8893FD761BFC1E0400711779 /* teams@3x.png */,
 				8893FD721BFC1C4600711779 /* profile@3x.png */,
@@ -442,6 +463,7 @@
 				88A736E31B91318D00093B27 /* Main.storyboard in Resources */,
 				88A736E81B91318D00093B27 /* LaunchScreen.xib in Resources */,
 				8893FD731BFC1C4600711779 /* profile@3x.png in Resources */,
+				88EC50281C0DCC2C00077E85 /* unknown_user.png in Resources */,
 				88E98E891BAF508400292B14 /* Softball.JPG in Resources */,
 				8893FD771BFC1E0400711779 /* teams@3x.png in Resources */,
 				88E98E8B1BAF508400292B14 /* fielding ground ball.jpg in Resources */,
@@ -450,6 +472,7 @@
 				88A736E51B91318D00093B27 /* Images.xcassets in Resources */,
 				88E98E8A1BAF508400292B14 /* hockey.jpg in Resources */,
 				88E953411BEB7ED50094F73D /* Contacts-50.png in Resources */,
+				88EC50261C0DC98D00077E85 /* icon-edit-avatar@2x.png in Resources */,
 				8893FD751BFC1CF600711779 /* friends@3x.png in Resources */,
 				8893FD711BFC1B5900711779 /* spotlight@3x.png in Resources */,
 				88CAE8D71BFB9AF30099A733 /* landingBg.jpg in Resources */,
@@ -532,6 +555,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				88EE2CC61B9E08B2002DDB99 /* SpotlightFeedViewController.m in Sources */,
+				88EC502B1C0DCE5200077E85 /* ProfilePictureMedia.m in Sources */,
 				88E953461BEB8B7D0094F73D /* FriendsTableViewController.m in Sources */,
 				8849A1E91BA2590800511DD5 /* IntroViewController.m in Sources */,
 				8893FD7D1BFD1FCB00711779 /* FieldEntryTableViewCell.m in Sources */,
@@ -550,6 +574,7 @@
 				88A736DA1B91318D00093B27 /* main.m in Sources */,
 				88BDFC761BFF70E6007A3EBB /* CreateSpotlightTableViewController.m in Sources */,
 				88E9E8FF1BD6A6470065AA0C /* SpotlightMediaTableViewCell.m in Sources */,
+				88EC502E1C0E041F00077E85 /* FriendTableViewCell.m in Sources */,
 				883D63F11C06E88000AE99CC /* TeamDetailsTableViewController.m in Sources */,
 				88BDFC791BFF82FD007A3EBB /* SpotlightHeaderCollectionReusableView.m in Sources */,
 				88BDFC731BFF6A38007A3EBB /* TeamSelectTableViewController.m in Sources */,
@@ -558,6 +583,7 @@
 				8849A1E31BA0CB8400511DD5 /* SignUpTableViewController.m in Sources */,
 				8893FD7A1BFCCC2100711779 /* Team.m in Sources */,
 				8849A1E61BA0CC7A00511DD5 /* SignUpInputTableViewCell.m in Sources */,
+				88EC50241C0DB72500077E85 /* FriendProfileViewController.m in Sources */,
 				883D63F41C07151700AE99CC /* MediaObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

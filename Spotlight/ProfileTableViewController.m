@@ -8,8 +8,17 @@
 
 #import "ProfileTableViewController.h"
 #import "Parse.h"
+#import "ProfilePictureMedia.h"
+
+#import <MobileCoreServices/UTCoreTypes.h>
+#import <AFNetworking/UIButton+AFNetworking.h>
 
 @interface ProfileTableViewController ()
+
+@property (weak, nonatomic) IBOutlet UIButton *profilePictureImageView;
+@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (strong, nonatomic) UIImagePickerController* imagePickerController;
+@property (strong, nonatomic) ProfilePictureMedia* profilePic;
 
 @end
 
@@ -18,11 +27,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    self.user = [PFUser currentUser];
+    [self.user[@"profilePic"] fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        self.profilePic = (ProfilePictureMedia*)object;
+        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.profilePic.thumbnailImageFile.url]];
+        
+        [self.profilePictureImageView setImageForState:UIControlStateNormal withURLRequest:request placeholderImage:nil success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, UIImage * _Nonnull image) {
+            [self.profilePictureImageView setImage:image forState:UIControlStateNormal];
+        } failure:^(NSError * _Nonnull error) {
+            
+        }];
+    }];
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    [self.profilePictureImageView.imageView setContentMode:UIViewContentModeScaleAspectFill];
+    [self.usernameLabel setText:self.user.username];
+    [self.profilePictureImageView.layer setCornerRadius:self.profilePictureImageView.bounds.size.width/2];
+    [self.profilePictureImageView.layer setBorderWidth:3];
+    [self.profilePictureImageView.layer setBorderColor:[UIColor whiteColor].CGColor];
+    [self.profilePictureImageView setClipsToBounds:YES];
+    
+    
     
 }
 
@@ -64,6 +89,43 @@
     
     [self logout];
 }
+- (IBAction)editPictureButtonPressed:(id)sender {
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
+    {
+        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+        imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
+        imagePickerController.delegate = self;
+        imagePickerController.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeMovie, (NSString *)kUTTypeImage, nil];
+        imagePickerController.videoMaximumDuration = 15;
+        [imagePickerController setAllowsEditing:YES];
+        
+        self.imagePickerController = imagePickerController;
+        [self.navigationController.tabBarController presentViewController:self.imagePickerController animated:YES completion:nil];
+    }
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)infoDict {
+
+    UIImage *image = [infoDict valueForKey:UIImagePickerControllerOriginalImage];
+    self.profilePic = [[ProfilePictureMedia alloc] initWithImage:image];
+    [self.profilePictureImageView setImage:image forState:UIControlStateNormal];
+    [self.profilePic saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+
+    }];
+    [self.imagePickerController dismissViewControllerAnimated:YES completion:nil];
+    self.user[@"profilePic"] = self.profilePic;
+    [self.user saveInBackground];
+}
+
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+
 
 /*
 // Override to support conditional editing of the table view.

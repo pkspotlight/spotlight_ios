@@ -126,8 +126,6 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     if ([segue.identifier isEqualToString:@"teamDetailsSegue"]) {
         [(TeamDetailsTableViewController*)[segue destinationViewController] setTeam:team];
     }
-    
-
 }
 
 

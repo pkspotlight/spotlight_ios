@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *mainImageView;
 @property (weak, nonatomic) IBOutlet UILabel *createdByLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *teamImageView;
 
 @end
 
@@ -51,6 +52,24 @@
                  NSLog(@"fuck thumbnail failure");
              }];
         }
+    }];
+    
+    [self.teamImageView.layer setCornerRadius:self.teamImageView.bounds.size.width/2];
+    [self.teamImageView.layer setBorderWidth:3];
+    [self.teamImageView.layer setBorderColor:[UIColor whiteColor].CGColor];
+    [self.teamImageView setClipsToBounds:YES];
+    [self.teamImageView cancelImageRequestOperation];
+
+    [spotlight.team.teamLogoMedia fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[(TeamLogoMedia*)object thumbnailImageFile].url]];
+        [self.teamImageView
+         setImageWithURLRequest:request
+         placeholderImage:nil
+         success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, UIImage * _Nonnull image) {
+             [self.teamImageView setImage:image];
+         } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, NSError * _Nonnull error) {
+             NSLog(@"fuck thumbnail failure");
+         }];
     }];
 }
 

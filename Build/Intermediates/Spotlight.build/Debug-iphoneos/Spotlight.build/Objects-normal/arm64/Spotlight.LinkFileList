@@ -1,3 +1,4 @@
+/Users/pkamm/Documents/ios/Spotlight/Build/Intermediates/Spotlight.build/Debug-iphoneos/Spotlight.build/Objects-normal/arm64/User.o
 /Users/pkamm/Documents/ios/Spotlight/Build/Intermediates/Spotlight.build/Debug-iphoneos/Spotlight.build/Objects-normal/arm64/SpotlightFeedViewController.o
 /Users/pkamm/Documents/ios/Spotlight/Build/Intermediates/Spotlight.build/Debug-iphoneos/Spotlight.build/Objects-normal/arm64/ProfilePictureMedia.o
 /Users/pkamm/Documents/ios/Spotlight/Build/Intermediates/Spotlight.build/Debug-iphoneos/Spotlight.build/Objects-normal/arm64/FriendsTableViewController.o
@@ -7,7 +8,6 @@
 /Users/pkamm/Documents/ios/Spotlight/Build/Intermediates/Spotlight.build/Debug-iphoneos/Spotlight.build/Objects-normal/arm64/SpotlightMedia.o
 /Users/pkamm/Documents/ios/Spotlight/Build/Intermediates/Spotlight.build/Debug-iphoneos/Spotlight.build/Objects-normal/arm64/SpotlightMediaCollectionViewCell.o
 /Users/pkamm/Documents/ios/Spotlight/Build/Intermediates/Spotlight.build/Debug-iphoneos/Spotlight.build/Objects-normal/arm64/MainTabBarController.o
-/Users/pkamm/Documents/ios/Spotlight/Build/Intermediates/Spotlight.build/Debug-iphoneos/Spotlight.build/Objects-normal/arm64/CreateSpotlightViewController.o
 /Users/pkamm/Documents/ios/Spotlight/Build/Intermediates/Spotlight.build/Debug-iphoneos/Spotlight.build/Objects-normal/arm64/AppDelegate.o
 /Users/pkamm/Documents/ios/Spotlight/Build/Intermediates/Spotlight.build/Debug-iphoneos/Spotlight.build/Objects-normal/arm64/Spotlight.o
 /Users/pkamm/Documents/ios/Spotlight/Build/Intermediates/Spotlight.build/Debug-iphoneos/Spotlight.build/Objects-normal/arm64/TeamTableViewCell.o
@@ -18,6 +18,7 @@
 /Users/pkamm/Documents/ios/Spotlight/Build/Intermediates/Spotlight.build/Debug-iphoneos/Spotlight.build/Objects-normal/arm64/main.o
 /Users/pkamm/Documents/ios/Spotlight/Build/Intermediates/Spotlight.build/Debug-iphoneos/Spotlight.build/Objects-normal/arm64/CreateSpotlightTableViewController.o
 /Users/pkamm/Documents/ios/Spotlight/Build/Intermediates/Spotlight.build/Debug-iphoneos/Spotlight.build/Objects-normal/arm64/SpotlightMediaTableViewCell.o
+/Users/pkamm/Documents/ios/Spotlight/Build/Intermediates/Spotlight.build/Debug-iphoneos/Spotlight.build/Objects-normal/arm64/MontageCreator.o
 /Users/pkamm/Documents/ios/Spotlight/Build/Intermediates/Spotlight.build/Debug-iphoneos/Spotlight.build/Objects-normal/arm64/FriendTableViewCell.o
 /Users/pkamm/Documents/ios/Spotlight/Build/Intermediates/Spotlight.build/Debug-iphoneos/Spotlight.build/Objects-normal/arm64/TeamDetailsTableViewController.o
 /Users/pkamm/Documents/ios/Spotlight/Build/Intermediates/Spotlight.build/Debug-iphoneos/Spotlight.build/Objects-normal/arm64/SpotlightHeaderCollectionReusableView.o

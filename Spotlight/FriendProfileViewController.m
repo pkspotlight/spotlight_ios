@@ -8,6 +8,7 @@
 
 #import "FriendProfileViewController.h"
 #import "SpotlightFeedViewController.h"
+#import "User.h"
 
 @interface FriendProfileViewController()
 
@@ -21,9 +22,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.friendNameLabel setText:self.user.username];
-//    [self.]
     
+    [self.friendNameLabel setText:self.user.username];
+    [self.friendImageView.layer setCornerRadius:self.friendImageView.bounds.size.width/2];
+    [self.friendImageView.layer setBorderWidth:3];
+    [self.friendImageView.layer setBorderColor:[UIColor whiteColor].CGColor];
+    [self.friendImageView setClipsToBounds:YES];
 }
 
 //- (void)cycleFromViewController: (UIViewController*) oldVC

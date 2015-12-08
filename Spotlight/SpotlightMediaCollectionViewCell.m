@@ -22,7 +22,6 @@
 
 - (void)formatCellForSpotlightMedia:(SpotlightMedia*)media {
     
-    
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.timeStyle = NSDateFormatterNoStyle;
     dateFormatter.dateStyle = NSDateFormatterMediumStyle;

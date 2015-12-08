@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <Parse.h>
 
+@class User;
+
 @interface FriendProfileViewController : UIViewController
 
-@property (strong, nonatomic) PFUser* user;
+@property (strong, nonatomic) User* user;
 
 @end

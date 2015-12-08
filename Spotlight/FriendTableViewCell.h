@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class User;
+
 @interface FriendTableViewCell : UITableViewCell
+
+- (void)formatForUser:(User*)user isFollowing:(BOOL)isFollowing;
 
 @end

@@ -29,7 +29,10 @@
     [super viewDidLoad];
     self.teamPropertyArray = @[ @"teamName", @"town", @"sport"];
     self.pendingFieldDictionary = [self newPendingFieldDictionary];
-    
+    [self.addTeamLogoButton.layer setCornerRadius:self.addTeamLogoButton.bounds.size.width/2];
+    [self.addTeamLogoButton.layer setBorderColor:[UIColor whiteColor].CGColor];
+    [self.addTeamLogoButton.layer setBorderWidth:3];
+    [self.addTeamLogoButton setClipsToBounds:YES];
 }
 
 - (NSMutableDictionary *)newPendingFieldDictionary {
@@ -55,23 +58,26 @@
 //        }
 //    }
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [hud setLabelText:@"Creating Team..."];
+    [hud setLabelText:@"Saving Profile..."];
 
-    PFObject *team = [PFObject objectWithClassName:@"Team" dictionary:self.pendingFieldDictionary];
-    team[@"teamLogoMedia"] = self.teamLogo;
-    PFUser* user = [PFUser currentUser];
-    PFRelation *participantRelation = [team relationForKey:@"teamParticipants"];
-    [participantRelation addObject:user];
+    // ** NEED TO ADD SAVING FUNCTIONALITY HERE **
     
-    [team saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-        if (succeeded) {
-            [self dismissViewControllerAnimated:YES completion:nil];
-
-        }
-        if (error) {
-            NSLog(@"fuck: %@", [error localizedDescription]);
-        }
-    }];
+    
+//    PFObject *team = [PFObject objectWithClassName:@"Team" dictionary:self.pendingFieldDictionary];
+//    team[@"teamLogoMedia"] = self.teamLogo;
+//    PFUser* user = [PFUser currentUser];
+//    PFRelation *participantRelation = [team relationForKey:@"teamParticipants"];
+//    [participantRelation addObject:user];
+//    
+//    [team saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+//        if (succeeded) {
+//            [self dismissViewControllerAnimated:YES completion:nil];
+//
+//        }
+//        if (error) {
+//            NSLog(@"fuck: %@", [error localizedDescription]);
+//        }
+//    }];
     return YES;
 }
 
@@ -127,7 +133,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     FieldEntryTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"FieldEntryTableViewCell" forIndexPath:indexPath];
-    [cell formatForAttributeString:self.teamPropertyArray[indexPath.row]];
+    [cell formatForAttributeString:self.teamPropertyArray[indexPath.row] withValue:@""];
     [cell setDelegate:self];
     
     return cell;

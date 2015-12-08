@@ -27,6 +27,10 @@
     [super viewDidLoad];
     [self.teamNameLabel setText:self.team.teamName];
     self.spotlight = [Spotlight object];
+    [self.teamImageView.layer setCornerRadius:self.teamImageView.bounds.size.width/2];
+    [self.teamImageView.layer setBorderColor:[UIColor whiteColor].CGColor];
+    [self.teamImageView.layer setBorderWidth:3];
+    [self.teamImageView setClipsToBounds:YES];
 }
 
 - (void)didReceiveMemoryWarning {

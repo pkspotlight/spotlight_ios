@@ -11,16 +11,18 @@
 #import "SpotlightMediaCollectionViewCell.h"
 #import "SpotlightMedia.h"
 #import "Team.h"
+#import "MontageCreator.h"
 
 #import <MobileCoreServices/UTCoreTypes.h>
-#import <AFNetworking/UIImageView+AFNetworking.h>
 #import <MBProgressHUD.h>
-
+#import <AVFoundation/AVFoundation.h>
+#import <AVKit/AVKit.h>
 
 @interface SpotlightCollectionViewController ()
 
 @property (strong, nonatomic) NSArray* mediaList;
 @property (strong, nonatomic) UIImagePickerController* imagePickerController;
+@property (assign, nonatomic) BOOL isShowingMontage;
 
 @end
 
@@ -30,7 +32,6 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
     [self.spotlight allMedia:^(NSArray *media, NSError *error) {
         self.mediaList = media;
         [self.collectionView reloadData];
@@ -48,6 +49,10 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
     return YES;
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    self.isShowingMontage = NO;
+}
 
 /*
 #pragma mark - Navigation
@@ -84,61 +89,11 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
     
     SpotlightHeaderCollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:
                                    UICollectionElementKindSectionHeader withReuseIdentifier:@"SpotlightHeaderCollectionReusableView" forIndexPath:indexPath];
-    [self updateSectionHeader:headerView forIndexPath:indexPath];
-    
+    [headerView formatHeaderForTeam:self.spotlight.team ];
+    [headerView setDelegate:self];
     return headerView;
 }
 
-- (void)updateSectionHeader:(UICollectionReusableView *)header forIndexPath:(NSIndexPath *)indexPath
-{
-    Team *team = self.spotlight.team;
-    [[(SpotlightHeaderCollectionReusableView*)header teamNameLabel] setText:team.teamName];
-    [team.teamLogoMedia fetchIfNeeded];
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:team.teamLogoMedia.thumbnailImageFile.url]];
-    [[(SpotlightHeaderCollectionReusableView*)header teamImageView]
-     setImageWithURLRequest:request
-     placeholderImage:nil
-     success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, UIImage * _Nonnull image) {
-         [[(SpotlightHeaderCollectionReusableView*)header teamImageView] setImage:image];
-     } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, NSError * _Nonnull error) {
-         NSLog(@"fuck thumbnail failure");
-     }];
-    
-
-    
-//    NSString *text = [NSString stringWithFormat:@"header #%i", indexPath.row];
-//    header.label.text = text;
-}
-
-
-/*
-// Uncomment this method to specify if the specified item should be highlighted during tracking
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
-	return YES;
-}
-*/
-
-/*
-// Uncomment this method to specify if the specified item should be selected
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
-}
-*/
-
-/*
-// Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath {
-	return NO;
-}
-
-- (BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-	return NO;
-}
-
-- (void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-	
-}
-*/
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -186,12 +141,23 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
 
 
 - (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
-    return self.mediaList.count;
+    return self.isShowingMontage ? 1 : self.mediaList.count;
 }
 
 - (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
-    if (index < self.mediaList.count) {
-        return [self mwphotoForSpotlightMedia:[self.mediaList objectAtIndex:index]];
+    if (self.isShowingMontage) {
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        NSString *myPathDocs =  [documentsDirectory stringByAppendingPathComponent:
+                                 [NSString stringWithFormat:@"montage.mov"]];
+        MWPhoto *video = [MWPhoto videoWithURL:[NSURL URLWithString:myPathDocs]];
+        video.videoURL = [NSURL URLWithString:myPathDocs];
+        return video;
+    } else {
+        
+        if (index < self.mediaList.count) {
+            return [self mwphotoForSpotlightMedia:[self.mediaList objectAtIndex:index]];
+        }
     }
     return nil;
 }
@@ -252,6 +218,40 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+#pragma mark - Montage Functions
+
+- (IBAction)viewMontageButtonPressed:(id)sender {
+    [[MontageCreator sharedCreator] createMontageWithMedia:self.mediaList completion:^{
+//        self.isShowingMontage = YES;
+//        MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
+//        
+//        // Set options
+//        browser.displayActionButton = YES; // Show action button to allow sharing, copying, etc (defaults to YES)
+//        browser.displayNavArrows = NO; // Whether to display left and right nav arrows on toolbar (defaults to NO)
+//        browser.displaySelectionButtons = NO; // Whether selection buttons are shown on each image (defaults to NO)
+//        browser.zoomPhotosToFill = YES; // Images that almost fill the screen will be initially zoomed to fill (defaults to YES)
+//        browser.alwaysShowControls = NO; // Allows to control whether the bars and controls are always visible or whether they fade away to show the photo full (defaults to NO)
+//        browser.enableGrid = NO; // Whether to allow the viewing of all the photo thumbnails on a grid (defaults to YES)
+//        browser.startOnGrid = NO; // Whether to start on the grid of thumbnails instead of the first photo (defaults to NO)
+//        browser.autoPlayOnAppear = NO; // Auto-play first video
+//        
+//        // Present
+//        [self.navigationController pushViewController:browser animated:YES];
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        NSString *myPathDocs =  [documentsDirectory stringByAppendingPathComponent:
+                                 [NSString stringWithFormat:@"montage.mov"]];
+        NSURL *videoURL = [NSURL fileURLWithPath:myPathDocs];
+        //filePath may be from the Bundle or from the Saved file Directory, it is just the path for the video
+        AVPlayer *player = [AVPlayer playerWithURL:videoURL];
+        AVPlayerViewController *playerViewController = [AVPlayerViewController new];
+        playerViewController.player = player;
+        [playerViewController.player play];//Used to Play On start
+        [self presentViewController:playerViewController animated:YES completion:nil];
+
+    }];
 }
 
 @end

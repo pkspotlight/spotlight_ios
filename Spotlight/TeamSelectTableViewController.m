@@ -7,7 +7,7 @@
 //
 
 #import "TeamSelectTableViewController.h"
-#import "CreateSpotlightViewController.h"
+#import "CreateSpotlightTableViewController.h"
 #import "TeamTableViewCell.h"
 #import "Team.h"
 
@@ -97,7 +97,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"CreateSpotlightSeque"]) {
         Team* team = self.myTeams[[[self.tableView indexPathForCell:sender] row]];
-        CreateSpotlightViewController* vc = (CreateSpotlightViewController*)[segue destinationViewController];
+        CreateSpotlightTableViewController* vc = (CreateSpotlightTableViewController*)[segue destinationViewController];
         [vc setTeam:team];
     }
     // Pass the selected object to the new view controller.

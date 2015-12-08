@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		880207A41C15DF7A002D5068 /* MontageCreator.m in Sources */ = {isa = PBXBuildFile; fileRef = 880207A31C15DF7A002D5068 /* MontageCreator.m */; };
 		883D63F11C06E88000AE99CC /* TeamDetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 883D63F01C06E88000AE99CC /* TeamDetailsTableViewController.m */; };
 		883D63F41C07151700AE99CC /* MediaObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 883D63F31C07151700AE99CC /* MediaObject.m */; };
 		883D63F91C0719E300AE99CC /* TeamLogoMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = 883D63F81C0719E300AE99CC /* TeamLogoMedia.m */; };
@@ -48,7 +49,6 @@
 		88E98E891BAF508400292B14 /* Softball.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 88E98E861BAF508400292B14 /* Softball.JPG */; };
 		88E98E8A1BAF508400292B14 /* hockey.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 88E98E871BAF508400292B14 /* hockey.jpg */; };
 		88E98E8B1BAF508400292B14 /* fielding ground ball.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 88E98E881BAF508400292B14 /* fielding ground ball.jpg */; };
-		88E9E8F31BD557F00065AA0C /* CreateSpotlightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E9E8F21BD557F00065AA0C /* CreateSpotlightViewController.m */; };
 		88E9E8F61BD5791E0065AA0C /* SpotlightMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E9E8F51BD5791E0065AA0C /* SpotlightMedia.m */; };
 		88E9E8F91BD5C46D0065AA0C /* SpotlightTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E9E8F81BD5C46D0065AA0C /* SpotlightTableViewCell.m */; };
 		88E9E8FF1BD6A6470065AA0C /* SpotlightMediaTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E9E8FE1BD6A6470065AA0C /* SpotlightMediaTableViewCell.m */; };
@@ -57,6 +57,7 @@
 		88EC50281C0DCC2C00077E85 /* unknown_user.png in Resources */ = {isa = PBXBuildFile; fileRef = 88EC50271C0DCC2C00077E85 /* unknown_user.png */; };
 		88EC502B1C0DCE5200077E85 /* ProfilePictureMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = 88EC502A1C0DCE5200077E85 /* ProfilePictureMedia.m */; };
 		88EC502E1C0E041F00077E85 /* FriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88EC502D1C0E041F00077E85 /* FriendTableViewCell.m */; };
+		88EC50311C12F19200077E85 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 88EC50301C12F19200077E85 /* User.m */; };
 		88EE2CC61B9E08B2002DDB99 /* SpotlightFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88EE2CC51B9E08B2002DDB99 /* SpotlightFeedViewController.m */; };
 		C2B409966BE212B335038003 /* libPods-Spotlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F03B672A3CAD95AD6DB192BE /* libPods-Spotlight.a */; };
 /* End PBXBuildFile section */
@@ -74,6 +75,8 @@
 /* Begin PBXFileReference section */
 		17139AE8364E5B9890F4FCBC /* Pods-Spotlight.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spotlight.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Spotlight/Pods-Spotlight.debug.xcconfig"; sourceTree = "<group>"; };
 		4FDDD1185B6B67FED774A599 /* Pods-Spotlight.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spotlight.release.xcconfig"; path = "Pods/Target Support Files/Pods-Spotlight/Pods-Spotlight.release.xcconfig"; sourceTree = "<group>"; };
+		880207A21C15DF7A002D5068 /* MontageCreator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MontageCreator.h; sourceTree = "<group>"; };
+		880207A31C15DF7A002D5068 /* MontageCreator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MontageCreator.m; sourceTree = "<group>"; };
 		883D63EF1C06E88000AE99CC /* TeamDetailsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamDetailsTableViewController.h; sourceTree = "<group>"; };
 		883D63F01C06E88000AE99CC /* TeamDetailsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamDetailsTableViewController.m; sourceTree = "<group>"; };
 		883D63F21C07151700AE99CC /* MediaObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaObject.h; sourceTree = "<group>"; };
@@ -141,8 +144,6 @@
 		88E98E861BAF508400292B14 /* Softball.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Softball.JPG; sourceTree = "<group>"; };
 		88E98E871BAF508400292B14 /* hockey.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = hockey.jpg; sourceTree = "<group>"; };
 		88E98E881BAF508400292B14 /* fielding ground ball.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "fielding ground ball.jpg"; sourceTree = "<group>"; };
-		88E9E8F11BD557F00065AA0C /* CreateSpotlightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateSpotlightViewController.h; sourceTree = "<group>"; };
-		88E9E8F21BD557F00065AA0C /* CreateSpotlightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateSpotlightViewController.m; sourceTree = "<group>"; };
 		88E9E8F41BD5791E0065AA0C /* SpotlightMedia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotlightMedia.h; sourceTree = "<group>"; };
 		88E9E8F51BD5791E0065AA0C /* SpotlightMedia.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotlightMedia.m; sourceTree = "<group>"; };
 		88E9E8F71BD5C46D0065AA0C /* SpotlightTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotlightTableViewCell.h; sourceTree = "<group>"; };
@@ -157,6 +158,8 @@
 		88EC502A1C0DCE5200077E85 /* ProfilePictureMedia.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfilePictureMedia.m; sourceTree = "<group>"; };
 		88EC502C1C0E041F00077E85 /* FriendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendTableViewCell.h; sourceTree = "<group>"; };
 		88EC502D1C0E041F00077E85 /* FriendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendTableViewCell.m; sourceTree = "<group>"; };
+		88EC502F1C12F19200077E85 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		88EC50301C12F19200077E85 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		88EE2CC41B9E08B2002DDB99 /* SpotlightFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotlightFeedViewController.h; sourceTree = "<group>"; };
 		88EE2CC51B9E08B2002DDB99 /* SpotlightFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotlightFeedViewController.m; sourceTree = "<group>"; };
 		F03B672A3CAD95AD6DB192BE /* libPods-Spotlight.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Spotlight.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -231,6 +234,8 @@
 				88BDFC621BFD4BFB007A3EBB /* MainTabBarController.m */,
 				883D63F21C07151700AE99CC /* MediaObject.h */,
 				883D63F31C07151700AE99CC /* MediaObject.m */,
+				88EC502F1C12F19200077E85 /* User.h */,
+				88EC50301C12F19200077E85 /* User.m */,
 				88BDFC561BFD3314007A3EBB /* Spotlight */,
 				88BDFC551BFD32E3007A3EBB /* SignUp */,
 				88BDFC541BFD32D0007A3EBB /* Team */,
@@ -244,6 +249,8 @@
 				88BDFC641BFD4FD2007A3EBB /* BasicHeaderView.xib */,
 				88BDFC661BFD5034007A3EBB /* BasicHeaderView.h */,
 				88BDFC671BFD5034007A3EBB /* BasicHeaderView.m */,
+				880207A21C15DF7A002D5068 /* MontageCreator.h */,
+				880207A31C15DF7A002D5068 /* MontageCreator.m */,
 				88A736E11B91318D00093B27 /* Main.storyboard */,
 				88A736E41B91318D00093B27 /* Images.xcassets */,
 				88A736E61B91318D00093B27 /* LaunchScreen.xib */,
@@ -322,8 +329,6 @@
 				88E9E8F51BD5791E0065AA0C /* SpotlightMedia.m */,
 				88EE2CC41B9E08B2002DDB99 /* SpotlightFeedViewController.h */,
 				88EE2CC51B9E08B2002DDB99 /* SpotlightFeedViewController.m */,
-				88E9E8F11BD557F00065AA0C /* CreateSpotlightViewController.h */,
-				88E9E8F21BD557F00065AA0C /* CreateSpotlightViewController.m */,
 				88BDFC741BFF70E6007A3EBB /* CreateSpotlightTableViewController.h */,
 				88BDFC751BFF70E6007A3EBB /* CreateSpotlightTableViewController.m */,
 				88BDFC6E1BFD60B5007A3EBB /* SpotlightCollectionViewController.h */,
@@ -554,6 +559,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88EC50311C12F19200077E85 /* User.m in Sources */,
 				88EE2CC61B9E08B2002DDB99 /* SpotlightFeedViewController.m in Sources */,
 				88EC502B1C0DCE5200077E85 /* ProfilePictureMedia.m in Sources */,
 				88E953461BEB8B7D0094F73D /* FriendsTableViewController.m in Sources */,
@@ -563,7 +569,6 @@
 				88E9E8F61BD5791E0065AA0C /* SpotlightMedia.m in Sources */,
 				88BDFC7C1BFF8ABB007A3EBB /* SpotlightMediaCollectionViewCell.m in Sources */,
 				88BDFC631BFD4BFB007A3EBB /* MainTabBarController.m in Sources */,
-				88E9E8F31BD557F00065AA0C /* CreateSpotlightViewController.m in Sources */,
 				88A736DD1B91318D00093B27 /* AppDelegate.m in Sources */,
 				887FF4CE1BD530B400F3679D /* Spotlight.m in Sources */,
 				88BDFC5D1BFD3635007A3EBB /* TeamTableViewCell.m in Sources */,
@@ -574,6 +579,7 @@
 				88A736DA1B91318D00093B27 /* main.m in Sources */,
 				88BDFC761BFF70E6007A3EBB /* CreateSpotlightTableViewController.m in Sources */,
 				88E9E8FF1BD6A6470065AA0C /* SpotlightMediaTableViewCell.m in Sources */,
+				880207A41C15DF7A002D5068 /* MontageCreator.m in Sources */,
 				88EC502E1C0E041F00077E85 /* FriendTableViewCell.m in Sources */,
 				883D63F11C06E88000AE99CC /* TeamDetailsTableViewController.m in Sources */,
 				88BDFC791BFF82FD007A3EBB /* SpotlightHeaderCollectionReusableView.m in Sources */,

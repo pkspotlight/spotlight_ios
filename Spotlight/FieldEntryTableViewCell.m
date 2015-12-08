@@ -22,10 +22,10 @@
     [self.valueTextField becomeFirstResponder];
 }
 
-- (void)formatForAttributeString:(NSString*)attributeString {
+- (void)formatForAttributeString:(NSString*)attributeString withValue:(NSString*)fieldValue {
     _attributeString = attributeString;
     [self.fieldTitleLabel setText:[attributeString capitalizedString]];
-    
+    [self.valueTextField setText:fieldValue];
 }
 
 - (IBAction)textFieldTextDidChange:(UITextField *)sender {

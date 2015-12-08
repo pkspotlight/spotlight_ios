@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class Team;
+
 @interface SpotlightHeaderCollectionReusableView : UICollectionReusableView
 
-@property (weak, nonatomic) IBOutlet UIImageView *teamImageView;
-@property (weak, nonatomic) IBOutlet UILabel *teamNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *spotlightDateLabel;
+- (void)formatHeaderForTeam:(Team*)team;
+
+@property (weak, nonatomic) id delegate;
 
 @end

@@ -90,20 +90,20 @@
     // other fields can be set just like with PFObject
    // user[@"phone"] = @"415-392-0202";
     
-    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (succeeded) {   // Hooray! Let them use the app now.
-            NSLog(@"sweet");
-            [self loadMainTabBar];
-        } else {
-            NSString *errorString = [error userInfo][@"error"];
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Nope" message:errorString preferredStyle:UIAlertControllerStyleAlert];
-            [alert addAction:[UIAlertAction actionWithTitle:@"OK"
-                                                      style:UIAlertActionStyleCancel
-                                                    handler:nil]];
-            [self presentViewController:alert animated:YES completion:nil];
-            NSLog(@"shit, %@",errorString);
-        }
-    }];
+        [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (succeeded) {   // Hooray! Let them use the app now.
+                NSLog(@"sweet");
+                [self loadMainTabBar];
+            } else {
+                NSString *errorString = [error userInfo][@"error"];
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Nope" message:errorString preferredStyle:UIAlertControllerStyleAlert];
+                [alert addAction:[UIAlertAction actionWithTitle:@"OK"
+                                                          style:UIAlertActionStyleCancel
+                                                        handler:nil]];
+                [self presentViewController:alert animated:YES completion:nil];
+                NSLog(@"shit, %@",errorString);
+            }
+        }];
     } else {
         UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Invalid Username/Password"
                                                                        message:@"Please make sure that you have entered a valid e-mail address and that your password is at least 6 charaters long" preferredStyle:UIAlertControllerStyleAlert];

@@ -9,11 +9,15 @@
 #import "ProfileTableViewController.h"
 #import "Parse.h"
 #import "ProfilePictureMedia.h"
+#import "User.h"
 
 #import <MobileCoreServices/UTCoreTypes.h>
 #import <AFNetworking/UIButton+AFNetworking.h>
 
 @interface ProfileTableViewController ()
+
+@property (strong, nonatomic) NSMutableDictionary *pendingFieldDictionary;
+@property (strong, nonatomic) NSArray* userPropertyArray;
 
 @property (weak, nonatomic) IBOutlet UIButton *profilePictureImageView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
@@ -27,7 +31,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.user = [PFUser currentUser];
+    self.user = [User currentUser];
+    
+    self.userPropertyArray = @[ @"firstName", @"lastName" ];
+    self.pendingFieldDictionary = [self newPendingFieldDictionary];
+    
     [self.user[@"profilePic"] fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
         self.profilePic = (ProfilePictureMedia*)object;
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.profilePic.thumbnailImageFile.url]];
@@ -39,7 +47,6 @@
         }];
     }];
     
-    
     [self.profilePictureImageView.imageView setContentMode:UIViewContentModeScaleAspectFill];
     [self.usernameLabel setText:self.user.username];
     [self.profilePictureImageView.layer setCornerRadius:self.profilePictureImageView.bounds.size.width/2];
@@ -47,8 +54,15 @@
     [self.profilePictureImageView.layer setBorderColor:[UIColor whiteColor].CGColor];
     [self.profilePictureImageView setClipsToBounds:YES];
     
-    
-    
+}
+
+- (NSMutableDictionary *)newPendingFieldDictionary {
+    NSMutableDictionary *fieldDict = [NSMutableDictionary dictionary];
+    User* user = [User currentUser];
+    for (NSString* attribute in self.userPropertyArray) {
+        fieldDict[attribute] = user[attribute];
+    }
+    return fieldDict;
 }
 
 
@@ -71,17 +85,26 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return (section == 0) ? self.userPropertyArray.count : 1;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LogoutCellId" forIndexPath:indexPath];
-    
+    UITableViewCell *cell;
+    if (indexPath.section == 0) {
+        
+        cell = [tableView dequeueReusableCellWithIdentifier:@"FieldEntryTableViewCell" forIndexPath:indexPath];
+        NSString* property = self.userPropertyArray[indexPath.row];
+        [(FieldEntryTableViewCell*)cell formatForAttributeString:property
+                                                       withValue:self.pendingFieldDictionary[property]];
+        [(FieldEntryTableViewCell*)cell setDelegate:self];
+    } else {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"LogoutCellId" forIndexPath:indexPath];
+    }
     return cell;
 }
 
@@ -170,5 +193,66 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark - Delegate Methods
+
+- (void)accountTextFieldCell:(FieldEntryTableViewCell *)cell didChangeToValue:(NSString *)text {
+    self.pendingFieldDictionary[cell.attributeString] = text;
+}
+
+- (void)accountTextFieldCellDidReturn:(FieldEntryTableViewCell *)cell {
+    NSIndexPath *path = [self indexPathFollowingAttribute:cell.attributeString];
+    if (path) {
+        FieldEntryTableViewCell *cell = [self.tableView cellForRowAtIndexPath:path];
+        if (cell) {
+            [cell focusTextField];
+        }
+    } else {
+        if ([self.view endEditing:NO]) {
+            [self saveAccountPressed:nil];
+        }
+    }
+}
+
+- (NSIndexPath *)indexPathFollowingAttribute:(NSString*)attribute{
+    NSInteger index = [self.userPropertyArray indexOfObject:attribute];
+    NSInteger nextIndex = index + 1;
+    if (nextIndex < self.userPropertyArray.count) {
+        return [NSIndexPath indexPathForRow:nextIndex inSection:0];
+    }
+    return nil;
+}
+
+- (IBAction)saveAccountPressed:(id)sender {
+    NSError *error;
+    [self.view endEditing:NO];
+//    if ([self savePendingChangesToAccount:&error]) {
+//        [self dismissViewControllerAnimated:YES completion:nil];
+//    } else {
+//        //Show some error
+//    }
+}
+
+
+- (IBAction)cancelButtonPressed:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)editPhotoButtonPressed:(id)sender {
+    
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
+    {
+        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+        imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
+        imagePickerController.delegate = self;
+        imagePickerController.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeMovie, (NSString *)kUTTypeImage, nil];
+        imagePickerController.videoMaximumDuration = 15;
+        [imagePickerController setAllowsEditing:YES];
+        
+        self.imagePickerController = imagePickerController;
+        [self.navigationController presentViewController:self.imagePickerController animated:YES completion:nil];
+    }
+}
+
 
 @end

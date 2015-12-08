@@ -8,6 +8,8 @@
 
 #import "FriendsTableViewController.h"
 #import "SpotlightFeedViewController.h"
+#import "FriendTableViewCell.h"
+#import "FriendProfileViewController.h"
 #import "Parse.h"
 
 @interface FriendsTableViewController ()
@@ -91,8 +93,8 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"friendTableViewCell" forIndexPath:indexPath];
-    [cell.textLabel setText:[self.friends[indexPath.row] objectForKey:@"username"]];
+    FriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FriendTableViewCell" forIndexPath:indexPath];
+    [cell formatForUser:self.friends[indexPath.row] isFollowing:NO];
     // Configure the cell...
     
     return cell;
@@ -141,7 +143,7 @@
 //    if ([segue.identifier isEqualToString:@"EmbedSpotlightSegue"]) {
 //        [(SpotlightFeedViewController*)[segue destinationViewController] setUser:self.friends[[self.tableView indexPathForCell:sender].row]];
 //    }
-    [(SpotlightFeedViewController*)[segue destinationViewController] setUser:self.friends[[self.tableView indexPathForCell:sender].row]];
+    [(FriendProfileViewController*)[segue destinationViewController] setUser:self.friends[[self.tableView indexPathForCell:sender].row]];
 }
 
 

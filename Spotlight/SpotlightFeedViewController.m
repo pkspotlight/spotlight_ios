@@ -11,6 +11,7 @@
 #import "SpotlightTableViewCell.h"
 #import "SpotlightCollectionViewController.h"
 #import "SpotlightMedia.h"
+#import "User.h"
 #import <AFNetworking/UIImageView+AFNetworking.h>
 
 @interface SpotlightFeedViewController ()
@@ -27,7 +28,7 @@
     [refresh addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     [self setRefreshControl:refresh];
     self.spotlights = [NSArray array];
-    if (!self.user) self.user = [PFUser currentUser];
+    if (!self.user) self.user = [User currentUser];
     [self loadSpotlights:nil];
 }
 

@@ -33,6 +33,9 @@
 
 - (void)formatForTeam:(Team*)team isFollowing:(BOOL)isFollowing {
     
+    [self.teamImageView.layer setCornerRadius:self.teamImageView.bounds.size.width/2];
+    [self.teamImageView setClipsToBounds:YES];
+    
     [self.teamNameLabel setText:team.teamName];
     
     NSString* buttonText = (isFollowing) ? @"Following" : @"Follow";

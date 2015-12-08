@@ -41,7 +41,7 @@
 
 - (void)initWritersWithUrlPath:(NSURL*)fileURL {
     NSError *error;
-
+    
     _assetWriter = [[AVAssetWriter alloc] initWithURL:fileURL
                                              fileType:AVFileTypeQuickTimeMovie
                                                 error:&error];
@@ -64,87 +64,84 @@
     _frameTime = CMTimeMake(1, 1);
 }
 
-- (void)initVideoSettingsFromVideoAsset:(AVAsset*)asset {
-    CGSize size = [[[asset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0] naturalSize];
-    self.videoSettings = [self videoSettingsWithCodec:AVVideoCodecH264 withWidth:size.width andHeight:size.height];
-}
-
 - (void)createMontageWithMedia:(NSArray*)mediaArray completion:(void (^ __nullable)(void))completion{
-
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND,0), ^{
-    AVMutableComposition *mixComposition = [[AVMutableComposition alloc] init];
-    AVMutableCompositionTrack *track = [mixComposition
-                                             addMutableTrackWithMediaType:AVMediaTypeVideo
-                                             preferredTrackID:kCMPersistentTrackID_Invalid];
-    CMTime totalDuration = kCMTimeZero;
-    NSError* error;
-    for (SpotlightMedia *media in mediaArray) {
-        AVURLAsset *asset = [AVURLAsset URLAssetWithURL:[NSURL URLWithString:media.mediaFile.url]
-                                                options:nil];
-        if (media.isVideo) {
-            if (!self.videoSettings) {
-                [self initVideoSettingsFromVideoAsset:(AVAsset*)asset];
-            }
-            [track insertTimeRange:CMTimeRangeMake(kCMTimeZero, asset.duration)
-                           ofTrack:[[asset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0]
-                            atTime:totalDuration
-                             error:&error];
-            totalDuration = CMTimeAdd(totalDuration, asset.duration);
-        } else {
-            NSString *fileName = [NSString stringWithFormat:@"%@_%@", [[NSProcessInfo processInfo] globallyUniqueString], @"image.mov"];
-            NSURL *fileURL = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:fileName]];
-            [self initWritersWithUrlPath:fileURL];
-            self.isWritingPhotoVideo = YES;
-            
-            AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:media.thumbnailImageFile.url]]];
-            requestOperation.responseSerializer = [AFImageResponseSerializer serializer];
-            [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-                NSLog(@"Response: %@", responseObject);
-                [self createMovieFromImage:(UIImage*)responseObject];
-            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                NSLog(@"Image error: %@", error);
-            }];
-            [requestOperation start];
-            
-            while (self.isWritingPhotoVideo) {
-                [NSThread sleepForTimeInterval:0.05];
-            }
-            AVURLAsset *asset = [AVURLAsset URLAssetWithURL:fileURL
-                                                    options:nil];
-            [track insertTimeRange:CMTimeRangeMake(kCMTimeZero, asset.duration)
-                           ofTrack:[[asset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0]
-                            atTime:totalDuration
-                             error:&error];
-            totalDuration = CMTimeAdd(totalDuration, asset.duration);
-        }
-        
-        if (error) {
-            NSLog(@"error: %@", [error localizedDescription]);
-        }
-    }
-        NSLog(@"starting export");
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *myPathDocs =  [documentsDirectory stringByAppendingPathComponent:
-                             [NSString stringWithFormat:@"montage.mov"]];
     
-    NSFileManager *manager = [NSFileManager defaultManager];
-    [manager removeItemAtPath:myPathDocs error:nil];
-
-    NSURL *url = [NSURL fileURLWithPath:myPathDocs];
-
-    AVAssetExportSession *exporter = [[AVAssetExportSession alloc]
-                                      initWithAsset:mixComposition
-                                      presetName:AVAssetExportPresetPassthrough];
-    exporter.outputURL = url;
-    exporter.outputFileType = AVFileTypeQuickTimeMovie;
-    exporter.shouldOptimizeForNetworkUse = YES;
-    [exporter exportAsynchronouslyWithCompletionHandler:^{
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self exportDidFinish:exporter];
-            completion();
-        });
-    }];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND,0), ^{
+        self.videoSettings = [self videoSettingsWithCodec:AVVideoCodecH264
+                                                withWidth:1280
+                                                andHeight:720];
+        AVMutableComposition *mixComposition = [[AVMutableComposition alloc] init];
+        AVMutableCompositionTrack *track = [mixComposition
+                                            addMutableTrackWithMediaType:AVMediaTypeVideo
+                                            preferredTrackID:kCMPersistentTrackID_Invalid];
+        CMTime totalDuration = kCMTimeZero;
+        NSError* error;
+        for (SpotlightMedia *media in mediaArray) {
+            AVURLAsset *asset = [AVURLAsset URLAssetWithURL:[NSURL URLWithString:media.mediaFile.url]
+                                                    options:nil];
+            if (media.isVideo) {
+                
+                [track insertTimeRange:CMTimeRangeMake(kCMTimeZero, asset.duration)
+                               ofTrack:[[asset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0]
+                                atTime:totalDuration
+                                 error:&error];
+                totalDuration = CMTimeAdd(totalDuration, asset.duration);
+            } else {
+                
+                NSString *fileName = [NSString stringWithFormat:@"%@_%@", [[NSProcessInfo processInfo] globallyUniqueString], @"image.mov"];
+                NSURL *fileURL = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:fileName]];
+                [self initWritersWithUrlPath:fileURL];
+                self.isWritingPhotoVideo = YES;
+                
+                AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:media.thumbnailImageFile.url]]];
+                requestOperation.responseSerializer = [AFImageResponseSerializer serializer];
+                [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+                    NSLog(@"Response: %@", responseObject);
+                    [self createMovieFromImage:(UIImage*)responseObject];
+                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                    NSLog(@"Image error: %@", error);
+                }];
+                [requestOperation start];
+                
+                while (self.isWritingPhotoVideo) {
+                    [NSThread sleepForTimeInterval:0.05];
+                }
+                AVURLAsset *asset = [AVURLAsset URLAssetWithURL:fileURL
+                                                        options:nil];
+                [track insertTimeRange:CMTimeRangeMake(kCMTimeZero, asset.duration)
+                               ofTrack:[[asset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0]
+                                atTime:totalDuration
+                                 error:&error];
+                totalDuration = CMTimeAdd(totalDuration, asset.duration);
+            }
+            
+            if (error) {
+                NSLog(@"error: %@", [error localizedDescription]);
+            }
+        }
+        NSLog(@"starting export");
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        NSString *myPathDocs =  [documentsDirectory stringByAppendingPathComponent:
+                                 [NSString stringWithFormat:@"montage.mov"]];
+        
+        NSFileManager *manager = [NSFileManager defaultManager];
+        [manager removeItemAtPath:myPathDocs error:nil];
+        
+        NSURL *url = [NSURL fileURLWithPath:myPathDocs];
+        
+        AVAssetExportSession *exporter = [[AVAssetExportSession alloc]
+                                          initWithAsset:mixComposition
+                                          presetName:AVAssetExportPresetPassthrough];
+        exporter.outputURL = url;
+        exporter.outputFileType = AVFileTypeQuickTimeMovie;
+        exporter.shouldOptimizeForNetworkUse = YES;
+        [exporter exportAsynchronouslyWithCompletionHandler:^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self exportDidFinish:exporter];
+                completion();
+            });
+        }];
     });
 }
 
@@ -162,37 +159,37 @@
     // This can prob be significantly more efficient
     [self.writerInput requestMediaDataWhenReadyOnQueue:mediaInputQueue
                                             usingBlock:^{
-        while (YES){
-            if (i >= frameNumber) {
-                break;
-            }
-            if ([self.writerInput isReadyForMoreMediaData]) {
-                
-                CVPixelBufferRef sampleBuffer = [self newPixelBufferFromCGImage:[image CGImage]];
-                
-                if (sampleBuffer) {
-                    if (i == 0) {
-                        [self.bufferAdapter appendPixelBuffer:sampleBuffer withPresentationTime:kCMTimeZero];
-                    }else{
-                        CMTime lastTime = CMTimeMake(i-1, self.frameTime.timescale);
-                        CMTime presentTime = CMTimeAdd(lastTime, self.frameTime);
-                        [self.bufferAdapter appendPixelBuffer:sampleBuffer withPresentationTime:presentTime];
-                    }
-                    CFRelease(sampleBuffer);
-                    i++;
-                }
-            }
-        }
-        
-        [self.writerInput markAsFinished];
-        [self.assetWriter finishWritingWithCompletionHandler:^{
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.isWritingPhotoVideo = NO;
-            });
-        }];
-        
-        CVPixelBufferPoolRelease(self.bufferAdapter.pixelBufferPool);
-    }];
+                                                while (YES){
+                                                    if (i >= frameNumber) {
+                                                        break;
+                                                    }
+                                                    if ([self.writerInput isReadyForMoreMediaData]) {
+                                                        
+                                                        CVPixelBufferRef sampleBuffer = [self newPixelBufferFromCGImage:[image CGImage]];
+                                                        
+                                                        if (sampleBuffer) {
+                                                            if (i == 0) {
+                                                                [self.bufferAdapter appendPixelBuffer:sampleBuffer withPresentationTime:kCMTimeZero];
+                                                            }else{
+                                                                CMTime lastTime = CMTimeMake(i-1, self.frameTime.timescale);
+                                                                CMTime presentTime = CMTimeAdd(lastTime, self.frameTime);
+                                                                [self.bufferAdapter appendPixelBuffer:sampleBuffer withPresentationTime:presentTime];
+                                                            }
+                                                            CFRelease(sampleBuffer);
+                                                            i++;
+                                                        }
+                                                    }
+                                                }
+                                                
+                                                [self.writerInput markAsFinished];
+                                                [self.assetWriter finishWritingWithCompletionHandler:^{
+                                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                                        self.isWritingPhotoVideo = NO;
+                                                    });
+                                                }];
+                                                
+                                                CVPixelBufferPoolRelease(self.bufferAdapter.pixelBufferPool);
+                                            }];
 }
 
 - (CVPixelBufferRef)newPixelBufferFromCGImage:(CGImageRef)image
@@ -247,19 +244,6 @@
     return pxbuffer;
 }
 
-+ (NSDictionary *)videoSettingsWithCodec:(NSString *)codec withWidth:(CGFloat)width andHeight:(CGFloat)height {
-    
-    if ((int)width % 16 != 0 ) {
-        NSLog(@"Warning: video settings width must be divisible by 16.");
-    }
-    
-    NSDictionary *videoSettings = @{AVVideoCodecKey : AVVideoCodecH264,
-                                    AVVideoWidthKey : [NSNumber numberWithInt:(int)width],
-                                    AVVideoHeightKey : [NSNumber numberWithInt:(int)height]};
-    
-    return videoSettings;
-}
-
 -(void)exportDidFinish:(AVAssetExportSession*)session {
     
     switch (session.status) {
@@ -291,34 +275,34 @@
         default:
             break;
     }
-//    
-//    
-//    if (session.status == AVAssetExportSessionStatusCompleted) {
-//        NSURL *outputURL = session.outputURL;
-//        ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
-//        if ([library videoAtPathIsCompatibleWithSavedPhotosAlbum:outputURL]) {
-//            [library writeVideoAtPathToSavedPhotosAlbum:outputURL
-//                                        completionBlock:^(NSURL *assetURL, NSError *error){
-//                dispatch_async(dispatch_get_main_queue(), ^{
-//                    if (error) {
-//                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-//                                                                        message:@"Video Saving Failed"
-//                                                                       delegate:nil
-//                                                              cancelButtonTitle:@"OK"
-//                                                              otherButtonTitles:nil];
-//                        [alert show];
-//                    } else {
-//                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Video Saved"
-//                                                                        message:@"Saved To Photo Album"
-//                                                                       delegate:self
-//                                                              cancelButtonTitle:@"OK"
-//                                                              otherButtonTitles:nil];
-//                        [alert show];
-//                    }
-//                });
-//            }];
-//        }
-//    }
+    //
+    //
+    //    if (session.status == AVAssetExportSessionStatusCompleted) {
+    //        NSURL *outputURL = session.outputURL;
+    //        ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+    //        if ([library videoAtPathIsCompatibleWithSavedPhotosAlbum:outputURL]) {
+    //            [library writeVideoAtPathToSavedPhotosAlbum:outputURL
+    //                                        completionBlock:^(NSURL *assetURL, NSError *error){
+    //                dispatch_async(dispatch_get_main_queue(), ^{
+    //                    if (error) {
+    //                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+    //                                                                        message:@"Video Saving Failed"
+    //                                                                       delegate:nil
+    //                                                              cancelButtonTitle:@"OK"
+    //                                                              otherButtonTitles:nil];
+    //                        [alert show];
+    //                    } else {
+    //                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Video Saved"
+    //                                                                        message:@"Saved To Photo Album"
+    //                                                                       delegate:self
+    //                                                              cancelButtonTitle:@"OK"
+    //                                                              otherButtonTitles:nil];
+    //                        [alert show];
+    //                    }
+    //                });
+    //            }];
+    //        }
+    //    }
 }
 
 - (NSDictionary *)videoSettingsWithCodec:(NSString *)codec withWidth:(CGFloat)width andHeight:(CGFloat)height

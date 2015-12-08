@@ -11,6 +11,7 @@
 #import "FriendTableViewCell.h"
 #import "FriendProfileViewController.h"
 #import "Parse.h"
+#import "User.h"
 
 @interface FriendsTableViewController ()
 
@@ -34,7 +35,7 @@
 
 - (void)loadFriends {
     
-    PFQuery *query = [(PFRelation*)[[PFUser currentUser] objectForKey:@"friends"] query];
+    PFQuery *query = [(PFRelation*)[[User currentUser] objectForKey:@"friends"] query];
     self.friends = [query findObjects];
     [self.tableView reloadData];
 
@@ -51,13 +52,13 @@
                       actionWithTitle:@"Add Friend"
                       style:UIAlertActionStyleDefault
                       handler:^(UIAlertAction * _Nonnull action) {
-                          PFQuery *query = [PFUser query];
+                          PFQuery *query = [User query];
                           [query whereKey:@"username" equalTo:alert.textFields[0].text];
                           [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
                               if (object) {
-                                  PFRelation *participantRelation = [[PFUser currentUser] relationForKey:@"friends"];
+                                  PFRelation *participantRelation = [[User currentUser] relationForKey:@"friends"];
                                   [participantRelation addObject:object];
-                                  [[PFUser currentUser] save];
+                                  [[User currentUser] save];
                                   [self loadFriends];
                               }else {
                                   UIAlertController* noUserAlert = [UIAlertController

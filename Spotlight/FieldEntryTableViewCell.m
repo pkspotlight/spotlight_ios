@@ -22,9 +22,11 @@
     [self.valueTextField becomeFirstResponder];
 }
 
-- (void)formatForAttributeString:(NSString*)attributeString withValue:(NSString*)fieldValue {
+- (void)formatForAttributeString:(NSString*)attributeString
+                     displayText:(NSString*)displayText
+                       withValue:(NSString*)fieldValue {
     _attributeString = attributeString;
-    [self.fieldTitleLabel setText:[attributeString capitalizedString]];
+    [self.fieldTitleLabel setText:displayText];
     [self.valueTextField setText:fieldValue];
 }
 

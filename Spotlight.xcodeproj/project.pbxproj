@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		880207A41C15DF7A002D5068 /* MontageCreator.m in Sources */ = {isa = PBXBuildFile; fileRef = 880207A31C15DF7A002D5068 /* MontageCreator.m */; };
-		883D63F11C06E88000AE99CC /* TeamDetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 883D63F01C06E88000AE99CC /* TeamDetailsTableViewController.m */; };
 		883D63F41C07151700AE99CC /* MediaObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 883D63F31C07151700AE99CC /* MediaObject.m */; };
 		883D63F91C0719E300AE99CC /* TeamLogoMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = 883D63F81C0719E300AE99CC /* TeamLogoMedia.m */; };
+		884250AD1C173076009034A6 /* TeamDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 884250AC1C173076009034A6 /* TeamDetailsViewController.m */; };
 		88450BFB1BC4CC30004BB6B4 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88450BF91BC4CC30004BB6B4 /* Fabric.framework */; };
 		88450BFC1BC4CC30004BB6B4 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88450BFA1BC4CC30004BB6B4 /* Crashlytics.framework */; };
 		8849A1E31BA0CB8400511DD5 /* SignUpTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8849A1E21BA0CB8400511DD5 /* SignUpTableViewController.m */; };
@@ -77,12 +77,12 @@
 		4FDDD1185B6B67FED774A599 /* Pods-Spotlight.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spotlight.release.xcconfig"; path = "Pods/Target Support Files/Pods-Spotlight/Pods-Spotlight.release.xcconfig"; sourceTree = "<group>"; };
 		880207A21C15DF7A002D5068 /* MontageCreator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MontageCreator.h; sourceTree = "<group>"; };
 		880207A31C15DF7A002D5068 /* MontageCreator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MontageCreator.m; sourceTree = "<group>"; };
-		883D63EF1C06E88000AE99CC /* TeamDetailsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamDetailsTableViewController.h; sourceTree = "<group>"; };
-		883D63F01C06E88000AE99CC /* TeamDetailsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamDetailsTableViewController.m; sourceTree = "<group>"; };
 		883D63F21C07151700AE99CC /* MediaObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaObject.h; sourceTree = "<group>"; };
 		883D63F31C07151700AE99CC /* MediaObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaObject.m; sourceTree = "<group>"; };
 		883D63F71C0719E300AE99CC /* TeamLogoMedia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamLogoMedia.h; sourceTree = "<group>"; };
 		883D63F81C0719E300AE99CC /* TeamLogoMedia.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamLogoMedia.m; sourceTree = "<group>"; };
+		884250AB1C173076009034A6 /* TeamDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamDetailsViewController.h; sourceTree = "<group>"; };
+		884250AC1C173076009034A6 /* TeamDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamDetailsViewController.m; sourceTree = "<group>"; };
 		88450BF91BC4CC30004BB6B4 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		88450BFA1BC4CC30004BB6B4 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		8849A1E11BA0CB8400511DD5 /* SignUpTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpTableViewController.h; sourceTree = "<group>"; };
@@ -295,8 +295,8 @@
 				883D63F81C0719E300AE99CC /* TeamLogoMedia.m */,
 				88BDFC581BFD33E0007A3EBB /* TeamsTableViewController.h */,
 				88BDFC591BFD33E0007A3EBB /* TeamsTableViewController.m */,
-				883D63EF1C06E88000AE99CC /* TeamDetailsTableViewController.h */,
-				883D63F01C06E88000AE99CC /* TeamDetailsTableViewController.m */,
+				884250AB1C173076009034A6 /* TeamDetailsViewController.h */,
+				884250AC1C173076009034A6 /* TeamDetailsViewController.m */,
 				88BDFC501BFD22B8007A3EBB /* CreateTeamTableViewController.h */,
 				88BDFC511BFD22B8007A3EBB /* CreateTeamTableViewController.m */,
 				88BDFC711BFF6A38007A3EBB /* TeamSelectTableViewController.h */,
@@ -575,13 +575,13 @@
 				88BDFC681BFD5034007A3EBB /* BasicHeaderView.m in Sources */,
 				88BDFC601BFD4602007A3EBB /* ProfileTableViewController.m in Sources */,
 				883D63F91C0719E300AE99CC /* TeamLogoMedia.m in Sources */,
+				884250AD1C173076009034A6 /* TeamDetailsViewController.m in Sources */,
 				88E9E8F91BD5C46D0065AA0C /* SpotlightTableViewCell.m in Sources */,
 				88A736DA1B91318D00093B27 /* main.m in Sources */,
 				88BDFC761BFF70E6007A3EBB /* CreateSpotlightTableViewController.m in Sources */,
 				88E9E8FF1BD6A6470065AA0C /* SpotlightMediaTableViewCell.m in Sources */,
 				880207A41C15DF7A002D5068 /* MontageCreator.m in Sources */,
 				88EC502E1C0E041F00077E85 /* FriendTableViewCell.m in Sources */,
-				883D63F11C06E88000AE99CC /* TeamDetailsTableViewController.m in Sources */,
 				88BDFC791BFF82FD007A3EBB /* SpotlightHeaderCollectionReusableView.m in Sources */,
 				88BDFC731BFF6A38007A3EBB /* TeamSelectTableViewController.m in Sources */,
 				88BDFC701BFD60B5007A3EBB /* SpotlightCollectionViewController.m in Sources */,

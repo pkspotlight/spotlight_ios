@@ -223,6 +223,8 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
 #pragma mark - Montage Functions
 
 - (IBAction)viewMontageButtonPressed:(id)sender {
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [hud setLabelText:@"Creating Montage..."];
     [[MontageCreator sharedCreator] createMontageWithMedia:self.mediaList completion:^{
 //        self.isShowingMontage = YES;
 //        MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
@@ -250,6 +252,7 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
         playerViewController.player = player;
         [playerViewController.player play];//Used to Play On start
         [self presentViewController:playerViewController animated:YES completion:nil];
+        [hud hide:YES];
 
     }];
 }

@@ -22,7 +22,9 @@
 
 - (void)focusTextField;
 
-- (void)formatForAttributeString:(NSString*)attributeString withValue:(NSString*)fieldValue;
+- (void)formatForAttributeString:(NSString*)attributeString
+                     displayText:(NSString*)displayText
+                       withValue:(NSString*)fieldValue;
 
 @property (readonly, nonatomic) NSString *attributeString;
 

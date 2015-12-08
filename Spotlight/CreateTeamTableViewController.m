@@ -27,7 +27,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.teamPropertyArray = @[ @"teamName", @"town", @"sport"];
+    self.teamPropertyArray = @[ @"teamName", @"town", @"sport", @"coach"];
     self.pendingFieldDictionary = [self newPendingFieldDictionary];
     [self.addTeamLogoButton.layer setCornerRadius:self.addTeamLogoButton.bounds.size.width/2];
     [self.addTeamLogoButton.layer setBorderColor:[UIColor whiteColor].CGColor];
@@ -48,43 +48,33 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (BOOL)savePendingChangesToAccount:(NSError **)error {
-//    NSMutableDictionary *toUpdate = [self.pendingFieldDictionary mutableCopy];
-//    for (NSString* attribute in self.teamPropertyArray) {
-//        NSString *enteredValue = self.pendingFieldDictionary[attribute];
-//        if (!enteredValue || [enteredValue length] < 1) {
-//            //ADD error here
-//            return NO;
-//        }
-//    }
+- (BOOL)savePendingChangesToTeam:(NSError **)error {
+
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [hud setLabelText:@"Saving Profile..."];
-
-    // ** NEED TO ADD SAVING FUNCTIONALITY HERE **
     
+    PFObject *team = [PFObject objectWithClassName:@"Team"
+                                        dictionary:self.pendingFieldDictionary];
+    team[@"teamLogoMedia"] = self.teamLogo;
+    PFUser* user = [PFUser currentUser];
+    PFRelation *participantRelation = [team relationForKey:@"teamParticipants"];
+    [participantRelation addObject:user];
     
-//    PFObject *team = [PFObject objectWithClassName:@"Team" dictionary:self.pendingFieldDictionary];
-//    team[@"teamLogoMedia"] = self.teamLogo;
-//    PFUser* user = [PFUser currentUser];
-//    PFRelation *participantRelation = [team relationForKey:@"teamParticipants"];
-//    [participantRelation addObject:user];
-//    
-//    [team saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-//        if (succeeded) {
-//            [self dismissViewControllerAnimated:YES completion:nil];
-//
-//        }
-//        if (error) {
-//            NSLog(@"fuck: %@", [error localizedDescription]);
-//        }
-//    }];
+    [team saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (succeeded) {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+        if (error) {
+            NSLog(@"fuck: %@", [error localizedDescription]);
+        }
+    }];
     return YES;
 }
 
 - (IBAction)saveAccountPressed:(id)sender {
     NSError *error;
     [self.view endEditing:NO];
-    if ([self savePendingChangesToAccount:&error]) {
+    if ([self savePendingChangesToTeam:&error]) {
         [self dismissViewControllerAnimated:YES completion:nil];
     } else {
         //Show some error
@@ -133,7 +123,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     FieldEntryTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"FieldEntryTableViewCell" forIndexPath:indexPath];
-    [cell formatForAttributeString:self.teamPropertyArray[indexPath.row] withValue:@""];
+    [cell formatForAttributeString:self.teamPropertyArray[indexPath.row]
+                         displayText:self.teamPropertyArray[indexPath.row] withValue:@""];
     [cell setDelegate:self];
     
     return cell;

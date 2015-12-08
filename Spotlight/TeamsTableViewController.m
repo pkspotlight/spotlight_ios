@@ -7,7 +7,7 @@
 //
 
 #import "TeamsTableViewController.h"
-#import "TeamDetailsTableViewController.h"
+#import "TeamDetailsViewController.h"
 #import "TeamTableViewCell.h"
 #import "Team.h"
 
@@ -122,9 +122,10 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     NSIndexPath *path = [self.tableView indexPathForCell:sender];
-    Team* team = (path.section == 0) ? self.myTeams[path.row] : self.allTeams[path.row];
+
     if ([segue.identifier isEqualToString:@"teamDetailsSegue"]) {
-        [(TeamDetailsTableViewController*)[segue destinationViewController] setTeam:team];
+        Team* team = (path.section == 0) ? self.myTeams[path.row] : self.allTeams[path.row];
+        [(TeamDetailsViewController*)[segue destinationViewController] setTeam:team];
     }
 }
 

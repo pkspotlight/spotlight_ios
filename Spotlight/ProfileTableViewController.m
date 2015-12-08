@@ -13,11 +13,13 @@
 
 #import <MobileCoreServices/UTCoreTypes.h>
 #import <AFNetworking/UIButton+AFNetworking.h>
+#import <MBProgressHUD.h>
 
 @interface ProfileTableViewController ()
 
 @property (strong, nonatomic) NSMutableDictionary *pendingFieldDictionary;
 @property (strong, nonatomic) NSArray* userPropertyArray;
+@property (strong, nonatomic) NSArray* userPropertyArrayDisplayText;
 
 @property (weak, nonatomic) IBOutlet UIButton *profilePictureImageView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
@@ -33,7 +35,9 @@
     
     self.user = [User currentUser];
     
-    self.userPropertyArray = @[ @"firstName", @"lastName" ];
+    self.userPropertyArray = @[ @"firstName", @"lastName", @"homeTown", @"favoriteSport" ];
+    self.userPropertyArrayDisplayText = @[ @"First Name", @"Last Name", @"Hometown", @"Favorite Sport" ];
+
     self.pendingFieldDictionary = [self newPendingFieldDictionary];
     
     [self.user[@"profilePic"] fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
@@ -100,6 +104,7 @@
         cell = [tableView dequeueReusableCellWithIdentifier:@"FieldEntryTableViewCell" forIndexPath:indexPath];
         NSString* property = self.userPropertyArray[indexPath.row];
         [(FieldEntryTableViewCell*)cell formatForAttributeString:property
+                                                     displayText:self.userPropertyArrayDisplayText[indexPath.row]
                                                        withValue:self.pendingFieldDictionary[property]];
         [(FieldEntryTableViewCell*)cell setDelegate:self];
     } else {
@@ -149,51 +154,6 @@
 }
 
 
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 #pragma mark - Delegate Methods
 
 - (void)accountTextFieldCell:(FieldEntryTableViewCell *)cell didChangeToValue:(NSString *)text {
@@ -226,11 +186,23 @@
 - (IBAction)saveAccountPressed:(id)sender {
     NSError *error;
     [self.view endEditing:NO];
-//    if ([self savePendingChangesToAccount:&error]) {
-//        [self dismissViewControllerAnimated:YES completion:nil];
-//    } else {
-//        //Show some error
-//    }
+    if ([self savePendingChangesToUser:error]) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    } else {
+        //Show some error
+    }
+}
+
+- (BOOL)savePendingChangesToUser:(NSError*)error {
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [hud setLabelText:@"Updating Info..."];
+    for (NSString* key in [self.pendingFieldDictionary allKeys]) {
+        self.user[key] = self.pendingFieldDictionary[key];
+    }
+    [self.user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        [hud hide:YES afterDelay:.5];
+    }];
+    return YES;
 }
 
 

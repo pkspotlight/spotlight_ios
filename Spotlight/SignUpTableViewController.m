@@ -80,7 +80,7 @@
     if (self.pendingInputDict[@"email"] &&
         [self.pendingInputDict[@"email"] length] > 4 &&
         self.pendingInputDict[@"password"] &&
-        [self.pendingInputDict[@"password"] length] > 6) {
+        [self.pendingInputDict[@"password"] length] > 4) {
 
     PFUser *user = [PFUser user];
     user.username = self.pendingInputDict[@"email"];
@@ -106,7 +106,7 @@
         }];
     } else {
         UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Invalid Username/Password"
-                                                                       message:@"Please make sure that you have entered a valid e-mail address and that your password is at least 6 charaters long" preferredStyle:UIAlertControllerStyleAlert];
+                                                                       message:@"Please make sure that you have entered a valid e-mail address and that your password is at least 4 charaters long" preferredStyle:UIAlertControllerStyleAlert];
         [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil]];
         [self presentViewController:alert animated:YES completion:nil];
     }

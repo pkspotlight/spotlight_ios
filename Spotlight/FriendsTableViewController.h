@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class User;
+@class Team;
+
 @interface FriendsTableViewController : UITableViewController
+
+@property (strong, nonatomic) User* user;
+@property (strong, nonatomic) Team* team;
 
 @end

@@ -10,6 +10,7 @@
 #import "SpotlightFeedViewController.h"
 #import "SpotlightMedia.h"
 #import "Team.h"
+#import "FriendsTableViewController.h"
 #import "SpotlightDataSource.h"
 
 #import <MobileCoreServices/UTCoreTypes.h>
@@ -19,6 +20,8 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *teamLogoImageView;
 @property (weak, nonatomic) IBOutlet UILabel *teamNameLabel;
+@property (weak, nonatomic) IBOutlet UIView *teamMemberViewContainer;
+@property (weak, nonatomic) IBOutlet UIView *spotlightContainer;
 
 @end
 
@@ -43,11 +46,33 @@
          NSLog(@"fuck thumbnail failure");
      }];
 }
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    SpotlightDataSource* datasource = [[SpotlightDataSource alloc] initWithTeam:self.team];
-    [(SpotlightFeedViewController*)[segue destinationViewController] setDataSource:datasource];
+- (IBAction)teamSegmentControllerValueChanged:(UISegmentedControl*)sender {
+    if( sender.selectedSegmentIndex == 0) {
+        [UIView animateWithDuration:.5
+                         animations:^{
+                             [self.spotlightContainer setAlpha:1];
+                             [self.teamMemberViewContainer setAlpha:0];
+                         }];
+    } else {
+        [UIView animateWithDuration:.5
+                         animations:^{
+                             [self.teamMemberViewContainer setAlpha:1];
+                             [self.spotlightContainer setAlpha:0];
+                         }];
+    }
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"teamMemberEmbedSegue"]) {
+        [(FriendsTableViewController*)[segue destinationViewController] setTeam:self.team];
+    } else {
+        SpotlightDataSource* datasource = [[SpotlightDataSource alloc] initWithTeam:self.team];
+        [(SpotlightFeedViewController*)[segue destinationViewController] setDataSource:datasource];
+    }
+}
+
+-(BOOL)hidesBottomBarWhenPushed {
+    return YES;
+}
 
 @end

@@ -201,7 +201,7 @@
                             <rect key="frame" x="0.0" y="44" width="600" height="144"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unknown_user.png" translatesAutoresizingMaskIntoConstraints="NO" id="PF0-XN-vBN">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unknown_user.png" translatesAutoresizingMaskIntoConstraints="NO" id="PF0-XN-vBN">
                                     <rect key="frame" x="8" y="8" width="128" height="128"/>
                                     <animations/>
                                     <constraints>
@@ -292,13 +292,13 @@
             <objects>
                 <tableViewController id="KaG-P1-Sfy" customClass="FriendsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="68" sectionHeaderHeight="28" sectionFooterHeight="28" id="PTB-dJ-aj2">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="288"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="FriendTableViewCell" rowHeight="68" id="0AA-B8-lWq" customClass="FriendTableViewCell">
-                                <rect key="frame" x="0.0" y="92" width="600" height="68"/>
+                                <rect key="frame" x="0.0" y="28" width="600" height="68"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" tableViewCell="0AA-B8-lWq" id="3Gj-QD-nlj">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="68"/>
@@ -366,17 +366,17 @@
                         <viewControllerLayoutGuide type="bottom" id="hne-WX-yBm"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Kur-d0-tlL">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="288"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rL5-qc-i6g">
+                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rL5-qc-i6g">
                                 <rect key="frame" x="0.0" y="312" width="600" height="288"/>
                                 <animations/>
                                 <connections>
                                     <segue destination="8hb-z5-ol4" kind="embed" identifier="EmbedSpotlightSegue" id="MtQ-jd-zmN"/>
                                 </connections>
                             </containerView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IsX-JN-Mbi">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IsX-JN-Mbi">
                                 <rect key="frame" x="0.0" y="64" width="600" height="248"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unknown_user.png" translatesAutoresizingMaskIntoConstraints="NO" id="dcO-BH-zJz">
@@ -457,13 +457,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wml-en-gDZ">
-                                <rect key="frame" x="0.0" y="312" width="600" height="288"/>
-                                <animations/>
-                                <connections>
-                                    <segue destination="8hb-z5-ol4" kind="embed" id="KDg-Dy-czv"/>
-                                </connections>
-                            </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TOd-AQ-irE">
                                 <rect key="frame" x="0.0" y="64" width="600" height="248"/>
                                 <subviews>
@@ -482,17 +475,20 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="xMt-ON-ZoP">
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="xMt-ON-ZoP">
                                         <rect key="frame" x="192" y="209" width="217" height="29"/>
                                         <animations/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="153" id="PQA-Mq-Rol"/>
+                                            <constraint firstAttribute="width" constant="217" id="PQA-Mq-Rol"/>
                                         </constraints>
                                         <segments>
                                             <segment title="Spotlights"/>
                                             <segment title="Team Members"/>
                                         </segments>
                                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="teamSegmentControllerValueChanged:" destination="G7Z-mU-6An" eventType="valueChanged" id="Brd-Ne-XEX"/>
+                                        </connections>
                                     </segmentedControl>
                                 </subviews>
                                 <animations/>
@@ -510,6 +506,20 @@
                                     <constraint firstAttribute="trailing" secondItem="5s6-aT-kQP" secondAttribute="trailing" constant="8" id="zmX-we-jFV"/>
                                 </constraints>
                             </view>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iR0-Zd-32o" userLabel="Team Member Container View">
+                                <rect key="frame" x="0.0" y="312" width="600" height="288"/>
+                                <animations/>
+                                <connections>
+                                    <segue destination="KaG-P1-Sfy" kind="embed" identifier="teamMemberEmbedSegue" id="5wK-cZ-7Zv"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wml-en-gDZ" userLabel="Spotlight Container View">
+                                <rect key="frame" x="0.0" y="312" width="600" height="288"/>
+                                <animations/>
+                                <connections>
+                                    <segue destination="8hb-z5-ol4" kind="embed" id="KDg-Dy-czv"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -525,7 +535,9 @@
                     </view>
                     <navigationItem key="navigationItem" title="Team Details" id="jZg-c6-Lfn"/>
                     <connections>
+                        <outlet property="spotlightContainer" destination="Wml-en-gDZ" id="Yt9-Md-bjb"/>
                         <outlet property="teamLogoImageView" destination="ENb-YQ-djp" id="KzA-uX-mgV"/>
+                        <outlet property="teamMemberViewContainer" destination="iR0-Zd-32o" id="5QE-Ky-R8R"/>
                         <outlet property="teamNameLabel" destination="5s6-aT-kQP" id="xBQ-m0-2Gy"/>
                     </connections>
                 </viewController>
@@ -1705,6 +1717,7 @@
         <image name="unknown_user.png" width="500" height="500"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="MtQ-jd-zmN"/>
+        <segue reference="5wK-cZ-7Zv"/>
+        <segue reference="KDg-Dy-czv"/>
     </inferredMetricsTieBreakers>
 </document>

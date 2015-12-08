@@ -77,10 +77,10 @@
         CMTime totalDuration = kCMTimeZero;
         NSError* error;
         for (SpotlightMedia *media in mediaArray) {
-            AVURLAsset *asset = [AVURLAsset URLAssetWithURL:[NSURL URLWithString:media.mediaFile.url]
-                                                    options:nil];
+            [media fetchIfNeeded];
             if (media.isVideo) {
-                
+                AVURLAsset *asset = [AVURLAsset URLAssetWithURL:[NSURL URLWithString:media.mediaFile.url]
+                                                        options:nil];
                 [track insertTimeRange:CMTimeRangeMake(kCMTimeZero, asset.duration)
                                ofTrack:[[asset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0]
                                 atTime:totalDuration

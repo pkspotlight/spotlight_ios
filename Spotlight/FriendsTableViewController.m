@@ -12,6 +12,7 @@
 #import "FriendProfileViewController.h"
 #import "Parse.h"
 #import "User.h"
+#import "Team.h"
 
 @interface FriendsTableViewController ()
 
@@ -23,8 +24,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self loadFriends];
-    
+    if (self.team) {
+        [self loadTeamMembers];
+    }else{
+        if (!self.user) {
+            self.user = [User currentUser];
+        }
+        [self loadFriends];
+    }
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -35,11 +42,18 @@
 
 - (void)loadFriends {
     
-    PFQuery *query = [(PFRelation*)[[User currentUser] objectForKey:@"friends"] query];
+    PFQuery *query = [(PFRelation*)[self.user objectForKey:@"friends"] query];
     self.friends = [query findObjects];
     [self.tableView reloadData];
-
 }
+
+- (void)loadTeamMembers{
+    PFQuery *query = [(PFRelation*)[self.team objectForKey:@"teamParticipants"] query];
+    self.friends = [query findObjects];
+    [self.tableView reloadData];
+}
+
+
 - (IBAction)addFriendButtonPressed:(id)sender {
     UIAlertController* alert = [UIAlertController
                                 alertControllerWithTitle:@"Enter email of friend"
@@ -56,9 +70,9 @@
                           [query whereKey:@"username" equalTo:alert.textFields[0].text];
                           [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
                               if (object) {
-                                  PFRelation *participantRelation = [[User currentUser] relationForKey:@"friends"];
+                                  PFRelation *participantRelation = [self.user relationForKey:@"friends"];
                                   [participantRelation addObject:object];
-                                  [[User currentUser] save];
+                                  [self.user save];
                                   [self loadFriends];
                               }else {
                                   UIAlertController* noUserAlert = [UIAlertController
@@ -101,40 +115,6 @@
     return cell;
 }
 
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 
 #pragma mark - Navigation

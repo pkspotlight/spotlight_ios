@@ -7,8 +7,10 @@
 //
 
 #import "TeamDetailsViewController.h"
+#import "SpotlightFeedViewController.h"
 #import "SpotlightMedia.h"
 #import "Team.h"
+#import "SpotlightDataSource.h"
 
 #import <MobileCoreServices/UTCoreTypes.h>
 #import <AFNetworking/UIImageView+AFNetworking.h>
@@ -17,7 +19,6 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *teamLogoImageView;
 @property (weak, nonatomic) IBOutlet UILabel *teamNameLabel;
-
 
 @end
 
@@ -41,6 +42,11 @@
      } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, NSError * _Nonnull error) {
          NSLog(@"fuck thumbnail failure");
      }];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    SpotlightDataSource* datasource = [[SpotlightDataSource alloc] initWithTeam:self.team];
+    [(SpotlightFeedViewController*)[segue destinationViewController] setDataSource:datasource];
 }
 
 

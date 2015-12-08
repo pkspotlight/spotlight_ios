@@ -10,9 +10,10 @@
 
 @implementation User
 
-@dynamic profileImage;
+@dynamic profilePic;
 @dynamic firstName;
 @dynamic lastName;
+@dynamic friends;
 
 #pragma mark - Parse Stuff
 

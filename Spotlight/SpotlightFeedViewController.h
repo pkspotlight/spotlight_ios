@@ -10,10 +10,10 @@
 #import "Parse.h"
 
 @class User;
+@class SpotlightDataSource;
 
 @interface SpotlightFeedViewController : UITableViewController
 
-
-@property(strong, nonatomic) User* user;
+@property (strong, nonatomic) SpotlightDataSource *dataSource;
 
 @end

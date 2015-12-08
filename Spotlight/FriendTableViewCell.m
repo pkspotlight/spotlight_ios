@@ -37,7 +37,8 @@
                        forState:UIControlStateNormal];
     
     [self.userImageView cancelImageRequestOperation];
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:user.profileImage.thumbnailImageFile.url]];
+    [user.profilePic fetchIfNeeded];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:user.profilePic.thumbnailImageFile.url]];
     [self.userImageView
      setImageWithURLRequest:request
      placeholderImage:nil

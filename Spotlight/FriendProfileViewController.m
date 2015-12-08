@@ -8,7 +8,10 @@
 
 #import "FriendProfileViewController.h"
 #import "SpotlightFeedViewController.h"
+#import "SpotlightDataSource.h"
 #import "User.h"
+#import "ProfilePictureMedia.h"
+#import <AFNetworking/UIImageView+AFNetworking.h>
 
 @interface FriendProfileViewController()
 
@@ -28,6 +31,17 @@
     [self.friendImageView.layer setBorderWidth:3];
     [self.friendImageView.layer setBorderColor:[UIColor whiteColor].CGColor];
     [self.friendImageView setClipsToBounds:YES];
+    [self.friendImageView cancelImageRequestOperation];
+    [self.user.profilePic fetchIfNeeded];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.user.profilePic.thumbnailImageFile.url]];
+    [self.friendImageView
+     setImageWithURLRequest:request
+     placeholderImage:nil
+     success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, UIImage * _Nonnull image) {
+         [self.friendImageView setImage:image];
+     } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, NSError * _Nonnull error) {
+         NSLog(@"fuck thumbnail failure");
+     }];
 }
 
 //- (void)cycleFromViewController: (UIViewController*) oldVC
@@ -62,7 +76,8 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    [(SpotlightFeedViewController*)[segue destinationViewController] setUser:self.user];
+    SpotlightDataSource* datasource = [[SpotlightDataSource alloc] initWithUser:self.user];
+    [(SpotlightFeedViewController*)[segue destinationViewController] setDataSource:datasource];
 }
 
 @end

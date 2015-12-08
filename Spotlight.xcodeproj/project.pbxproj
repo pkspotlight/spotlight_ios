@@ -11,6 +11,7 @@
 		883D63F41C07151700AE99CC /* MediaObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 883D63F31C07151700AE99CC /* MediaObject.m */; };
 		883D63F91C0719E300AE99CC /* TeamLogoMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = 883D63F81C0719E300AE99CC /* TeamLogoMedia.m */; };
 		884250AD1C173076009034A6 /* TeamDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 884250AC1C173076009034A6 /* TeamDetailsViewController.m */; };
+		884250B01C1736D7009034A6 /* SpotlightDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 884250AF1C1736D7009034A6 /* SpotlightDataSource.m */; };
 		88450BFB1BC4CC30004BB6B4 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88450BF91BC4CC30004BB6B4 /* Fabric.framework */; };
 		88450BFC1BC4CC30004BB6B4 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88450BFA1BC4CC30004BB6B4 /* Crashlytics.framework */; };
 		8849A1E31BA0CB8400511DD5 /* SignUpTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8849A1E21BA0CB8400511DD5 /* SignUpTableViewController.m */; };
@@ -83,6 +84,8 @@
 		883D63F81C0719E300AE99CC /* TeamLogoMedia.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamLogoMedia.m; sourceTree = "<group>"; };
 		884250AB1C173076009034A6 /* TeamDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamDetailsViewController.h; sourceTree = "<group>"; };
 		884250AC1C173076009034A6 /* TeamDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamDetailsViewController.m; sourceTree = "<group>"; };
+		884250AE1C1736D7009034A6 /* SpotlightDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotlightDataSource.h; sourceTree = "<group>"; };
+		884250AF1C1736D7009034A6 /* SpotlightDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotlightDataSource.m; sourceTree = "<group>"; };
 		88450BF91BC4CC30004BB6B4 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		88450BFA1BC4CC30004BB6B4 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		8849A1E11BA0CB8400511DD5 /* SignUpTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpTableViewController.h; sourceTree = "<group>"; };
@@ -325,6 +328,8 @@
 			children = (
 				887FF4CC1BD530B400F3679D /* Spotlight.h */,
 				887FF4CD1BD530B400F3679D /* Spotlight.m */,
+				884250AE1C1736D7009034A6 /* SpotlightDataSource.h */,
+				884250AF1C1736D7009034A6 /* SpotlightDataSource.m */,
 				88E9E8F41BD5791E0065AA0C /* SpotlightMedia.h */,
 				88E9E8F51BD5791E0065AA0C /* SpotlightMedia.m */,
 				88EE2CC41B9E08B2002DDB99 /* SpotlightFeedViewController.h */,
@@ -588,6 +593,7 @@
 				88BDFC521BFD22B8007A3EBB /* CreateTeamTableViewController.m in Sources */,
 				8849A1E31BA0CB8400511DD5 /* SignUpTableViewController.m in Sources */,
 				8893FD7A1BFCCC2100711779 /* Team.m in Sources */,
+				884250B01C1736D7009034A6 /* SpotlightDataSource.m in Sources */,
 				8849A1E61BA0CC7A00511DD5 /* SignUpInputTableViewCell.m in Sources */,
 				88EC50241C0DB72500077E85 /* FriendProfileViewController.m in Sources */,
 				883D63F41C07151700AE99CC /* MediaObject.m in Sources */,

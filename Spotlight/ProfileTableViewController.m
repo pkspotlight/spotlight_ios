@@ -143,7 +143,7 @@
 
     }];
     [self.imagePickerController dismissViewControllerAnimated:YES completion:nil];
-    self.user[@"profilePic"] = self.profilePic;
+    self.user.profilePic = self.profilePic;
     [self.user saveInBackground];
 }
 

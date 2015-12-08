@@ -35,7 +35,7 @@
 }
 
 - (void)formatForSpotlight:(Spotlight*)spotlight {
-    
+    _spotlight = spotlight;
     [self.mainImageView setImage:nil];
     [self.mainImageView cancelImageRequestOperation];
     [self.titleLabel setText:spotlight.team.teamName];

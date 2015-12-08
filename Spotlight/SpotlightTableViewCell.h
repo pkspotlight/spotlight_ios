@@ -13,4 +13,6 @@
 
 - (void)formatForSpotlight:(Spotlight*)spotlight;
 
+@property (strong, nonatomic) Spotlight* spotlight;
+
 @end

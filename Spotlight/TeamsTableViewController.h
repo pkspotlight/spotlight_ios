@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class User;
+
 @interface TeamsTableViewController : UITableViewController
+
+@property (strong, nonatomic) User* user;
+@property (assign, nonatomic) BOOL isCurrentUser;
 
 @end

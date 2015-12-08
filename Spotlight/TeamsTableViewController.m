@@ -10,9 +10,9 @@
 #import "TeamDetailsViewController.h"
 #import "TeamTableViewCell.h"
 #import "Team.h"
-
 #import "BasicHeaderView.h"
 #import "Parse.h"
+#import "User.h"
 
 static CGFloat const BasicHeaderHeight = 50;
 
@@ -30,12 +30,21 @@ static CGFloat const BasicHeaderHeight = 50;
     [self.tableView registerNib:[UINib nibWithNibName:@"BasicHeaderView" bundle:nil]
 forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     UIRefreshControl* refresh = [[UIRefreshControl alloc] init];
-    [refresh addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
+    [refresh addTarget:self
+                action:@selector(refresh:)
+      forControlEvents:UIControlEventValueChanged];
     [self setRefreshControl:refresh];
+    
     self.allTeams = [NSArray array];
     self.myTeams = [NSArray array];
+    if (self.user) {
+        self.isCurrentUser = NO;
+    } else {
+        self.user = [User currentUser];
+        self.isCurrentUser = YES;
+        [self loadTeams:nil];
+    }
     [self loadMyTeams:nil];
-    [self loadTeams:nil];
 }
 
 - (void)refresh:(id)sender {
@@ -51,7 +60,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 - (void)loadTeams:(UIRefreshControl*)sender {
     PFQuery *query = [PFQuery queryWithClassName:@"Team"];
     [query includeKey:@"teamLogoMedia"];
-    [query whereKey:@"teamParticipants" notEqualTo:[PFUser currentUser].objectId];
+    [query whereKey:@"teamParticipants" notEqualTo:self.user.objectId];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             NSLog(@"Successfully retrieved all %lu Teams.", (unsigned long)objects.count);
@@ -69,7 +78,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 - (void)loadMyTeams:(UIRefreshControl*)sender  {
     PFQuery *query = [PFQuery queryWithClassName:@"Team"];
     [query includeKey:@"teamLogoMedia"];
-    [query whereKey:@"teamParticipants" equalTo:[PFUser currentUser].objectId];
+    [query whereKey:@"teamParticipants" equalTo:self.user.objectId];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             NSLog(@"Successfully retrieved my %lu Teams.", (unsigned long)objects.count);
@@ -86,7 +95,11 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    if (self.isCurrentUser) {
+        return 2;
+    } else {
+        return 1;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -106,13 +119,20 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    BasicHeaderView *cell = [self.tableView dequeueReusableHeaderFooterViewWithIdentifier:@"BasicHeaderView"];
-    cell.headerTitleLabel.text = (section == 0) ? @"My Teams" : @"Add Teams";
-    return cell;
+    if (self.isCurrentUser) {
+        BasicHeaderView *cell = [self.tableView dequeueReusableHeaderFooterViewWithIdentifier:@"BasicHeaderView"];
+        cell.headerTitleLabel.text = (section == 0) ? @"My Teams" : @"Add Teams";
+        return cell;
+    } else {
+        return nil;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return BasicHeaderHeight;
+    if (self.isCurrentUser) {
+        return BasicHeaderHeight;
+    }
+    return 0;
 }
 
 

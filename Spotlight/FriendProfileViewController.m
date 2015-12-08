@@ -9,6 +9,7 @@
 #import "FriendProfileViewController.h"
 #import "SpotlightFeedViewController.h"
 #import "SpotlightDataSource.h"
+#import "TeamsTableViewController.h"
 #import "User.h"
 #import "ProfilePictureMedia.h"
 #import <AFNetworking/UIImageView+AFNetworking.h>
@@ -17,6 +18,8 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *friendImageView;
 @property (weak, nonatomic) IBOutlet UILabel *friendNameLabel;
+@property (weak, nonatomic) IBOutlet UIView *teamsContainerView;
+@property (weak, nonatomic) IBOutlet UIView *spotlightsContainerView;
 
 @end
 
@@ -42,6 +45,21 @@
      } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, NSError * _Nonnull error) {
          NSLog(@"fuck thumbnail failure");
      }];
+}
+- (IBAction)segmentControllerValueChanged:(UISegmentedControl*)sender {
+    if( sender.selectedSegmentIndex == 0) {
+        [UIView animateWithDuration:.5
+                         animations:^{
+                             [self.spotlightsContainerView setAlpha:1];
+                             [self.teamsContainerView setAlpha:0];
+                         }];
+    } else {
+        [UIView animateWithDuration:.5
+                         animations:^{
+                             [self.teamsContainerView setAlpha:1];
+                             [self.spotlightsContainerView setAlpha:0];
+                         }];
+    }
 }
 
 //- (void)cycleFromViewController: (UIViewController*) oldVC
@@ -76,8 +94,13 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    SpotlightDataSource* datasource = [[SpotlightDataSource alloc] initWithUser:self.user];
-    [(SpotlightFeedViewController*)[segue destinationViewController] setDataSource:datasource];
+    
+    if ([segue.identifier isEqualToString:@"friendTeamsEmbedSegue"]) {
+        [(TeamsTableViewController*)[segue destinationViewController] setUser:self.user];
+    } else {
+        SpotlightDataSource* datasource = [[SpotlightDataSource alloc] initWithUser:self.user];
+        [(SpotlightFeedViewController*)[segue destinationViewController] setDataSource:datasource];
+    }
 }
 
 @end

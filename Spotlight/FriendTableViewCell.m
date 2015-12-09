@@ -26,11 +26,18 @@
 @implementation FriendTableViewCell
 
 - (void)formatForUser:(User*)user isFollowing:(BOOL)isFollowing {
-    
+    _user = user;
+
     [self.userImageView.layer setCornerRadius:self.userImageView.bounds.size.width/2];
     [self.userImageView setClipsToBounds:YES];
-        _user = user;
-    [self.userDisplayNameLabel setText:user.username];
+    NSString* displayName = user.username;
+    if (self.user.firstName) {
+        displayName = self.user.firstName;
+        if (self.user.lastName) {
+            displayName = [NSString stringWithFormat:@"%@ %@", displayName, self.user.lastName];
+        }
+    }
+    [self.userDisplayNameLabel setText:displayName];
     
     NSString* buttonText = (isFollowing) ? @"Following" : @"Follow";
     [self.followButton setTitle:buttonText

@@ -89,7 +89,7 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
     
     SpotlightHeaderCollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:
                                    UICollectionElementKindSectionHeader withReuseIdentifier:@"SpotlightHeaderCollectionReusableView" forIndexPath:indexPath];
-    [headerView formatHeaderForTeam:self.spotlight.team ];
+    [headerView formatHeaderForTeam:self.spotlight.team spotlight:self.spotlight ];
     [headerView setDelegate:self];
     return headerView;
 }

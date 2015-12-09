@@ -19,6 +19,11 @@
 
 @property (strong, nonatomic) NSString* teamName;
 @property (strong, nonatomic) TeamLogoMedia* teamLogoMedia;
+@property (strong, nonatomic) NSString* year;
+@property (strong, nonatomic) NSString* sport;
+@property (strong, nonatomic) NSString* season;
+@property (strong, nonatomic) NSString* town;
+@property (strong, nonatomic) NSString* grade;
 
 
 @end

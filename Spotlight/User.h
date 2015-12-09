@@ -17,5 +17,6 @@
 @property (strong, nonatomic) NSString* lastName;
 @property (readonly, nonatomic) PFRelation* friends;
 
+- (NSString*)displayName;
 
 @end

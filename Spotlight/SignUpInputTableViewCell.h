@@ -20,6 +20,8 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 @property (strong, nonatomic) NSString* fieldName;
+@property (weak, nonatomic) IBOutlet UILabel *fieldNameLabel;
+
 
 @property(weak) id<SignupInputTextFieldDelegate> delegate;
 

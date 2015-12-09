@@ -30,7 +30,7 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:media.thumbnailImageFile.url]];
     [self.mediaImageView
      setImageWithURLRequest:request
-     placeholderImage:[UIImage imageNamed:@"gb"]
+     placeholderImage:[UIImage imageNamed:@"spotlight_logo"]
      success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, UIImage * _Nonnull image) {
          [self.mediaImageView setImage:image];
          NSLog(@"got the thumbnail ");

@@ -11,7 +11,7 @@
 
 @interface SpotlightTableViewCell : UITableViewCell
 
-- (void)formatForSpotlight:(Spotlight*)spotlight;
+- (void)formatForSpotlight:(Spotlight*)spotlight dateFormat:(NSDateFormatter*)dateFormatter;
 
 @property (strong, nonatomic) Spotlight* spotlight;
 

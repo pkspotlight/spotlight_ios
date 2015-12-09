@@ -21,7 +21,7 @@
 @property (strong, nonatomic) NSArray *spotlights;
 @property (strong, nonatomic) User* user;
 @property (strong, nonatomic) Team* team;
-
+@property (strong, nonatomic) NSDateFormatter* dateFormatter;
 
 @end
 
@@ -30,29 +30,36 @@
 
 - (instancetype)init{
     if (self = [super init]) {
-        self.spotlights = [NSArray array];
         self.team = nil;
         self.user = nil;
+        [self commonInit];
     }
     return self;
 }
 
 - (instancetype)initWithUser:(User*)user{
     if (self = [super init]) {
-        self.spotlights = [NSArray array];
         self.user = user;
         self.team = nil;
+        [self commonInit];
     }
     return self;
 }
 
 - (instancetype)initWithTeam:(Team*)team{
     if (self = [super init]) {
-        self.spotlights = [NSArray array];
         self.team = team;
         self.user = nil;
+        [self commonInit];
     }
     return self;
+}
+
+- (void)commonInit {
+    self.spotlights = [NSArray array];
+    self.dateFormatter = [[NSDateFormatter alloc] init];
+    self.dateFormatter.timeStyle = NSDateFormatterNoStyle;
+    self.dateFormatter.dateStyle = NSDateFormatterLongStyle;
 }
 
 - (void)loadSpotlights:(void (^ __nullable)(void))completion{
@@ -71,7 +78,7 @@
     
     PFQuery *teamQuery = [PFQuery queryWithClassName:@"Team"];
     [teamQuery whereKey:@"teamParticipants" equalTo:[[User currentUser] objectId]];
-    [teamQuery whereKey:@"teamParticipants" matchesKey:@"objectId" inQuery:friendQuery];
+   // [teamQuery whereKey:@"teamParticipants" matchesKey:@"objectId" inQuery:friendQuery];
 
     [teamQuery includeKey:@"teamLogoMedia"];
     [teamQuery includeKey:@"thumbnailImageFile"];
@@ -165,7 +172,7 @@
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     SpotlightTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SpotlightTableViewCell" forIndexPath:indexPath];
-    [cell formatForSpotlight:self.spotlights[indexPath.row]];
+    [cell formatForSpotlight:self.spotlights[indexPath.row] dateFormat:self.dateFormatter];
     return cell;
 }
 

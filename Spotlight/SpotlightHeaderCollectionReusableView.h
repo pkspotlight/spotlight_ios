@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @class Team;
+@class Spotlight;
 
 @interface SpotlightHeaderCollectionReusableView : UICollectionReusableView
 
-- (void)formatHeaderForTeam:(Team*)team;
+- (void)formatHeaderForTeam:(Team*)team spotlight:(Spotlight*)spotlight;
 
 @property (weak, nonatomic) id delegate;
 

@@ -35,8 +35,8 @@
     
     self.user = [User currentUser];
     
-    self.userPropertyArray = @[ @"firstName", @"lastName", @"homeTown", @"favoriteSport" ];
-    self.userPropertyArrayDisplayText = @[ @"First Name", @"Last Name", @"Hometown", @"Favorite Sport" ];
+    self.userPropertyArray = @[ @"firstName", @"lastName", @"homeTown", @"family" ];
+    self.userPropertyArrayDisplayText = @[ @"First Name", @"Last Name", @"Hometown", @"Family" ];
 
     self.pendingFieldDictionary = [self newPendingFieldDictionary];
     
@@ -52,7 +52,7 @@
     }];
     
     [self.profilePictureImageView.imageView setContentMode:UIViewContentModeScaleAspectFill];
-    [self.usernameLabel setText:self.user.username];
+    [self.usernameLabel setText:[self.user displayName]];
     [self.profilePictureImageView.layer setCornerRadius:self.profilePictureImageView.bounds.size.width/2];
     [self.profilePictureImageView.layer setBorderWidth:3];
     [self.profilePictureImageView.layer setBorderColor:[UIColor whiteColor].CGColor];

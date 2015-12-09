@@ -10,6 +10,7 @@
 #import "Spotlight.h"
 #import "SpotlightMedia.h"
 #import "Team.h"
+#import "User.h"
 #import <MobileCoreServices/UTCoreTypes.h>
 #import <MBProgressHUD.h>
 #import <AFNetworking/UIImageView+AFNetworking.h>
@@ -59,13 +60,13 @@
 - (IBAction)saveButtonPressed:(id)sender {
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [hud setLabelText:@"Creating Spotlight..."];
-    PFUser* user = [PFUser currentUser];
+    User* user = [User currentUser];
     PFRelation *participantRelation = [self.spotlight relationForKey:@"creator"];
     [participantRelation addObject:user];
 //    PFRelation *teamRelation = [self.spotlight relationForKey:@"team"];
 //    [teamRelation addObject:self.team];
     [self.spotlight setTeam:self.team];
-    [self.spotlight setCreatorName:user.username];
+    [self.spotlight setCreatorName:[NSString stringWithFormat:@"%@ %@", user.firstName, user.lastName]];
     [self.spotlight saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         [self.navigationController dismissViewControllerAnimated:YES completion:^{
             

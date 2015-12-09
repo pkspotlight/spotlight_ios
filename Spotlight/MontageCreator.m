@@ -119,6 +119,15 @@
                 NSLog(@"error: %@", [error localizedDescription]);
             }
         }
+        NSURL *audio_url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"eye_of_tiger" ofType:@"mp3"]];
+        AVURLAsset  *audioAsset = [[AVURLAsset alloc]initWithURL:audio_url options:nil];
+        AVMutableCompositionTrack *audioTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio
+                                                                            preferredTrackID:kCMPersistentTrackID_Invalid];
+        [audioTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, totalDuration)
+                            ofTrack:[[audioAsset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0] atTime:kCMTimeZero error:nil];
+        
+        
+        
         NSLog(@"starting export");
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *documentsDirectory = [paths objectAtIndex:0];

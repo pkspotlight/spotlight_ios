@@ -34,12 +34,18 @@
     // Configure the view for the selected state
 }
 
-- (void)formatForSpotlight:(Spotlight*)spotlight {
+- (void)formatForSpotlight:(Spotlight*)spotlight dateFormat:(NSDateFormatter*)dateFormatter {
     _spotlight = spotlight;
+    Team* team = self.spotlight.team;
     [self.mainImageView setImage:nil];
     [self.mainImageView cancelImageRequestOperation];
     [self.titleLabel setText:spotlight.team.teamName];
-    [self.createdByLabel setText:[NSString stringWithFormat:@"by %@", spotlight.creatorName]];
+    
+    [self.titleLabel setText:[NSString stringWithFormat:@"%@ %@ - Grade %@", team.teamName, team.sport, team.grade]];
+
+    NSDate* date = self.spotlight.createdAt;
+
+    [self.createdByLabel setText:[NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:date]]];
     [spotlight allThumbnailUrls:^(NSArray *urls, NSError *error) {
         if (urls && !error) {
             NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[urls firstObject]]];

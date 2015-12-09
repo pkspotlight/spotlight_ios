@@ -22,4 +22,14 @@
     [self registerSubclass];
 }
 
+- (NSString*)displayName {
+    NSString* displayName = self.username;
+    if (self.firstName) {
+        displayName = self.firstName;
+        if (self.lastName) {
+            displayName = [NSString stringWithFormat:@"%@ %@", displayName, self.lastName];
+        }
+    }
+    return displayName;
+}
 @end

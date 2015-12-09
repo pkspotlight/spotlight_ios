@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *teamNameLabel;
 @property (weak, nonatomic) IBOutlet UIButton *followButton;
 @property (weak, nonatomic) IBOutlet UIImageView *teamImageView;
+@property (weak, nonatomic) IBOutlet UILabel *seasonLabel;
+@property (weak, nonatomic) IBOutlet UILabel *sportLabel;
 
 @end
 
@@ -36,7 +38,12 @@
     [self.teamImageView.layer setCornerRadius:self.teamImageView.bounds.size.width/2];
     [self.teamImageView setClipsToBounds:YES];
     
-    [self.teamNameLabel setText:team.teamName];
+    [self.teamNameLabel setText:[NSString stringWithFormat:@"%@ %@", team.town, team.teamName]];
+    
+    NSString* subtext = [NSString stringWithFormat:@"GRADE %@ %@", team.grade, team.sport];
+    [self.sportLabel setText:[subtext uppercaseString]];
+    
+    [self.seasonLabel setText:[[NSString stringWithFormat:@"%@ %@",team.season, team.year] uppercaseString]];
     
     NSString* buttonText = (isFollowing) ? @"Following" : @"Follow";
     [self.followButton setTitle:buttonText

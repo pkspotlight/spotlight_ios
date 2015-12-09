@@ -17,6 +17,7 @@
 @interface CreateTeamTableViewController ()
 
 @property (strong, nonatomic) NSArray* teamPropertyArray;
+@property (strong, nonatomic) NSArray* teamPropertyDisplay;
 @property (strong, nonatomic) TeamLogoMedia* teamLogo;
 @property (strong, nonatomic) NSMutableDictionary *pendingFieldDictionary;
 @property (strong, nonatomic) UIImagePickerController* imagePickerController;
@@ -28,7 +29,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.teamPropertyArray = @[ @"teamName", @"town", @"sport", @"coach"];
+    self.teamPropertyArray = @[ @"teamName", @"town", @"sport", @"grade", @"year", @"season", @"coach"];
+    self.teamPropertyDisplay = @[ @"Team Name", @"Town", @"Sport", @"Grade", @"Year", @"Season", @"Coach"];
     self.pendingFieldDictionary = [self newPendingFieldDictionary];
     [self.addTeamLogoButton.layer setCornerRadius:self.addTeamLogoButton.bounds.size.width/2];
     [self.addTeamLogoButton.layer setBorderColor:[UIColor whiteColor].CGColor];
@@ -125,7 +127,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     FieldEntryTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"FieldEntryTableViewCell" forIndexPath:indexPath];
     [cell formatForAttributeString:self.teamPropertyArray[indexPath.row]
-                         displayText:self.teamPropertyArray[indexPath.row] withValue:@""];
+                         displayText:self.teamPropertyDisplay[indexPath.row] withValue:@""];
     [cell setDelegate:self];
     
     return cell;

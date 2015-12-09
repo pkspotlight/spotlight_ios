@@ -12,6 +12,11 @@
 
 @dynamic teamName;
 @dynamic teamLogoMedia;
+@dynamic season;
+@dynamic year;
+@dynamic town;
+@dynamic grade;
+@dynamic sport;
 
 #pragma mark - Parse Stuff
 + (void)load {

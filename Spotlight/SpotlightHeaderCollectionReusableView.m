@@ -16,12 +16,24 @@
 @property (weak, nonatomic) IBOutlet UIImageView *teamImageView;
 @property (weak, nonatomic) IBOutlet UILabel *teamNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *spotlightDateLabel;
+@property (weak, nonatomic) IBOutlet UIButton *viewMontageButton;
+@property (weak, nonatomic) IBOutlet UILabel *sportLabel;
 
 @end
 
 @implementation SpotlightHeaderCollectionReusableView
 
 - (void)formatHeaderForTeam:(Team*)team spotlight:(Spotlight*)spotlight{
+    
+    [self.teamNameLabel setText:[NSString stringWithFormat:@"%@ %@", team.town, team.teamName]];
+    
+    NSString* subtext = [NSString stringWithFormat:@"Grade %@ %@", team.grade, team.sport];
+    [self.sportLabel setText:subtext];
+
+    
+    [self.viewMontageButton.layer setBorderColor:[UIColor whiteColor].CGColor];
+    [self.viewMontageButton.layer setBorderWidth:1];
+    [self.viewMontageButton.layer setCornerRadius:5];
     
     [self.teamImageView.layer setCornerRadius:self.teamImageView.bounds.size.width/2];
     [self.teamImageView.layer setBorderColor:[UIColor whiteColor].CGColor];
@@ -33,7 +45,6 @@
                                                           dateStyle:NSDateFormatterLongStyle
                                                           timeStyle:NSDateFormatterNoStyle];
     [self.spotlightDateLabel setText:dateString];
-    [[self teamNameLabel] setText:team.teamName];
     [team.teamLogoMedia fetchIfNeeded];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:team.teamLogoMedia.thumbnailImageFile.url]];
     [self.teamImageView cancelImageRequestOperation];

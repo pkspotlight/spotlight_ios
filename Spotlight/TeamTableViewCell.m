@@ -40,7 +40,7 @@
     
     [self.teamNameLabel setText:[NSString stringWithFormat:@"%@ %@", team.town, team.teamName]];
     
-    NSString* subtext = [NSString stringWithFormat:@"GRADE %@ %@", team.grade, team.sport];
+    NSString* subtext = [NSString stringWithFormat:@"GRADE %@ - %@", team.grade, team.sport];
     [self.sportLabel setText:[subtext uppercaseString]];
     
     [self.seasonLabel setText:[[NSString stringWithFormat:@"%@ %@",team.season, team.year] uppercaseString]];

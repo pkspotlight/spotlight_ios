@@ -24,15 +24,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    if (self.team) {
-        [self loadTeamMembers];
-    }else{
-        if (!self.user) {
-            self.user = [User currentUser];
-        }
-        [self loadFriends];
-    }
     
+    UIRefreshControl* refresh = [[UIRefreshControl alloc] init];
+    [refresh addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
+    [self setRefreshControl:refresh];
+    [refresh beginRefreshing];
+    [self refresh:refresh];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -40,17 +37,36 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-- (void)loadFriends {
+- (void)refresh:(UIRefreshControl*)sender {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND,0), ^{
+        if (self.team) {
+            [self loadTeamMembers:sender];
+        }else{
+            if (!self.user) {
+                self.user = [User currentUser];
+            }
+            [self loadFriends:sender];
+        }
+    });
+}
+
+- (void)loadFriends:(UIRefreshControl*)refresh {
     
     PFQuery *query = [(PFRelation*)[self.user objectForKey:@"friends"] query];
     self.friends = [query findObjects];
-    [self.tableView reloadData];
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        [self.tableView reloadData];
+        [refresh endRefreshing];
+    }];
 }
 
-- (void)loadTeamMembers{
+- (void)loadTeamMembers:(UIRefreshControl*)refresh{
     PFQuery *query = [(PFRelation*)[self.team objectForKey:@"teamParticipants"] query];
     self.friends = [query findObjects];
-    [self.tableView reloadData];
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        [self.tableView reloadData];
+        [refresh endRefreshing];
+    }];
 }
 
 
@@ -73,7 +89,7 @@
                                   PFRelation *participantRelation = [self.user relationForKey:@"friends"];
                                   [participantRelation addObject:object];
                                   [self.user save];
-                                  [self loadFriends];
+                                  [self loadFriends:nil];
                               }else {
                                   UIAlertController* noUserAlert = [UIAlertController
                                                                     alertControllerWithTitle:@"User does not exist"

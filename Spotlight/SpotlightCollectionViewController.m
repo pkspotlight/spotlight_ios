@@ -23,6 +23,7 @@
 @property (strong, nonatomic) NSArray* mediaList;
 @property (strong, nonatomic) UIImagePickerController* imagePickerController;
 @property (assign, nonatomic) BOOL isShowingMontage;
+@property (weak, nonatomic) IBOutlet UIButton *viewSpotlightButton;
 
 @end
 
@@ -32,12 +33,23 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    refreshControl.tintColor = [UIColor grayColor];
+    [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
+    [self.collectionView addSubview:refreshControl];
+    self.collectionView.alwaysBounceVertical = YES;
+    [refreshControl beginRefreshing];
+    [self refresh:refreshControl];
+    
+    // Do any additional setup after loading the view.
+}
+
+- (void)refresh:(UIRefreshControl*)refresh {
     [self.spotlight allMedia:^(NSArray *media, NSError *error) {
         self.mediaList = media;
         [self.collectionView reloadData];
+        [refresh endRefreshing];
     }];
-    
-    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {
@@ -223,7 +235,7 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
 - (IBAction)viewMontageButtonPressed:(id)sender {
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [hud setLabelText:@"Creating Montage..."];
-    [[MontageCreator sharedCreator] createMontageWithMedia:[self.mediaList copy]completion:^{
+    [[MontageCreator sharedCreator] createMontageWithMedia:[self.mediaList copy] completion:^{
 //        self.isShowingMontage = YES;
 //        MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
 //        

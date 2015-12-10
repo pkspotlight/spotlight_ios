@@ -29,9 +29,8 @@
     [self setRefreshControl:refresh];
     if (!self.dataSource) self.dataSource = [[SpotlightDataSource alloc] init];
     [self.tableView setDataSource:self.dataSource];
-    [self.dataSource loadSpotlights:^{
-        [self.tableView reloadData];
-    }];
+    [refresh beginRefreshing];
+    [self refresh:refresh];
 }
 
 - (void)refresh:(id)sender {

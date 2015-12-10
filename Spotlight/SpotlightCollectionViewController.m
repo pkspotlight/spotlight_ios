@@ -234,7 +234,7 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
 
 - (IBAction)viewMontageButtonPressed:(id)sender {
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [hud setLabelText:@"Creating Montage..."];
+    [hud setLabelText:@"Creating Reel..."];
     [[MontageCreator sharedCreator] createMontageWithMedia:[self.mediaList copy] completion:^{
 //        self.isShowingMontage = YES;
 //        MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];

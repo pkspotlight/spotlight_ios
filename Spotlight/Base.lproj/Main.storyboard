@@ -210,7 +210,7 @@
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weston Wildcats" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7UG-Vn-rDX">
-                                    <rect key="frame" x="139" y="16" width="448" height="25"/>
+                                    <rect key="frame" x="144" y="16" width="443" height="25"/>
                                     <animations/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="42" id="OBL-Ab-88c"/>
@@ -257,7 +257,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="June 20, 2015" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ghh-fS-gLH">
-                                    <rect key="frame" x="139" y="60" width="448" height="23"/>
+                                    <rect key="frame" x="144" y="60" width="443" height="23"/>
                                     <animations/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="23" id="pDG-U2-wnt"/>
@@ -274,7 +274,7 @@
                                 <constraint firstItem="jOs-Zz-Tmp" firstAttribute="leading" secondItem="PF0-XN-vBN" secondAttribute="trailing" constant="-1" id="6fe-Xn-mnw"/>
                                 <constraint firstItem="Ghh-fS-gLH" firstAttribute="top" secondItem="7UG-Vn-rDX" secondAttribute="bottom" constant="19" id="9W5-g1-5R1"/>
                                 <constraint firstItem="jOs-Zz-Tmp" firstAttribute="leading" secondItem="PF0-XN-vBN" secondAttribute="trailing" constant="-1" id="A6k-MU-jI8"/>
-                                <constraint firstItem="Ghh-fS-gLH" firstAttribute="leading" secondItem="PF0-XN-vBN" secondAttribute="trailing" constant="3" id="GXo-y8-2gf"/>
+                                <constraint firstItem="Ghh-fS-gLH" firstAttribute="leading" secondItem="PF0-XN-vBN" secondAttribute="trailing" constant="8" id="GXo-y8-2gf"/>
                                 <constraint firstItem="7UG-Vn-rDX" firstAttribute="trailing" secondItem="R0v-np-qOv" secondAttribute="trailingMargin" constant="-5" id="IpP-BK-TUy"/>
                                 <constraint firstItem="PF0-XN-vBN" firstAttribute="top" secondItem="R0v-np-qOv" secondAttribute="topMargin" id="JS4-rq-LLV"/>
                                 <constraint firstItem="PF0-XN-vBN" firstAttribute="bottom" secondItem="R0v-np-qOv" secondAttribute="bottomMargin" id="JWG-py-ApR"/>
@@ -284,7 +284,7 @@
                                 <constraint firstItem="mvY-Pf-Phr" firstAttribute="top" secondItem="R0v-np-qOv" secondAttribute="topMargin" constant="29" id="c6c-Wx-LBz"/>
                                 <constraint firstItem="jOs-Zz-Tmp" firstAttribute="bottom" secondItem="R0v-np-qOv" secondAttribute="bottomMargin" id="hmO-Oy-7Bl"/>
                                 <constraint firstItem="7UG-Vn-rDX" firstAttribute="top" secondItem="R0v-np-qOv" secondAttribute="topMargin" constant="8" id="jcW-Ji-Nj9"/>
-                                <constraint firstItem="7UG-Vn-rDX" firstAttribute="leading" secondItem="PF0-XN-vBN" secondAttribute="trailing" constant="3" id="o1u-rt-Yxk"/>
+                                <constraint firstItem="7UG-Vn-rDX" firstAttribute="leading" secondItem="PF0-XN-vBN" secondAttribute="trailing" constant="8" id="o1u-rt-Yxk"/>
                                 <constraint firstItem="mvY-Pf-Phr" firstAttribute="leading" secondItem="PF0-XN-vBN" secondAttribute="trailing" constant="8" id="tpW-AN-vp4"/>
                             </constraints>
                             <connections>

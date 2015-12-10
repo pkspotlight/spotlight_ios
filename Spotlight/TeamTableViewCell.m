@@ -45,7 +45,7 @@
     
     [self.seasonLabel setText:[[NSString stringWithFormat:@"%@ %@",team.season, team.year] uppercaseString]];
     
-    NSString* buttonText = (isFollowing) ? @"Following" : @"Follow";
+    NSString* buttonText = (isFollowing) ? @"Unfollow" : @"Follow";
     [self.followButton setTitle:buttonText
                        forState:UIControlStateNormal];
     _team = team;

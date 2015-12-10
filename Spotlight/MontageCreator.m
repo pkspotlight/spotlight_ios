@@ -70,6 +70,19 @@
         self.videoSettings = [self videoSettingsWithCodec:AVVideoCodecH264
                                                 withWidth:1280
                                                 andHeight:720];
+        NSFileManager *Tmanager = [NSFileManager defaultManager];
+        NSArray *Tpaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        
+        NSString *TdocumentsDirectory = [Tpaths objectAtIndex:0];
+        NSString *TmyPathDocs =  [TdocumentsDirectory stringByAppendingPathComponent:
+                                 [NSString stringWithFormat:@"montage.mov"]];
+        
+        if ([Tmanager fileExistsAtPath:TmyPathDocs]) {
+            completion();
+            return;
+        }
+
+        
         AVMutableComposition *mixComposition = [[AVMutableComposition alloc] init];
         AVMutableCompositionTrack *track = [mixComposition
                                             addMutableTrackWithMediaType:AVMediaTypeVideo

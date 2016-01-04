@@ -67,21 +67,25 @@
 - (void)createMontageWithMedia:(NSArray*)mediaArray completion:(void (^ __nullable)(void))completion{
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND,0), ^{
+        
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        NSString *myPathDocs =  [documentsDirectory stringByAppendingPathComponent:
+                                 [NSString stringWithFormat:@"montage.mov"]];
+        
+        NSFileManager *manager = [NSFileManager defaultManager];
+
+//        if ([manager fileExistsAtPath:myPathDocs]) {
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//               // [self exportDidFinish:exporter];
+//                completion();
+//            });
+//            return;
+//        }
+        
         self.videoSettings = [self videoSettingsWithCodec:AVVideoCodecH264
                                                 withWidth:1280
                                                 andHeight:720];
-        NSFileManager *Tmanager = [NSFileManager defaultManager];
-        NSArray *Tpaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        
-        NSString *TdocumentsDirectory = [Tpaths objectAtIndex:0];
-        NSString *TmyPathDocs =  [TdocumentsDirectory stringByAppendingPathComponent:
-                                 [NSString stringWithFormat:@"montage.mov"]];
-        
-        if ([Tmanager fileExistsAtPath:TmyPathDocs]) {
-            completion();
-            return;
-        }
-
         
         AVMutableComposition *mixComposition = [[AVMutableComposition alloc] init];
         AVMutableCompositionTrack *track = [mixComposition
@@ -90,15 +94,20 @@
         CMTime totalDuration = kCMTimeZero;
         NSError* error;
         for (SpotlightMedia *media in mediaArray) {
-            [media fetchIfNeeded];
+            [media fetch];
             if (media.isVideo) {
+                [media fetch];
                 AVURLAsset *asset = [AVURLAsset URLAssetWithURL:[NSURL URLWithString:media.mediaFile.url]
                                                         options:nil];
+                if (asset && [[asset tracksWithMediaType:AVMediaTypeVideo] count] > 0 ) {
                 [track insertTimeRange:CMTimeRangeMake(kCMTimeZero, asset.duration)
                                ofTrack:[[asset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0]
                                 atTime:totalDuration
                                  error:&error];
                 totalDuration = CMTimeAdd(totalDuration, asset.duration);
+                } else {
+                    continue;
+                }
             } else {
                 
                 NSString *fileName = [NSString stringWithFormat:@"%@_%@", [[NSProcessInfo processInfo] globallyUniqueString], @"image.mov"];
@@ -138,19 +147,21 @@
                                                                             preferredTrackID:kCMPersistentTrackID_Invalid];
         [audioTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, totalDuration)
                             ofTrack:[[audioAsset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0] atTime:kCMTimeZero error:nil];
-        
-        
-        
-        NSLog(@"starting export");
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *documentsDirectory = [paths objectAtIndex:0];
-        NSString *myPathDocs =  [documentsDirectory stringByAppendingPathComponent:
-                                 [NSString stringWithFormat:@"montage.mov"]];
-        
-        NSFileManager *manager = [NSFileManager defaultManager];
         [manager removeItemAtPath:myPathDocs error:nil];
         
         NSURL *url = [NSURL fileURLWithPath:myPathDocs];
+        
+        
+//        NSLog(@"starting export");
+//        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//        NSString *documentsDirectory = [paths objectAtIndex:0];
+//        NSString *myPathDocs =  [documentsDirectory stringByAppendingPathComponent:
+//                                 [NSString stringWithFormat:@"montage.mov"]];
+//        
+//        NSFileManager *manager = [NSFileManager defaultManager];
+//        [manager removeItemAtPath:myPathDocs error:nil];
+//        
+//        NSURL *url = [NSURL fileURLWithPath:myPathDocs];
         
         AVAssetExportSession *exporter = [[AVAssetExportSession alloc]
                                           initWithAsset:mixComposition

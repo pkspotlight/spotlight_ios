@@ -18,6 +18,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *teamImageView;
 @property (weak, nonatomic) IBOutlet UILabel *seasonLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sportLabel;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *followingActivityIndicator;
+@property (assign, nonatomic) BOOL isFollowing;
 
 @end
 
@@ -34,7 +36,7 @@
 }
 
 - (void)formatForTeam:(Team*)team isFollowing:(BOOL)isFollowing {
-    
+    _isFollowing = isFollowing;
     [self.teamImageView.layer setCornerRadius:self.teamImageView.bounds.size.width/2];
     [self.teamImageView setClipsToBounds:YES];
     
@@ -44,10 +46,7 @@
     [self.sportLabel setText:[subtext uppercaseString]];
     
     [self.seasonLabel setText:[[NSString stringWithFormat:@"%@ %@",team.season, team.year] uppercaseString]];
-    
-    NSString* buttonText = (isFollowing) ? @"Unfollow" : @"Follow";
-    [self.followButton setTitle:buttonText
-                       forState:UIControlStateNormal];
+    [self formatButtonText];
     _team = team;
     
     [self.teamImageView cancelImageRequestOperation];
@@ -62,13 +61,28 @@
      }];
 }
 
+- (void)formatButtonText {
+    NSString* buttonText = (_isFollowing) ? @"Following" : @"Follow";
+    [self.followButton setTitle:buttonText
+                       forState:UIControlStateNormal];
+}
+
 - (IBAction)followButtonPressed:(id)sender {
+    [self.followingActivityIndicator startAnimating];
     PFUser* user = [PFUser currentUser];
     PFRelation *participantRelation = [self.team relationForKey:@"teamParticipants"];
-    [participantRelation addObject:user];
+    if (_isFollowing) {
+        [participantRelation removeObject:user];
+    } else {
+        [participantRelation addObject:user];
+    }
     [self.team saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-        [self.followButton setTitle:@"Following"
-                           forState:UIControlStateNormal];
+        if (succeeded) {
+            self.isFollowing = !self.isFollowing;
+        }
+        [self formatButtonText];
+        [self.followingActivityIndicator stopAnimating];
+        [self.delegate performSelector:@selector(reloadTable)];
     }];
 }
 

@@ -12,6 +12,8 @@
 
 @interface TeamsTableViewController : UITableViewController
 
+- (void)reloadTable;
+
 @property (strong, nonatomic) User* user;
 @property (assign, nonatomic) BOOL isCurrentUser;
 

@@ -114,6 +114,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     
     TeamTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TeamTableViewCell" forIndexPath:indexPath];
     Team* team = (indexPath.section == 0) ? self.myTeams[indexPath.row] : self.allTeams[indexPath.row];
+    [cell setDelegate:self];
     [cell formatForTeam:team isFollowing:(indexPath.section == 0)];
     return cell;
 }
@@ -135,6 +136,9 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     return 0;
 }
 
+- (void)reloadTable {
+    [self refresh:nil];
+}
 
 #pragma mark - Navigation
 

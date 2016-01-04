@@ -15,6 +15,6 @@
 - (void)formatForTeam:(Team*)team isFollowing:(BOOL)isFollowing;
 
 @property (readonly, nonatomic) Team* team;
-
+@property (weak, nonatomic) id delegate;
 
 @end

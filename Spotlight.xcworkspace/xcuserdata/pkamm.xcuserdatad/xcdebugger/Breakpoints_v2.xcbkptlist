@@ -114,11 +114,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Spotlight/MontageCreator.m"
-            timestampString = "471422292.965908"
+            timestampString = "472422228.657253"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "155"
-            endingLineNumber = "155"
+            startingLineNumber = "178"
+            endingLineNumber = "178"
             landmarkName = "-createMontageWithMedia:completion:"
             landmarkType = "5">
          </BreakpointContent>
@@ -130,28 +130,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Spotlight/MontageCreator.m"
-            timestampString = "471422292.965908"
+            timestampString = "472422228.657253"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "163"
-            endingLineNumber = "163"
-            landmarkName = "-createMontageWithMedia:completion:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Spotlight/FriendTableViewCell.m"
-            timestampString = "471330410.862995"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
-            landmarkName = "-followButtonPressed:"
+            startingLineNumber = "186"
+            endingLineNumber = "186"
+            landmarkName = "-createMovieFromImage:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -167,22 +151,6 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "53"
             endingLineNumber = "53"
-            landmarkName = "-formatForUser:isFollowing:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Spotlight/FriendTableViewCell.m"
-            timestampString = "471330410.862995"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "31"
-            endingLineNumber = "31"
             landmarkName = "-formatForUser:isFollowing:"
             landmarkType = "5">
          </BreakpointContent>
@@ -225,13 +193,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Spotlight/MontageCreator.m"
-            timestampString = "471422468.929827"
+            filePath = "Spotlight/TeamTableViewCell.m"
+            timestampString = "473636319.578458"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
-            landmarkName = "-createMontageWithMedia:completion:"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "-formatForTeam:isFollowing:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

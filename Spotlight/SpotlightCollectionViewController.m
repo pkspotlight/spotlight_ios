@@ -24,6 +24,7 @@
 @property (strong, nonatomic) UIImagePickerController* imagePickerController;
 @property (assign, nonatomic) BOOL isShowingMontage;
 @property (weak, nonatomic) IBOutlet UIButton *viewSpotlightButton;
+@property (strong, nonatomic) MWPhotoBrowser *browser;
 
 @end
 
@@ -117,23 +118,33 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
     
     // Create browser (must be done each time photo browser is
     // displayed. Photo browser objects cannot be re-used)
-    MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
+    self.browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
     
     // Set options
-    browser.displayActionButton = YES; // Show action button to allow sharing, copying, etc (defaults to YES)
-    browser.displayNavArrows = NO; // Whether to display left and right nav arrows on toolbar (defaults to NO)
-    browser.displaySelectionButtons = NO; // Whether selection buttons are shown on each image (defaults to NO)
-    browser.zoomPhotosToFill = YES; // Images that almost fill the screen will be initially zoomed to fill (defaults to YES)
-    browser.alwaysShowControls = NO; // Allows to control whether the bars and controls are always visible or whether they fade away to show the photo full (defaults to NO)
-    browser.enableGrid = YES; // Whether to allow the viewing of all the photo thumbnails on a grid (defaults to YES)
-    browser.startOnGrid = NO; // Whether to start on the grid of thumbnails instead of the first photo (defaults to NO)
-    browser.autoPlayOnAppear = YES; // Auto-play first video
+    self.browser.displayActionButton = YES; // Show action button to allow sharing, copying, etc (defaults to YES)
+    self.browser.displayNavArrows = NO; // Whether to display left and right nav arrows on toolbar (defaults to NO)
+    self.browser.displaySelectionButtons = YES; // Whether selection buttons are shown on each image (defaults to NO)
+    self.browser.zoomPhotosToFill = YES; // Images that almost fill the screen will be initially zoomed to fill (defaults to YES)
+    self.browser.alwaysShowControls = NO; // Allows to control whether the bars and controls are always visible or whether they fade away to show the photo full (defaults to NO)
+    self.browser.enableGrid = YES; // Whether to allow the viewing of all the photo thumbnails on a grid (defaults to YES)
+    self.browser.startOnGrid = NO; // Whether to start on the grid of thumbnails instead of the first photo (defaults to NO)
+    self.browser.autoPlayOnAppear = YES; // Auto-play first video
     
     // Optionally set the current visible photo before displaying
-    [browser setCurrentPhotoIndex:indexPath.row];
+    [self.browser setCurrentPhotoIndex:indexPath.row];
     
     // Present
-    [self.navigationController pushViewController:browser animated:YES];
+    [self.navigationController pushViewController:self.browser animated:YES];
+}
+
+-(void)photoBrowser:(MWPhotoBrowser *)photoBrowser deletePhotoAtIndex:(NSUInteger)index {
+    
+    [self.navigationController popViewControllerAnimated:YES];
+    
+    SpotlightMedia *media = self.mediaList[index];
+    [media deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        [self refresh:nil];
+    }];
 }
 
 - (IBAction)addMediaButtonPressed:(id)sender {
@@ -211,9 +222,7 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
         if (error) {
             NSLog(@"fuck: %@", [error localizedDescription]);
         } else {
-            
             [self.spotlight allMedia:^(NSArray *media, NSError *error) {
-                
                 self.mediaList = media;
                 [self.collectionView reloadData];
                 [hud hide:YES];

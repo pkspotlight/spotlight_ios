@@ -45,17 +45,18 @@
                                                           dateStyle:NSDateFormatterLongStyle
                                                           timeStyle:NSDateFormatterNoStyle];
     [self.spotlightDateLabel setText:dateString];
-    [team.teamLogoMedia fetchIfNeeded];
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:team.teamLogoMedia.thumbnailImageFile.url]];
-    [self.teamImageView cancelImageRequestOperation];
-    [[self teamImageView]
-     setImageWithURLRequest:request
-     placeholderImage:nil
-     success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, UIImage * _Nonnull image) {
-         [[self teamImageView] setImage:image];
-     } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, NSError * _Nonnull error) {
-         NSLog(@"fuck thumbnail failure");
-     }];
+    [team.teamLogoMedia fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:team.teamLogoMedia.thumbnailImageFile.url]];
+        [self.teamImageView cancelImageRequestOperation];
+        [[self teamImageView]
+         setImageWithURLRequest:request
+         placeholderImage:nil
+         success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, UIImage * _Nonnull image) {
+             [[self teamImageView] setImage:image];
+         } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, NSError * _Nonnull error) {
+             NSLog(@"fuck thumbnail failure");
+         }];
+    }];
 }
 
 - (IBAction)viewMontageButtonPressed:(id)sender {

@@ -11,7 +11,7 @@
 @class User;
 @class Team;
 
-@interface FriendsTableViewController : UITableViewController
+@interface FriendsTableViewController : UITableViewController <UISearchBarDelegate>
 
 @property (strong, nonatomic) User* user;
 @property (strong, nonatomic) Team* team;

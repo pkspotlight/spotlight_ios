@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *userDisplayNameLabel;
 @property (weak, nonatomic) IBOutlet UIButton *followButton;
 @property (weak, nonatomic) IBOutlet UIImageView *userImageView;
+@property (assign, nonatomic) BOOL isFollowing;
 
 @end
 
@@ -56,14 +57,27 @@
      }];
 }
 
+- (void)formatButtonText {
+    NSString* buttonText = (_isFollowing) ? @"Following" : @"Follow";
+    [self.followButton setTitle:buttonText
+                       forState:UIControlStateNormal];
+}
+
 - (IBAction)followButtonPressed:(id)sender {
-//    PFUser* user = [PFUser currentUser];
-//    PFRelation *participantRelation = [self.team relationForKey:@"teamParticipants"];
-//    [participantRelation addObject:user];
-//    [self.team saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-//        [self.followButton setTitle:@"Following"
-//                           forState:UIControlStateNormal];
-//    }];
+//    [self.followingActivityIndicator startAnimating];
+    
+    PFRelation *friendRelation = [[User currentUser] relationForKey:@"friends"];
+    _isFollowing ? [friendRelation removeObject:self.user] :
+                   [friendRelation addObject:self.user];
+
+    [[User currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (succeeded) {
+            self.isFollowing = !self.isFollowing;
+        }
+        [self formatButtonText];
+//        [self.followingActivityIndicator stopAnimating];
+//        [self.delegate performSelector:@selector(reloadTable)];
+    }];
 }
 
 

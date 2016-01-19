@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SignUpInputTableViewCell.h"
+#import "FieldEntryTableViewCell.h"
 
-@interface SignUpTableViewController : UITableViewController <SignupInputTextFieldDelegate>
+@interface SignUpTableViewController : UITableViewController <FieldEntryTextFieldCellDelegate>
+
+@property (assign, nonatomic) BOOL isLoginScreen;
 
 @end

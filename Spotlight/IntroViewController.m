@@ -7,6 +7,7 @@
 //
 
 #import "IntroViewController.h"
+#import "SignUpTableViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface IntroViewController ()
@@ -23,7 +24,6 @@
 
     [self.signupButton.layer setCornerRadius:7];
     [self.loginButton.layer setCornerRadius:7];
-
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,14 +36,17 @@
         [[self navigationController] setNavigationBarHidden:YES animated:YES];
 }
 
-/*
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if([segue.identifier isEqualToString:@"LoginSegueIdentifier"]) {
+        [(SignUpTableViewController*)[segue destinationViewController] setIsLoginScreen:YES];
+    } else {
+        [(SignUpTableViewController*)[segue destinationViewController] setIsLoginScreen:NO];
+    }
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
-*/
 
 @end

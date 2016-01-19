@@ -30,8 +30,22 @@
     [self.valueTextField setText:fieldValue];
 }
 
-- (IBAction)textFieldTextDidChange:(UITextField *)sender {
-    [self.delegate accountTextFieldCell:self didChangeToValue:sender.text];
+- (void)setKeyboardType:(UIKeyboardType)keyboardType {
+    [self.valueTextField setKeyboardType:keyboardType];
+}
+
+- (void)setIsSecure:(BOOL)isSecure {
+    [self.valueTextField setSecureTextEntry:isSecure];
+}
+
+- (IBAction)textFieldTextDidChange:(UITextField *)textField {
+    [self.delegate accountTextFieldCell:self didChangeToValue:textField.text];
+}
+
+
+-(BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    [self.delegate accountTextFieldCell:self didChangeToValue:textField.text];
+    return YES;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

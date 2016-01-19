@@ -25,7 +25,8 @@
 - (void)formatForAttributeString:(NSString*)attributeString
                      displayText:(NSString*)displayText
                        withValue:(NSString*)fieldValue;
-
+- (void)setKeyboardType:(UIKeyboardType)keyboardType;
+- (void)setIsSecure:(BOOL)isSecure;
 @property (readonly, nonatomic) NSString *attributeString;
 
 

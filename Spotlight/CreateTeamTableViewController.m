@@ -127,9 +127,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     FieldEntryTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"FieldEntryTableViewCell" forIndexPath:indexPath];
     [cell formatForAttributeString:self.teamPropertyArray[indexPath.row]
-                         displayText:self.teamPropertyDisplay[indexPath.row] withValue:@""];
+                         displayText:self.teamPropertyDisplay[indexPath.row]
+                         withValue:@""];
     [cell setDelegate:self];
-    
     return cell;
 }
 

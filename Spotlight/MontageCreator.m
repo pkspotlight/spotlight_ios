@@ -75,13 +75,13 @@
         
         NSFileManager *manager = [NSFileManager defaultManager];
 
-//        if ([manager fileExistsAtPath:myPathDocs]) {
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//               // [self exportDidFinish:exporter];
-//                completion();
-//            });
-//            return;
-//        }
+        if ([manager fileExistsAtPath:myPathDocs]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+               // [self exportDidFinish:exporter];
+                completion();
+            });
+            return;
+        }
         
         self.videoSettings = [self videoSettingsWithCodec:AVVideoCodecH264
                                                 withWidth:1280

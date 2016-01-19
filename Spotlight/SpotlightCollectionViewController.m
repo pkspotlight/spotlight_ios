@@ -123,7 +123,7 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
     // Set options
     self.browser.displayActionButton = YES; // Show action button to allow sharing, copying, etc (defaults to YES)
     self.browser.displayNavArrows = NO; // Whether to display left and right nav arrows on toolbar (defaults to NO)
-    self.browser.displaySelectionButtons = YES; // Whether selection buttons are shown on each image (defaults to NO)
+    self.browser.displaySelectionButtons = NO; // Whether selection buttons are shown on each image (defaults to NO)
     self.browser.zoomPhotosToFill = YES; // Images that almost fill the screen will be initially zoomed to fill (defaults to YES)
     self.browser.alwaysShowControls = NO; // Allows to control whether the bars and controls are always visible or whether they fade away to show the photo full (defaults to NO)
     self.browser.enableGrid = YES; // Whether to allow the viewing of all the photo thumbnails on a grid (defaults to YES)
@@ -140,7 +140,6 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
 -(void)photoBrowser:(MWPhotoBrowser *)photoBrowser deletePhotoAtIndex:(NSUInteger)index {
     
     [self.navigationController popViewControllerAnimated:YES];
-    
     SpotlightMedia *media = self.mediaList[index];
     [media deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         [self refresh:nil];

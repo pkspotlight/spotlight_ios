@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AVFoundation/AVFoundation.h>
 
 @interface MontageCreator : NSObject
 
 + (MontageCreator *)sharedCreator;
 
-- (void)createMontageWithMedia:(NSArray*)mediaArray completion:(void (^ __nullable)(void))completion;
-
+- (void)createMontageWithMedia:(NSArray*)mediaArray completion:(void (^)(AVPlayerItem* item))completion;
 @end

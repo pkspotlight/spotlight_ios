@@ -430,7 +430,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IsX-JN-Mbi">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IsX-JN-Mbi">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="248"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unknown_user.png" translatesAutoresizingMaskIntoConstraints="NO" id="dcO-BH-zJz">
@@ -475,13 +475,13 @@
                                     <constraint firstAttribute="bottom" secondItem="aRt-nH-S3E" secondAttribute="bottom" constant="11" id="xZW-Fk-D7f"/>
                                 </constraints>
                             </view>
-                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GQq-CA-1SY">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GQq-CA-1SY">
                                 <rect key="frame" x="0.0" y="248" width="600" height="352"/>
                                 <connections>
                                     <segue destination="mfN-W3-7S4" kind="embed" identifier="friendTeamsEmbedSegue" id="oT6-GV-6Bb"/>
                                 </connections>
                             </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rL5-qc-i6g">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rL5-qc-i6g">
                                 <rect key="frame" x="0.0" y="248" width="600" height="352"/>
                                 <connections>
                                     <segue destination="8hb-z5-ol4" kind="embed" identifier="EmbedSpotlightSegue" id="MtQ-jd-zmN"/>

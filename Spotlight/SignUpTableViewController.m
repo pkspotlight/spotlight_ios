@@ -115,13 +115,10 @@
     }
 }
 - (IBAction)LogInButtonPressed:(id)sender {
-    NSLog(@"%@, %@", self.pendingInputDict[@"email"], self.pendingInputDict[@"password"]);
     if (self.pendingInputDict[@"username"] &&
         [self.pendingInputDict[@"username"] length] > 4 &&
         self.pendingInputDict[@"password"] &&
         [self.pendingInputDict[@"password"] length] > 4) {
-        NSLog(@"still!!! dict is %@", self.pendingInputDict);
-
         [User logInWithUsernameInBackground:self.pendingInputDict[@"username"]
                                      password:self.pendingInputDict[@"password"]
                                         block:^(PFUser *user, NSError *error) {
@@ -149,7 +146,6 @@
 #pragma mark - Delegate Methods
 
 - (void)accountTextFieldCell:(FieldEntryTableViewCell *)cell didChangeToValue:(NSString *)text {
-    NSLog(@"text is %@ dict is %@",text, self.pendingInputDict);
     self.pendingInputDict[cell.attributeString] = text;
 }
 

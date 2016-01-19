@@ -9,7 +9,6 @@
 #import "MontageCreator.h"
 #import "SpotlightMedia.h"
 
-#import <AVFoundation/AVFoundation.h>
 #import <CoreMedia/CoreMedia.h>
 #import <MobileCoreServices/UTCoreTypes.h>
 #import <AssetsLibrary/AssetsLibrary.h>
@@ -64,7 +63,9 @@
     _frameTime = CMTimeMake(1, 1);
 }
 
-- (void)createMontageWithMedia:(NSArray*)mediaArray completion:(void (^ __nullable)(void))completion{
+- (void)createMontageWithMedia:(NSArray*)mediaArray completion:(void (^)(AVPlayerItem* item))completion{
+//    - (void)createMontageWithMedia:(NSArray*)mediaArray completion:(void (^ __nullable)(void))completion{
+
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND,0), ^{
         
@@ -75,13 +76,14 @@
         
         NSFileManager *manager = [NSFileManager defaultManager];
 
-        if ([manager fileExistsAtPath:myPathDocs]) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-               // [self exportDidFinish:exporter];
-                completion();
-            });
-            return;
-        }
+        //quickness hack
+//        if ([manager fileExistsAtPath:myPathDocs]) {
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//               // [self exportDidFinish:exporter];
+//                completion();
+//            });
+//            return;
+//        }
         
         self.videoSettings = [self videoSettingsWithCodec:AVVideoCodecH264
                                                 withWidth:1280
@@ -94,9 +96,13 @@
         CMTime totalDuration = kCMTimeZero;
         NSError* error;
         for (SpotlightMedia *media in mediaArray) {
-            [media fetch];
+            
+            NSLog(@"downloading...");
+            [media fetchIfNeeded];
+            NSLog(@"done");
             if (media.isVideo) {
-                [media fetch];
+                NSLog(@"attempt...");
+
                 AVURLAsset *asset = [AVURLAsset URLAssetWithURL:[NSURL URLWithString:media.mediaFile.url]
                                                         options:nil];
                 if (asset && [[asset tracksWithMediaType:AVMediaTypeVideo] count] > 0 ) {
@@ -105,6 +111,8 @@
                                 atTime:totalDuration
                                  error:&error];
                 totalDuration = CMTimeAdd(totalDuration, asset.duration);
+                    NSLog(@"woo...");
+
                 } else {
                     continue;
                 }
@@ -148,33 +156,49 @@
         [audioTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, totalDuration)
                             ofTrack:[[audioAsset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0] atTime:kCMTimeZero error:nil];
         [manager removeItemAtPath:myPathDocs error:nil];
+        NSLog(@"1");
+
         
-        NSURL *url = [NSURL fileURLWithPath:myPathDocs];
+        NSMutableArray* instructions = [NSMutableArray array];
         
+        AVMutableVideoCompositionInstruction *videoCompositionInstruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
+        videoCompositionInstruction.timeRange = CMTimeRangeMake(kCMTimeZero, totalDuration);
+        videoCompositionInstruction.layerInstructions = @[[AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:track]];
+        [instructions addObject:videoCompositionInstruction];
         
-//        NSLog(@"starting export");
-//        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//        NSString *documentsDirectory = [paths objectAtIndex:0];
-//        NSString *myPathDocs =  [documentsDirectory stringByAppendingPathComponent:
-//                                 [NSString stringWithFormat:@"montage.mov"]];
-//        
-//        NSFileManager *manager = [NSFileManager defaultManager];
-//        [manager removeItemAtPath:myPathDocs error:nil];
-//        
-//        NSURL *url = [NSURL fileURLWithPath:myPathDocs];
+        AVMutableVideoComposition *mutableVideoComposition = [AVMutableVideoComposition videoComposition];
+        mutableVideoComposition.instructions = instructions;
+        mutableVideoComposition.frameDuration = CMTimeMake(1, 30);
+        mutableVideoComposition.renderSize = CGSizeMake(1280, 720);
         
-        AVAssetExportSession *exporter = [[AVAssetExportSession alloc]
-                                          initWithAsset:mixComposition
-                                          presetName:AVAssetExportPresetPassthrough];
-        exporter.outputURL = url;
-        exporter.outputFileType = AVFileTypeQuickTimeMovie;
-        exporter.shouldOptimizeForNetworkUse = YES;
-        [exporter exportAsynchronouslyWithCompletionHandler:^{
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self exportDidFinish:exporter];
-                completion();
-            });
-        }];
+        AVPlayerItem *pi = [AVPlayerItem playerItemWithAsset:mixComposition];
+        pi.videoComposition = mutableVideoComposition;
+
+        
+                dispatch_async(dispatch_get_main_queue(), ^{
+
+        completion(pi);
+                });
+
+        
+        //all needed
+//        AVAssetExportSession *exporter = [[AVAssetExportSession alloc]
+//                                          initWithAsset:mixComposition
+//                                          presetName:AVMediaTypeVideo];
+//        exporter.outputURL = url;
+//        exporter.outputFileType = AVFileTypeMPEG4;
+//        exporter.shouldOptimizeForNetworkUse = YES;
+//        NSLog(@"2");
+//
+//        [exporter exportAsynchronouslyWithCompletionHandler:^{
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                NSLog(@"3");
+//                [self exportDidFinish:exporter];
+//                completion();
+//                NSLog(@"1");
+//
+//            });
+//        }];
     });
 }
 

@@ -13,13 +13,13 @@
 #import "BasicHeaderView.h"
 #import "Parse.h"
 #import "User.h"
+#import "Child.h"
 
 static CGFloat const BasicHeaderHeight = 50;
 
 @interface TeamsTableViewController ()
 
-@property (strong, nonatomic) NSArray *allTeams;
-@property (strong, nonatomic) NSArray *myTeams;
+@property (strong, nonatomic) NSArray *teams;
 
 @end
 
@@ -35,36 +35,32 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
       forControlEvents:UIControlEventValueChanged];
     [self setRefreshControl:refresh];
     
-    self.allTeams = [NSArray array];
-    self.myTeams = [NSArray array];
-    if (self.user) {
-        self.isCurrentUser = NO;
-    } else {
+    self.teams = [NSArray array];
+    if (!self.child && !self.user) {
         self.user = [User currentUser];
-        self.isCurrentUser = YES;
-        [self loadTeams:nil];
     }
-    [self loadMyTeams:nil];
+    [self refresh:refresh];
 }
 
 - (void)refresh:(id)sender {
-    [self loadMyTeams:(UIRefreshControl*)sender];
-    [self loadTeams:(UIRefreshControl*)sender];
+    if (self.child){
+        [self loadChildTeams:sender];
+    } else {
+        [self loadUserTeams:sender];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-- (void)loadTeams:(UIRefreshControl*)sender {
-    PFQuery *query = [PFQuery queryWithClassName:@"Team"];
+- (void)loadUserTeams:(UIRefreshControl*)sender  {
+    PFQuery *query = [[self.user teams] query];
     [query includeKey:@"teamLogoMedia"];
-    [query whereKey:@"teamParticipants" notEqualTo:self.user.objectId];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
-            NSLog(@"Successfully retrieved all %lu Teams.", (unsigned long)objects.count);
-            self.allTeams = objects;
+            NSLog(@"Successfully retrieved my %lu Teams.", (unsigned long)objects.count);
+            self.teams = objects;
             [self.tableView reloadData];
             [sender endRefreshing];
         } else {
@@ -72,17 +68,15 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
             [sender endRefreshing];
         }
     }];
-
 }
 
-- (void)loadMyTeams:(UIRefreshControl*)sender  {
-    PFQuery *query = [PFQuery queryWithClassName:@"Team"];
+- (void)loadChildTeams:(UIRefreshControl*)sender {
+    PFQuery *query = [self.child.teams query];
     [query includeKey:@"teamLogoMedia"];
-    [query whereKey:@"teamParticipants" equalTo:self.user.objectId];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             NSLog(@"Successfully retrieved my %lu Teams.", (unsigned long)objects.count);
-            self.myTeams = objects;
+            self.teams = objects;
             [self.tableView reloadData];
             [sender endRefreshing];
         } else {
@@ -95,63 +89,85 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    if (self.isCurrentUser) {
-        return 2;
-    } else {
-        return 1;
-    }
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) {
-        return self.myTeams.count;
-    }else{
-        return self.allTeams.count;
-    }
+    return self.teams.count;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     TeamTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TeamTableViewCell" forIndexPath:indexPath];
-    Team* team = (indexPath.section == 0) ? self.myTeams[indexPath.row] : self.allTeams[indexPath.row];
+    Team* team = self.teams[indexPath.row];
     [cell setDelegate:self];
     [cell formatForTeam:team isFollowing:(indexPath.section == 0)];
     return cell;
 }
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if (self.isCurrentUser) {
-        BasicHeaderView *cell = [self.tableView dequeueReusableHeaderFooterViewWithIdentifier:@"BasicHeaderView"];
-        cell.headerTitleLabel.text = (section == 0) ? @"My Teams" : @"Add Teams";
-        return cell;
-    } else {
-        return nil;
-    }
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (self.isCurrentUser) {
-        return BasicHeaderHeight;
-    }
-    return 0;
-}
+//
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+//    if (self.isCurrentUser) {
+//        BasicHeaderView *cell = [self.tableView dequeueReusableHeaderFooterViewWithIdentifier:@"BasicHeaderView"];
+//        cell.headerTitleLabel.text = (section == 0) ? @"My Teams" : @"Add Teams";
+//        return cell;
+//    } else {
+//        return nil;
+//    }
+//}
+//
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+//    if (self.isCurrentUser) {
+//        return BasicHeaderHeight;
+//    }
+//    return 0;
+//}
 
 - (void)reloadTable {
     [self refresh:nil];
 }
 
+
+- (IBAction)addTeamButtonPressed:(id)sender {
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Add a New Team"
+                                                                   message:@""
+                                                            preferredStyle:UIAlertControllerStyleActionSheet];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Search Teams"
+                                              style:UIAlertActionStyleDefault
+                                            handler:^(UIAlertAction * _Nonnull action) {
+                                                [self performSegueWithIdentifier:@"SearchTeamsSegue"
+                                                                          sender:sender];
+                                            }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Add New Team"
+                                              style:UIAlertActionStyleDefault
+                                            handler:^(UIAlertAction * _Nonnull action) {
+                                                [self performSegueWithIdentifier:@"CreateTeamSegue"
+                                                                          sender:sender];
+                                            }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Cancel"
+                                              style:UIAlertActionStyleCancel
+                                            handler:^(UIAlertAction * _Nonnull action) {
+                                                
+                                            }]];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
 #pragma mark - Navigation
 
+- (IBAction)unwindAddTeams:(UIStoryboardSegue*)sender {
+    [self refresh:nil];
+}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     NSIndexPath *path = [self.tableView indexPathForCell:sender];
-
     if ([segue.identifier isEqualToString:@"teamDetailsSegue"]) {
-        Team* team = (path.section == 0) ? self.myTeams[path.row] : self.allTeams[path.row];
+        Team* team = self.teams[path.row];
         [(TeamDetailsViewController*)[segue destinationViewController] setTeam:team];
+    } else if ([segue.identifier isEqualToString:@"SearchTeamsSegue"]) {
+    } else if ([segue.identifier isEqualToString:@"CreateTeamSegue"]) {
     }
 }
+
+# pragma  mark - Delegate Methods
 
 
 @end

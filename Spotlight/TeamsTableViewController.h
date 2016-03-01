@@ -9,12 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @class User;
+@class Child;
 
 @interface TeamsTableViewController : UITableViewController
 
 - (void)reloadTable;
 
 @property (strong, nonatomic) User* user;
-@property (assign, nonatomic) BOOL isCurrentUser;
+@property (strong, nonatomic) Child* child;
 
 @end

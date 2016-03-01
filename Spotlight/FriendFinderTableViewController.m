@@ -74,7 +74,6 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 }
 
 
-
 #pragma mark - SearchBar Delegate Methods
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
@@ -141,9 +140,10 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
-    [(FriendProfileViewController*)[segue destinationViewController] setUser:self.searchResults[[self.tableView indexPathForCell:sender].row]];
-
+    if ([segue.identifier isEqualToString:@"ViewFriendProfileSegue"]) {
+        [(FriendProfileViewController*)[segue destinationViewController]
+         setUser:self.searchResults[[self.tableView indexPathForCell:sender].row]];
+    }
 }
 
 @end

@@ -56,16 +56,20 @@
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [hud setLabelText:@"Saving Profile..."];
     
-    PFObject *team = [PFObject objectWithClassName:@"Team"
-                                        dictionary:self.pendingFieldDictionary];
-    team[@"teamLogoMedia"] = self.teamLogo;
-    User* user = [User currentUser];
-    PFRelation *participantRelation = [team relationForKey:@"teamParticipants"];
-    [participantRelation addObject:user];
-    
+    Team *team = [Team new];
+    for (NSString* key in [self.pendingFieldDictionary allKeys]) {
+        if (self.pendingFieldDictionary[key] && ![self.pendingFieldDictionary[key] isEqualToString:@""] ) {
+            team[key] = self.pendingFieldDictionary[key];
+        }
+    }
+    if (self.teamLogo) {
+        team.teamLogoMedia = self.teamLogo;
+    }
     [team saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
-            [self dismissViewControllerAnimated:YES completion:nil];
+            [[User currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }];
         }
         if (error) {
             NSLog(@"fuck: %@", [error localizedDescription]);

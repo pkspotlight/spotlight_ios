@@ -11,11 +11,13 @@
 
 @class User;
 @class Team;
+@class Child;
 
 @interface SpotlightDataSource : NSObject <UITableViewDataSource>
 
 - (instancetype)initWithUser:(User*)user;
 - (instancetype)initWithTeam:(Team*)team;
+- (instancetype)initWithChild:(Child*)child;
 
 - (void)loadSpotlights:(void (^)(void))completion;
 

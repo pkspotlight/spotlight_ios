@@ -9,6 +9,7 @@
 #import "FriendsTableViewController.h"
 #import "SpotlightFeedViewController.h"
 #import "FriendTableViewCell.h"
+#import "ChildTableViewCell.h"
 #import "FriendProfileViewController.h"
 #import "Parse.h"
 #import "User.h"
@@ -21,6 +22,7 @@ static CGFloat const BasicHeaderHeight = 50;
 @interface FriendsTableViewController ()
 
 @property (strong, nonatomic) NSArray* friends;
+@property (strong, nonatomic) NSArray* children;
 
 @end
 
@@ -28,13 +30,14 @@ static CGFloat const BasicHeaderHeight = 50;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.tableView registerNib:[UINib nibWithNibName:@"BasicHeaderView" bundle:nil]
-forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
-    UIRefreshControl* refresh = [[UIRefreshControl alloc] init];
-    [refresh addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
-    [self setRefreshControl:refresh];
-    [refresh beginRefreshing];
-    [self refresh:refresh];
+    [self.tableView
+     registerNib:[UINib nibWithNibName:@"BasicHeaderView" bundle:nil]
+     forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
+    [self setRefreshControl:self.refreshControl];
+    [self.refreshControl beginRefreshing];
+    [self refresh:self.refreshControl];
 }
 
 - (void)refresh:(UIRefreshControl*)sender {
@@ -46,23 +49,35 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                 self.user = [User currentUser];
             }
             [self loadFriends:sender];
+            [self loadChildren:sender];
         }
     });
 }
 
 - (void)loadFriends:(UIRefreshControl*)refresh {
-    PFQuery *query = [(PFRelation*)[self.user objectForKey:@"friends"] query];
+    PFQuery *query = [self.user.friends query];
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-        self.friends = objects;
+        self.friends = [objects copy];
         [self.tableView reloadData];
         [refresh endRefreshing];
     }];
 }
 
 - (void)loadTeamMembers:(UIRefreshControl*)refresh {
-    PFQuery *query = [(PFRelation*)[self.team objectForKey:@"teamParticipants"] query];
-    self.friends = [query findObjects];
-    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+    PFQuery *query = [User query];
+    [query whereKey:@"objectId" containsString:self.team.objectId];
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        self.friends = [objects copy];
+        [self.tableView reloadData];
+        [refresh endRefreshing];
+    }];
+}
+
+- (void)loadChildren:(UIRefreshControl*)refresh {
+    PFQuery *query = [self.user.children query];
+    NSLog(@"User: %@",self.user.displayName);
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        self.children = [objects copy];
         [self.tableView reloadData];
         [refresh endRefreshing];
     }];
@@ -71,46 +86,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
 }
-
-//- (IBAction)addFriendButtonPressed:(id)sender {
-//    UIAlertController* alert = [UIAlertController
-//                                alertControllerWithTitle:@"Enter email of friend"
-//                                message:nil
-//                                preferredStyle:UIAlertControllerStyleAlert];
-//    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-//        [textField setKeyboardType:UIKeyboardTypeEmailAddress];
-//    }];
-//    [alert addAction:[UIAlertAction
-//                      actionWithTitle:@"Add Friend"
-//                      style:UIAlertActionStyleDefault
-//                      handler:^(UIAlertAction * _Nonnull action) {
-//                          PFQuery *query = [User query];
-//                          [query whereKey:@"username" equalTo:alert.textFields[0].text];
-//                          [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-//                              if (object) {
-//                                  PFRelation *participantRelation = [self.user relationForKey:@"friends"];
-//                                  [participantRelation addObject:object];
-//                                  [self.user save];
-//                                  [self loadFriends:nil];
-//                              }else {
-//                                  UIAlertController* noUserAlert = [UIAlertController
-//                                                                    alertControllerWithTitle:@"User does not exist"
-//                                                                    message:nil
-//                                                                    preferredStyle:UIAlertControllerStyleAlert];
-//                                  [noUserAlert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil]];
-//                                  [self presentViewController:noUserAlert animated:YES completion:nil];
-//                                  
-//                              }
-//                              
-//                          }];
-//                          
-//                      }]];
-//    [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
-//    [self presentViewController:alert animated:YES completion:nil];
-//}
-
 
 - (IBAction)plusButtonPressed:(id)sender {
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Add a New Spotlighter"
@@ -148,7 +124,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     BasicHeaderView *cell = [self.tableView dequeueReusableHeaderFooterViewWithIdentifier:@"BasicHeaderView"];
-    cell.headerTitleLabel.text = (section == 0) ? @"Family" : @"Friends";
+    cell.headerTitleLabel.text = (section == 0) ? @"My Family" : @"Friends";
     return cell;
 }
 
@@ -157,16 +133,26 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
+    if (section == 0) {
+        return self.children.count;
+    } else {
         return self.friends.count;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell* cell;
+    if (indexPath.section == 0) {
+        cell = (ChildTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"ChildTableViewCell"
+                                                                    forIndexPath:indexPath];
+        
+        [(ChildTableViewCell*)cell formatForChild:self.children[indexPath.row] isFollowing:YES];
+    } else {
         cell = (FriendTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"FriendTableViewCell"
                                                                      forIndexPath:indexPath];
-
-            [(FriendTableViewCell*)cell formatForUser:self.friends[indexPath.row] isFollowing:YES];
+        
+        [(FriendTableViewCell*)cell formatForUser:self.friends[indexPath.row] isFollowing:YES];
+    }
     return cell;
 }
 
@@ -180,11 +166,14 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
             [(FriendProfileViewController*)[segue destinationViewController] setUser:self.friends[[self.tableView indexPathForCell:sender].row]];
     } else if ([segue.identifier isEqualToString:@"SearchFriendsSegue"]) {
     } else if ([segue.identifier isEqualToString:@"CreateFamilyMemberSegue"]) {
+    } else if ([segue.identifier isEqualToString:@"ChildDetailsSegue"]) {
+         [(FriendProfileViewController*)[segue destinationViewController] setChild:self.children[[self.tableView indexPathForCell:sender].row]];
     }
 }
 
 - (IBAction)unwindAddFriends:(UIStoryboardSegue*)sender {
-    
+    [self.refreshControl beginRefreshing];
+    [self refresh:self.refreshControl];
 }
 
 - (IBAction)unwindCancelAddFamilyMember:(UIStoryboardSegue*)sender {
@@ -192,7 +181,8 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 }
 
 - (IBAction)unwindSaveFamilyMember:(UIStoryboardSegue*)sender {
-    
+    [self.refreshControl beginRefreshing];
+    [self refresh:self.refreshControl];
 }
 
 @end

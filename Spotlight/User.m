@@ -7,6 +7,7 @@
 //
 
 #import "User.h"
+#import "Team.h"
 
 @implementation User
 
@@ -14,6 +15,8 @@
 @dynamic firstName;
 @dynamic lastName;
 @dynamic friends;
+@dynamic children;
+@dynamic teams;
 
 #pragma mark - Parse Stuff
 
@@ -31,5 +34,14 @@
         }
     }
     return displayName;
+}
+
+- (void)followTeam:(Team*)team completion:(void (^)(void))completion{
+    [[self teams] addObject:team];
+    [self saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (completion) {
+            completion();
+        }
+    }];
 }
 @end

@@ -31,14 +31,7 @@
 
     [self.userImageView.layer setCornerRadius:self.userImageView.bounds.size.width/2];
     [self.userImageView setClipsToBounds:YES];
-    NSString* displayName = user.username;
-    if (self.user.firstName) {
-        displayName = self.user.firstName;
-        if (self.user.lastName) {
-            displayName = [NSString stringWithFormat:@"%@ %@", displayName, self.user.lastName];
-        }
-    }
-    [self.userDisplayNameLabel setText:displayName];
+    [self.userDisplayNameLabel setText:[self.user displayName]];
     
     NSString* buttonText = (isFollowing) ? @"Following" : @"Follow";
     [self.followButton setTitle:buttonText

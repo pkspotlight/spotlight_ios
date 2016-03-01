@@ -9,6 +9,7 @@
 #import <Parse/Parse.h>
 
 @class ProfilePictureMedia;
+@class Team;
 
 @interface User : PFUser <PFSubclassing>
 
@@ -16,7 +17,10 @@
 @property (strong, nonatomic) NSString* firstName;
 @property (strong, nonatomic) NSString* lastName;
 @property (readonly, nonatomic) PFRelation* friends;
+@property (readonly, nonatomic) PFRelation* children;
+@property (readonly, nonatomic) PFRelation* teams;
 
 - (NSString*)displayName;
+- (void)followTeam:(Team*)team completion:(void (^)(void))completion;
 
 @end

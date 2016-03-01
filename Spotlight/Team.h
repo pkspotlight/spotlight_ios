@@ -25,5 +25,4 @@
 @property (strong, nonatomic) NSString* town;
 @property (strong, nonatomic) NSString* grade;
 
-
 @end

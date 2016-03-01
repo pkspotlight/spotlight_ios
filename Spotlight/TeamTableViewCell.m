@@ -8,6 +8,7 @@
 
 #import "TeamTableViewCell.h"
 #import "Team.h"
+#import "User.h"
 
 #import <AFNetworking/UIImageView+AFNetworking.h>
 
@@ -48,17 +49,19 @@
     [self.seasonLabel setText:[[NSString stringWithFormat:@"%@ %@",team.season, team.year] uppercaseString]];
     [self formatButtonText];
     _team = team;
-    
     [self.teamImageView cancelImageRequestOperation];
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:team.teamLogoMedia.thumbnailImageFile.url]];
-    [self.teamImageView
-     setImageWithURLRequest:request
-     placeholderImage:nil
-     success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, UIImage * _Nonnull image) {
-         [self.teamImageView setImage:image];
-     } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, NSError * _Nonnull error) {
-         NSLog(@"fuck thumbnail failure");
-     }];
+    [self.teamImageView setImage:nil];
+    [team.teamLogoMedia fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:team.teamLogoMedia.thumbnailImageFile.url]];
+        [self.teamImageView
+         setImageWithURLRequest:request
+         placeholderImage:nil
+         success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, UIImage * _Nonnull image) {
+             [self.teamImageView setImage:image];
+         } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, NSError * _Nonnull error) {
+             NSLog(@"fuck thumbnail failure");
+         }];
+    }];
 }
 
 - (void)formatButtonText {
@@ -68,22 +71,36 @@
 }
 
 - (IBAction)followButtonPressed:(id)sender {
-    [self.followingActivityIndicator startAnimating];
-    PFUser* user = [PFUser currentUser];
-    PFRelation *participantRelation = [self.team relationForKey:@"teamParticipants"];
-    if (_isFollowing) {
-        [participantRelation removeObject:user];
-    } else {
-        [participantRelation addObject:user];
-    }
-    [self.team saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-        if (succeeded) {
-            self.isFollowing = !self.isFollowing;
-        }
-        [self formatButtonText];
-        [self.followingActivityIndicator stopAnimating];
-        [self.delegate performSelector:@selector(reloadTable)];
-    }];
+    
+    [self.delegate performSelector:@selector(followButtonPressed:)
+                        withObject:self];
+    
+//    
+//    [self.followingActivityIndicator startAnimating];
+//    PFUser* user = [PFUser currentUser];
+//    PFRelation *participantRelation = [self.team relationForKey:@"teamParticipants"];
+//    if (_isFollowing) {
+//        
+//        [User currentUser] fol
+//        
+//        
+//        [participantRelation removeObject:user];
+//    } else {
+//        [participantRelation addObject:user];
+//    }
+//    
+//    
+//    
+//    [self.team saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+//        if (succeeded) {
+//            self.isFollowing = !self.isFollowing;
+//        }
+//        [self formatButtonText];
+//        [self.followingActivityIndicator stopAnimating];
+////        [self.delegate performSelector:@selector(reloadTable)];
+//        [self.delegate performSelector:@selector(followButtonPressed:)
+//                            withObject:self];
+//    }];
 }
 
 @end

@@ -13,6 +13,7 @@
 
 #import "BasicHeaderView.h"
 #import "Parse.h"
+#import "User.h"
 
 
 static CGFloat const BasicHeaderHeight = 50;
@@ -41,8 +42,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 }
 
 - (void)loadMyTeams {
-    PFQuery *query = [PFQuery queryWithClassName:@"Team"];
-    [query whereKey:@"teamParticipants" equalTo:[PFUser currentUser].objectId];
+    PFQuery *query = [[[User currentUser] teams] query];
     [query includeKey:@"teamLogoMedia"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {

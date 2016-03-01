@@ -11,6 +11,7 @@
 #import "SpotlightDataSource.h"
 #import "TeamsTableViewController.h"
 #import "User.h"
+#import "Child.h"
 #import "ProfilePictureMedia.h"
 #import <AFNetworking/UIImageView+AFNetworking.h>
 
@@ -20,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *friendNameLabel;
 @property (weak, nonatomic) IBOutlet UIView *teamsContainerView;
 @property (weak, nonatomic) IBOutlet UIView *spotlightsContainerView;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 
 @end
 
@@ -28,24 +30,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self.friendNameLabel setText:[self.user displayName]];
     [self.friendImageView.layer setCornerRadius:self.friendImageView.bounds.size.width/2];
     [self.friendImageView.layer setBorderWidth:3];
     [self.friendImageView.layer setBorderColor:[UIColor whiteColor].CGColor];
     [self.friendImageView setClipsToBounds:YES];
-    [self.friendImageView cancelImageRequestOperation];
-    [self.user.profilePic fetchIfNeeded];
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.user.profilePic.thumbnailImageFile.url]];
-    [self.friendImageView
-     setImageWithURLRequest:request
-     placeholderImage:nil
-     success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, UIImage * _Nonnull image) {
-         [self.friendImageView setImage:image];
-     } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, NSError * _Nonnull error) {
-         NSLog(@"fuck thumbnail failure");
-     }];
+    if (self.user) {
+        [self formatForUser];
+    } else {
+        [self formatForChild];
+    }
 }
+
 - (IBAction)segmentControllerValueChanged:(UISegmentedControl*)sender {
     if( sender.selectedSegmentIndex == 0) {
         [UIView animateWithDuration:.5
@@ -62,6 +57,34 @@
     }
 }
 
+- (void)formatWithName:(NSString*)name profilePicture:(ProfilePictureMedia*)profilePic {
+    [self.friendNameLabel setText:name];
+    [self.friendImageView cancelImageRequestOperation];
+    [profilePic fetchIfNeeded];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:profilePic.thumbnailImageFile.url]];
+    [self.friendImageView
+     setImageWithURLRequest:request
+     placeholderImage:nil
+     success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, UIImage * _Nonnull image) {
+         [self.friendImageView setImage:image];
+     } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, NSError * _Nonnull error) {
+         NSLog(@"fuck thumbnail failure");
+     }];
+    [self.user.children.query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if (objects && [objects count] > 0) {
+            [self.segmentedControl insertSegmentWithTitle:@"Family" atIndex:2 animated:NO];
+        }
+    }];
+}
+
+- (void)formatForUser {
+    [self formatWithName:[self.user displayName] profilePicture:self.user.profilePic];
+}
+
+- (void)formatForChild {
+    [self formatWithName:[self.child displayName] profilePicture:self.child.profilePic];
+}
+     
 -(BOOL)hidesBottomBarWhenPushed {
     return YES;
 }
@@ -69,9 +92,18 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([segue.identifier isEqualToString:@"friendTeamsEmbedSegue"]) {
-        [(TeamsTableViewController*)[segue destinationViewController] setUser:self.user];
+        if (self.user) {
+            [(TeamsTableViewController*)[segue destinationViewController] setUser:self.user];
+        } else {
+            [(TeamsTableViewController*)[segue destinationViewController] setChild:self.child];
+        }
     } else {
-        SpotlightDataSource* datasource = [[SpotlightDataSource alloc] initWithUser:self.user];
+        SpotlightDataSource* datasource;
+        if (self.user) {
+            datasource = [[SpotlightDataSource alloc] initWithUser:self.user];
+        } else {
+            datasource = [[SpotlightDataSource alloc] initWithChild:self.child];
+        }
         [(SpotlightFeedViewController*)[segue destinationViewController] setDataSource:datasource];
     }
 }

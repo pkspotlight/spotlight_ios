@@ -15,5 +15,6 @@
 
 @property (strong, nonatomic) User* user;
 @property (strong, nonatomic) Team* team;
+@property (assign, nonatomic) BOOL justFamily;
 
 @end

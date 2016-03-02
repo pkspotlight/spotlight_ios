@@ -14,6 +14,7 @@
 #import "Parse.h"
 #import "User.h"
 #import "Team.h"
+#import "Child.h"
 #import "BasicHeaderView.h"
 
 static CGFloat const BasicHeaderHeight = 50;
@@ -23,6 +24,7 @@ static CGFloat const BasicHeaderHeight = 50;
 
 @property (strong, nonatomic) NSArray* friends;
 @property (strong, nonatomic) NSArray* children;
+@property (strong, nonatomic) NSArray* teammates;
 
 @end
 
@@ -48,7 +50,9 @@ static CGFloat const BasicHeaderHeight = 50;
             if (!self.user) {
                 self.user = [User currentUser];
             }
-            [self loadFriends:sender];
+            if (!self.justFamily) {
+                [self loadFriends:sender];
+            }
             [self loadChildren:sender];
         }
     });
@@ -64,10 +68,10 @@ static CGFloat const BasicHeaderHeight = 50;
 }
 
 - (void)loadTeamMembers:(UIRefreshControl*)refresh {
-    PFQuery *query = [User query];
-    [query whereKey:@"objectId" containsString:self.team.objectId];
+    PFQuery *query = [PFQuery queryWithClassName:@"Child"];
+    [query whereKey:@"teams" equalTo:self.team];
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-        self.friends = [objects copy];
+        self.teammates = [objects copy];
         [self.tableView reloadData];
         [refresh endRefreshing];
     }];
@@ -82,7 +86,6 @@ static CGFloat const BasicHeaderHeight = 50;
         [refresh endRefreshing];
     }];
 }
-
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -119,7 +122,11 @@ static CGFloat const BasicHeaderHeight = 50;
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    if (self.team || self.justFamily) {
+        return 1;
+    } else {
+        return 2;
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -129,29 +136,52 @@ static CGFloat const BasicHeaderHeight = 50;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return BasicHeaderHeight;
+    if (self.team || self.justFamily) {
+        return 0;
+    } else {
+        return BasicHeaderHeight;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) {
-        return self.children.count;
+    if (self.team) {
+        return self.teammates.count;
     } else {
-        return self.friends.count;
+        if (section == 0) {
+            return self.children.count;
+        } else {
+            return self.friends.count;
+        }
     }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell* cell;
-    if (indexPath.section == 0) {
-        cell = (ChildTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"ChildTableViewCell"
-                                                                    forIndexPath:indexPath];
-        
-        [(ChildTableViewCell*)cell formatForChild:self.children[indexPath.row] isFollowing:YES];
+    
+    if (self.team) {
+        if ([self.teammates[indexPath.row] isKindOfClass:[Child class]]){
+            cell = (ChildTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"ChildTableViewCell"
+                                                                        forIndexPath:indexPath];
+            
+            [(ChildTableViewCell*)cell formatForChild:self.teammates[indexPath.row] isFollowing:YES];
+        } else if ([self.teammates[indexPath.row] isKindOfClass:[User class]]){
+            cell = (FriendTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"FriendTableViewCell"
+                                                                         forIndexPath:indexPath];
+            
+            [(FriendTableViewCell*)cell formatForUser:self.teammates[indexPath.row] isFollowing:YES];
+        }
     } else {
-        cell = (FriendTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"FriendTableViewCell"
-                                                                     forIndexPath:indexPath];
-        
-        [(FriendTableViewCell*)cell formatForUser:self.friends[indexPath.row] isFollowing:YES];
+        if (indexPath.section == 0) {
+            cell = (ChildTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"ChildTableViewCell"
+                                                                        forIndexPath:indexPath];
+            
+            [(ChildTableViewCell*)cell formatForChild:self.children[indexPath.row] isFollowing:YES];
+        } else {
+            cell = (FriendTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"FriendTableViewCell"
+                                                                         forIndexPath:indexPath];
+            
+            [(FriendTableViewCell*)cell formatForUser:self.friends[indexPath.row] isFollowing:YES];
+        }
     }
     return cell;
 }
@@ -161,13 +191,14 @@ static CGFloat const BasicHeaderHeight = 50;
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-
     if ([segue.identifier isEqualToString:@"FriendDetailsSegue"]) {
-            [(FriendProfileViewController*)[segue destinationViewController] setUser:self.friends[[self.tableView indexPathForCell:sender].row]];
+        id user = (self.team) ? self.teammates[[self.tableView indexPathForCell:sender].row] : self.friends[[self.tableView indexPathForCell:sender].row];
+        [(FriendProfileViewController*)[segue destinationViewController] setUser:user];
     } else if ([segue.identifier isEqualToString:@"SearchFriendsSegue"]) {
     } else if ([segue.identifier isEqualToString:@"CreateFamilyMemberSegue"]) {
     } else if ([segue.identifier isEqualToString:@"ChildDetailsSegue"]) {
-         [(FriendProfileViewController*)[segue destinationViewController] setChild:self.children[[self.tableView indexPathForCell:sender].row]];
+        id user = (self.team) ? self.teammates[[self.tableView indexPathForCell:sender].row] : self.children[[self.tableView indexPathForCell:sender].row];
+         [(FriendProfileViewController*)[segue destinationViewController] setChild:user];
     }
 }
 

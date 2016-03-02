@@ -7,6 +7,7 @@
 //
 
 #import "FriendProfileViewController.h"
+#import "FriendsTableViewController.h"
 #import "SpotlightFeedViewController.h"
 #import "SpotlightDataSource.h"
 #import "TeamsTableViewController.h"
@@ -21,7 +22,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *friendNameLabel;
 @property (weak, nonatomic) IBOutlet UIView *teamsContainerView;
 @property (weak, nonatomic) IBOutlet UIView *spotlightsContainerView;
+@property (weak, nonatomic) IBOutlet UIView *familyContainerView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
+
+@property (assign, nonatomic) BOOL hasFamily;
 
 @end
 
@@ -47,13 +51,23 @@
                          animations:^{
                              [self.spotlightsContainerView setAlpha:1];
                              [self.teamsContainerView setAlpha:0];
+                             [self.familyContainerView setAlpha:0];
                          }];
-    } else {
+    } else if( sender.selectedSegmentIndex == 1) {
         [UIView animateWithDuration:.5
                          animations:^{
                              [self.teamsContainerView setAlpha:1];
                              [self.spotlightsContainerView setAlpha:0];
+                             [self.familyContainerView setAlpha:0];
                          }];
+    } else {
+        [UIView animateWithDuration:.5
+                         animations:^{
+                             [self.spotlightsContainerView setAlpha:0];
+                             [self.teamsContainerView setAlpha:0];
+                             [self.familyContainerView setAlpha:1];
+                         }];
+        
     }
 }
 
@@ -72,7 +86,9 @@
      }];
     [self.user.children.query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (objects && [objects count] > 0) {
+            self.hasFamily = YES;
             [self.segmentedControl insertSegmentWithTitle:@"Family" atIndex:2 animated:NO];
+            [self performSegueWithIdentifier:@"EmbedFamilySegue" sender:nil];
         }
     }];
 }
@@ -97,7 +113,7 @@
         } else {
             [(TeamsTableViewController*)[segue destinationViewController] setChild:self.child];
         }
-    } else {
+    } else if ([segue.identifier isEqualToString:@"EmbedSpotlightSegue"]){
         SpotlightDataSource* datasource;
         if (self.user) {
             datasource = [[SpotlightDataSource alloc] initWithUser:self.user];
@@ -105,7 +121,14 @@
             datasource = [[SpotlightDataSource alloc] initWithChild:self.child];
         }
         [(SpotlightFeedViewController*)[segue destinationViewController] setDataSource:datasource];
+    } else if (self.hasFamily){
+        [(FriendsTableViewController*)[segue destinationViewController] setUser:self.user];
+        [(FriendsTableViewController*)[segue destinationViewController] setJustFamily:YES];
     }
+}
+
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
+    return (![identifier isEqualToString:@"EmbedFamilySegue"] || self.hasFamily);
 }
 
 @end

@@ -24,5 +24,6 @@
 @property (strong, nonatomic) NSString* season;
 @property (strong, nonatomic) NSString* town;
 @property (strong, nonatomic) NSString* grade;
+@property (readonly, nonatomic) PFRelation* moderators;
 
 @end

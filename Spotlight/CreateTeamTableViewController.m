@@ -22,6 +22,7 @@
 @property (strong, nonatomic) NSMutableDictionary *pendingFieldDictionary;
 @property (strong, nonatomic) UIImagePickerController* imagePickerController;
 @property (weak, nonatomic) IBOutlet UIButton *addTeamLogoButton;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *photoUploadIndicator;
 
 @end
 
@@ -31,11 +32,16 @@
     [super viewDidLoad];
     self.teamPropertyArray = @[ @"teamName", @"town", @"sport", @"grade", @"year", @"season", @"coach"];
     self.teamPropertyDisplay = @[ @"Team Name", @"Town", @"Sport", @"Grade", @"Year", @"Season", @"Coach"];
-    self.pendingFieldDictionary = [self newPendingFieldDictionary];
     [self.addTeamLogoButton.layer setCornerRadius:self.addTeamLogoButton.bounds.size.width/2];
     [self.addTeamLogoButton.layer setBorderColor:[UIColor whiteColor].CGColor];
     [self.addTeamLogoButton.layer setBorderWidth:3];
     [self.addTeamLogoButton setClipsToBounds:YES];
+    if (!self.team) {
+        self.team = [Team new];
+        self.pendingFieldDictionary = [self newPendingFieldDictionary];
+    } else {
+        self.pendingFieldDictionary = [self populateExistingTeamAttributes:self.team];
+    }
 }
 
 - (NSMutableDictionary *)newPendingFieldDictionary {
@@ -43,6 +49,21 @@
     for (NSString* attribute in self.teamPropertyArray) {
         fieldDict[attribute] = @"";
     }
+    return fieldDict;
+}
+
+- (NSMutableDictionary *)populateExistingTeamAttributes:(Team*)team {
+    NSMutableDictionary *fieldDict = [NSMutableDictionary dictionary];
+    for (NSString* attribute in self.teamPropertyArray) {
+        if (self.team[attribute]) {
+            fieldDict[attribute] = self.team[attribute];
+        }
+    }
+    self.teamLogo = self.team.teamLogoMedia;
+    PFFile* thumbFile = self.teamLogo.thumbnailImageFile;
+    [thumbFile getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
+        [self.addTeamLogoButton setImage:[UIImage imageWithData:data] forState:UIControlStateNormal];
+    }];
     return fieldDict;
 }
 
@@ -56,18 +77,20 @@
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [hud setLabelText:@"Saving Profile..."];
     
-    Team *team = [Team new];
     for (NSString* key in [self.pendingFieldDictionary allKeys]) {
         if (self.pendingFieldDictionary[key] && ![self.pendingFieldDictionary[key] isEqualToString:@""] ) {
-            team[key] = self.pendingFieldDictionary[key];
+            self.team[key] = self.pendingFieldDictionary[key];
         }
     }
     if (self.teamLogo) {
-        team.teamLogoMedia = self.teamLogo;
+        self.team.teamLogoMedia = self.teamLogo;
     }
-    [team saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+    [self.team.moderators addObject:[User currentUser]];
+    [self.team saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
-            [[User currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+            User* user = [User currentUser];
+            [user.teams addObject:self.team];
+            [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                 [self dismissViewControllerAnimated:YES completion:nil];
             }];
         }
@@ -82,7 +105,8 @@
     NSError *error;
     [self.view endEditing:NO];
     if ([self savePendingChangesToTeam:&error]) {
-        [self dismissViewControllerAnimated:YES completion:nil];
+        //[self dismissViewControllerAnimated:YES completion:nil];
+        [self performSegueWithIdentifier:@"UnwindEditSegue" sender:sender];
     } else {
         //Show some error
     }
@@ -132,7 +156,7 @@
     FieldEntryTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"FieldEntryTableViewCell" forIndexPath:indexPath];
     [cell formatForAttributeString:self.teamPropertyArray[indexPath.row]
                          displayText:self.teamPropertyDisplay[indexPath.row]
-                         withValue:@""];
+                         withValue:self.pendingFieldDictionary[self.teamPropertyArray[indexPath.row]]];
     [cell setDelegate:self];
     return cell;
 }
@@ -143,8 +167,7 @@
 
 - (IBAction)editPhotoButtonPressed:(id)sender {
     
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
-    {
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
         UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
         imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
         imagePickerController.delegate = self;
@@ -174,14 +197,17 @@
         UIImage *image = [infoDict valueForKey:UIImagePickerControllerOriginalImage];
         self.teamLogo = [[TeamLogoMedia alloc] initWithImage:image];
     }
+    [self.photoUploadIndicator startAnimating];
     [self.teamLogo saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        PFFile* thumbFile = self.teamLogo.thumbnailImageFile;
+        [thumbFile getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
+            [self.addTeamLogoButton setImage:[UIImage imageWithData:data] forState:UIControlStateNormal];
+            [self.photoUploadIndicator stopAnimating];
+        }];
         if (error) {
             NSLog(@"fuck: %@", [error localizedDescription]);
+            [self.photoUploadIndicator stopAnimating];
         }
-    }];
-    PFFile* thumbFile = self.teamLogo.thumbnailImageFile;
-    [thumbFile getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
-        [self.addTeamLogoButton setImage:[UIImage imageWithData:data] forState:UIControlStateNormal];
     }];
     [self.imagePickerController dismissViewControllerAnimated:YES completion:nil];
 }

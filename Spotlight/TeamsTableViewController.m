@@ -19,7 +19,7 @@ static CGFloat const BasicHeaderHeight = 50;
 
 @interface TeamsTableViewController ()
 
-@property (strong, nonatomic) NSArray *teams;
+@property (strong, nonatomic) NSMutableArray *teams;
 
 @end
 
@@ -29,22 +29,22 @@ static CGFloat const BasicHeaderHeight = 50;
     [super viewDidLoad];
     [self.tableView registerNib:[UINib nibWithNibName:@"BasicHeaderView" bundle:nil]
 forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
-    UIRefreshControl* refresh = [[UIRefreshControl alloc] init];
-    [refresh addTarget:self
-                action:@selector(refresh:)
-      forControlEvents:UIControlEventValueChanged];
-    [self setRefreshControl:refresh];
-    
-    self.teams = [NSArray array];
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl  addTarget:self
+                             action:@selector(refresh:)
+                   forControlEvents:UIControlEventValueChanged];
+    [self setRefreshControl:self.refreshControl];
+    self.teams = [NSMutableArray array];
     if (!self.child && !self.user) {
         self.user = [User currentUser];
     }
-    [self refresh:refresh];
+    [self refresh:self.refreshControl];
 }
 
-- (void)refresh:(id)sender {
+- (void)refresh:(UIRefreshControl*)sender {
+    [sender beginRefreshing];
     if (self.child){
-        [self loadChildTeams:sender];
+        [self loadChildTeams:self.child sender:sender];
     } else {
         [self loadUserTeams:sender];
     }
@@ -57,12 +57,19 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 - (void)loadUserTeams:(UIRefreshControl*)sender  {
     PFQuery *query = [[self.user teams] query];
     [query includeKey:@"teamLogoMedia"];
+    [query orderByDescending:@"year"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             NSLog(@"Successfully retrieved my %lu Teams.", (unsigned long)objects.count);
-            self.teams = objects;
-            [self.tableView reloadData];
-            [sender endRefreshing];
+            [self.teams addObjectsFromArray:[objects copy]];
+            PFQuery *query = [self.user.children query];
+            [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+                for (Child* child in objects) {
+                    [self loadChildTeams:child sender:sender];
+                }
+                [self.tableView reloadData];
+                [sender endRefreshing];
+            }];
         } else {
             NSLog(@"Error: %@ %@", error, [error userInfo]);
             [sender endRefreshing];
@@ -70,13 +77,14 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     }];
 }
 
-- (void)loadChildTeams:(UIRefreshControl*)sender {
-    PFQuery *query = [self.child.teams query];
+- (void)loadChildTeams:(Child*)child sender:(UIRefreshControl*)sender {
+    PFQuery *query = [child.teams query];
     [query includeKey:@"teamLogoMedia"];
+    [query orderByDescending:@"year"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
-            NSLog(@"Successfully retrieved my %lu Teams.", (unsigned long)objects.count);
-            self.teams = objects;
+            NSLog(@"Successfully retrieved child's %lu Teams.", (unsigned long)objects.count);
+            [self.teams addObjectsFromArray:[objects copy]];
             [self.tableView reloadData];
             [sender endRefreshing];
         } else {
@@ -103,23 +111,6 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     [cell formatForTeam:team isFollowing:(indexPath.section == 0)];
     return cell;
 }
-//
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-//    if (self.isCurrentUser) {
-//        BasicHeaderView *cell = [self.tableView dequeueReusableHeaderFooterViewWithIdentifier:@"BasicHeaderView"];
-//        cell.headerTitleLabel.text = (section == 0) ? @"My Teams" : @"Add Teams";
-//        return cell;
-//    } else {
-//        return nil;
-//    }
-//}
-//
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-//    if (self.isCurrentUser) {
-//        return BasicHeaderHeight;
-//    }
-//    return 0;
-//}
 
 - (void)reloadTable {
     [self refresh:nil];
@@ -153,7 +144,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 #pragma mark - Navigation
 
 - (IBAction)unwindAddTeams:(UIStoryboardSegue*)sender {
-    [self refresh:nil];
+    [self refresh:self.refreshControl];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

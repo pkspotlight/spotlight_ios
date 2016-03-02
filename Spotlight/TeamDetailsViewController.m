@@ -10,7 +10,9 @@
 #import "SpotlightFeedViewController.h"
 #import "SpotlightMedia.h"
 #import "Team.h"
+#import "User.h"
 #import "FriendsTableViewController.h"
+#import "CreateTeamTableViewController.h"
 #import "SpotlightDataSource.h"
 
 #import <MobileCoreServices/UTCoreTypes.h>
@@ -22,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *teamNameLabel;
 @property (weak, nonatomic) IBOutlet UIView *teamMemberViewContainer;
 @property (weak, nonatomic) IBOutlet UIView *spotlightContainer;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
 
 @end
 
@@ -33,19 +36,19 @@
     [self.teamLogoImageView.layer setBorderColor:[UIColor whiteColor].CGColor];
     [self.teamLogoImageView.layer setBorderWidth:3];
     [self.teamLogoImageView setClipsToBounds:YES];
-    
-    [self.teamNameLabel setText:self.team.teamName];
-    
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.team.teamLogoMedia.thumbnailImageFile.url]];
-    [self.teamLogoImageView
-     setImageWithURLRequest:request
-     placeholderImage:nil
-     success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, UIImage * _Nonnull image) {
-         [self.teamLogoImageView setImage:image];
-     } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, NSError * _Nonnull error) {
-         NSLog(@"fuck thumbnail failure");
-     }];
+    [self formatPage];
+
+    PFQuery* moderatorQuery = [self.team.moderators query];
+    [moderatorQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        for (User* user in objects) {
+            if ([user.objectId isEqualToString:[[User currentUser] objectId]]) {
+                [self.editButton setTintColor:[UIColor whiteColor]];
+                [self.editButton setEnabled:YES];
+            }
+        }
+    }];
 }
+
 - (IBAction)teamSegmentControllerValueChanged:(UISegmentedControl*)sender {
     if( sender.selectedSegmentIndex == 0) {
         [UIView animateWithDuration:.5
@@ -65,10 +68,31 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"teamMemberEmbedSegue"]) {
         [(FriendsTableViewController*)[segue destinationViewController] setTeam:self.team];
+    } else if ([segue.identifier isEqualToString:@"EditTeamSegue"]){
+        [(CreateTeamTableViewController*)[(UINavigationController*)[segue destinationViewController] viewControllers][0] setTeam:self.team];
     } else {
         SpotlightDataSource* datasource = [[SpotlightDataSource alloc] initWithTeam:self.team];
         [(SpotlightFeedViewController*)[segue destinationViewController] setDataSource:datasource];
     }
+}
+
+- (void)formatPage {
+    [self.teamNameLabel setText:self.team.teamName];
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.team.teamLogoMedia.thumbnailImageFile.url]];
+    [self.teamLogoImageView
+     setImageWithURLRequest:request
+     placeholderImage:nil
+     success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, UIImage * _Nonnull image) {
+         [self.teamLogoImageView setImage:image];
+     } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, NSError * _Nonnull error) {
+         NSLog(@"fuck thumbnail failure");
+     }];
+
+}
+
+- (IBAction)unwindEditTeam:(UIStoryboardSegue*)sender {
+    [self formatPage];
 }
 
 -(BOOL)hidesBottomBarWhenPushed {

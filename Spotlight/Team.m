@@ -17,6 +17,7 @@
 @dynamic town;
 @dynamic grade;
 @dynamic sport;
+@dynamic moderators;
 
 #pragma mark - Parse Stuff
 + (void)load {

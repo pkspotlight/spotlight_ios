@@ -97,7 +97,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                 self.searchResults = objects;
                 if (objects.count > 0) {
                     for (Team *team in objects) {
-                        NSLog(@"team: %@ %@ -- %@ %@", team.teamName, team.town);
+                        NSLog(@"team: %@, %@", team.teamName, team.town);
                     }
                 } else {
                     //Show no search results message

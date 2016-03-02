@@ -84,7 +84,7 @@
                   moduleName = "Spotlight"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/pkamm/Documents/ios/Spotlight/Spotlight/MontageCreator.m"
-                  timestampString = "478572974.800614"
+                  timestampString = "478640701.833499"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "202"
@@ -99,7 +99,7 @@
                   moduleName = "Spotlight"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/pkamm/Documents/ios/Spotlight/Spotlight/MontageCreator.m"
-                  timestampString = "478572974.800735"
+                  timestampString = "478640701.833616"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -114,7 +114,7 @@
                   moduleName = "Spotlight"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/pkamm/Documents/ios/Spotlight/Spotlight/MontageCreator.m"
-                  timestampString = "478572974.800819"
+                  timestampString = "478640701.833708"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -339,11 +339,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Spotlight/TeamsTableViewController.m"
-            timestampString = "478556484.656403"
+            timestampString = "478634098.267839"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "156"
-            endingLineNumber = "156"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
             landmarkName = "-unwindAddTeams:"
             landmarkType = "5">
          </BreakpointContent>
@@ -377,22 +377,6 @@
             startingLineNumber = "146"
             endingLineNumber = "146"
             landmarkName = "-prepareForSegue:sender:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Spotlight/FriendsTableViewController.m"
-            timestampString = "478572299.498636"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
-            landmarkName = "-loadTeamMembers:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

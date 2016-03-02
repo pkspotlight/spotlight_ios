@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "FieldEntryTableViewCell.h"
 
+@class Team;
+
 @interface CreateTeamTableViewController : UITableViewController <FieldEntryTextFieldCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate>
+
+@property (strong, nonatomic) Team* team;
 
 @end

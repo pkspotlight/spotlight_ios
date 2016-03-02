@@ -459,15 +459,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IsX-JN-Mbi">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="248"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unknown_user.png" translatesAutoresizingMaskIntoConstraints="NO" id="dcO-BH-zJz">
-                                        <rect key="frame" x="234" y="16" width="132" height="132"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="132" id="p0f-nc-8lA"/>
-                                            <constraint firstAttribute="height" constant="132" id="zLC-7y-qyw"/>
-                                        </constraints>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Greg Mann" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Exd-GK-0ex">
-                                        <rect key="frame" x="8" y="156" width="584" height="45"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Greg Mann" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Exd-GK-0ex">
+                                        <rect key="frame" x="8" y="166" width="584" height="45"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="22"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -486,17 +479,24 @@
                                             <action selector="segmentControllerValueChanged:" destination="IAe-cA-R6E" eventType="valueChanged" id="CsE-Gd-9OL"/>
                                         </connections>
                                     </segmentedControl>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unknown_user.png" translatesAutoresizingMaskIntoConstraints="NO" id="dcO-BH-zJz">
+                                        <rect key="frame" x="220" y="8" width="160" height="160"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="160" id="p0f-nc-8lA"/>
+                                            <constraint firstAttribute="height" constant="160" id="zLC-7y-qyw"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.14901960780000001" green="0.60392156860000001" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="Exd-GK-0ex" firstAttribute="top" secondItem="dcO-BH-zJz" secondAttribute="bottom" constant="8" id="BFl-y3-Xcj"/>
+                                    <constraint firstItem="Exd-GK-0ex" firstAttribute="top" secondItem="dcO-BH-zJz" secondAttribute="bottom" constant="-2" id="BFl-y3-Xcj"/>
                                     <constraint firstAttribute="height" constant="248" id="GvV-Sp-5dx"/>
                                     <constraint firstAttribute="trailing" secondItem="Exd-GK-0ex" secondAttribute="trailing" constant="8" id="c29-Kl-CrG"/>
                                     <constraint firstItem="Exd-GK-0ex" firstAttribute="leading" secondItem="IsX-JN-Mbi" secondAttribute="leading" constant="8" id="cnq-bD-PFg"/>
                                     <constraint firstItem="aRt-nH-S3E" firstAttribute="top" secondItem="Exd-GK-0ex" secondAttribute="bottom" constant="8" id="fNY-u5-TyL"/>
                                     <constraint firstItem="aRt-nH-S3E" firstAttribute="centerX" secondItem="IsX-JN-Mbi" secondAttribute="centerX" id="hLT-0U-F3Q"/>
                                     <constraint firstAttribute="bottom" secondItem="Exd-GK-0ex" secondAttribute="bottom" constant="47" id="lWU-vr-8X9"/>
-                                    <constraint firstItem="dcO-BH-zJz" firstAttribute="top" secondItem="IsX-JN-Mbi" secondAttribute="top" constant="16" id="mRr-kY-VTW"/>
+                                    <constraint firstItem="dcO-BH-zJz" firstAttribute="top" secondItem="IsX-JN-Mbi" secondAttribute="top" constant="8" id="mRr-kY-VTW"/>
                                     <constraint firstItem="dcO-BH-zJz" firstAttribute="centerX" secondItem="IsX-JN-Mbi" secondAttribute="centerX" id="qsA-hC-DIZ"/>
                                     <constraint firstAttribute="bottom" secondItem="aRt-nH-S3E" secondAttribute="bottom" constant="11" id="xZW-Fk-D7f"/>
                                 </constraints>
@@ -806,8 +806,16 @@
                             <constraint firstAttribute="trailingMargin" secondItem="iR0-Zd-32o" secondAttribute="trailing" constant="-20" id="xqS-fg-ZsG"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Team Details" id="jZg-c6-Lfn"/>
+                    <navigationItem key="navigationItem" title="Team Details" id="jZg-c6-Lfn">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Edit" id="4im-tk-dPv">
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <segue destination="fwn-cf-8LL" kind="presentation" identifier="EditTeamSegue" id="LEx-VJ-MlG"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="editButton" destination="4im-tk-dPv" id="AhS-Hl-FFk"/>
                         <outlet property="spotlightContainer" destination="Wml-en-gDZ" id="Yt9-Md-bjb"/>
                         <outlet property="teamLogoImageView" destination="ENb-YQ-djp" id="KzA-uX-mgV"/>
                         <outlet property="teamMemberViewContainer" destination="iR0-Zd-32o" id="5QE-Ky-R8R"/>
@@ -830,7 +838,7 @@
                             <rect key="frame" x="0.0" y="64" width="600" height="168"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4GE-Hj-xaF">
+                                <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4GE-Hj-xaF">
                                     <rect key="frame" x="234" y="16" width="132" height="132"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="132" id="E6e-fb-e4H"/>
@@ -848,11 +856,16 @@
                                         <constraint firstAttribute="width" constant="51" id="XRz-Pf-eCM"/>
                                     </constraints>
                                 </imageView>
+                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="Iwy-8G-ip0">
+                                    <rect key="frame" x="290" y="74" width="20" height="20"/>
+                                </activityIndicatorView>
                             </subviews>
                             <color key="backgroundColor" red="0.14901960780000001" green="0.60392156860000001" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
+                                <constraint firstItem="Iwy-8G-ip0" firstAttribute="centerX" secondItem="BLP-EP-TGl" secondAttribute="centerX" id="9uv-hL-McI"/>
                                 <constraint firstItem="4GE-Hj-xaF" firstAttribute="centerX" secondItem="BLP-EP-TGl" secondAttribute="centerX" id="AQw-S9-0EJ"/>
                                 <constraint firstItem="4GE-Hj-xaF" firstAttribute="top" secondItem="BLP-EP-TGl" secondAttribute="top" constant="16" id="CQ6-Mz-6wA"/>
+                                <constraint firstItem="Iwy-8G-ip0" firstAttribute="centerY" secondItem="BLP-EP-TGl" secondAttribute="centerY" id="PpG-gE-Bfl"/>
                                 <constraint firstItem="VZK-zj-MSa" firstAttribute="centerX" secondItem="BLP-EP-TGl" secondAttribute="centerX" id="UwB-yP-ebS"/>
                                 <constraint firstAttribute="bottom" secondItem="VZK-zj-MSa" secondAttribute="bottom" constant="20" id="eIB-kD-3Ul"/>
                             </constraints>
@@ -932,9 +945,12 @@
                     </navigationItem>
                     <connections>
                         <outlet property="addTeamLogoButton" destination="4GE-Hj-xaF" id="brf-tt-jRK"/>
+                        <outlet property="photoUploadIndicator" destination="Iwy-8G-ip0" id="dqn-4n-6fB"/>
+                        <segue destination="ti0-IU-pz3" kind="unwind" identifier="UnwindEditSegue" unwindAction="unwindEditTeam:" id="iKS-72-cin"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IMr-R7-Eka" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="ti0-IU-pz3" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-307" y="3976"/>
         </scene>
@@ -2227,9 +2243,10 @@
         <image name="unknown_user.png" width="500" height="500"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="MtQ-jd-zmN"/>
-        <segue reference="Who-nY-iIu"/>
-        <segue reference="M8J-oH-n9R"/>
+        <segue reference="KDg-Dy-czv"/>
         <segue reference="oT6-GV-6Bb"/>
+        <segue reference="Who-nY-iIu"/>
+        <segue reference="5wK-cZ-7Zv"/>
+        <segue reference="LEx-VJ-MlG"/>
     </inferredMetricsTieBreakers>
 </document>

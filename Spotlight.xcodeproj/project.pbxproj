@@ -67,6 +67,22 @@
 		88EC502E1C0E041F00077E85 /* FriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88EC502D1C0E041F00077E85 /* FriendTableViewCell.m */; };
 		88EC50311C12F19200077E85 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 88EC50301C12F19200077E85 /* User.m */; };
 		88EE2CC61B9E08B2002DDB99 /* SpotlightFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88EE2CC51B9E08B2002DDB99 /* SpotlightFeedViewController.m */; };
+		88FDB8881C8EA2A1008C9A3D /* TPWW_UMPG_Problem.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 88FDB8781C8EA2A1008C9A3D /* TPWW_UMPG_Problem.mp3 */; };
+		88FDB8891C8EA2A1008C9A3D /* TPWW_UMPG_Lost Worlds.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 88FDB8791C8EA2A1008C9A3D /* TPWW_UMPG_Lost Worlds.mp3 */; };
+		88FDB88A1C8EA2A1008C9A3D /* TPWW_InMyShoes_F1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 88FDB87A1C8EA2A1008C9A3D /* TPWW_InMyShoes_F1.wav */; };
+		88FDB88B1C8EA2A1008C9A3D /* TPWW_TimeOfOurLives_F1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 88FDB87B1C8EA2A1008C9A3D /* TPWW_TimeOfOurLives_F1.wav */; };
+		88FDB88C1C8EA2A1008C9A3D /* TPWW_JustTheWayItGoes_F1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 88FDB87C1C8EA2A1008C9A3D /* TPWW_JustTheWayItGoes_F1.wav */; };
+		88FDB88D1C8EA2A1008C9A3D /* DT_TheDuff_LetMeSeeYouGetLow_main_F1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 88FDB87D1C8EA2A1008C9A3D /* DT_TheDuff_LetMeSeeYouGetLow_main_F1.wav */; };
+		88FDB88E1C8EA2A1008C9A3D /* TB - Disney Funk 124bpm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 88FDB87E1C8EA2A1008C9A3D /* TB - Disney Funk 124bpm.mp3 */; };
+		88FDB88F1C8EA2A1008C9A3D /* TPWW_ShakeThatLaLa_mastered.wav in Resources */ = {isa = PBXBuildFile; fileRef = 88FDB87F1C8EA2A1008C9A3D /* TPWW_ShakeThatLaLa_mastered.wav */; };
+		88FDB8901C8EA2A1008C9A3D /* TPWW_UMPG_Titan.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 88FDB8801C8EA2A1008C9A3D /* TPWW_UMPG_Titan.mp3 */; };
+		88FDB8911C8EA2A1008C9A3D /* DT_TheDuff_Ready2Go_128_INST.wav in Resources */ = {isa = PBXBuildFile; fileRef = 88FDB8811C8EA2A1008C9A3D /* DT_TheDuff_Ready2Go_128_INST.wav */; };
+		88FDB8921C8EA2A1008C9A3D /* DT_TheDUFF_EverySingleNight_INST_125.wav in Resources */ = {isa = PBXBuildFile; fileRef = 88FDB8821C8EA2A1008C9A3D /* DT_TheDUFF_EverySingleNight_INST_125.wav */; };
+		88FDB8931C8EA2A1008C9A3D /* DT_TheDuff_CandyHearts_F1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 88FDB8831C8EA2A1008C9A3D /* DT_TheDuff_CandyHearts_F1.wav */; };
+		88FDB8941C8EA2A1008C9A3D /* DT_TheDuff_CoolKids_INST130.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 88FDB8841C8EA2A1008C9A3D /* DT_TheDuff_CoolKids_INST130.mp3 */; };
+		88FDB8951C8EA2A1008C9A3D /* DT_SB_BurnItUp.wav in Resources */ = {isa = PBXBuildFile; fileRef = 88FDB8851C8EA2A1008C9A3D /* DT_SB_BurnItUp.wav */; };
+		88FDB8961C8EA2A1008C9A3D /* TPWW_BringIt_inst_F1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 88FDB8861C8EA2A1008C9A3D /* TPWW_BringIt_inst_F1.wav */; };
+		88FDB8971C8EA2A1008C9A3D /* TPWW_BringIt_F1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 88FDB8871C8EA2A1008C9A3D /* TPWW_BringIt_F1.wav */; };
 		C2B409966BE212B335038003 /* libPods-Spotlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F03B672A3CAD95AD6DB192BE /* libPods-Spotlight.a */; };
 /* End PBXBuildFile section */
 
@@ -184,6 +200,22 @@
 		88EC50301C12F19200077E85 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		88EE2CC41B9E08B2002DDB99 /* SpotlightFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotlightFeedViewController.h; sourceTree = "<group>"; };
 		88EE2CC51B9E08B2002DDB99 /* SpotlightFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotlightFeedViewController.m; sourceTree = "<group>"; };
+		88FDB8781C8EA2A1008C9A3D /* TPWW_UMPG_Problem.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = TPWW_UMPG_Problem.mp3; sourceTree = "<group>"; };
+		88FDB8791C8EA2A1008C9A3D /* TPWW_UMPG_Lost Worlds.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "TPWW_UMPG_Lost Worlds.mp3"; sourceTree = "<group>"; };
+		88FDB87A1C8EA2A1008C9A3D /* TPWW_InMyShoes_F1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = TPWW_InMyShoes_F1.wav; sourceTree = "<group>"; };
+		88FDB87B1C8EA2A1008C9A3D /* TPWW_TimeOfOurLives_F1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = TPWW_TimeOfOurLives_F1.wav; sourceTree = "<group>"; };
+		88FDB87C1C8EA2A1008C9A3D /* TPWW_JustTheWayItGoes_F1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = TPWW_JustTheWayItGoes_F1.wav; sourceTree = "<group>"; };
+		88FDB87D1C8EA2A1008C9A3D /* DT_TheDuff_LetMeSeeYouGetLow_main_F1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = DT_TheDuff_LetMeSeeYouGetLow_main_F1.wav; sourceTree = "<group>"; };
+		88FDB87E1C8EA2A1008C9A3D /* TB - Disney Funk 124bpm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "TB - Disney Funk 124bpm.mp3"; sourceTree = "<group>"; };
+		88FDB87F1C8EA2A1008C9A3D /* TPWW_ShakeThatLaLa_mastered.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = TPWW_ShakeThatLaLa_mastered.wav; sourceTree = "<group>"; };
+		88FDB8801C8EA2A1008C9A3D /* TPWW_UMPG_Titan.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = TPWW_UMPG_Titan.mp3; sourceTree = "<group>"; };
+		88FDB8811C8EA2A1008C9A3D /* DT_TheDuff_Ready2Go_128_INST.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = DT_TheDuff_Ready2Go_128_INST.wav; sourceTree = "<group>"; };
+		88FDB8821C8EA2A1008C9A3D /* DT_TheDUFF_EverySingleNight_INST_125.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = DT_TheDUFF_EverySingleNight_INST_125.wav; sourceTree = "<group>"; };
+		88FDB8831C8EA2A1008C9A3D /* DT_TheDuff_CandyHearts_F1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = DT_TheDuff_CandyHearts_F1.wav; sourceTree = "<group>"; };
+		88FDB8841C8EA2A1008C9A3D /* DT_TheDuff_CoolKids_INST130.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = DT_TheDuff_CoolKids_INST130.mp3; sourceTree = "<group>"; };
+		88FDB8851C8EA2A1008C9A3D /* DT_SB_BurnItUp.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = DT_SB_BurnItUp.wav; sourceTree = "<group>"; };
+		88FDB8861C8EA2A1008C9A3D /* TPWW_BringIt_inst_F1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = TPWW_BringIt_inst_F1.wav; sourceTree = "<group>"; };
+		88FDB8871C8EA2A1008C9A3D /* TPWW_BringIt_F1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = TPWW_BringIt_F1.wav; sourceTree = "<group>"; };
 		F03B672A3CAD95AD6DB192BE /* libPods-Spotlight.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Spotlight.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -300,6 +332,7 @@
 		88A736D71B91318D00093B27 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				88FDB8771C8EA268008C9A3D /* Music */,
 				88E98E851BAF507700292B14 /* Images */,
 				88A736D81B91318D00093B27 /* Info.plist */,
 				88A736D91B91318D00093B27 /* main.m */,
@@ -422,6 +455,29 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
+		88FDB8771C8EA268008C9A3D /* Music */ = {
+			isa = PBXGroup;
+			children = (
+				88FDB8781C8EA2A1008C9A3D /* TPWW_UMPG_Problem.mp3 */,
+				88FDB8791C8EA2A1008C9A3D /* TPWW_UMPG_Lost Worlds.mp3 */,
+				88FDB87A1C8EA2A1008C9A3D /* TPWW_InMyShoes_F1.wav */,
+				88FDB87B1C8EA2A1008C9A3D /* TPWW_TimeOfOurLives_F1.wav */,
+				88FDB87C1C8EA2A1008C9A3D /* TPWW_JustTheWayItGoes_F1.wav */,
+				88FDB87D1C8EA2A1008C9A3D /* DT_TheDuff_LetMeSeeYouGetLow_main_F1.wav */,
+				88FDB87E1C8EA2A1008C9A3D /* TB - Disney Funk 124bpm.mp3 */,
+				88FDB87F1C8EA2A1008C9A3D /* TPWW_ShakeThatLaLa_mastered.wav */,
+				88FDB8801C8EA2A1008C9A3D /* TPWW_UMPG_Titan.mp3 */,
+				88FDB8811C8EA2A1008C9A3D /* DT_TheDuff_Ready2Go_128_INST.wav */,
+				88FDB8821C8EA2A1008C9A3D /* DT_TheDUFF_EverySingleNight_INST_125.wav */,
+				88FDB8831C8EA2A1008C9A3D /* DT_TheDuff_CandyHearts_F1.wav */,
+				88FDB8841C8EA2A1008C9A3D /* DT_TheDuff_CoolKids_INST130.mp3 */,
+				88FDB8851C8EA2A1008C9A3D /* DT_SB_BurnItUp.wav */,
+				88FDB8861C8EA2A1008C9A3D /* TPWW_BringIt_inst_F1.wav */,
+				88FDB8871C8EA2A1008C9A3D /* TPWW_BringIt_F1.wav */,
+			);
+			name = Music;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -509,6 +565,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				88BDFC6A1BFD53BD007A3EBB /* gb.png in Resources */,
+				88FDB8881C8EA2A1008C9A3D /* TPWW_UMPG_Problem.mp3 in Resources */,
+				88FDB8941C8EA2A1008C9A3D /* DT_TheDuff_CoolKids_INST130.mp3 in Resources */,
+				88FDB8901C8EA2A1008C9A3D /* TPWW_UMPG_Titan.mp3 in Resources */,
 				88A736E31B91318D00093B27 /* Main.storyboard in Resources */,
 				88A736E81B91318D00093B27 /* LaunchScreen.xib in Resources */,
 				8893FD731BFC1C4600711779 /* profile@3x.png in Resources */,
@@ -517,16 +576,29 @@
 				8893FD771BFC1E0400711779 /* teams@3x.png in Resources */,
 				88E98E8B1BAF508400292B14 /* fielding ground ball.jpg in Resources */,
 				88BDFC651BFD4FD2007A3EBB /* BasicHeaderView.xib in Resources */,
+				88FDB8921C8EA2A1008C9A3D /* DT_TheDUFF_EverySingleNight_INST_125.wav in Resources */,
+				88FDB8911C8EA2A1008C9A3D /* DT_TheDuff_Ready2Go_128_INST.wav in Resources */,
+				88FDB88C1C8EA2A1008C9A3D /* TPWW_JustTheWayItGoes_F1.wav in Resources */,
+				88FDB8961C8EA2A1008C9A3D /* TPWW_BringIt_inst_F1.wav in Resources */,
 				88E953431BEB7FDF0094F73D /* Conference_call-100.png in Resources */,
+				88FDB88F1C8EA2A1008C9A3D /* TPWW_ShakeThatLaLa_mastered.wav in Resources */,
 				88A736E51B91318D00093B27 /* Images.xcassets in Resources */,
+				88FDB8891C8EA2A1008C9A3D /* TPWW_UMPG_Lost Worlds.mp3 in Resources */,
 				88E98E8A1BAF508400292B14 /* hockey.jpg in Resources */,
 				88E953411BEB7ED50094F73D /* Contacts-50.png in Resources */,
+				88FDB8931C8EA2A1008C9A3D /* DT_TheDuff_CandyHearts_F1.wav in Resources */,
+				88FDB88A1C8EA2A1008C9A3D /* TPWW_InMyShoes_F1.wav in Resources */,
 				884250B21C18929B009034A6 /* spotlight_logo.png in Resources */,
+				88FDB88E1C8EA2A1008C9A3D /* TB - Disney Funk 124bpm.mp3 in Resources */,
 				884250B41C18CA9D009034A6 /* eye_of_tiger.mp3 in Resources */,
 				88EC50261C0DC98D00077E85 /* icon-edit-avatar@2x.png in Resources */,
 				8893FD751BFC1CF600711779 /* friends@3x.png in Resources */,
+				88FDB8971C8EA2A1008C9A3D /* TPWW_BringIt_F1.wav in Resources */,
 				8893FD711BFC1B5900711779 /* spotlight@3x.png in Resources */,
+				88FDB88B1C8EA2A1008C9A3D /* TPWW_TimeOfOurLives_F1.wav in Resources */,
 				88CAE8D71BFB9AF30099A733 /* landingBg.jpg in Resources */,
+				88FDB8951C8EA2A1008C9A3D /* DT_SB_BurnItUp.wav in Resources */,
+				88FDB88D1C8EA2A1008C9A3D /* DT_TheDuff_LetMeSeeYouGetLow_main_F1.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -241,9 +241,45 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
 #pragma mark - Montage Functions
 
 - (IBAction)viewMontageButtonPressed:(id)sender {
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Select your background music"
+                                                                   message:@""
+                                                            preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"Problem"
+                                              style:UIAlertActionStyleDefault
+                                            handler:^(UIAlertAction * _Nonnull action) {
+                                                [self createMontageWithSongTitle:@"TPWW_UMPG_Problem"];
+                                            }]];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"Lost Worlds"
+                                              style:UIAlertActionStyleDefault
+                                            handler:^(UIAlertAction * _Nonnull action) {
+                                                [self createMontageWithSongTitle:@"TPWW_UMPG_Lost Worlds"];
+                                            }]];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"Disney Funk"
+                                              style:UIAlertActionStyleDefault
+                                            handler:^(UIAlertAction * _Nonnull action) {
+                                                [self createMontageWithSongTitle:@"TB - Disney Funk 124bpm"];
+                                            }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Titan"
+                                              style:UIAlertActionStyleDefault
+                                            handler:^(UIAlertAction * _Nonnull action) {
+                                                [self createMontageWithSongTitle:@"TPWW_UMPG_Titan"];
+                                            }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Cancel"
+                                              style:UIAlertActionStyleCancel
+                                            handler:^(UIAlertAction * _Nonnull action) {
+                                                
+                                            }]];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)createMontageWithSongTitle:(NSString*)songTitle {
+    
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [hud setLabelText:@"Creating Reel..."];
-    [[MontageCreator sharedCreator] createMontageWithMedia:[self.mediaList copy] completion:^(AVPlayerItem *item) {
+    [[MontageCreator sharedCreator] createMontageWithMedia:[self.mediaList copy] songTitle:songTitle completion:^(AVPlayerItem *item) {
         AVPlayer *player = [AVPlayer playerWithPlayerItem:item];
         AVPlayerViewController* VC = [[AVPlayerViewController alloc] init];
         [VC setShowsPlaybackControls:YES];
@@ -252,9 +288,11 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
                            animated:YES
                          completion:^{
                              [VC.player play];
-                             }];
+                         }];
         [hud hide:YES];
     }];
+    
+    
 }
 
 @end

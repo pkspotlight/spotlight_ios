@@ -13,5 +13,8 @@
 
 + (MontageCreator *)sharedCreator;
 
-- (void)createMontageWithMedia:(NSArray*)mediaArray completion:(void (^)(AVPlayerItem* item))completion;
+- (void)createMontageWithMedia:(NSArray*)mediaArray
+                     songTitle:(NSString*)songTitle
+                    completion:(void (^)(AVPlayerItem* item))completion;
+
 @end

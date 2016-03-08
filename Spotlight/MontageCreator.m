@@ -63,8 +63,9 @@
     _frameTime = CMTimeMake(1, 1);
 }
 
-- (void)createMontageWithMedia:(NSArray*)mediaArray completion:(void (^)(AVPlayerItem* item))completion{
-//    - (void)createMontageWithMedia:(NSArray*)mediaArray completion:(void (^ __nullable)(void))completion{
+- (void)createMontageWithMedia:(NSArray*)mediaArray
+                     songTitle:(NSString*)songTitle
+                    completion:(void (^)(AVPlayerItem* item))completion {
 
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND,0), ^{
@@ -76,15 +77,6 @@
         
         NSFileManager *manager = [NSFileManager defaultManager];
 
-        //quickness hack
-//        if ([manager fileExistsAtPath:myPathDocs]) {
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//               // [self exportDidFinish:exporter];
-//                completion();
-//            });
-//            return;
-//        }
-        
         self.videoSettings = [self videoSettingsWithCodec:AVVideoCodecH264
                                                 withWidth:1280
                                                 andHeight:720];
@@ -149,7 +141,7 @@
                 NSLog(@"error: %@", [error localizedDescription]);
             }
         }
-        NSURL *audio_url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"eye_of_tiger" ofType:@"mp3"]];
+        NSURL *audio_url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:songTitle ofType:@"mp3"]];
         AVURLAsset  *audioAsset = [[AVURLAsset alloc]initWithURL:audio_url options:nil];
         AVMutableCompositionTrack *audioTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio
                                                                             preferredTrackID:kCMPersistentTrackID_Invalid];

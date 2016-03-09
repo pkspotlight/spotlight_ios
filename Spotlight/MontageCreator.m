@@ -65,7 +65,8 @@
 
 - (void)createMontageWithMedia:(NSArray*)mediaArray
                      songTitle:(NSString*)songTitle
-                    completion:(void (^)(AVPlayerItem* item))completion {
+                       isShare:(BOOL)isShare
+                    completion:(void (^)(AVPlayerItem* item, NSURL* fileURL))completion {
 
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND,0), ^{
@@ -87,6 +88,8 @@
                                             preferredTrackID:kCMPersistentTrackID_Invalid];
         CMTime totalDuration = kCMTimeZero;
         NSError* error;
+        AVURLAsset *asset;
+        NSURL *fileURL;
         for (SpotlightMedia *media in mediaArray) {
             
             NSLog(@"downloading...");
@@ -95,7 +98,7 @@
             if (media.isVideo) {
                 NSLog(@"attempt...");
 
-                AVURLAsset *asset = [AVURLAsset URLAssetWithURL:[NSURL URLWithString:media.mediaFile.url]
+                asset = [AVURLAsset URLAssetWithURL:[NSURL URLWithString:media.mediaFile.url]
                                                         options:nil];
                 if (asset && [[asset tracksWithMediaType:AVMediaTypeVideo] count] > 0 ) {
                 [track insertTimeRange:CMTimeRangeMake(kCMTimeZero, asset.duration)
@@ -111,7 +114,7 @@
             } else {
                 
                 NSString *fileName = [NSString stringWithFormat:@"%@_%@", [[NSProcessInfo processInfo] globallyUniqueString], @"image.mov"];
-                NSURL *fileURL = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:fileName]];
+                fileURL = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:fileName]];
                 [self initWritersWithUrlPath:fileURL];
                 self.isWritingPhotoVideo = YES;
                 
@@ -128,7 +131,7 @@
                 while (self.isWritingPhotoVideo) {
                     [NSThread sleepForTimeInterval:0.05];
                 }
-                AVURLAsset *asset = [AVURLAsset URLAssetWithURL:fileURL
+                asset = [AVURLAsset URLAssetWithURL:fileURL
                                                         options:nil];
                 [track insertTimeRange:CMTimeRangeMake(kCMTimeZero, asset.duration)
                                ofTrack:[[asset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0]
@@ -149,7 +152,7 @@
                             ofTrack:[[audioAsset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0] atTime:kCMTimeZero error:nil];
         [manager removeItemAtPath:myPathDocs error:nil];
         NSLog(@"1");
-
+        
         
         NSMutableArray* instructions = [NSMutableArray array];
         
@@ -165,28 +168,52 @@
         
         AVPlayerItem *pi = [AVPlayerItem playerItemWithAsset:mixComposition];
         pi.videoComposition = mutableVideoComposition;
-
         
-                dispatch_async(dispatch_get_main_queue(), ^{
-
-        completion(pi);
-                });
-
+        //this is the thing
+        
+        if (!isShare) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                completion(pi,nil);
+            });
+        } else {
+            //
+            
+            
+            AVAssetExportSession *session = [[AVAssetExportSession alloc] initWithAsset:mixComposition presetName:AVAssetExportPresetHighestQuality];
+            // session.videoComposition = mutableVideoComposition;
+            NSString *fileName2 = [NSString stringWithFormat:@"%@_%@", [[NSProcessInfo processInfo] globallyUniqueString], @"ddd.mov"];
+            NSURL *fileURL2 = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:fileName2]];
+            session.outputURL = fileURL2;
+            session.outputFileType = AVFileTypeQuickTimeMovie;
+            [session exportAsynchronouslyWithCompletionHandler:
+             ^(void )
+             {
+                 NSLog(@"TADA!");
+                 
+                 
+                 dispatch_async(dispatch_get_main_queue(), ^{
+                     
+                     completion(pi, fileURL2);
+                 });
+                 
+             }];
+        }
         
         //all needed
-//        AVAssetExportSession *exporter = [[AVAssetExportSession alloc]
-//                                          initWithAsset:mixComposition
-//                                          presetName:AVMediaTypeVideo];
-//        exporter.outputURL = url;
-//        exporter.outputFileType = AVFileTypeMPEG4;
-//        exporter.shouldOptimizeForNetworkUse = YES;
-//        NSLog(@"2");
-//
-//        [exporter exportAsynchronouslyWithCompletionHandler:^{
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                NSLog(@"3");
-//                [self exportDidFinish:exporter];
-//                completion();
+        //        AVAssetExportSession *exporter = [[AVAssetExportSession alloc]
+        //                                          initWithAsset:mixComposition
+        //                                          presetName:AVMediaTypeVideo];
+        //        exporter.outputURL = url;
+        //        exporter.outputFileType = AVFileTypeMPEG4;
+        //        exporter.shouldOptimizeForNetworkUse = YES;
+        //        NSLog(@"2");
+        //
+        //        [exporter exportAsynchronouslyWithCompletionHandler:^{
+        //            dispatch_async(dispatch_get_main_queue(), ^{
+        //                NSLog(@"3");
+        //                [self exportDidFinish:exporter];
+        //                completion();
 //                NSLog(@"1");
 //
 //            });

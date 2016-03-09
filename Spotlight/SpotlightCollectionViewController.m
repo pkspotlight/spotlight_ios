@@ -24,6 +24,7 @@
 @property (strong, nonatomic) UIImagePickerController* imagePickerController;
 @property (assign, nonatomic) BOOL isShowingMontage;
 @property (weak, nonatomic) IBOutlet UIButton *viewSpotlightButton;
+@property (weak, nonatomic) IBOutlet UIButton *shareSpotlightButton;
 @property (strong, nonatomic) MWPhotoBrowser *browser;
 
 @end
@@ -238,59 +239,108 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
+
 #pragma mark - Montage Functions
 
 - (IBAction)viewMontageButtonPressed:(id)sender {
+    
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Select your background music"
                                                                    message:@""
                                                             preferredStyle:UIAlertControllerStyleActionSheet];
     
-    [alert addAction:[UIAlertAction actionWithTitle:@"Problem"
+    [alert addAction:[UIAlertAction actionWithTitle:@"Cool Kids"
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * _Nonnull action) {
-                                                [self createMontageWithSongTitle:@"TPWW_UMPG_Problem"];
+                                                [self createMontageWithSongTitle:@"DT_TheDuff_CoolKids_INST130" share:NO];
                                             }]];
-    
-    [alert addAction:[UIAlertAction actionWithTitle:@"Lost Worlds"
-                                              style:UIAlertActionStyleDefault
-                                            handler:^(UIAlertAction * _Nonnull action) {
-                                                [self createMontageWithSongTitle:@"TPWW_UMPG_Lost Worlds"];
-                                            }]];
-    
     [alert addAction:[UIAlertAction actionWithTitle:@"Disney Funk"
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * _Nonnull action) {
-                                                [self createMontageWithSongTitle:@"TB - Disney Funk 124bpm"];
+                                                [self createMontageWithSongTitle:@"TB - Disney Funk 124bpm" share:NO];
                                             }]];
-    [alert addAction:[UIAlertAction actionWithTitle:@"Titan"
+    [alert addAction:[UIAlertAction actionWithTitle:@"Every Single Night"
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * _Nonnull action) {
-                                                [self createMontageWithSongTitle:@"TPWW_UMPG_Titan"];
+                                                [self createMontageWithSongTitle:@"DT_TheDUFF_EverySingleNight_INST_125" share:NO];
+                                            }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Ready 2 Go"
+                                              style:UIAlertActionStyleDefault
+                                            handler:^(UIAlertAction * _Nonnull action) {
+                                                [self createMontageWithSongTitle:@"DT_TheDuff_Ready2Go_128_INST" share:NO];
                                             }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"Cancel"
                                               style:UIAlertActionStyleCancel
-                                            handler:^(UIAlertAction * _Nonnull action) {
-                                                
-                                            }]];
+                                            handler:nil]];
     [self presentViewController:alert animated:YES completion:nil];
 }
 
-- (void)createMontageWithSongTitle:(NSString*)songTitle {
+- (IBAction)shareMontageButtonPressed:(id)sender {
+    
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Select your background music"
+                                                                   message:@""
+                                                            preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"Cool Kids"
+                                              style:UIAlertActionStyleDefault
+                                            handler:^(UIAlertAction * _Nonnull action) {
+                                                [self createMontageWithSongTitle:@"DT_TheDuff_CoolKids_INST130" share:YES];
+                                            }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Disney Funk"
+                                              style:UIAlertActionStyleDefault
+                                            handler:^(UIAlertAction * _Nonnull action) {
+                                                [self createMontageWithSongTitle:@"TB - Disney Funk 124bpm" share:YES];
+                                            }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Every Single Night"
+                                              style:UIAlertActionStyleDefault
+                                            handler:^(UIAlertAction * _Nonnull action) {
+                                                [self createMontageWithSongTitle:@"DT_TheDUFF_EverySingleNight_INST_125"  share:YES];
+                                            }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Ready 2 Go"
+                                              style:UIAlertActionStyleDefault
+                                            handler:^(UIAlertAction * _Nonnull action) {
+                                                [self createMontageWithSongTitle:@"DT_TheDuff_Ready2Go_128_INST" share:YES];
+                                            }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Cancel"
+                                              style:UIAlertActionStyleCancel
+                                            handler:nil]];
+    [self presentViewController:alert animated:YES completion:nil];
+    
+}
+
+- (void)createMontageWithSongTitle:(NSString*)songTitle share:(BOOL)shouldShare{
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [hud setLabelText:@"Creating Reel..."];
-    [[MontageCreator sharedCreator] createMontageWithMedia:[self.mediaList copy] songTitle:songTitle completion:^(AVPlayerItem *item) {
-        AVPlayer *player = [AVPlayer playerWithPlayerItem:item];
-        AVPlayerViewController* VC = [[AVPlayerViewController alloc] init];
-        [VC setShowsPlaybackControls:YES];
-        [VC setPlayer:player];
-        [self presentViewController:VC
-                           animated:YES
-                         completion:^{
-                             [VC.player play];
-                         }];
-        [hud hide:YES];
-    }];
+    
+    if (shouldShare) {
+        [[MontageCreator sharedCreator] createMontageWithMedia:[self.mediaList copy] songTitle:songTitle isShare:YES completion:^(AVPlayerItem *item, NSURL *fileURL) {
+            
+            UIActivityViewController* AVC =  [[UIActivityViewController alloc] initWithActivityItems:@[fileURL, @"ducks"] applicationActivities:nil];
+            [self presentViewController:AVC
+                               animated:YES
+                             completion:^{
+                                               [hud hide:YES];
+                               }];
+            
+            
+        }];
+        
+    } else {
+        
+        [[MontageCreator sharedCreator] createMontageWithMedia:[self.mediaList copy] songTitle:songTitle  isShare:NO completion:^(AVPlayerItem *item, NSURL *fileURL) {
+            AVPlayer *player = [AVPlayer playerWithPlayerItem:item];
+            AVPlayerViewController* VC = [[AVPlayerViewController alloc] init];
+            
+            [VC setShowsPlaybackControls:YES];
+            [VC setPlayer:player];
+            [self presentViewController:VC
+                               animated:YES
+                             completion:^{
+                                 [VC.player play];
+                             }];
+            [hud hide:YES];
+        }];
+    }
     
     
 }

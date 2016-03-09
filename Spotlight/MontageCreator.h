@@ -13,8 +13,10 @@
 
 + (MontageCreator *)sharedCreator;
 
+
 - (void)createMontageWithMedia:(NSArray*)mediaArray
                      songTitle:(NSString*)songTitle
-                    completion:(void (^)(AVPlayerItem* item))completion;
+                       isShare:(BOOL)isShare
+                    completion:(void (^)(AVPlayerItem* item, NSURL* fileURL))completion;
 
 @end

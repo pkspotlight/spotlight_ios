@@ -64,47 +64,62 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Spotlight/MontageCreator.m"
-            timestampString = "474924895.899537"
+            timestampString = "479204710.217476"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "190"
-            endingLineNumber = "190"
-            landmarkName = "-createMontageWithMedia:songTitle:completion:"
+            startingLineNumber = "217"
+            endingLineNumber = "217"
+            landmarkName = "-createMontageWithMedia:songTitle:isShare:completion:"
             landmarkType = "5">
             <Locations>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "__62-[MontageCreator createMontageWithMedia:songTitle:completion:]_block_invoke"
                   moduleName = "Spotlight"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/pkamm/Documents/ios/Spotlight/Spotlight/MontageCreator.m"
-                  timestampString = "479111234.984927"
+                  timestampString = "479199575.411331"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "194"
                   endingLineNumber = "194"
-                  offsetFromSymbolStart = "6344">
+                  offsetFromSymbolStart = "4964">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "__copy_helper_block_202"
                   moduleName = "Spotlight"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/pkamm/Documents/ios/Spotlight/Spotlight/MontageCreator.m"
-                  timestampString = "479111234.985096"
+                  timestampString = "479199575.411517"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
                   endingLineNumber = "0"
-                  offsetFromSymbolStart = "16">
+                  offsetFromSymbolStart = "24">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__destroy_helper_block_203"
+                  moduleName = "Spotlight"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pkamm/Documents/ios/Spotlight/Spotlight/MontageCreator.m"
+                  timestampString = "479199575.411676"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "20">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -116,11 +131,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Spotlight/MontageCreator.m"
-            timestampString = "474925030.920327"
+            timestampString = "479204710.217476"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "200"
-            endingLineNumber = "200"
+            startingLineNumber = "227"
+            endingLineNumber = "227"
             landmarkName = "-createMovieFromImage:"
             landmarkType = "5">
          </BreakpointContent>
@@ -196,11 +211,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pods/MWPhotoBrowser/Pod/Classes/MWPhotoBrowser.m"
-            timestampString = "473707720.28534"
+            timestampString = "479197373.42403"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1558"
-            endingLineNumber = "1558"
+            startingLineNumber = "1561"
+            endingLineNumber = "1561"
             landmarkName = "-deleteButtonPressed:"
             landmarkType = "5">
          </BreakpointContent>
@@ -212,11 +227,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Spotlight/SpotlightCollectionViewController.m"
-            timestampString = "473707877.186477"
+            timestampString = "479204638.512384"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "145"
-            endingLineNumber = "145"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
             landmarkName = "-photoBrowser:deletePhotoAtIndex:"
             landmarkType = "5">
          </BreakpointContent>
@@ -362,22 +377,6 @@
             startingLineNumber = "91"
             endingLineNumber = "91"
             landmarkName = "-formatWithName:profilePicture:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Spotlight/SpotlightCollectionViewController.m"
-            timestampString = "479111225.346164"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "280"
-            endingLineNumber = "280"
-            landmarkName = "-createMontageWithSongTitle:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

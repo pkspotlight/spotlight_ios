@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *teamNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *spotlightDateLabel;
 @property (weak, nonatomic) IBOutlet UIButton *viewMontageButton;
+@property (weak, nonatomic) IBOutlet UIButton *shareMontageButton;
 @property (weak, nonatomic) IBOutlet UILabel *sportLabel;
 
 @end
@@ -34,6 +35,10 @@
     [self.viewMontageButton.layer setBorderColor:[UIColor whiteColor].CGColor];
     [self.viewMontageButton.layer setBorderWidth:1];
     [self.viewMontageButton.layer setCornerRadius:5];
+    
+    [self.shareMontageButton.layer setBorderColor:[UIColor whiteColor].CGColor];
+    [self.shareMontageButton.layer setBorderWidth:1];
+    [self.shareMontageButton.layer setCornerRadius:5];
     
     [self.teamImageView.layer setCornerRadius:self.teamImageView.bounds.size.width/2];
     [self.teamImageView.layer setBorderColor:[UIColor whiteColor].CGColor];

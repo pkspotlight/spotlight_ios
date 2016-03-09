@@ -212,19 +212,20 @@
                                     </variation>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jOs-Zz-Tmp">
-                                    <rect key="frame" x="135" y="106" width="457" height="30"/>
+                                    <rect key="frame" x="258" y="106" width="48" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="77y-xP-v7I"/>
-                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="gMP-Hq-iQX"/>
-                                        <constraint firstAttribute="width" constant="98" id="ws7-b6-2q6"/>
+                                        <constraint firstAttribute="width" constant="48" id="83Y-WN-L67"/>
+                                        <constraint firstAttribute="height" constant="30" id="EJb-mR-Ub2"/>
+                                        <constraint firstAttribute="width" constant="163" id="zo7-AA-M7i"/>
                                     </constraints>
-                                    <state key="normal" title="View Spotlight Reel">
+                                    <state key="normal" title="View">
                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
                                     <variation key="default">
                                         <mask key="constraints">
-                                            <exclude reference="gMP-Hq-iQX"/>
-                                            <exclude reference="ws7-b6-2q6"/>
+                                            <exclude reference="77y-xP-v7I"/>
+                                            <exclude reference="zo7-AA-M7i"/>
                                         </mask>
                                     </variation>
                                     <connections>
@@ -249,13 +250,49 @@
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Spotlight Reel: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tXG-my-qip">
+                                    <rect key="frame" x="142" y="106" width="108" height="30"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="108" id="U4Q-28-9jg"/>
+                                        <constraint firstAttribute="height" constant="30" id="gcx-r8-BQi"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Mj-hx-xFu">
+                                    <rect key="frame" x="314" y="106" width="48" height="30"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="30" id="86s-e2-MvR"/>
+                                        <constraint firstAttribute="height" constant="30" id="EW5-Ff-LOS"/>
+                                        <constraint firstAttribute="width" constant="163" id="aLo-9h-LzR"/>
+                                        <constraint firstAttribute="width" constant="48" id="c91-MQ-pEf"/>
+                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="tpJ-uv-nEj"/>
+                                    </constraints>
+                                    <state key="normal" title="Share">
+                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="86s-e2-MvR"/>
+                                            <exclude reference="aLo-9h-LzR"/>
+                                            <exclude reference="tpJ-uv-nEj"/>
+                                        </mask>
+                                    </variation>
+                                    <connections>
+                                        <action selector="shareMontageButtonPressed:" destination="h9E-yE-X25" eventType="touchUpInside" id="Dah-Kb-w2A"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" red="0.14901960780000001" green="0.60392156860000001" blue="0.91764705879999997" alpha="0.70199188931297707" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstItem="mvY-Pf-Phr" firstAttribute="trailing" secondItem="R0v-np-qOv" secondAttribute="trailingMargin" constant="-5" id="3fH-yf-8ky"/>
+                                <constraint firstItem="jOs-Zz-Tmp" firstAttribute="leading" secondItem="R0v-np-qOv" secondAttribute="leadingMargin" constant="127" id="6Lq-JW-MMb"/>
                                 <constraint firstItem="jOs-Zz-Tmp" firstAttribute="leading" secondItem="PF0-XN-vBN" secondAttribute="trailing" constant="-1" id="6fe-Xn-mnw"/>
+                                <constraint firstItem="tXG-my-qip" firstAttribute="bottom" secondItem="R0v-np-qOv" secondAttribute="bottomMargin" id="7yt-fd-spc"/>
                                 <constraint firstItem="Ghh-fS-gLH" firstAttribute="top" secondItem="7UG-Vn-rDX" secondAttribute="bottom" constant="19" id="9W5-g1-5R1"/>
                                 <constraint firstItem="jOs-Zz-Tmp" firstAttribute="leading" secondItem="PF0-XN-vBN" secondAttribute="trailing" constant="-1" id="A6k-MU-jI8"/>
+                                <constraint firstItem="5Mj-hx-xFu" firstAttribute="bottom" secondItem="R0v-np-qOv" secondAttribute="bottomMargin" id="ADQ-y3-qi6"/>
                                 <constraint firstItem="Ghh-fS-gLH" firstAttribute="leading" secondItem="PF0-XN-vBN" secondAttribute="trailing" constant="8" id="GXo-y8-2gf"/>
                                 <constraint firstItem="7UG-Vn-rDX" firstAttribute="trailing" secondItem="R0v-np-qOv" secondAttribute="trailingMargin" constant="-5" id="IpP-BK-TUy"/>
                                 <constraint firstItem="PF0-XN-vBN" firstAttribute="top" secondItem="R0v-np-qOv" secondAttribute="topMargin" id="JS4-rq-LLV"/>
@@ -263,13 +300,33 @@
                                 <constraint firstItem="PF0-XN-vBN" firstAttribute="leading" secondItem="R0v-np-qOv" secondAttribute="leadingMargin" id="KKU-Ez-JRm"/>
                                 <constraint firstItem="jOs-Zz-Tmp" firstAttribute="trailing" secondItem="R0v-np-qOv" secondAttribute="trailingMargin" id="LCV-Rw-oSD"/>
                                 <constraint firstItem="Ghh-fS-gLH" firstAttribute="trailing" secondItem="R0v-np-qOv" secondAttribute="trailingMargin" constant="-5" id="LQQ-ia-A2v"/>
+                                <constraint firstItem="5Mj-hx-xFu" firstAttribute="bottom" secondItem="R0v-np-qOv" secondAttribute="bottomMargin" id="SfO-Ct-SjE"/>
+                                <constraint firstItem="jOs-Zz-Tmp" firstAttribute="leading" secondItem="PF0-XN-vBN" secondAttribute="trailing" constant="8" id="avo-U0-wp8"/>
                                 <constraint firstItem="mvY-Pf-Phr" firstAttribute="top" secondItem="R0v-np-qOv" secondAttribute="topMargin" constant="29" id="c6c-Wx-LBz"/>
+                                <constraint firstItem="5Mj-hx-xFu" firstAttribute="leading" secondItem="jOs-Zz-Tmp" secondAttribute="trailing" constant="8" id="fDf-fh-b3Y"/>
                                 <constraint firstItem="jOs-Zz-Tmp" firstAttribute="bottom" secondItem="R0v-np-qOv" secondAttribute="bottomMargin" id="hmO-Oy-7Bl"/>
                                 <constraint firstItem="7UG-Vn-rDX" firstAttribute="top" secondItem="R0v-np-qOv" secondAttribute="topMargin" constant="8" id="jcW-Ji-Nj9"/>
+                                <constraint firstItem="jOs-Zz-Tmp" firstAttribute="leading" secondItem="tXG-my-qip" secondAttribute="trailing" constant="8" id="n2u-0T-c66"/>
                                 <constraint firstItem="7UG-Vn-rDX" firstAttribute="leading" secondItem="PF0-XN-vBN" secondAttribute="trailing" constant="8" id="o1u-rt-Yxk"/>
+                                <constraint firstAttribute="trailingMargin" secondItem="5Mj-hx-xFu" secondAttribute="trailing" constant="5" id="rfc-fs-6HO"/>
                                 <constraint firstItem="mvY-Pf-Phr" firstAttribute="leading" secondItem="PF0-XN-vBN" secondAttribute="trailing" constant="8" id="tpW-AN-vp4"/>
+                                <constraint firstItem="jOs-Zz-Tmp" firstAttribute="bottom" secondItem="R0v-np-qOv" secondAttribute="bottomMargin" id="ufl-ES-pxK"/>
+                                <constraint firstItem="tXG-my-qip" firstAttribute="leading" secondItem="PF0-XN-vBN" secondAttribute="trailing" constant="6" id="wKD-iG-km3"/>
                             </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="6Lq-JW-MMb"/>
+                                    <exclude reference="6fe-Xn-mnw"/>
+                                    <exclude reference="A6k-MU-jI8"/>
+                                    <exclude reference="LCV-Rw-oSD"/>
+                                    <exclude reference="avo-U0-wp8"/>
+                                    <exclude reference="hmO-Oy-7Bl"/>
+                                    <exclude reference="SfO-Ct-SjE"/>
+                                    <exclude reference="rfc-fs-6HO"/>
+                                </mask>
+                            </variation>
                             <connections>
+                                <outlet property="shareMontageButton" destination="5Mj-hx-xFu" id="qhH-Ya-I2I"/>
                                 <outlet property="sportLabel" destination="mvY-Pf-Phr" id="ROQ-zf-NCl"/>
                                 <outlet property="spotlightDateLabel" destination="Ghh-fS-gLH" id="l1j-gb-xnq"/>
                                 <outlet property="teamImageView" destination="PF0-XN-vBN" id="nMV-kL-All"/>

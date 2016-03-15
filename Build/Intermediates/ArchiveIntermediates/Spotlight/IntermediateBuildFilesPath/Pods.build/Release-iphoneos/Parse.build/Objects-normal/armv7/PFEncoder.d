@@ -1,0 +1,30 @@
+dependencies: \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFEncoder.m \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Target\ Support\ Files/Parse/Parse-prefix.pch \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFEncoder.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/ACL/PFACLPrivate.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/PFACL.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/PFNullability.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFAssert.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFMacros.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFBase64Encoder.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFDateFormatter.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/FieldOperation/PFFieldOperation.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/PFFile.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Bolts/Bolts/Common/BFTask.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Bolts/Bolts/Common/BFCancellationToken.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Bolts/Bolts/Common/BFCancellationTokenRegistration.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/PFConstants.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFGeoPointPrivate.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/PFGeoPoint.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/Object/PFObjectPrivate.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/PFObject.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFDecoder.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFMulticastDelegate.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/Object/Controller/PFObjectControlling.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/LocalDataStore/OfflineStore/PFOfflineStore.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/Relation/PFRelationPrivate.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/PFRelation.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/PFQuery.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/PFUser.h \
+  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/PFSubclassing.h

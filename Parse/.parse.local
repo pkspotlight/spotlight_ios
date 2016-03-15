@@ -1,0 +1,10 @@
+{
+  "applications": {
+    "Spotlight": {
+      "applicationId": "nuNuhBJQp4cYfeUnWlNFo27QUCKeAgWBX5D74r4F"
+    },
+    "_default": {
+      "link": "Spotlight"
+    }
+  }
+}

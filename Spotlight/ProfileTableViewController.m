@@ -15,6 +15,7 @@
 #import <AFNetworking/UIButton+AFNetworking.h>
 #import <MBProgressHUD.h>
 
+
 @interface ProfileTableViewController ()
 
 @property (strong, nonatomic) NSMutableDictionary *pendingFieldDictionary;
@@ -35,8 +36,8 @@
     
     self.user = [User currentUser];
     
-    self.userPropertyArray = @[ @"firstName", @"lastName", @"homeTown", @"family" ];
-    self.userPropertyArrayDisplayText = @[ @"First Name", @"Last Name", @"Hometown", @"Family" ];
+    self.userPropertyArray = @[ @"username", @"firstName", @"lastName", @"homeTown", @"family" ];
+    self.userPropertyArrayDisplayText = @[ @"Username", @"First Name", @"Last Name", @"Hometown", @"Family" ];
 
     self.pendingFieldDictionary = [self newPendingFieldDictionary];
     
@@ -89,7 +90,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -107,16 +108,42 @@
                                                      displayText:self.userPropertyArrayDisplayText[indexPath.row]
                                                        withValue:self.pendingFieldDictionary[property]];
         [(FieldEntryTableViewCell*)cell setDelegate:self];
+    } else if (indexPath.section == 1) {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"SendFeedbackCellId" forIndexPath:indexPath];
     } else {
         cell = [tableView dequeueReusableCellWithIdentifier:@"LogoutCellId" forIndexPath:indexPath];
+
     }
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    [self logout];
+    if (indexPath.section == 1) {
+        [self showFeedbackEmail];
+    } else {
+        [self logout];
+    }
 }
+
+- (void)showFeedbackEmail {
+    
+    if ([MFMailComposeViewController canSendMail])
+    {
+        MFMailComposeViewController *mail = [[MFMailComposeViewController alloc] init];
+        mail.mailComposeDelegate = self;
+        [mail setSubject:@"Spotlight Feedback"];
+        [mail setToRecipients:@[@"ryan@myspotlight.me"]];
+        
+        [self presentViewController:mail animated:YES completion:NULL];
+    }
+    else
+    {
+        NSLog(@"This device cannot send email");
+    }
+    
+}
+
+
 - (IBAction)editPictureButtonPressed:(id)sender {
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
     {
@@ -152,6 +179,33 @@
 {
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
+
+#pragma mark - Mail Composer Methods
+
+
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    switch (result) {
+        case MFMailComposeResultSent:
+            NSLog(@"You sent the email.");
+            break;
+        case MFMailComposeResultSaved:
+            NSLog(@"You saved a draft of this email");
+            break;
+        case MFMailComposeResultCancelled:
+            NSLog(@"You cancelled sending this email.");
+            break;
+        case MFMailComposeResultFailed:
+            NSLog(@"Mail failed:  An error occurred when trying to compose this email");
+            break;
+        default:
+            NSLog(@"An error occurred when trying to compose this email");
+            break;
+    }
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
 
 
 #pragma mark - Delegate Methods

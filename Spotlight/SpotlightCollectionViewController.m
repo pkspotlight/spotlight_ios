@@ -150,20 +150,19 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
 
 
 -(void)photoBrowser:(MWPhotoBrowser *)photoBrowser likePhotoAtIndex:(NSUInteger)index {
-    [self.navigationController popViewControllerAnimated:YES];
     SpotlightMedia *media = self.mediaList[index];
     PFQuery* query = [media.likes query];
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         for (User* user in objects) {
             if ([user.objectId isEqualToString:[[User currentUser] objectId]]) {
                 [media unlikeInBackgroundFromUser:[User currentUser] completion:^{
-                    [self refresh:nil];
+                    [self photoBrowser:self.browser populateLikesForPhotoAtIndex:index];
                 }];
                 return;
             }
         }
         [media likeInBackgroundFromUser:[User currentUser] completion:^{
-            [self refresh:nil];
+            [self photoBrowser:self.browser populateLikesForPhotoAtIndex:index];
         }];
     }];
 }
@@ -173,7 +172,6 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
     [media likeCountWithCompletion:^(NSInteger likes) {
         [self.browser populateLikeCount:likes atIndex:index];
     }];
-
 }
 
 

@@ -62,6 +62,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
         if (!error) {
             NSLog(@"Successfully retrieved my %lu Teams.", (unsigned long)objects.count);
             [self.teams addObjectsFromArray:[objects copy]];
+            [self sortTeamsArray:self.teams];
             PFQuery *query = [self.user.children query];
             [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
                 for (Child* child in objects) {
@@ -85,6 +86,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
         if (!error) {
             NSLog(@"Successfully retrieved child's %lu Teams.", (unsigned long)objects.count);
             [self.teams addObjectsFromArray:[objects copy]];
+            [self sortTeamsArray:self.teams];
             [self.tableView reloadData];
             [sender endRefreshing];
         } else {
@@ -93,6 +95,36 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
         }
     }];
 }
+
+- (void)sortTeamsArray:(NSMutableArray*)teams {
+    NSArray *sortedArray = [teams sortedArrayUsingComparator:^NSComparisonResult(Team* a, Team* b) {
+        if (a.year == b.year) {
+            if ([[a.season lowercaseString] isEqualToString:@"fall"]) {
+                return (NSComparisonResult)NSOrderedAscending;
+            } else if ([[a.season lowercaseString] isEqualToString:@"winter"]) {
+                if ([[b.season lowercaseString] isEqualToString:@"fall"]) {
+                    return (NSComparisonResult)NSOrderedAscending;
+                }else{
+                    return (NSComparisonResult)NSOrderedDescending;
+                }
+            }  else if ([[a.season lowercaseString] isEqualToString:@"spring"]) {
+                if ([[b.season lowercaseString] isEqualToString:@"fall"] || [[b.season lowercaseString] isEqualToString:@"winter"]) {
+                    return (NSComparisonResult)NSOrderedDescending;
+                }else{
+                    return (NSComparisonResult)NSOrderedAscending;
+                }
+            } else {
+                return (NSComparisonResult)NSOrderedDescending;
+            }
+        } else if (a.year > b.year) {
+            return (NSComparisonResult)NSOrderedAscending;
+        }
+        return (NSComparisonResult)NSOrderedDescending;
+    }];
+    self.teams = [NSMutableArray arrayWithArray:sortedArray];
+}
+    
+    
 
 #pragma mark - Table view data source
 

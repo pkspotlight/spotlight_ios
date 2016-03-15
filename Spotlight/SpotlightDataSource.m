@@ -94,7 +94,7 @@
     [spotlightQuery includeKey:@"teamLogoMedia"];
     [spotlightQuery includeKey:@"thumbnailImageFile"];
     [spotlightQuery whereKey:@"team" matchesKey:@"objectId" inQuery:teamQuery];
-    
+    [spotlightQuery orderByDescending:@"createdAt"];
     [spotlightQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             NSLog(@"Successfully retrieved %lu Spotlights.", (unsigned long)objects.count);
@@ -113,10 +113,11 @@
     [spotlightQuery includeKey:@"teamLogoMedia"];
     [spotlightQuery includeKey:@"thumbnailImageFile"];
     [spotlightQuery whereKey:@"team" equalTo:team];
+    [spotlightQuery orderByDescending:@"createdAt"];
     [spotlightQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             NSLog(@"Successfully retrieved %lu Spotlights.", (unsigned long)objects.count);
-            self.spotlights = objects;
+            self.spotlights = [self sortSpotlightsByCreatedDate:objects];
             if (completion) completion();
         } else {
             NSLog(@"Error: %@ %@", error, [error userInfo]);
@@ -138,10 +139,12 @@
     [spotlightQuery includeKey:@"thumbnailImageFile"];
     
     [spotlightQuery whereKey:@"team" matchesKey:@"objectId" inQuery:teamQuery];
+    [spotlightQuery orderByDescending:@"createdAt"];
+
     [spotlightQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             NSLog(@"Successfully retrieved %lu Spotlights.", (unsigned long)objects.count);
-            self.spotlights = objects;
+            self.spotlights = [self sortSpotlightsByCreatedDate:objects];
             [self loadSpotlightsForChildren:[user children]
                                  completion:completion];
         } else {
@@ -158,10 +161,22 @@
         for (Child* child in objects) {
             [self synchronouslyLoadSpotlightForChild:child];
         }
+        self.spotlights = [self sortSpotlightsByCreatedDate:self.spotlights];
+
         // add error checking here
         if (completion) completion();
     }];
     
+}
+
+- (NSArray*)sortSpotlightsByCreatedDate:(NSArray*)spotlights {
+    return [spotlights sortedArrayUsingComparator:^NSComparisonResult(Spotlight*  _Nonnull obj1, Spotlight*  _Nonnull obj2) {
+        if ([[obj1.createdAt laterDate:obj2.createdAt] isEqualToDate:obj1.createdAt]) {
+            return (NSComparisonResult)NSOrderedAscending;
+        } else {
+            return (NSComparisonResult)NSOrderedDescending;
+        }
+    }];
 }
 
 - (void)synchronouslyLoadSpotlightForChild:(Child*)child{
@@ -179,6 +194,7 @@
         [self addUniqueSpotlight:spotlight];
     }
 }
+
 
 - (void)addUniqueSpotlight:(Spotlight*)nextSpotlight {
     

@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "FieldEntryTableViewCell.h"
+#import <MessageUI/MessageUI.h>
 
 @class User;
 
-@interface ProfileTableViewController : UITableViewController  <FieldEntryTextFieldCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate>
+@interface ProfileTableViewController : UITableViewController  <FieldEntryTextFieldCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, MFMailComposeViewControllerDelegate>
 
 @property(strong, nonatomic) User* user;
 

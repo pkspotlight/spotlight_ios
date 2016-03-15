@@ -7,6 +7,7 @@
 //
 
 #import "SpotlightMedia.h"
+#import "User.h"
 
 @implementation SpotlightMedia
 
@@ -18,5 +19,22 @@
     return @"SpotlightMedia";
 }
 
+- (void)likeInBackgroundFromUser:(User*)user completion:(void (^)(void))completion{
+    [self.likes addObject:user];
+    [self saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (completion) {
+            completion();
+        }
+    }];
+}
+
+- (void)unlikeInBackgroundFromUser:(User*)user completion:(void (^)(void))completion{
+    [self.likes removeObject:user];
+    [self saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (completion) {
+            completion();
+        }
+    }];
+}
 
 @end

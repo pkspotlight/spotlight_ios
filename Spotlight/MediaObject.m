@@ -16,6 +16,7 @@
 @dynamic mediaFile;
 @dynamic thumbnailImageFile;
 @dynamic isVideo;
+@dynamic likes;
 
 - (instancetype)initWithVideoPath:(NSString*)path {
     
@@ -54,6 +55,13 @@
     CGImageRelease(imageRef);  // CGImageRef won't be released by ARC
     
     return thumbnail;
+}
+
+- (void)likeCountWithCompletion:(void (^)(NSInteger likes))completion{
+    PFQuery* query = [self.likes query];
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        completion(objects.count);
+    }];
 }
 
 @end

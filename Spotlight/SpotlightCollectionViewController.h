@@ -14,4 +14,6 @@
 
 @property (strong, nonatomic) Spotlight* spotlight;
 
+-(void)photoBrowser:(MWPhotoBrowser *)photoBrowser likePhotoAtIndex:(NSUInteger)index;
+
 @end

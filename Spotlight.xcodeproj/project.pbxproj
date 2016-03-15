@@ -13,7 +13,6 @@
 		880726F61C778F0400F2C1B9 /* TeamFinderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 880726F51C778F0400F2C1B9 /* TeamFinderTableViewController.m */; };
 		883265491C8F79E80063D1F9 /* DT_TheDUFF_EverySingleNight_INST_125.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 883265481C8F79E80063D1F9 /* DT_TheDUFF_EverySingleNight_INST_125.mp3 */; };
 		8832654B1C8F79F80063D1F9 /* DT_TheDuff_Ready2Go_128_INST.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8832654A1C8F79F80063D1F9 /* DT_TheDuff_Ready2Go_128_INST.mp3 */; };
-		8832654D1C8FF0BC0063D1F9 /* like@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8832654C1C8FF0BC0063D1F9 /* like@3x.png */; };
 		883D63F41C07151700AE99CC /* MediaObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 883D63F31C07151700AE99CC /* MediaObject.m */; };
 		883D63F91C0719E300AE99CC /* TeamLogoMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = 883D63F81C0719E300AE99CC /* TeamLogoMedia.m */; };
 		884250AD1C173076009034A6 /* TeamDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 884250AC1C173076009034A6 /* TeamDetailsViewController.m */; };
@@ -33,6 +32,9 @@
 		8893FD771BFC1E0400711779 /* teams@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8893FD761BFC1E0400711779 /* teams@3x.png */; };
 		8893FD7A1BFCCC2100711779 /* Team.m in Sources */ = {isa = PBXBuildFile; fileRef = 8893FD791BFCCC2100711779 /* Team.m */; };
 		8893FD7D1BFD1FCB00711779 /* FieldEntryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8893FD7C1BFD1FCB00711779 /* FieldEntryTableViewCell.m */; };
+		889DEEC81C97370100726D83 /* heart.png in Resources */ = {isa = PBXBuildFile; fileRef = 889DEEC51C97370100726D83 /* heart.png */; };
+		889DEEC91C97370100726D83 /* heart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 889DEEC61C97370100726D83 /* heart@2x.png */; };
+		889DEECA1C97370100726D83 /* heart@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 889DEEC71C97370100726D83 /* heart@3x.png */; };
 		88A736DA1B91318D00093B27 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A736D91B91318D00093B27 /* main.m */; };
 		88A736DD1B91318D00093B27 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A736DC1B91318D00093B27 /* AppDelegate.m */; };
 		88A736E31B91318D00093B27 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88A736E11B91318D00093B27 /* Main.storyboard */; };
@@ -97,7 +99,6 @@
 		880726F51C778F0400F2C1B9 /* TeamFinderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamFinderTableViewController.m; sourceTree = "<group>"; };
 		883265481C8F79E80063D1F9 /* DT_TheDUFF_EverySingleNight_INST_125.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = DT_TheDUFF_EverySingleNight_INST_125.mp3; sourceTree = "<group>"; };
 		8832654A1C8F79F80063D1F9 /* DT_TheDuff_Ready2Go_128_INST.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = DT_TheDuff_Ready2Go_128_INST.mp3; sourceTree = "<group>"; };
-		8832654C1C8FF0BC0063D1F9 /* like@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "like@3x.png"; sourceTree = "<group>"; };
 		883D63F21C07151700AE99CC /* MediaObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaObject.h; sourceTree = "<group>"; };
 		883D63F31C07151700AE99CC /* MediaObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaObject.m; sourceTree = "<group>"; };
 		883D63F71C0719E300AE99CC /* TeamLogoMedia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamLogoMedia.h; sourceTree = "<group>"; };
@@ -129,6 +130,9 @@
 		8893FD791BFCCC2100711779 /* Team.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Team.m; sourceTree = "<group>"; };
 		8893FD7B1BFD1FCB00711779 /* FieldEntryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FieldEntryTableViewCell.h; sourceTree = "<group>"; };
 		8893FD7C1BFD1FCB00711779 /* FieldEntryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FieldEntryTableViewCell.m; sourceTree = "<group>"; };
+		889DEEC51C97370100726D83 /* heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heart.png; sourceTree = "<group>"; };
+		889DEEC61C97370100726D83 /* heart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart@2x.png"; sourceTree = "<group>"; };
+		889DEEC71C97370100726D83 /* heart@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart@3x.png"; sourceTree = "<group>"; };
 		88A736D41B91318D00093B27 /* Spotlight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spotlight.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88A736D81B91318D00093B27 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88A736D91B91318D00093B27 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -412,7 +416,9 @@
 		88E98E851BAF507700292B14 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				8832654C1C8FF0BC0063D1F9 /* like@3x.png */,
+				889DEEC51C97370100726D83 /* heart.png */,
+				889DEEC61C97370100726D83 /* heart@2x.png */,
+				889DEEC71C97370100726D83 /* heart@3x.png */,
 				884250B11C18929B009034A6 /* spotlight_logo.png */,
 				88EC50271C0DCC2C00077E85 /* unknown_user.png */,
 				88EC50251C0DC98D00077E85 /* icon-edit-avatar@2x.png */,
@@ -529,6 +535,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				88BDFC6A1BFD53BD007A3EBB /* gb.png in Resources */,
+				889DEEC81C97370100726D83 /* heart.png in Resources */,
 				883265491C8F79E80063D1F9 /* DT_TheDUFF_EverySingleNight_INST_125.mp3 in Resources */,
 				88FDB8941C8EA2A1008C9A3D /* DT_TheDuff_CoolKids_INST130.mp3 in Resources */,
 				88A736E31B91318D00093B27 /* Main.storyboard in Resources */,
@@ -539,6 +546,7 @@
 				8893FD771BFC1E0400711779 /* teams@3x.png in Resources */,
 				88E98E8B1BAF508400292B14 /* fielding ground ball.jpg in Resources */,
 				88BDFC651BFD4FD2007A3EBB /* BasicHeaderView.xib in Resources */,
+				889DEECA1C97370100726D83 /* heart@3x.png in Resources */,
 				88E953431BEB7FDF0094F73D /* Conference_call-100.png in Resources */,
 				88A736E51B91318D00093B27 /* Images.xcassets in Resources */,
 				88E98E8A1BAF508400292B14 /* hockey.jpg in Resources */,
@@ -548,8 +556,8 @@
 				8832654B1C8F79F80063D1F9 /* DT_TheDuff_Ready2Go_128_INST.mp3 in Resources */,
 				88EC50261C0DC98D00077E85 /* icon-edit-avatar@2x.png in Resources */,
 				8893FD751BFC1CF600711779 /* friends@3x.png in Resources */,
+				889DEEC91C97370100726D83 /* heart@2x.png in Resources */,
 				8893FD711BFC1B5900711779 /* spotlight@3x.png in Resources */,
-				8832654D1C8FF0BC0063D1F9 /* like@3x.png in Resources */,
 				88CAE8D71BFB9AF30099A733 /* landingBg.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

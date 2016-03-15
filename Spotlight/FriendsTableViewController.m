@@ -92,16 +92,16 @@ static CGFloat const BasicHeaderHeight = 50;
 }
 
 - (IBAction)plusButtonPressed:(id)sender {
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Add a New Spotlighter"
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Search/Add Spotlighters"
                                                                     message:@""
                                                              preferredStyle:UIAlertControllerStyleActionSheet];
-    [alert addAction:[UIAlertAction actionWithTitle:@"Search Spotlighters"
+    [alert addAction:[UIAlertAction actionWithTitle:@"Search/Add Spotlighters"
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * _Nonnull action) {
                                                 [self performSegueWithIdentifier:@"SearchFriendsSegue"
                                                                           sender:sender];
                                             }]];
-    [alert addAction:[UIAlertAction actionWithTitle:@"Add Family Member"
+    [alert addAction:[UIAlertAction actionWithTitle:@"Add Family Members"
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * _Nonnull action) {
                                                 [self performSegueWithIdentifier:@"CreateFamilyMemberSegue"

@@ -15,9 +15,11 @@
 
 - (instancetype)initWithVideoPath:(NSString*)path;
 - (instancetype)initWithImage:(UIImage*)image;
+- (void)likeCountWithCompletion:(void (^)(NSInteger likes))completion;
 
 @property (strong, nonatomic) PFFile *mediaFile;
 @property (strong, nonatomic) PFFile *thumbnailImageFile;
 @property (assign, nonatomic) BOOL isVideo;
+@property (readonly, nonatomic) PFRelation* likes;
 
 @end

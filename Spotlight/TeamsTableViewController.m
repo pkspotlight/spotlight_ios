@@ -118,7 +118,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 
 
 - (IBAction)addTeamButtonPressed:(id)sender {
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Add a New Team"
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Search/Add a New Team"
                                                                    message:@""
                                                             preferredStyle:UIAlertControllerStyleActionSheet];
     [alert addAction:[UIAlertAction actionWithTitle:@"Search Teams"

@@ -11,6 +11,7 @@
 #import "SpotlightMediaCollectionViewCell.h"
 #import "SpotlightMedia.h"
 #import "Team.h"
+#import "User.h"
 #import "MontageCreator.h"
 
 #import <MobileCoreServices/UTCoreTypes.h>
@@ -146,6 +147,35 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
         [self refresh:nil];
     }];
 }
+
+
+-(void)photoBrowser:(MWPhotoBrowser *)photoBrowser likePhotoAtIndex:(NSUInteger)index {
+    [self.navigationController popViewControllerAnimated:YES];
+    SpotlightMedia *media = self.mediaList[index];
+    PFQuery* query = [media.likes query];
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        for (User* user in objects) {
+            if ([user.objectId isEqualToString:[[User currentUser] objectId]]) {
+                [media unlikeInBackgroundFromUser:[User currentUser] completion:^{
+                    [self refresh:nil];
+                }];
+                return;
+            }
+        }
+        [media likeInBackgroundFromUser:[User currentUser] completion:^{
+            [self refresh:nil];
+        }];
+    }];
+}
+
+-(void)photoBrowser:(MWPhotoBrowser *)photoBrowser populateLikesForPhotoAtIndex:(NSUInteger)index {
+    SpotlightMedia *media = self.mediaList[index];
+    [media likeCountWithCompletion:^(NSInteger likes) {
+        [self.browser populateLikeCount:likes atIndex:index];
+    }];
+
+}
+
 
 - (IBAction)addMediaButtonPressed:(id)sender {
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
@@ -315,7 +345,7 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
     if (shouldShare) {
         [[MontageCreator sharedCreator] createMontageWithMedia:[self.mediaList copy] songTitle:songTitle isShare:YES completion:^(AVPlayerItem *item, NSURL *fileURL) {
             
-            UIActivityViewController* AVC =  [[UIActivityViewController alloc] initWithActivityItems:@[fileURL, @"ducks"] applicationActivities:nil];
+            UIActivityViewController* AVC =  [[UIActivityViewController alloc] initWithActivityItems:@[fileURL, @""] applicationActivities:nil];
             [self presentViewController:AVC
                                animated:YES
                              completion:^{

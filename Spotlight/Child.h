@@ -23,5 +23,6 @@
 
 - (NSString*)displayName;
 - (void)followTeam:(Team*)team completion:(void (^)(void))completion;
+- (void)unfollowTeam:(Team*)team completion:(void (^)(void))completion;
 
 @end

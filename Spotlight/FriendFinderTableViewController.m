@@ -81,17 +81,36 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     [self.searchBar resignFirstResponder];
     
     //Strip the whitespace off the end of the search text
-    NSString *searchText = [self.searchBar.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSArray* components = [self.searchBar.text componentsSeparatedByString:@" "];
+//    NSString *searchText = [self.searchBar.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
-    if (![searchText isEqualToString:@""]) {
+    if (![components[0] isEqualToString:@""]) {
         PFQuery *firstQuery = [User query];
         PFQuery *secondQuery = [User query];
+        PFQuery *usernameQuery = [User query];
+        PFQuery *emailQuery = [User query];
+        PFQuery *lastNameQuery = [User query];
+
         
-        [firstQuery whereKey:@"firstName" containsString:searchText];
-        [secondQuery whereKey:@"lastName" containsString:searchText];
+        [firstQuery whereKey:@"firstName" containsString:components[0]];
+        [secondQuery whereKey:@"lastName" containsString:components[0]];
+        [usernameQuery whereKey:@"username" containsString:[components[0] lowercaseString]];
+        [emailQuery whereKey:@"email" containsString:[components[0] lowercaseString]];
         
-        PFQuery *query = [PFQuery orQueryWithSubqueries:@[firstQuery,
-                                                          secondQuery]];
+        PFQuery *query;
+        if (components.count > 1) {
+            [lastNameQuery whereKey:@"lastName" containedIn:components[1]];
+            query = [PFQuery orQueryWithSubqueries:@[firstQuery,
+                                                              secondQuery,
+                                                              usernameQuery,
+                                                              emailQuery,
+                                                     lastNameQuery]];
+        }else {
+            query = [PFQuery orQueryWithSubqueries:@[firstQuery,
+                                                     secondQuery,
+                                                     usernameQuery,
+                                                     emailQuery]];
+        }
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             if (!error) {
                 self.searchResults = objects;

@@ -31,6 +31,24 @@
     [self.tableView setDataSource:self.dataSource];
     [refresh beginRefreshing];
     [self refresh:refresh];
+    
+    UIView *headerView = [[UIView alloc] init];
+    headerView.frame = CGRectMake(0, 0, 320, 70);
+    
+    UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"spotlightWriting"]];
+    imgView.frame = CGRectMake(58, 0, 240, 70);
+    imgView.contentMode = UIViewContentModeScaleAspectFit;
+    
+    [headerView addSubview:imgView];
+    
+    self.navigationItem.titleView = headerView;
+//    
+//    
+//    
+//    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"spotlightWriting"]];
+//    [self.navigationItem.titleView setFrame:CGRectMake(40, 0, 70, 60)];
+//    //[self.navigationItem.titleView]
+//    [self.navigationItem.titleView setContentMode:UIViewContentModeScaleAspectFit];
 }
 
 - (void)refresh:(id)sender {

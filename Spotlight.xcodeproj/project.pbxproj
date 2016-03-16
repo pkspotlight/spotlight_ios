@@ -36,6 +36,7 @@
 		889DEEC91C97370100726D83 /* heart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 889DEEC61C97370100726D83 /* heart@2x.png */; };
 		889DEECA1C97370100726D83 /* heart@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 889DEEC71C97370100726D83 /* heart@3x.png */; };
 		889DEECC1C98B90000726D83 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 889DEECB1C98B90000726D83 /* MessageUI.framework */; };
+		889DEED01C98E6E100726D83 /* spotlightWriting.png in Resources */ = {isa = PBXBuildFile; fileRef = 889DEECF1C98E6E100726D83 /* spotlightWriting.png */; };
 		88A736DA1B91318D00093B27 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A736D91B91318D00093B27 /* main.m */; };
 		88A736DD1B91318D00093B27 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A736DC1B91318D00093B27 /* AppDelegate.m */; };
 		88A736E31B91318D00093B27 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88A736E11B91318D00093B27 /* Main.storyboard */; };
@@ -135,6 +136,7 @@
 		889DEEC61C97370100726D83 /* heart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart@2x.png"; sourceTree = "<group>"; };
 		889DEEC71C97370100726D83 /* heart@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart@3x.png"; sourceTree = "<group>"; };
 		889DEECB1C98B90000726D83 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		889DEECF1C98E6E100726D83 /* spotlightWriting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spotlightWriting.png; sourceTree = "<group>"; };
 		88A736D41B91318D00093B27 /* Spotlight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spotlight.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88A736D81B91318D00093B27 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88A736D91B91318D00093B27 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -420,6 +422,7 @@
 		88E98E851BAF507700292B14 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				889DEECF1C98E6E100726D83 /* spotlightWriting.png */,
 				889DEEC51C97370100726D83 /* heart.png */,
 				889DEEC61C97370100726D83 /* heart@2x.png */,
 				889DEEC71C97370100726D83 /* heart@3x.png */,
@@ -552,6 +555,7 @@
 				8893FD731BFC1C4600711779 /* profile@3x.png in Resources */,
 				88EC50281C0DCC2C00077E85 /* unknown_user.png in Resources */,
 				88E98E891BAF508400292B14 /* Softball.JPG in Resources */,
+				889DEED01C98E6E100726D83 /* spotlightWriting.png in Resources */,
 				8893FD771BFC1E0400711779 /* teams@3x.png in Resources */,
 				88E98E8B1BAF508400292B14 /* fielding ground ball.jpg in Resources */,
 				88BDFC651BFD4FD2007A3EBB /* BasicHeaderView.xib in Resources */,

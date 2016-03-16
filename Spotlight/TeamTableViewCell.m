@@ -71,23 +71,35 @@
 }
 
 - (IBAction)followButtonPressed:(id)sender {
+    if (_isFollowing) {
+        [self.delegate
+         unfollowButtonPressed:self
+         completion:^(void){
+             self.isFollowing = NO;
+             [self formatButtonText];
+         }];
+    } else {
+        [self.delegate
+         followButtonPressed:self
+         completion:^(void){
+             self.isFollowing = YES;
+             [self formatButtonText];
+         }];
+    }
     
-    [self.delegate performSelector:@selector(followButtonPressed:)
-                        withObject:self];
-    
-//    
-//    [self.followingActivityIndicator startAnimating];
-//    PFUser* user = [PFUser currentUser];
-//    PFRelation *participantRelation = [self.team relationForKey:@"teamParticipants"];
-//    if (_isFollowing) {
-//        
-//        [User currentUser] fol
-//        
-//        
-//        [participantRelation removeObject:user];
-//    } else {
-//        [participantRelation addObject:user];
-//    }
+    //
+    //    [self.followingActivityIndicator startAnimating];
+    //    PFUser* user = [PFUser currentUser];
+    //    PFRelation *participantRelation = [self.team relationForKey:@"teamParticipants"];
+    //    if (_isFollowing) {
+    //
+    //        [User currentUser] fol
+    //
+    //
+    //        [participantRelation removeObject:user];
+    //    } else {
+    //        [participantRelation addObject:user];
+    //    }
 //    
 //    
 //    

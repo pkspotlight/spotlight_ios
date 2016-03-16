@@ -43,6 +43,8 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 
 - (void)refresh:(UIRefreshControl*)sender {
     [sender beginRefreshing];
+    self.teams = [NSMutableArray array];
+    [self.tableView reloadData];
     if (self.child){
         [self loadChildTeams:self.child sender:sender];
     } else {
@@ -191,6 +193,63 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 }
 
 # pragma  mark - Delegate Methods
+
+// make all this superclass eventually
+
+
+- (void)followButtonPressed:(TeamTableViewCell*)teamCell completion:(void (^)(void))completion{
+    [[[[User currentUser] children] query] findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        [self showAlertWithChildren:objects team:teamCell.team completion:completion];
+    }];
+}
+
+- (void)unfollowButtonPressed:(TeamTableViewCell*)teamCell completion:(void (^)(void))completion{
+   //check for children eventually
+    [[User currentUser] unfollowTeam:teamCell.team completion:completion];
+}
+
+- (void)showAlertWithChildren:(NSArray*)children team:(Team*)team completion:(void (^)(void))completion {
+    if (children && [children count] > 0) {
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Which Child is on this Team?"
+                                                                       message:@""
+                                                                preferredStyle:UIAlertControllerStyleActionSheet];
+        [alert addAction:[UIAlertAction actionWithTitle:@"None, I just want to follow it"
+                                                  style:UIAlertActionStyleDefault
+                                                handler:^(UIAlertAction * _Nonnull action) {
+                                                    [[User currentUser] followTeam:team completion:^{
+                                                        [self refresh:self.refreshControl];
+                                                        if (completion) {
+                                                            completion();
+                                                        }
+                                                    }];
+                                                }]];
+        for (Child* child in children) {
+            [alert addAction:[UIAlertAction actionWithTitle:[child displayName]
+                                                      style:UIAlertActionStyleDefault
+                                                    handler:^(UIAlertAction * _Nonnull action) {
+                                                        [child followTeam:team completion:^{
+                                                            [self refresh:self.refreshControl];
+                                                            if (completion) {
+                                                                completion();
+                                                            }
+                                                        }];
+                                                    }]];
+        }
+        [alert addAction:[UIAlertAction actionWithTitle:@"Cancel"
+                                                  style:UIAlertActionStyleCancel
+                                                handler:^(UIAlertAction * _Nonnull action) {
+                                                    [self refresh:self.refreshControl];
+                                                }]];
+        [self presentViewController:alert animated:YES completion:nil];
+    } else {
+        [[User currentUser] followTeam:team completion:^{
+            [self refresh:self.refreshControl];
+            if (completion) {
+                completion();
+            }
+        }];
+    }
+}
 
 
 @end

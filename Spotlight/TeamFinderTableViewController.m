@@ -136,15 +136,19 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     [self.searchBar resignFirstResponder];
 }
 
-- (void)followButtonPressed:(TeamTableViewCell*)teamCell {
+- (void)followButtonPressed:(TeamTableViewCell*)teamCell completion:(void (^)(void))completion{
     
     [[[[User currentUser] children] query] findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-        [self showAlertWithChildren:objects team:teamCell.team];
+        [self showAlertWithChildren:objects team:teamCell.team completion:completion];
     }];
-
 }
 
-- (void)showAlertWithChildren:(NSArray*)children team:(Team*)team{
+- (void)unfollowButtonPressed:(TeamTableViewCell*)teamCell completion:(void (^)(void))completion{
+    //check for children eventually
+    [[User currentUser] unfollowTeam:teamCell.team completion:completion];
+}
+
+- (void)showAlertWithChildren:(NSArray*)children team:(Team*)team completion:(void (^)(void))completion {
     if (children && [children count] > 0) {
         UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Which Child is on this Team?"
                                                                        message:@""
@@ -153,35 +157,32 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                                                   style:UIAlertActionStyleDefault
                                                 handler:^(UIAlertAction * _Nonnull action) {
                                                     [[User currentUser] followTeam:team completion:^{
-                                                        
+                                                        if (completion) {
+                                                            completion();
+                                                        }
                                                     }];
-                                                    
-                                                    
-//                                                    [self performSegueWithIdentifier:@"SearchTeamsSegue"
-//                                                                              sender:nil];
                                                 }]];
         for (Child* child in children) {
             [alert addAction:[UIAlertAction actionWithTitle:[child displayName]
                                                       style:UIAlertActionStyleDefault
                                                     handler:^(UIAlertAction * _Nonnull action) {
                                                         [child followTeam:team completion:^{
-                                                            
+                                                            if (completion) {
+                                                                completion();
+                                                            }
                                                         }];
-//                                                        
-//                                                        
-//                                                        [self performSegueWithIdentifier:@"CreateTeamSegue"
-//                                                                                  sender:nil];
                                                     }]];
         }
         [alert addAction:[UIAlertAction actionWithTitle:@"Cancel"
                                                   style:UIAlertActionStyleCancel
                                                 handler:^(UIAlertAction * _Nonnull action) {
-                                                    
                                                 }]];
         [self presentViewController:alert animated:YES completion:nil];
     } else {
         [[User currentUser] followTeam:team completion:^{
-            
+            if (completion) {
+                completion();
+            }
         }];
     }
 }

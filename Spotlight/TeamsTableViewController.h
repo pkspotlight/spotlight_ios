@@ -7,13 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TeamTableViewCell.h"
 
 @class User;
 @class Child;
 
-@interface TeamsTableViewController : UITableViewController
+@interface TeamsTableViewController : UITableViewController <TeamTableViewCellDelegate>
 
 - (void)reloadTable;
+- (void)followButtonPressed:(TeamTableViewCell*)teamCell completion:(void (^)(void))completion;
 
 @property (strong, nonatomic) User* user;
 @property (strong, nonatomic) Child* child;

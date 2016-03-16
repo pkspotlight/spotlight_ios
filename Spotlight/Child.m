@@ -51,4 +51,13 @@
     }];
 }
 
+- (void)unfollowTeam:(Team*)team completion:(void (^)(void))completion{
+    [[self teams] removeObject:team];
+    [self saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (completion) {
+            completion();
+        }
+    }];
+}
+
 @end

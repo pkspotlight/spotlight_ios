@@ -8,10 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@class TeamTableViewCell;
+#import "TeamTableViewCell.h"
+@interface TeamFinderTableViewController : UITableViewController <TeamTableViewCellDelegate>
 
-@interface TeamFinderTableViewController : UITableViewController
-
-- (void)followButtonPressed:(TeamTableViewCell*)teamCell;
+- (void)followButtonPressed:(TeamTableViewCell*)teamCell completion:(void (^)(void))completion;
 
 @end

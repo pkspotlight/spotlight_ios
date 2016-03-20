@@ -17,6 +17,7 @@
 @dynamic thumbnailImageFile;
 @dynamic isVideo;
 @dynamic likes;
+@dynamic title;
 
 - (instancetype)initWithVideoPath:(NSString*)path {
     

@@ -203,32 +203,60 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
                                  [NSString stringWithFormat:@"montage.mov"]];
         MWPhoto *video = [MWPhoto videoWithURL:[NSURL URLWithString:myPathDocs]];
         video.videoURL = [NSURL URLWithString:myPathDocs];
-        return video;
     } else {
-        
         if (index < self.mediaList.count) {
-            return [self mwphotoForSpotlightMedia:[self.mediaList objectAtIndex:index]];
+            return [self mwphotoForSpotlightMedia:self.mediaList[index]];
         }
     }
     return nil;
 }
 
 - (MWPhoto*)mwphotoForSpotlightMedia:(SpotlightMedia*)media {
-    
+    MWPhoto *mwMedia;
     if (media.isVideo) {
-        MWPhoto *video = [MWPhoto photoWithURL:[NSURL URLWithString:media.thumbnailImageFile.url]];
-        video.videoURL = [NSURL URLWithString:media.mediaFile.url];
-        return video;
+        mwMedia= [MWPhoto photoWithURL:[NSURL URLWithString:media.thumbnailImageFile.url]];
+        mwMedia.videoURL = [NSURL URLWithString:media.mediaFile.url];
     } else {
-        return [MWPhoto photoWithURL:[NSURL URLWithString:media.mediaFile.url]];
+        mwMedia =[MWPhoto photoWithURL:[NSURL URLWithString:media.mediaFile.url]];
     }
+    if (media.title) {
+        mwMedia.caption = media.title;
+    }
+    return mwMedia;
 }
 
 #pragma mark - UIImagePickerControllerDelegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)infoDict {
-    
-    //   for (NSDictionary* infoDict in infoArray) {
+    [self dismissViewControllerAnimated:YES completion:^{
+        UIAlertController* titleAlert = [UIAlertController alertControllerWithTitle:@"Would you like to add a title?"
+                                                                                   message:nil
+                                                                            preferredStyle:UIAlertControllerStyleAlert];
+        [titleAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+            
+        }];
+        
+        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK"
+                                                                style:UIAlertActionStyleDefault
+                                                              handler:^(UIAlertAction * action) {
+                                                                  [self saveImageWithMediaInfo:infoDict title:titleAlert.textFields[0].text];
+                                                              }];
+        UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"No Title"
+                                                               style:UIAlertActionStyleCancel
+                                                             handler:^(UIAlertAction * action) {
+                                                                 [self saveImageWithMediaInfo:infoDict title:nil];
+                                                             }];
+        [titleAlert addAction:defaultAction];
+        [titleAlert addAction:cancelAction];
+        [self presentViewController:titleAlert
+                           animated:YES
+                         completion:^{
+                             
+                         }];
+    }];
+}
+
+- (void)saveImageWithMediaInfo:(NSDictionary<NSString *,id> *)infoDict title:(NSString*)title{
     SpotlightMedia *media;
     NSString *mediaType = [infoDict objectForKey: UIImagePickerControllerMediaType];
     
@@ -242,6 +270,9 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
     } else if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
         UIImage *image = [infoDict valueForKey:UIImagePickerControllerOriginalImage];
         media = [[SpotlightMedia alloc] initWithImage:image];
+    }
+    if (title) {
+        media.title = title;
     }
     MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [hud setLabelText:@"Adding Media..."];
@@ -257,7 +288,6 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
             }];
         }
     }];
-    [self dismissViewControllerAnimated:YES completion:nil];
     self.imagePickerController = nil;
 }
 

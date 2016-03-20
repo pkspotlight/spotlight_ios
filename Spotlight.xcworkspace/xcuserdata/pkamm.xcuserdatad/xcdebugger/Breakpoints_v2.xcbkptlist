@@ -386,54 +386,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Spotlight/SpotlightCollectionViewController.m"
-            timestampString = "479708732.878054"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "171"
-            endingLineNumber = "171"
-            landmarkName = "-photoBrowser:populateLikesForPhotoAtIndex:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Spotlight/SpotlightCollectionViewController.m"
-            timestampString = "479708732.878054"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "173"
-            endingLineNumber = "173"
-            landmarkName = "-photoBrowser:populateLikesForPhotoAtIndex:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Pods/MWPhotoBrowser/Pod/Classes/MWPhotoBrowser.m"
-            timestampString = "479708183.904215"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "437"
-            endingLineNumber = "437"
-            landmarkName = "-populateLikeCount:atIndex:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Pods/MWPhotoBrowser/Pod/Classes/MWPhotoBrowser.m"
             timestampString = "479708672.340205"
             startingColumnNumber = "9223372036854775807"
@@ -467,11 +419,11 @@
                   moduleName = "Spotlight"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/pkamm/Documents/ios/Spotlight/Spotlight/TeamsTableViewController.m"
-                  timestampString = "479789538.366298"
+                  timestampString = "480206296.294109"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "198"
-                  endingLineNumber = "198"
+                  startingLineNumber = "201"
+                  endingLineNumber = "201"
                   offsetFromSymbolStart = "96">
                </Location>
                <Location
@@ -482,11 +434,11 @@
                   moduleName = "Spotlight"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/pkamm/Documents/ios/Spotlight/Spotlight/TeamsTableViewController.m"
-                  timestampString = "479789538.366412"
+                  timestampString = "480206296.294232"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "198"
-                  endingLineNumber = "198"
+                  startingLineNumber = "201"
+                  endingLineNumber = "201"
                   offsetFromSymbolStart = "80">
                </Location>
             </Locations>
@@ -515,11 +467,11 @@
                   moduleName = "Spotlight"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/pkamm/Documents/ios/Spotlight/Spotlight/TeamsTableViewController.m"
-                  timestampString = "479789538.367029"
+                  timestampString = "480206296.294969"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "237"
-                  endingLineNumber = "237"
+                  startingLineNumber = "245"
+                  endingLineNumber = "245"
                   offsetFromSymbolStart = "1548">
                </Location>
                <Location
@@ -530,11 +482,11 @@
                   moduleName = "Spotlight"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/pkamm/Documents/ios/Spotlight/Spotlight/TeamsTableViewController.m"
-                  timestampString = "479789538.367151"
+                  timestampString = "480206296.295078"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "237"
-                  endingLineNumber = "237"
+                  startingLineNumber = "245"
+                  endingLineNumber = "245"
                   offsetFromSymbolStart = "24">
                </Location>
             </Locations>

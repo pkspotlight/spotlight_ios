@@ -356,7 +356,7 @@
             <objects>
                 <tableViewController id="KaG-P1-Sfy" customClass="FriendsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="68" sectionHeaderHeight="28" sectionFooterHeight="28" id="PTB-dJ-aj2">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="288"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -621,7 +621,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" id="IdR-vi-Q9R">
-                            <rect key="frame" x="0.0" y="44" width="600" height="44"/>
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
                             <scopeButtonTitles>
@@ -634,7 +634,7 @@
                         </searchBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="FriendTableViewCell" rowHeight="68" id="NKJ-Px-kyO" customClass="FriendTableViewCell">
-                                <rect key="frame" x="0.0" y="116" width="600" height="68"/>
+                                <rect key="frame" x="0.0" y="72" width="600" height="68"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" tableViewCell="NKJ-Px-kyO" id="BP6-yR-QV3">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="67"/>
@@ -687,7 +687,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="NoResultsTableViewCell" rowHeight="68" id="KLb-G9-r60">
-                                <rect key="frame" x="0.0" y="184" width="600" height="68"/>
+                                <rect key="frame" x="0.0" y="140" width="600" height="68"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" tableViewCell="KLb-G9-r60" id="xUj-G5-GaI">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="67"/>
@@ -787,7 +787,7 @@
                         <viewControllerLayoutGuide type="bottom" id="u0L-dv-84F"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="HYy-yF-zdT">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="352"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TOd-AQ-irE">
@@ -844,7 +844,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wml-en-gDZ" userLabel="Spotlight Container View">
                                 <rect key="frame" x="0.0" y="312" width="600" height="288"/>
                                 <connections>
-                                    <segue destination="8hb-z5-ol4" kind="embed" id="KDg-Dy-czv"/>
+                                    <segue destination="8hb-z5-ol4" kind="embed" identifier="EmbedSpotlightDataSource" id="KDg-Dy-czv"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -877,9 +877,11 @@
                         <outlet property="teamLogoImageView" destination="ENb-YQ-djp" id="KzA-uX-mgV"/>
                         <outlet property="teamMemberViewContainer" destination="iR0-Zd-32o" id="5QE-Ky-R8R"/>
                         <outlet property="teamNameLabel" destination="5s6-aT-kQP" id="xBQ-m0-2Gy"/>
+                        <segue destination="Hgu-59-zcs" kind="unwind" identifier="UnwindDeleteTeam" unwindAction="unwindDeleteTeam:" id="8x1-MC-Dh4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P9Y-qB-WiM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Hgu-59-zcs" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="635" y="3412"/>
         </scene>
@@ -892,7 +894,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="BLP-EP-TGl">
-                            <rect key="frame" x="0.0" y="64" width="600" height="168"/>
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="168"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4GE-Hj-xaF">
@@ -929,7 +931,7 @@
                         </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="FieldEntryTableViewCell" rowHeight="44" id="pYH-Fl-t2x" customClass="FieldEntryTableViewCell">
-                                <rect key="frame" x="0.0" y="260" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="196" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pYH-Fl-t2x" id="wZe-uA-rKs">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -980,6 +982,28 @@
                                     <outlet property="valueTextField" destination="vSj-Wg-Wf4" id="m4L-0z-AG3"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DeleteTeamCellId" id="TH6-Z1-is1">
+                                <rect key="frame" x="0.0" y="240" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TH6-Z1-is1" id="S6z-QE-T3e">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Delete Team" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FiT-nE-miT">
+                                            <rect key="frame" x="8" y="11" width="584" height="23"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                            <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="FiT-nE-miT" firstAttribute="top" secondItem="S6z-QE-T3e" secondAttribute="topMargin" constant="3" id="3Op-xz-oE0"/>
+                                        <constraint firstItem="FiT-nE-miT" firstAttribute="leading" secondItem="S6z-QE-T3e" secondAttribute="leadingMargin" id="QBU-We-VqI"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="FiT-nE-miT" secondAttribute="bottom" constant="4" id="Vku-X3-NVk"/>
+                                        <constraint firstItem="FiT-nE-miT" firstAttribute="trailing" secondItem="S6z-QE-T3e" secondAttribute="trailingMargin" id="hMb-ZQ-Tbv"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="uE4-Z5-Ji9" id="Ay9-PW-pw1"/>
@@ -1004,6 +1028,7 @@
                         <outlet property="addTeamLogoButton" destination="4GE-Hj-xaF" id="brf-tt-jRK"/>
                         <outlet property="photoUploadIndicator" destination="Iwy-8G-ip0" id="dqn-4n-6fB"/>
                         <segue destination="ti0-IU-pz3" kind="unwind" identifier="UnwindEditSegue" unwindAction="unwindEditTeam:" id="iKS-72-cin"/>
+                        <segue destination="ti0-IU-pz3" kind="unwind" identifier="UnwindDeleteTeam" unwindAction="unwindDeleteTeam:" id="G6v-es-A3J"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IMr-R7-Eka" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1020,7 +1045,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" id="BVR-C8-PJB">
-                            <rect key="frame" x="0.0" y="44" width="600" height="44"/>
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits"/>
                             <connections>
@@ -1029,7 +1054,7 @@
                         </searchBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="TeamTableViewCell" rowHeight="87" id="fuH-ye-vV2" customClass="TeamTableViewCell">
-                                <rect key="frame" x="0.0" y="116" width="600" height="87"/>
+                                <rect key="frame" x="0.0" y="72" width="600" height="87"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" tableViewCell="fuH-ye-vV2" id="Byw-Dz-iLN">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="86"/>
@@ -1122,7 +1147,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="NoResultsTableViewCell" rowHeight="68" id="wK3-dU-x3M">
-                                <rect key="frame" x="0.0" y="203" width="600" height="68"/>
+                                <rect key="frame" x="0.0" y="159" width="600" height="68"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" tableViewCell="wK3-dU-x3M" id="568-Pf-J6U">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="67"/>
@@ -1680,7 +1705,7 @@
             <objects>
                 <tableViewController title="Teams" id="mfN-W3-7S4" customClass="TeamsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="87" sectionHeaderHeight="18" sectionFooterHeight="18" id="UMH-0L-rim">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="352"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
@@ -2190,7 +2215,7 @@
             <objects>
                 <tableViewController title="New Family Member" id="GsY-JL-C3U" customClass="CreateFamilyMemberTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="CQk-Wy-82N" customClass="TPKeyboardAvoidingTableView">
-                        <rect key="frame" x="0.0" y="44" width="600" height="556"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="YnS-6N-RQ3">
@@ -2318,10 +2343,10 @@
         <image name="unknown_user.png" width="500" height="500"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="LEx-VJ-MlG"/>
+        <segue reference="5wK-cZ-7Zv"/>
         <segue reference="oT6-GV-6Bb"/>
         <segue reference="Who-nY-iIu"/>
-        <segue reference="M8J-oH-n9R"/>
-        <segue reference="MtQ-jd-zmN"/>
+        <segue reference="KDg-Dy-czv"/>
+        <segue reference="LEx-VJ-MlG"/>
     </inferredMetricsTieBreakers>
 </document>

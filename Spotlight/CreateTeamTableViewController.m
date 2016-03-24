@@ -23,6 +23,7 @@
 @property (strong, nonatomic) UIImagePickerController* imagePickerController;
 @property (weak, nonatomic) IBOutlet UIButton *addTeamLogoButton;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *photoUploadIndicator;
+@property (assign, nonatomic) BOOL isNewTeam;
 
 @end
 
@@ -39,8 +40,10 @@
     if (!self.team) {
         self.team = [Team new];
         self.pendingFieldDictionary = [self newPendingFieldDictionary];
+        self.isNewTeam = YES;
     } else {
         self.pendingFieldDictionary = [self populateExistingTeamAttributes:self.team];
+        self.isNewTeam = NO;
     }
 }
 
@@ -144,21 +147,43 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return (self.isNewTeam) ? 1 : 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.teamPropertyArray count];
+    if (section == 0) {
+        return [self.teamPropertyArray count];
+    } else {
+        return 1;
+    }
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    FieldEntryTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"FieldEntryTableViewCell" forIndexPath:indexPath];
-    [cell formatForAttributeString:self.teamPropertyArray[indexPath.row]
-                         displayText:self.teamPropertyDisplay[indexPath.row]
-                         withValue:self.pendingFieldDictionary[self.teamPropertyArray[indexPath.row]]];
-    [cell setDelegate:self];
-    return cell;
+    if (indexPath.section == 0) {
+        FieldEntryTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"FieldEntryTableViewCell" forIndexPath:indexPath];
+        [cell formatForAttributeString:self.teamPropertyArray[indexPath.row]
+                           displayText:self.teamPropertyDisplay[indexPath.row]
+                             withValue:self.pendingFieldDictionary[self.teamPropertyArray[indexPath.row]]];
+        [cell setDelegate:self];
+        return cell;
+    } else {
+        UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"DeleteTeamCellId" forIndexPath:indexPath];
+        return cell;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 1) {
+        [self deleteTeam];
+    }
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)deleteTeam {
+    [self.team deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        [self performSegueWithIdentifier:@"UnwindDeleteTeam" sender:nil];
+    }];
 }
 
 - (IBAction)cancelButtonPressed:(id)sender {

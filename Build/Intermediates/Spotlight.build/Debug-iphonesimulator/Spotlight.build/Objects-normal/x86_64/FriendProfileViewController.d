@@ -5,6 +5,7 @@ dependencies: \
   /Users/pkamm/Documents/ios/Spotlight/Spotlight/SpotlightFeedViewController.h \
   /Users/pkamm/Documents/ios/Spotlight/Spotlight/SpotlightDataSource.h \
   /Users/pkamm/Documents/ios/Spotlight/Spotlight/TeamsTableViewController.h \
+  /Users/pkamm/Documents/ios/Spotlight/Spotlight/TeamTableViewCell.h \
   /Users/pkamm/Documents/ios/Spotlight/Spotlight/User.h \
   /Users/pkamm/Documents/ios/Spotlight/Spotlight/Child.h \
   /Users/pkamm/Documents/ios/Spotlight/Spotlight/ProfilePictureMedia.h \

@@ -181,6 +181,10 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     [self refresh:self.refreshControl];
 }
 
+- (IBAction)unwindDeleteTeam:(UIStoryboardSegue*)sender {
+    [self refresh:self.refreshControl];
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     NSIndexPath *path = [self.tableView indexPathForCell:sender];

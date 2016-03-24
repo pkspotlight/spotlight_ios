@@ -70,7 +70,7 @@
         [(FriendsTableViewController*)[segue destinationViewController] setTeam:self.team];
     } else if ([segue.identifier isEqualToString:@"EditTeamSegue"]){
         [(CreateTeamTableViewController*)[(UINavigationController*)[segue destinationViewController] viewControllers][0] setTeam:self.team];
-    } else {
+    } else if ([segue.identifier isEqualToString:@"EmbedSpotlightDataSource"]){
         SpotlightDataSource* datasource = [[SpotlightDataSource alloc] initWithTeam:self.team];
         [(SpotlightFeedViewController*)[segue destinationViewController] setDataSource:datasource];
     }
@@ -93,6 +93,10 @@
 
 - (IBAction)unwindEditTeam:(UIStoryboardSegue*)sender {
     [self formatPage];
+}
+
+- (IBAction)unwindDeleteTeam:(UIStoryboardSegue*)sender {
+    [self performSegueWithIdentifier:@"UnwindDeleteTeam" sender:sender];
 }
 
 -(BOOL)hidesBottomBarWhenPushed {

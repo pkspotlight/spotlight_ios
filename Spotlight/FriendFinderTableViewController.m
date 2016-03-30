@@ -99,11 +99,11 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
         
         PFQuery *query;
         if (components.count > 1) {
-            [lastNameQuery whereKey:@"lastName" containedIn:components[1]];
+            [lastNameQuery whereKey:@"lastName" containsString:components[1]];
             query = [PFQuery orQueryWithSubqueries:@[firstQuery,
-                                                              secondQuery,
-                                                              usernameQuery,
-                                                              emailQuery,
+                                                     secondQuery,
+                                                     usernameQuery,
+                                                     emailQuery,
                                                      lastNameQuery]];
         }else {
             query = [PFQuery orQueryWithSubqueries:@[firstQuery,

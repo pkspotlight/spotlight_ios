@@ -42,29 +42,23 @@
                                                                              categories:nil];
     [application registerUserNotificationSettings:settings];
     [application registerForRemoteNotifications];
-    
-    
-    [PFCloud callFunctionInBackground:@"hello"
-                       withParameters:@{}
-                                block:^(NSString *result, NSError *error) {
-                                    if (!error) {
-                                        // result is @"Hello world!"
-                                    }
-                                }];
+
     
     return YES;
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     // Store the deviceToken in the current installation and save it to Parse.
-    PFInstallation *installation = [PFInstallation currentInstallation];
-    [installation setDeviceTokenFromData:deviceToken];
-    installation.channels = @[ @"global" ];
-    [installation saveInBackground];
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    [currentInstallation setDeviceTokenFromData:deviceToken];
+    currentInstallation.channels = @[ @"global" ];
+    PFUser *user = [PFUser currentUser];
+    [currentInstallation setObject:user forKey: @"owner"];
+    [currentInstallation saveInBackground];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    [PFPush handlePush:userInfo];
+//    [PFPush handlePush:userInfo];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

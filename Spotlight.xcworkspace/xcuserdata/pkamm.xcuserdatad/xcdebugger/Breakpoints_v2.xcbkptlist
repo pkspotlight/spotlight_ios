@@ -419,7 +419,7 @@
                   moduleName = "Spotlight"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/pkamm/Documents/ios/Spotlight/Spotlight/TeamsTableViewController.m"
-                  timestampString = "480510748.838434"
+                  timestampString = "480992743.754804"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "205"
@@ -434,12 +434,12 @@
                   moduleName = "Spotlight"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/pkamm/Documents/ios/Spotlight/Spotlight/TeamsTableViewController.m"
-                  timestampString = "480510748.838548"
+                  timestampString = "480992743.754912"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "205"
                   endingLineNumber = "205"
-                  offsetFromSymbolStart = "80">
+                  offsetFromSymbolStart = "24">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -467,7 +467,7 @@
                   moduleName = "Spotlight"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/pkamm/Documents/ios/Spotlight/Spotlight/TeamsTableViewController.m"
-                  timestampString = "480510748.839248"
+                  timestampString = "480992743.755526"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "249"
@@ -478,11 +478,11 @@
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "__66-[TeamsTableViewController showAlertWithChildren:team:completion:]_block_invoke204"
+                  symbolName = "__66-[TeamsTableViewController showAlertWithChildren:team:completion:]_block_invoke.204"
                   moduleName = "Spotlight"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/pkamm/Documents/ios/Spotlight/Spotlight/TeamsTableViewController.m"
-                  timestampString = "480510748.839368"
+                  timestampString = "480992743.755616"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "249"
@@ -505,6 +505,22 @@
             startingLineNumber = "85"
             endingLineNumber = "85"
             landmarkName = "-followButtonPressed:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Spotlight/FriendFinderTableViewController.m"
+            timestampString = "480992698.680663"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
+            landmarkName = "-searchBarSearchButtonClicked:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

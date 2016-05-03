@@ -53,8 +53,10 @@
     [currentInstallation setDeviceTokenFromData:deviceToken];
     currentInstallation.channels = @[ @"global" ];
     PFUser *user = [PFUser currentUser];
-    [currentInstallation setObject:user forKey: @"owner"];
-    [currentInstallation saveInBackground];
+    if (user) {
+        [currentInstallation setObject:user forKey: @"owner"];
+        [currentInstallation saveInBackground];
+    }
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {

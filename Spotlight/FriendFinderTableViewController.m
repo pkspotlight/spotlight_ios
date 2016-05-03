@@ -15,12 +15,9 @@
 
 @interface FriendFinderTableViewController ()
 
-
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
-
 @property (strong, nonatomic) NSArray* searchResults;
 @property (strong, nonatomic) UITapGestureRecognizer* hideKeyboardTap;
-
 
 @end
 

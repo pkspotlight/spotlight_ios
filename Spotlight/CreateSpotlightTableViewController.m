@@ -63,8 +63,6 @@
     User* user = [User currentUser];
     PFRelation *participantRelation = [self.spotlight relationForKey:@"creator"];
     [participantRelation addObject:user];
-//    PFRelation *teamRelation = [self.spotlight relationForKey:@"team"];
-//    [teamRelation addObject:self.team];
     [self.spotlight setTeam:self.team];
     [self.spotlight setCreatorName:[NSString stringWithFormat:@"%@ %@", user.firstName, user.lastName]];
     [self.spotlight saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {

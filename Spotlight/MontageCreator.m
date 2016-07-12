@@ -67,10 +67,7 @@
                      songTitle:(NSString*)songTitle
                        isShare:(BOOL)isShare
                     completion:(void (^)(AVPlayerItem* item, NSURL* fileURL))completion {
-
-    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND,0), ^{
-        
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *documentsDirectory = [paths objectAtIndex:0];
         NSString *myPathDocs =  [documentsDirectory stringByAppendingPathComponent:

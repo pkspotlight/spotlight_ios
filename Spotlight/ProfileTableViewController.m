@@ -35,21 +35,24 @@
     [super viewDidLoad];
     
     self.user = [User currentUser];
-    
-    self.userPropertyArray = @[ @"username", @"firstName", @"lastName", @"homeTown", @"family" ];
-    self.userPropertyArrayDisplayText = @[ @"Username", @"First Name", @"Last Name", @"Hometown", @"Family" ];
-
+    self.userPropertyArray = @[ @"username",
+                                @"firstName",
+                                @"lastName",
+                                @"homeTown",
+                                @"family" ];
+    self.userPropertyArrayDisplayText = @[ @"Username",
+                                           @"First Name",
+                                           @"Last Name",
+                                           @"Hometown",
+                                           @"Family" ];
     self.pendingFieldDictionary = [self newPendingFieldDictionary];
-    
     [self.user[@"profilePic"] fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
         self.profilePic = (ProfilePictureMedia*)object;
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.profilePic.thumbnailImageFile.url]];
         
         [self.profilePictureImageView setImageForState:UIControlStateNormal withURLRequest:request placeholderImage:nil success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, UIImage * _Nonnull image) {
             [self.profilePictureImageView setImage:image forState:UIControlStateNormal];
-        } failure:^(NSError * _Nonnull error) {
-            
-        }];
+        } failure:nil];
     }];
     
     [self.profilePictureImageView.imageView setContentMode:UIViewContentModeScaleAspectFill];
@@ -58,7 +61,6 @@
     [self.profilePictureImageView.layer setBorderWidth:3];
     [self.profilePictureImageView.layer setBorderColor:[UIColor whiteColor].CGColor];
     [self.profilePictureImageView setClipsToBounds:YES];
-    
 }
 
 - (NSMutableDictionary *)newPendingFieldDictionary {
@@ -70,10 +72,8 @@
     return fieldDict;
 }
 
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)logout {
@@ -84,7 +84,6 @@
         UIViewController *controller = [mainStoryboard instantiateViewControllerWithIdentifier: @"IntroNavigationController"];
         [[UIApplication sharedApplication].delegate.window setRootViewController:controller];
     }];
-    
 }
 
 #pragma mark - Table view data source
@@ -101,7 +100,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell;
     if (indexPath.section == 0) {
-        
         cell = [tableView dequeueReusableCellWithIdentifier:@"FieldEntryTableViewCell" forIndexPath:indexPath];
         NSString* property = self.userPropertyArray[indexPath.row];
         [(FieldEntryTableViewCell*)cell formatForAttributeString:property
@@ -126,9 +124,7 @@
 }
 
 - (void)showFeedbackEmail {
-    
-    if ([MFMailComposeViewController canSendMail])
-    {
+    if ([MFMailComposeViewController canSendMail]){
         MFMailComposeViewController *mail = [[MFMailComposeViewController alloc] init];
         mail.mailComposeDelegate = self;
         [mail setSubject:@"Spotlight Feedback"];
@@ -140,7 +136,6 @@
     {
         NSLog(@"This device cannot send email");
     }
-    
 }
 
 

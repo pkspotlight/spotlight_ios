@@ -15,7 +15,6 @@
 #import "Parse.h"
 #import "User.h"
 
-
 static CGFloat const BasicHeaderHeight = 50;
 
 
@@ -86,9 +85,6 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 #pragma mark - Navigation
 
 - (IBAction)cancelButtonPressed:(id)sender {
-    //    [self.spotlight deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-    //
-    //    }];
     [self.navigationController dismissViewControllerAnimated:YES completion:^{
         
     }];

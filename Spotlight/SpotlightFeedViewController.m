@@ -42,13 +42,6 @@
     [headerView addSubview:imgView];
     
     self.navigationItem.titleView = headerView;
-//    
-//    
-//    
-//    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"spotlightWriting"]];
-//    [self.navigationItem.titleView setFrame:CGRectMake(40, 0, 70, 60)];
-//    //[self.navigationItem.titleView]
-//    [self.navigationItem.titleView setContentMode:UIViewContentModeScaleAspectFit];
 }
 
 - (void)refresh:(id)sender {

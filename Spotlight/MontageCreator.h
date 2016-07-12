@@ -13,7 +13,6 @@
 
 + (MontageCreator *)sharedCreator;
 
-
 - (void)createMontageWithMedia:(NSArray*)mediaArray
                      songTitle:(NSString*)songTitle
                        isShare:(BOOL)isShare

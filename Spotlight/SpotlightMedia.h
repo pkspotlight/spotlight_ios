@@ -20,6 +20,4 @@
 - (void)likeInBackgroundFromUser:(User*)user completion:(void (^)(void))completion;
 - (void)unlikeInBackgroundFromUser:(User*)user completion:(void (^)(void))completion;
 
-
-
 @end

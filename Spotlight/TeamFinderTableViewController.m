@@ -37,22 +37,11 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                             action:@selector(dismissKeyboard)];
 }
 
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
-//
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-//    BasicHeaderView *cell = [self.tableView dequeueReusableHeaderFooterViewWithIdentifier:@"BasicHeaderView"];
-//    cell.headerTitleLabel.text = (section == 0) ? @"Family" : @"Friends";
-//    return cell;
-//}
-//
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-//    return BasicHeaderHeight;
-//}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return (self.searchResults.count == 0) ? 1 : self.searchResults.count;

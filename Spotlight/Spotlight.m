@@ -64,6 +64,7 @@
 
 
 #pragma mark - Parse Stuff
+
 + (void)load {
     [self registerSubclass];
 }

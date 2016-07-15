@@ -13,7 +13,7 @@
 @class Team;
 @class Child;
 
-@interface SpotlightDataSource : NSObject <UITableViewDataSource>
+@interface SpotlightDataSource : NSObject <UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
 
 - (instancetype)initWithUser:(User*)user;
 - (instancetype)initWithTeam:(Team*)team;

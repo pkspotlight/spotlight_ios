@@ -35,13 +35,22 @@ static CGFloat const BasicHeaderHeight = 50;
     [self.tableView
      registerNib:[UINib nibWithNibName:@"BasicHeaderView" bundle:nil]
      forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
+//    self.refreshControl = [[UIRefreshControl alloc] init];
+//    [self.refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
+//    [self setRefreshControl:self.refreshControl];
+//    [self.refreshControl beginRefreshing];
+//    [self refresh:self.refreshControl];
+}
+
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     [self setRefreshControl:self.refreshControl];
     [self.refreshControl beginRefreshing];
     [self refresh:self.refreshControl];
 }
-
 - (void)refresh:(UIRefreshControl*)sender {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND,0), ^{
         if (self.team) {

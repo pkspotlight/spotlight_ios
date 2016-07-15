@@ -41,6 +41,9 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     [self refresh:self.refreshControl];
 }
 
+
+
+
 - (void)refresh:(UIRefreshControl*)sender {
     [sender beginRefreshing];
     self.teams = [NSMutableArray array];

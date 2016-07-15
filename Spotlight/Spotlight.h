@@ -20,6 +20,7 @@
 @property(strong, nonatomic) NSString*  creatorName;
 @property(strong, nonatomic) NSString*  title;
 @property(strong, nonatomic) Team* team;
+@property (readonly, nonatomic) PFRelation* moderators;
 
 - (void)allMedia:(void (^)(NSArray *media, NSError *error))completion;
 - (void)allImageUrls:(void (^)(NSArray *urls, NSError *error))completion;

@@ -222,25 +222,77 @@
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
-    return YES;
-}
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        //        //add code here for when you hit delete
-        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Are You Sure To Delete This Feed ?"
-                                                          message:nil
-                                                         delegate:self
-                                                cancelButtonTitle:@"OK"
-                                                otherButtonTitles:@"Cancel",nil];
-        [message show];
-        
+    
+    SpotlightTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if(cell)
+    {
+        return cell.isEditingAllowed;
     }
+    return true;
 }
+
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    
+    Spotlight *spotlight = [self.spotlights objectAtIndex:indexPath.row];
+    __block BOOL isCreatedByCurrentUser = false;
+    PFQuery* moderatorQuery = [spotlight.moderators query];
+    [moderatorQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        for (User* user in objects) {
+            if ([user.objectId isEqualToString:[[User currentUser] objectId]]) {
+                isCreatedByCurrentUser = true;
+                
+                
+                if(isCreatedByCurrentUser)
+                {
+                    if (editingStyle == UITableViewCellEditingStyleDelete) {
+                        //        //add code here for when you hit delete
+                        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Are You Sure ?"
+                                                                          message:nil
+                                                                         delegate:self
+                                                                cancelButtonTitle:@"Yes"
+                                                                otherButtonTitles:@"No",nil];
+                        message.accessibilityValue = @"Delete";
+                        message.tag = indexPath.row;
+                        [message show];
+                        
+                    }
+                }
+                
+
+                
+                
+                
+            }
+        }
+        
+        if(!isCreatedByCurrentUser)
+        {
+            [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        }
+        
+    }];
+    
+    }
 
 
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    if([alertView.accessibilityValue isEqualToString:@"Delete"]){
+        if(buttonIndex ==0){
+            Spotlight *spotlight = [self.spotlights objectAtIndex:alertView.tag];
+            MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication].delegate window] animated:YES];
+            [hud setLabelText:@"Deleting Spotlight..."];
+            
+            [spotlight deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                if(succeeded){
+                    [self.delegate spotlightDeleted:hud];
+                }
+            }];
+        }
+    }
     
 }
 

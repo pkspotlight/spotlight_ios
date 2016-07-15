@@ -28,6 +28,7 @@
     [refresh addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     [self setRefreshControl:refresh];
     if (!self.dataSource) self.dataSource = [[SpotlightDataSource alloc] init];
+    self.dataSource.delegate = self;
     [self.tableView setDataSource:self.dataSource];
     [refresh beginRefreshing];
     [self refresh:refresh];
@@ -44,15 +45,28 @@
     self.navigationItem.titleView = headerView;
 }
 
+
 - (void)refresh:(id)sender {
     [self.dataSource loadSpotlights:^{
         [self.tableView reloadData];
+        if(sender)
+        {
+        if([sender isKindOfClass:[MBProgressHUD class]])
+        {
+            MBProgressHUD *hud = (MBProgressHUD *)sender;
+            [hud hide:YES];
+        }
+        else
         [sender endRefreshing];
+        }
     }];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+- (void)viewDidAppear:(BOOL)animated {
+  
+
+    [super viewDidAppear:animated];
+     [self refresh:nil];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -64,6 +78,10 @@
     }];
 }
 
+-(void)spotlightDeleted:(MBProgressHUD *)hud
+{
+    [self refresh:hud];
+}
 
 #pragma mark - Navigation
 

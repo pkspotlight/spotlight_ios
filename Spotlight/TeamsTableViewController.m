@@ -38,11 +38,15 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     if (!self.child && !self.user) {
         self.user = [User currentUser];
     }
-    [self refresh:self.refreshControl];
+   // [self refresh:self.refreshControl];
 }
 
 
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    [self refresh:self.refreshControl];
+}
 
 - (void)refresh:(UIRefreshControl*)sender {
     [sender beginRefreshing];

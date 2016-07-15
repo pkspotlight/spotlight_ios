@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Spotlight.h"
 #import "MWPhotoBrowser.h"
+#import "ELCImagePickerController.h"
 
 @interface SpotlightCollectionViewController : UICollectionViewController <MWPhotoBrowserDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegateFlowLayout>
 

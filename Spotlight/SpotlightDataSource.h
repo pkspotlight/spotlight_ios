@@ -6,8 +6,16 @@
 //  Copyright © 2015 Spotlight. All rights reserved.
 //
 
+
+
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <MBProgressHUD.h>
+@protocol RefreshTableDelegate <NSObject>
+
+-(void)spotlightDeleted:(MBProgressHUD *)hud;
+
+@end
 
 @class User;
 @class Team;
@@ -18,7 +26,7 @@
 - (instancetype)initWithUser:(User*)user;
 - (instancetype)initWithTeam:(Team*)team;
 - (instancetype)initWithChild:(Child*)child;
-
+@property (weak,atomic) id <RefreshTableDelegate> delegate;
 - (void)loadSpotlights:(void (^)(void))completion;
 
 @end

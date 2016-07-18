@@ -45,9 +45,21 @@ static CGFloat const BasicHeaderHeight = 50;
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-  
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshScreen) name:@"Frdfollowunfollow" object:nil];
     [self refresh:self.refreshControl];
 }
+
+-(void)refreshScreen
+{
+    [self refresh:self.refreshControl];
+}
+
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"Frdfollowunfollow" object:nil];
+}
+
 - (void)refresh:(UIRefreshControl*)sender {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND,0), ^{
         if (self.team) {

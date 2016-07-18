@@ -68,6 +68,7 @@
             self.isFollowing = !self.isFollowing;
         }
         [self formatButtonText];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"Frdfollowunfollow" object:nil];
 //        [self.followingActivityIndicator stopAnimating];
 //        [self.delegate performSelector:@selector(reloadTable)];
     }];

@@ -15,6 +15,7 @@
 
 - (instancetype)initWithVideoPath:(NSString*)path;
 - (instancetype)initWithImage:(UIImage*)image;
+- (instancetype)initWithVideoData:(NSData*)data;
 - (void)likeCountWithCompletion:(void (^)(NSInteger likes))completion;
 
 @property (strong, nonatomic) PFFile *mediaFile;

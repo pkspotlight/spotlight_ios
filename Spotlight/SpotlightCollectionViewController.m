@@ -20,6 +20,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AVKit/AVKit.h>
 
+
 @interface SpotlightCollectionViewController ()
 
 @property (strong, nonatomic) NSArray* mediaList;
@@ -194,6 +195,7 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
     ELCAlbumPickerController *albumController = [[ELCAlbumPickerController alloc] init];
     ELCImagePickerController *elcPicker = [[ELCImagePickerController alloc] initWithRootViewController:albumController];
     [albumController setParent:elcPicker];
+  
     elcPicker.imagePickerDelegate = self;
     [self presentModalViewController:elcPicker animated:YES];
 
@@ -266,39 +268,80 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
 //}
 //
 - (void)saveImageWithMediaInfo:(NSArray *)info title:(NSString*)title{
-    SpotlightMedia *media;
+   __block SpotlightMedia *media;
     
       for (NSDictionary *infoDict in info){
     NSString *mediaType = [infoDict objectForKey: UIImagePickerControllerMediaType];
     
     if ([mediaType isEqualToString:(NSString *)ALAssetTypeVideo]){
         
-        NSURL *videoUrl=(NSURL*)[infoDict objectForKey:UIImagePickerControllerMediaURL];
-        NSString *videoPath = [videoUrl path];
-        media = [[SpotlightMedia alloc] initWithVideoPath:videoPath];
+        
+        
+        
+        NSURL *videoUrl=(NSURL*)[infoDict objectForKey:UIImagePickerControllerReferenceURL];
+        PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[videoUrl] options:nil];
+        PHAsset *asset = result.firstObject;
+        
+        [[PHImageManager defaultManager] requestAVAssetForVideo:asset options:PHVideoRequestOptionsDeliveryModeAutomatic resultHandler:^(AVAsset * avasset, AVAudioMix * audioMix, NSDictionary * info) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                AVURLAsset *asset = (AVURLAsset *)avasset;
+                NSURL *url = asset.URL;
+                NSLog(@"url is %@",url);
+                NSString *videoPath = [url path];
+                media = [[SpotlightMedia alloc] initWithVideoPath:videoPath];
+                if (title) {
+                    media.title = title;
+                }
+                MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                [hud setLabelText:@"Adding Media..."];
+                media[@"parent"] = self.spotlight;
+                [media saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                    if (error) {
+                        [hud hide:YES];
+
+                        NSLog(@"fuck: %@", [error localizedDescription]);
+                    } else {
+                        [self.spotlight allMedia:^(NSArray *media, NSError *error) {
+                            self.mediaList = media;
+                            [self.collectionView reloadData];
+                            [hud hide:YES];
+                        }];
+                    }
+                }];
+
+
+              
+            });
+        }];
+
         
     } else if ([mediaType isEqualToString:(NSString *)ALAssetTypePhoto]) {
         UIImage *image = [infoDict valueForKey:UIImagePickerControllerOriginalImage];
         media = [[SpotlightMedia alloc] initWithImage:image];
-    }
-    if (title) {
-        media.title = title;
-    }
-    MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [hud setLabelText:@"Adding Media..."];
-    media[@"parent"] = self.spotlight;
-    [media saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-        if (error) {
-            NSLog(@"fuck: %@", [error localizedDescription]);
-        } else {
-            [self.spotlight allMedia:^(NSArray *media, NSError *error) {
-                self.mediaList = media;
-                [self.collectionView reloadData];
-                [hud hide:YES];
-            }];
+        
+        if (title) {
+            media.title = title;
         }
-    }];
-      }
+        MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [hud setLabelText:@"Adding Media..."];
+        media[@"parent"] = self.spotlight;
+        [media saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+            if (error) {
+                [hud hide:YES];
+
+                NSLog(@"fuck: %@", [error localizedDescription]);
+            } else {
+                [self.spotlight allMedia:^(NSArray *media, NSError *error) {
+                    self.mediaList = media;
+                    [self.collectionView reloadData];
+                    [hud hide:YES];
+                }];
+            }
+        }];
+
+    }
+          }
     self.imagePickerController = nil;
 }
 //

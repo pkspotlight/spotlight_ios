@@ -375,7 +375,8 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
      }
 
 - (void)elcImagePickerControllerDidCancel:(ELCImagePickerController *)picker{
-     [self dismissViewControllerAnimated:YES completion:NULL];
+    
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 

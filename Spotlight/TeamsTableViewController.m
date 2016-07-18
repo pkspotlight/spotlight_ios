@@ -224,7 +224,9 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     [alert addAction:[UIAlertAction actionWithTitle:@"Yes"
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * _Nonnull action) {
-                                                [[User currentUser] unfollowTeam:teamCell.team completion:completion];
+                                                [[User currentUser] unfollowTeam:teamCell.team completion:^{
+                                                    [self refresh:self.refreshControl];
+                                                }];
                                             }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"No"
                                               style:UIAlertActionStyleDefault

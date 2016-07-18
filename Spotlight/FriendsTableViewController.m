@@ -45,6 +45,7 @@ static CGFloat const BasicHeaderHeight = 50;
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshScreen) name:@"Frdfollowunfollow" object:nil];
     [self refresh:self.refreshControl];
 }

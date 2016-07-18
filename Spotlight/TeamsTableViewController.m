@@ -154,7 +154,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 }
 
 - (void)reloadTable {
-    [self refresh:nil];
+    //[self refresh:nil];
 }
 
 
@@ -185,11 +185,11 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 #pragma mark - Navigation
 
 - (IBAction)unwindAddTeams:(UIStoryboardSegue*)sender {
-    [self refresh:self.refreshControl];
+  //  [self refresh:self.refreshControl];
 }
 
 - (IBAction)unwindDeleteTeam:(UIStoryboardSegue*)sender {
-    [self refresh:self.refreshControl];
+  //  [self refresh:self.refreshControl];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

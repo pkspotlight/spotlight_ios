@@ -14,7 +14,7 @@
 #import "FriendsTableViewController.h"
 #import "CreateTeamTableViewController.h"
 #import "SpotlightDataSource.h"
-
+#import "CreateSpotlightTableViewController.h"
 #import <MobileCoreServices/UTCoreTypes.h>
 #import <AFNetworking/UIImageView+AFNetworking.h>
 
@@ -49,6 +49,10 @@
     }];
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    
+}
 - (IBAction)teamSegmentControllerValueChanged:(UISegmentedControl*)sender {
     if( sender.selectedSegmentIndex == 0) {
         [UIView animateWithDuration:.5
@@ -74,6 +78,12 @@
         SpotlightDataSource* datasource = [[SpotlightDataSource alloc] initWithTeam:self.team];
         [(SpotlightFeedViewController*)[segue destinationViewController] setDataSource:datasource];
     }
+    else if ([segue.identifier isEqualToString:@"createSpotLightFromTeamDetail"]) {
+            
+            CreateSpotlightTableViewController* vc = (CreateSpotlightTableViewController*)[segue destinationViewController];
+        vc.isFromTeamdetail = YES;
+            [vc setTeam:_team];
+        }
 }
 
 - (void)formatPage {
@@ -102,5 +112,8 @@
 -(BOOL)hidesBottomBarWhenPushed {
     return YES;
 }
+
+
+
 
 @end

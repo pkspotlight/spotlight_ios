@@ -13,5 +13,6 @@
 @interface CreateSpotlightTableViewController : UITableViewController
 
 @property(strong, nonatomic) Team* team;
+@property(assign, nonatomic) BOOL isFromTeamdetail;
 
 @end

@@ -820,6 +820,13 @@
                                             <action selector="teamSegmentControllerValueChanged:" destination="G7Z-mU-6An" eventType="valueChanged" id="Brd-Ne-XEX"/>
                                         </connections>
                                     </segmentedControl>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="afZ-RQ-hgx">
+                                        <rect key="frame" x="16" y="212" width="22" height="22"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <segue destination="WCb-DW-cH7" kind="show" identifier="createSpotLightFromTeamDetail" id="G4n-FP-84S"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.14901960780000001" green="0.60392156860000001" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -831,6 +838,8 @@
                                     <constraint firstAttribute="bottom" secondItem="xMt-ON-ZoP" secondAttribute="bottom" constant="11" id="cg8-DR-E3z"/>
                                     <constraint firstItem="xMt-ON-ZoP" firstAttribute="centerX" secondItem="TOd-AQ-irE" secondAttribute="centerX" id="d14-mZ-wPZ"/>
                                     <constraint firstItem="ENb-YQ-djp" firstAttribute="top" secondItem="TOd-AQ-irE" secondAttribute="top" constant="16" id="e5O-Tl-J0j"/>
+                                    <constraint firstItem="afZ-RQ-hgx" firstAttribute="centerY" secondItem="xMt-ON-ZoP" secondAttribute="centerY" id="lXN-Tj-NcD"/>
+                                    <constraint firstItem="afZ-RQ-hgx" firstAttribute="leading" secondItem="TOd-AQ-irE" secondAttribute="leading" constant="16" id="qxl-nw-npd"/>
                                     <constraint firstItem="xMt-ON-ZoP" firstAttribute="top" secondItem="5s6-aT-kQP" secondAttribute="bottom" constant="8" id="taL-w2-I7u"/>
                                     <constraint firstAttribute="trailing" secondItem="5s6-aT-kQP" secondAttribute="trailing" constant="8" id="zmX-we-jFV"/>
                                 </constraints>
@@ -883,7 +892,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P9Y-qB-WiM" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Hgu-59-zcs" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="635" y="3412"/>
+            <point key="canvasLocation" x="415" y="3518"/>
         </scene>
         <!--Create Team-->
         <scene sceneID="v6S-2c-xhI">
@@ -1344,7 +1353,7 @@
         <!--Create Spotlight-->
         <scene sceneID="llE-GR-SuP">
             <objects>
-                <tableViewController id="WCb-DW-cH7" customClass="CreateSpotlightTableViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="CreateSpotlightTableViewController" id="WCb-DW-cH7" customClass="CreateSpotlightTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="64" sectionHeaderHeight="28" sectionFooterHeight="28" id="44W-nD-88x">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1421,7 +1430,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wpg-nI-DtL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3743" y="840"/>
+            <point key="canvasLocation" x="1343" y="3348"/>
         </scene>
         <!--Intro View Controller-->
         <scene sceneID="nrt-5o-vV7">
@@ -2343,10 +2352,11 @@
         <image name="unknown_user.png" width="500" height="500"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KDg-Dy-czv"/>
+        <segue reference="G4n-FP-84S"/>
         <segue reference="oT6-GV-6Bb"/>
         <segue reference="VZn-Uf-dUM"/>
-        <segue reference="M8J-oH-n9R"/>
+        <segue reference="5wK-cZ-7Zv"/>
+        <segue reference="KDg-Dy-czv"/>
         <segue reference="LEx-VJ-MlG"/>
     </inferredMetricsTieBreakers>
 </document>

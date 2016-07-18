@@ -216,7 +216,27 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 
 - (void)unfollowButtonPressed:(TeamTableViewCell*)teamCell completion:(void (^)(void))completion{
    //check for children eventually
-    [[User currentUser] unfollowTeam:teamCell.team completion:completion];
+    
+   
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Are you sure?"
+                                                                   message:@""
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Yes"
+                                              style:UIAlertActionStyleDefault
+                                            handler:^(UIAlertAction * _Nonnull action) {
+                                                [[User currentUser] unfollowTeam:teamCell.team completion:completion];
+                                            }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"No"
+                                              style:UIAlertActionStyleDefault
+                                            handler:^(UIAlertAction * _Nonnull action) {
+                                                
+                                            }]];
+   
+    [self presentViewController:alert animated:YES completion:nil];
+
+    
+    
+    
 }
 
 - (void)showAlertWithChildren:(NSArray*)children team:(Team*)team completion:(void (^)(void))completion {

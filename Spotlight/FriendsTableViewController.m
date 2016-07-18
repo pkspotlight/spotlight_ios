@@ -43,8 +43,8 @@ static CGFloat const BasicHeaderHeight = 50;
 }
 
 
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
   
     [self refresh:self.refreshControl];
 }
@@ -93,9 +93,7 @@ static CGFloat const BasicHeaderHeight = 50;
     }];
 }
 
--(void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
+
 
 - (IBAction)plusButtonPressed:(id)sender {
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Search/Add Spotlighters"
@@ -209,8 +207,8 @@ static CGFloat const BasicHeaderHeight = 50;
 }
 
 - (IBAction)unwindAddFriends:(UIStoryboardSegue*)sender {
-    [self.refreshControl beginRefreshing];
-    [self refresh:self.refreshControl];
+   // [self.refreshControl beginRefreshing];
+   // [self refresh:self.refreshControl];
 }
 
 - (IBAction)unwindCancelAddFamilyMember:(UIStoryboardSegue*)sender {
@@ -218,8 +216,8 @@ static CGFloat const BasicHeaderHeight = 50;
 }
 
 - (IBAction)unwindSaveFamilyMember:(UIStoryboardSegue*)sender {
-    [self.refreshControl beginRefreshing];
-    [self refresh:self.refreshControl];
+   // [self.refreshControl beginRefreshing];
+  //  [self refresh:self.refreshControl];
 }
 
 @end

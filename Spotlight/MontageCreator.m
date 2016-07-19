@@ -141,6 +141,8 @@
                 NSLog(@"error: %@", [error localizedDescription]);
             }
         }
+        
+         if(![songTitle isEqualToString:@""]){
         NSURL *audio_url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:songTitle ofType:@"mp3"]];
         AVURLAsset  *audioAsset = [[AVURLAsset alloc]initWithURL:audio_url options:nil];
         AVMutableCompositionTrack *audioTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio
@@ -148,6 +150,8 @@
         [audioTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, totalDuration)
                             ofTrack:[[audioAsset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0] atTime:kCMTimeZero error:nil];
         [manager removeItemAtPath:myPathDocs error:nil];
+             
+         }
         NSLog(@"1");
         
         

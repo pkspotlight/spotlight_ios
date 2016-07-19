@@ -431,6 +431,31 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
                                                                    message:@""
                                                             preferredStyle:UIAlertControllerStyleActionSheet];
     
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"No Music"
+                      
+                                              style:UIAlertActionStyleDefault
+                      
+                                            handler:^(UIAlertAction * _Nonnull action) {
+                                                
+                                                [self createMontageWithSongTitle:@"" share:NO];
+                                                
+                                            }]];
+    
+    
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"Get Music"
+                      
+                                              style:UIAlertActionStyleDefault
+                      
+                                            handler:^(UIAlertAction * _Nonnull action) {
+                                                
+                                                [self openMedia];
+                                                
+                                            }]];
+    
+    
+    
     [alert addAction:[UIAlertAction actionWithTitle:@"Cool Kids"
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * _Nonnull action) {
@@ -462,6 +487,32 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Select your background music"
                                                                    message:@""
                                                             preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"No Music"
+                      
+                                              style:UIAlertActionStyleDefault
+                      
+                                            handler:^(UIAlertAction * _Nonnull action) {
+                                                
+                                                [self createMontageWithSongTitle:@"" share:NO];
+                                                
+                                            }]];
+    
+    
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"Get Music"
+                      
+                                              style:UIAlertActionStyleDefault
+                      
+                                            handler:^(UIAlertAction * _Nonnull action) {
+                                                
+                                                [self openMedia];
+                                                
+                                            }]];
+    
+    
+    
     
     [alert addAction:[UIAlertAction actionWithTitle:@"Cool Kids"
                                               style:UIAlertActionStyleDefault
@@ -527,5 +578,317 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
     
     
 }
+
+-(void)openMedia{
+    
+    MPMediaPickerController *mediaPicker = [[MPMediaPickerController alloc] initWithMediaTypes:MPMediaTypeMusic];
+    
+    mediaPicker.delegate = self;
+    
+    mediaPicker.allowsPickingMultipleItems = NO;
+    
+    [self presentViewController:mediaPicker animated:YES completion:nil];
+    
+}
+
+
+
+- (void)mediaPicker: (MPMediaPickerController *)mediaPicker didPickMediaItems:(MPMediaItemCollection *)mediaItemCollection {
+    
+    [self dismissModalViewControllerAnimated:YES];
+    
+    for (int i = 0; i < [mediaItemCollection.items count]; i++) {
+        
+        
+        
+        [self exportAssetAsSourceFormat:[[mediaItemCollection items] objectAtIndex:i]];
+        
+        //NSLog(@"for loop : %d", i);
+        
+    }
+    
+}
+
+
+
+- (void)mediaPickerDidCancel:(MPMediaPickerController *)mediaPicker{
+    
+    [self dismissModalViewControllerAnimated:YES];
+    
+}
+
+
+
+- (void)exportAssetAsSourceFormat:(MPMediaItem *)item {
+    
+    
+    
+    NSURL *assetURL = [item valueForProperty:MPMediaItemPropertyAssetURL];
+    
+    
+    
+    BOOL isCloud = FALSE;
+    
+    
+    
+    //    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0")) {
+    
+    //        NSNumber *isCloudNumber = [item valueForProperty:MPMediaItemPropertyIsCloudItem];
+    
+    //        isCloud = [isCloudNumber boolValue];
+    
+    //    }
+    
+    
+    
+    //
+    
+    //    if(assetURL != nil &&  ![assetURL isKindOfClass:[NSNull class]] && ! isCloud)
+    
+    //    {
+    
+    //        NSLog(@"ASSET URL :%@ ", assetURL);
+    
+    //
+    
+    //        NSLog(@"\n>>>> assetURL : %@",[assetURL absoluteString]);
+    
+    //        AVURLAsset *songAsset = [AVURLAsset URLAssetWithURL:assetURL options:nil];
+    
+    //
+    
+    //        AVAssetExportSession *exportSession = [[AVAssetExportSession alloc]
+    
+    //                                               initWithAsset:songAsset
+    
+    //                                               presetName:AVAssetExportPresetPassthrough];
+    
+    //
+    
+    //        NSArray *tracks = [songAsset tracksWithMediaType:AVMediaTypeAudio];
+    
+    //        AVAssetTrack *track = [tracks objectAtIndex:0];
+    
+    //
+    
+    //        id desc = [track.formatDescriptions objectAtIndex:0];
+    
+    //        const AudioStreamBasicDescription *audioDesc = CMAudioFormatDescriptionGetStreamBasicDescription((CMAudioFormatDescriptionRef)desc);
+    
+    //
+    
+    //        FourCharCode formatID = audioDesc->mFormatID;
+    
+    //
+    
+    //        NSString *fileType = nil;
+    
+    //        NSString *ex = nil;
+    
+    //
+    
+    //        switch (formatID) {
+    
+    //
+    
+    //            case kAudioFormatLinearPCM:
+    
+    //            {
+    
+    //                UInt32 flags = audioDesc->mFormatFlags;
+    
+    //                if (flags & kAudioFormatFlagIsBigEndian) {
+    
+    //                    fileType = @"public.aiff-audio";
+    
+    //                    ex = @"aif";
+    
+    //                } else {
+    
+    //                    fileType = @"com.microsoft.waveform-audio";
+    
+    //                    ex = @"wav";
+    
+    //                }
+    
+    //            }
+    
+    //                break;
+    
+    //
+    
+    //            case kAudioFormatMPEGLayer3:
+    
+    //                fileType = @"com.apple.quicktime-movie";
+    
+    //                ex = @"mp3";
+    
+    //                break;
+    
+    //
+    
+    //            case kAudioFormatMPEG4AAC:
+    
+    //                fileType = @"com.apple.m4a-audio";
+    
+    //                ex = @"m4a";
+    
+    //                break;
+    
+    //
+    
+    //            case kAudioFormatAppleLossless:
+    
+    //                fileType = @"com.apple.m4a-audio";
+    
+    //                ex = @"m4a";
+    
+    //                break;
+    
+    //
+    
+    //            default:
+    
+    //                break;
+    
+    //        }
+    
+    //
+    
+    //        exportSession.outputFileType = fileType;
+    
+    //
+    
+    //        NSString *fileName = nil;
+    
+    //
+    
+    //        fileName = [NSString stringWithString:[item valueForProperty:MPMediaItemPropertyTitle]];
+    
+    //
+    
+    //        NSArray *fileNameArray = nil;
+    
+    //        fileNameArray = [fileName componentsSeparatedByString:@" "];
+    
+    //        fileName = [fileNameArray componentsJoinedByString:@""];
+    
+    //
+    
+    //        NSString *docDir = [[AppDelegate sharedAppDelegate]applicationDocumentsDirectory];
+    
+    //
+    
+    //        NSString *filePath = [[docDir stringByAppendingPathComponent:fileName] stringByAppendingPathExtension:ex];
+    
+    //
+    
+    //        int fileNumber = 0;
+    
+    //        NSString *fileNumberString = nil;
+    
+    //        NSString *fileNameWithNumber = nil;
+    
+    //        while ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+    
+    //            fileNumber++;
+    
+    //            fileNumberString = [NSString stringWithFormat:@"-%02d", fileNumber];
+    
+    //            fileNameWithNumber = [fileName stringByAppendingString:fileNumberString];
+    
+    //            filePath = [[docDir stringByAppendingPathComponent:fileNameWithNumber] stringByAppendingPathExtension:ex];
+    
+    //            //NSLog(@"filePath = %@", filePath);
+    
+    //        }
+    
+    //
+    
+    //        // -------------------------------------
+    
+    //
+    
+    //        [self deleteMyFile:filePath];
+    
+    //        filePath = [filePath stringByAppendingString:@".mov"];
+    
+    //        [self deleteMyFile:filePath];
+    
+    //
+    
+    //        exportSession.outputURL = [NSURL fileURLWithPath:filePath];
+    
+    //
+    
+    //        [exportSession exportAsynchronouslyWithCompletionHandler:^{
+    
+    //
+    
+    //            if (exportSession.status == AVAssetExportSessionStatusCompleted) {
+    
+    //
+    
+    //                NSFileManager *fileMgr = [NSFileManager defaultManager];
+    
+    //                NSError *error;
+    
+    //                NSString *newpath = [filePath stringByReplacingOccurrencesOfString:@".mov" withString:@""];
+    
+    //                if ([fileMgr moveItemAtPath:filePath toPath:newpath error:&error] != YES)
+    
+    //                    NSLog(@"Unable to move file: %@", [error localizedDescription]);
+    
+    //            }
+    
+    //        }
+    
+    //         else
+    
+    //         {
+    
+    //             //NSLog(@"export session error");
+    
+    //         }
+    
+    //         [exportSession release];
+    
+    //         }];
+    
+    //        
+    
+    //    }   
+    
+    
+    
+}
+
+
+
+-(void)deleteMyFile:(NSString *)path
+
+{
+    
+    
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+        
+        NSError *deleteErr = nil;
+        
+        [[NSFileManager defaultManager] removeItemAtPath:path error:&deleteErr];
+        
+        if (deleteErr) {
+            
+            NSLog (@"Can't delete %@: %@", path, deleteErr);
+            
+        }
+        
+    }
+    
+}
+
+
+
+
 
 @end

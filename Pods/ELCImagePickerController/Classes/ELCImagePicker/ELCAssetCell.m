@@ -54,9 +54,37 @@
         if (i < [_imageViewArray count]) {
             UIImageView *imageView = [_imageViewArray objectAtIndex:i];
             imageView.image = [UIImage imageWithCGImage:asset.asset.thumbnail];
+            for(UIView *subview in imageView.subviews)
+                [subview removeFromSuperview];
+            
+            if ([[asset.asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
+                // asset is a video
+                
+                
+                UIImageView *videoIcon = [[UIImageView alloc] initWithFrame:CGRectMake(22.5, 22.5, 30, 30)];
+                videoIcon.image = [UIImage imageNamed:@"video_Icon"];
+                
+                [imageView addSubview:videoIcon];
+            }
+           
+            
         } else {
             UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageWithCGImage:asset.asset.thumbnail]];
             [_imageViewArray addObject:imageView];
+            
+            for(UIView *subview in imageView.subviews)
+                [subview removeFromSuperview];
+
+            
+            if ([[asset.asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
+                // asset is a video
+                
+                
+                UIImageView *videoIcon = [[UIImageView alloc] initWithFrame:CGRectMake(22.5, 22.5, 30, 30)];
+                videoIcon.image = [UIImage imageNamed:@"video_Icon"];
+                
+                [imageView addSubview:videoIcon];
+            }
         }
         
         if (i < [_overlayViewArray count]) {
@@ -66,6 +94,9 @@
             if (overlayImage == nil) {
                 overlayImage = [UIImage imageNamed:@"Overlay.png"];
             }
+            
+            
+            
             UIImageView *overlayView = [[UIImageView alloc] initWithImage:overlayImage];
             [_overlayViewArray addObject:overlayView];
             overlayView.hidden = asset.selected ? NO : YES;

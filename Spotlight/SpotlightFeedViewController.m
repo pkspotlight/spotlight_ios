@@ -62,12 +62,12 @@
     }];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-  
-
-    [super viewDidAppear:animated];
-     [self refresh:nil];
-}
+//- (void)viewDidAppear:(BOOL)animated {
+//  
+//
+//    [super viewDidAppear:animated];
+//     [self refresh:nil];
+//}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="hOq-mx-7hw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="hOq-mx-7hw">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -1359,7 +1359,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="DpV-UE-4y4">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="209"/>
+                            <rect key="frame" x="0.0" y="64" width="600" height="209"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unknown_user.png" translatesAutoresizingMaskIntoConstraints="NO" id="e7Z-HN-3NL">
@@ -1388,7 +1388,7 @@
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CreateSpotlightButtonCell" rowHeight="64" id="vIu-SN-1DP">
-                                <rect key="frame" x="0.0" y="237" width="600" height="64"/>
+                                <rect key="frame" x="0.0" y="301" width="600" height="64"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vIu-SN-1DP" id="0VG-1E-Cia">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="63"/>
@@ -2352,11 +2352,11 @@
         <image name="unknown_user.png" width="500" height="500"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="G4n-FP-84S"/>
+        <segue reference="KDg-Dy-czv"/>
         <segue reference="oT6-GV-6Bb"/>
         <segue reference="VZn-Uf-dUM"/>
         <segue reference="5wK-cZ-7Zv"/>
-        <segue reference="KDg-Dy-czv"/>
+        <segue reference="G4n-FP-84S"/>
         <segue reference="LEx-VJ-MlG"/>
     </inferredMetricsTieBreakers>
 </document>

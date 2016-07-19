@@ -39,7 +39,7 @@ static CGFloat const BasicHeaderHeight = 50;
     [self.refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     [self setRefreshControl:self.refreshControl];
     [self.refreshControl beginRefreshing];
-//    [self refresh:self.refreshControl];
+    [self refresh:self.refreshControl];
 }
 
 
@@ -47,7 +47,7 @@ static CGFloat const BasicHeaderHeight = 50;
     [super viewDidAppear:animated];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshScreen) name:@"Frdfollowunfollow" object:nil];
-    [self refresh:self.refreshControl];
+   // [self refresh:self.refreshControl];
 }
 
 -(void)refreshScreen

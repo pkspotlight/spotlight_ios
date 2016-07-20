@@ -31,7 +31,7 @@
         
         NSMutableArray *mutableArray = [[NSMutableArray alloc] initWithCapacity:4];
         self.imageViewArray = mutableArray;
-        squareSide = 85;
+        squareSide = 100;
 
         NSMutableArray *overlayArray = [[NSMutableArray alloc] initWithCapacity:4];
         self.overlayViewArray = overlayArray;
@@ -64,7 +64,7 @@
                 // asset is a video
                 
                 
-                UIImageView *videoIcon = [[UIImageView alloc] initWithFrame:CGRectMake((squareSide - 30)/2.0, (squareSide - 30)/2.0, 30, 30)];
+                UIImageView *videoIcon = [[UIImageView alloc] initWithFrame:CGRectMake((75 - 30)/2.0, (75 - 30)/2.0, 30, 30)];
                 videoIcon.image = [UIImage imageNamed:@"video_Icon"];
                 
                 [imageView addSubview:videoIcon];
@@ -83,7 +83,7 @@
                 // asset is a video
                 
                 
-                 UIImageView *videoIcon = [[UIImageView alloc] initWithFrame:CGRectMake((squareSide - 30)/2.0, (squareSide - 30)/2.0, 30, 30)];
+                 UIImageView *videoIcon = [[UIImageView alloc] initWithFrame:CGRectMake((75 - 30)/2.0, (75 - 30)/2.0, 30, 30)];
                 videoIcon.image = [UIImage imageNamed:@"video_Icon"];
                 
                 [imageView addSubview:videoIcon];
@@ -110,10 +110,10 @@
 - (void)cellTapped:(UITapGestureRecognizer *)tapRecognizer
 {
     CGPoint point = [tapRecognizer locationInView:self];
-    CGFloat totalWidth = self.rowAssets.count * squareSide + (self.rowAssets.count - 1) * 4;
+    CGFloat totalWidth = self.rowAssets.count * 75 + (self.rowAssets.count - 1) * 4;
     CGFloat startX = (self.bounds.size.width - totalWidth) / 2;
     
-	CGRect frame = CGRectMake(startX, 2, squareSide, squareSide);
+	CGRect frame = CGRectMake(startX, 2, 75, 75);
 	
 	for (int i = 0; i < [_rowAssets count]; ++i) {
         if (CGRectContainsPoint(frame, point)) {
@@ -131,17 +131,17 @@
 {
     
     
-    CGFloat totalWidth = self.rowAssets.count * squareSide + (self.rowAssets.count - 1) * 4;
+    CGFloat totalWidth = self.rowAssets.count * 75 + (self.rowAssets.count - 1) * 4;
     
-    if(totalWidth > [UIScreen mainScreen].bounds.size.width)
-    {
-        squareSide = 78;
-        totalWidth = self.rowAssets.count * squareSide + (self.rowAssets.count - 1) * 4;
-    }
+//    while(totalWidth > [UIScreen mainScreen].bounds.size.width)
+//    {
+//        squareSide = squareSide - 1;
+//        totalWidth = self.rowAssets.count * squareSide + (self.rowAssets.count - 1) * 4;
+//    }
     
     CGFloat startX = (self.bounds.size.width - totalWidth) / 2;
     
-	CGRect frame = CGRectMake(startX, 2, squareSide, squareSide);
+	CGRect frame = CGRectMake(startX, 2, 75, 75);
 	
 	for (int i = 0; i < [_rowAssets count]; ++i) {
 		UIImageView *imageView = [_imageViewArray objectAtIndex:i];

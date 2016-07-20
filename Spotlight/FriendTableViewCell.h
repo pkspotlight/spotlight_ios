@@ -10,7 +10,7 @@
 
 @class User;
 
-@interface FriendTableViewCell : UITableViewCell
+@interface FriendTableViewCell : UITableViewCell<UIAlertViewDelegate>
 
 - (void)formatForUser:(User*)user isFollowing:(BOOL)isFollowing;
 

@@ -168,8 +168,10 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
         [alert addAction:[UIAlertAction actionWithTitle:@"None, I just want to follow it"
                                                   style:UIAlertActionStyleDefault
                                                 handler:^(UIAlertAction * _Nonnull action) {
+                                                    
                                                     [[User currentUser] followTeam:team completion:^{
                                                         if (completion) {
+                                                            
                                                             completion();
                                                         }
                                                     }];
@@ -180,6 +182,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                                                     handler:^(UIAlertAction * _Nonnull action) {
                                                         [child followTeam:team completion:^{
                                                             if (completion) {
+                                                                
                                                                 completion();
                                                             }
                                                         }];
@@ -193,6 +196,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     } else {
         [[User currentUser] followTeam:team completion:^{
             if (completion) {
+              
                 completion();
             }
         }];

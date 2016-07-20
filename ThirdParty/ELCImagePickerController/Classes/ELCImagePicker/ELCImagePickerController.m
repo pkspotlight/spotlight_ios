@@ -51,21 +51,34 @@
 //    if (!shouldSelect) {
     
         NSNumber *number = [asset.asset valueForProperty:ALAssetPropertyDuration];
-    
+    ALAssetRepresentation *representation = [asset.asset defaultRepresentation];
+    long long fileSize=(long long)[representation size];
     if (number.floatValue>15){
         
-        
+       
         
                 NSString *message = @"Please Select Video Less Than 15 Seconds.";
                 [[[UIAlertView alloc] initWithTitle:@""
                                             message:message
                                            delegate:nil
                                   cancelButtonTitle:nil
-                                  otherButtonTitles:NSLocalizedString(@"Okay", nil), nil] show];
+                                  otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
+         return false;
           }
-
+    
+    else if(fileSize >= 10400000){
+        NSString *message = @"Video Size too long.";
+        [[[UIAlertView alloc] initWithTitle:@""
+                                    message:message
+                                   delegate:nil
+                          cancelButtonTitle:nil
+                          otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
         
-      return number.floatValue<=15;
+        return false;
+    }
+
+    
+      return true;
 }
 
 - (void)selectedAssets:(NSArray *)assets

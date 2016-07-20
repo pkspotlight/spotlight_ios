@@ -39,6 +39,9 @@
 - (void)followTeam:(Team*)team completion:(void (^)(void))completion{
     [[self teams] addObject:team];
     [self saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if(succeeded){
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"SpotLightRefersh" object:nil];
+        }
         if (completion) {
             completion();
         }
@@ -48,7 +51,11 @@
 -(void)unfollowTeam:(Team*)team completion:(void (^)(void))completion{
     [[self teams] removeObject:team];
     [self saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if(succeeded){
+             [[NSNotificationCenter defaultCenter] postNotificationName:@"SpotLightRefersh" object:nil];
+        }
         if (completion) {
+            
             completion();
         }
     }];

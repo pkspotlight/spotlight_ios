@@ -72,6 +72,9 @@
     [self.spotlight setTeam:self.team];
     [self.spotlight setCreatorName:[NSString stringWithFormat:@"%@ %@", user.firstName, user.lastName]];
     [self.spotlight saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if(succeeded){
+         [[NSNotificationCenter defaultCenter] postNotificationName:@"SpotLightRefersh" object:nil];
+        }
         if(_isFromTeamdetail)
        
             [self.navigationController popViewControllerAnimated:YES];
@@ -81,6 +84,8 @@
             
         }];
     }];
+    
+    
 }
 
 - (void)dismissView:(MBProgressHUD*)hud {

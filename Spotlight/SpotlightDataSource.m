@@ -158,13 +158,34 @@
                        completion:(void (^ __nullable)(void))completion{
     [[children query] findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         
-        for (Child* child in objects) {
-            [self synchronouslyLoadSpotlightForChild:child];
+        long childCount = objects.count;
+        if(childCount == 0)
+        {
+            self.spotlights = [self sortSpotlightsByCreatedDate:self.spotlights];
+            
+            // add error checking here
+            if (completion) completion();
+            return;
         }
-        self.spotlights = [self sortSpotlightsByCreatedDate:self.spotlights];
-
-        // add error checking here
-        if (completion) completion();
+      __block  long initialCount = 0;
+        
+        for (Child* child in objects) {
+            [self synchronouslyLoadSpotlightForChild:child completion:^{
+                
+                initialCount++;
+                if(initialCount == childCount)
+                {
+                    self.spotlights = [self sortSpotlightsByCreatedDate:self.spotlights];
+                    
+                    // add error checking here
+                    if (completion) completion();
+                }
+                
+            }];
+        }
+       
+        
+        
     }];
     
 }
@@ -179,7 +200,8 @@
     }];
 }
 
-- (void)synchronouslyLoadSpotlightForChild:(Child*)child{
+- (void)synchronouslyLoadSpotlightForChild:(Child*)child completion:(void (^ __nullable)(void))completion
+{
     PFQuery *teamQuery = [[child teams] query];
     [teamQuery includeKey:@"teamLogoMedia"];
     [teamQuery includeKey:@"thumbnailImageFile"];
@@ -189,10 +211,16 @@
     [spotlightQuery includeKey:@"teamLogoMedia"];
     [spotlightQuery includeKey:@"thumbnailImageFile"];
     [spotlightQuery whereKey:@"team" matchesKey:@"objectId" inQuery:teamQuery];
-    NSArray* newSpotlights = [spotlightQuery findObjects];
-    for (Spotlight* spotlight in newSpotlights) {
-        [self addUniqueSpotlight:spotlight];
-    }
+    [spotlightQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if(!error)
+        {
+        for (Spotlight* spotlight in objects) {
+            [self addUniqueSpotlight:spotlight];
+        }
+        }
+        if(completion) completion();
+    }];
+    
 }
 
 

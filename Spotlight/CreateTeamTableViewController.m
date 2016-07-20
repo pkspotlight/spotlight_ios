@@ -13,7 +13,7 @@
 #import "SpotlightMedia.h"
 #import <MBProgressHUD.h>
 #import <MobileCoreServices/UTCoreTypes.h>
-
+#import "Child.h"
 @interface CreateTeamTableViewController ()
 
 @property (strong, nonatomic) NSArray* teamPropertyArray;
@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *addTeamLogoButton;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *photoUploadIndicator;
 @property (assign, nonatomic) BOOL isNewTeam;
+@property (strong, nonatomic) Child* selfChild;
 
 @end
 
@@ -37,6 +38,14 @@
     [self.addTeamLogoButton.layer setBorderColor:[UIColor whiteColor].CGColor];
     [self.addTeamLogoButton.layer setBorderWidth:3];
     [self.addTeamLogoButton setClipsToBounds:YES];
+    
+    _selfChild = [Child new];
+    
+    _selfChild.firstName = [User currentUser].firstName;
+    _selfChild.lastName = [User currentUser].lastName;
+    _selfChild.hometown = @"";
+    _selfChild.profilePic = [User currentUser].profilePic;
+    
     if (!self.team) {
         self.team = [Team new];
         self.pendingFieldDictionary = [self newPendingFieldDictionary];
@@ -93,9 +102,17 @@
         if (succeeded) {
             User* user = [User currentUser];
             [user.teams addObject:self.team];
+            
             [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                 [self dismissViewControllerAnimated:YES completion:nil];
             }];
+            
+            [_selfChild followTeam:self.team completion:^{
+                
+            }];
+            
+            
+            
         }
         if (error) {
             NSLog(@"fuck: %@", [error localizedDescription]);

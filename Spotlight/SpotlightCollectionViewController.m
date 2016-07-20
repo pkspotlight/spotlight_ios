@@ -172,7 +172,7 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
 -(void)photoBrowser:(MWPhotoBrowser *)photoBrowser populateLikesForPhotoAtIndex:(NSUInteger)index {
     SpotlightMedia *media = self.mediaList[index];
     [media likeCountWithCompletion:^(NSInteger likes) {
-        [self.browser populateLikeCount:likes atIndex:index];
+      //  [self.browser populateLikeCount:likes atIndex:index];
     }];
 }
 

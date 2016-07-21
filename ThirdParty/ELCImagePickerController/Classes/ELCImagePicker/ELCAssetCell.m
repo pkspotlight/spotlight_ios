@@ -130,10 +130,6 @@
 - (void)layoutSubviews
 {
     squareSide = 100;
-    
-    
-    
-    
     CGFloat totalWidth = self.rowAssets.count * squareSide + (self.rowAssets.count - 1) * 4;
     
     while(totalWidth > [UIScreen mainScreen].bounds.size.width)

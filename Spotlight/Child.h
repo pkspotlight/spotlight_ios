@@ -8,7 +8,8 @@
 
 #import <Parse/Parse.h>
 
-@class ProfilePictureMedia;
+//@class ProfilePictureMedia;
+#import "ProfilePictureMedia.h"
 @class Team;
 
 @interface Child : PFObject <PFSubclassing>

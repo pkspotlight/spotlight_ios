@@ -38,17 +38,22 @@
                        forState:UIControlStateNormal];
     
     [self.userImageView cancelImageRequestOperation];
-    [child.profilePic fetchIfNeeded];
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:child.profilePic.thumbnailImageFile.url]];
-    [self.userImageView
-     setImageWithURLRequest:request
-     placeholderImage:nil
-     success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, UIImage * _Nonnull image) {
-         [self.userImageView setImage:image];
-     } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, NSError * _Nonnull error) {
-         NSLog(@"fuck thumbnail failure");
-     }];
-}
+    [child.profilePic fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        if(!error)
+        {
+            NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:child.profilePic.thumbnailImageFile.url]];
+            [self.userImageView
+             setImageWithURLRequest:request
+             placeholderImage:nil
+             success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, UIImage * _Nonnull image) {
+                 [self.userImageView setImage:image];
+             } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, NSError * _Nonnull error) {
+                 NSLog(@"fuck thumbnail failure");
+             }];
+  
+        }
+    }];
+   }
 
 - (void)formatButtonText {
 //    NSString* buttonText = (_isFollowing) ? @"Following" : @"Follow";

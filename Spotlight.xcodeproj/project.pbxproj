@@ -9,6 +9,18 @@
 /* Begin PBXBuildFile section */
 		8404D5831D3E51BC00B2D325 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8404D5821D3E51BC00B2D325 /* MediaPlayer.framework */; };
 		841FAE121D3CE26700772B23 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841FAE111D3CE26700772B23 /* Photos.framework */; };
+		84A2343D1D3F5F0D008AB7C0 /* ELCAlbumPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A2342A1D3F5F0D008AB7C0 /* ELCAlbumPickerController.m */; };
+		84A2343E1D3F5F0D008AB7C0 /* ELCAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A2342C1D3F5F0D008AB7C0 /* ELCAsset.m */; };
+		84A2343F1D3F5F0D008AB7C0 /* ELCAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A2342E1D3F5F0D008AB7C0 /* ELCAssetCell.m */; };
+		84A234401D3F5F0D008AB7C0 /* ELCAssetTablePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A234321D3F5F0D008AB7C0 /* ELCAssetTablePicker.m */; };
+		84A234411D3F5F0D008AB7C0 /* ELCImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A234341D3F5F0D008AB7C0 /* ELCImagePickerController.m */; };
+		84A234421D3F5F0D008AB7C0 /* ELCAlbumPickerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A234361D3F5F0D008AB7C0 /* ELCAlbumPickerController.xib */; };
+		84A234431D3F5F0D008AB7C0 /* ELCAssetPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A234371D3F5F0D008AB7C0 /* ELCAssetPicker.xib */; };
+		84A234441D3F5F0D008AB7C0 /* ELCAssetTablePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A234381D3F5F0D008AB7C0 /* ELCAssetTablePicker.xib */; };
+		84A234451D3F5F0D008AB7C0 /* Overlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A234391D3F5F0D008AB7C0 /* Overlay.png */; };
+		84A234461D3F5F0D008AB7C0 /* Overlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A2343A1D3F5F0D008AB7C0 /* Overlay@2x.png */; };
+		84A234471D3F5F0D008AB7C0 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 84A2343B1D3F5F0D008AB7C0 /* README.md */; };
+		84A234481D3F5F0D008AB7C0 /* video_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A2343C1D3F5F0D008AB7C0 /* video_Icon.png */; };
 		880054EA1C6B8D630034D639 /* Child.m in Sources */ = {isa = PBXBuildFile; fileRef = 880054E91C6B8D630034D639 /* Child.m */; };
 		880054EE1C6B9E8C0034D639 /* ChildTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 880054ED1C6B9E8C0034D639 /* ChildTableViewCell.m */; };
 		880207A41C15DF7A002D5068 /* MontageCreator.m in Sources */ = {isa = PBXBuildFile; fileRef = 880207A31C15DF7A002D5068 /* MontageCreator.m */; };
@@ -95,6 +107,25 @@
 		4FDDD1185B6B67FED774A599 /* Pods-Spotlight.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spotlight.release.xcconfig"; path = "Pods/Target Support Files/Pods-Spotlight/Pods-Spotlight.release.xcconfig"; sourceTree = "<group>"; };
 		8404D5821D3E51BC00B2D325 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		841FAE111D3CE26700772B23 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		84A234291D3F5F0D008AB7C0 /* ELCAlbumPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAlbumPickerController.h; sourceTree = "<group>"; };
+		84A2342A1D3F5F0D008AB7C0 /* ELCAlbumPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCAlbumPickerController.m; sourceTree = "<group>"; };
+		84A2342B1D3F5F0D008AB7C0 /* ELCAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAsset.h; sourceTree = "<group>"; };
+		84A2342C1D3F5F0D008AB7C0 /* ELCAsset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCAsset.m; sourceTree = "<group>"; };
+		84A2342D1D3F5F0D008AB7C0 /* ELCAssetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAssetCell.h; sourceTree = "<group>"; };
+		84A2342E1D3F5F0D008AB7C0 /* ELCAssetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCAssetCell.m; sourceTree = "<group>"; };
+		84A2342F1D3F5F0D008AB7C0 /* ELCAssetPickerFilterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAssetPickerFilterDelegate.h; sourceTree = "<group>"; };
+		84A234301D3F5F0D008AB7C0 /* ELCAssetSelectionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAssetSelectionDelegate.h; sourceTree = "<group>"; };
+		84A234311D3F5F0D008AB7C0 /* ELCAssetTablePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAssetTablePicker.h; sourceTree = "<group>"; };
+		84A234321D3F5F0D008AB7C0 /* ELCAssetTablePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCAssetTablePicker.m; sourceTree = "<group>"; };
+		84A234331D3F5F0D008AB7C0 /* ELCImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCImagePickerController.h; sourceTree = "<group>"; };
+		84A234341D3F5F0D008AB7C0 /* ELCImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCImagePickerController.m; sourceTree = "<group>"; };
+		84A234361D3F5F0D008AB7C0 /* ELCAlbumPickerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ELCAlbumPickerController.xib; sourceTree = "<group>"; };
+		84A234371D3F5F0D008AB7C0 /* ELCAssetPicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ELCAssetPicker.xib; sourceTree = "<group>"; };
+		84A234381D3F5F0D008AB7C0 /* ELCAssetTablePicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ELCAssetTablePicker.xib; sourceTree = "<group>"; };
+		84A234391D3F5F0D008AB7C0 /* Overlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Overlay.png; sourceTree = "<group>"; };
+		84A2343A1D3F5F0D008AB7C0 /* Overlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Overlay@2x.png"; sourceTree = "<group>"; };
+		84A2343B1D3F5F0D008AB7C0 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		84A2343C1D3F5F0D008AB7C0 /* video_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = video_Icon.png; sourceTree = "<group>"; };
 		880054E81C6B8D630034D639 /* Child.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Child.h; sourceTree = "<group>"; };
 		880054E91C6B8D630034D639 /* Child.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Child.m; sourceTree = "<group>"; };
 		880054EC1C6B9E8C0034D639 /* ChildTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildTableViewCell.h; sourceTree = "<group>"; };
@@ -251,6 +282,64 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		84A234251D3F5F0D008AB7C0 /* ThirdParty */ = {
+			isa = PBXGroup;
+			children = (
+				84A234261D3F5F0D008AB7C0 /* ELCImagePickerController */,
+			);
+			path = ThirdParty;
+			sourceTree = "<group>";
+		};
+		84A234261D3F5F0D008AB7C0 /* ELCImagePickerController */ = {
+			isa = PBXGroup;
+			children = (
+				84A234271D3F5F0D008AB7C0 /* Classes */,
+				84A2343B1D3F5F0D008AB7C0 /* README.md */,
+				84A2343C1D3F5F0D008AB7C0 /* video_Icon.png */,
+			);
+			path = ELCImagePickerController;
+			sourceTree = "<group>";
+		};
+		84A234271D3F5F0D008AB7C0 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				84A234281D3F5F0D008AB7C0 /* ELCImagePicker */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		84A234281D3F5F0D008AB7C0 /* ELCImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				84A234291D3F5F0D008AB7C0 /* ELCAlbumPickerController.h */,
+				84A2342A1D3F5F0D008AB7C0 /* ELCAlbumPickerController.m */,
+				84A2342B1D3F5F0D008AB7C0 /* ELCAsset.h */,
+				84A2342C1D3F5F0D008AB7C0 /* ELCAsset.m */,
+				84A2342D1D3F5F0D008AB7C0 /* ELCAssetCell.h */,
+				84A2342E1D3F5F0D008AB7C0 /* ELCAssetCell.m */,
+				84A2342F1D3F5F0D008AB7C0 /* ELCAssetPickerFilterDelegate.h */,
+				84A234301D3F5F0D008AB7C0 /* ELCAssetSelectionDelegate.h */,
+				84A234311D3F5F0D008AB7C0 /* ELCAssetTablePicker.h */,
+				84A234321D3F5F0D008AB7C0 /* ELCAssetTablePicker.m */,
+				84A234331D3F5F0D008AB7C0 /* ELCImagePickerController.h */,
+				84A234341D3F5F0D008AB7C0 /* ELCImagePickerController.m */,
+				84A234351D3F5F0D008AB7C0 /* Resources */,
+			);
+			path = ELCImagePicker;
+			sourceTree = "<group>";
+		};
+		84A234351D3F5F0D008AB7C0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				84A234361D3F5F0D008AB7C0 /* ELCAlbumPickerController.xib */,
+				84A234371D3F5F0D008AB7C0 /* ELCAssetPicker.xib */,
+				84A234381D3F5F0D008AB7C0 /* ELCAssetTablePicker.xib */,
+				84A234391D3F5F0D008AB7C0 /* Overlay.png */,
+				84A2343A1D3F5F0D008AB7C0 /* Overlay@2x.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		880054EB1C6B8E6F0034D639 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -275,6 +364,7 @@
 		88A736CB1B91318D00093B27 = {
 			isa = PBXGroup;
 			children = (
+				84A234251D3F5F0D008AB7C0 /* ThirdParty */,
 				88A736D61B91318D00093B27 /* Spotlight */,
 				88A736F01B91318D00093B27 /* SpotlightTests */,
 				88A736D51B91318D00093B27 /* Products */,
@@ -476,7 +566,6 @@
 				88A736D21B91318D00093B27 /* Resources */,
 				1B0E6BB741D293639D84CBA3 /* Copy Pods Resources */,
 				8849A1E01B9FB6CA00511DD5 /* ShellScript */,
-				852C6EEB208C3AFADBC59333 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -558,6 +647,9 @@
 				889DEEC81C97370100726D83 /* heart.png in Resources */,
 				883265491C8F79E80063D1F9 /* DT_TheDUFF_EverySingleNight_INST_125.mp3 in Resources */,
 				88FDB8941C8EA2A1008C9A3D /* DT_TheDuff_CoolKids_INST130.mp3 in Resources */,
+				84A234421D3F5F0D008AB7C0 /* ELCAlbumPickerController.xib in Resources */,
+				84A234451D3F5F0D008AB7C0 /* Overlay.png in Resources */,
+				84A234481D3F5F0D008AB7C0 /* video_Icon.png in Resources */,
 				88A736E31B91318D00093B27 /* Main.storyboard in Resources */,
 				88A736E81B91318D00093B27 /* LaunchScreen.xib in Resources */,
 				8893FD731BFC1C4600711779 /* profile@3x.png in Resources */,
@@ -565,6 +657,8 @@
 				88E98E891BAF508400292B14 /* Softball.JPG in Resources */,
 				889DEED01C98E6E100726D83 /* spotlightWriting.png in Resources */,
 				8893FD771BFC1E0400711779 /* teams@3x.png in Resources */,
+				84A234461D3F5F0D008AB7C0 /* Overlay@2x.png in Resources */,
+				84A234441D3F5F0D008AB7C0 /* ELCAssetTablePicker.xib in Resources */,
 				88E98E8B1BAF508400292B14 /* fielding ground ball.jpg in Resources */,
 				88BDFC651BFD4FD2007A3EBB /* BasicHeaderView.xib in Resources */,
 				889DEECA1C97370100726D83 /* heart@3x.png in Resources */,
@@ -574,6 +668,7 @@
 				88E953411BEB7ED50094F73D /* Contacts-50.png in Resources */,
 				884250B21C18929B009034A6 /* spotlight_logo.png in Resources */,
 				88FDB88E1C8EA2A1008C9A3D /* TB - Disney Funk 124bpm.mp3 in Resources */,
+				84A234431D3F5F0D008AB7C0 /* ELCAssetPicker.xib in Resources */,
 				8832654B1C8F79F80063D1F9 /* DT_TheDuff_Ready2Go_128_INST.mp3 in Resources */,
 				88EC50261C0DC98D00077E85 /* icon-edit-avatar@2x.png in Resources */,
 				8893FD751BFC1CF600711779 /* friends@3x.png in Resources */,
@@ -606,21 +701,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Spotlight/Pods-Spotlight-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		852C6EEB208C3AFADBC59333 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Spotlight/Pods-Spotlight-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8849A1E01B9FB6CA00511DD5 /* ShellScript */ = {
@@ -662,6 +742,8 @@
 				88EE2CC61B9E08B2002DDB99 /* SpotlightFeedViewController.m in Sources */,
 				88EC502B1C0DCE5200077E85 /* ProfilePictureMedia.m in Sources */,
 				88E953461BEB8B7D0094F73D /* FriendsTableViewController.m in Sources */,
+				84A234411D3F5F0D008AB7C0 /* ELCImagePickerController.m in Sources */,
+				84A234401D3F5F0D008AB7C0 /* ELCAssetTablePicker.m in Sources */,
 				8849A1E91BA2590800511DD5 /* IntroViewController.m in Sources */,
 				8893FD7D1BFD1FCB00711779 /* FieldEntryTableViewCell.m in Sources */,
 				88BDFC5A1BFD33E0007A3EBB /* TeamsTableViewController.m in Sources */,
@@ -685,16 +767,20 @@
 				880207A41C15DF7A002D5068 /* MontageCreator.m in Sources */,
 				88EC502E1C0E041F00077E85 /* FriendTableViewCell.m in Sources */,
 				88BDFC791BFF82FD007A3EBB /* SpotlightHeaderCollectionReusableView.m in Sources */,
+				84A2343F1D3F5F0D008AB7C0 /* ELCAssetCell.m in Sources */,
 				88BDFC731BFF6A38007A3EBB /* TeamSelectTableViewController.m in Sources */,
 				88BDFC701BFD60B5007A3EBB /* SpotlightCollectionViewController.m in Sources */,
 				88BDFC521BFD22B8007A3EBB /* CreateTeamTableViewController.m in Sources */,
 				887EC7651C697778001DBDB3 /* CreateFamilyMemberTableViewController.m in Sources */,
 				8849A1E31BA0CB8400511DD5 /* SignUpTableViewController.m in Sources */,
 				8893FD7A1BFCCC2100711779 /* Team.m in Sources */,
+				84A2343E1D3F5F0D008AB7C0 /* ELCAsset.m in Sources */,
 				884250B01C1736D7009034A6 /* SpotlightDataSource.m in Sources */,
 				8849A1E61BA0CC7A00511DD5 /* SignUpInputTableViewCell.m in Sources */,
+				84A2343D1D3F5F0D008AB7C0 /* ELCAlbumPickerController.m in Sources */,
 				88EC50241C0DB72500077E85 /* FriendProfileViewController.m in Sources */,
 				880054EE1C6B9E8C0034D639 /* ChildTableViewCell.m in Sources */,
+				84A234471D3F5F0D008AB7C0 /* README.md in Sources */,
 				883D63F41C07151700AE99CC /* MediaObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -778,7 +864,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "1714aa4a-47be-4666-b0a2-b882c084e773";
+				PROVISIONING_PROFILE = "d185da62-45e2-4e90-8a78-f424e6c07ddb";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -817,7 +903,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "1714aa4a-47be-4666-b0a2-b882c084e773";
+				PROVISIONING_PROFILE = "d185da62-45e2-4e90-8a78-f424e6c07ddb";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -887,7 +973,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.spotlight.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1714aa4a-47be-4666-b0a2-b882c084e773";
+				PROVISIONING_PROFILE = "d185da62-45e2-4e90-8a78-f424e6c07ddb";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Spotlight.app/Spotlight";
 			};
 			name = Debug;
@@ -906,7 +992,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.spotlight.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1714aa4a-47be-4666-b0a2-b882c084e773";
+				PROVISIONING_PROFILE = "d185da62-45e2-4e90-8a78-f424e6c07ddb";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Spotlight.app/Spotlight";
 			};
 			name = Release;

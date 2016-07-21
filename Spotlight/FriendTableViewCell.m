@@ -38,16 +38,26 @@
                        forState:UIControlStateNormal];
     
     [self.userImageView cancelImageRequestOperation];
-    [user.profilePic fetchIfNeeded];
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:user.profilePic.thumbnailImageFile.url]];
-    [self.userImageView
-     setImageWithURLRequest:request
-     placeholderImage:nil
-     success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, UIImage * _Nonnull image) {
-         [self.userImageView setImage:image];
-     } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, NSError * _Nonnull error) {
-         NSLog(@"fuck thumbnail failure");
-     }];
+   // [user.profilePic fetchIfNeeded];
+    
+    [user.profilePic fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        if(!error)
+        {
+            NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:user.profilePic.thumbnailImageFile.url]];
+            [self.userImageView
+             setImageWithURLRequest:request
+             placeholderImage:nil
+             success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, UIImage * _Nonnull image) {
+                 [self.userImageView setImage:image];
+             } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, NSError * _Nonnull error) {
+                 NSLog(@"fuck thumbnail failure");
+             }];
+            
+        }
+    }];
+    
+    
+   
 }
 
 - (void)formatButtonText {
@@ -62,17 +72,66 @@
     PFRelation *friendRelation = [[User currentUser] relationForKey:@"friends"];
     _isFollowing ? [friendRelation removeObject:self.user] :
                    [friendRelation addObject:self.user];
+    if(_isFollowing){
+    UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Are You Sure ?"
+                                                      message:nil
+                                                     delegate:self
+                                            cancelButtonTitle:@"Yes"
+                                            otherButtonTitles:@"No",nil];
+    [message show];
+    }
+    
+    else{
+        [[User currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+            if (succeeded) {
+                self.isFollowing = !self.isFollowing;
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"SpotLightRefersh" object:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"Frdfollowunfollow" object:nil];
+            }
+            [self formatButtonText];
+            
+                
+            
+            
+            //        [self.followingActivityIndicator stopAnimating];
+            //        [self.delegate performSelector:@selector(reloadTable)];
+        }];
+        
 
-    [[User currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-        if (succeeded) {
-            self.isFollowing = !self.isFollowing;
-        }
-        [self formatButtonText];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"Frdfollowunfollow" object:nil];
-//        [self.followingActivityIndicator stopAnimating];
-//        [self.delegate performSelector:@selector(reloadTable)];
-    }];
+    }
+
+    }
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+   
+    if(buttonIndex ==0)
+    {
+        [[User currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+            if (succeeded) {
+                self.isFollowing = !self.isFollowing;
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"SpotLightRefersh" object:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"Frdfollowunfollow" object:nil];
+               
+            }
+            [self formatButtonText];
+            
+         
+
+            
+            
+            //        [self.followingActivityIndicator stopAnimating];
+            //        [self.delegate performSelector:@selector(reloadTable)];
+        }];
+
+        
+
+    }
+        
+    
 }
+
 
 
 @end

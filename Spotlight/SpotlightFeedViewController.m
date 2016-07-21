@@ -16,7 +16,9 @@
 #import <AFNetworking/UIImageView+AFNetworking.h>
 
 @interface SpotlightFeedViewController ()
-
+{
+    UIRefreshControl* refresh;
+}
 @end
 
 @implementation SpotlightFeedViewController
@@ -24,15 +26,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIRefreshControl* refresh = [[UIRefreshControl alloc] init];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshScreen) name:@"SpotLightRefersh" object:nil];
+    refresh = [[UIRefreshControl alloc] init];
     [refresh addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
-    [self setRefreshControl:refresh];
+   
     if (!self.dataSource) self.dataSource = [[SpotlightDataSource alloc] init];
     self.dataSource.delegate = self;
     [self.tableView setDataSource:self.dataSource];
-    [refresh beginRefreshing];
+    [self.tableView addSubview:refresh];
     [self refresh:refresh];
-    
+    [refresh beginRefreshing];
     UIView *headerView = [[UIView alloc] init];
     headerView.frame = CGRectMake(0, 0, 320, 70);
     
@@ -47,6 +50,7 @@
 
 
 - (void)refresh:(id)sender {
+
     [self.dataSource loadSpotlights:^{
         [self.tableView reloadData];
         if(sender)
@@ -62,12 +66,27 @@
     }];
 }
 
-//- (void)viewDidAppear:(BOOL)animated {
-//  
-//
-//    [super viewDidAppear:animated];
-//     [self refresh:nil];
-//}
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    
+   
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    //[[NSNotificationCenter defaultCenter] removeObserver:self name:@"SpotLightRefersh" object:nil];
+
+    
+}
+
+-(void)refreshScreen
+{
+    //[self.tableView setContentOffset:CGPointMake(0, -refresh.frame.size.height) animated:YES];
+
+   [self refresh:refresh];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }

@@ -172,7 +172,7 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
 -(void)photoBrowser:(MWPhotoBrowser *)photoBrowser populateLikesForPhotoAtIndex:(NSUInteger)index {
     SpotlightMedia *media = self.mediaList[index];
     [media likeCountWithCompletion:^(NSInteger likes) {
-        [self.browser populateLikeCount:likes atIndex:index];
+      //  [self.browser populateLikeCount:likes atIndex:index];
     }];
 }
 
@@ -281,9 +281,10 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
         NSURL *videoUrl=(NSURL*)[infoDict objectForKey:UIImagePickerControllerReferenceURL];
         PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[videoUrl] options:nil];
         PHAsset *asset = result.firstObject;
-        
-        [[PHImageManager defaultManager] requestAVAssetForVideo:asset options:PHVideoRequestOptionsDeliveryModeAutomatic resultHandler:^(AVAsset * avasset, AVAudioMix * audioMix, NSDictionary * info) {
-            dispatch_async(dispatch_get_main_queue(), ^{
+        PHVideoRequestOptions *options=[[PHVideoRequestOptions alloc]init];
+        options.version=PHVideoRequestOptionsVersionOriginal;
+        [[PHImageManager defaultManager] requestAVAssetForVideo:asset options:options resultHandler:^(AVAsset * avasset, AVAudioMix * audioMix, NSDictionary * info) {
+           
                 
                 AVURLAsset *asset = (AVURLAsset *)avasset;
                 NSURL *url = asset.URL;
@@ -293,6 +294,7 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
                 if (title) {
                     media.title = title;
                 }
+             dispatch_async(dispatch_get_main_queue(), ^{
                 MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
                 [hud setLabelText:@"Adding Media..."];
                 media[@"parent"] = self.spotlight;

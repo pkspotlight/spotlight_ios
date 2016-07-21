@@ -1359,7 +1359,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="DpV-UE-4y4">
-                            <rect key="frame" x="0.0" y="64" width="600" height="209"/>
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="209"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unknown_user.png" translatesAutoresizingMaskIntoConstraints="NO" id="e7Z-HN-3NL">
@@ -1388,7 +1388,7 @@
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CreateSpotlightButtonCell" rowHeight="64" id="vIu-SN-1DP">
-                                <rect key="frame" x="0.0" y="301" width="600" height="64"/>
+                                <rect key="frame" x="0.0" y="237" width="600" height="64"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vIu-SN-1DP" id="0VG-1E-Cia">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="63"/>

@@ -38,14 +38,14 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     if (!self.child && !self.user) {
         self.user = [User currentUser];
     }
-    [self refresh:self.refreshControl];
+   // [self refresh:self.refreshControl];
 }
 
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-   // [self refresh:self.refreshControl];
+    [self refresh:self.refreshControl];
 }
 
 - (void)refresh:(UIRefreshControl*)sender {
@@ -154,7 +154,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 }
 
 - (void)reloadTable {
-    [self refresh:nil];
+ //   [self refresh:nil];
 }
 
 
@@ -185,11 +185,11 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 #pragma mark - Navigation
 
 - (IBAction)unwindAddTeams:(UIStoryboardSegue*)sender {
-    [self refresh:self.refreshControl];
+    //[self refresh:self.refreshControl];
 }
 
 - (IBAction)unwindDeleteTeam:(UIStoryboardSegue*)sender {
-    [self refresh:self.refreshControl];
+//[self refresh:self.refreshControl];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -225,6 +225,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * _Nonnull action) {
                                                 [[User currentUser] unfollowTeam:teamCell.team completion:^{
+                                                   
                                                     [self refresh:self.refreshControl];
                                                 }];
                                             }]];
@@ -250,6 +251,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                                                   style:UIAlertActionStyleDefault
                                                 handler:^(UIAlertAction * _Nonnull action) {
                                                     [[User currentUser] followTeam:team completion:^{
+                                                        
                                                         [self refresh:self.refreshControl];
                                                         if (completion) {
                                                             completion();
@@ -261,6 +263,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                                                       style:UIAlertActionStyleDefault
                                                     handler:^(UIAlertAction * _Nonnull action) {
                                                         [child followTeam:team completion:^{
+                                                            
                                                             [self refresh:self.refreshControl];
                                                             if (completion) {
                                                                 completion();
@@ -271,7 +274,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
         [alert addAction:[UIAlertAction actionWithTitle:@"Cancel"
                                                   style:UIAlertActionStyleCancel
                                                 handler:^(UIAlertAction * _Nonnull action) {
-                                                    [self refresh:self.refreshControl];
+
                                                 }]];
         [self presentViewController:alert animated:YES completion:nil];
     } else {

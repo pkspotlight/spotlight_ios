@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		8404D5831D3E51BC00B2D325 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8404D5821D3E51BC00B2D325 /* MediaPlayer.framework */; };
 		841FAE121D3CE26700772B23 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841FAE111D3CE26700772B23 /* Photos.framework */; };
+		846F75B01D40D41B00B5120E /* TeamRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 846F75AF1D40D41B00B5120E /* TeamRequest.m */; };
+		8493C2551D40FF85004F694F /* PendingRequestTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8493C2541D40FF85004F694F /* PendingRequestTableViewController.m */; };
 		84A2343D1D3F5F0D008AB7C0 /* ELCAlbumPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A2342A1D3F5F0D008AB7C0 /* ELCAlbumPickerController.m */; };
 		84A2343E1D3F5F0D008AB7C0 /* ELCAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A2342C1D3F5F0D008AB7C0 /* ELCAsset.m */; };
 		84A2343F1D3F5F0D008AB7C0 /* ELCAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A2342E1D3F5F0D008AB7C0 /* ELCAssetCell.m */; };
@@ -107,6 +109,10 @@
 		4FDDD1185B6B67FED774A599 /* Pods-Spotlight.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spotlight.release.xcconfig"; path = "Pods/Target Support Files/Pods-Spotlight/Pods-Spotlight.release.xcconfig"; sourceTree = "<group>"; };
 		8404D5821D3E51BC00B2D325 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		841FAE111D3CE26700772B23 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		846F75AE1D40D41B00B5120E /* TeamRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamRequest.h; sourceTree = "<group>"; };
+		846F75AF1D40D41B00B5120E /* TeamRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamRequest.m; sourceTree = "<group>"; };
+		8493C2531D40FF85004F694F /* PendingRequestTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PendingRequestTableViewController.h; sourceTree = "<group>"; };
+		8493C2541D40FF85004F694F /* PendingRequestTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PendingRequestTableViewController.m; sourceTree = "<group>"; };
 		84A234291D3F5F0D008AB7C0 /* ELCAlbumPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAlbumPickerController.h; sourceTree = "<group>"; };
 		84A2342A1D3F5F0D008AB7C0 /* ELCAlbumPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCAlbumPickerController.m; sourceTree = "<group>"; };
 		84A2342B1D3F5F0D008AB7C0 /* ELCAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAsset.h; sourceTree = "<group>"; };
@@ -349,6 +355,8 @@
 				88EC50301C12F19200077E85 /* User.m */,
 				880054E81C6B8D630034D639 /* Child.h */,
 				880054E91C6B8D630034D639 /* Child.m */,
+				846F75AE1D40D41B00B5120E /* TeamRequest.h */,
+				846F75AF1D40D41B00B5120E /* TeamRequest.m */,
 				887FF4CC1BD530B400F3679D /* Spotlight.h */,
 				887FF4CD1BD530B400F3679D /* Spotlight.m */,
 				88E9E8F41BD5791E0065AA0C /* SpotlightMedia.h */,
@@ -458,6 +466,8 @@
 				88BDFC721BFF6A38007A3EBB /* TeamSelectTableViewController.m */,
 				88BDFC5B1BFD3635007A3EBB /* TeamTableViewCell.h */,
 				88BDFC5C1BFD3635007A3EBB /* TeamTableViewCell.m */,
+				8493C2531D40FF85004F694F /* PendingRequestTableViewController.h */,
+				8493C2541D40FF85004F694F /* PendingRequestTableViewController.m */,
 			);
 			name = Team;
 			sourceTree = "<group>";
@@ -743,9 +753,11 @@
 				88EC502B1C0DCE5200077E85 /* ProfilePictureMedia.m in Sources */,
 				88E953461BEB8B7D0094F73D /* FriendsTableViewController.m in Sources */,
 				84A234411D3F5F0D008AB7C0 /* ELCImagePickerController.m in Sources */,
+				846F75B01D40D41B00B5120E /* TeamRequest.m in Sources */,
 				84A234401D3F5F0D008AB7C0 /* ELCAssetTablePicker.m in Sources */,
 				8849A1E91BA2590800511DD5 /* IntroViewController.m in Sources */,
 				8893FD7D1BFD1FCB00711779 /* FieldEntryTableViewCell.m in Sources */,
+				8493C2551D40FF85004F694F /* PendingRequestTableViewController.m in Sources */,
 				88BDFC5A1BFD33E0007A3EBB /* TeamsTableViewController.m in Sources */,
 				88E9E8F61BD5791E0065AA0C /* SpotlightMedia.m in Sources */,
 				88BDFC7C1BFF8ABB007A3EBB /* SpotlightMediaCollectionViewCell.m in Sources */,

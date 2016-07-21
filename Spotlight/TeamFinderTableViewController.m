@@ -169,23 +169,76 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                                                   style:UIAlertActionStyleDefault
                                                 handler:^(UIAlertAction * _Nonnull action) {
                                                     
-                                                    [[User currentUser] followTeam:team completion:^{
-                                                        if (completion) {
+                                                    PFQuery* moderatorQuery = [team.moderators query];
+                                                    [moderatorQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+                                                        
+                                                        for (User* user in objects) {
                                                             
-                                                            completion();
+                                                            if([user.objectId isEqualToString:[User currentUser].objectId] ){
+                                                                
+                                                                [[[UIAlertView alloc] initWithTitle:@""
+                                                                                            message:@"No User Admin"
+                                                                                           delegate:nil
+                                                                                  cancelButtonTitle:nil
+                                                                                  otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
+
+                                                            }
+                                                            else {
+                                                           NSString *timestamp =  [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970] * 1000];
+                                                            
+                                                            TeamRequest *teamRequest = [[TeamRequest alloc]init];
+                                                           
+                                                            [teamRequest saveTeam:team andAdmin:user  followby:[User currentUser] orChild:nil withTimestamp:timestamp completion:^{
+                                                                if (completion) {
+                                                                    
+                                                                                                                                    completion();
+                                                                                                                                }
+                                                            }];
+                                                            break;
+                                                            
                                                         }
-                                                    }];
+                                                        }
+                                                         }];
+                                                    
+                                                    
+                                                    
+//                                                    [[User currentUser] followTeam:team completion:^{
+//                                                        if (completion) {
+//                                                            
+//                                                            completion();
+//                                                        }
+//                                                    }];
                                                 }]];
         for (Child* child in children) {
             [alert addAction:[UIAlertAction actionWithTitle:[child displayName]
                                                       style:UIAlertActionStyleDefault
                                                     handler:^(UIAlertAction * _Nonnull action) {
-                                                        [child followTeam:team completion:^{
-                                                            if (completion) {
+                                                        
+                                                        PFQuery* moderatorQuery = [team.moderators query];
+                                                        [moderatorQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+                                                            for (User* user in objects) {
+                                                                NSString *timestamp =  [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970] * 1000];
                                                                 
-                                                                completion();
+                                                                TeamRequest *teamRequest = [[TeamRequest alloc]init];
+                                                                
+                                                                [teamRequest saveTeam:team andAdmin:user  followby:nil orChild:child withTimestamp:timestamp completion:^{
+                                                                    if (completion) {
+                                                                        
+                                                                        completion();
+                                                                    }
+                                                                }];
+                                                                
                                                             }
+                                                            
                                                         }];
+
+                                                        
+//                                                        [child followTeam:team completion:^{
+//                                                            if (completion) {
+//                                                                
+//                                                                completion();
+//                                                            }
+//                                                        }];
                                                     }]];
         }
         [alert addAction:[UIAlertAction actionWithTitle:@"Cancel"
@@ -194,12 +247,12 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                                                 }]];
         [self presentViewController:alert animated:YES completion:nil];
     } else {
-        [[User currentUser] followTeam:team completion:^{
-            if (completion) {
-              
-                completion();
-            }
-        }];
+//        [[User currentUser] followTeam:team completion:^{
+//            if (completion) {
+//              
+//                completion();
+//            }
+//        }];
     }
 }
 
@@ -211,5 +264,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 //    [(FriendProfileViewController*)[segue destinationViewController] setUser:self.searchResults[[self.tableView indexPathForCell:sender].row]];
 //    
 }
+
+
 
 @end

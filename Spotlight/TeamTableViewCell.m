@@ -63,25 +63,32 @@
 }
 
 - (void)formatButtonText {
+  
     NSString* buttonText = (_isFollowing) ? @"Following" : @"Follow";
     [self.followButton setTitle:buttonText
                        forState:UIControlStateNormal];
 }
 
+
+
+
 - (IBAction)followButtonPressed:(id)sender {
+    
+    [self.followButton setTitle:@""
+                       forState:UIControlStateNormal];
     if (_isFollowing) {
         [self.delegate
          unfollowButtonPressed:self
          completion:^(void){
              self.isFollowing = NO;
-             [self formatButtonText];
+             //[self formatButtonText];
          }];
     } else {
         [self.delegate
          followButtonPressed:self
          completion:^(void){
              self.isFollowing = YES;
-             [self formatButtonText];
+            // [self formatButtonText];
          }];
     }
     

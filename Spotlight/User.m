@@ -17,7 +17,7 @@
 @dynamic friends;
 @dynamic children;
 @dynamic teams;
-
+@dynamic teamsRequest;
 #pragma mark - Parse Stuff
 
 

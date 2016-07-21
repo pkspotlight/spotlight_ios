@@ -14,10 +14,13 @@
 #import "Parse.h"
 #import "User.h"
 #import "Child.h"
-
+#import "TeamRequest.h"
 static CGFloat const BasicHeaderHeight = 50;
 
-@interface TeamsTableViewController ()
+@interface TeamsTableViewController (){
+    NSString *pendingRequest;
+    long count;
+}
 
 @property (strong, nonatomic) NSMutableArray *teams;
 
@@ -27,25 +30,76 @@ static CGFloat const BasicHeaderHeight = 50;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.tableView registerNib:[UINib nibWithNibName:@"BasicHeaderView" bundle:nil]
-forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
+    pendingRequest = [[NSString alloc]init];
+ //   [self.tableView registerNib:[UINib nibWithNibName:@"BasicHeaderView" bundle:nil]
+//forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl  addTarget:self
                              action:@selector(refresh:)
                    forControlEvents:UIControlEventValueChanged];
     [self setRefreshControl:self.refreshControl];
+    //[self.tableView addSubview:self.refreshControl];
     self.teams = [NSMutableArray array];
     if (!self.child && !self.user) {
         self.user = [User currentUser];
     }
+    self.tableView.contentInset = UIEdgeInsetsMake(30, 0, 0, 0);
+   
    // [self refresh:self.refreshControl];
 }
 
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
+    count = 0;
+     [self fetchRequest];
     [self refresh:self.refreshControl];
+}
+
+
+-(void)fetchRequest{
+  
+    
+    
+    PFQuery *spotlightQuery = [PFQuery queryWithClassName:@"TeamRequest"];
+    [spotlightQuery whereKey:@"admin" equalTo:[User currentUser]];
+    
+    [spotlightQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        count = objects.count;
+        [self.tableView reloadData];
+        if(objects.count > 0)
+        {
+            NSMutableArray *array = [NSMutableArray new];
+            for(TeamRequest *request in objects)
+            {
+             if(request.user.objectId != request.admin.objectId)
+             {
+                 [array addObject:request];
+             }
+                
+            }
+            pendingRequest = [NSString stringWithFormat:@"You have %ld request pendings",array.count];
+            [[self navigationController] tabBarItem].badgeValue = [NSString stringWithFormat:@"%ld",array.count];
+
+            
+        }
+        else{
+             [[self navigationController] tabBarItem].badgeValue  = @"";
+        }
+        
+        for(TeamRequest *request in objects)
+        {
+            [request.admin fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+             //   NSString *data =[NSString stringWithFormat:@"%@       %@",request.admin.firstName,request.user.firstName];
+                
+                NSLog(@"%@",request.admin.firstName);
+            }];
+            
+           
+
+        }
+        
+    }];
 }
 
 - (void)refresh:(UIRefreshControl*)sender {
@@ -140,6 +194,10 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    
+    return (count > 0)?30:0;
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.teams.count;
@@ -151,6 +209,24 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     [cell setDelegate:self];
     [cell formatForTeam:team isFollowing:(indexPath.section == 0)];
     return cell;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 30)];
+    /* Create custom view to display section header... */
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 30)];
+    [label setFont:[UIFont boldSystemFontOfSize:12]];
+    
+    /* Section header is in 0th index... */
+    [label setText:[NSString stringWithFormat:@"You have %ld pending %@",count , (count==1)?@"Request":@"Requests"]];
+    label.textAlignment = NSTextAlignmentCenter;
+    [view addSubview:label];
+    view.backgroundColor = [UIColor redColor];
+    label.textColor = [UIColor whiteColor];
+       
+    //your background color...
+    return view;
 }
 
 - (void)reloadTable {

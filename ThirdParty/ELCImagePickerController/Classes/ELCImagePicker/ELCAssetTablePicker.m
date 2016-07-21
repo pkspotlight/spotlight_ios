@@ -10,7 +10,11 @@
 #import "ELCAsset.h"
 #import "ELCAlbumPickerController.h"
 
+
+
+
 @interface ELCAssetTablePicker ()
+
 
 @property (nonatomic, assign) int columns;
 
@@ -53,7 +57,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.columns = self.view.bounds.size.width / 80;
+   // self.columns = [UIScreen mainScreen].bounds.size.width / 80;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
@@ -64,7 +68,7 @@
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-    self.columns = self.view.bounds.size.width / 80;
+    //self.columns = [UIScreen mainScreen].bounds.size.width / 80;
     [self.tableView reloadData];
 }
 
@@ -197,9 +201,16 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if(UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation))
+    {
+    return  (([UIScreen mainScreen].bounds.size.height  - 6) /4) + 2;
+    }
+    else if (UIDeviceOrientationIsPortrait([UIDevice currentDevice].orientation))
+    {
+      return  (([UIScreen mainScreen].bounds.size.width  - 6) /4) + 2;
+    }
     
-    //return  (([UIScreen mainScreen].bounds.size.width  - 6) /4) + 2;
-    return 79;
+      return  (([UIScreen mainScreen].bounds.size.width  - 6) /4) + 2;
 }
 
 - (int)totalSelectedAssets

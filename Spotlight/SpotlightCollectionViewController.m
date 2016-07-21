@@ -438,13 +438,13 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
                       
                                             handler:^(UIAlertAction * _Nonnull action) {
                                                 
-                                                [self createMontageWithSongTitle:@"" share:NO];
+                                                [self createMontageWithSongTitle:nil share:NO AssetURL:nil];
                                                 
                                             }]];
     
     
     
-    [alert addAction:[UIAlertAction actionWithTitle:@"Get Music"
+    [alert addAction:[UIAlertAction actionWithTitle:@"Choose Music from Device"
                       
                                               style:UIAlertActionStyleDefault
                       
@@ -459,22 +459,22 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
     [alert addAction:[UIAlertAction actionWithTitle:@"Cool Kids"
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * _Nonnull action) {
-                                                [self createMontageWithSongTitle:@"DT_TheDuff_CoolKids_INST130" share:NO];
+                                                [self createMontageWithSongTitle:@"DT_TheDuff_CoolKids_INST130" share:NO AssetURL:nil];
                                             }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"Disney Funk"
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * _Nonnull action) {
-                                                [self createMontageWithSongTitle:@"TB - Disney Funk 124bpm" share:NO];
+                                                [self createMontageWithSongTitle:@"TB - Disney Funk 124bpm" share:NO AssetURL:nil];
                                             }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"Every Single Night"
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * _Nonnull action) {
-                                                [self createMontageWithSongTitle:@"DT_TheDUFF_EverySingleNight_INST_125" share:NO];
+                                                [self createMontageWithSongTitle:@"DT_TheDUFF_EverySingleNight_INST_125" share:NO AssetURL:nil];
                                             }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"Ready 2 Go"
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * _Nonnull action) {
-                                                [self createMontageWithSongTitle:@"DT_TheDuff_Ready2Go_128_INST" share:NO];
+                                                [self createMontageWithSongTitle:@"DT_TheDuff_Ready2Go_128_INST" share:NO AssetURL:nil];
                                             }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"Cancel"
                                               style:UIAlertActionStyleCancel
@@ -495,13 +495,13 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
                       
                                             handler:^(UIAlertAction * _Nonnull action) {
                                                 
-                                                [self createMontageWithSongTitle:@"" share:NO];
+                                                [self createMontageWithSongTitle:nil share:NO AssetURL:nil];
                                                 
                                             }]];
     
     
     
-    [alert addAction:[UIAlertAction actionWithTitle:@"Get Music"
+    [alert addAction:[UIAlertAction actionWithTitle:@"Choose Music from your device"
                       
                                               style:UIAlertActionStyleDefault
                       
@@ -517,22 +517,22 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
     [alert addAction:[UIAlertAction actionWithTitle:@"Cool Kids"
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * _Nonnull action) {
-                                                [self createMontageWithSongTitle:@"DT_TheDuff_CoolKids_INST130" share:YES];
+                                                [self createMontageWithSongTitle:@"DT_TheDuff_CoolKids_INST130" share:YES AssetURL:nil];
                                             }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"Disney Funk"
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * _Nonnull action) {
-                                                [self createMontageWithSongTitle:@"TB - Disney Funk 124bpm" share:YES];
+                                                [self createMontageWithSongTitle:@"TB - Disney Funk 124bpm" share:YES AssetURL:nil];
                                             }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"Every Single Night"
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * _Nonnull action) {
-                                                [self createMontageWithSongTitle:@"DT_TheDUFF_EverySingleNight_INST_125"  share:YES];
+                                                [self createMontageWithSongTitle:@"DT_TheDUFF_EverySingleNight_INST_125"  share:YES AssetURL:nil];
                                             }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"Ready 2 Go"
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * _Nonnull action) {
-                                                [self createMontageWithSongTitle:@"DT_TheDuff_Ready2Go_128_INST" share:YES];
+                                                [self createMontageWithSongTitle:@"DT_TheDuff_Ready2Go_128_INST" share:YES AssetURL:nil];
                                             }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"Cancel"
                                               style:UIAlertActionStyleCancel
@@ -541,13 +541,13 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
     
 }
 
-- (void)createMontageWithSongTitle:(NSString*)songTitle share:(BOOL)shouldShare{
+- (void)createMontageWithSongTitle:(NSString*)songTitle share:(BOOL)shouldShare AssetURL:(NSURL *)assetURL{
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [hud setLabelText:@"Creating Reel..."];
     
     if (shouldShare) {
-        [[MontageCreator sharedCreator] createMontageWithMedia:[self.mediaList copy] songTitle:songTitle isShare:YES completion:^(AVPlayerItem *item, NSURL *fileURL) {
+        [[MontageCreator sharedCreator] createMontageWithMedia:[self.mediaList copy] songTitle:songTitle assetURL:assetURL isShare:YES completion:^(AVPlayerItem *item, NSURL *fileURL) {
             
             UIActivityViewController* AVC =  [[UIActivityViewController alloc] initWithActivityItems:@[fileURL, @""] applicationActivities:nil];
             [self presentViewController:AVC
@@ -561,7 +561,7 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
         
     } else {
         
-        [[MontageCreator sharedCreator] createMontageWithMedia:[self.mediaList copy] songTitle:songTitle  isShare:NO completion:^(AVPlayerItem *item, NSURL *fileURL) {
+        [[MontageCreator sharedCreator] createMontageWithMedia:[self.mediaList copy] songTitle:songTitle assetURL:assetURL  isShare:NO completion:^(AVPlayerItem *item, NSURL *fileURL) {
             AVPlayer *player = [AVPlayer playerWithPlayerItem:item];
             AVPlayerViewController* VC = [[AVPlayerViewController alloc] init];
             
@@ -603,6 +603,7 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
         
         [self exportAssetAsSourceFormat:[[mediaItemCollection items] objectAtIndex:i]];
         
+        break;
         //NSLog(@"for loop : %d", i);
         
     }
@@ -625,7 +626,7 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
     
     NSURL *assetURL = [item valueForProperty:MPMediaItemPropertyAssetURL];
     
-    
+    [self createMontageWithSongTitle:nil share:NO AssetURL:assetURL];
     
     BOOL isCloud = FALSE;
     

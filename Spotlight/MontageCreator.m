@@ -64,7 +64,7 @@
 }
 
 - (void)createMontageWithMedia:(NSArray*)mediaArray
-                     songTitle:(NSString*)songTitle
+                     songTitle:(NSString*)songTitle assetURL:(NSURL *)asseturl
                        isShare:(BOOL)isShare
                     completion:(void (^)(AVPlayerItem* item, NSURL* fileURL))completion {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND,0), ^{
@@ -142,7 +142,12 @@
             }
         }
         
-         if(![songTitle isEqualToString:@""]){
+        
+        
+        
+        
+         if(songTitle){
+             
         NSURL *audio_url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:songTitle ofType:@"mp3"]];
         AVURLAsset  *audioAsset = [[AVURLAsset alloc]initWithURL:audio_url options:nil];
         AVMutableCompositionTrack *audioTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio
@@ -152,7 +157,19 @@
         [manager removeItemAtPath:myPathDocs error:nil];
              
          }
-        NSLog(@"1");
+        
+        
+        if(asseturl){
+            
+           
+            AVURLAsset  *audioAsset = [[AVURLAsset alloc]initWithURL:asseturl options:nil];
+            AVMutableCompositionTrack *audioTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio
+                                                                                preferredTrackID:kCMPersistentTrackID_Invalid];
+            [audioTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, totalDuration)
+                                ofTrack:[[audioAsset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0] atTime:kCMTimeZero error:nil];
+            [manager removeItemAtPath:myPathDocs error:nil];
+            
+        }
         
         
         NSMutableArray* instructions = [NSMutableArray array];

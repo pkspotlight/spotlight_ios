@@ -837,10 +837,11 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Spotlight/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.myspotlight.spotlight;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1714aa4a-47be-4666-b0a2-b882c084e773";
+				PROVISIONING_PROFILE = "d185da62-45e2-4e90-8a78-f424e6c07ddb";
 				SWIFT_OBJC_BRIDGING_HEADER = "Spotlight/Spotlight-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -859,10 +860,11 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Spotlight/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.myspotlight.spotlight;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1714aa4a-47be-4666-b0a2-b882c084e773";
+				PROVISIONING_PROFILE = "d185da62-45e2-4e90-8a78-f424e6c07ddb";
 				SWIFT_OBJC_BRIDGING_HEADER = "Spotlight/Spotlight-Bridging-Header.h";
 			};
 			name = Release;

@@ -7,10 +7,16 @@
 //
 
 #import "PendingRequestTableViewController.h"
-
+#import "Parse.h"
+#import "User.h"
+#import "Child.h"
+#import "TeamRequest.h"
 @interface PendingRequestTableViewController ()
+@property (strong, nonatomic) NSMutableArray *requestArray;
 
 @end
+
+
 
 @implementation PendingRequestTableViewController
 
@@ -24,6 +30,61 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    _requestArray = [[NSMutableArray alloc]init];
+      [self fetchRequest];
+    
+}
+
+
+-(void)fetchRequest{
+    
+    
+    
+    PFQuery *spotlightQuery = [PFQuery queryWithClassName:@"TeamRequest"];
+    [spotlightQuery whereKey:@"admin" equalTo:[User currentUser]];
+    
+    [spotlightQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+       
+//        [self.tableView reloadData];
+        if(objects.count > 0)
+        {
+            NSMutableArray *array = [NSMutableArray new];
+            for(TeamRequest *request in objects)
+            {
+                if(request.user.objectId != request.admin.objectId)
+                {
+                    [_requestArray addObject:request];
+                     [self.tableView reloadData];
+                    [array addObject:request];
+                }
+                
+            }
+         
+            
+            
+        }
+        else{
+         
+        }
+        
+//        for(TeamRequest *request in objects)
+//        {
+//            [request.admin fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+//                //   NSString *data =[NSString stringWithFormat:@"%@       %@",request.admin.firstName,request.user.firstName];
+//                
+//                NSLog(@"%@",request.admin.firstName);
+//            }];
+//            
+//            
+//            
+//        }
+        
+    }];
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -32,24 +93,119 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+
+    return _requestArray.count;
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    PendingRequestTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"pendingRequest" forIndexPath:indexPath];
+   TeamRequest* request = self.requestArray[indexPath.row];
+    [cell setData:request.nameOfRequester teamName:request.teamName fromUser:request.user forChild:request.child];
     
-    // Configure the cell...
-    
+    cell.acceptButton.tag = 1001;
+    cell.rejectButton.tag = 1002;
+    [cell.acceptButton addTarget:self action:@selector(requestAction:) forControlEvents:UIControlEventTouchUpInside];
+     [cell.rejectButton addTarget:self action:@selector(requestAction:) forControlEvents:UIControlEventTouchUpInside];
+
     return cell;
 }
-*/
+
+
+
+-(void)requestAction:(UIButton *)sender
+{
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:(PendingRequestTableViewCell *)sender.superview.superview];
+    TeamRequest* request = self.requestArray[indexPath.row];
+    
+    if(sender.tag == 1001){
+        
+        
+        [request.team fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+            
+            if(request.user){
+                [request.user followTeam:request.team completion:^{
+                   
+                    [request deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                        if(succeeded){
+                            
+                            [_requestArray removeObjectAtIndex:indexPath.row];
+                            if(_requestArray.count==0){
+                                [self.navigationController popViewControllerAnimated:YES];
+                         
+                            }
+                            else{
+                                   [self.tableView reloadData];
+                            }
+                        }
+                    }];
+
+
+                
+                }];
+            }
+            else{
+                
+                 [request.child fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+                
+                     [request.child followTeam:request.team completion:^{
+                         
+                        
+                         [request deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                             if(succeeded){
+                                
+                                 [_requestArray removeObjectAtIndex:indexPath.row];
+                                 if(_requestArray.count==0){
+                                     [self.navigationController popViewControllerAnimated:YES];
+                                     
+                                 }
+                                 else{
+                                     [self.tableView reloadData];
+                                 }                             }
+                         }];
+                     }];
+                     
+                 }];
+            }
+
+            
+          
+            
+            NSLog(@"%@",request.admin.firstName);
+        }];
+
+        
+        
+        
+        
+        
+        //NSLog(@"%d",indexPath.row);
+    }
+    else if(sender.tag == 1002){
+        
+        [request deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+            if(succeeded){
+                [_requestArray removeObjectAtIndex:indexPath.row];
+                if(_requestArray.count==0){
+                    [self.navigationController popViewControllerAnimated:YES];
+                    
+                }
+                else{
+                    [self.tableView reloadData];
+                }
+            
+            }
+        }];
+
+        
+    }
+
+}
 
 /*
 // Override to support conditional editing of the table view.

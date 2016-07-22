@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface PendingRequestTableViewController : UITableViewController
+#import "PendingRequestTableViewCell.h"
+@interface PendingRequestTableViewController : UITableViewController<UITableViewDataSource,UITableViewDelegate>
 
 @end

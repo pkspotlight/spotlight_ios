@@ -54,7 +54,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                                                forIndexPath:indexPath];
     } else {
         cell = (TeamTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"TeamTableViewCell"
-                                                                     forIndexPath:indexPath];
+                                                                   forIndexPath:indexPath];
         [(TeamTableViewCell*)cell formatForTeam:self.searchResults[indexPath.row] isFollowing:NO];
         
         [(TeamTableViewCell*)cell setDelegate:self];
@@ -142,9 +142,9 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     [alert addAction:[UIAlertAction actionWithTitle:@"Yes"
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * _Nonnull action) {
-                                               
+                                                
                                                 [[User currentUser] unfollowTeam:teamCell.team completion:completion];
-
+                                                
                                                 
                                             }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"No"
@@ -155,7 +155,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     
     [self presentViewController:alert animated:YES completion:nil];
     
-
+    
     
     
 }
@@ -171,43 +171,52 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                                                     
                                                     PFQuery* moderatorQuery = [team.moderators query];
                                                     [moderatorQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+                                                        if(objects.count==0){
+                                                            [[[UIAlertView alloc] initWithTitle:@""
+                                                                                        message:@"No User Admin"
+                                                                                       delegate:nil
+                                                                              cancelButtonTitle:nil
+                                                                              otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
+                                                        }
                                                         
-                                                        for (User* user in objects) {
-                                                            
-                                                            if([user.objectId isEqualToString:[User currentUser].objectId] ){
+                                                        else{
+                                                            for (User* user in objects) {
                                                                 
-                                                                [[[UIAlertView alloc] initWithTitle:@""
-                                                                                            message:@"No User Admin"
-                                                                                           delegate:nil
-                                                                                  cancelButtonTitle:nil
-                                                                                  otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
-
-                                                            }
-                                                            else {
-                                                           NSString *timestamp =  [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970] * 1000];
-                                                            
-                                                            TeamRequest *teamRequest = [[TeamRequest alloc]init];
-                                                           
-                                                            [teamRequest saveTeam:team andAdmin:user  followby:[User currentUser] orChild:nil withTimestamp:timestamp completion:^{
-                                                                if (completion) {
+                                                                if([user.objectId isEqualToString:[User currentUser].objectId] ){
                                                                     
-                                                                                                                                    completion();
-                                                                                                                                }
-                                                            }];
-                                                            break;
-                                                            
+                                                                    [[[UIAlertView alloc] initWithTitle:@""
+                                                                                                message:@"You can not follow your own team"
+                                                                                               delegate:nil
+                                                                                      cancelButtonTitle:nil
+                                                                                      otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
+                                                                    
+                                                                }
+                                                                else {
+                                                                    NSString *timestamp =  [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970] * 1000];
+                                                                    
+                                                                    TeamRequest *teamRequest = [[TeamRequest alloc]init];
+                                                                    
+                                                                    [teamRequest saveTeam:team andAdmin:user  followby:[User currentUser] orChild:nil withTimestamp:timestamp completion:^{
+                                                                        if (completion) {
+                                                                            
+                                                                            completion();
+                                                                        }
+                                                                    }];
+                                                                    break;
+                                                                    
+                                                                }
+                                                            }
                                                         }
-                                                        }
-                                                         }];
+                                                    }];
                                                     
                                                     
                                                     
-//                                                    [[User currentUser] followTeam:team completion:^{
-//                                                        if (completion) {
-//                                                            
-//                                                            completion();
-//                                                        }
-//                                                    }];
+                                                    //                                                    [[User currentUser] followTeam:team completion:^{
+                                                    //                                                        if (completion) {
+                                                    //
+                                                    //                                                            completion();
+                                                    //                                                        }
+                                                    //                                                    }];
                                                 }]];
         for (Child* child in children) {
             [alert addAction:[UIAlertAction actionWithTitle:[child displayName]
@@ -216,29 +225,52 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                                                         
                                                         PFQuery* moderatorQuery = [team.moderators query];
                                                         [moderatorQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-                                                            for (User* user in objects) {
-                                                                NSString *timestamp =  [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970] * 1000];
-                                                                
-                                                                TeamRequest *teamRequest = [[TeamRequest alloc]init];
-                                                                
-                                                                [teamRequest saveTeam:team andAdmin:user  followby:nil orChild:child withTimestamp:timestamp completion:^{
-                                                                    if (completion) {
-                                                                        
-                                                                        completion();
-                                                                    }
-                                                                }];
-                                                                
+                                                            if(objects.count==0){
+                                                                [[[UIAlertView alloc] initWithTitle:@""
+                                                                                            message:@"No User Admin"
+                                                                                           delegate:nil
+                                                                                  cancelButtonTitle:nil
+                                                                                  otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
                                                             }
                                                             
+                                                            else{
+                                                                for (User* user in objects) {
+                                                                    
+                                                                    if([user.objectId isEqualToString:[User currentUser].objectId] ){
+                                                                        
+                                                                        [[[UIAlertView alloc] initWithTitle:@""
+                                                                                                    message:@"You can not follow your own team"
+                                                                                                   delegate:nil
+                                                                                          cancelButtonTitle:nil
+                                                                                          otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
+                                                                        
+                                                                    }
+                                                                    else {
+                                                                        NSString *timestamp =  [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970] * 1000];
+                                                                        
+                                                                        TeamRequest *teamRequest = [[TeamRequest alloc]init];
+                                                                        
+                                                                        [teamRequest saveTeam:team andAdmin:user  followby:nil orChild:child withTimestamp:timestamp completion:^{
+                                                                            if (completion) {
+                                                                                
+                                                                                completion();
+                                                                            }
+                                                                        }];
+                                                                        break;
+                                                                        
+                                                                    }
+                                                                }
+                                                            }
                                                         }];
-
                                                         
-//                                                        [child followTeam:team completion:^{
-//                                                            if (completion) {
-//                                                                
-//                                                                completion();
-//                                                            }
-//                                                        }];
+                                                        
+                                                        
+                                                        //                                                        [child followTeam:team completion:^{
+                                                        //                                                            if (completion) {
+                                                        //
+                                                        //                                                                completion();
+                                                        //                                                            }
+                                                        //                                                        }];
                                                     }]];
         }
         [alert addAction:[UIAlertAction actionWithTitle:@"Cancel"
@@ -247,12 +279,12 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                                                 }]];
         [self presentViewController:alert animated:YES completion:nil];
     } else {
-//        [[User currentUser] followTeam:team completion:^{
-//            if (completion) {
-//              
-//                completion();
-//            }
-//        }];
+        //        [[User currentUser] followTeam:team completion:^{
+        //            if (completion) {
+        //              
+        //                completion();
+        //            }
+        //        }];
     }
 }
 
@@ -260,9 +292,9 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//    
-//    [(FriendProfileViewController*)[segue destinationViewController] setUser:self.searchResults[[self.tableView indexPathForCell:sender].row]];
-//    
+    //    
+    //    [(FriendProfileViewController*)[segue destinationViewController] setUser:self.searchResults[[self.tableView indexPathForCell:sender].row]];
+    //    
 }
 
 

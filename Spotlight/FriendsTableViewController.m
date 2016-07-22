@@ -50,10 +50,6 @@ static CGFloat const BasicHeaderHeight = 50;
     [self refresh:self.refreshControl];
 }
 
--(void)refreshScreen
-{
-    [self refresh:self.refreshControl];
-}
 
 
 -(void)viewWillDisappear:(BOOL)animated

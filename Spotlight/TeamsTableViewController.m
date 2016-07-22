@@ -15,6 +15,7 @@
 #import "User.h"
 #import "Child.h"
 #import "TeamRequest.h"
+#import "PendingRequestTableViewController.h"
 static CGFloat const BasicHeaderHeight = 50;
 
 @interface TeamsTableViewController (){
@@ -218,6 +219,16 @@ static CGFloat const BasicHeaderHeight = 50;
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 30)];
     [label setFont:[UIFont boldSystemFontOfSize:12]];
     
+    UITapGestureRecognizer *singleFingerTap =
+    [[UITapGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(handleSingleTap:)];
+    [view addGestureRecognizer:singleFingerTap];
+ 
+    
+    //The event handling method
+  
+
+    
     /* Section header is in 0th index... */
     [label setText:[NSString stringWithFormat:@"You have %ld pending %@",count , (count==1)?@"Request":@"Requests"]];
     label.textAlignment = NSTextAlignmentCenter;
@@ -233,6 +244,13 @@ static CGFloat const BasicHeaderHeight = 50;
  //   [self refresh:nil];
 }
 
+- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    PendingRequestTableViewController *pendingRequestController = [storyboard instantiateViewControllerWithIdentifier:@"PendingRequest"];
+    [self.navigationController pushViewController:pendingRequestController animated:YES];
+    
+    //Do stuff here...
+}
 
 - (IBAction)addTeamButtonPressed:(id)sender {
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Search/Add a New Team"

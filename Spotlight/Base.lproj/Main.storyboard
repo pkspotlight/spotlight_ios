@@ -513,7 +513,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IsX-JN-Mbi">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IsX-JN-Mbi">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="248"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Greg Mann" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Exd-GK-0ex">
@@ -558,19 +558,19 @@
                                     <constraint firstAttribute="bottom" secondItem="aRt-nH-S3E" secondAttribute="bottom" constant="11" id="xZW-Fk-D7f"/>
                                 </constraints>
                             </view>
-                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GQq-CA-1SY">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GQq-CA-1SY">
                                 <rect key="frame" x="0.0" y="248" width="600" height="352"/>
                                 <connections>
                                     <segue destination="mfN-W3-7S4" kind="embed" identifier="friendTeamsEmbedSegue" id="oT6-GV-6Bb"/>
                                 </connections>
                             </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rL5-qc-i6g">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rL5-qc-i6g">
                                 <rect key="frame" x="0.0" y="248" width="600" height="352"/>
                                 <connections>
                                     <segue destination="8hb-z5-ol4" kind="embed" identifier="EmbedSpotlightSegue" id="MtQ-jd-zmN"/>
                                 </connections>
                             </containerView>
-                            <containerView opaque="NO" alpha="0.0" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t2I-S8-bER">
+                            <containerView opaque="NO" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t2I-S8-bER">
                                 <rect key="frame" x="0.0" y="248" width="600" height="352"/>
                                 <connections>
                                     <segue destination="KaG-P1-Sfy" kind="embed" identifier="EmbedFamilySegue" id="M8J-oH-n9R"/>
@@ -790,7 +790,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TOd-AQ-irE">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TOd-AQ-irE">
                                 <rect key="frame" x="0.0" y="64" width="600" height="248"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unknown_user.png" translatesAutoresizingMaskIntoConstraints="NO" id="ENb-YQ-djp">
@@ -844,13 +844,13 @@
                                     <constraint firstAttribute="trailing" secondItem="5s6-aT-kQP" secondAttribute="trailing" constant="8" id="zmX-we-jFV"/>
                                 </constraints>
                             </view>
-                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iR0-Zd-32o" userLabel="Team Member Container View">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iR0-Zd-32o" userLabel="Team Member Container View">
                                 <rect key="frame" x="0.0" y="312" width="600" height="288"/>
                                 <connections>
                                     <segue destination="KaG-P1-Sfy" kind="embed" identifier="teamMemberEmbedSegue" id="5wK-cZ-7Zv"/>
                                 </connections>
                             </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wml-en-gDZ" userLabel="Spotlight Container View">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wml-en-gDZ" userLabel="Spotlight Container View">
                                 <rect key="frame" x="0.0" y="312" width="600" height="288"/>
                                 <connections>
                                     <segue destination="8hb-z5-ol4" kind="embed" identifier="EmbedSpotlightDataSource" id="KDg-Dy-czv"/>
@@ -1205,6 +1205,98 @@
                 <exit id="pde-GS-z9A" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-1070" y="3976"/>
+        </scene>
+        <!--Pending Request Table View Controller-->
+        <scene sceneID="IGR-cu-LkI">
+            <objects>
+                <tableViewController storyboardIdentifier="PendingRequest" id="O1O-Ab-Apc" customClass="PendingRequestTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="110" sectionHeaderHeight="28" sectionFooterHeight="28" id="adq-j2-Pe9">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="pendingRequest" id="kRl-al-Pet" customClass="PendingRequestTableViewCell">
+                                <rect key="frame" x="0.0" y="28" width="600" height="110"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kRl-al-Pet" id="3wq-k7-RBT">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="109"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unknown_user.png" translatesAutoresizingMaskIntoConstraints="NO" id="Wjf-19-eTj">
+                                            <rect key="frame" x="14" y="16" width="52" height="52"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="52" id="OXX-ib-CIM"/>
+                                                <constraint firstAttribute="height" constant="52" id="bkM-ES-KPq"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VfV-c4-jsB">
+                                            <rect key="frame" x="74" y="16" width="508" height="45"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="45" id="SRg-rz-eW2"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7dh-3E-K4e">
+                                            <rect key="frame" x="364" y="71" width="90" height="30"/>
+                                            <color key="backgroundColor" red="0.0" green="0.50196078431372548" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="V5E-dR-XB3"/>
+                                                <constraint firstAttribute="width" constant="90" id="dsa-wR-Yuy"/>
+                                            </constraints>
+                                            <state key="normal" title="Accept">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jbe-Ok-d7S">
+                                            <rect key="frame" x="480" y="71" width="90" height="30"/>
+                                            <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="XKx-bt-787"/>
+                                            </constraints>
+                                            <state key="normal" title="Reject">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Jbe-Ok-d7S" firstAttribute="leading" secondItem="7dh-3E-K4e" secondAttribute="trailing" constant="26" id="0pN-SX-2Bt"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="VfV-c4-jsB" secondAttribute="trailing" constant="10" id="4Ja-vd-jdw"/>
+                                        <constraint firstItem="Wjf-19-eTj" firstAttribute="top" secondItem="3wq-k7-RBT" secondAttribute="top" constant="16" id="OVZ-uB-OLU"/>
+                                        <constraint firstItem="Wjf-19-eTj" firstAttribute="leading" secondItem="3wq-k7-RBT" secondAttribute="leading" constant="14" id="R7o-or-0ae"/>
+                                        <constraint firstAttribute="trailing" secondItem="Jbe-Ok-d7S" secondAttribute="trailing" constant="30" id="Rye-6P-wtf"/>
+                                        <constraint firstItem="VfV-c4-jsB" firstAttribute="leading" secondItem="Wjf-19-eTj" secondAttribute="trailing" constant="8" id="bnf-Km-LfE"/>
+                                        <constraint firstAttribute="trailing" secondItem="VfV-c4-jsB" secondAttribute="trailing" constant="10" id="cmJ-t1-WOK"/>
+                                        <constraint firstItem="Jbe-Ok-d7S" firstAttribute="height" secondItem="7dh-3E-K4e" secondAttribute="height" id="eSy-vV-dIF"/>
+                                        <constraint firstItem="Jbe-Ok-d7S" firstAttribute="top" secondItem="VfV-c4-jsB" secondAttribute="bottom" constant="10" id="f10-uk-oJd"/>
+                                        <constraint firstItem="VfV-c4-jsB" firstAttribute="top" secondItem="3wq-k7-RBT" secondAttribute="top" constant="16" id="fEd-hg-sEZ"/>
+                                        <constraint firstItem="7dh-3E-K4e" firstAttribute="top" secondItem="VfV-c4-jsB" secondAttribute="bottom" constant="10" id="pJm-Vb-N93"/>
+                                        <constraint firstItem="Jbe-Ok-d7S" firstAttribute="width" secondItem="7dh-3E-K4e" secondAttribute="width" id="pzK-3B-fbu"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="cmJ-t1-WOK"/>
+                                        </mask>
+                                    </variation>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="acceptButton" destination="7dh-3E-K4e" id="lMT-gU-myO"/>
+                                    <outlet property="profilePic" destination="Wjf-19-eTj" id="u79-XY-O0c"/>
+                                    <outlet property="rejectButton" destination="Jbe-Ok-d7S" id="xYZ-vN-CCb"/>
+                                    <outlet property="requestName" destination="VfV-c4-jsB" id="8EV-gO-aRi"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="O1O-Ab-Apc" id="7bs-9p-g7l"/>
+                            <outlet property="delegate" destination="O1O-Ab-Apc" id="4wU-Hj-WNc"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qQZ-OF-6ak" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-675" y="3274"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pCn-gq-sCA">
@@ -1835,7 +1927,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mfq-IK-xSB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-271" y="2502"/>
+            <point key="canvasLocation" x="-343" y="2472"/>
         </scene>
         <!--Teams-->
         <scene sceneID="Pue-Qn-wU0">
@@ -2354,11 +2446,11 @@
         <image name="unknown_user.png" width="500" height="500"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="5wK-cZ-7Zv"/>
+        <segue reference="KDg-Dy-czv"/>
         <segue reference="u73-SH-IMh"/>
         <segue reference="JxX-hR-H3e"/>
         <segue reference="G4n-FP-84S"/>
-        <segue reference="KDg-Dy-czv"/>
+        <segue reference="5wK-cZ-7Zv"/>
         <segue reference="VZn-Uf-dUM"/>
     </inferredMetricsTieBreakers>
 </document>

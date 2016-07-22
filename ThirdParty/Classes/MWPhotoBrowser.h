@@ -36,6 +36,7 @@
 - (void)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index selectedChanged:(BOOL)selected;
 - (void)photoBrowserDidFinishModalPresentation:(MWPhotoBrowser *)photoBrowser;
 -(void)cropBtnClicked:(NSUInteger)currentIndex withImage:(UIImage *)image;
+-(void)photoBrowser:(MWPhotoBrowser *)photoBrowser deletePhotoAtIndex:(NSUInteger)index;
 
 
 @end
@@ -60,6 +61,8 @@
 @property (nonatomic, strong) NSString *customImageSelectedIconName;
 @property (nonatomic, strong) NSString *customImageSelectedSmallIconName;
 @property (nonatomic, strong) UIBarButtonItem *cropButton;
+@property (nonatomic, strong) UIBarButtonItem *deleteBtn;
+@property (nonatomic, strong) UIBarButtonItem *likeBtn;
 
 
 // Init

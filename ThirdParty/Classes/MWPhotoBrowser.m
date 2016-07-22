@@ -176,10 +176,18 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
         _nextButton = [[UIBarButtonItem alloc] initWithImage:nextButtonImage style:UIBarButtonItemStylePlain target:self action:@selector(gotoNextPage)];
     }
     if (self.displayActionButton) {
-        _actionButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(actionButtonPressed:)];
+//        _actionButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(actionButtonPressed:)];
+        _actionButton = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"upload.png"] style:UIBarButtonItemStylePlain target:self action:@selector(actionButtonPressed:)];
+       // _actionButton.imageInsets = UIEdgeInsetsMake(0.0, 0.0, 0, -30);
     }
+
+    _cropButton = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"edit.png"] style:UIBarButtonItemStylePlain target:self action:@selector(cropButtonPressed:)];
+   //_cropButton.imageInsets = UIEdgeInsetsMake(0.0, 0.0, 0, -30);
     
-     _cropButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(cropButtonPressed:)];
+    _deleteBtn = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"delete.png"] style:UIBarButtonItemStylePlain target:self action:@selector(deleteButtonPressed:)];
+   //_deleteBtn.imageInsets = UIEdgeInsetsMake(0.0, 0.0, 0, -30);
+    
+
     
     // Update
     [self reloadData];
@@ -267,7 +275,7 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
     } else {
         // We're not showing the toolbar so try and show in top right
         if (_actionButton && _cropButton)
-                  self.navigationItem.rightBarButtonItems = @[_actionButton,_cropButton];
+                  self.navigationItem.rightBarButtonItems = @[_deleteBtn,_actionButton,_cropButton];
         [items addObject:fixedSpace];
     }
 
@@ -1343,7 +1351,7 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
     [_gridController adjustOffsetsAsRequired];
     
     // Hide action button on nav bar if it exists
-    if (self.navigationItem.rightBarButtonItems[0] == _actionButton && self.navigationItem.rightBarButtonItems[1] == _cropButton) {
+    if (self.navigationItem.rightBarButtonItems[1] == _actionButton && self.navigationItem.rightBarButtonItems[2] == _cropButton) {
         _gridPreviousRightNavItems = @[_actionButton, _cropButton];
         [self.navigationItem setRightBarButtonItems:nil animated:YES];
     } else {
@@ -1375,7 +1383,7 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
     _currentGridContentOffset = _gridController.collectionView.contentOffset;
     
     // Restore action button if it was removed
-    if (_gridPreviousRightNavItems[0] == _actionButton && _gridPreviousRightNavItems[1] == _cropButton && _cropButton && _actionButton) {
+    if (_gridPreviousRightNavItems[1] == _actionButton && _gridPreviousRightNavItems[2] == _cropButton && _cropButton && _actionButton) {
         [self.navigationItem setRightBarButtonItems:_gridPreviousRightNavItems animated:YES];
     }
     
@@ -1646,6 +1654,11 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
 {
     MWPhoto *photo = [self photoAtIndex:_currentPageIndex];
     [self.delegate cropBtnClicked:self.currentIndex withImage:photo.underlyingImage];
+}
+
+- (void)deleteButtonPressed:(id)sender
+{
+    [self.delegate photoBrowser:self deletePhotoAtIndex:self.currentIndex];
 }
 
 

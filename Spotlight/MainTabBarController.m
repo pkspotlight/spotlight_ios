@@ -29,9 +29,101 @@
 }
 
 
+-(void)deleteTeamRequest:(TeamRequest *)request
+{
+    [request deleteInBackground];
+}
+
+-(void)followAcceptedRequest:(TeamRequest *)request
+{
+  
+    if(!request.isChild.boolValue)
+    {
+        [request.team fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+            if(!error)
+            {
+            [[User currentUser] followTeamWithBlockCallback:request.team completion:^(BOOL succeeded, NSError * _Nullable error) {
+                if(succeeded)
+                {
+                    [request deleteInBackground];
+                }
+            }];
+            }
+
+        }];
+    }
+    else
+    {
+        
+        [request.team fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+    
+            [request.child fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+                if(!error)
+                {
+                    [request.child followTeamWithBlockCallback:request.team completion:^(BOOL succeeded, NSError * _Nullable error) {
+                        if(succeeded)
+                        {
+                            [request deleteInBackground];
+                        }
+                    }];
+                }
+            }];
+            
+            
+        }];
+        
+    }
+    
+    
+}
+
+-(void)FollowAcceptedRequests
+{
+    
+ 
+    
+    PFQuery *spotlightQuery = [PFQuery queryWithClassName:@"TeamRequest"];
+    [spotlightQuery whereKey:@"user" equalTo:[User currentUser]];
+    
+
+    
+    
+    
+   // [spotlightQuery whereKey:@"child" equalTo:[User currentUser].children];
+
+    [spotlightQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if(objects.count > 0)
+        {
+            for(TeamRequest *request in objects)
+            {
+                if(request.user.objectId == request.admin.objectId)
+                {
+                    [self deleteTeamRequest:request];
+                }
+                
+               else if(request.requestState.intValue == requestStateAccepted)
+                {
+                    [self followAcceptedRequest:request];
+
+                }
+                
+                
+                
+            }
+        }
+        
+        
+    }];
+    
+    
+    
+    
+}
+
 
 -(void)updatePendingRequest
 {
+    [self FollowAcceptedRequests];
     
     PFQuery *spotlightQuery = [PFQuery queryWithClassName:@"TeamRequest"];
     [spotlightQuery whereKey:@"admin" equalTo:[User currentUser]];
@@ -42,18 +134,23 @@
             NSMutableArray *array = [NSMutableArray new];
             for(TeamRequest *request in objects)
             {
-                if(request.user.objectId != request.admin.objectId)
+                 if((request.user.objectId != request.admin.objectId) && (request.requestState.intValue == reqestStatePending))
                 {
                     [array addObject:request];
                 }
                 
             }
+            if(array.count>0){
             [[[self  tabBar]items] objectAtIndex:2].badgeValue = [NSString stringWithFormat:@"%ld",array.count];
+            }
+            else{
+                  [[[self  tabBar]items] objectAtIndex:2].badgeValue  = nil;
+            }
             
             
         }
         else{
-            [[[self  tabBar]items] objectAtIndex:2].badgeValue  = @"";
+            [[[self  tabBar]items] objectAtIndex:2].badgeValue  = nil;
         }
         
 //        for(TeamRequest *request in objects)
@@ -75,9 +172,9 @@
 
 -(void)viewDidUnload{
      [super viewDidUnload];
-    
+     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"PendingRequest" object:nil];
       
-      }
+    }
 
 /*
 #pragma mark - Navigation

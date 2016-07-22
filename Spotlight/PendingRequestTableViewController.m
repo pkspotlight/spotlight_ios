@@ -11,6 +11,7 @@
 #import "User.h"
 #import "Child.h"
 #import "TeamRequest.h"
+#import <MBProgressHUD.h>
 @interface PendingRequestTableViewController ()
 @property (strong, nonatomic) NSMutableArray *requestArray;
 
@@ -41,7 +42,8 @@
 -(void)fetchRequest{
     
     
-    
+    MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [hud setLabelText:@"Loading..."];
     PFQuery *spotlightQuery = [PFQuery queryWithClassName:@"TeamRequest"];
     [spotlightQuery whereKey:@"admin" equalTo:[User currentUser]];
     
@@ -53,7 +55,7 @@
             NSMutableArray *array = [NSMutableArray new];
             for(TeamRequest *request in objects)
             {
-                if(request.user.objectId != request.admin.objectId)
+                if((request.user.objectId != request.admin.objectId) && (request.requestState.intValue == reqestStatePending))
                 {
                     [_requestArray addObject:request];
                      [self.tableView reloadData];
@@ -61,12 +63,12 @@
                 }
                 
             }
-         
+            [hud hide:YES];
             
             
         }
         else{
-         
+          [hud hide:YES];
         }
         
 //        for(TeamRequest *request in objects)
@@ -122,62 +124,47 @@
 {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:(PendingRequestTableViewCell *)sender.superview.superview];
     TeamRequest* request = self.requestArray[indexPath.row];
+    MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [hud setLabelText:@"Please Wait..."];
+   
+    
     
     if(sender.tag == 1001){
         
+     
         
-        [request.team fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-            
-            if(request.user){
-                [request.user followTeam:request.team completion:^{
-                   
-                    [request deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-                        if(succeeded){
-                            
-                            [_requestArray removeObjectAtIndex:indexPath.row];
-                            if(_requestArray.count==0){
-                                [self.navigationController popViewControllerAnimated:YES];
-                         
-                            }
-                            else{
-                                   [self.tableView reloadData];
-                            }
-                        }
-                    }];
-
-
-                
+        request.requestState = [NSNumber numberWithInt:requestStateAccepted];
+        
+        [request saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+            if(succeeded){
+                [_requestArray removeObjectAtIndex:indexPath.row];
+                if(_requestArray.count==0){
+                    [self.navigationController popViewControllerAnimated:YES];
+                    
+                }
+                else{
+                    
+                    [self.tableView reloadData];
+                }
+            }
+            else
+            {
+                UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"" message:@"Unable to accept the request. Please check your network and try again." preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    
                 }];
+                [controller addAction:action];
+                [self.navigationController presentViewController:controller animated:YES completion:nil];
             }
-            else{
-                
-                 [request.child fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-                
-                     [request.child followTeam:request.team completion:^{
-                         
-                        
-                         [request deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-                             if(succeeded){
-                                
-                                 [_requestArray removeObjectAtIndex:indexPath.row];
-                                 if(_requestArray.count==0){
-                                     [self.navigationController popViewControllerAnimated:YES];
-                                     
-                                 }
-                                 else{
-                                     [self.tableView reloadData];
-                                 }                             }
-                         }];
-                     }];
-                     
-                 }];
-            }
+            [hud hide:YES];
+        }];
+
 
             
           
             
-            NSLog(@"%@",request.admin.firstName);
-        }];
+        
+       
 
         
         
@@ -190,6 +177,7 @@
         
         [request deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
             if(succeeded){
+              
                 [_requestArray removeObjectAtIndex:indexPath.row];
                 if(_requestArray.count==0){
                     [self.navigationController popViewControllerAnimated:YES];
@@ -200,6 +188,8 @@
                 }
             
             }
+            
+            [hud hide:YES];
         }];
 
         

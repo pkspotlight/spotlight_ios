@@ -28,8 +28,13 @@
 - (void)setData:(NSString*)name teamName:(NSString*)teamName fromUser:(User *)user forChild:(Child *)child{
     [self.profilePic.layer setCornerRadius:self.profilePic.bounds.size.width/2];
     [self.profilePic setClipsToBounds:YES];
-    
-    NSString *requestText = [NSString stringWithFormat:@"%@ wants to follow %@",name?name:@"This",teamName];
+    NSString *requestText;
+    if([name isKindOfClass:[NSNull class]]){
+        requestText =   [NSString stringWithFormat:@"This wants to follow %@",teamName];
+    }else{
+        requestText =   [NSString stringWithFormat:@"%@ wants to follow %@",name,teamName];
+    }
+ 
     
     self.requestName.text = requestText;
     self.profilePic.image = [UIImage imageNamed:@"unknown_user"];

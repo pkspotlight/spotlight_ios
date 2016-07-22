@@ -941,6 +941,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Spotlight/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.myspotlight.spotlight;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -963,6 +964,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Spotlight/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.myspotlight.spotlight;
 				PRODUCT_NAME = "$(TARGET_NAME)";

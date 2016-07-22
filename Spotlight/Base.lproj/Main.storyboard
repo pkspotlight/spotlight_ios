@@ -11,13 +11,13 @@
             <objects>
                 <tableViewController storyboardIdentifier="SpotlightFeedViewController" id="8hb-z5-ol4" customClass="SpotlightFeedViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="192" sectionHeaderHeight="22" sectionFooterHeight="22" id="9Pj-Xg-5pY">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="288"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="0.96078437569999997" blue="0.96078437569999997" alpha="1" colorSpace="deviceRGB"/>
                         <color key="sectionIndexBackgroundColor" red="1" green="0.96078437569999997" blue="0.96078437569999997" alpha="1" colorSpace="deviceRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SpotlightTableViewCell" rowHeight="192" id="cV8-cF-CTj" customClass="SpotlightTableViewCell">
-                                <rect key="frame" x="0.0" y="66" width="600" height="192"/>
+                                <rect key="frame" x="0.0" y="86" width="600" height="192"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" tableViewCell="cV8-cF-CTj" id="6wP-Er-nX9">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="192"/>
@@ -152,7 +152,7 @@
             <objects>
                 <collectionViewController id="h9E-yE-X25" customClass="SpotlightCollectionViewController" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Vyx-SG-6aQ">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="288"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="0.96078437569999997" blue="0.96078437569999997" alpha="1" colorSpace="deviceRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="0YC-Y0-77M">
@@ -163,7 +163,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SpotlightMediaCollectionViewCell" id="fXR-VF-jEk" customClass="SpotlightMediaCollectionViewCell">
-                                <rect key="frame" x="0.0" y="188" width="160" height="143"/>
+                                <rect key="frame" x="0.0" y="208" width="160" height="143"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="160" height="143"/>
@@ -187,7 +187,7 @@
                             </collectionViewCell>
                         </cells>
                         <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SpotlightHeaderCollectionReusableView" id="R0v-np-qOv" customClass="SpotlightHeaderCollectionReusableView">
-                            <rect key="frame" x="0.0" y="44" width="600" height="144"/>
+                            <rect key="frame" x="0.0" y="64" width="600" height="144"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unknown_user.png" translatesAutoresizingMaskIntoConstraints="NO" id="PF0-XN-vBN">
@@ -1259,6 +1259,12 @@
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                         </button>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kB8-YB-XtQ">
+                                            <rect key="frame" x="0.0" y="107" width="600" height="1"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="1" id="Euu-Zf-Hs2"/>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="Jbe-Ok-d7S" firstAttribute="leading" secondItem="7dh-3E-K4e" secondAttribute="trailing" constant="26" id="0pN-SX-2Bt"/>
@@ -1267,10 +1273,13 @@
                                         <constraint firstItem="Wjf-19-eTj" firstAttribute="leading" secondItem="3wq-k7-RBT" secondAttribute="leading" constant="14" id="R7o-or-0ae"/>
                                         <constraint firstAttribute="trailing" secondItem="Jbe-Ok-d7S" secondAttribute="trailing" constant="30" id="Rye-6P-wtf"/>
                                         <constraint firstItem="VfV-c4-jsB" firstAttribute="leading" secondItem="Wjf-19-eTj" secondAttribute="trailing" constant="8" id="bnf-Km-LfE"/>
+                                        <constraint firstAttribute="trailing" secondItem="kB8-YB-XtQ" secondAttribute="trailing" id="c4i-a0-PyA"/>
                                         <constraint firstAttribute="trailing" secondItem="VfV-c4-jsB" secondAttribute="trailing" constant="10" id="cmJ-t1-WOK"/>
                                         <constraint firstItem="Jbe-Ok-d7S" firstAttribute="height" secondItem="7dh-3E-K4e" secondAttribute="height" id="eSy-vV-dIF"/>
                                         <constraint firstItem="Jbe-Ok-d7S" firstAttribute="top" secondItem="VfV-c4-jsB" secondAttribute="bottom" constant="10" id="f10-uk-oJd"/>
                                         <constraint firstItem="VfV-c4-jsB" firstAttribute="top" secondItem="3wq-k7-RBT" secondAttribute="top" constant="16" id="fEd-hg-sEZ"/>
+                                        <constraint firstAttribute="bottom" secondItem="kB8-YB-XtQ" secondAttribute="bottom" constant="1" id="gkn-W6-Qaw"/>
+                                        <constraint firstItem="kB8-YB-XtQ" firstAttribute="leading" secondItem="3wq-k7-RBT" secondAttribute="leading" id="iR1-ml-csS"/>
                                         <constraint firstItem="7dh-3E-K4e" firstAttribute="top" secondItem="VfV-c4-jsB" secondAttribute="bottom" constant="10" id="pJm-Vb-N93"/>
                                         <constraint firstItem="Jbe-Ok-d7S" firstAttribute="width" secondItem="7dh-3E-K4e" secondAttribute="width" id="pzK-3B-fbu"/>
                                     </constraints>
@@ -1369,7 +1378,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="TeamTableViewCell" rowHeight="68" id="20l-YH-MoY" customClass="TeamTableViewCell">
-                                <rect key="frame" x="0.0" y="72" width="600" height="68"/>
+                                <rect key="frame" x="0.0" y="92" width="600" height="68"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" tableViewCell="20l-YH-MoY" id="t8f-mZ-SBM">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="67"/>
@@ -2446,11 +2455,11 @@
         <image name="unknown_user.png" width="500" height="500"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KDg-Dy-czv"/>
-        <segue reference="u73-SH-IMh"/>
-        <segue reference="JxX-hR-H3e"/>
-        <segue reference="G4n-FP-84S"/>
-        <segue reference="5wK-cZ-7Zv"/>
+        <segue reference="oT6-GV-6Bb"/>
         <segue reference="VZn-Uf-dUM"/>
+        <segue reference="5wK-cZ-7Zv"/>
+        <segue reference="KDg-Dy-czv"/>
+        <segue reference="G4n-FP-84S"/>
+        <segue reference="JxX-hR-H3e"/>
     </inferredMetricsTieBreakers>
 </document>

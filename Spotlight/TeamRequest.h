@@ -11,6 +11,12 @@
 #import "Team.h"
 #import "User.h"
 
+enum requestStates{
+    reqestStatePending = 1,
+    requestStateAccepted,
+    requestStateRejected
+};
+
 @interface TeamRequest : PFObject  <PFSubclassing>
 + (NSString *)parseClassName;
 
@@ -22,8 +28,11 @@
 @property (assign, nonatomic) User *admin;
 @property (assign, nonatomic) NSString *nameOfRequester;
 @property (assign, nonatomic) NSString *teamName;
+@property (assign, nonatomic) NSNumber *requestState;
+@property (assign, nonatomic) NSNumber *isChild;
+
 @property (strong, nonatomic) ProfilePictureMedia* PicOfRequester;
 
 
-- (void)saveTeam:(Team*)team andAdmin:(User*)admin followby:(User*)user  orChild:(Child*)child withTimestamp:(NSString*)time completion:(void (^)(void))completion;
+- (void)saveTeam:(Team*)team andAdmin:(User*)admin followby:(User*)user  orChild:(Child*)child withTimestamp:(NSString*)time isChild:(NSNumber*)isChild completion:(void (^)(void))completion;
 @end

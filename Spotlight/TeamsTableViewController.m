@@ -72,8 +72,8 @@ static CGFloat const BasicHeaderHeight = 50;
             NSMutableArray *array = [NSMutableArray new];
             for(TeamRequest *request in objects)
             {
-             if(request.user.objectId != request.admin.objectId)
-             {
+              if((request.user.objectId != request.admin.objectId) && (request.requestState.intValue == reqestStatePending))
+              {
                  [array addObject:request];
              }
                 
@@ -81,12 +81,19 @@ static CGFloat const BasicHeaderHeight = 50;
             count = array.count;
             [self.tableView reloadData];
           //  pendingRequest = [NSString stringWithFormat:@"You have %ld request pendings",array.count];
-            [[self navigationController] tabBarItem].badgeValue = [NSString stringWithFormat:@"%ld",array.count];
+            if(array.count>0){
+               [[self navigationController] tabBarItem].badgeValue = [NSString stringWithFormat:@"%ld",array.count];
+            }
+            else{
+                [[self navigationController] tabBarItem].badgeValue  = nil;
+            }
+
+          
 
             
         }
         else{
-             [[self navigationController] tabBarItem].badgeValue  = @"";
+             [[self navigationController] tabBarItem].badgeValue  = nil;
         }
         
                

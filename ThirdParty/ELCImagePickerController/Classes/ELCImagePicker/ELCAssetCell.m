@@ -136,11 +136,34 @@
     
     CGFloat totalWidth = self.rowAssets.count * squareSide + (self.rowAssets.count - 1) * 4;
     
-    while(totalWidth > [UIScreen mainScreen].bounds.size.width)
+    
+    
+    if(UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation))
     {
-        squareSide = squareSide - 1;
-        totalWidth = self.rowAssets.count * squareSide + (self.rowAssets.count - 1) * 4;
+        while(totalWidth > [UIScreen mainScreen].bounds.size.height)
+        {
+            squareSide = squareSide - 1;
+            totalWidth = self.rowAssets.count * squareSide + (self.rowAssets.count - 1) * 4;
+        }
     }
+    else if (UIDeviceOrientationIsPortrait([UIDevice currentDevice].orientation))
+    {
+        while(totalWidth > [UIScreen mainScreen].bounds.size.width)
+        {
+            squareSide = squareSide - 1;
+            totalWidth = self.rowAssets.count * squareSide + (self.rowAssets.count - 1) * 4;
+        }
+    }
+    else
+    {
+        while(totalWidth > [UIScreen mainScreen].bounds.size.width)
+        {
+            squareSide = squareSide - 1;
+            totalWidth = self.rowAssets.count * squareSide + (self.rowAssets.count - 1) * 4;
+        }
+    }
+    
+   
     
     CGFloat startX = (self.bounds.size.width - totalWidth) / 2;
     

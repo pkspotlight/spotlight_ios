@@ -66,8 +66,7 @@ static CGFloat const BasicHeaderHeight = 50;
     [spotlightQuery whereKey:@"admin" equalTo:[User currentUser]];
     
     [spotlightQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        count = objects.count;
-        [self.tableView reloadData];
+        
         if(objects.count > 0)
         {
             NSMutableArray *array = [NSMutableArray new];
@@ -79,7 +78,9 @@ static CGFloat const BasicHeaderHeight = 50;
              }
                 
             }
-            pendingRequest = [NSString stringWithFormat:@"You have %ld request pendings",array.count];
+            count = array.count;
+            [self.tableView reloadData];
+          //  pendingRequest = [NSString stringWithFormat:@"You have %ld request pendings",array.count];
             [[self navigationController] tabBarItem].badgeValue = [NSString stringWithFormat:@"%ld",array.count];
 
             
@@ -88,18 +89,7 @@ static CGFloat const BasicHeaderHeight = 50;
              [[self navigationController] tabBarItem].badgeValue  = @"";
         }
         
-        for(TeamRequest *request in objects)
-        {
-            [request.admin fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-             //   NSString *data =[NSString stringWithFormat:@"%@       %@",request.admin.firstName,request.user.firstName];
-                
-                NSLog(@"%@",request.admin.firstName);
-            }];
-            
-           
-
-        }
-        
+               
     }];
 }
 

@@ -76,12 +76,19 @@
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"PendingRequest" object:nil];
+ 
+   
+    
+  
    
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"PendingRequest" object:nil];
+    });
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 

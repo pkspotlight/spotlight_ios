@@ -53,25 +53,31 @@
             
         }
         else{
-            [[self navigationController] tabBarItem].badgeValue  = @"";
+            [[[self  tabBar]items] objectAtIndex:2].badgeValue  = @"";
         }
         
-        for(TeamRequest *request in objects)
-        {
-            [request.admin fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-                //   NSString *data =[NSString stringWithFormat:@"%@       %@",request.admin.firstName,request.user.firstName];
-                
-                NSLog(@"%@",request.admin.firstName);
-            }];
-            
-            
-            
-        }
+//        for(TeamRequest *request in objects)
+//        {
+//            [request.admin fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+//                //   NSString *data =[NSString stringWithFormat:@"%@       %@",request.admin.firstName,request.user.firstName];
+//                
+//                NSLog(@"%@",request.admin.firstName);
+//            }];
+//            
+//            
+//            
+//        }
         
     }];
 
 }
 
+
+-(void)viewDidUnload{
+     [super viewDidUnload];
+    
+      
+      }
 
 /*
 #pragma mark - Navigation

@@ -29,7 +29,7 @@
     [self.profilePic.layer setCornerRadius:self.profilePic.bounds.size.width/2];
     [self.profilePic setClipsToBounds:YES];
     NSString *requestText;
-    if([name isKindOfClass:[NSNull class]]){
+    if(name == nil ){
         requestText =   [NSString stringWithFormat:@"This wants to follow %@",teamName];
     }else{
         requestText =   [NSString stringWithFormat:@"%@ wants to follow %@",name,teamName];

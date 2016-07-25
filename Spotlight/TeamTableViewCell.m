@@ -73,7 +73,8 @@
 
 
 - (IBAction)followButtonPressed:(id)sender {
-    
+    [self.followButton setTitle:@""
+                       forState:UIControlStateNormal];
    
     if (_isFollowing) {
         [self.followButton setTitle:@"Following"
@@ -87,7 +88,7 @@
          }];
     } else {
         
-        [self.followButton setTitle:@"Following"
+        [self.followButton setTitle:@""
                            forState:UIControlStateNormal];
         [self.delegate
          followButtonPressed:self

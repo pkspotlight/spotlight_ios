@@ -97,53 +97,6 @@
             endingLineNumber = "184"
             landmarkName = "-showAlertWithChildren:team:completion:"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__71-[TeamFinderTableViewController showAlertWithChildren:team:completion:]_block_invoke_2"
-                  moduleName = "Spotlight"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/algoworkstrainee2/Documents/projects/SpotLight%20Project/spotlight_ios/Spotlight/TeamFinderTableViewController.m"
-                  timestampString = "491123022.687255"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "184"
-                  endingLineNumber = "184"
-                  offsetFromSymbolStart = "54">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__copy_helper_block_140"
-                  moduleName = "Spotlight"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/algoworkstrainee2/Documents/projects/SpotLight%20Project/spotlight_ios/Spotlight/TeamFinderTableViewController.m"
-                  timestampString = "491123022.68743"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "21">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__destroy_helper_block_141"
-                  moduleName = "Spotlight"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/algoworkstrainee2/Documents/projects/SpotLight%20Project/spotlight_ios/Spotlight/TeamFinderTableViewController.m"
-                  timestampString = "491123022.687586"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "16">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -192,6 +145,38 @@
             endingLineNumber = "71"
             landmarkName = "-setData:teamName:fromUser:forChild:"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__66-[PendingRequestTableViewCell setData:teamName:fromUser:forChild:]_block_invoke59"
+                  moduleName = "Spotlight"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/algoworkstrainee2/Documents/projects/SpotLight%20Project/spotlight_ios/Spotlight/PendingRequestTableViewCell.m"
+                  timestampString = "491127443.726077"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "71"
+                  endingLineNumber = "71"
+                  offsetFromSymbolStart = "82">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__66-[PendingRequestTableViewCell setData:teamName:fromUser:forChild:]_block_invoke_260"
+                  moduleName = "Spotlight"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/algoworkstrainee2/Documents/projects/SpotLight%20Project/spotlight_ios/Spotlight/PendingRequestTableViewCell.m"
+                  timestampString = "491127443.726337"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "71"
+                  endingLineNumber = "71"
+                  offsetFromSymbolStart = "70">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -205,7 +190,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "153"
-            endingLineNumber = "153">
+            endingLineNumber = "153"
+            landmarkName = "-updatePendingRequest"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -235,7 +222,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "40"
-            endingLineNumber = "40">
+            endingLineNumber = "40"
+            landmarkName = "-followAcceptedRequest:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -249,7 +238,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "95"
-            endingLineNumber = "95">
+            endingLineNumber = "95"
+            landmarkName = "-FollowAcceptedRequests"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -264,8 +255,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "34"
             endingLineNumber = "34"
-            landmarkName = "@implementation MainTabBarController"
-            landmarkType = "3">
+            landmarkName = "-deleteTeamRequest:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -279,7 +270,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "46"
-            endingLineNumber = "46">
+            endingLineNumber = "46"
+            landmarkName = "-followAcceptedRequest:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -293,7 +286,41 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "63"
-            endingLineNumber = "63">
+            endingLineNumber = "63"
+            landmarkName = "-followAcceptedRequest:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__46-[MainTabBarController followAcceptedRequest:]_block_invoke_232"
+                  moduleName = "Spotlight"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/algoworkstrainee2/Documents/projects/SpotLight%20Project/spotlight_ios/Spotlight/MainTabBarController.m"
+                  timestampString = "491127443.73277"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "63"
+                  endingLineNumber = "63"
+                  offsetFromSymbolStart = "100">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__46-[MainTabBarController followAcceptedRequest:]_block_invoke_3"
+                  moduleName = "Spotlight"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/algoworkstrainee2/Documents/projects/SpotLight%20Project/spotlight_ios/Spotlight/MainTabBarController.m"
+                  timestampString = "491127443.732954"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "63"
+                  endingLineNumber = "63"
+                  offsetFromSymbolStart = "47">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -310,38 +337,6 @@
             endingLineNumber = "82"
             landmarkName = "-refresh:"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[SpotlightFeedViewController refresh:]"
-                  moduleName = "Spotlight"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/algoworkstrainee2/Documents/projects/SpotLight%20Project/spotlight_ios/Spotlight/SpotlightFeedViewController.m"
-                  timestampString = "491123022.690749"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "82"
-                  endingLineNumber = "82"
-                  offsetFromSymbolStart = "43">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__39-[SpotlightFeedViewController refresh:]_block_invoke"
-                  moduleName = "Spotlight"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/algoworkstrainee2/Documents/projects/SpotLight%20Project/spotlight_ios/Spotlight/SpotlightFeedViewController.m"
-                  timestampString = "491123022.691031"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "82"
-                  endingLineNumber = "82"
-                  offsetFromSymbolStart = "12">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -373,6 +368,22 @@
             startingLineNumber = "84"
             endingLineNumber = "84"
             landmarkName = "-refresh:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Spotlight/TeamTableViewCell.m"
+            timestampString = "491127419.50412"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "-followButtonPressed:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

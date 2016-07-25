@@ -22,6 +22,8 @@
 @property (strong, nonatomic) PFFile *thumbnailImageFile;
 @property (strong, nonatomic) NSString* title;
 @property (assign, nonatomic) BOOL isVideo;
+
+
 @property (readonly, nonatomic) PFRelation* likes;
 
 @end

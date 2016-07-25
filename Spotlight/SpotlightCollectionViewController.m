@@ -51,7 +51,8 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
 
 - (void)refresh:(UIRefreshControl*)refresh {
     [self.spotlight allMedia:^(NSArray *media, NSError *error) {
-        self.mediaList = media;
+     
+        self.mediaList = [self getSortedArray:media];
         [self.collectionView reloadData];
         [refresh endRefreshing];
     }];
@@ -281,16 +282,19 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
         NSURL *videoUrl=(NSURL*)[infoDict objectForKey:UIImagePickerControllerReferenceURL];
         PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[videoUrl] options:nil];
         PHAsset *asset = result.firstObject;
+        NSDate *date = asset.creationDate;
+         double timestamp = [date timeIntervalSince1970];
         PHVideoRequestOptions *options=[[PHVideoRequestOptions alloc]init];
         options.version=PHVideoRequestOptionsVersionOriginal;
         [[PHImageManager defaultManager] requestAVAssetForVideo:asset options:options resultHandler:^(AVAsset * avasset, AVAudioMix * audioMix, NSDictionary * info) {
            
-                
                 AVURLAsset *asset = (AVURLAsset *)avasset;
+            
                 NSURL *url = asset.URL;
                 NSLog(@"url is %@",url);
                 NSString *videoPath = [url path];
                 media = [[SpotlightMedia alloc] initWithVideoPath:videoPath];
+            media.timeStamp = timestamp;
                 if (title) {
                     media.title = title;
                 }
@@ -305,7 +309,7 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
                         NSLog(@"fuck: %@", [error localizedDescription]);
                     } else {
                         [self.spotlight allMedia:^(NSArray *media, NSError *error) {
-                            self.mediaList = media;
+                            self.mediaList = [self getSortedArray:media];
                             [self.collectionView reloadData];
                             [hud hide:YES];
                         }];
@@ -319,9 +323,14 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
 
         
     } else if ([mediaType isEqualToString:(NSString *)ALAssetTypePhoto]) {
+        NSURL *imageUrl=(NSURL*)[infoDict objectForKey:UIImagePickerControllerReferenceURL];
+        PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[imageUrl] options:nil];
+        PHAsset *asset = result.firstObject;
+         NSDate *date = asset.creationDate;
+        double timestamp = [date timeIntervalSince1970];
         UIImage *image = [infoDict valueForKey:UIImagePickerControllerOriginalImage];
         media = [[SpotlightMedia alloc] initWithImage:image];
-        
+          media.timeStamp = timestamp;
         if (title) {
             media.title = title;
         }
@@ -335,7 +344,7 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
                 NSLog(@"fuck: %@", [error localizedDescription]);
             } else {
                 [self.spotlight allMedia:^(NSArray *media, NSError *error) {
-                    self.mediaList = media;
+                    self.mediaList = [self getSortedArray:media];
                     [self.collectionView reloadData];
                     [hud hide:YES];
                 }];
@@ -528,6 +537,13 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
     }
     
     
+}
+
+-(NSArray*)getSortedArray:(NSArray*)arr{
+    NSSortDescriptor *valueDescriptor = [[NSSortDescriptor alloc] initWithKey:@"timeStamp" ascending:NO];
+    NSArray *descriptors = [NSArray arrayWithObject:valueDescriptor];
+    NSArray *sortedArray = [arr sortedArrayUsingDescriptors:descriptors];
+    return sortedArray;
 }
 
 @end

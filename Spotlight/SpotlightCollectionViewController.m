@@ -19,9 +19,9 @@
 #import <MBProgressHUD.h>
 #import <AVFoundation/AVFoundation.h>
 #import <AVKit/AVKit.h>
+#import "PECropViewController.h"
 
-
-@interface SpotlightCollectionViewController ()
+@interface SpotlightCollectionViewController ()<PECropViewControllerDelegate>
 
 @property (strong, nonatomic) NSArray* mediaList;
 @property (strong, nonatomic) UIImagePickerController* imagePickerController;
@@ -148,6 +148,58 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
     [media deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         [self refresh:nil];
     }];
+}
+
+
+-(void)editPhotoAtIndex:(NSUInteger)index withImage:(UIImage *)image
+{
+   if( self.mediaList.count > index && image)
+   {
+       SpotlightMedia *media = self.mediaList[index];
+if(!media.isVideo)
+{
+
+    PECropViewController *controller = [[PECropViewController alloc] init];
+    controller.delegate = self;
+    controller.image = image;
+    
+    
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:controller];
+    [self presentViewController:navigationController animated:YES completion:NULL];
+}
+   }
+    
+}
+
+- (void)cropViewController:(PECropViewController *)controller didFinishCroppingImage:(UIImage *)croppedImage
+{
+  
+    
+     [controller dismissViewControllerAnimated:YES completion:NULL];
+     SpotlightMedia* media = self.mediaList[self.browser.currentIndex];
+    media.mediaFile = [PFFile fileWithName:@"image.png" data:UIImageJPEGRepresentation(croppedImage, 1.0)];
+    media.thumbnailImageFile = [PFFile fileWithName:@"image.png" data:UIImageJPEGRepresentation(croppedImage, 0.5)];
+    
+    MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication].delegate window] animated:YES];
+    [hud setLabelText:@"Updating image..."];
+    
+    [media saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        [self.browser reloadData];
+        [self.collectionView reloadData];
+        [hud hide:YES];
+    }];
+    
+}
+
+- (void)cropViewControllerDidCancel:(PECropViewController *)controller
+{
+      [controller dismissViewControllerAnimated:YES completion:NULL];
+}
+
+
+-(void)cropBtnClicked:(NSUInteger)currentIndex withImage:(UIImage *)image
+{
+    [self editPhotoAtIndex:currentIndex withImage:image];
 }
 
 

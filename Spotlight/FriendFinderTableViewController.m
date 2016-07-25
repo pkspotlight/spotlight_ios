@@ -14,7 +14,9 @@
 
 
 @interface FriendFinderTableViewController ()
-
+{
+    UIRefreshControl* refresh;
+}
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) NSArray* searchResults;
 @property (strong, nonatomic) UITapGestureRecognizer* hideKeyboardTap;
@@ -27,10 +29,9 @@
     [super viewDidLoad];
     [self.tableView registerNib:[UINib nibWithNibName:@"BasicHeaderView" bundle:nil]
 forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
-    UIRefreshControl* refresh = [[UIRefreshControl alloc] init];
+    refresh = [[UIRefreshControl alloc] init];
     [refresh addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     [self setRefreshControl:refresh];
-    [refresh beginRefreshing];
     self.hideKeyboardTap = [[UITapGestureRecognizer alloc]
                             initWithTarget:self
                             action:@selector(dismissKeyboard)];
@@ -108,6 +109,8 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                                                      usernameQuery,
                                                      emailQuery]];
         }
+        [refresh beginRefreshing];
+
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             if (!error) {
                 self.searchResults = objects;
@@ -124,6 +127,9 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
             } else {
                 
             }
+            
+            [refresh endRefreshing];
+
         }];
     }
 }
@@ -131,6 +137,8 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 -(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     self.searchResults = @[];
     [self.tableView reloadData];
+    [refresh endRefreshing];
+
 }
 
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {

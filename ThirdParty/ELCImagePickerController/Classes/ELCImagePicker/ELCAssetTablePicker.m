@@ -201,16 +201,16 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation))
-    {
-    return  (([UIScreen mainScreen].bounds.size.height  - 6) /4) + 2;
-    }
-    else if (UIDeviceOrientationIsPortrait([UIDevice currentDevice].orientation))
-    {
-      return  (([UIScreen mainScreen].bounds.size.width  - 6) /4) + 2;
-    }
+//    if(UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation))
+//    {
+//    return  (([UIScreen mainScreen].bounds.size.height  - 6) /4) + 2;
+//    }
+//    else if (UIDeviceOrientationIsPortrait([UIDevice currentDevice].orientation))
+//    {
+//      return  (([UIScreen mainScreen].bounds.size.width  - 6) /4) + 2;
+//    }
     
-      return  (([UIScreen mainScreen].bounds.size.width  - 6) /4) + 2;
+      return  79;
 }
 
 - (int)totalSelectedAssets

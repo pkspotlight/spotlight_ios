@@ -31,7 +31,7 @@
         
         NSMutableArray *mutableArray = [[NSMutableArray alloc] initWithCapacity:4];
         self.imageViewArray = mutableArray;
-        squareSide = 100;
+        squareSide = 75;
 
         NSMutableArray *overlayArray = [[NSMutableArray alloc] initWithCapacity:4];
         self.overlayViewArray = overlayArray;
@@ -129,7 +129,7 @@
 
 - (void)layoutSubviews
 {
-    squareSide = 100;
+    squareSide = 75;
     
     
     
@@ -138,30 +138,30 @@
     
     
     
-    if(UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation))
-    {
-        while(totalWidth > [UIScreen mainScreen].bounds.size.height)
-        {
-            squareSide = squareSide - 1;
-            totalWidth = self.rowAssets.count * squareSide + (self.rowAssets.count - 1) * 4;
-        }
-    }
-    else if (UIDeviceOrientationIsPortrait([UIDevice currentDevice].orientation))
-    {
-        while(totalWidth > [UIScreen mainScreen].bounds.size.width)
-        {
-            squareSide = squareSide - 1;
-            totalWidth = self.rowAssets.count * squareSide + (self.rowAssets.count - 1) * 4;
-        }
-    }
-    else
-    {
-        while(totalWidth > [UIScreen mainScreen].bounds.size.width)
-        {
-            squareSide = squareSide - 1;
-            totalWidth = self.rowAssets.count * squareSide + (self.rowAssets.count - 1) * 4;
-        }
-    }
+//    if(UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation))
+//    {
+//        while(totalWidth > [UIScreen mainScreen].bounds.size.height)
+//        {
+//            squareSide = squareSide - 1;
+//            totalWidth = self.rowAssets.count * squareSide + (self.rowAssets.count - 1) * 4;
+//        }
+//    }
+//    else if (UIDeviceOrientationIsPortrait([UIDevice currentDevice].orientation))
+//    {
+//        while(totalWidth > [UIScreen mainScreen].bounds.size.width)
+//        {
+//            squareSide = squareSide - 1;
+//            totalWidth = self.rowAssets.count * squareSide + (self.rowAssets.count - 1) * 4;
+//        }
+//    }
+//    else
+//    {
+//        while(totalWidth > [UIScreen mainScreen].bounds.size.width)
+//        {
+//            squareSide = squareSide - 1;
+//            totalWidth = self.rowAssets.count * squareSide + (self.rowAssets.count - 1) * 4;
+//        }
+//    }
     
    
     

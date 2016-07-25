@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		07FCD23C1D46019C0030E8DC /* video_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 07FCD23B1D46019C0030E8DC /* video_Icon.png */; };
 		39574E1E1D420F050059029C /* edit@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39574E1C1D420F050059029C /* edit@3x.png */; };
 		39574E1F1D420F050059029C /* edit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39574E1D1D420F050059029C /* edit@2x.png */; };
 		39574E221D421FD30059029C /* delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39574E201D421FD30059029C /* delete@2x.png */; };
@@ -75,7 +76,7 @@
 		84A234451D3F5F0D008AB7C0 /* Overlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A234391D3F5F0D008AB7C0 /* Overlay.png */; };
 		84A234461D3F5F0D008AB7C0 /* Overlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A2343A1D3F5F0D008AB7C0 /* Overlay@2x.png */; };
 		84A234471D3F5F0D008AB7C0 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 84A2343B1D3F5F0D008AB7C0 /* README.md */; };
-		84B0066A1D45F2320040E778 /* video_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 84B006691D45F2320040E778 /* video_Icon.png */; };
+		84B0066A1D45F2320040E778 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		880054EA1C6B8D630034D639 /* Child.m in Sources */ = {isa = PBXBuildFile; fileRef = 880054E91C6B8D630034D639 /* Child.m */; };
 		880054EE1C6B9E8C0034D639 /* ChildTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 880054ED1C6B9E8C0034D639 /* ChildTableViewCell.m */; };
 		880207A41C15DF7A002D5068 /* MontageCreator.m in Sources */ = {isa = PBXBuildFile; fileRef = 880207A31C15DF7A002D5068 /* MontageCreator.m */; };
@@ -158,6 +159,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		07FCD23B1D46019C0030E8DC /* video_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = video_Icon.png; sourceTree = "<group>"; };
 		2361F9765AB807421C692532 /* Pods-Spotlight.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spotlight.release.xcconfig"; path = "Pods/Target Support Files/Pods-Spotlight/Pods-Spotlight.release.xcconfig"; sourceTree = "<group>"; };
 		39574E1C1D420F050059029C /* edit@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "edit@3x.png"; sourceTree = "<group>"; };
 		39574E1D1D420F050059029C /* edit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "edit@2x.png"; sourceTree = "<group>"; };
@@ -251,7 +253,7 @@
 		84A234391D3F5F0D008AB7C0 /* Overlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Overlay.png; sourceTree = "<group>"; };
 		84A2343A1D3F5F0D008AB7C0 /* Overlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Overlay@2x.png"; sourceTree = "<group>"; };
 		84A2343B1D3F5F0D008AB7C0 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		84B006691D45F2320040E778 /* video_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = video_Icon.png; sourceTree = "<group>"; };
+		87A655F7E5723EA721F010C4 /* libPods-SpotlightTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SpotlightTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		880054E81C6B8D630034D639 /* Child.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Child.h; sourceTree = "<group>"; };
 		880054E91C6B8D630034D639 /* Child.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Child.m; sourceTree = "<group>"; };
 		880054EC1C6B9E8C0034D639 /* ChildTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildTableViewCell.h; sourceTree = "<group>"; };
@@ -553,7 +555,6 @@
 		84A234281D3F5F0D008AB7C0 /* ELCImagePicker */ = {
 			isa = PBXGroup;
 			children = (
-				84B006691D45F2320040E778 /* video_Icon.png */,
 				84A234291D3F5F0D008AB7C0 /* ELCAlbumPickerController.h */,
 				84A2342A1D3F5F0D008AB7C0 /* ELCAlbumPickerController.m */,
 				84A2342B1D3F5F0D008AB7C0 /* ELCAsset.h */,
@@ -574,6 +575,7 @@
 		84A234351D3F5F0D008AB7C0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				07FCD23B1D46019C0030E8DC /* video_Icon.png */,
 				84A234361D3F5F0D008AB7C0 /* ELCAlbumPickerController.xib */,
 				84A234371D3F5F0D008AB7C0 /* ELCAssetPicker.xib */,
 				84A234381D3F5F0D008AB7C0 /* ELCAssetTablePicker.xib */,
@@ -810,6 +812,7 @@
 				8849A1E01B9FB6CA00511DD5 /* ShellScript */,
 				40F341607985E36E694A9D46 /* 📦 Embed Pods Frameworks */,
 				443E975FE080CA64F5F22E83 /* 📦 Copy Pods Resources */,
+				84E3570133E9EFCF61B15C3D /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -890,7 +893,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84B0066A1D45F2320040E778 /* video_Icon.png in Resources */,
+				84B0066A1D45F2320040E778 /* (null) in Resources */,
 				88BDFC6A1BFD53BD007A3EBB /* gb.png in Resources */,
 				889DEEC81C97370100726D83 /* heart.png in Resources */,
 				398D24921D40D64D00647117 /* UIBarButtonItemArrowLeft@2x.png in Resources */,
@@ -908,6 +911,7 @@
 				84A234451D3F5F0D008AB7C0 /* Overlay.png in Resources */,
 				88A736E31B91318D00093B27 /* Main.storyboard in Resources */,
 				88A736E81B91318D00093B27 /* LaunchScreen.xib in Resources */,
+				07FCD23C1D46019C0030E8DC /* video_Icon.png in Resources */,
 				396C0E771D40F90A009654EA /* PEPhotoCropEditor.bundle in Resources */,
 				398D24871D40D64D00647117 /* ImageSelectedSmallOff@3x.png in Resources */,
 				39574E261D4220B70059029C /* upload@2x.png in Resources */,
@@ -1048,6 +1052,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		84E3570133E9EFCF61B15C3D /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Spotlight/Pods-Spotlight-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8849A1E01B9FB6CA00511DD5 /* ShellScript */ = {
@@ -1284,12 +1303,14 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Spotlight/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.myspotlight.spotlight;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "d185da62-45e2-4e90-8a78-f424e6c07ddb";
 				SWIFT_OBJC_BRIDGING_HEADER = "Spotlight/Spotlight-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1306,11 +1327,13 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Spotlight/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.myspotlight.spotlight;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "d185da62-45e2-4e90-8a78-f424e6c07ddb";
 				SWIFT_OBJC_BRIDGING_HEADER = "Spotlight/Spotlight-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

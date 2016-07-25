@@ -35,7 +35,7 @@
     self.admin = admin;
     self.requestState = [NSNumber numberWithInt:reqestStatePending];
      self.isChild = isChild;
-    if(!isChild)
+    if(!isChild.boolValue)
     {
         self.nameOfRequester = [NSString stringWithFormat:@"%@ %@",user.firstName,user.lastName];
         self.PicOfRequester = user.profilePic;
@@ -55,7 +55,7 @@
             NSLog(@"success team");
             
             [[[UIAlertView alloc] initWithTitle:@""
-                                        message:@"Your request has been sent to Admin"
+                                        message:@"Your request has been sent to Admin. Team will appear in your list Once admin approves your request."
                                        delegate:nil
                               cancelButtonTitle:nil
                               otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];

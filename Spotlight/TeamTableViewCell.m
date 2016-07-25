@@ -73,28 +73,30 @@
 
 
 - (IBAction)followButtonPressed:(id)sender {
-    [self.followButton setTitle:@""
-                       forState:UIControlStateNormal];
+//    [self.followButton setTitle:@""
+//                       forState:UIControlStateNormal];
    
     if (_isFollowing) {
-        [self.followButton setTitle:@"Following"
-                           forState:UIControlStateNormal];
         
         [self.delegate
          unfollowButtonPressed:self
          completion:^(void){
              self.isFollowing = NO;
-             //[self formatButtonText];
+//             [self.followButton setTitle:@"Following"
+//                                forState:UIControlStateNormal];
+
+             [self formatButtonText];
          }];
     } else {
         
-        [self.followButton setTitle:@""
-                           forState:UIControlStateNormal];
+       
         [self.delegate
          followButtonPressed:self
          completion:^(void){
+//             [self.followButton setTitle:@""
+//                                forState:UIControlStateNormal];
              self.isFollowing = YES;
-            // [self formatButtonText];
+            [self formatButtonText];
          }];
     }
     

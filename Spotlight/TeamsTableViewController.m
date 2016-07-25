@@ -31,6 +31,7 @@ static CGFloat const BasicHeaderHeight = 50;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+     count = 0;
     pendingRequest = [[NSString alloc]init];
  //   [self.tableView registerNib:[UINib nibWithNibName:@"BasicHeaderView" bundle:nil]
 //forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
@@ -39,12 +40,14 @@ static CGFloat const BasicHeaderHeight = 50;
                              action:@selector(refresh:)
                    forControlEvents:UIControlEventValueChanged];
     [self setRefreshControl:self.refreshControl];
+    [self.refreshControl beginRefreshing];
+
     //[self.tableView addSubview:self.refreshControl];
     self.teams = [NSMutableArray array];
     if (!self.child && !self.user) {
         self.user = [User currentUser];
     }
-    self.tableView.contentInset = UIEdgeInsetsMake(30, 0, 0, 0);
+   // self.tableView.contentInset = UIEdgeInsetsMake(30, 0, 0, 0);
    
    // [self refresh:self.refreshControl];
 }

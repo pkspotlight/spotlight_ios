@@ -126,6 +126,7 @@ static CGFloat const BasicHeaderHeight = 50;
         if (!error) {
             NSLog(@"Successfully retrieved my %lu Teams.", (unsigned long)objects.count);
             [self.teams addObjectsFromArray:[objects copy]];
+         
             [self sortTeamsArray:self.teams];
             PFQuery *query = [self.user.children query];
             [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
@@ -150,6 +151,7 @@ static CGFloat const BasicHeaderHeight = 50;
         if (!error) {
             NSLog(@"Successfully retrieved child's %lu Teams.", (unsigned long)objects.count);
             [self.teams addObjectsFromArray:[objects copy]];
+            
             [self sortTeamsArray:self.teams];
             [self.tableView reloadData];
             [sender endRefreshing];
@@ -185,6 +187,7 @@ static CGFloat const BasicHeaderHeight = 50;
         }
         return (NSComparisonResult)NSOrderedDescending;
     }];
+   
     self.teams = [NSMutableArray arrayWithArray:sortedArray];
 }
     

@@ -12,7 +12,9 @@
 #import "SpotlightCollectionViewController.h"
 #import "SpotlightMedia.h"
 #import "User.h"
+#import "MainTabBarController.h"
 #import "SpotlightDataSource.h"
+#import "TeamSelectTableViewController.h"
 #import <AFNetworking/UIImageView+AFNetworking.h>
 
 @interface SpotlightFeedViewController ()
@@ -51,6 +53,32 @@
 
 - (void)refresh:(id)sender {
 
+//    if([self.navigationController.viewControllers.lastObject isKindOfClass:[TeamSelectTableViewController class]]){
+//        
+//        MainTabBarController *tabbar = (MainTabBarController*)[[UIApplication sharedApplication].delegate.window rootViewController];
+//        
+//       UINavigationController *navController = (UINavigationController *)[tabbar.viewControllers objectAtIndex:0] ;
+//          SpotlightFeedViewController *spotlight = (SpotlightFeedViewController*)[navController.viewControllers firstObject];
+//        
+//        if(spotlight!=nil){
+//            [spotlight.dataSource loadSpotlights:^{
+//                [spotlight.tableView reloadData];
+//                if(sender)
+//                {
+//                    if([sender isKindOfClass:[MBProgressHUD class]])
+//                    {
+//                        MBProgressHUD *hud = (MBProgressHUD *)sender;
+//                        [hud hide:YES];
+//                    }
+//                    else
+//                        [sender endRefreshing];
+//                }
+//            }];
+//
+//        }
+//    }
+    
+    
     [self.dataSource loadSpotlights:^{
         [self.tableView reloadData];
         if(sender)
@@ -68,7 +96,9 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"PendingRequest" object:nil];
+    });
     
    
 }

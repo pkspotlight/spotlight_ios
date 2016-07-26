@@ -7,6 +7,62 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		07FCD23C1D46019C0030E8DC /* video_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 07FCD23B1D46019C0030E8DC /* video_Icon.png */; };
+		39574E1E1D420F050059029C /* edit@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39574E1C1D420F050059029C /* edit@3x.png */; };
+		39574E1F1D420F050059029C /* edit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39574E1D1D420F050059029C /* edit@2x.png */; };
+		39574E221D421FD30059029C /* delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39574E201D421FD30059029C /* delete@2x.png */; };
+		39574E231D421FD30059029C /* delete@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39574E211D421FD30059029C /* delete@3x.png */; };
+		39574E261D4220B70059029C /* upload@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39574E241D4220B70059029C /* upload@2x.png */; };
+		39574E271D4220B70059029C /* upload@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39574E251D4220B70059029C /* upload@3x.png */; };
+		396C0E771D40F90A009654EA /* PEPhotoCropEditor.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 396C0E761D40F90A009654EA /* PEPhotoCropEditor.bundle */; };
+		398D247C1D40D64D00647117 /* ImageError.png in Resources */ = {isa = PBXBuildFile; fileRef = 398D24451D40D64D00647117 /* ImageError.png */; };
+		398D247D1D40D64D00647117 /* ImageError@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 398D24461D40D64D00647117 /* ImageError@2x.png */; };
+		398D247E1D40D64D00647117 /* ImageError@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 398D24471D40D64D00647117 /* ImageError@3x.png */; };
+		398D247F1D40D64D00647117 /* ImageSelectedOff.png in Resources */ = {isa = PBXBuildFile; fileRef = 398D24481D40D64D00647117 /* ImageSelectedOff.png */; };
+		398D24801D40D64D00647117 /* ImageSelectedOff@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 398D24491D40D64D00647117 /* ImageSelectedOff@2x.png */; };
+		398D24811D40D64D00647117 /* ImageSelectedOff@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 398D244A1D40D64D00647117 /* ImageSelectedOff@3x.png */; };
+		398D24821D40D64D00647117 /* ImageSelectedOn.png in Resources */ = {isa = PBXBuildFile; fileRef = 398D244B1D40D64D00647117 /* ImageSelectedOn.png */; };
+		398D24831D40D64D00647117 /* ImageSelectedOn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 398D244C1D40D64D00647117 /* ImageSelectedOn@2x.png */; };
+		398D24841D40D64D00647117 /* ImageSelectedOn@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 398D244D1D40D64D00647117 /* ImageSelectedOn@3x.png */; };
+		398D24851D40D64D00647117 /* ImageSelectedSmallOff.png in Resources */ = {isa = PBXBuildFile; fileRef = 398D244E1D40D64D00647117 /* ImageSelectedSmallOff.png */; };
+		398D24861D40D64D00647117 /* ImageSelectedSmallOff@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 398D244F1D40D64D00647117 /* ImageSelectedSmallOff@2x.png */; };
+		398D24871D40D64D00647117 /* ImageSelectedSmallOff@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 398D24501D40D64D00647117 /* ImageSelectedSmallOff@3x.png */; };
+		398D24881D40D64D00647117 /* ImageSelectedSmallOn.png in Resources */ = {isa = PBXBuildFile; fileRef = 398D24511D40D64D00647117 /* ImageSelectedSmallOn.png */; };
+		398D24891D40D64D00647117 /* ImageSelectedSmallOn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 398D24521D40D64D00647117 /* ImageSelectedSmallOn@2x.png */; };
+		398D248A1D40D64D00647117 /* ImageSelectedSmallOn@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 398D24531D40D64D00647117 /* ImageSelectedSmallOn@3x.png */; };
+		398D248B1D40D64D00647117 /* PlayButtonOverlayLarge.png in Resources */ = {isa = PBXBuildFile; fileRef = 398D24541D40D64D00647117 /* PlayButtonOverlayLarge.png */; };
+		398D248C1D40D64D00647117 /* PlayButtonOverlayLarge@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 398D24551D40D64D00647117 /* PlayButtonOverlayLarge@2x.png */; };
+		398D248D1D40D64D00647117 /* PlayButtonOverlayLarge@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 398D24561D40D64D00647117 /* PlayButtonOverlayLarge@3x.png */; };
+		398D248E1D40D64D00647117 /* PlayButtonOverlayLargeTap.png in Resources */ = {isa = PBXBuildFile; fileRef = 398D24571D40D64D00647117 /* PlayButtonOverlayLargeTap.png */; };
+		398D248F1D40D64D00647117 /* PlayButtonOverlayLargeTap@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 398D24581D40D64D00647117 /* PlayButtonOverlayLargeTap@2x.png */; };
+		398D24901D40D64D00647117 /* PlayButtonOverlayLargeTap@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 398D24591D40D64D00647117 /* PlayButtonOverlayLargeTap@3x.png */; };
+		398D24911D40D64D00647117 /* UIBarButtonItemArrowLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 398D245A1D40D64D00647117 /* UIBarButtonItemArrowLeft.png */; };
+		398D24921D40D64D00647117 /* UIBarButtonItemArrowLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 398D245B1D40D64D00647117 /* UIBarButtonItemArrowLeft@2x.png */; };
+		398D24931D40D64D00647117 /* UIBarButtonItemArrowLeft@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 398D245C1D40D64D00647117 /* UIBarButtonItemArrowLeft@3x.png */; };
+		398D24941D40D64D00647117 /* UIBarButtonItemArrowRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 398D245D1D40D64D00647117 /* UIBarButtonItemArrowRight.png */; };
+		398D24951D40D64D00647117 /* UIBarButtonItemArrowRight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 398D245E1D40D64D00647117 /* UIBarButtonItemArrowRight@2x.png */; };
+		398D24961D40D64D00647117 /* UIBarButtonItemArrowRight@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 398D245F1D40D64D00647117 /* UIBarButtonItemArrowRight@3x.png */; };
+		398D24971D40D64D00647117 /* UIBarButtonItemGrid.png in Resources */ = {isa = PBXBuildFile; fileRef = 398D24601D40D64D00647117 /* UIBarButtonItemGrid.png */; };
+		398D24981D40D64D00647117 /* UIBarButtonItemGrid@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 398D24611D40D64D00647117 /* UIBarButtonItemGrid@2x.png */; };
+		398D24991D40D64D00647117 /* UIBarButtonItemGrid@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 398D24621D40D64D00647117 /* UIBarButtonItemGrid@3x.png */; };
+		398D249A1D40D64D00647117 /* VideoOverlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 398D24631D40D64D00647117 /* VideoOverlay.png */; };
+		398D249B1D40D64D00647117 /* VideoOverlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 398D24641D40D64D00647117 /* VideoOverlay@2x.png */; };
+		398D249C1D40D64D00647117 /* VideoOverlay@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 398D24651D40D64D00647117 /* VideoOverlay@3x.png */; };
+		398D249D1D40D64D00647117 /* MWCaptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 398D24681D40D64D00647117 /* MWCaptionView.m */; };
+		398D249E1D40D64D00647117 /* MWGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 398D246B1D40D64D00647117 /* MWGridCell.m */; };
+		398D249F1D40D64D00647117 /* MWGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 398D246D1D40D64D00647117 /* MWGridViewController.m */; };
+		398D24A01D40D64D00647117 /* MWPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 398D246F1D40D64D00647117 /* MWPhoto.m */; };
+		398D24A11D40D64D00647117 /* MWPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 398D24711D40D64D00647117 /* MWPhotoBrowser.m */; };
+		398D24A21D40D64D00647117 /* MWTapDetectingImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 398D24751D40D64D00647117 /* MWTapDetectingImageView.m */; };
+		398D24A31D40D64D00647117 /* MWTapDetectingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 398D24771D40D64D00647117 /* MWTapDetectingView.m */; };
+		398D24A41D40D64D00647117 /* MWZoomingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 398D24791D40D64D00647117 /* MWZoomingScrollView.m */; };
+		398D24A51D40D64D00647117 /* UIImage+MWPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 398D247B1D40D64D00647117 /* UIImage+MWPhotoBrowser.m */; };
+		39D634391D40C86500CAA666 /* PECropRectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 39D634301D40C86500CAA666 /* PECropRectView.m */; };
+		39D6343A1D40C86500CAA666 /* PECropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 39D634321D40C86500CAA666 /* PECropView.m */; };
+		39D6343B1D40C86500CAA666 /* PECropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39D634341D40C86500CAA666 /* PECropViewController.m */; };
+		39D6343C1D40C86500CAA666 /* PEResizeControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 39D634361D40C86500CAA666 /* PEResizeControl.m */; };
+		39D6343D1D40C86500CAA666 /* UIImage+PECrop.m in Sources */ = {isa = PBXBuildFile; fileRef = 39D634381D40C86500CAA666 /* UIImage+PECrop.m */; };
+		7463923B6498BDF06E9ADC41 /* libPods-Spotlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 99D6E4F266EF6F424B0CD604 /* libPods-Spotlight.a */; };
 		8404D5831D3E51BC00B2D325 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8404D5821D3E51BC00B2D325 /* MediaPlayer.framework */; };
 		841FAE121D3CE26700772B23 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841FAE111D3CE26700772B23 /* Photos.framework */; };
 		846F75B01D40D41B00B5120E /* TeamRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 846F75AF1D40D41B00B5120E /* TeamRequest.m */; };
@@ -22,7 +78,7 @@
 		84A234451D3F5F0D008AB7C0 /* Overlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A234391D3F5F0D008AB7C0 /* Overlay.png */; };
 		84A234461D3F5F0D008AB7C0 /* Overlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A2343A1D3F5F0D008AB7C0 /* Overlay@2x.png */; };
 		84A234471D3F5F0D008AB7C0 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 84A2343B1D3F5F0D008AB7C0 /* README.md */; };
-		84A234481D3F5F0D008AB7C0 /* video_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A2343C1D3F5F0D008AB7C0 /* video_Icon.png */; };
+		84B0066A1D45F2320040E778 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		84B52BD41D41F43D005995AC /* PendingRequestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B52BD31D41F43D005995AC /* PendingRequestTableViewCell.m */; };
 		880054EA1C6B8D630034D639 /* Child.m in Sources */ = {isa = PBXBuildFile; fileRef = 880054E91C6B8D630034D639 /* Child.m */; };
 		880054EE1C6B9E8C0034D639 /* ChildTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 880054ED1C6B9E8C0034D639 /* ChildTableViewCell.m */; };
@@ -92,7 +148,7 @@
 		88EE2CC61B9E08B2002DDB99 /* SpotlightFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88EE2CC51B9E08B2002DDB99 /* SpotlightFeedViewController.m */; };
 		88FDB88E1C8EA2A1008C9A3D /* TB - Disney Funk 124bpm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 88FDB87E1C8EA2A1008C9A3D /* TB - Disney Funk 124bpm.mp3 */; };
 		88FDB8941C8EA2A1008C9A3D /* DT_TheDuff_CoolKids_INST130.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 88FDB8841C8EA2A1008C9A3D /* DT_TheDuff_CoolKids_INST130.mp3 */; };
-		C2B409966BE212B335038003 /* libPods-Spotlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F03B672A3CAD95AD6DB192BE /* libPods-Spotlight.a */; };
+		8BAEE647A01A1BC65A654968 /* libPods-SpotlightTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 87A655F7E5723EA721F010C4 /* libPods-SpotlightTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,8 +162,80 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		17139AE8364E5B9890F4FCBC /* Pods-Spotlight.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spotlight.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Spotlight/Pods-Spotlight.debug.xcconfig"; sourceTree = "<group>"; };
-		4FDDD1185B6B67FED774A599 /* Pods-Spotlight.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spotlight.release.xcconfig"; path = "Pods/Target Support Files/Pods-Spotlight/Pods-Spotlight.release.xcconfig"; sourceTree = "<group>"; };
+		07FCD23B1D46019C0030E8DC /* video_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = video_Icon.png; sourceTree = "<group>"; };
+		2361F9765AB807421C692532 /* Pods-Spotlight.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spotlight.release.xcconfig"; path = "Pods/Target Support Files/Pods-Spotlight/Pods-Spotlight.release.xcconfig"; sourceTree = "<group>"; };
+		39574E1C1D420F050059029C /* edit@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "edit@3x.png"; sourceTree = "<group>"; };
+		39574E1D1D420F050059029C /* edit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "edit@2x.png"; sourceTree = "<group>"; };
+		39574E201D421FD30059029C /* delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete@2x.png"; sourceTree = "<group>"; };
+		39574E211D421FD30059029C /* delete@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete@3x.png"; sourceTree = "<group>"; };
+		39574E241D4220B70059029C /* upload@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "upload@2x.png"; sourceTree = "<group>"; };
+		39574E251D4220B70059029C /* upload@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "upload@3x.png"; sourceTree = "<group>"; };
+		396C0E761D40F90A009654EA /* PEPhotoCropEditor.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = PEPhotoCropEditor.bundle; sourceTree = "<group>"; };
+		398D24451D40D64D00647117 /* ImageError.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ImageError.png; sourceTree = "<group>"; };
+		398D24461D40D64D00647117 /* ImageError@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ImageError@2x.png"; sourceTree = "<group>"; };
+		398D24471D40D64D00647117 /* ImageError@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ImageError@3x.png"; sourceTree = "<group>"; };
+		398D24481D40D64D00647117 /* ImageSelectedOff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ImageSelectedOff.png; sourceTree = "<group>"; };
+		398D24491D40D64D00647117 /* ImageSelectedOff@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ImageSelectedOff@2x.png"; sourceTree = "<group>"; };
+		398D244A1D40D64D00647117 /* ImageSelectedOff@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ImageSelectedOff@3x.png"; sourceTree = "<group>"; };
+		398D244B1D40D64D00647117 /* ImageSelectedOn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ImageSelectedOn.png; sourceTree = "<group>"; };
+		398D244C1D40D64D00647117 /* ImageSelectedOn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ImageSelectedOn@2x.png"; sourceTree = "<group>"; };
+		398D244D1D40D64D00647117 /* ImageSelectedOn@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ImageSelectedOn@3x.png"; sourceTree = "<group>"; };
+		398D244E1D40D64D00647117 /* ImageSelectedSmallOff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ImageSelectedSmallOff.png; sourceTree = "<group>"; };
+		398D244F1D40D64D00647117 /* ImageSelectedSmallOff@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ImageSelectedSmallOff@2x.png"; sourceTree = "<group>"; };
+		398D24501D40D64D00647117 /* ImageSelectedSmallOff@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ImageSelectedSmallOff@3x.png"; sourceTree = "<group>"; };
+		398D24511D40D64D00647117 /* ImageSelectedSmallOn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ImageSelectedSmallOn.png; sourceTree = "<group>"; };
+		398D24521D40D64D00647117 /* ImageSelectedSmallOn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ImageSelectedSmallOn@2x.png"; sourceTree = "<group>"; };
+		398D24531D40D64D00647117 /* ImageSelectedSmallOn@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ImageSelectedSmallOn@3x.png"; sourceTree = "<group>"; };
+		398D24541D40D64D00647117 /* PlayButtonOverlayLarge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlayButtonOverlayLarge.png; sourceTree = "<group>"; };
+		398D24551D40D64D00647117 /* PlayButtonOverlayLarge@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PlayButtonOverlayLarge@2x.png"; sourceTree = "<group>"; };
+		398D24561D40D64D00647117 /* PlayButtonOverlayLarge@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PlayButtonOverlayLarge@3x.png"; sourceTree = "<group>"; };
+		398D24571D40D64D00647117 /* PlayButtonOverlayLargeTap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlayButtonOverlayLargeTap.png; sourceTree = "<group>"; };
+		398D24581D40D64D00647117 /* PlayButtonOverlayLargeTap@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PlayButtonOverlayLargeTap@2x.png"; sourceTree = "<group>"; };
+		398D24591D40D64D00647117 /* PlayButtonOverlayLargeTap@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PlayButtonOverlayLargeTap@3x.png"; sourceTree = "<group>"; };
+		398D245A1D40D64D00647117 /* UIBarButtonItemArrowLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIBarButtonItemArrowLeft.png; sourceTree = "<group>"; };
+		398D245B1D40D64D00647117 /* UIBarButtonItemArrowLeft@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIBarButtonItemArrowLeft@2x.png"; sourceTree = "<group>"; };
+		398D245C1D40D64D00647117 /* UIBarButtonItemArrowLeft@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIBarButtonItemArrowLeft@3x.png"; sourceTree = "<group>"; };
+		398D245D1D40D64D00647117 /* UIBarButtonItemArrowRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIBarButtonItemArrowRight.png; sourceTree = "<group>"; };
+		398D245E1D40D64D00647117 /* UIBarButtonItemArrowRight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIBarButtonItemArrowRight@2x.png"; sourceTree = "<group>"; };
+		398D245F1D40D64D00647117 /* UIBarButtonItemArrowRight@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIBarButtonItemArrowRight@3x.png"; sourceTree = "<group>"; };
+		398D24601D40D64D00647117 /* UIBarButtonItemGrid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIBarButtonItemGrid.png; sourceTree = "<group>"; };
+		398D24611D40D64D00647117 /* UIBarButtonItemGrid@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIBarButtonItemGrid@2x.png"; sourceTree = "<group>"; };
+		398D24621D40D64D00647117 /* UIBarButtonItemGrid@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIBarButtonItemGrid@3x.png"; sourceTree = "<group>"; };
+		398D24631D40D64D00647117 /* VideoOverlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = VideoOverlay.png; sourceTree = "<group>"; };
+		398D24641D40D64D00647117 /* VideoOverlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "VideoOverlay@2x.png"; sourceTree = "<group>"; };
+		398D24651D40D64D00647117 /* VideoOverlay@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "VideoOverlay@3x.png"; sourceTree = "<group>"; };
+		398D24671D40D64D00647117 /* MWCaptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWCaptionView.h; sourceTree = "<group>"; };
+		398D24681D40D64D00647117 /* MWCaptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWCaptionView.m; sourceTree = "<group>"; };
+		398D24691D40D64D00647117 /* MWCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWCommon.h; sourceTree = "<group>"; };
+		398D246A1D40D64D00647117 /* MWGridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWGridCell.h; sourceTree = "<group>"; };
+		398D246B1D40D64D00647117 /* MWGridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWGridCell.m; sourceTree = "<group>"; };
+		398D246C1D40D64D00647117 /* MWGridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWGridViewController.h; sourceTree = "<group>"; };
+		398D246D1D40D64D00647117 /* MWGridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWGridViewController.m; sourceTree = "<group>"; };
+		398D246E1D40D64D00647117 /* MWPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWPhoto.h; sourceTree = "<group>"; };
+		398D246F1D40D64D00647117 /* MWPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWPhoto.m; sourceTree = "<group>"; };
+		398D24701D40D64D00647117 /* MWPhotoBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWPhotoBrowser.h; sourceTree = "<group>"; };
+		398D24711D40D64D00647117 /* MWPhotoBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWPhotoBrowser.m; sourceTree = "<group>"; };
+		398D24721D40D64D00647117 /* MWPhotoBrowserPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWPhotoBrowserPrivate.h; sourceTree = "<group>"; };
+		398D24731D40D64D00647117 /* MWPhotoProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWPhotoProtocol.h; sourceTree = "<group>"; };
+		398D24741D40D64D00647117 /* MWTapDetectingImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWTapDetectingImageView.h; sourceTree = "<group>"; };
+		398D24751D40D64D00647117 /* MWTapDetectingImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWTapDetectingImageView.m; sourceTree = "<group>"; };
+		398D24761D40D64D00647117 /* MWTapDetectingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWTapDetectingView.h; sourceTree = "<group>"; };
+		398D24771D40D64D00647117 /* MWTapDetectingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWTapDetectingView.m; sourceTree = "<group>"; };
+		398D24781D40D64D00647117 /* MWZoomingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWZoomingScrollView.h; sourceTree = "<group>"; };
+		398D24791D40D64D00647117 /* MWZoomingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWZoomingScrollView.m; sourceTree = "<group>"; };
+		398D247A1D40D64D00647117 /* UIImage+MWPhotoBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MWPhotoBrowser.h"; sourceTree = "<group>"; };
+		398D247B1D40D64D00647117 /* UIImage+MWPhotoBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MWPhotoBrowser.m"; sourceTree = "<group>"; };
+		39D6342F1D40C86500CAA666 /* PECropRectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PECropRectView.h; sourceTree = "<group>"; };
+		39D634301D40C86500CAA666 /* PECropRectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PECropRectView.m; sourceTree = "<group>"; };
+		39D634311D40C86500CAA666 /* PECropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PECropView.h; sourceTree = "<group>"; };
+		39D634321D40C86500CAA666 /* PECropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PECropView.m; sourceTree = "<group>"; };
+		39D634331D40C86500CAA666 /* PECropViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PECropViewController.h; sourceTree = "<group>"; };
+		39D634341D40C86500CAA666 /* PECropViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PECropViewController.m; sourceTree = "<group>"; };
+		39D634351D40C86500CAA666 /* PEResizeControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEResizeControl.h; sourceTree = "<group>"; };
+		39D634361D40C86500CAA666 /* PEResizeControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PEResizeControl.m; sourceTree = "<group>"; };
+		39D634371D40C86500CAA666 /* UIImage+PECrop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+PECrop.h"; sourceTree = "<group>"; };
+		39D634381D40C86500CAA666 /* UIImage+PECrop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+PECrop.m"; sourceTree = "<group>"; };
+		4D49675B7178C092CA67749B /* Pods-Spotlight.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spotlight.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Spotlight/Pods-Spotlight.debug.xcconfig"; sourceTree = "<group>"; };
 		8404D5821D3E51BC00B2D325 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		841FAE111D3CE26700772B23 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		846F75AE1D40D41B00B5120E /* TeamRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamRequest.h; sourceTree = "<group>"; };
@@ -132,9 +260,9 @@
 		84A234391D3F5F0D008AB7C0 /* Overlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Overlay.png; sourceTree = "<group>"; };
 		84A2343A1D3F5F0D008AB7C0 /* Overlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Overlay@2x.png"; sourceTree = "<group>"; };
 		84A2343B1D3F5F0D008AB7C0 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		84A2343C1D3F5F0D008AB7C0 /* video_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = video_Icon.png; sourceTree = "<group>"; };
 		84B52BD21D41F43D005995AC /* PendingRequestTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PendingRequestTableViewCell.h; sourceTree = "<group>"; };
 		84B52BD31D41F43D005995AC /* PendingRequestTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PendingRequestTableViewCell.m; sourceTree = "<group>"; };
+		87A655F7E5723EA721F010C4 /* libPods-SpotlightTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SpotlightTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		880054E81C6B8D630034D639 /* Child.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Child.h; sourceTree = "<group>"; };
 		880054E91C6B8D630034D639 /* Child.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Child.m; sourceTree = "<group>"; };
 		880054EC1C6B9E8C0034D639 /* ChildTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildTableViewCell.h; sourceTree = "<group>"; };
@@ -244,7 +372,9 @@
 		88EE2CC51B9E08B2002DDB99 /* SpotlightFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotlightFeedViewController.m; sourceTree = "<group>"; };
 		88FDB87E1C8EA2A1008C9A3D /* TB - Disney Funk 124bpm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "TB - Disney Funk 124bpm.mp3"; sourceTree = "<group>"; };
 		88FDB8841C8EA2A1008C9A3D /* DT_TheDuff_CoolKids_INST130.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = DT_TheDuff_CoolKids_INST130.mp3; sourceTree = "<group>"; };
-		F03B672A3CAD95AD6DB192BE /* libPods-Spotlight.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Spotlight.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		99D6E4F266EF6F424B0CD604 /* libPods-Spotlight.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Spotlight.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA9E3123F18E0C8EC70D41FD /* Pods-SpotlightTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpotlightTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SpotlightTests/Pods-SpotlightTests.release.xcconfig"; sourceTree = "<group>"; };
+		C79FC9396B17349A00318887 /* Pods-SpotlightTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpotlightTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SpotlightTests/Pods-SpotlightTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -255,9 +385,9 @@
 				8404D5831D3E51BC00B2D325 /* MediaPlayer.framework in Frameworks */,
 				841FAE121D3CE26700772B23 /* Photos.framework in Frameworks */,
 				889DEECC1C98B90000726D83 /* MessageUI.framework in Frameworks */,
-				C2B409966BE212B335038003 /* libPods-Spotlight.a in Frameworks */,
 				88450BFC1BC4CC30004BB6B4 /* Crashlytics.framework in Frameworks */,
 				88450BFB1BC4CC30004BB6B4 /* Fabric.framework in Frameworks */,
+				7463923B6498BDF06E9ADC41 /* libPods-Spotlight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,28 +395,141 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BAEE647A01A1BC65A654968 /* libPods-SpotlightTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		396C0E751D40F90A009654EA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				396C0E761D40F90A009654EA /* PEPhotoCropEditor.bundle */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		398D24441D40D64C00647117 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				39574E241D4220B70059029C /* upload@2x.png */,
+				39574E251D4220B70059029C /* upload@3x.png */,
+				39574E201D421FD30059029C /* delete@2x.png */,
+				39574E211D421FD30059029C /* delete@3x.png */,
+				39574E1C1D420F050059029C /* edit@3x.png */,
+				39574E1D1D420F050059029C /* edit@2x.png */,
+				398D24451D40D64D00647117 /* ImageError.png */,
+				398D24461D40D64D00647117 /* ImageError@2x.png */,
+				398D24471D40D64D00647117 /* ImageError@3x.png */,
+				398D24481D40D64D00647117 /* ImageSelectedOff.png */,
+				398D24491D40D64D00647117 /* ImageSelectedOff@2x.png */,
+				398D244A1D40D64D00647117 /* ImageSelectedOff@3x.png */,
+				398D244B1D40D64D00647117 /* ImageSelectedOn.png */,
+				398D244C1D40D64D00647117 /* ImageSelectedOn@2x.png */,
+				398D244D1D40D64D00647117 /* ImageSelectedOn@3x.png */,
+				398D244E1D40D64D00647117 /* ImageSelectedSmallOff.png */,
+				398D244F1D40D64D00647117 /* ImageSelectedSmallOff@2x.png */,
+				398D24501D40D64D00647117 /* ImageSelectedSmallOff@3x.png */,
+				398D24511D40D64D00647117 /* ImageSelectedSmallOn.png */,
+				398D24521D40D64D00647117 /* ImageSelectedSmallOn@2x.png */,
+				398D24531D40D64D00647117 /* ImageSelectedSmallOn@3x.png */,
+				398D24541D40D64D00647117 /* PlayButtonOverlayLarge.png */,
+				398D24551D40D64D00647117 /* PlayButtonOverlayLarge@2x.png */,
+				398D24561D40D64D00647117 /* PlayButtonOverlayLarge@3x.png */,
+				398D24571D40D64D00647117 /* PlayButtonOverlayLargeTap.png */,
+				398D24581D40D64D00647117 /* PlayButtonOverlayLargeTap@2x.png */,
+				398D24591D40D64D00647117 /* PlayButtonOverlayLargeTap@3x.png */,
+				398D245A1D40D64D00647117 /* UIBarButtonItemArrowLeft.png */,
+				398D245B1D40D64D00647117 /* UIBarButtonItemArrowLeft@2x.png */,
+				398D245C1D40D64D00647117 /* UIBarButtonItemArrowLeft@3x.png */,
+				398D245D1D40D64D00647117 /* UIBarButtonItemArrowRight.png */,
+				398D245E1D40D64D00647117 /* UIBarButtonItemArrowRight@2x.png */,
+				398D245F1D40D64D00647117 /* UIBarButtonItemArrowRight@3x.png */,
+				398D24601D40D64D00647117 /* UIBarButtonItemGrid.png */,
+				398D24611D40D64D00647117 /* UIBarButtonItemGrid@2x.png */,
+				398D24621D40D64D00647117 /* UIBarButtonItemGrid@3x.png */,
+				398D24631D40D64D00647117 /* VideoOverlay.png */,
+				398D24641D40D64D00647117 /* VideoOverlay@2x.png */,
+				398D24651D40D64D00647117 /* VideoOverlay@3x.png */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		398D24661D40D64D00647117 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				398D24671D40D64D00647117 /* MWCaptionView.h */,
+				398D24681D40D64D00647117 /* MWCaptionView.m */,
+				398D24691D40D64D00647117 /* MWCommon.h */,
+				398D246A1D40D64D00647117 /* MWGridCell.h */,
+				398D246B1D40D64D00647117 /* MWGridCell.m */,
+				398D246C1D40D64D00647117 /* MWGridViewController.h */,
+				398D246D1D40D64D00647117 /* MWGridViewController.m */,
+				398D246E1D40D64D00647117 /* MWPhoto.h */,
+				398D246F1D40D64D00647117 /* MWPhoto.m */,
+				398D24701D40D64D00647117 /* MWPhotoBrowser.h */,
+				398D24711D40D64D00647117 /* MWPhotoBrowser.m */,
+				398D24721D40D64D00647117 /* MWPhotoBrowserPrivate.h */,
+				398D24731D40D64D00647117 /* MWPhotoProtocol.h */,
+				398D24741D40D64D00647117 /* MWTapDetectingImageView.h */,
+				398D24751D40D64D00647117 /* MWTapDetectingImageView.m */,
+				398D24761D40D64D00647117 /* MWTapDetectingView.h */,
+				398D24771D40D64D00647117 /* MWTapDetectingView.m */,
+				398D24781D40D64D00647117 /* MWZoomingScrollView.h */,
+				398D24791D40D64D00647117 /* MWZoomingScrollView.m */,
+				398D247A1D40D64D00647117 /* UIImage+MWPhotoBrowser.h */,
+				398D247B1D40D64D00647117 /* UIImage+MWPhotoBrowser.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		398D24A61D40D65A00647117 /* MWPhotoBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				398D24441D40D64C00647117 /* Assets */,
+				398D24661D40D64D00647117 /* Classes */,
+			);
+			name = MWPhotoBrowser;
+			sourceTree = "<group>";
+		};
+		39D6342E1D40C86500CAA666 /* PhotoCropper */ = {
+			isa = PBXGroup;
+			children = (
+				396C0E751D40F90A009654EA /* Resources */,
+				39D6342F1D40C86500CAA666 /* PECropRectView.h */,
+				39D634301D40C86500CAA666 /* PECropRectView.m */,
+				39D634311D40C86500CAA666 /* PECropView.h */,
+				39D634321D40C86500CAA666 /* PECropView.m */,
+				39D634331D40C86500CAA666 /* PECropViewController.h */,
+				39D634341D40C86500CAA666 /* PECropViewController.m */,
+				39D634351D40C86500CAA666 /* PEResizeControl.h */,
+				39D634361D40C86500CAA666 /* PEResizeControl.m */,
+				39D634371D40C86500CAA666 /* UIImage+PECrop.h */,
+				39D634381D40C86500CAA666 /* UIImage+PECrop.m */,
+			);
+			path = PhotoCropper;
+			sourceTree = "<group>";
+		};
 		4C8670A663CEB02CAA8F6223 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				8404D5821D3E51BC00B2D325 /* MediaPlayer.framework */,
 				841FAE111D3CE26700772B23 /* Photos.framework */,
 				889DEECB1C98B90000726D83 /* MessageUI.framework */,
-				F03B672A3CAD95AD6DB192BE /* libPods-Spotlight.a */,
+				99D6E4F266EF6F424B0CD604 /* libPods-Spotlight.a */,
+				87A655F7E5723EA721F010C4 /* libPods-SpotlightTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		521BF6B11B45F7B248EE7844 /* Pods */ = {
+		6B5095DACED99AAA6294246B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				17139AE8364E5B9890F4FCBC /* Pods-Spotlight.debug.xcconfig */,
-				4FDDD1185B6B67FED774A599 /* Pods-Spotlight.release.xcconfig */,
+				4D49675B7178C092CA67749B /* Pods-Spotlight.debug.xcconfig */,
+				2361F9765AB807421C692532 /* Pods-Spotlight.release.xcconfig */,
+				C79FC9396B17349A00318887 /* Pods-SpotlightTests.debug.xcconfig */,
+				BA9E3123F18E0C8EC70D41FD /* Pods-SpotlightTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -294,6 +537,8 @@
 		84A234251D3F5F0D008AB7C0 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				398D24A61D40D65A00647117 /* MWPhotoBrowser */,
+				39D6342E1D40C86500CAA666 /* PhotoCropper */,
 				84A234261D3F5F0D008AB7C0 /* ELCImagePickerController */,
 			);
 			path = ThirdParty;
@@ -304,7 +549,6 @@
 			children = (
 				84A234271D3F5F0D008AB7C0 /* Classes */,
 				84A2343B1D3F5F0D008AB7C0 /* README.md */,
-				84A2343C1D3F5F0D008AB7C0 /* video_Icon.png */,
 			);
 			path = ELCImagePickerController;
 			sourceTree = "<group>";
@@ -340,6 +584,7 @@
 		84A234351D3F5F0D008AB7C0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				07FCD23B1D46019C0030E8DC /* video_Icon.png */,
 				84A234361D3F5F0D008AB7C0 /* ELCAlbumPickerController.xib */,
 				84A234371D3F5F0D008AB7C0 /* ELCAssetPicker.xib */,
 				84A234381D3F5F0D008AB7C0 /* ELCAssetTablePicker.xib */,
@@ -381,8 +626,8 @@
 				88A736D51B91318D00093B27 /* Products */,
 				88450BF91BC4CC30004BB6B4 /* Fabric.framework */,
 				88450BFA1BC4CC30004BB6B4 /* Crashlytics.framework */,
-				521BF6B11B45F7B248EE7844 /* Pods */,
 				4C8670A663CEB02CAA8F6223 /* Frameworks */,
+				6B5095DACED99AAA6294246B /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -575,12 +820,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 88A736F71B91318D00093B27 /* Build configuration list for PBXNativeTarget "Spotlight" */;
 			buildPhases = (
-				C44A0772023A2D7CE8F7F1D5 /* Check Pods Manifest.lock */,
+				827272A19971E22DF2FDBCA0 /* 📦 Check Pods Manifest.lock */,
 				88A736D01B91318D00093B27 /* Sources */,
 				88A736D11B91318D00093B27 /* Frameworks */,
 				88A736D21B91318D00093B27 /* Resources */,
-				1B0E6BB741D293639D84CBA3 /* Copy Pods Resources */,
 				8849A1E01B9FB6CA00511DD5 /* ShellScript */,
+				40F341607985E36E694A9D46 /* 📦 Embed Pods Frameworks */,
+				443E975FE080CA64F5F22E83 /* 📦 Copy Pods Resources */,
+				84E3570133E9EFCF61B15C3D /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -595,9 +842,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 88A736FA1B91318D00093B27 /* Build configuration list for PBXNativeTarget "SpotlightTests" */;
 			buildPhases = (
+				88A41C42EA56F7DCBC77812B /* 📦 Check Pods Manifest.lock */,
 				88A736E91B91318D00093B27 /* Sources */,
 				88A736EA1B91318D00093B27 /* Frameworks */,
 				88A736EB1B91318D00093B27 /* Resources */,
+				4B3C085835A2F4BCC02C6804 /* 📦 Embed Pods Frameworks */,
+				354FEF177982B23F150F67E6 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -658,38 +908,79 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84B0066A1D45F2320040E778 /* (null) in Resources */,
 				88BDFC6A1BFD53BD007A3EBB /* gb.png in Resources */,
 				889DEEC81C97370100726D83 /* heart.png in Resources */,
+				398D24921D40D64D00647117 /* UIBarButtonItemArrowLeft@2x.png in Resources */,
+				398D24961D40D64D00647117 /* UIBarButtonItemArrowRight@3x.png in Resources */,
+				398D24891D40D64D00647117 /* ImageSelectedSmallOn@2x.png in Resources */,
 				883265491C8F79E80063D1F9 /* DT_TheDUFF_EverySingleNight_INST_125.mp3 in Resources */,
+				398D24981D40D64D00647117 /* UIBarButtonItemGrid@2x.png in Resources */,
 				88FDB8941C8EA2A1008C9A3D /* DT_TheDuff_CoolKids_INST130.mp3 in Resources */,
+				398D24811D40D64D00647117 /* ImageSelectedOff@3x.png in Resources */,
+				398D249B1D40D64D00647117 /* VideoOverlay@2x.png in Resources */,
+				398D249A1D40D64D00647117 /* VideoOverlay.png in Resources */,
+				398D24881D40D64D00647117 /* ImageSelectedSmallOn.png in Resources */,
 				84A234421D3F5F0D008AB7C0 /* ELCAlbumPickerController.xib in Resources */,
+				398D24931D40D64D00647117 /* UIBarButtonItemArrowLeft@3x.png in Resources */,
 				84A234451D3F5F0D008AB7C0 /* Overlay.png in Resources */,
-				84A234481D3F5F0D008AB7C0 /* video_Icon.png in Resources */,
 				88A736E31B91318D00093B27 /* Main.storyboard in Resources */,
 				88A736E81B91318D00093B27 /* LaunchScreen.xib in Resources */,
+				07FCD23C1D46019C0030E8DC /* video_Icon.png in Resources */,
+				396C0E771D40F90A009654EA /* PEPhotoCropEditor.bundle in Resources */,
+				398D24871D40D64D00647117 /* ImageSelectedSmallOff@3x.png in Resources */,
+				39574E261D4220B70059029C /* upload@2x.png in Resources */,
 				8893FD731BFC1C4600711779 /* profile@3x.png in Resources */,
+				398D248F1D40D64D00647117 /* PlayButtonOverlayLargeTap@2x.png in Resources */,
+				39574E221D421FD30059029C /* delete@2x.png in Resources */,
+				398D24971D40D64D00647117 /* UIBarButtonItemGrid.png in Resources */,
+				398D24911D40D64D00647117 /* UIBarButtonItemArrowLeft.png in Resources */,
 				88EC50281C0DCC2C00077E85 /* unknown_user.png in Resources */,
 				88E98E891BAF508400292B14 /* Softball.JPG in Resources */,
 				889DEED01C98E6E100726D83 /* spotlightWriting.png in Resources */,
 				8893FD771BFC1E0400711779 /* teams@3x.png in Resources */,
 				84A234461D3F5F0D008AB7C0 /* Overlay@2x.png in Resources */,
 				84A234441D3F5F0D008AB7C0 /* ELCAssetTablePicker.xib in Resources */,
+				398D248D1D40D64D00647117 /* PlayButtonOverlayLarge@3x.png in Resources */,
+				398D24841D40D64D00647117 /* ImageSelectedOn@3x.png in Resources */,
+				398D247C1D40D64D00647117 /* ImageError.png in Resources */,
 				88E98E8B1BAF508400292B14 /* fielding ground ball.jpg in Resources */,
 				88BDFC651BFD4FD2007A3EBB /* BasicHeaderView.xib in Resources */,
+				398D24901D40D64D00647117 /* PlayButtonOverlayLargeTap@3x.png in Resources */,
 				889DEECA1C97370100726D83 /* heart@3x.png in Resources */,
 				88E953431BEB7FDF0094F73D /* Conference_call-100.png in Resources */,
 				88A736E51B91318D00093B27 /* Images.xcassets in Resources */,
+				398D248E1D40D64D00647117 /* PlayButtonOverlayLargeTap.png in Resources */,
+				398D247F1D40D64D00647117 /* ImageSelectedOff.png in Resources */,
+				398D248B1D40D64D00647117 /* PlayButtonOverlayLarge.png in Resources */,
+				398D24951D40D64D00647117 /* UIBarButtonItemArrowRight@2x.png in Resources */,
 				88E98E8A1BAF508400292B14 /* hockey.jpg in Resources */,
 				88E953411BEB7ED50094F73D /* Contacts-50.png in Resources */,
 				884250B21C18929B009034A6 /* spotlight_logo.png in Resources */,
 				88FDB88E1C8EA2A1008C9A3D /* TB - Disney Funk 124bpm.mp3 in Resources */,
+				398D249C1D40D64D00647117 /* VideoOverlay@3x.png in Resources */,
+				39574E231D421FD30059029C /* delete@3x.png in Resources */,
+				398D24861D40D64D00647117 /* ImageSelectedSmallOff@2x.png in Resources */,
 				84A234431D3F5F0D008AB7C0 /* ELCAssetPicker.xib in Resources */,
+				39574E1F1D420F050059029C /* edit@2x.png in Resources */,
+				398D24851D40D64D00647117 /* ImageSelectedSmallOff.png in Resources */,
+				398D24821D40D64D00647117 /* ImageSelectedOn.png in Resources */,
+				398D247D1D40D64D00647117 /* ImageError@2x.png in Resources */,
+				398D247E1D40D64D00647117 /* ImageError@3x.png in Resources */,
 				8832654B1C8F79F80063D1F9 /* DT_TheDuff_Ready2Go_128_INST.mp3 in Resources */,
 				88EC50261C0DC98D00077E85 /* icon-edit-avatar@2x.png in Resources */,
+				39574E1E1D420F050059029C /* edit@3x.png in Resources */,
+				398D24801D40D64D00647117 /* ImageSelectedOff@2x.png in Resources */,
 				8893FD751BFC1CF600711779 /* friends@3x.png in Resources */,
+				398D24991D40D64D00647117 /* UIBarButtonItemGrid@3x.png in Resources */,
+				398D24831D40D64D00647117 /* ImageSelectedOn@2x.png in Resources */,
+				398D248C1D40D64D00647117 /* PlayButtonOverlayLarge@2x.png in Resources */,
 				889DEEC91C97370100726D83 /* heart@2x.png in Resources */,
+				398D248A1D40D64D00647117 /* ImageSelectedSmallOn@3x.png in Resources */,
 				8893FD711BFC1B5900711779 /* spotlight@3x.png in Resources */,
+				39574E271D4220B70059029C /* upload@3x.png in Resources */,
 				88CAE8D71BFB9AF30099A733 /* landingBg.jpg in Resources */,
+				398D24941D40D64D00647117 /* UIBarButtonItemArrowRight.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -703,19 +994,94 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1B0E6BB741D293639D84CBA3 /* Copy Pods Resources */ = {
+		354FEF177982B23F150F67E6 /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SpotlightTests/Pods-SpotlightTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		40F341607985E36E694A9D46 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Spotlight/Pods-Spotlight-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		443E975FE080CA64F5F22E83 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Spotlight/Pods-Spotlight-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4B3C085835A2F4BCC02C6804 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SpotlightTests/Pods-SpotlightTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		827272A19971E22DF2FDBCA0 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		84E3570133E9EFCF61B15C3D /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Spotlight/Pods-Spotlight-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8849A1E01B9FB6CA00511DD5 /* ShellScript */ = {
@@ -731,14 +1097,14 @@
 			shellPath = /bin/sh;
 			shellScript = "./Fabric.framework/run 1f3dc97cb296c416a691168cae8634f266e98641 ca2e2e6269a77a78e209a012d8dd69f84b0edbd92ebb3f443d2a6f08938ae991";
 		};
-		C44A0772023A2D7CE8F7F1D5 /* Check Pods Manifest.lock */ = {
+		88A41C42EA56F7DCBC77812B /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -758,12 +1124,17 @@
 				88EE2CC61B9E08B2002DDB99 /* SpotlightFeedViewController.m in Sources */,
 				88EC502B1C0DCE5200077E85 /* ProfilePictureMedia.m in Sources */,
 				88E953461BEB8B7D0094F73D /* FriendsTableViewController.m in Sources */,
+				39D6343C1D40C86500CAA666 /* PEResizeControl.m in Sources */,
+				398D24A51D40D64D00647117 /* UIImage+MWPhotoBrowser.m in Sources */,
 				84A234411D3F5F0D008AB7C0 /* ELCImagePickerController.m in Sources */,
 				846F75B01D40D41B00B5120E /* TeamRequest.m in Sources */,
 				84A234401D3F5F0D008AB7C0 /* ELCAssetTablePicker.m in Sources */,
 				8849A1E91BA2590800511DD5 /* IntroViewController.m in Sources */,
 				8893FD7D1BFD1FCB00711779 /* FieldEntryTableViewCell.m in Sources */,
 				8493C2551D40FF85004F694F /* PendingRequestTableViewController.m in Sources */,
+				39D634391D40C86500CAA666 /* PECropRectView.m in Sources */,
+				398D24A31D40D64D00647117 /* MWTapDetectingView.m in Sources */,
+				398D249F1D40D64D00647117 /* MWGridViewController.m in Sources */,
 				88BDFC5A1BFD33E0007A3EBB /* TeamsTableViewController.m in Sources */,
 				88E9E8F61BD5791E0065AA0C /* SpotlightMedia.m in Sources */,
 				88BDFC7C1BFF8ABB007A3EBB /* SpotlightMediaCollectionViewCell.m in Sources */,
@@ -773,6 +1144,7 @@
 				88BDFC5D1BFD3635007A3EBB /* TeamTableViewCell.m in Sources */,
 				88BDFC681BFD5034007A3EBB /* BasicHeaderView.m in Sources */,
 				88BDFC601BFD4602007A3EBB /* ProfileTableViewController.m in Sources */,
+				398D249D1D40D64D00647117 /* MWCaptionView.m in Sources */,
 				883D63F91C0719E300AE99CC /* TeamLogoMedia.m in Sources */,
 				884250AD1C173076009034A6 /* TeamDetailsViewController.m in Sources */,
 				88E9E8F91BD5C46D0065AA0C /* SpotlightTableViewCell.m in Sources */,
@@ -781,6 +1153,7 @@
 				887EC7621C6974ED001DBDB3 /* FriendFinderTableViewController.m in Sources */,
 				88BDFC761BFF70E6007A3EBB /* CreateSpotlightTableViewController.m in Sources */,
 				880726F61C778F0400F2C1B9 /* TeamFinderTableViewController.m in Sources */,
+				39D6343B1D40C86500CAA666 /* PECropViewController.m in Sources */,
 				88E9E8FF1BD6A6470065AA0C /* SpotlightMediaTableViewCell.m in Sources */,
 				880207A41C15DF7A002D5068 /* MontageCreator.m in Sources */,
 				88EC502E1C0E041F00077E85 /* FriendTableViewCell.m in Sources */,
@@ -788,15 +1161,22 @@
 				84A2343F1D3F5F0D008AB7C0 /* ELCAssetCell.m in Sources */,
 				88BDFC731BFF6A38007A3EBB /* TeamSelectTableViewController.m in Sources */,
 				88BDFC701BFD60B5007A3EBB /* SpotlightCollectionViewController.m in Sources */,
+				39D6343A1D40C86500CAA666 /* PECropView.m in Sources */,
+				398D24A41D40D64D00647117 /* MWZoomingScrollView.m in Sources */,
 				88BDFC521BFD22B8007A3EBB /* CreateTeamTableViewController.m in Sources */,
 				887EC7651C697778001DBDB3 /* CreateFamilyMemberTableViewController.m in Sources */,
 				8849A1E31BA0CB8400511DD5 /* SignUpTableViewController.m in Sources */,
 				8893FD7A1BFCCC2100711779 /* Team.m in Sources */,
 				84A2343E1D3F5F0D008AB7C0 /* ELCAsset.m in Sources */,
+				398D249E1D40D64D00647117 /* MWGridCell.m in Sources */,
 				884250B01C1736D7009034A6 /* SpotlightDataSource.m in Sources */,
+				398D24A11D40D64D00647117 /* MWPhotoBrowser.m in Sources */,
+				39D6343D1D40C86500CAA666 /* UIImage+PECrop.m in Sources */,
 				8849A1E61BA0CC7A00511DD5 /* SignUpInputTableViewCell.m in Sources */,
+				398D24A21D40D64D00647117 /* MWTapDetectingImageView.m in Sources */,
 				84A2343D1D3F5F0D008AB7C0 /* ELCAlbumPickerController.m in Sources */,
 				88EC50241C0DB72500077E85 /* FriendProfileViewController.m in Sources */,
+				398D24A01D40D64D00647117 /* MWPhoto.m in Sources */,
 				880054EE1C6B9E8C0034D639 /* ChildTableViewCell.m in Sources */,
 				84A234471D3F5F0D008AB7C0 /* README.md in Sources */,
 				883D63F41C07151700AE99CC /* MediaObject.m in Sources */,
@@ -858,8 +1238,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ajeet Singh (VH76Y7WGDN)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ajeet Singh (VH76Y7WGDN)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -882,7 +1262,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "d185da62-45e2-4e90-8a78-f424e6c07ddb";
+				PROVISIONING_PROFILE = "8cd4d716-2b6c-4f4e-bf2a-dbeeca18397d";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -905,8 +1285,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ajeet Singh (VH76Y7WGDN)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ajeet Singh (VH76Y7WGDN)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -921,7 +1301,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "d185da62-45e2-4e90-8a78-f424e6c07ddb";
+				PROVISIONING_PROFILE = "8cd4d716-2b6c-4f4e-bf2a-dbeeca18397d";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -930,12 +1310,12 @@
 		};
 		88A736F81B91318D00093B27 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 17139AE8364E5B9890F4FCBC /* Pods-Spotlight.debug.xcconfig */;
+			baseConfigurationReference = 4D49675B7178C092CA67749B /* Pods-Spotlight.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ajeet Singh (VH76Y7WGDN)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ajeet Singh (VH76Y7WGDN)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -943,22 +1323,23 @@
 				INFOPLIST_FILE = Spotlight/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.myspotlight.spotlight;
+				PRODUCT_BUNDLE_IDENTIFIER = com.spotlight.info;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d185da62-45e2-4e90-8a78-f424e6c07ddb";
+				PROVISIONING_PROFILE = "8cd4d716-2b6c-4f4e-bf2a-dbeeca18397d";
 				SWIFT_OBJC_BRIDGING_HEADER = "Spotlight/Spotlight-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		88A736F91B91318D00093B27 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4FDDD1185B6B67FED774A599 /* Pods-Spotlight.release.xcconfig */;
+			baseConfigurationReference = 2361F9765AB807421C692532 /* Pods-Spotlight.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ajeet Singh (VH76Y7WGDN)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ajeet Singh (VH76Y7WGDN)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -966,19 +1347,21 @@
 				INFOPLIST_FILE = Spotlight/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.myspotlight.spotlight;
+				PRODUCT_BUNDLE_IDENTIFIER = com.spotlight.info;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d185da62-45e2-4e90-8a78-f424e6c07ddb";
+				PROVISIONING_PROFILE = "8cd4d716-2b6c-4f4e-bf2a-dbeeca18397d";
 				SWIFT_OBJC_BRIDGING_HEADER = "Spotlight/Spotlight-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
 		88A736FB1B91318D00093B27 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C79FC9396B17349A00318887 /* Pods-SpotlightTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ajeet Singh (VH76Y7WGDN)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ajeet Singh (VH76Y7WGDN)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -991,17 +1374,18 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.spotlight.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d185da62-45e2-4e90-8a78-f424e6c07ddb";
+				PROVISIONING_PROFILE = "8cd4d716-2b6c-4f4e-bf2a-dbeeca18397d";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Spotlight.app/Spotlight";
 			};
 			name = Debug;
 		};
 		88A736FC1B91318D00093B27 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BA9E3123F18E0C8EC70D41FD /* Pods-SpotlightTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ajeet Singh (VH76Y7WGDN)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ajeet Singh (VH76Y7WGDN)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -1010,7 +1394,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.spotlight.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d185da62-45e2-4e90-8a78-f424e6c07ddb";
+				PROVISIONING_PROFILE = "8cd4d716-2b6c-4f4e-bf2a-dbeeca18397d";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Spotlight.app/Spotlight";
 			};
 			name = Release;

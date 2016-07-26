@@ -29,10 +29,30 @@
     [self.profilePic.layer setCornerRadius:self.profilePic.bounds.size.width/2];
     [self.profilePic setClipsToBounds:YES];
     NSString *requestText;
-    if(name == nil ){
-        requestText =   [NSString stringWithFormat:@"This wants to follow %@",teamName];
-    }else{
-        requestText =   [NSString stringWithFormat:@"%@ wants to follow %@",name,teamName];
+   
+    if(name != nil ){
+        
+        if( [name isEqualToString:@"(null) (null)"]){
+            NSString  *str =  [[name stringByReplacingOccurrencesOfString:@"(null) (null)"
+                                                               withString:@"This"] mutableCopy];
+            
+            requestText =   [NSString stringWithFormat:@"%@ wants to follow %@",str,teamName];
+        }
+        
+        else if([name isEqualToString:@" "]){
+         
+            
+            requestText =   [NSString stringWithFormat:@"This wants to follow %@",teamName];
+
+        }
+        
+        else{
+            NSString  *str =  [[name stringByReplacingOccurrencesOfString:@"(null)"
+                                                               withString:@""] mutableCopy];
+
+            requestText =   [NSString stringWithFormat:@"%@ wants to follow %@",str,teamName];
+        }
+     
     }
  
     

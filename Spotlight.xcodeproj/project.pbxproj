@@ -78,7 +78,7 @@
 		84A234451D3F5F0D008AB7C0 /* Overlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A234391D3F5F0D008AB7C0 /* Overlay.png */; };
 		84A234461D3F5F0D008AB7C0 /* Overlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A2343A1D3F5F0D008AB7C0 /* Overlay@2x.png */; };
 		84A234471D3F5F0D008AB7C0 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 84A2343B1D3F5F0D008AB7C0 /* README.md */; };
-		84A234481D3F5F0D008AB7C0 /* video_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A2343C1D3F5F0D008AB7C0 /* video_Icon.png */; };
+		84B0066A1D45F2320040E778 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		84B52BD41D41F43D005995AC /* PendingRequestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B52BD31D41F43D005995AC /* PendingRequestTableViewCell.m */; };
 		880054EA1C6B8D630034D639 /* Child.m in Sources */ = {isa = PBXBuildFile; fileRef = 880054E91C6B8D630034D639 /* Child.m */; };
 		880054EE1C6B9E8C0034D639 /* ChildTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 880054ED1C6B9E8C0034D639 /* ChildTableViewCell.m */; };
@@ -260,9 +260,9 @@
 		84A234391D3F5F0D008AB7C0 /* Overlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Overlay.png; sourceTree = "<group>"; };
 		84A2343A1D3F5F0D008AB7C0 /* Overlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Overlay@2x.png"; sourceTree = "<group>"; };
 		84A2343B1D3F5F0D008AB7C0 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		84A2343C1D3F5F0D008AB7C0 /* video_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = video_Icon.png; sourceTree = "<group>"; };
 		84B52BD21D41F43D005995AC /* PendingRequestTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PendingRequestTableViewCell.h; sourceTree = "<group>"; };
 		84B52BD31D41F43D005995AC /* PendingRequestTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PendingRequestTableViewCell.m; sourceTree = "<group>"; };
+		87A655F7E5723EA721F010C4 /* libPods-SpotlightTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SpotlightTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		880054E81C6B8D630034D639 /* Child.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Child.h; sourceTree = "<group>"; };
 		880054E91C6B8D630034D639 /* Child.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Child.m; sourceTree = "<group>"; };
 		880054EC1C6B9E8C0034D639 /* ChildTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildTableViewCell.h; sourceTree = "<group>"; };
@@ -1132,6 +1132,9 @@
 				8849A1E91BA2590800511DD5 /* IntroViewController.m in Sources */,
 				8893FD7D1BFD1FCB00711779 /* FieldEntryTableViewCell.m in Sources */,
 				8493C2551D40FF85004F694F /* PendingRequestTableViewController.m in Sources */,
+				39D634391D40C86500CAA666 /* PECropRectView.m in Sources */,
+				398D24A31D40D64D00647117 /* MWTapDetectingView.m in Sources */,
+				398D249F1D40D64D00647117 /* MWGridViewController.m in Sources */,
 				88BDFC5A1BFD33E0007A3EBB /* TeamsTableViewController.m in Sources */,
 				88E9E8F61BD5791E0065AA0C /* SpotlightMedia.m in Sources */,
 				88BDFC7C1BFF8ABB007A3EBB /* SpotlightMediaCollectionViewCell.m in Sources */,
@@ -1235,8 +1238,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ajeet Singh (VH76Y7WGDN)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ajeet Singh (VH76Y7WGDN)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1259,7 +1262,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "d185da62-45e2-4e90-8a78-f424e6c07ddb";
+				PROVISIONING_PROFILE = "8cd4d716-2b6c-4f4e-bf2a-dbeeca18397d";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1282,8 +1285,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ajeet Singh (VH76Y7WGDN)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ajeet Singh (VH76Y7WGDN)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1298,7 +1301,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "d185da62-45e2-4e90-8a78-f424e6c07ddb";
+				PROVISIONING_PROFILE = "8cd4d716-2b6c-4f4e-bf2a-dbeeca18397d";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -1311,8 +1314,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ajeet Singh (VH76Y7WGDN)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ajeet Singh (VH76Y7WGDN)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1320,9 +1323,9 @@
 				INFOPLIST_FILE = Spotlight/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.myspotlight.spotlight;
+				PRODUCT_BUNDLE_IDENTIFIER = com.spotlight.info;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d185da62-45e2-4e90-8a78-f424e6c07ddb";
+				PROVISIONING_PROFILE = "8cd4d716-2b6c-4f4e-bf2a-dbeeca18397d";
 				SWIFT_OBJC_BRIDGING_HEADER = "Spotlight/Spotlight-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1335,8 +1338,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ajeet Singh (VH76Y7WGDN)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ajeet Singh (VH76Y7WGDN)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1344,9 +1347,9 @@
 				INFOPLIST_FILE = Spotlight/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.myspotlight.spotlight;
+				PRODUCT_BUNDLE_IDENTIFIER = com.spotlight.info;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d185da62-45e2-4e90-8a78-f424e6c07ddb";
+				PROVISIONING_PROFILE = "8cd4d716-2b6c-4f4e-bf2a-dbeeca18397d";
 				SWIFT_OBJC_BRIDGING_HEADER = "Spotlight/Spotlight-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1357,8 +1360,8 @@
 			baseConfigurationReference = C79FC9396B17349A00318887 /* Pods-SpotlightTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ajeet Singh (VH76Y7WGDN)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ajeet Singh (VH76Y7WGDN)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -1371,7 +1374,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.spotlight.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d185da62-45e2-4e90-8a78-f424e6c07ddb";
+				PROVISIONING_PROFILE = "8cd4d716-2b6c-4f4e-bf2a-dbeeca18397d";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Spotlight.app/Spotlight";
 			};
 			name = Debug;
@@ -1381,8 +1384,8 @@
 			baseConfigurationReference = BA9E3123F18E0C8EC70D41FD /* Pods-SpotlightTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ajeet Singh (VH76Y7WGDN)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ajeet Singh (VH76Y7WGDN)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -1391,7 +1394,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.spotlight.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d185da62-45e2-4e90-8a78-f424e6c07ddb";
+				PROVISIONING_PROFILE = "8cd4d716-2b6c-4f4e-bf2a-dbeeca18397d";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Spotlight.app/Spotlight";
 			};
 			name = Release;

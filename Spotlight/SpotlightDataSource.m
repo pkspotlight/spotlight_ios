@@ -311,12 +311,13 @@
     if([alertView.accessibilityValue isEqualToString:@"Delete"]){
         if(buttonIndex ==0){
             Spotlight *spotlight = [self.spotlights objectAtIndex:alertView.tag];
-            MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication].delegate window] animated:YES];
-            [hud setLabelText:@"Deleting Spotlight..."];
+//            MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication].delegate window] animated:YES];
+//            [hud setLabelText:@"Deleting Spotlight..."];
             
             [spotlight deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                 if(succeeded){
-                    [self.delegate spotlightDeleted:hud];
+                     [[NSNotificationCenter defaultCenter] postNotificationName:@"SpotLightRefersh" object:nil];
+                   // [self.delegate spotlightDeleted:hud];
                 }
             }];
         }

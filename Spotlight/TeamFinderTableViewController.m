@@ -15,7 +15,9 @@
 #import "Team.h"
 
 @interface TeamFinderTableViewController()
-
+{
+    UIRefreshControl* refresh;
+}
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @property (strong, nonatomic) NSArray* searchResults;
@@ -28,10 +30,9 @@
     [super viewDidLoad];
     [self.tableView registerNib:[UINib nibWithNibName:@"BasicHeaderView" bundle:nil]
 forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
-    UIRefreshControl* refresh = [[UIRefreshControl alloc] init];
+    refresh = [[UIRefreshControl alloc] init];
     [refresh addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     [self setRefreshControl:refresh];
-    [refresh beginRefreshing];
     self.hideKeyboardTap = [[UITapGestureRecognizer alloc]
                             initWithTarget:self
                             action:@selector(dismissKeyboard)];
@@ -73,6 +74,9 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     NSString *searchText = [self.searchBar.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
     if (![searchText isEqualToString:@""]) {
+        
+        [refresh beginRefreshing];
+        
         PFQuery *firstQuery = [Team query];
         PFQuery *secondQuery = [Team query];
         
@@ -97,6 +101,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
             } else {
                 
             }
+            [refresh endRefreshing];
         }];
     }
 }
@@ -104,6 +109,8 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 -(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     self.searchResults = @[];
     [self.tableView reloadData];
+    [refresh endRefreshing];
+
 }
 
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {

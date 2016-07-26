@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="hOq-mx-7hw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="hOq-mx-7hw">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -787,10 +787,10 @@
                         <viewControllerLayoutGuide type="bottom" id="u0L-dv-84F"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="HYy-yF-zdT">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="352"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TOd-AQ-irE">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TOd-AQ-irE">
                                 <rect key="frame" x="0.0" y="64" width="600" height="248"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unknown_user.png" translatesAutoresizingMaskIntoConstraints="NO" id="ENb-YQ-djp">
@@ -844,13 +844,13 @@
                                     <constraint firstAttribute="trailing" secondItem="5s6-aT-kQP" secondAttribute="trailing" constant="8" id="zmX-we-jFV"/>
                                 </constraints>
                             </view>
-                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iR0-Zd-32o" userLabel="Team Member Container View">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iR0-Zd-32o" userLabel="Team Member Container View">
                                 <rect key="frame" x="0.0" y="312" width="600" height="288"/>
                                 <connections>
                                     <segue destination="KaG-P1-Sfy" kind="embed" identifier="teamMemberEmbedSegue" id="5wK-cZ-7Zv"/>
                                 </connections>
                             </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wml-en-gDZ" userLabel="Spotlight Container View">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wml-en-gDZ" userLabel="Spotlight Container View">
                                 <rect key="frame" x="0.0" y="312" width="600" height="288"/>
                                 <connections>
                                     <segue destination="8hb-z5-ol4" kind="embed" identifier="EmbedSpotlightDataSource" id="KDg-Dy-czv"/>

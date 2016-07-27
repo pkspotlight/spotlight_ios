@@ -1220,8 +1220,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ajeet Singh (VH76Y7WGDN)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ajeet Singh (VH76Y7WGDN)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1244,7 +1244,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "d185da62-45e2-4e90-8a78-f424e6c07ddb";
+				PROVISIONING_PROFILE = "8cd4d716-2b6c-4f4e-bf2a-dbeeca18397d";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1267,8 +1267,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ajeet Singh (VH76Y7WGDN)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ajeet Singh (VH76Y7WGDN)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1283,7 +1283,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "d185da62-45e2-4e90-8a78-f424e6c07ddb";
+				PROVISIONING_PROFILE = "8cd4d716-2b6c-4f4e-bf2a-dbeeca18397d";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -1296,8 +1296,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ajeet Singh (VH76Y7WGDN)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ajeet Singh (VH76Y7WGDN)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1305,9 +1305,9 @@
 				INFOPLIST_FILE = Spotlight/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.myspotlight.spotlight;
+				PRODUCT_BUNDLE_IDENTIFIER = com.spotlight.info;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d185da62-45e2-4e90-8a78-f424e6c07ddb";
+				PROVISIONING_PROFILE = "8cd4d716-2b6c-4f4e-bf2a-dbeeca18397d";
 				SWIFT_OBJC_BRIDGING_HEADER = "Spotlight/Spotlight-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1320,8 +1320,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ajeet Singh (VH76Y7WGDN)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ajeet Singh (VH76Y7WGDN)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1329,9 +1329,9 @@
 				INFOPLIST_FILE = Spotlight/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.myspotlight.spotlight;
+				PRODUCT_BUNDLE_IDENTIFIER = com.spotlight.info;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d185da62-45e2-4e90-8a78-f424e6c07ddb";
+				PROVISIONING_PROFILE = "8cd4d716-2b6c-4f4e-bf2a-dbeeca18397d";
 				SWIFT_OBJC_BRIDGING_HEADER = "Spotlight/Spotlight-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1342,8 +1342,8 @@
 			baseConfigurationReference = C79FC9396B17349A00318887 /* Pods-SpotlightTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ajeet Singh (VH76Y7WGDN)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ajeet Singh (VH76Y7WGDN)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -1356,7 +1356,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.spotlight.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d185da62-45e2-4e90-8a78-f424e6c07ddb";
+				PROVISIONING_PROFILE = "8cd4d716-2b6c-4f4e-bf2a-dbeeca18397d";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Spotlight.app/Spotlight";
 			};
 			name = Debug;
@@ -1366,8 +1366,8 @@
 			baseConfigurationReference = BA9E3123F18E0C8EC70D41FD /* Pods-SpotlightTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ajeet Singh (VH76Y7WGDN)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ajeet Singh (VH76Y7WGDN)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -1376,7 +1376,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.spotlight.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d185da62-45e2-4e90-8a78-f424e6c07ddb";
+				PROVISIONING_PROFILE = "8cd4d716-2b6c-4f4e-bf2a-dbeeca18397d";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Spotlight.app/Spotlight";
 			};
 			name = Release;

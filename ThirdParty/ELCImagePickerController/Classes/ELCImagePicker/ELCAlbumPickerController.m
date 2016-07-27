@@ -127,7 +127,7 @@
     
     // Get count
     ALAssetsGroup *g = (ALAssetsGroup*)[self.assetGroups objectAtIndex:indexPath.row];
-    [g setAssetsFilter:[ALAssetsFilter allAssets]];
+    [g setAssetsFilter:[ALAssetsFilter allPhotos]];
     NSInteger gCount = [g numberOfAssets];
     
     cell.textLabel.text = [NSString stringWithFormat:@"%@ (%ld)",[g valueForProperty:ALAssetsGroupPropertyName], (long)gCount];
@@ -146,7 +146,7 @@
 	picker.parent = self;
 
     picker.assetGroup = [self.assetGroups objectAtIndex:indexPath.row];
-    [picker.assetGroup setAssetsFilter:[ALAssetsFilter allAssets]];
+    [picker.assetGroup setAssetsFilter:[ALAssetsFilter allPhotos]];
     
 	picker.assetPickerFilterDelegate = self.assetPickerFilterDelegate;
 	

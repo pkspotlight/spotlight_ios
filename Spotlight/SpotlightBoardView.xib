@@ -11,47 +11,52 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AQ2-hP-bVs">
+                <button opaque="NO" alpha="0.29999999999999999" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AQ2-hP-bVs">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <state key="normal" title="Button"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <action selector="removeSpotlightBoardingView:" destination="iN0-l3-epB" eventType="touchUpInside" id="Kk4-vC-iP9"/>
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yzP-7W-mNE">
-                    <rect key="frame" x="2" y="242" width="371" height="183"/>
+                    <rect key="frame" x="2" y="300" width="371" height="125"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u8f-E2-pQx">
-                            <rect key="frame" x="10" y="10" width="351" height="21"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u8f-E2-pQx">
+                            <rect key="frame" x="10" y="8" width="351" height="107"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="u8f-E2-pQx" secondAttribute="bottom" constant="152" id="1cG-Ah-3RM"/>
-                        <constraint firstItem="u8f-E2-pQx" firstAttribute="top" secondItem="yzP-7W-mNE" secondAttribute="top" constant="10" id="1dg-b5-e9E"/>
+                        <constraint firstAttribute="bottom" secondItem="u8f-E2-pQx" secondAttribute="bottom" constant="10" id="1cG-Ah-3RM"/>
+                        <constraint firstItem="u8f-E2-pQx" firstAttribute="top" secondItem="yzP-7W-mNE" secondAttribute="top" constant="8" id="1dg-b5-e9E"/>
                         <constraint firstItem="u8f-E2-pQx" firstAttribute="leading" secondItem="yzP-7W-mNE" secondAttribute="leading" constant="10" id="PMh-h7-QYn"/>
                         <constraint firstAttribute="trailing" secondItem="u8f-E2-pQx" secondAttribute="trailing" constant="10" id="veg-ns-w1F"/>
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="AQ2-hP-bVs" secondAttribute="trailing" id="3Ft-6T-MdS"/>
                 <constraint firstAttribute="bottom" secondItem="AQ2-hP-bVs" secondAttribute="bottom" id="5Y9-VC-gTV"/>
                 <constraint firstItem="yzP-7W-mNE" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="LCF-rC-A15"/>
-                <constraint firstItem="yzP-7W-mNE" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="242" id="RDx-j0-zwn"/>
+                <constraint firstItem="yzP-7W-mNE" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="300" id="RDx-j0-zwn"/>
                 <constraint firstItem="AQ2-hP-bVs" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="eWt-bX-kLs"/>
                 <constraint firstItem="AQ2-hP-bVs" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="gN4-5h-oTG"/>
                 <constraint firstItem="yzP-7W-mNE" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="jCU-uu-1Hx"/>
                 <constraint firstItem="yzP-7W-mNE" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="2" id="phx-3B-3dT"/>
+                <constraint firstAttribute="bottom" secondItem="yzP-7W-mNE" secondAttribute="bottom" constant="242" id="utT-F7-E7A"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="LCF-rC-A15"/>
+                </mask>
+            </variation>
             <connections>
                 <outlet property="spotLightScreenDetail" destination="u8f-E2-pQx" id="cJq-IW-73K"/>
+                <outlet property="spotLightScreenView" destination="yzP-7W-mNE" id="BLz-Th-lwS"/>
             </connections>
         </view>
     </objects>

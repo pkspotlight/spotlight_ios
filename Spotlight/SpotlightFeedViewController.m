@@ -55,16 +55,20 @@
 
 -(void)addSpotlightScreenBoardingPopUp{
     
-    if([[NSUserDefaults standardUserDefaults] boolForKey:@"SpotlightPopUp"] == FALSE)
-    {
-        
+//    if([[NSUserDefaults standardUserDefaults] boolForKey:@"SpotlightPopUp"] == FALSE)
+//    {
+    
         SpotlightBoardView *spotlightBoardingView = [[[NSBundle mainBundle] loadNibNamed:@"SpotlightBoardView" owner:self options:nil] objectAtIndex:0];
         spotlightBoardingView.spotLightScreenDetail.text = SpotlightFeedBoardingText;
+        spotlightBoardingView.frame = CGRectMake(0, 0,[[UIApplication sharedApplication].delegate window].frame.size.width,[[UIApplication sharedApplication].delegate window].frame.size.height);
+    
         [ [[UIApplication sharedApplication].delegate window] addSubview:spotlightBoardingView];
+    spotlightBoardingView.translatesAutoresizingMaskIntoConstraints = true;
+    [spotlightBoardingView.superview layoutIfNeeded];
         [[NSUserDefaults standardUserDefaults] setBool:TRUE forKey:@"SpotlightPopUp"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         //Alert code will go here...
-    }
+    //}
     
 }
 

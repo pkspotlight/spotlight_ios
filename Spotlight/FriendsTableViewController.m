@@ -16,7 +16,9 @@
 #import "Team.h"
 #import "Child.h"
 #import "BasicHeaderView.h"
-#define SpotlightFriendsBoardingText @"Thisn is where you can find all of the team that you are interested in.Search for existing team by clicking the "+" or create your own!"
+#import "SpotlightBoardView.h"
+
+#define SpotlightFriendsBoardingText @"Thisn is where you can find all of the team that you are interested in.Search for existing team by clicking the '+' or create your own!"
 static CGFloat const BasicHeaderHeight = 50;
 
 
@@ -36,6 +38,7 @@ static CGFloat const BasicHeaderHeight = 50;
      registerNib:[UINib nibWithNibName:@"BasicHeaderView" bundle:nil]
      forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     self.refreshControl = [[UIRefreshControl alloc] init];
+    [self addSpotlightFriendScreenBoardingPopUp];
     [self.refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     [self setRefreshControl:self.refreshControl];
     [self.refreshControl beginRefreshing];
@@ -52,6 +55,23 @@ static CGFloat const BasicHeaderHeight = 50;
     [self refresh:self.refreshControl];
 }
 
+-(void)addSpotlightFriendScreenBoardingPopUp{
+    
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"SpotlightFriendsPopUp"] == FALSE)
+    {
+        
+        SpotlightBoardView *spotlightBoardingView = [[[NSBundle mainBundle] loadNibNamed:@"SpotlightBoardView" owner:self options:nil] objectAtIndex:0];
+        spotlightBoardingView.spotLightScreenDetail.text = SpotlightFriendsBoardingText;
+        spotlightBoardingView.frame = CGRectMake(0, 0,self.view.frame.size.width,self.view.frame.size.height);
+        spotlightBoardingView.translatesAutoresizingMaskIntoConstraints = true;
+        [spotlightBoardingView.superview layoutIfNeeded];
+        [ [[UIApplication sharedApplication].delegate window] addSubview:spotlightBoardingView];
+        [[NSUserDefaults standardUserDefaults] setBool:TRUE forKey:@"SpotlightFriendsPopUp"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        //Alert code will go here...
+    }
+    
+}
 
 
 -(void)viewWillDisappear:(BOOL)animated

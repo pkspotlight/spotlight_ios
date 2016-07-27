@@ -15,8 +15,11 @@
 #import "User.h"
 #import "Child.h"
 #import "TeamRequest.h"
+#import "SpotlightBoardView.h"
 #import "PendingRequestTableViewController.h"
-#define SpotlightFriendsBoardingText @"Thisn is where you can find all of your friendsin.Search for existing team by clicking the "+" or create your own!"
+
+
+#define SpotlightTeamBoardingText @"This is where you can find all of your friends or teammates and follow thier activity.Click on the '+' in the top right to search for your friends!"
 
 static CGFloat const BasicHeaderHeight = 50;
 
@@ -46,6 +49,7 @@ static CGFloat const BasicHeaderHeight = 50;
 
     //[self.tableView addSubview:self.refreshControl];
     self.teams = [NSMutableArray array];
+    [self addSpotlightTeamScreenBoardingPopUp];
     if (!self.child && !self.user) {
         self.user = [User currentUser];
     }
@@ -61,7 +65,24 @@ static CGFloat const BasicHeaderHeight = 50;
      [self fetchRequest];
     [self refresh:self.refreshControl];
 }
-
+-(void)addSpotlightTeamScreenBoardingPopUp{
+    
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"SpotlightTeamPopUp"] == FALSE)
+    {
+        
+        SpotlightBoardView *spotlightBoardingView = [[[NSBundle mainBundle] loadNibNamed:@"SpotlightBoardView" owner:self options:nil] objectAtIndex:0];
+        spotlightBoardingView.spotLightScreenDetail.text = SpotlightTeamBoardingText;
+        
+        spotlightBoardingView.frame = CGRectMake(0, 0,self.view.frame.size.width,self.view.frame.size.height);
+        spotlightBoardingView.translatesAutoresizingMaskIntoConstraints = true;
+        [spotlightBoardingView.superview layoutIfNeeded];
+        [ [[UIApplication sharedApplication].delegate window] addSubview:spotlightBoardingView];
+        [[NSUserDefaults standardUserDefaults] setBool:TRUE forKey:@"SpotlightTeamPopUp"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        //Alert code will go here...
+    }
+    
+}
 
 -(void)fetchRequest{
   

@@ -16,7 +16,8 @@
 #import "SpotlightDataSource.h"
 #import "TeamSelectTableViewController.h"
 #import <AFNetworking/UIImageView+AFNetworking.h>
-
+#import "SpotlightBoardView.h"
+#define SpotlightFeedBoardingText @"Welcome to Spotlight.A Spotlight is group ofshared mediafraom an event.For example,you could create a Spotlight for basketball game and share all the pictures and videos you took.Click on our Spotlight to check it out!"
 @interface SpotlightFeedViewController ()
 {
     UIRefreshControl* refresh;
@@ -50,6 +51,12 @@
     self.navigationItem.titleView = headerView;
 }
 
+
+-(void)addSpotlightScreenBoardingPopUp{
+    SpotlightBoardView *spotlightBoardingView = [[[NSBundle mainBundle] loadNibNamed:@"SpotlightBoardView" owner:self options:nil] objectAtIndex:0];
+    spotlightBoardingView.spotLightScreenDetail.text = SpotlightFeedBoardingText;
+    [self.view addSubview:spotlightBoardingView];
+}
 
 - (void)refresh:(id)sender {
 

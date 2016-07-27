@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SpotlightBoardView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yzP-7W-mNE">
+                    <rect key="frame" x="2" y="242" width="371" height="183"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u8f-E2-pQx">
+                            <rect key="frame" x="10" y="10" width="351" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="u8f-E2-pQx" secondAttribute="bottom" constant="152" id="1cG-Ah-3RM"/>
+                        <constraint firstItem="u8f-E2-pQx" firstAttribute="top" secondItem="yzP-7W-mNE" secondAttribute="top" constant="10" id="1dg-b5-e9E"/>
+                        <constraint firstItem="u8f-E2-pQx" firstAttribute="leading" secondItem="yzP-7W-mNE" secondAttribute="leading" constant="10" id="PMh-h7-QYn"/>
+                        <constraint firstAttribute="trailing" secondItem="u8f-E2-pQx" secondAttribute="trailing" constant="10" id="veg-ns-w1F"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="yzP-7W-mNE" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="LCF-rC-A15"/>
+                <constraint firstItem="yzP-7W-mNE" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="242" id="RDx-j0-zwn"/>
+                <constraint firstItem="yzP-7W-mNE" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="jCU-uu-1Hx"/>
+                <constraint firstItem="yzP-7W-mNE" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="2" id="phx-3B-3dT"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+            <connections>
+                <outlet property="spotLightScreenDetail" destination="u8f-E2-pQx" id="cJq-IW-73K"/>
+            </connections>
+        </view>
+    </objects>
+</document>

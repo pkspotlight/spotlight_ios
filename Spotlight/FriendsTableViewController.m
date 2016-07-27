@@ -57,13 +57,15 @@ static CGFloat const BasicHeaderHeight = 50;
 
 -(void)addSpotlightFriendScreenBoardingPopUp{
     
-    if([[NSUserDefaults standardUserDefaults] boolForKey:@"SpotlightFriendsPopUp"] == FALSE)
+   if([[NSUserDefaults standardUserDefaults] boolForKey:@"SpotlightFriendsPopUp"] == FALSE)
     {
         
         SpotlightBoardView *spotlightBoardingView = [[[NSBundle mainBundle] loadNibNamed:@"SpotlightBoardView" owner:self options:nil] objectAtIndex:0];
-        spotlightBoardingView.spotLightScreenDetail.text = SpotlightFriendsBoardingText;
+         spotlightBoardingView.lblSpotLightScreenDetailTextBold.text = @"";
+        spotlightBoardingView.lblSpotLightScreenDetail.text = SpotlightFriendsBoardingText;
         CGRect frameRect =spotlightBoardingView.frame;
-        frameRect.size.width = self.view.frame.size.width;
+        frameRect.size.width = [UIScreen mainScreen].bounds.size.width;
+        frameRect.size.height = [UIScreen mainScreen].bounds.size.height;
         spotlightBoardingView.frame = frameRect;
         [ [[UIApplication sharedApplication].delegate window] addSubview:spotlightBoardingView];
         [[NSUserDefaults standardUserDefaults] setBool:TRUE forKey:@"SpotlightFriendsPopUp"];

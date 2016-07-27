@@ -233,7 +233,7 @@ if(!media.isVideo)
     
     
     
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Select"
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Select Source"
                                                                    message:@""
                                                             preferredStyle:UIAlertControllerStyleActionSheet];
     

@@ -71,10 +71,12 @@ static CGFloat const BasicHeaderHeight = 50;
     {
         
         SpotlightBoardView *spotlightBoardingView = [[[NSBundle mainBundle] loadNibNamed:@"SpotlightBoardView" owner:self options:nil] objectAtIndex:0];
-        spotlightBoardingView.spotLightScreenDetail.text = SpotlightTeamBoardingText;
+        spotlightBoardingView.lblSpotLightScreenDetailTextBold.text = @"";
+        spotlightBoardingView.lblSpotLightScreenDetail.text =SpotlightTeamBoardingText;
         
         CGRect frameRect =spotlightBoardingView.frame;
-        frameRect.size.width = self.view.frame.size.width;
+        frameRect.size.width = [UIScreen mainScreen].bounds.size.width;
+        frameRect.size.height = [UIScreen mainScreen].bounds.size.height;
         spotlightBoardingView.frame = frameRect;
         [ [[UIApplication sharedApplication].delegate window] addSubview:spotlightBoardingView];
         [[NSUserDefaults standardUserDefaults] setBool:TRUE forKey:@"SpotlightTeamPopUp"];

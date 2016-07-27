@@ -20,9 +20,9 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    self.spotLightScreenView.layer.cornerRadius = 10; // this value vary as per your desire
- 
-   self.spotLightScreenView.layer.masksToBounds = YES;
+//    self.spotLightScreenView.layer.cornerRadius = 10; // this value vary as per your desire
+// 
+//   self.spotLightScreenView.layer.masksToBounds = YES;
     
     
 }

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 @interface SpotlightBoardView : UIView
-@property (weak, nonatomic) IBOutlet UILabel *spotLightScreenDetail;
+@property (weak, nonatomic) IBOutlet UILabel *lblSpotLightScreenDetailTextBold;
+@property (weak, nonatomic) IBOutlet UILabel *lblSpotLightScreenDetail;
 @property (weak, nonatomic) IBOutlet UIView *spotLightScreenView;
 @end

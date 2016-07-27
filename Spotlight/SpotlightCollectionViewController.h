@@ -10,8 +10,8 @@
 #import "Spotlight.h"
 #import "MWPhotoBrowser.h"
 #import "ELCImagePickerController.h"
-
-@interface SpotlightCollectionViewController : UICollectionViewController <MWPhotoBrowserDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegateFlowLayout,ELCImagePickerControllerDelegate>
+#import <MediaPlayer/MediaPlayer.h>
+@interface SpotlightCollectionViewController : UICollectionViewController <MWPhotoBrowserDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegateFlowLayout,ELCImagePickerControllerDelegate,MPMediaPickerControllerDelegate>
 
 @property (strong, nonatomic) Spotlight* spotlight;
 

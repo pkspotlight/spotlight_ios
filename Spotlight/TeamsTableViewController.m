@@ -16,6 +16,8 @@
 #import "Child.h"
 #import "TeamRequest.h"
 #import "PendingRequestTableViewController.h"
+#define SpotlightFriendsBoardingText @"Thisn is where you can find all of your friendsin.Search for existing team by clicking the "+" or create your own!"
+
 static CGFloat const BasicHeaderHeight = 50;
 
 @interface TeamsTableViewController (){

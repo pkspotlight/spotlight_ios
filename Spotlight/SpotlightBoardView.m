@@ -17,5 +17,8 @@
     // Drawing code
 }
 */
+- (IBAction)removeSpotlightBoardingView:(id)sender {
+    [self removeFromSuperview];
+}
 
 @end

@@ -30,6 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshScreen) name:@"SpotLightRefersh" object:nil];
+    [self addSpotlightScreenBoardingPopUp];
     refresh = [[UIRefreshControl alloc] init];
     [refresh addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
    
@@ -53,9 +54,18 @@
 
 
 -(void)addSpotlightScreenBoardingPopUp{
-    SpotlightBoardView *spotlightBoardingView = [[[NSBundle mainBundle] loadNibNamed:@"SpotlightBoardView" owner:self options:nil] objectAtIndex:0];
-    spotlightBoardingView.spotLightScreenDetail.text = SpotlightFeedBoardingText;
-    [self.view addSubview:spotlightBoardingView];
+    
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"SpotlightPopUp"] == FALSE)
+    {
+        
+        SpotlightBoardView *spotlightBoardingView = [[[NSBundle mainBundle] loadNibNamed:@"SpotlightBoardView" owner:self options:nil] objectAtIndex:0];
+        spotlightBoardingView.spotLightScreenDetail.text = SpotlightFeedBoardingText;
+        [ [[UIApplication sharedApplication].delegate window] addSubview:spotlightBoardingView];
+        [[NSUserDefaults standardUserDefaults] setBool:TRUE forKey:@"SpotlightPopUp"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        //Alert code will go here...
+    }
+    
 }
 
 - (void)refresh:(id)sender {

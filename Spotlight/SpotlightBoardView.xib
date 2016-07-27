@@ -32,6 +32,7 @@
                         <constraint firstAttribute="bottom" secondItem="u8f-E2-pQx" secondAttribute="bottom" constant="10" id="1cG-Ah-3RM"/>
                         <constraint firstItem="u8f-E2-pQx" firstAttribute="top" secondItem="yzP-7W-mNE" secondAttribute="top" constant="8" id="1dg-b5-e9E"/>
                         <constraint firstItem="u8f-E2-pQx" firstAttribute="leading" secondItem="yzP-7W-mNE" secondAttribute="leading" constant="10" id="PMh-h7-QYn"/>
+                        <constraint firstAttribute="height" constant="125" id="sHf-xN-CgZ"/>
                         <constraint firstAttribute="trailing" secondItem="u8f-E2-pQx" secondAttribute="trailing" constant="10" id="veg-ns-w1F"/>
                     </constraints>
                 </view>

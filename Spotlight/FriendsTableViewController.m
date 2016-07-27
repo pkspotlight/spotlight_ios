@@ -18,7 +18,7 @@
 #import "BasicHeaderView.h"
 #import "SpotlightBoardView.h"
 
-#define SpotlightFriendsBoardingText @"Thisn is where you can find all of the team that you are interested in.Search for existing team by clicking the '+' or create your own!"
+#define SpotlightFriendsBoardingText @"This is where you can find all of the team that you are interested in.Search for existing team by clicking the '+' or create your own!"
 static CGFloat const BasicHeaderHeight = 50;
 
 
@@ -62,9 +62,9 @@ static CGFloat const BasicHeaderHeight = 50;
         
         SpotlightBoardView *spotlightBoardingView = [[[NSBundle mainBundle] loadNibNamed:@"SpotlightBoardView" owner:self options:nil] objectAtIndex:0];
         spotlightBoardingView.spotLightScreenDetail.text = SpotlightFriendsBoardingText;
-        spotlightBoardingView.frame = CGRectMake(0, 0,self.view.frame.size.width,self.view.frame.size.height);
-        spotlightBoardingView.translatesAutoresizingMaskIntoConstraints = true;
-        [spotlightBoardingView.superview layoutIfNeeded];
+        CGRect frameRect =spotlightBoardingView.frame;
+        frameRect.size.width = self.view.frame.size.width;
+        spotlightBoardingView.frame = frameRect;
         [ [[UIApplication sharedApplication].delegate window] addSubview:spotlightBoardingView];
         [[NSUserDefaults standardUserDefaults] setBool:TRUE forKey:@"SpotlightFriendsPopUp"];
         [[NSUserDefaults standardUserDefaults] synchronize];

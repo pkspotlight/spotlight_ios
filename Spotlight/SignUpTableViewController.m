@@ -77,7 +77,11 @@
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     MainTabBarController *mainTabBarController = [storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
     if([User currentUser].isNew){
-        
+       [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SpotlightPopUp"];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SpotlightFriendsPopUp"];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SpotlightTeamPopUp"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+
         
     }
     

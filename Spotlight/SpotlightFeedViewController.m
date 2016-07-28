@@ -18,7 +18,7 @@
 #import "TeamSelectTableViewController.h"
 #import <AFNetworking/UIImageView+AFNetworking.h>
 #import "SpotlightBoardView.h"
-#define SpotlightFeedBoardingText @"A Spotlight is group of shared media from an event.For example,you could create a Spotlight for basketball game and share all the pictures and videos you took.Click on our Spotlight to check it out!"
+#define SpotlightFeedBoardingText @"A Spotlight is group of shared media from an event. For example, you could create a Spotlight for basketball game and share all the pictures and videos you took. Click on our Spotlight to check it out!"
 @interface SpotlightFeedViewController ()
 {
     UIRefreshControl* refresh;

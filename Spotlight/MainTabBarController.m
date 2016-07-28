@@ -11,15 +11,23 @@
 #import "User.h"
 #import "Child.h"
 #import "TeamRequest.h"
-@interface MainTabBarController ()
+#import "AppDelegate.h"
 
+#define appDel ((AppDelegate *)[UIApplication sharedApplication].delegate)
+
+@interface MainTabBarController ()
+{
+    BOOL isAcceptingTeams;
+}
 @end
 
 @implementation MainTabBarController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
       [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatePendingRequest) name:@"PendingRequest" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatePendingMessageRequest) name:@"ShowAlertForAcceptedRequest" object:nil];
     // Do any additional setup after loading the view.
 }
 
@@ -79,7 +87,7 @@
     
 }
 
--(void)FollowAcceptedRequests
+-(void)FollowAcceptedRequests:(BOOL)isMessage
 {
     
  
@@ -94,6 +102,8 @@
    // [spotlightQuery whereKey:@"child" equalTo:[User currentUser].children];
 
     [spotlightQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        
+        NSString *teams = @"";
         if(objects.count > 0)
         {
             for(TeamRequest *request in objects)
@@ -105,6 +115,15 @@
                 
                else if(request.requestState.intValue == requestStateAccepted)
                 {
+                    
+                    if(![appDel.acceptedTeamIDs containsObject:request.objectId])
+                    {
+                        [appDel.acceptedTeamIDs addObject:request.objectId];
+                    
+                     teams = (teams.length == 0)? [NSString stringWithFormat:@"%@",request.teamName] : [NSString stringWithFormat:@"%@, %@",teams,request.teamName];
+                    
+                    }
+                    
                     [self followAcceptedRequest:request];
 
                 }
@@ -112,6 +131,17 @@
                 
                 
             }
+            
+            
+            if(teams.length > 0)
+            {
+                [[[UIAlertView alloc] initWithTitle:@""
+                                            message:[NSString stringWithFormat:@"Your follow request for %@ has been accepted",teams]
+                                           delegate:nil
+                                  cancelButtonTitle:nil
+                                  otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] performSelectorOnMainThread:@selector(show)  withObject:nil waitUntilDone:NO];
+            }
+            
         }
         
         
@@ -122,10 +152,59 @@
     
 }
 
+-(void)updatePendingMessageRequest
+{
+    [self FollowAcceptedRequests:true];
+    
+    PFQuery *spotlightQuery = [PFQuery queryWithClassName:@"TeamRequest"];
+    [spotlightQuery whereKey:@"admin" equalTo:[User currentUser]];
+    
+    [spotlightQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if(objects.count > 0)
+        {
+            NSMutableArray *array = [NSMutableArray new];
+            for(TeamRequest *request in objects)
+            {
+                if((request.user.objectId != request.admin.objectId) && (request.requestState.intValue == reqestStatePending))
+                {
+                    [array addObject:request];
+                }
+                
+            }
+            if(array.count>0){
+                [[[self  tabBar]items] objectAtIndex:2].badgeValue = [NSString stringWithFormat:@"%ld",(unsigned long)array.count];
+            }
+            else{
+                [[[self  tabBar]items] objectAtIndex:2].badgeValue  = nil;
+            }
+            
+            
+        }
+        else{
+            [[[self  tabBar]items] objectAtIndex:2].badgeValue  = nil;
+        }
+        
+        //        for(TeamRequest *request in objects)
+        //        {
+        //            [request.admin fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        //                //   NSString *data =[NSString stringWithFormat:@"%@       %@",request.admin.firstName,request.user.firstName];
+        //
+        //                NSLog(@"%@",request.admin.firstName);
+        //            }];
+        //
+        //            
+        //            
+        //        }
+        
+    }];
+    
+}
+
+
 
 -(void)updatePendingRequest
 {
-    [self FollowAcceptedRequests];
+    [self FollowAcceptedRequests:false];
     
     PFQuery *spotlightQuery = [PFQuery queryWithClassName:@"TeamRequest"];
     [spotlightQuery whereKey:@"admin" equalTo:[User currentUser]];
@@ -143,7 +222,7 @@
                 
             }
             if(array.count>0){
-            [[[self  tabBar]items] objectAtIndex:2].badgeValue = [NSString stringWithFormat:@"%ld",array.count];
+            [[[self  tabBar]items] objectAtIndex:2].badgeValue = [NSString stringWithFormat:@"%ld",(unsigned long)array.count];
             }
             else{
                   [[[self  tabBar]items] objectAtIndex:2].badgeValue  = nil;

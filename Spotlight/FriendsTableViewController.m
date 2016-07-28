@@ -18,7 +18,7 @@
 #import "BasicHeaderView.h"
 #import "SpotlightBoardView.h"
 
-#define SpotlightFriendsBoardingText @"This is where you can find all of the team that you are interested in.Search for existing team by clicking the '+' or create your own!"
+#define SpotlightFriendsBoardingText @"This is where you can find all of your friends or teammates and follow thier activity. Click on the '+' in the top right to search for your friends!"
 static CGFloat const BasicHeaderHeight = 50;
 
 

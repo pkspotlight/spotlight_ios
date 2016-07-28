@@ -19,7 +19,9 @@
 #import "PendingRequestTableViewController.h"
 
 
-#define SpotlightTeamBoardingText @"This is where you can find all of your friends or teammates and follow thier activity.Click on the '+' in the top right to search for your friends!"
+#define SpotlightTeamBoardingText @"This is where you can find all of the teams that you are interested in. Search for existing team by clicking the '+' or create your own!"
+
+
 
 static CGFloat const BasicHeaderHeight = 50;
 

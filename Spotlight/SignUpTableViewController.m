@@ -139,11 +139,16 @@
         [self.pendingInputDict[@"username"] length] > 4 &&
         self.pendingInputDict[@"password"] &&
         [self.pendingInputDict[@"password"] length] > 4) {
+        MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication].delegate window] animated:YES];
+                  [hud setLabelText:@"Please Wait..."];
         [User logInWithUsernameInBackground:self.pendingInputDict[@"username"]
                                      password:self.pendingInputDict[@"password"]
                                         block:^(PFUser *user, NSError *error) {
+                                            [hud hide:YES];
+                                            
                                             if (user) {
                                                 NSLog(@"sweet");
+                                                
                                                 [self loadMainTabBar];
                                             } else {
                                                 NSString *errorString = [error userInfo][@"error"];
@@ -174,11 +179,14 @@
             [self loadMainTabBar];
         } else {
             NSString *errorString = [error userInfo][@"error"];
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Nope" message:errorString preferredStyle:UIAlertControllerStyleAlert];
+            if(error!= nil){
+            
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Facebook Login Failed" message:errorString preferredStyle:UIAlertControllerStyleAlert];
             [alert addAction:[UIAlertAction actionWithTitle:@"OK"
                                                       style:UIAlertActionStyleCancel
                                                     handler:nil]];
             [self presentViewController:alert animated:YES completion:nil];
+            }
             NSLog(@"shit, %@",errorString);
         }
     }];

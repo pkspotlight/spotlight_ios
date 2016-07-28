@@ -45,6 +45,8 @@
             [[User currentUser] followTeamWithBlockCallback:request.team completion:^(BOOL succeeded, NSError * _Nullable error) {
                 if(succeeded)
                 {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"SpotLightRefersh" object:nil];
+
                     [request deleteInBackground];
                 }
             }];

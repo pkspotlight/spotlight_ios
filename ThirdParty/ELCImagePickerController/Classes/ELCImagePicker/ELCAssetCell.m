@@ -29,11 +29,11 @@
         UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cellTapped:)];
         [self addGestureRecognizer:tapRecognizer];
         
-        NSMutableArray *mutableArray = [[NSMutableArray alloc] initWithCapacity:4];
+        NSMutableArray *mutableArray = [[NSMutableArray alloc] initWithCapacity:10];
         self.imageViewArray = mutableArray;
-        squareSide = 75;
+        squareSide = 110;
 
-        NSMutableArray *overlayArray = [[NSMutableArray alloc] initWithCapacity:4];
+        NSMutableArray *overlayArray = [[NSMutableArray alloc] initWithCapacity:10];
         self.overlayViewArray = overlayArray;
 	}
 	return self;
@@ -41,6 +41,12 @@
 
 - (void)setAssets:(NSArray *)assets
 {
+    squareSide =  ([UIScreen mainScreen].bounds.size.width/4.0) - 6;
+    if(UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation))
+    {
+        squareSide =  ([UIScreen mainScreen].bounds.size.width/6.0) -  10;
+        
+    }
     self.rowAssets = assets;
 	for (UIImageView *view in _imageViewArray) {
         [view removeFromSuperview];
@@ -56,7 +62,9 @@
 
         if (i < [_imageViewArray count]) {
             UIImageView *imageView = [_imageViewArray objectAtIndex:i];
-            imageView.image = [UIImage imageWithCGImage:asset.asset.thumbnail];
+            imageView.image = [UIImage imageWithCGImage:asset.asset.aspectRatioThumbnail];
+            imageView.contentMode = UIViewContentModeScaleAspectFill;
+            imageView.clipsToBounds = YES;
             for(UIView *subview in imageView.subviews)
                 [subview removeFromSuperview];
             
@@ -72,7 +80,10 @@
            
             
         } else {
-            UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageWithCGImage:asset.asset.thumbnail]];
+            UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageWithCGImage:asset.asset.aspectRatioThumbnail]];
+            imageView.contentMode = UIViewContentModeScaleAspectFill;
+            imageView.clipsToBounds = YES;
+
             [_imageViewArray addObject:imageView];
             
             for(UIView *subview in imageView.subviews)
@@ -129,39 +140,20 @@
 
 - (void)layoutSubviews
 {
-    squareSide = 75;
-    
-    
+    squareSide =  ([UIScreen mainScreen].bounds.size.width/4.0) - 6;
+    if(UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation))
+    {
+        squareSide =  ([UIScreen mainScreen].bounds.size.width/6.0) -  10;
+
+    }
     
     
     CGFloat totalWidth = self.rowAssets.count * squareSide + (self.rowAssets.count - 1) * 4;
-    
-    
-    
-//    if(UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation))
-//    {
-//        while(totalWidth > [UIScreen mainScreen].bounds.size.height)
-//        {
-//            squareSide = squareSide - 1;
-//            totalWidth = self.rowAssets.count * squareSide + (self.rowAssets.count - 1) * 4;
-//        }
-//    }
-//    else if (UIDeviceOrientationIsPortrait([UIDevice currentDevice].orientation))
-//    {
-//        while(totalWidth > [UIScreen mainScreen].bounds.size.width)
-//        {
-//            squareSide = squareSide - 1;
-//            totalWidth = self.rowAssets.count * squareSide + (self.rowAssets.count - 1) * 4;
-//        }
-//    }
-//    else
-//    {
-//        while(totalWidth > [UIScreen mainScreen].bounds.size.width)
-//        {
-//            squareSide = squareSide - 1;
-//            totalWidth = self.rowAssets.count * squareSide + (self.rowAssets.count - 1) * 4;
-//        }
-//    }
+    if(UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation))
+    {
+         totalWidth = self.rowAssets.count * squareSide + (self.rowAssets.count - 1) * 6;
+        
+    }
     
    
     

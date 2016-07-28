@@ -230,28 +230,62 @@ if(!media.isVideo)
 
 
 - (IBAction)addMediaButtonPressed:(id)sender {
-//    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
-//    {
-//        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-//        imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
-//        imagePickerController.delegate = self;
-//        imagePickerController.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeMovie, (NSString *)kUTTypeImage, nil];
-//        imagePickerController.videoMaximumDuration = 15;
-//        [imagePickerController setAllowsEditing:YES];
-//        
-//        self.imagePickerController = imagePickerController;
-//        [self.navigationController presentViewController:self.imagePickerController animated:YES completion:nil];
-//    }
     
+    
+    
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Select Source"
+                                                                   message:@""
+                                                            preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"Choose Photos"
+                                              style:UIAlertActionStyleDefault
+                                            handler:^(UIAlertAction * _Nonnull action) {
+                                                [self selectImagesFromElcImagePicker];
+                                            }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Choose Video"
+                                              style:UIAlertActionStyleDefault
+                                            handler:^(UIAlertAction * _Nonnull action) {
+                                                [self selectVideoFromNativeImagePicker];
+                                            }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"Cancel"
+                                              style:UIAlertActionStyleCancel
+                                            handler:nil]];
+    [self presentViewController:alert animated:YES completion:nil];
+    
+    
+    
+    
+
+}
+
+
+-(void)selectVideoFromNativeImagePicker{
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
+        {
+            UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+            imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
+            imagePickerController.delegate = self;
+            imagePickerController.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeMovie,  nil];
+            imagePickerController.videoMaximumDuration = 15;
+            [imagePickerController setAllowsEditing:YES];
+    
+            self.imagePickerController = imagePickerController;
+            [self.navigationController presentViewController:self.imagePickerController animated:YES completion:nil];
+        }
+
+}
+
+-(void)selectImagesFromElcImagePicker{
     
     ELCAlbumPickerController *albumController = [[ELCAlbumPickerController alloc] init];
     ELCImagePickerController *elcPicker = [[ELCImagePickerController alloc] initWithRootViewController:albumController];
     [albumController setParent:elcPicker];
-  
+    
     elcPicker.imagePickerDelegate = self;
     [self presentModalViewController:elcPicker animated:YES];
-
 }
+
+
 
 
 - (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
@@ -290,35 +324,72 @@ if(!media.isVideo)
 
 #pragma mark - UIImagePickerControllerDelegate
 
-//- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)infoDict {
-//    [self dismissViewControllerAnimated:YES completion:^{
-//        UIAlertController* titleAlert = [UIAlertController alertControllerWithTitle:@"Would you like to add a title?"
-//                                                                                   message:nil
-//                                                                            preferredStyle:UIAlertControllerStyleAlert];
-//        [titleAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-//            
-//        }];
-//        
-//        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK"
-//                                                                style:UIAlertActionStyleDefault
-//                                                              handler:^(UIAlertAction * action) {
-//                                                                  [self saveImageWithMediaInfo:infoDict title:titleAlert.textFields[0].text];
-//                                                              }];
-//        UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"No Title"
-//                                                               style:UIAlertActionStyleCancel
-//                                                             handler:^(UIAlertAction * action) {
-//                                                                 [self saveImageWithMediaInfo:infoDict title:nil];
-//                                                             }];
-//        [titleAlert addAction:defaultAction];
-//        [titleAlert addAction:cancelAction];
-//        [self presentViewController:titleAlert
-//                           animated:YES
-//                         completion:^{
-//                             
-//                         }];
-//    }];
-//}
-//
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)infoDict {
+    [self dismissViewControllerAnimated:YES completion:^{
+        UIAlertController* titleAlert = [UIAlertController alertControllerWithTitle:@"Would you like to add a title?"
+                                                                                   message:nil
+                                                                            preferredStyle:UIAlertControllerStyleAlert];
+        [titleAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+            
+        }];
+        
+        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK"
+                                                                style:UIAlertActionStyleDefault
+                                                              handler:^(UIAlertAction * action) {
+                                                                  [self saveImageWithMediaInfoVideo:infoDict title:titleAlert.textFields[0].text];
+                                                              }];
+        UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"No Title"
+                                                               style:UIAlertActionStyleCancel
+                                                             handler:^(UIAlertAction * action) {
+                                                                 [self saveImageWithMediaInfoVideo:infoDict title:nil];
+                                                             }];
+        [titleAlert addAction:defaultAction];
+        [titleAlert addAction:cancelAction];
+        [self presentViewController:titleAlert
+                           animated:YES
+                         completion:^{
+                             
+                         }];
+    }];
+}
+
+- (void)saveImageWithMediaInfoVideo:(NSDictionary<NSString *,id> *)infoDict title:(NSString*)title{
+    SpotlightMedia *media;
+    NSString *mediaType = [infoDict objectForKey: UIImagePickerControllerMediaType];
+    
+    if ([mediaType isEqualToString:(NSString *)kUTTypeVideo] ||
+        [mediaType isEqualToString:(NSString *)kUTTypeMovie]){
+        
+        NSURL *videoUrl=(NSURL*)[infoDict objectForKey:UIImagePickerControllerMediaURL];
+        NSString *videoPath = [videoUrl path];
+        media = [[SpotlightMedia alloc] initWithVideoPath:videoPath];
+        
+    } else if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
+        UIImage *image = [infoDict valueForKey:UIImagePickerControllerOriginalImage];
+        media = [[SpotlightMedia alloc] initWithImage:image];
+    }
+    if (title) {
+        media.title = title;
+    }
+    MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [hud setLabelText:@"Adding Media..."];
+    media[@"parent"] = self.spotlight;
+    [media saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"fuck: %@", [error localizedDescription]);
+        } else {
+            [self.spotlight allMedia:^(NSArray *media, NSError *error) {
+                self.mediaList = media;
+                [self.collectionView reloadData];
+                [hud hide:YES];
+            }];
+        }
+    }];
+    self.imagePickerController = nil;
+}
+
+
+
 - (void)saveImageWithMediaInfo:(NSArray *)info title:(NSString*)title{
    __block SpotlightMedia *media;
     
@@ -398,12 +469,12 @@ if(!media.isVideo)
           }
     self.imagePickerController = nil;
 }
-//
-//
-//- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-//{
-//    [self dismissViewControllerAnimated:YES completion:NULL];
-//}
+
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
 
 - (void)elcImagePickerController:(ELCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)info{
     [self dismissViewControllerAnimated:YES completion:^{

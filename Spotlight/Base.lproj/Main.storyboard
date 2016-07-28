@@ -787,10 +787,10 @@
                         <viewControllerLayoutGuide type="bottom" id="u0L-dv-84F"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="HYy-yF-zdT">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="352"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TOd-AQ-irE">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TOd-AQ-irE">
                                 <rect key="frame" x="0.0" y="64" width="600" height="248"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unknown_user.png" translatesAutoresizingMaskIntoConstraints="NO" id="ENb-YQ-djp">
@@ -844,13 +844,13 @@
                                     <constraint firstAttribute="trailing" secondItem="5s6-aT-kQP" secondAttribute="trailing" constant="8" id="zmX-we-jFV"/>
                                 </constraints>
                             </view>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iR0-Zd-32o" userLabel="Team Member Container View">
+                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iR0-Zd-32o" userLabel="Team Member Container View">
                                 <rect key="frame" x="0.0" y="312" width="600" height="288"/>
                                 <connections>
                                     <segue destination="KaG-P1-Sfy" kind="embed" identifier="teamMemberEmbedSegue" id="5wK-cZ-7Zv"/>
                                 </connections>
                             </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wml-en-gDZ" userLabel="Spotlight Container View">
+                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wml-en-gDZ" userLabel="Spotlight Container View">
                                 <rect key="frame" x="0.0" y="312" width="600" height="288"/>
                                 <connections>
                                     <segue destination="8hb-z5-ol4" kind="embed" identifier="EmbedSpotlightDataSource" id="KDg-Dy-czv"/>
@@ -2233,28 +2233,47 @@
                                 <constraint firstItem="aMv-FM-Q6n" firstAttribute="top" secondItem="TUQ-7e-Hbr" secondAttribute="top" constant="11" id="dag-lc-t2h"/>
                             </constraints>
                         </view>
-                        <view key="tableFooterView" contentMode="scaleToFill" id="z2k-07-IrY">
-                            <rect key="frame" x="0.0" y="279" width="600" height="99"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="Iio-w5-o83">
+                            <rect key="frame" x="0.0" y="279" width="600" height="150"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hee-LV-P3I">
-                                    <rect key="frame" x="263" y="35" width="74" height="30"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yVh-Vn-QYM">
+                                    <rect key="frame" x="263" y="22" width="74" height="30"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="74" id="dw0-Fa-MZf"/>
+                                        <constraint firstAttribute="width" constant="74" id="bF1-U7-QfB"/>
                                     </constraints>
                                     <state key="normal" title="Log In">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
-                                        <action selector="LogInButtonPressed:" destination="Pm3-HU-US8" eventType="touchUpInside" id="Dms-xe-kpw"/>
+                                        <action selector="LogInButtonPressed:" destination="Pm3-HU-US8" eventType="touchUpInside" id="usM-nC-szA"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HAR-2C-1K3">
+                                    <rect key="frame" x="225" y="104" width="150" height="34"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="34" id="QMg-wW-MeV"/>
+                                        <constraint firstAttribute="width" constant="150" id="VJA-m7-P84"/>
+                                    </constraints>
+                                    <state key="normal" image="facebook_login_button"/>
+                                    <connections>
+                                        <action selector="logInWithFacebookBtnClicked:" destination="Pm3-HU-US8" eventType="touchUpInside" id="rcF-n4-SNW"/>
                                     </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="centerX" secondItem="Hee-LV-P3I" secondAttribute="centerX" id="41e-HC-3i9"/>
-                                <constraint firstAttribute="centerY" secondItem="Hee-LV-P3I" secondAttribute="centerY" id="yKD-52-jJu"/>
+                                <constraint firstAttribute="centerX" secondItem="yVh-Vn-QYM" secondAttribute="centerX" id="1wE-mA-HDF"/>
+                                <constraint firstItem="yVh-Vn-QYM" firstAttribute="top" secondItem="Iio-w5-o83" secondAttribute="top" constant="22" id="4lE-pp-B2k"/>
+                                <constraint firstItem="HAR-2C-1K3" firstAttribute="top" secondItem="yVh-Vn-QYM" secondAttribute="bottom" constant="52" id="XLl-7X-MuB"/>
+                                <constraint firstItem="HAR-2C-1K3" firstAttribute="centerX" secondItem="Iio-w5-o83" secondAttribute="centerX" id="fOv-hc-QPb"/>
+                                <constraint firstAttribute="centerY" secondItem="yVh-Vn-QYM" secondAttribute="centerY" id="gYj-iV-1cB"/>
                             </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="gYj-iV-1cB"/>
+                                </mask>
+                            </variation>
                         </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="FieldEntryTableViewCell" rowHeight="44" id="n7e-rk-g2b" customClass="FieldEntryTableViewCell">
@@ -2445,6 +2464,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="facebook_login_button" width="202" height="46"/>
         <image name="friends.png" width="25" height="25"/>
         <image name="icon-edit-avatar.png" width="19" height="17"/>
         <image name="landingBg.jpg" width="750" height="1334"/>

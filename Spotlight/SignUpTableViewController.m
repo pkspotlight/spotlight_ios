@@ -11,6 +11,12 @@
 #import "MainTabBarController.h"
 #import "User.h"
 #import <Parse.h>
+#import <ParseFacebookUtilsV4/PFFacebookUtils.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import "SDWebImageManager.h"
+#import "ProfilePictureMedia.h"
+
 
 
 @interface SignUpTableViewController ()
@@ -147,6 +153,71 @@
         [self presentViewController:alert animated:YES completion:nil];
     }
 }
+
+- (IBAction)logInWithFacebookBtnClicked:(UIButton *)sender {
+    
+    NSArray *permissionArray = @[@"public_profile",@"email"];
+    [PFFacebookUtils logInInBackgroundWithReadPermissions:permissionArray block:^(PFUser * _Nullable user, NSError * _Nullable error) {
+        if (user) {
+            NSLog(@"sweet");
+            if(user.isNew)
+            [self fetchFbData];
+            [self loadMainTabBar];
+        } else {
+            NSString *errorString = [error userInfo][@"error"];
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Nope" message:errorString preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"OK"
+                                                      style:UIAlertActionStyleCancel
+                                                    handler:nil]];
+            [self presentViewController:alert animated:YES completion:nil];
+            NSLog(@"shit, %@",errorString);
+        }
+    }];
+    
+    
+}
+
+-(void)fetchFbData
+{
+    if ([FBSDKAccessToken currentAccessToken]) {
+        [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{ @"fields" : @"id,first_name,last_name,picture.width(500).height(500),email"}]
+         startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+             if (!error) {
+                   User *user = [User currentUser];
+               //  if (user.isNew)
+                 {
+                     user.email = result[@"email"];
+                     user.firstName = result[@"first_name"];
+                     user.lastName = result[@"last_name"];
+                 SDWebImageManager *manager = [SDWebImageManager sharedManager];
+                 [manager downloadImageWithURL:[NSURL URLWithString:result[@"picture"][@"data"][@"url"]]
+                                       options:0
+                                      progress:^(NSInteger receivedSize, NSInteger expectedSize)
+                  {
+                      
+                  }
+                                     completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished,NSURL *imageURL)
+                  {
+                      if (image)
+                      {
+                          // do something with image
+                          
+                          user.profilePic = [[ProfilePictureMedia alloc] initWithImage:image];
+                          
+                         [user.profilePic saveInBackground];
+                         // PFFile *imageFile = [PFFile fileWithName:@"profilePic" data:imageNSData];
+                       //   user[@"profilePic"] = imageFile;
+                          [user saveInBackground];
+                          
+                      }
+                  }];
+                 }
+                 NSLog(@"fetched user:%@", result);
+             }
+         }];
+    }
+}
+
 
 #pragma mark - Delegate Methods
 

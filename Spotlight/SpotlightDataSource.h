@@ -11,9 +11,11 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import <MBProgressHUD.h>
+#import "SpotlightCollectionViewController.h"
 @protocol RefreshTableDelegate <NSObject>
 
 -(void)spotlightDeleted:(MBProgressHUD *)hud;
+
 
 @end
 
@@ -27,6 +29,8 @@
 - (instancetype)initWithTeam:(Team*)team;
 - (instancetype)initWithChild:(Child*)child;
 @property (weak,atomic) id <RefreshTableDelegate> delegate;
+@property (assign,nonatomic)  BOOL doesCheckForPrivacy;;
+
 - (void)loadSpotlights:(void (^)(void))completion;
 
 @end

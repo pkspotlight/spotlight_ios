@@ -17,13 +17,16 @@
 
 #import <AFNetworking/UIImageView+AFNetworking.h>
 
-@interface SpotlightDataSource ()
+@interface SpotlightDataSource (){
+
+}
 
 @property (strong, nonatomic) NSArray *spotlights;
 @property (strong, nonatomic) User* user;
 @property (strong, nonatomic) Team* team;
 @property (strong, nonatomic) Child* child;
 @property (strong, nonatomic) NSDateFormatter* dateFormatter;
+
 
 @end
 
@@ -33,6 +36,7 @@
 - (instancetype)init{
     if (self = [super init]) {
         [self commonInit];
+        
     }
     return self;
 }
@@ -72,13 +76,21 @@
 }
 
 - (void)loadSpotlights:(void (^ __nullable)(void))completion{
+    
+    _doesCheckForPrivacy = true;
     if (self.user) {
+        _doesCheckForPrivacy = true;
         [self loadTeamSpotlightsForUser:self.user completion:completion];
     }else if (self.child) {
+        _doesCheckForPrivacy = true;
+
         [self loadTeamSpotlightsForChild:self.child completion:completion];
     } else if (self.team) {
+     
+
         [self loadTeamSpotlights:self.team completion:completion];
     } else {
+        
         [self loadTeamSpotlightsForUser:[User currentUser] completion:completion];
     }
 }
@@ -145,8 +157,9 @@
         if (!error) {
             NSLog(@"Successfully retrieved %lu Spotlights.", (unsigned long)objects.count);
             self.spotlights = [self sortSpotlightsByCreatedDate:objects];
-            [self loadSpotlightsForChildren:[user children]
-                                 completion:completion];
+//            [self loadSpotlightsForChildren:[user children]
+//                                 completion:completion];
+             if (completion) completion();
         } else {
             NSLog(@"Error: %@ %@", error, [error userInfo]);
             if (completion) completion();
@@ -244,9 +257,17 @@
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    SpotlightTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SpotlightTableViewCell" forIndexPath:indexPath];
-    [cell formatForSpotlight:self.spotlights[indexPath.row] dateFormat:self.dateFormatter];
-    return cell;
+    
+    Spotlight *spotLight = self.spotlights[indexPath.row];
+    
+    
+        SpotlightTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SpotlightTableViewCell" forIndexPath:indexPath];
+        [cell formatForSpotlight:spotLight dateFormat:self.dateFormatter];
+        return cell;
+   
+    
+    
+    
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{

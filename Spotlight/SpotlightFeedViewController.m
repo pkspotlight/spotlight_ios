@@ -12,6 +12,7 @@
 #import "SpotlightCollectionViewController.h"
 #import "SpotlightMedia.h"
 #import "User.h"
+#import "Team.h"
 #import "MainTabBarController.h"
 #import "SpotlightDataSource.h"
 #import "TeamSelectTableViewController.h"
@@ -158,14 +159,151 @@
     [self refresh:hud];
 }
 
+
+
 #pragma mark - Navigation
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    SpotlightTableViewCell *cell = (SpotlightTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+    Spotlight *spotLight = [cell spotlight];
     
-    if ([[segue identifier] isEqualToString:@"SpotlightSegue"]) {
-        [(SpotlightCollectionViewController*)[segue destinationViewController] setSpotlight:[(SpotlightTableViewCell*)sender spotlight]];
+    __block BOOL isAllowed = false;
+    
+    if(self.dataSource.doesCheckForPrivacy){
+        
+        PFQuery *query = [[[User currentUser] teams] query];
+        [query includeKey:@"teamLogoMedia"];
+        [query orderByDescending:@"year"];
+        
+        
+        
+        
+        
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            
+            for(Team *team in objects)
+            {
+                if([team.objectId isEqualToString:spotLight.team.objectId])
+                {
+                    isAllowed = true;
+                    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                    SpotlightCollectionViewController *spotLightCollection = [storyboard instantiateViewControllerWithIdentifier:@"SpotLightCollectionView"];
+                    [spotLightCollection setSpotlight:spotLight];
+                    [self.navigationController pushViewController:spotLightCollection animated:YES];
+                    
+                    break;
+                }
+                
+                
+            }
+            
+            if(!isAllowed){
+                
+                
+                [[[UIAlertView alloc] initWithTitle:@""
+                                            message:@"You do not have access to view this Spotlight. Please request to follow this team in order to gain access."
+                                           delegate:nil
+                                  cancelButtonTitle:nil
+                                  otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
+            }
+            
+            
+            
+        }];
+
     }
+    
+    else{
+        UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        SpotlightCollectionViewController *spotLightCollection = [storyboard instantiateViewControllerWithIdentifier:@"SpotLightCollectionView"];
+        [spotLightCollection setSpotlight:spotLight];
+        [self.navigationController pushViewController:spotLightCollection animated:YES];
+    }
+    
+    
+    
+    //    if(!isAllowed)
+    //    {
+    //
+    //
+    //
+    //    }
+    //
+    
+    
+    
+    //    [(SpotlightCollectionViewController*)[segue destinationViewController] setSpotlight:[(SpotlightTableViewCell*)sender spotlight]];
 }
+
+
+
+//- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(nullable id)sender NS_AVAILABLE_IOS(6_0)
+//{
+//    
+//    
+//}
+
+
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+//    
+//    
+//    
+//    if ([[segue identifier] isEqualToString:@"SpotlightSegue"]) {
+//        Spotlight *spotLight = [(SpotlightTableViewCell*)sender spotlight];
+//
+//        __block BOOL isAllowed = false;
+//        
+//        
+//            PFQuery *query = [[[User currentUser] teams] query];
+//            [query includeKey:@"teamLogoMedia"];
+//            [query orderByDescending:@"year"];
+//        
+//        
+//        for(Team *team in [User currentUser].teams)
+//        {
+//            
+//        }
+//        
+//        
+//        
+//            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//                
+//                for(Team *team in objects)
+//                {
+//                    if([team.objectId isEqualToString:spotLight.team.objectId])
+//                    {
+//                        isAllowed = true;
+//                        
+//                        
+//                        
+//                        break;
+//                    }
+//                    
+//                }
+//                
+//            }];
+//            
+//        
+//            if(!isAllowed)
+//            {
+//                
+//                [[[UIAlertView alloc] initWithTitle:@""
+//                                            message:@"You do not have access to view this Spotlight. Please request to follow this team in order to gain access."
+//                                           delegate:nil
+//                                  cancelButtonTitle:nil
+//                                  otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
+//                
+//                
+//            }
+//            
+//            
+//
+//        
+//        [(SpotlightCollectionViewController*)[segue destinationViewController] setSpotlight:[(SpotlightTableViewCell*)sender spotlight]];
+//    }
+//}
 
 
 @end

@@ -12,7 +12,7 @@
 @class User;
 @class SpotlightDataSource;
 
-@interface SpotlightFeedViewController : UITableViewController<RefreshTableDelegate>
+@interface SpotlightFeedViewController : UITableViewController<RefreshTableDelegate,UITableViewDelegate>
 
 @property (strong, nonatomic) SpotlightDataSource *dataSource;
 

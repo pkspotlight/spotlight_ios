@@ -28,6 +28,7 @@ static CGFloat const BasicHeaderHeight = 50;
 @interface TeamsTableViewController (){
     NSString *pendingRequest;
     long count;
+    NSMutableArray *filteredArrayOfObjects;
 }
 
 @property (strong, nonatomic) NSMutableArray *teams;
@@ -39,6 +40,7 @@ static CGFloat const BasicHeaderHeight = 50;
 - (void)viewDidLoad {
     [super viewDidLoad];
      count = 0;
+     filteredArrayOfObjects = [[NSMutableArray alloc] init];
     pendingRequest = [[NSString alloc]init];
  //   [self.tableView registerNib:[UINib nibWithNibName:@"BasicHeaderView" bundle:nil]
 //forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
@@ -65,6 +67,7 @@ static CGFloat const BasicHeaderHeight = 50;
     [super viewWillAppear:animated];
     count = 0;
      [self fetchRequest];
+    [ filteredArrayOfObjects removeAllObjects];
     [self refresh:self.refreshControl];
 }
 -(void)addSpotlightTeamScreenBoardingPopUp{
@@ -214,8 +217,18 @@ static CGFloat const BasicHeaderHeight = 50;
         }
         return (NSComparisonResult)NSOrderedDescending;
     }];
-   
-    self.teams = [NSMutableArray arrayWithArray:sortedArray];
+ 
+    for (Team *team in sortedArray)
+    {
+        if(!([[filteredArrayOfObjects valueForKeyPath:@"objectId"] containsObject:team.objectId]))
+        {
+            [filteredArrayOfObjects addObject:team];
+        }
+    }
+    
+    self.teams = filteredArrayOfObjects;
+    
+   // [NSMutableArray arrayWithArray:sortedArray];
 }
     
     

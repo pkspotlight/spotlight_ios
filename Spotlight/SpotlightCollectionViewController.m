@@ -711,6 +711,7 @@ if(!media.isVideo)
     mediaPicker.delegate = self;
     
     mediaPicker.allowsPickingMultipleItems = NO;
+    mediaPicker.showsCloudItems = NO;
     
     [self presentViewController:mediaPicker animated:YES completion:nil];
     

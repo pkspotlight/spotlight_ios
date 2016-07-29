@@ -17,6 +17,9 @@
 
 
 @interface ProfileTableViewController ()
+{
+    NSString *userName;
+}
 
 @property (strong, nonatomic) NSMutableDictionary *pendingFieldDictionary;
 @property (strong, nonatomic) NSArray* userPropertyArray;
@@ -33,8 +36,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+   
     self.user = [User currentUser];
+     userName = self.user.username;
     self.userPropertyArray = @[ @"username",
                                 @"firstName",
                                 @"lastName",
@@ -250,10 +254,30 @@
     }
     [self.user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         [hud hide:YES afterDelay:.5];
+        if (error) {
+            NSString *errorString = [error userInfo][@"error"];
+            if(error!= nil){
+                
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:errorString preferredStyle:UIAlertControllerStyleAlert];
+                [alert addAction:[UIAlertAction actionWithTitle:@"OK"
+                                                          style:UIAlertActionStyleCancel
+                                                        handler:nil]];
+                [self presentViewController:alert animated:YES completion:nil];
+                self.user.username = userName;
+                self.pendingFieldDictionary[@"username"] = userName;
+                [self.user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.tableView reloadData];
+                    });
+                }];
+                
+            }
+            
+            
+        }
     }];
     return YES;
 }
-
 
 - (IBAction)cancelButtonPressed:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];

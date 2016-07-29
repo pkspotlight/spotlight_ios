@@ -59,14 +59,24 @@
                                        delegate:nil
                               cancelButtonTitle:nil
                               otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
+            if (completion) {
+                
+                completion();
+            }
+
             
           //  [[NSNotificationCenter defaultCenter] postNotificationName:@"SpotLightRefersh" object:nil];
         }
-        if (completion) {
-            
-            completion();
+        
+        else{
+            [[[UIAlertView alloc] initWithTitle:@""
+                                        message:@"We are unable to send request.Please try again later"
+                                       delegate:nil
+                              cancelButtonTitle:nil
+                              otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
         }
-    }];
+        
+            }];
 }
 
 //- (void)unfollowTeam:(Team*)team completion:(void (^)(void))completion{

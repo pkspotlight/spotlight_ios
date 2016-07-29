@@ -30,7 +30,7 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"BasicHeaderView" bundle:nil]
 forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     refresh = [[UIRefreshControl alloc] init];
-    [refresh addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
+    [refresh addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
     [self setRefreshControl:refresh];
     self.hideKeyboardTap = [[UITapGestureRecognizer alloc]
                             initWithTarget:self
@@ -128,7 +128,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                 
             }
             
-            [refresh endRefreshing];
+            [refresh performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:NO];
 
         }];
     }
@@ -147,6 +147,12 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
         [self.tableView reloadData];
     }
 }
+
+
+-(void)refresh{
+    [refresh endRefreshing];
+}
+
 
 -(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
     [self.view addGestureRecognizer:self.hideKeyboardTap];

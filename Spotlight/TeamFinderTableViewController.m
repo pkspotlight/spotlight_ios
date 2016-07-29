@@ -17,6 +17,7 @@
 @interface TeamFinderTableViewController()
 {
     UIRefreshControl* refresh;
+    NSMutableArray *pendingRequestArray;
 }
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
@@ -28,10 +29,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    pendingRequestArray = [NSMutableArray new];
+    [self fetchAllPendingRequest];
     [self.tableView registerNib:[UINib nibWithNibName:@"BasicHeaderView" bundle:nil]
 forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     refresh = [[UIRefreshControl alloc] init];
-    [refresh addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
+    [refresh addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
     [self setRefreshControl:refresh];
     self.hideKeyboardTap = [[UITapGestureRecognizer alloc]
                             initWithTarget:self
@@ -62,6 +65,8 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     }
     return cell;
 }
+
+
 
 
 #pragma mark - SearchBar Delegate Methods
@@ -101,9 +106,13 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
             } else {
                 
             }
-            [refresh endRefreshing];
+            [refresh performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:NO];
         }];
     }
+}
+
+-(void)refresh{
+    [refresh endRefreshing];
 }
 
 -(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
@@ -131,6 +140,55 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 - (void) dismissKeyboard {
     [self.searchBar resignFirstResponder];
 }
+
+-(void)fetchAllPendingRequest{
+    
+        PFQuery *spotlightQuery = [PFQuery queryWithClassName:@"TeamRequest"];
+        [spotlightQuery whereKey:@"user" equalTo:[User currentUser]];
+        
+        [spotlightQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if(objects.count > 0)
+            {
+               // NSMutableArray *array = [NSMutableArray new];
+                for(TeamRequest *request in objects)
+                {
+                    if((request.requestState.intValue == reqestStatePending))
+                    {
+                        
+                        [pendingRequestArray addObject:request];
+
+                        [request.team fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+                                            //   NSString *data =[NSString stringWithFormat:@"%@       %@",request.admin.firstName,request.user.firstName];
+                          
+                            
+                                        }];
+                                            }
+                    
+                }
+                
+                
+            }
+            else{
+                //[[[self  tabBar]items] objectAtIndex:2].badgeValue  = nil;
+            }
+            
+            //        for(TeamRequest *request in objects)
+            //        {
+            //            [request.admin fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+            //                //   NSString *data =[NSString stringWithFormat:@"%@       %@",request.admin.firstName,request.user.firstName];
+            //                
+            //                NSLog(@"%@",request.admin.firstName);
+            //            }];
+            //            
+            //            
+            //            
+            //        }
+            
+        }];
+        
+    }
+
+
 
 - (void)followButtonPressed:(TeamTableViewCell*)teamCell completion:(void (^)(void))completion{
     
@@ -180,7 +238,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                                                     [moderatorQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
                                                         if(objects.count==0){
                                                             [[[UIAlertView alloc] initWithTitle:@""
-                                                                                        message:@"No User Admin"
+                                                                                        message:@"No admin found for this team"
                                                                                        delegate:nil
                                                                               cancelButtonTitle:nil
                                                                               otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
@@ -189,20 +247,32 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                                                         else{
                                                             for (User* user in objects) {
                                                                 
+                                                                if(![self isRequestAllowed:NO withUser:user withChild:nil withTeam:team]){
+                                                                    [[[UIAlertView alloc] initWithTitle:@""
+                                                                                                message:@"A request to follow this team is already sent to admin."
+                                                                                               delegate:nil
+                                                                                      cancelButtonTitle:nil
+                                                                                      otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
+                                                                }
                                                                 
-                                                               
+                                                                else{
                                                                     NSString *timestamp =  [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970] * 1000];
                                                                     
                                                                     TeamRequest *teamRequest = [[TeamRequest alloc]init];
                                                                     
                                                                     [teamRequest saveTeam:team andAdmin:user  followby:[User currentUser] orChild:nil withTimestamp:timestamp isChild:@0 completion:^{
                                                                         if (completion) {
-                                                                            
+                                                                          
                                                                             completion();
                                                                         }
+                                                                          [pendingRequestArray addObject:teamRequest];
+                                                                          [self.tableView reloadData];
                                                                     }];
                                                                     break;
-                                                                    
+
+                                                                }
+                                                               
+                                                                
                                                                 
                                                             }
                                                         }
@@ -226,7 +296,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                                                         [moderatorQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
                                                             if(objects.count==0){
                                                                 [[[UIAlertView alloc] initWithTitle:@""
-                                                                                            message:@"No User Admin"
+                                                                                            message:@"No admin found for this team."
                                                                                            delegate:nil
                                                                                   cancelButtonTitle:nil
                                                                                   otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
@@ -235,7 +305,15 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                                                             else{
                                                                 for (User* user in objects) {
                                                                     
+                                                                    if(![self isRequestAllowed:YES withUser:nil withChild:child withTeam:team]){
+                                                                        [[[UIAlertView alloc] initWithTitle:@""
+                                                                                                    message:@"A request to follow this team is already sent to admin."
+                                                                                                   delegate:nil
+                                                                                          cancelButtonTitle:nil
+                                                                                          otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
+                                                                    }
                                                                     
+                                                                    else{
                                                                   
                                                                         NSString *timestamp =  [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970] * 1000];
                                                                         
@@ -246,10 +324,14 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                                                                                 
                                                                                 completion();
                                                                             }
+                                                                            [pendingRequestArray addObject:teamRequest];
+                                                                             [self.tableView reloadData];
                                                                         }];
                                                                         break;
                                                                         
                                                                                                                                    }
+                                                                    
+                                                                }
                                                             }
                                                         }];
                                                         
@@ -274,7 +356,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
         [moderatorQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
             if(objects.count==0){
                 [[[UIAlertView alloc] initWithTitle:@""
-                                            message:@"No User Admin"
+                                            message:@"No admin found for this team."
                                            delegate:nil
                                   cancelButtonTitle:nil
                                   otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
@@ -283,21 +365,31 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
             else{
                 for (User* user in objects) {
                     
-                  
+                    if(![self isRequestAllowed:NO withUser:[User currentUser] withChild:nil withTeam:team]){
+                        [[[UIAlertView alloc] initWithTitle:@""
+                                                    message:@"A request to follow this team is already sent to admin."
+                                                   delegate:nil
+                                          cancelButtonTitle:nil
+                                          otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
+                    }
+                    else{
                    
                         NSString *timestamp =  [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970] * 1000];
-                        
+                    
                         TeamRequest *teamRequest = [[TeamRequest alloc]init];
-                        
+                    
                         [teamRequest saveTeam:team andAdmin:user  followby:[User currentUser] orChild:nil withTimestamp:timestamp isChild:@0 completion:^{
                             if (completion) {
                                 
                                 completion();
                             }
+                              [pendingRequestArray addObject:teamRequest];
+                             [self.tableView reloadData];
                         }];
                         break;
                         
                     
+                }
                 }
             }
         }];
@@ -315,6 +407,44 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     }
 }
 
+
+-(BOOL)isRequestAllowed:(BOOL)isChild withUser:(User*)user withChild:(Child*)child withTeam:(Team*)team {
+    
+    if(!isChild){
+        for(TeamRequest *request in pendingRequestArray){
+            
+            if((!request.isChild.boolValue)&&([request.team.objectId isEqualToString:team.objectId])){
+                return NO;
+            }
+        
+    }
+        
+        return YES;
+
+    }
+    else{
+        for(TeamRequest *request in pendingRequestArray){
+            
+            if(([child.objectId isEqualToString:request.child.objectId])&&([request.team.objectId isEqualToString:team.objectId])&& (request.isChild.boolValue)){
+                
+                return NO;
+                
+            
+            
+            }
+
+            
+           
+            
+            
+        }
+            return YES;
+
+        }
+        
+        
+    
+}
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation

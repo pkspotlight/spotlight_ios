@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="hOq-mx-7hw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="hOq-mx-7hw">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -1549,7 +1549,7 @@
                                 <rect key="frame" x="20" y="0.0" width="560" height="600"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D2c-I6-cLy">
-                                <rect key="frame" x="20" y="518" width="560" height="62"/>
+                                <rect key="frame" x="20" y="448" width="560" height="62"/>
                                 <color key="backgroundColor" red="0.32549019607843138" green="0.32549019607843138" blue="0.32549019607843138" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="89" id="aJR-tS-YPo"/>
@@ -1570,7 +1570,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="drL-D3-HGv">
-                                <rect key="frame" x="20" y="448" width="560" height="62"/>
+                                <rect key="frame" x="20" y="378" width="560" height="62"/>
                                 <color key="backgroundColor" red="0.24313725490196078" green="0.76078431372549016" blue="0.34901960784313724" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="62" id="4G9-8t-OQQ"/>
@@ -1599,30 +1599,59 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DCc-h0-7vu">
+                                <rect key="frame" x="20" y="518" width="560" height="62"/>
+                                <color key="backgroundColor" red="0.0" green="0.24698606000000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="89" id="5H0-ia-Eow"/>
+                                    <constraint firstAttribute="height" constant="62" id="Uyh-g9-5ku"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="LOG IN WITH FACEBOOK">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="5H0-ia-Eow"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="logInWithFacebookBtnClicked:" destination="cWM-Yi-BmZ" eventType="touchUpInside" id="vWx-Dd-Ztp"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="D2c-I6-cLy" secondAttribute="centerX" id="0Kh-CK-XHv"/>
+                            <constraint firstItem="DCc-h0-7vu" firstAttribute="trailing" secondItem="NLl-qY-bQe" secondAttribute="trailingMargin" id="3ho-cA-dVW"/>
                             <constraint firstItem="D2c-I6-cLy" firstAttribute="trailing" secondItem="NLl-qY-bQe" secondAttribute="trailingMargin" id="4Ss-Lg-FQq"/>
                             <constraint firstItem="UOT-o9-2sO" firstAttribute="leading" secondItem="NLl-qY-bQe" secondAttribute="leadingMargin" id="5Js-yi-cfC"/>
                             <constraint firstItem="D2c-I6-cLy" firstAttribute="top" secondItem="drL-D3-HGv" secondAttribute="bottom" constant="8" id="7f5-Pn-e9H"/>
                             <constraint firstItem="AB0-W6-tW3" firstAttribute="top" secondItem="NLl-qY-bQe" secondAttribute="topMargin" id="84m-ET-c4F"/>
                             <constraint firstItem="AB0-W6-tW3" firstAttribute="leading" secondItem="NLl-qY-bQe" secondAttribute="leadingMargin" id="9zi-at-mJz"/>
+                            <constraint firstItem="DCc-h0-7vu" firstAttribute="trailing" secondItem="NLl-qY-bQe" secondAttribute="trailingMargin" id="AXn-57-j9A"/>
                             <constraint firstItem="drL-D3-HGv" firstAttribute="trailing" secondItem="NLl-qY-bQe" secondAttribute="trailingMargin" id="Bgg-iU-1Ak"/>
                             <constraint firstAttribute="centerX" secondItem="drL-D3-HGv" secondAttribute="centerX" id="Bql-39-cdX"/>
+                            <constraint firstItem="DCc-h0-7vu" firstAttribute="leading" secondItem="NLl-qY-bQe" secondAttribute="leadingMargin" id="EzQ-bP-QVj"/>
                             <constraint firstItem="UOT-o9-2sO" firstAttribute="trailing" secondItem="NLl-qY-bQe" secondAttribute="trailingMargin" id="HYK-XX-xEh"/>
                             <constraint firstItem="AB0-W6-tW3" firstAttribute="top" secondItem="NLl-qY-bQe" secondAttribute="topMargin" id="JEZ-cd-IPT"/>
                             <constraint firstItem="D2c-I6-cLy" firstAttribute="top" secondItem="drL-D3-HGv" secondAttribute="bottom" constant="41" id="JJO-g2-crI"/>
-                            <constraint firstItem="jmC-mG-TIG" firstAttribute="top" secondItem="D2c-I6-cLy" secondAttribute="bottom" constant="20" id="KQN-Tl-u7q"/>
+                            <constraint firstItem="jmC-mG-TIG" firstAttribute="top" secondItem="D2c-I6-cLy" secondAttribute="bottom" constant="90" id="KQN-Tl-u7q"/>
                             <constraint firstItem="D2c-I6-cLy" firstAttribute="leading" secondItem="NLl-qY-bQe" secondAttribute="leadingMargin" id="P0Z-33-bAH"/>
                             <constraint firstAttribute="trailingMargin" secondItem="AB0-W6-tW3" secondAttribute="trailing" id="RSx-Lh-PS1"/>
+                            <constraint firstItem="DCc-h0-7vu" firstAttribute="leading" secondItem="NLl-qY-bQe" secondAttribute="leadingMargin" id="THX-9H-rXk"/>
+                            <constraint firstItem="DCc-h0-7vu" firstAttribute="leading" secondItem="NLl-qY-bQe" secondAttribute="leading" id="W93-Br-MfS"/>
                             <constraint firstItem="drL-D3-HGv" firstAttribute="leading" secondItem="NLl-qY-bQe" secondAttribute="leadingMargin" id="WP1-KO-iOP"/>
                             <constraint firstItem="jmC-mG-TIG" firstAttribute="top" secondItem="AB0-W6-tW3" secondAttribute="bottom" id="XmM-BH-eLX"/>
                             <constraint firstItem="UOT-o9-2sO" firstAttribute="top" secondItem="Nfl-Hn-PAa" secondAttribute="bottom" constant="92" id="ZPc-DM-efo"/>
                             <constraint firstItem="jmC-mG-TIG" firstAttribute="top" secondItem="AB0-W6-tW3" secondAttribute="bottom" id="bIf-Oa-GZ0"/>
                             <constraint firstItem="UOT-o9-2sO" firstAttribute="centerX" secondItem="NLl-qY-bQe" secondAttribute="centerX" id="enI-F3-bQ9"/>
+                            <constraint firstItem="DCc-h0-7vu" firstAttribute="top" secondItem="D2c-I6-cLy" secondAttribute="bottom" constant="8" id="fIP-cW-OMn"/>
                             <constraint firstItem="AB0-W6-tW3" firstAttribute="leading" secondItem="NLl-qY-bQe" secondAttribute="leadingMargin" id="g8m-4j-WJX"/>
+                            <constraint firstItem="jmC-mG-TIG" firstAttribute="top" secondItem="DCc-h0-7vu" secondAttribute="bottom" constant="20" id="gu9-7x-TQc"/>
                             <constraint firstItem="UOT-o9-2sO" firstAttribute="centerY" secondItem="NLl-qY-bQe" secondAttribute="centerY" id="kpQ-HE-OK1"/>
+                            <constraint firstAttribute="trailing" secondItem="DCc-h0-7vu" secondAttribute="trailing" id="q6T-FO-EvV"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -1630,6 +1659,11 @@
                                 <exclude reference="g8m-4j-WJX"/>
                                 <exclude reference="kpQ-HE-OK1"/>
                                 <exclude reference="JJO-g2-crI"/>
+                                <exclude reference="AXn-57-j9A"/>
+                                <exclude reference="EzQ-bP-QVj"/>
+                                <exclude reference="W93-Br-MfS"/>
+                                <exclude reference="q6T-FO-EvV"/>
+                                <exclude reference="KQN-Tl-u7q"/>
                                 <exclude reference="bIf-Oa-GZ0"/>
                             </mask>
                         </variation>
@@ -1638,6 +1672,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="loginButton" destination="D2c-I6-cLy" id="eWb-Jo-jKJ"/>
+                        <outlet property="loginWithFBBtn" destination="DCc-h0-7vu" id="z2X-4n-X6b"/>
                         <outlet property="signupButton" destination="drL-D3-HGv" id="DMq-2g-mcu"/>
                     </connections>
                 </viewController>
@@ -2233,7 +2268,7 @@
                             </constraints>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="Iio-w5-o83">
-                            <rect key="frame" x="0.0" y="279" width="600" height="150"/>
+                            <rect key="frame" x="0.0" y="279" width="600" height="72"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yVh-Vn-QYM">
@@ -2248,24 +2283,11 @@
                                         <action selector="LogInButtonPressed:" destination="Pm3-HU-US8" eventType="touchUpInside" id="usM-nC-szA"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HAR-2C-1K3">
-                                    <rect key="frame" x="225" y="104" width="150" height="34"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="34" id="QMg-wW-MeV"/>
-                                        <constraint firstAttribute="width" constant="150" id="VJA-m7-P84"/>
-                                    </constraints>
-                                    <state key="normal" image="facebook_login_button"/>
-                                    <connections>
-                                        <action selector="logInWithFacebookBtnClicked:" destination="Pm3-HU-US8" eventType="touchUpInside" id="rcF-n4-SNW"/>
-                                    </connections>
-                                </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="centerX" secondItem="yVh-Vn-QYM" secondAttribute="centerX" id="1wE-mA-HDF"/>
                                 <constraint firstItem="yVh-Vn-QYM" firstAttribute="top" secondItem="Iio-w5-o83" secondAttribute="top" constant="22" id="4lE-pp-B2k"/>
-                                <constraint firstItem="HAR-2C-1K3" firstAttribute="top" secondItem="yVh-Vn-QYM" secondAttribute="bottom" constant="52" id="XLl-7X-MuB"/>
-                                <constraint firstItem="HAR-2C-1K3" firstAttribute="centerX" secondItem="Iio-w5-o83" secondAttribute="centerX" id="fOv-hc-QPb"/>
                                 <constraint firstAttribute="centerY" secondItem="yVh-Vn-QYM" secondAttribute="centerY" id="gYj-iV-1cB"/>
                             </constraints>
                             <variation key="default">
@@ -2463,7 +2485,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="facebook_login_button" width="202" height="46"/>
         <image name="friends.png" width="25" height="25"/>
         <image name="icon-edit-avatar.png" width="19" height="17"/>
         <image name="landingBg.jpg" width="750" height="1334"/>

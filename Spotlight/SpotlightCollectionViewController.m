@@ -557,17 +557,6 @@ if(!media.isVideo)
                                                             preferredStyle:UIAlertControllerStyleActionSheet];
     
     
-    [alert addAction:[UIAlertAction actionWithTitle:@"No Music"
-                      
-                                              style:UIAlertActionStyleDefault
-                      
-                                            handler:^(UIAlertAction * _Nonnull action) {
-                                                
-                                                [self createMontageWithSongTitle:nil share:NO AssetURL:nil];
-                                                
-                                            }]];
-    
-    
     
     [alert addAction:[UIAlertAction actionWithTitle:@"Choose Music from Device"
                       
@@ -578,6 +567,9 @@ if(!media.isVideo)
                                                 [self openMedia];
                                                 
                                             }]];
+    
+    
+    
     
     
     
@@ -601,6 +593,19 @@ if(!media.isVideo)
                                             handler:^(UIAlertAction * _Nonnull action) {
                                                 [self createMontageWithSongTitle:@"DT_TheDuff_Ready2Go_128_INST" share:NO AssetURL:nil];
                                             }]];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"No Music"
+                      
+                                              style:UIAlertActionStyleDefault
+                      
+                                            handler:^(UIAlertAction * _Nonnull action) {
+                                                
+                                                [self createMontageWithSongTitle:nil share:NO AssetURL:nil];
+                                                
+                                            }]];
+    
+
+    
     [alert addAction:[UIAlertAction actionWithTitle:@"Cancel"
                                               style:UIAlertActionStyleCancel
                                             handler:nil]];
@@ -612,17 +617,6 @@ if(!media.isVideo)
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Select your background music"
                                                                    message:@""
                                                             preferredStyle:UIAlertControllerStyleActionSheet];
-    
-    
-    [alert addAction:[UIAlertAction actionWithTitle:@"No Music"
-                      
-                                              style:UIAlertActionStyleDefault
-                      
-                                            handler:^(UIAlertAction * _Nonnull action) {
-                                                
-                                                [self createMontageWithSongTitle:nil share:NO AssetURL:nil];
-                                                
-                                            }]];
     
     
     
@@ -659,6 +653,20 @@ if(!media.isVideo)
                                             handler:^(UIAlertAction * _Nonnull action) {
                                                 [self createMontageWithSongTitle:@"DT_TheDuff_Ready2Go_128_INST" share:YES AssetURL:nil];
                                             }]];
+    
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"No Music"
+                      
+                                              style:UIAlertActionStyleDefault
+                      
+                                            handler:^(UIAlertAction * _Nonnull action) {
+                                                
+                                                [self createMontageWithSongTitle:nil share:NO AssetURL:nil];
+                                                
+                                            }]];
+    
+
+    
     [alert addAction:[UIAlertAction actionWithTitle:@"Cancel"
                                               style:UIAlertActionStyleCancel
                                             handler:nil]];

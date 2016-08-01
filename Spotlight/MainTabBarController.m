@@ -24,10 +24,12 @@
 @implementation MainTabBarController
 
 - (void)viewDidLoad {
-    
     [super viewDidLoad];
-      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatePendingRequest) name:@"PendingRequest" object:nil];
+    [self showLoginPopUp];
+       [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatePendingRequest) name:@"PendingRequest" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatePendingMessageRequest) name:@"ShowAlertForAcceptedRequest" object:nil];
+    
+    
     // Do any additional setup after loading the view.
 }
 
@@ -36,6 +38,24 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+-(void)showLoginPopUp{
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"SpotlightLoginPopUp"] == FALSE)
+    {
+        
+        [[[UIAlertView alloc] initWithTitle:@""
+                                    message:@"Successfully logged in."
+                                   delegate:nil
+                          cancelButtonTitle:nil
+                          otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
+        
+       
+        [[NSUserDefaults standardUserDefaults] setBool:TRUE forKey:@"SpotlightLoginPopUp"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        //Alert code will go here...
+    }
+    
+}
 
 -(void)deleteTeamRequest:(TeamRequest *)request
 {
@@ -108,12 +128,12 @@
         {
             for(TeamRequest *request in objects)
             {
-                if(request.user.objectId == request.admin.objectId)
-                {
-                    [self deleteTeamRequest:request];
-                }
+//                if(request.user.objectId == request.admin.objectId)
+//                {
+//                    [self deleteTeamRequest:request];
+//                }
                 
-               else if(request.requestState.intValue == requestStateAccepted)
+               if(request.requestState.intValue == requestStateAccepted)
                 {
                     
                     if(![appDel.acceptedTeamIDs containsObject:request.objectId])
@@ -165,7 +185,7 @@
             NSMutableArray *array = [NSMutableArray new];
             for(TeamRequest *request in objects)
             {
-                if((request.user.objectId != request.admin.objectId) && (request.requestState.intValue == reqestStatePending))
+                if( (request.requestState.intValue == reqestStatePending))
                 {
                     [array addObject:request];
                 }
@@ -215,7 +235,7 @@
             NSMutableArray *array = [NSMutableArray new];
             for(TeamRequest *request in objects)
             {
-                 if((request.user.objectId != request.admin.objectId) && (request.requestState.intValue == reqestStatePending))
+                 if((request.requestState.intValue == reqestStatePending))
                 {
                     [array addObject:request];
                 }

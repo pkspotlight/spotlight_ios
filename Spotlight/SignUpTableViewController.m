@@ -80,8 +80,12 @@
 }
 
 - (void)loadMainTabBar {
+    
+   
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     MainTabBarController *mainTabBarController = [storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
+    
+    
     if([User currentUser].isNew){
        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SpotlightPopUp"];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SpotlightFriendsPopUp"];
@@ -100,6 +104,8 @@
 }
 
 - (IBAction)createAccountButtonPressed:(id)sender {
+    
+     [self.view endEditing:YES];
     
     if (self.pendingInputDict[@"email"] &&
         [self.pendingInputDict[@"email"] length] > 4 &&
@@ -135,6 +141,8 @@
     }
 }
 - (IBAction)LogInButtonPressed:(id)sender {
+    
+     [self.view endEditing:YES];
     if (self.pendingInputDict[@"username"] &&
         [self.pendingInputDict[@"username"] length] > 4 &&
         self.pendingInputDict[@"password"] &&

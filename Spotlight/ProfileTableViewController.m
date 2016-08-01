@@ -85,6 +85,8 @@
         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"
                                                                  bundle: nil];
         
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SpotlightLoginPopUp"];
+        
         UIViewController *controller = [mainStoryboard instantiateViewControllerWithIdentifier: @"IntroNavigationController"];
         [[UIApplication sharedApplication].delegate.window setRootViewController:controller];
     }];

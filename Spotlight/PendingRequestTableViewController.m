@@ -55,7 +55,7 @@
             NSMutableArray *array = [NSMutableArray new];
             for(TeamRequest *request in objects)
             {
-                if((request.user.objectId != request.admin.objectId) && (request.requestState.intValue == reqestStatePending))
+                if((request.requestState.intValue == reqestStatePending))
                 {
                     [_requestArray addObject:request];
                      [self.tableView reloadData];
@@ -108,7 +108,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PendingRequestTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"pendingRequest" forIndexPath:indexPath];
    TeamRequest* request = self.requestArray[indexPath.row];
-    [cell setData:request.nameOfRequester teamName:request.teamName fromUser:request.user forChild:request.child];
+    [cell setData:request.nameOfRequester teamName:request.teamName fromUser:request.user forChild:request.child isChild:request.isChild.boolValue];
     
     cell.acceptButton.tag = 1001;
     cell.rejectButton.tag = 1002;

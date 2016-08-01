@@ -25,7 +25,7 @@
 
     // Configure the view for the selected state
 }
-- (void)setData:(NSString*)name teamName:(NSString*)teamName fromUser:(User *)user forChild:(Child *)child{
+- (void)setData:(NSString*)name teamName:(NSString*)teamName fromUser:(User *)user forChild:(Child *)child isChild:(BOOL)isChild{
     [self.profilePic.layer setCornerRadius:self.profilePic.bounds.size.width/2];
     [self.profilePic setClipsToBounds:YES];
     NSString *requestText;
@@ -59,7 +59,7 @@
     self.requestName.text = requestText;
     self.profilePic.image = [UIImage imageNamed:@"unknown_user"];
     
-    if(user)
+    if(!isChild)
     {
     [user fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
         

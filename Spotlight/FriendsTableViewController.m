@@ -18,7 +18,7 @@
 #import "BasicHeaderView.h"
 #import "SpotlightBoardView.h"
 
-#define SpotlightFriendsBoardingText @"This is where you can find all of your friends or teammates and follow thier activity. Click on the '+' in the top right to search for your friends!"
+#define SpotlightFriendsBoardingText @"This is where you can find all of your friends or teamsMemberArray and follow thier activity. Click on the '+' in the top right to search for your friends!"
 static CGFloat const BasicHeaderHeight = 50;
 
 
@@ -26,7 +26,8 @@ static CGFloat const BasicHeaderHeight = 50;
 
 @property (strong, nonatomic) NSArray* friends;
 @property (strong, nonatomic) NSArray* children;
-@property (strong, nonatomic) NSArray* teammates;
+@property (strong, nonatomic) NSMutableArray* teamsMemberArray;
+
 
 @end
 
@@ -34,6 +35,7 @@ static CGFloat const BasicHeaderHeight = 50;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _teamsMemberArray = [NSMutableArray new];
     [self.tableView
      registerNib:[UINib nibWithNibName:@"BasicHeaderView" bundle:nil]
      forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
@@ -107,13 +109,33 @@ static CGFloat const BasicHeaderHeight = 50;
 }
 
 - (void)loadTeamMembers:(UIRefreshControl*)refresh {
+    [_teamsMemberArray removeAllObjects];
+    [self.tableView reloadData];
     PFQuery *query = [PFQuery queryWithClassName:@"Child"];
     [query whereKey:@"teams" equalTo:self.team];
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-        self.teammates = [objects copy];
        
-        [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-        [refresh performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:NO];
+        if(objects.count > 0)
+        {
+            [_teamsMemberArray addObjectsFromArray:objects];
+        }
+        
+        PFQuery *query1 = [PFQuery queryWithClassName:@"_User"];
+        [query1 whereKey:@"teams" equalTo:self.team];
+        
+        [query1 findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+            if(objects.count > 0)
+            {
+                [_teamsMemberArray addObjectsFromArray:objects];
+            }
+            
+            [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+            [refresh performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:NO];
+            
+        }];
+        
+       
+        
     }];
 }
 
@@ -184,7 +206,7 @@ static CGFloat const BasicHeaderHeight = 50;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (self.team) {
-        return self.teammates.count;
+        return self.teamsMemberArray.count;
     } else {
         if (section == 0) {
             return self.children.count;
@@ -198,16 +220,16 @@ static CGFloat const BasicHeaderHeight = 50;
     UITableViewCell* cell;
     
     if (self.team) {
-        if ([self.teammates[indexPath.row] isKindOfClass:[Child class]]){
+        if ([self.teamsMemberArray[indexPath.row] isKindOfClass:[Child class]]){
             cell = (ChildTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"ChildTableViewCell"
                                                                         forIndexPath:indexPath];
             
-            [(ChildTableViewCell*)cell formatForChild:self.teammates[indexPath.row] isFollowing:YES];
-        } else if ([self.teammates[indexPath.row] isKindOfClass:[User class]]){
+            [(ChildTableViewCell*)cell formatForChild:self.teamsMemberArray[indexPath.row] isFollowing:YES];
+        } else if ([self.teamsMemberArray[indexPath.row] isKindOfClass:[User class]]){
             cell = (FriendTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"FriendTableViewCell"
                                                                          forIndexPath:indexPath];
             
-            [(FriendTableViewCell*)cell formatForUser:self.teammates[indexPath.row] isFollowing:YES];
+            [(FriendTableViewCell*)cell formatForUser:self.teamsMemberArray[indexPath.row] isFollowing:YES];
         }
     } else {
         if (indexPath.section == 0) {
@@ -231,12 +253,12 @@ static CGFloat const BasicHeaderHeight = 50;
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"FriendDetailsSegue"]) {
-        id user = (self.team) ? self.teammates[[self.tableView indexPathForCell:sender].row] : self.friends[[self.tableView indexPathForCell:sender].row];
+        id user = (self.team) ? self.teamsMemberArray[[self.tableView indexPathForCell:sender].row] : self.friends[[self.tableView indexPathForCell:sender].row];
         [(FriendProfileViewController*)[segue destinationViewController] setUser:user];
     } else if ([segue.identifier isEqualToString:@"SearchFriendsSegue"]) {
     } else if ([segue.identifier isEqualToString:@"CreateFamilyMemberSegue"]) {
     } else if ([segue.identifier isEqualToString:@"ChildDetailsSegue"]) {
-        id user = (self.team) ? self.teammates[[self.tableView indexPathForCell:sender].row] : self.children[[self.tableView indexPathForCell:sender].row];
+        id user = (self.team) ? self.teamsMemberArray[[self.tableView indexPathForCell:sender].row] : self.children[[self.tableView indexPathForCell:sender].row];
          [(FriendProfileViewController*)[segue destinationViewController] setChild:user];
     }
 }

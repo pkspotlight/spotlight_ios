@@ -107,9 +107,7 @@
                 [self dismissViewControllerAnimated:YES completion:nil];
             }];
             
-            [_selfChild followTeam:self.team completion:^{
-                
-            }];
+            
             
             
             

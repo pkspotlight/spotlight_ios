@@ -105,7 +105,7 @@ static CGFloat const BasicHeaderHeight = 50;
             NSMutableArray *array = [NSMutableArray new];
             for(TeamRequest *request in objects)
             {
-              if((request.user.objectId != request.admin.objectId) && (request.requestState.intValue == reqestStatePending))
+              if((request.requestState.intValue == reqestStatePending))
               {
                  [array addObject:request];
              }

@@ -13,13 +13,15 @@
 #import "Team.h"
 #import "User.h"
 #import "MontageCreator.h"
-
+#import "ELCImagePickerController.h"
+#import "ELCAlbumPickerController.h"
 #import <MobileCoreServices/UTCoreTypes.h>
 #import <MBProgressHUD.h>
 #import <AVFoundation/AVFoundation.h>
 #import <AVKit/AVKit.h>
+#import "PECropViewController.h"
 
-@interface SpotlightCollectionViewController ()
+@interface SpotlightCollectionViewController ()<PECropViewControllerDelegate>
 
 @property (strong, nonatomic) NSArray* mediaList;
 @property (strong, nonatomic) UIImagePickerController* imagePickerController;
@@ -149,6 +151,58 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
 }
 
 
+-(void)editPhotoAtIndex:(NSUInteger)index withImage:(UIImage *)image
+{
+   if( self.mediaList.count > index && image)
+   {
+       SpotlightMedia *media = self.mediaList[index];
+if(!media.isVideo)
+{
+
+    PECropViewController *controller = [[PECropViewController alloc] init];
+    controller.delegate = self;
+    controller.image = image;
+    
+    
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:controller];
+    [self presentViewController:navigationController animated:YES completion:NULL];
+}
+   }
+    
+}
+
+- (void)cropViewController:(PECropViewController *)controller didFinishCroppingImage:(UIImage *)croppedImage
+{
+  
+    
+     [controller dismissViewControllerAnimated:YES completion:NULL];
+     SpotlightMedia* media = self.mediaList[self.browser.currentIndex];
+    media.mediaFile = [PFFile fileWithName:@"image.png" data:UIImageJPEGRepresentation(croppedImage, 1.0)];
+    media.thumbnailImageFile = [PFFile fileWithName:@"image.png" data:UIImageJPEGRepresentation(croppedImage, 0.5)];
+    
+    MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication].delegate window] animated:YES];
+    [hud setLabelText:@"Updating image..."];
+    
+    [media saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        [self.browser reloadData];
+        [self.collectionView reloadData];
+        [hud hide:YES];
+    }];
+    
+}
+
+- (void)cropViewControllerDidCancel:(PECropViewController *)controller
+{
+      [controller dismissViewControllerAnimated:YES completion:NULL];
+}
+
+
+-(void)cropBtnClicked:(NSUInteger)currentIndex withImage:(UIImage *)image
+{
+    [self editPhotoAtIndex:currentIndex withImage:image];
+}
+
+
 -(void)photoBrowser:(MWPhotoBrowser *)photoBrowser likePhotoAtIndex:(NSUInteger)index {
     SpotlightMedia *media = self.mediaList[index];
     PFQuery* query = [media.likes query];
@@ -170,25 +224,68 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
 -(void)photoBrowser:(MWPhotoBrowser *)photoBrowser populateLikesForPhotoAtIndex:(NSUInteger)index {
     SpotlightMedia *media = self.mediaList[index];
     [media likeCountWithCompletion:^(NSInteger likes) {
-        [self.browser populateLikeCount:likes atIndex:index];
+      //  [self.browser populateLikeCount:likes atIndex:index];
     }];
 }
 
 
 - (IBAction)addMediaButtonPressed:(id)sender {
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
-    {
-        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-        imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
-        imagePickerController.delegate = self;
-        imagePickerController.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeMovie, (NSString *)kUTTypeImage, nil];
-        imagePickerController.videoMaximumDuration = 15;
-        [imagePickerController setAllowsEditing:YES];
-        
-        self.imagePickerController = imagePickerController;
-        [self.navigationController presentViewController:self.imagePickerController animated:YES completion:nil];
-    }
+    
+    
+    
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Select"
+                                                                   message:@""
+                                                            preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"Choose Photos"
+                                              style:UIAlertActionStyleDefault
+                                            handler:^(UIAlertAction * _Nonnull action) {
+                                                [self selectImagesFromElcImagePicker];
+                                            }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Choose Video"
+                                              style:UIAlertActionStyleDefault
+                                            handler:^(UIAlertAction * _Nonnull action) {
+                                                [self selectVideoFromNativeImagePicker];
+                                            }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"Cancel"
+                                              style:UIAlertActionStyleCancel
+                                            handler:nil]];
+    [self presentViewController:alert animated:YES completion:nil];
+    
+    
+    
+    
+
 }
+
+
+-(void)selectVideoFromNativeImagePicker{
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
+        {
+            UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+            imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
+            imagePickerController.delegate = self;
+            imagePickerController.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeMovie,  nil];
+            imagePickerController.videoMaximumDuration = 15;
+            [imagePickerController setAllowsEditing:YES];
+    
+            self.imagePickerController = imagePickerController;
+            [self.navigationController presentViewController:self.imagePickerController animated:YES completion:nil];
+        }
+
+}
+
+-(void)selectImagesFromElcImagePicker{
+    
+    ELCAlbumPickerController *albumController = [[ELCAlbumPickerController alloc] init];
+    ELCImagePickerController *elcPicker = [[ELCImagePickerController alloc] initWithRootViewController:albumController];
+    [albumController setParent:elcPicker];
+    
+    elcPicker.imagePickerDelegate = self;
+    [self presentModalViewController:elcPicker animated:YES];
+}
+
+
 
 
 - (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
@@ -239,12 +336,12 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
         UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK"
                                                                 style:UIAlertActionStyleDefault
                                                               handler:^(UIAlertAction * action) {
-                                                                  [self saveImageWithMediaInfo:infoDict title:titleAlert.textFields[0].text];
+                                                                  [self saveImageWithMediaInfoVideo:infoDict title:titleAlert.textFields[0].text];
                                                               }];
         UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"No Title"
                                                                style:UIAlertActionStyleCancel
                                                              handler:^(UIAlertAction * action) {
-                                                                 [self saveImageWithMediaInfo:infoDict title:nil];
+                                                                 [self saveImageWithMediaInfoVideo:infoDict title:nil];
                                                              }];
         [titleAlert addAction:defaultAction];
         [titleAlert addAction:cancelAction];
@@ -256,7 +353,7 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
     }];
 }
 
-- (void)saveImageWithMediaInfo:(NSDictionary<NSString *,id> *)infoDict title:(NSString*)title{
+- (void)saveImageWithMediaInfoVideo:(NSDictionary<NSString *,id> *)infoDict title:(NSString*)title{
     SpotlightMedia *media;
     NSString *mediaType = [infoDict objectForKey: UIImagePickerControllerMediaType];
     
@@ -292,8 +389,161 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
 }
 
 
+
+- (void)saveImageWithMediaInfo:(NSArray *)info title:(NSString*)title{
+   __block SpotlightMedia *media;
+    
+      for (NSDictionary *infoDict in info){
+    NSString *mediaType = [infoDict objectForKey: UIImagePickerControllerMediaType];
+    
+    if ([mediaType isEqualToString:(NSString *)ALAssetTypeVideo]){
+        
+        
+        
+        
+        NSURL *videoUrl=(NSURL*)[infoDict objectForKey:UIImagePickerControllerReferenceURL];
+        PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[videoUrl] options:nil];
+        PHAsset *asset = result.firstObject;
+        PHVideoRequestOptions *options=[[PHVideoRequestOptions alloc]init];
+        options.version=PHVideoRequestOptionsVersionOriginal;
+        [[PHImageManager defaultManager] requestAVAssetForVideo:asset options:options resultHandler:^(AVAsset * avasset, AVAudioMix * audioMix, NSDictionary * info) {
+           
+                
+                AVURLAsset *asset = (AVURLAsset *)avasset;
+                NSURL *url = asset.URL;
+                NSLog(@"url is %@",url);
+                NSString *videoPath = [url path];
+                media = [[SpotlightMedia alloc] initWithVideoPath:videoPath];
+                if (title) {
+                    media.title = title;
+                }
+             dispatch_async(dispatch_get_main_queue(), ^{
+                MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                [hud setLabelText:@"Adding Media..."];
+                media[@"parent"] = self.spotlight;
+                [media saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                    if (error) {
+                        [hud hide:YES];
+
+                        NSLog(@"fuck: %@", [error localizedDescription]);
+                    } else {
+                        [self.spotlight allMedia:^(NSArray *media, NSError *error) {
+                            self.mediaList = media;
+                            [self.collectionView reloadData];
+                            [hud hide:YES];
+                        }];
+                    }
+                }];
+
+
+              
+            });
+        }];
+
+        
+    } else if ([mediaType isEqualToString:(NSString *)ALAssetTypePhoto]) {
+        UIImage *image = [infoDict valueForKey:UIImagePickerControllerOriginalImage];
+        media = [[SpotlightMedia alloc] initWithImage:image];
+        
+        if (title) {
+            media.title = title;
+        }
+        MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [hud setLabelText:@"Adding Media..."];
+        media[@"parent"] = self.spotlight;
+        [media saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+            if (error) {
+                [hud hide:YES];
+
+                NSLog(@"fuck: %@", [error localizedDescription]);
+            } else {
+                [self.spotlight allMedia:^(NSArray *media, NSError *error) {
+                    self.mediaList = media;
+                    [self.collectionView reloadData];
+                    [hud hide:YES];
+                }];
+            }
+        }];
+
+    }
+          }
+    self.imagePickerController = nil;
+}
+
+
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (void)elcImagePickerController:(ELCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)info{
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+      
+        if(info.count>1){
+            
+            
+            UIAlertController* titleAlert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Would you like to add a title to these %lu images",(unsigned long)info.count]
+                                                                                message:nil
+                                                                         preferredStyle:UIAlertControllerStyleAlert];
+            [titleAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+                
+            }];
+            
+            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK"
+                                                                    style:UIAlertActionStyleDefault
+                                                                  handler:^(UIAlertAction * action) {
+                                                                      [self saveImageWithMediaInfo:info title:titleAlert.textFields[0].text];
+                                                                  }];
+            UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"No Title"
+                                                                   style:UIAlertActionStyleCancel
+                                                                 handler:^(UIAlertAction * action) {
+                                                                     [self saveImageWithMediaInfo:info title:nil];
+                                                                 }];
+            [titleAlert addAction:defaultAction];
+            [titleAlert addAction:cancelAction];
+            [self presentViewController:titleAlert
+                               animated:YES
+                             completion:^{
+                                 
+                             }];
+
+        }
+        
+        else{
+            UIAlertController* titleAlert = [UIAlertController alertControllerWithTitle:@"Would you like to add a title?"
+                                                                                message:nil
+                                                                         preferredStyle:UIAlertControllerStyleAlert];
+            [titleAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+                
+            }];
+            
+            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK"
+                                                                    style:UIAlertActionStyleDefault
+                                                                  handler:^(UIAlertAction * action) {
+                                                                      [self saveImageWithMediaInfo:info title:titleAlert.textFields[0].text];
+                                                                  }];
+            UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"No Title"
+                                                                   style:UIAlertActionStyleCancel
+                                                                 handler:^(UIAlertAction * action) {
+                                                                     [self saveImageWithMediaInfo:info title:nil];
+                                                                 }];
+            [titleAlert addAction:defaultAction];
+            [titleAlert addAction:cancelAction];
+            [self presentViewController:titleAlert
+                               animated:YES
+                             completion:^{
+                                 
+                             }];
+
+        }
+        
+
+    }];
+     }
+
+- (void)elcImagePickerControllerDidCancel:(ELCImagePickerController *)picker{
+    
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 

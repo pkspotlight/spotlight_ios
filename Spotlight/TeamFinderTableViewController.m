@@ -15,7 +15,9 @@
 #import "Team.h"
 
 @interface TeamFinderTableViewController()
-
+{
+    UIRefreshControl* refresh;
+}
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @property (strong, nonatomic) NSArray* searchResults;
@@ -28,10 +30,9 @@
     [super viewDidLoad];
     [self.tableView registerNib:[UINib nibWithNibName:@"BasicHeaderView" bundle:nil]
 forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
-    UIRefreshControl* refresh = [[UIRefreshControl alloc] init];
+    refresh = [[UIRefreshControl alloc] init];
     [refresh addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     [self setRefreshControl:refresh];
-    [refresh beginRefreshing];
     self.hideKeyboardTap = [[UITapGestureRecognizer alloc]
                             initWithTarget:self
                             action:@selector(dismissKeyboard)];
@@ -73,6 +74,9 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     NSString *searchText = [self.searchBar.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
     if (![searchText isEqualToString:@""]) {
+        
+        [refresh beginRefreshing];
+        
         PFQuery *firstQuery = [Team query];
         PFQuery *secondQuery = [Team query];
         
@@ -97,6 +101,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
             } else {
                 
             }
+            [refresh endRefreshing];
         }];
     }
 }
@@ -104,6 +109,8 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 -(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     self.searchResults = @[];
     [self.tableView reloadData];
+    [refresh endRefreshing];
+
 }
 
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
@@ -134,7 +141,30 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 
 - (void)unfollowButtonPressed:(TeamTableViewCell*)teamCell completion:(void (^)(void))completion{
     //check for children eventually
-    [[User currentUser] unfollowTeam:teamCell.team completion:completion];
+    
+    
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Are you sure?"
+                                                                   message:@""
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Yes"
+                                              style:UIAlertActionStyleDefault
+                                            handler:^(UIAlertAction * _Nonnull action) {
+                                               
+                                                [[User currentUser] unfollowTeam:teamCell.team completion:completion];
+
+                                                
+                                            }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"No"
+                                              style:UIAlertActionStyleDefault
+                                            handler:^(UIAlertAction * _Nonnull action) {
+                                                
+                                            }]];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+    
+
+    
+    
 }
 
 - (void)showAlertWithChildren:(NSArray*)children team:(Team*)team completion:(void (^)(void))completion {
@@ -145,8 +175,10 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
         [alert addAction:[UIAlertAction actionWithTitle:@"None, I just want to follow it"
                                                   style:UIAlertActionStyleDefault
                                                 handler:^(UIAlertAction * _Nonnull action) {
+                                                    
                                                     [[User currentUser] followTeam:team completion:^{
                                                         if (completion) {
+                                                            
                                                             completion();
                                                         }
                                                     }];
@@ -157,6 +189,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                                                     handler:^(UIAlertAction * _Nonnull action) {
                                                         [child followTeam:team completion:^{
                                                             if (completion) {
+                                                                
                                                                 completion();
                                                             }
                                                         }];
@@ -170,6 +203,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     } else {
         [[User currentUser] followTeam:team completion:^{
             if (completion) {
+              
                 completion();
             }
         }];

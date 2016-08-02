@@ -14,11 +14,14 @@
 #import "FriendsTableViewController.h"
 #import "CreateTeamTableViewController.h"
 #import "SpotlightDataSource.h"
-
+#import "CreateSpotlightTableViewController.h"
 #import <MobileCoreServices/UTCoreTypes.h>
 #import <AFNetworking/UIImageView+AFNetworking.h>
 
 @interface TeamDetailsViewController()
+{
+    BOOL doRefresh;
+}
 
 @property (weak, nonatomic) IBOutlet UIImageView *teamLogoImageView;
 @property (weak, nonatomic) IBOutlet UILabel *teamNameLabel;
@@ -32,6 +35,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    doRefresh = false;
     [self.teamLogoImageView.layer setCornerRadius:self.teamLogoImageView.bounds.size.width/2];
     [self.teamLogoImageView.layer setBorderColor:[UIColor whiteColor].CGColor];
     [self.teamLogoImageView.layer setBorderWidth:3];
@@ -49,6 +53,27 @@
     }];
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    if(doRefresh)
+    {
+        doRefresh = !doRefresh;
+        if(self.spotlightContainer.subviews.count > 0)
+        {
+        UITableView *tableView = self.spotlightContainer.subviews[0];
+            if([tableView isKindOfClass:[UITableView class]])
+            {
+               
+                SpotlightDataSource *dataSource = (SpotlightDataSource *)[tableView dataSource];
+                if([dataSource isKindOfClass:[SpotlightDataSource class]])
+                [dataSource loadSpotlights:^{
+                    
+                }];
+                
+            }
+        }
+    }
+}
 - (IBAction)teamSegmentControllerValueChanged:(UISegmentedControl*)sender {
     if( sender.selectedSegmentIndex == 0) {
         [UIView animateWithDuration:.5
@@ -74,6 +99,12 @@
         SpotlightDataSource* datasource = [[SpotlightDataSource alloc] initWithTeam:self.team];
         [(SpotlightFeedViewController*)[segue destinationViewController] setDataSource:datasource];
     }
+    else if ([segue.identifier isEqualToString:@"createSpotLightFromTeamDetail"]) {
+        doRefresh = true;
+            CreateSpotlightTableViewController* vc = (CreateSpotlightTableViewController*)[segue destinationViewController];
+        vc.isFromTeamdetail = YES;
+            [vc setTeam:_team];
+        }
 }
 
 - (void)formatPage {
@@ -102,5 +133,8 @@
 -(BOOL)hidesBottomBarWhenPushed {
     return YES;
 }
+
+
+
 
 @end

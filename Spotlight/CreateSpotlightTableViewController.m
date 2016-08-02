@@ -52,9 +52,14 @@
 }
 
 - (IBAction)cancelButtonPressed:(id)sender {
-    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+    if(_isFromTeamdetail)
         
-    }];
+        [self.navigationController popViewControllerAnimated:YES];
+    
+    else
+        [self.navigationController dismissViewControllerAnimated:YES completion:^{
+            
+        }];
 }
 
 - (IBAction)saveButtonPressed:(id)sender {
@@ -63,20 +68,37 @@
     User* user = [User currentUser];
     PFRelation *participantRelation = [self.spotlight relationForKey:@"creator"];
     [participantRelation addObject:user];
+    [self.spotlight.moderators addObject:user];
     [self.spotlight setTeam:self.team];
     [self.spotlight setCreatorName:[NSString stringWithFormat:@"%@ %@", user.firstName, user.lastName]];
     [self.spotlight saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if(succeeded){
+         [[NSNotificationCenter defaultCenter] postNotificationName:@"SpotLightRefersh" object:nil];
+        }
+        if(_isFromTeamdetail)
+       
+            [self.navigationController popViewControllerAnimated:YES];
+        
+        else
         [self.navigationController dismissViewControllerAnimated:YES completion:^{
             
         }];
     }];
+    
+    
 }
 
 - (void)dismissView:(MBProgressHUD*)hud {
     [hud hide:YES afterDelay:1.5];
-    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+    if(_isFromTeamdetail)
         
-    }];
+        [self.navigationController popViewControllerAnimated:YES];
+    
+    else
+        [self.navigationController dismissViewControllerAnimated:YES completion:^{
+            
+        }];
+
 }
 
 #pragma mark - Table view data source

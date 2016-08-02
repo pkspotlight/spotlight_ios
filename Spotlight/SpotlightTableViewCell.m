@@ -8,7 +8,7 @@
 
 #import "SpotlightTableViewCell.h"
 #import "Team.h"
-
+#import "User.h"
 #import <AFNetworking/UIImageView+AFNetworking.h>
 
 @interface SpotlightTableViewCell()
@@ -36,6 +36,19 @@
 
 - (void)formatForSpotlight:(Spotlight*)spotlight dateFormat:(NSDateFormatter*)dateFormatter {
     _spotlight = spotlight;
+    
+    _isEditingAllowed = NO;
+    PFQuery* moderatorQuery = [spotlight.moderators query];
+    [moderatorQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        for (User* user in objects) {
+            if ([user.objectId isEqualToString:[[User currentUser] objectId]]) {
+                
+                _isEditingAllowed = true;
+            }
+        }
+    }];
+    
+    
     Team* team = self.spotlight.team;
     [self.mainImageView setImage:nil];
     [self.mainImageView cancelImageRequestOperation];

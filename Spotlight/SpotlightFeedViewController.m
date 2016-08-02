@@ -12,11 +12,15 @@
 #import "SpotlightCollectionViewController.h"
 #import "SpotlightMedia.h"
 #import "User.h"
+#import "MainTabBarController.h"
 #import "SpotlightDataSource.h"
+#import "TeamSelectTableViewController.h"
 #import <AFNetworking/UIImageView+AFNetworking.h>
 
 @interface SpotlightFeedViewController ()
-
+{
+    UIRefreshControl* refresh;
+}
 @end
 
 @implementation SpotlightFeedViewController
@@ -24,14 +28,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIRefreshControl* refresh = [[UIRefreshControl alloc] init];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshScreen) name:@"SpotLightRefersh" object:nil];
+    refresh = [[UIRefreshControl alloc] init];
     [refresh addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
-    [self setRefreshControl:refresh];
+   
     if (!self.dataSource) self.dataSource = [[SpotlightDataSource alloc] init];
+    self.dataSource.delegate = self;
     [self.tableView setDataSource:self.dataSource];
-    [refresh beginRefreshing];
+    [self.tableView addSubview:refresh];
     [self refresh:refresh];
-    
+    [refresh beginRefreshing];
     UIView *headerView = [[UIView alloc] init];
     headerView.frame = CGRectMake(0, 0, 320, 70);
     
@@ -44,16 +50,71 @@
     self.navigationItem.titleView = headerView;
 }
 
+
 - (void)refresh:(id)sender {
+
+//    if([self.navigationController.viewControllers.lastObject isKindOfClass:[TeamSelectTableViewController class]]){
+//        
+//        MainTabBarController *tabbar = (MainTabBarController*)[[UIApplication sharedApplication].delegate.window rootViewController];
+//        
+//       UINavigationController *navController = (UINavigationController *)[tabbar.viewControllers objectAtIndex:0] ;
+//          SpotlightFeedViewController *spotlight = (SpotlightFeedViewController*)[navController.viewControllers firstObject];
+//        
+//        if(spotlight!=nil){
+//            [spotlight.dataSource loadSpotlights:^{
+//                [spotlight.tableView reloadData];
+//                if(sender)
+//                {
+//                    if([sender isKindOfClass:[MBProgressHUD class]])
+//                    {
+//                        MBProgressHUD *hud = (MBProgressHUD *)sender;
+//                        [hud hide:YES];
+//                    }
+//                    else
+//                        [sender endRefreshing];
+//                }
+//            }];
+//
+//        }
+//    }
+    
+    
     [self.dataSource loadSpotlights:^{
         [self.tableView reloadData];
+        if(sender)
+        {
+        if([sender isKindOfClass:[MBProgressHUD class]])
+        {
+            MBProgressHUD *hud = (MBProgressHUD *)sender;
+            [hud hide:YES];
+        }
+        else
         [sender endRefreshing];
+        }
     }];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    
+   
 }
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    //[[NSNotificationCenter defaultCenter] removeObserver:self name:@"SpotLightRefersh" object:nil];
+
+    
+}
+
+-(void)refreshScreen
+{
+    //[self.tableView setContentOffset:CGPointMake(0, -refresh.frame.size.height) animated:YES];
+
+   [self refresh:refresh];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
@@ -64,6 +125,10 @@
     }];
 }
 
+-(void)spotlightDeleted:(MBProgressHUD *)hud
+{
+    [self refresh:hud];
+}
 
 #pragma mark - Navigation
 

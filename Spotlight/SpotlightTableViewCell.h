@@ -14,5 +14,5 @@
 - (void)formatForSpotlight:(Spotlight*)spotlight dateFormat:(NSDateFormatter*)dateFormatter;
 
 @property (strong, nonatomic) Spotlight* spotlight;
-
+@property (assign) BOOL isEditingAllowed;
 @end

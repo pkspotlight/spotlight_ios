@@ -39,7 +39,26 @@ static CGFloat const BasicHeaderHeight = 50;
     [self.refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     [self setRefreshControl:self.refreshControl];
     [self.refreshControl beginRefreshing];
+    //[self refresh:self.refreshControl];
+}
+
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshScreen) name:@"Frdfollowunfollow" object:nil];
     [self refresh:self.refreshControl];
+}
+
+-(void)refreshScreen
+{
+    [self refresh:self.refreshControl];
+}
+
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"Frdfollowunfollow" object:nil];
 }
 
 - (void)refresh:(UIRefreshControl*)sender {
@@ -62,8 +81,8 @@ static CGFloat const BasicHeaderHeight = 50;
     PFQuery *query = [self.user.friends query];
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         self.friends = [objects copy];
-        [self.tableView reloadData];
-        [refresh endRefreshing];
+        [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+        [refresh performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:NO];
     }];
 }
 
@@ -72,8 +91,9 @@ static CGFloat const BasicHeaderHeight = 50;
     [query whereKey:@"teams" equalTo:self.team];
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         self.teammates = [objects copy];
-        [self.tableView reloadData];
-        [refresh endRefreshing];
+       
+        [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+        [refresh performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:NO];
     }];
 }
 
@@ -82,14 +102,13 @@ static CGFloat const BasicHeaderHeight = 50;
     NSLog(@"User: %@",self.user.displayName);
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         self.children = [objects copy];
-        [self.tableView reloadData];
-        [refresh endRefreshing];
+       
+        [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+        [refresh performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:NO];
     }];
 }
 
--(void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
+
 
 - (IBAction)plusButtonPressed:(id)sender {
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Search/Add Spotlighters"
@@ -203,8 +222,8 @@ static CGFloat const BasicHeaderHeight = 50;
 }
 
 - (IBAction)unwindAddFriends:(UIStoryboardSegue*)sender {
-    [self.refreshControl beginRefreshing];
-    [self refresh:self.refreshControl];
+   // [self.refreshControl beginRefreshing];
+   // [self refresh:self.refreshControl];
 }
 
 - (IBAction)unwindCancelAddFamilyMember:(UIStoryboardSegue*)sender {
@@ -212,8 +231,8 @@ static CGFloat const BasicHeaderHeight = 50;
 }
 
 - (IBAction)unwindSaveFamilyMember:(UIStoryboardSegue*)sender {
-    [self.refreshControl beginRefreshing];
-    [self refresh:self.refreshControl];
+   // [self.refreshControl beginRefreshing];
+  //  [self refresh:self.refreshControl];
 }
 
 @end

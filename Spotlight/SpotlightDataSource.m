@@ -158,13 +158,34 @@
                        completion:(void (^ __nullable)(void))completion{
     [[children query] findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         
-        for (Child* child in objects) {
-            [self synchronouslyLoadSpotlightForChild:child];
+        long childCount = objects.count;
+        if(childCount == 0)
+        {
+            self.spotlights = [self sortSpotlightsByCreatedDate:self.spotlights];
+            
+            // add error checking here
+            if (completion) completion();
+            return;
         }
-        self.spotlights = [self sortSpotlightsByCreatedDate:self.spotlights];
-
-        // add error checking here
-        if (completion) completion();
+      __block  long initialCount = 0;
+        
+        for (Child* child in objects) {
+            [self synchronouslyLoadSpotlightForChild:child completion:^{
+                
+                initialCount++;
+                if(initialCount == childCount)
+                {
+                    self.spotlights = [self sortSpotlightsByCreatedDate:self.spotlights];
+                    
+                    // add error checking here
+                    if (completion) completion();
+                }
+                
+            }];
+        }
+       
+        
+        
     }];
     
 }
@@ -179,7 +200,8 @@
     }];
 }
 
-- (void)synchronouslyLoadSpotlightForChild:(Child*)child{
+- (void)synchronouslyLoadSpotlightForChild:(Child*)child completion:(void (^ __nullable)(void))completion
+{
     PFQuery *teamQuery = [[child teams] query];
     [teamQuery includeKey:@"teamLogoMedia"];
     [teamQuery includeKey:@"thumbnailImageFile"];
@@ -189,10 +211,16 @@
     [spotlightQuery includeKey:@"teamLogoMedia"];
     [spotlightQuery includeKey:@"thumbnailImageFile"];
     [spotlightQuery whereKey:@"team" matchesKey:@"objectId" inQuery:teamQuery];
-    NSArray* newSpotlights = [spotlightQuery findObjects];
-    for (Spotlight* spotlight in newSpotlights) {
-        [self addUniqueSpotlight:spotlight];
-    }
+    [spotlightQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if(!error)
+        {
+        for (Spotlight* spotlight in objects) {
+            [self addUniqueSpotlight:spotlight];
+        }
+        }
+        if(completion) completion();
+    }];
+    
 }
 
 
@@ -219,6 +247,82 @@
     SpotlightTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SpotlightTableViewCell" forIndexPath:indexPath];
     [cell formatForSpotlight:self.spotlights[indexPath.row] dateFormat:self.dateFormatter];
     return cell;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    SpotlightTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if(cell)
+    {
+        return cell.isEditingAllowed;
+    }
+    return true;
+}
+
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    
+    Spotlight *spotlight = [self.spotlights objectAtIndex:indexPath.row];
+    __block BOOL isCreatedByCurrentUser = false;
+    PFQuery* moderatorQuery = [spotlight.moderators query];
+    [moderatorQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        for (User* user in objects) {
+            if ([user.objectId isEqualToString:[[User currentUser] objectId]]) {
+                isCreatedByCurrentUser = true;
+                
+                
+                if(isCreatedByCurrentUser)
+                {
+                    if (editingStyle == UITableViewCellEditingStyleDelete) {
+                        //        //add code here for when you hit delete
+                        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Are You Sure ?"
+                                                                          message:nil
+                                                                         delegate:self
+                                                                cancelButtonTitle:@"Yes"
+                                                                otherButtonTitles:@"No",nil];
+                        message.accessibilityValue = @"Delete";
+                        message.tag = indexPath.row;
+                        [message show];
+                        
+                    }
+                }
+                
+
+                
+                
+                
+            }
+        }
+        
+        if(!isCreatedByCurrentUser)
+        {
+            [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        }
+        
+    }];
+    
+    }
+
+
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if([alertView.accessibilityValue isEqualToString:@"Delete"]){
+        if(buttonIndex ==0){
+            Spotlight *spotlight = [self.spotlights objectAtIndex:alertView.tag];
+//            MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication].delegate window] animated:YES];
+//            [hud setLabelText:@"Deleting Spotlight..."];
+            
+            [spotlight deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                if(succeeded){
+                     [[NSNotificationCenter defaultCenter] postNotificationName:@"SpotLightRefersh" object:nil];
+                   // [self.delegate spotlightDeleted:hud];
+                }
+            }];
+        }
+    }
+    
 }
 
 @end

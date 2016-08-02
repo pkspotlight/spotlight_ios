@@ -10,10 +10,10 @@
 		07FCD23C1D46019C0030E8DC /* video_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 07FCD23B1D46019C0030E8DC /* video_Icon.png */; };
 		39574E1E1D420F050059029C /* edit@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39574E1C1D420F050059029C /* edit@3x.png */; };
 		39574E1F1D420F050059029C /* edit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39574E1D1D420F050059029C /* edit@2x.png */; };
-		39574E221D421FD30059029C /* delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39574E201D421FD30059029C /* delete@2x.png */; };
-		39574E231D421FD30059029C /* delete@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39574E211D421FD30059029C /* delete@3x.png */; };
 		39574E261D4220B70059029C /* upload@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39574E241D4220B70059029C /* upload@2x.png */; };
 		39574E271D4220B70059029C /* upload@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39574E251D4220B70059029C /* upload@3x.png */; };
+		395C8BA71D50B3B100BC6087 /* delete@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 395C8BA51D50B3B100BC6087 /* delete@3x.png */; };
+		395C8BA81D50B3B100BC6087 /* delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 395C8BA61D50B3B100BC6087 /* delete@2x.png */; };
 		396C0E771D40F90A009654EA /* PEPhotoCropEditor.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 396C0E761D40F90A009654EA /* PEPhotoCropEditor.bundle */; };
 		398D247C1D40D64D00647117 /* ImageError.png in Resources */ = {isa = PBXBuildFile; fileRef = 398D24451D40D64D00647117 /* ImageError.png */; };
 		398D247D1D40D64D00647117 /* ImageError@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 398D24461D40D64D00647117 /* ImageError@2x.png */; };
@@ -166,10 +166,10 @@
 		07FCD23B1D46019C0030E8DC /* video_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = video_Icon.png; sourceTree = "<group>"; };
 		39574E1C1D420F050059029C /* edit@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "edit@3x.png"; sourceTree = "<group>"; };
 		39574E1D1D420F050059029C /* edit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "edit@2x.png"; sourceTree = "<group>"; };
-		39574E201D421FD30059029C /* delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete@2x.png"; sourceTree = "<group>"; };
-		39574E211D421FD30059029C /* delete@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete@3x.png"; sourceTree = "<group>"; };
 		39574E241D4220B70059029C /* upload@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "upload@2x.png"; sourceTree = "<group>"; };
 		39574E251D4220B70059029C /* upload@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "upload@3x.png"; sourceTree = "<group>"; };
+		395C8BA51D50B3B100BC6087 /* delete@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete@3x.png"; sourceTree = "<group>"; };
+		395C8BA61D50B3B100BC6087 /* delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete@2x.png"; sourceTree = "<group>"; };
 		396C0E761D40F90A009654EA /* PEPhotoCropEditor.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = PEPhotoCropEditor.bundle; sourceTree = "<group>"; };
 		398D24451D40D64D00647117 /* ImageError.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ImageError.png; sourceTree = "<group>"; };
 		398D24461D40D64D00647117 /* ImageError@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ImageError@2x.png"; sourceTree = "<group>"; };
@@ -413,10 +413,10 @@
 		398D24441D40D64C00647117 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				395C8BA51D50B3B100BC6087 /* delete@3x.png */,
+				395C8BA61D50B3B100BC6087 /* delete@2x.png */,
 				39574E241D4220B70059029C /* upload@2x.png */,
 				39574E251D4220B70059029C /* upload@3x.png */,
-				39574E201D421FD30059029C /* delete@2x.png */,
-				39574E211D421FD30059029C /* delete@3x.png */,
 				39574E1C1D420F050059029C /* edit@3x.png */,
 				39574E1D1D420F050059029C /* edit@2x.png */,
 				398D24451D40D64D00647117 /* ImageError.png */,
@@ -918,6 +918,7 @@
 				398D24881D40D64D00647117 /* ImageSelectedSmallOn.png in Resources */,
 				84A234421D3F5F0D008AB7C0 /* ELCAlbumPickerController.xib in Resources */,
 				398D24931D40D64D00647117 /* UIBarButtonItemArrowLeft@3x.png in Resources */,
+				395C8BA81D50B3B100BC6087 /* delete@2x.png in Resources */,
 				84A234451D3F5F0D008AB7C0 /* Overlay.png in Resources */,
 				88A736E31B91318D00093B27 /* Main.storyboard in Resources */,
 				88A736E81B91318D00093B27 /* LaunchScreen.xib in Resources */,
@@ -927,7 +928,6 @@
 				39574E261D4220B70059029C /* upload@2x.png in Resources */,
 				8893FD731BFC1C4600711779 /* profile@3x.png in Resources */,
 				398D248F1D40D64D00647117 /* PlayButtonOverlayLargeTap@2x.png in Resources */,
-				39574E221D421FD30059029C /* delete@2x.png in Resources */,
 				398D24971D40D64D00647117 /* UIBarButtonItemGrid.png in Resources */,
 				398D24911D40D64D00647117 /* UIBarButtonItemArrowLeft.png in Resources */,
 				88EC50281C0DCC2C00077E85 /* unknown_user.png in Resources */,
@@ -955,7 +955,6 @@
 				884250B21C18929B009034A6 /* spotlight_logo.png in Resources */,
 				88FDB88E1C8EA2A1008C9A3D /* TB - Disney Funk 124bpm.mp3 in Resources */,
 				398D249C1D40D64D00647117 /* VideoOverlay@3x.png in Resources */,
-				39574E231D421FD30059029C /* delete@3x.png in Resources */,
 				398D24861D40D64D00647117 /* ImageSelectedSmallOff@2x.png in Resources */,
 				84A234431D3F5F0D008AB7C0 /* ELCAssetPicker.xib in Resources */,
 				39574E1F1D420F050059029C /* edit@2x.png in Resources */,
@@ -970,6 +969,7 @@
 				8893FD751BFC1CF600711779 /* friends@3x.png in Resources */,
 				398D24991D40D64D00647117 /* UIBarButtonItemGrid@3x.png in Resources */,
 				398D24831D40D64D00647117 /* ImageSelectedOn@2x.png in Resources */,
+				395C8BA71D50B3B100BC6087 /* delete@3x.png in Resources */,
 				398D248C1D40D64D00647117 /* PlayButtonOverlayLarge@2x.png in Resources */,
 				889DEEC91C97370100726D83 /* heart@2x.png in Resources */,
 				398D248A1D40D64D00647117 /* ImageSelectedSmallOn@3x.png in Resources */,

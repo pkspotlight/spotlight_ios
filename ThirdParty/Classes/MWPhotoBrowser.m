@@ -275,7 +275,7 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
     } else {
         // We're not showing the toolbar so try and show in top right
         if (_actionButton && _cropButton)
-                  self.navigationItem.rightBarButtonItems = @[_deleteBtn,_actionButton];
+                  self.navigationItem.rightBarButtonItems = @[_deleteBtn,_cropButton,_actionButton];
         [items addObject:fixedSpace];
     }
 

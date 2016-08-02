@@ -217,6 +217,7 @@ static CGFloat const BasicHeaderHeight = 50;
         }
         return (NSComparisonResult)NSOrderedDescending;
     }];
+    [filteredArrayOfObjects removeAllObjects];
  
     for (Team *team in sortedArray)
     {

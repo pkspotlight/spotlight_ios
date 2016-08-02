@@ -57,6 +57,15 @@ static CGFloat const BasicHeaderHeight = 50;
     [self refresh:self.refreshControl];
 }
 
+
+
+-(void)refreshScreen
+{
+    //[self.tableView setContentOffset:CGPointMake(0, -refresh.frame.size.height) animated:YES];
+    
+    [self refresh:self.refreshControl];
+}
+
 -(void)addSpotlightFriendScreenBoardingPopUp{
     
    if([[NSUserDefaults standardUserDefaults] boolForKey:@"SpotlightFriendsPopUp"] == FALSE)

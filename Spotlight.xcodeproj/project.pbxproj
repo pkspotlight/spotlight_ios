@@ -82,6 +82,8 @@
 		84A234471D3F5F0D008AB7C0 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 84A2343B1D3F5F0D008AB7C0 /* README.md */; };
 		84B0066A1D45F2320040E778 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		84B52BD41D41F43D005995AC /* PendingRequestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B52BD31D41F43D005995AC /* PendingRequestTableViewCell.m */; };
+		84C6563C1D50D8460057E214 /* ReorderImagesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C656391D50D8460057E214 /* ReorderImagesTableViewCell.m */; };
+		84C6563D1D50D8460057E214 /* ReorderSpolightImagesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C6563B1D50D8460057E214 /* ReorderSpolightImagesTableViewController.m */; };
 		880054EA1C6B8D630034D639 /* Child.m in Sources */ = {isa = PBXBuildFile; fileRef = 880054E91C6B8D630034D639 /* Child.m */; };
 		880054EE1C6B9E8C0034D639 /* ChildTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 880054ED1C6B9E8C0034D639 /* ChildTableViewCell.m */; };
 		880207A41C15DF7A002D5068 /* MontageCreator.m in Sources */ = {isa = PBXBuildFile; fileRef = 880207A31C15DF7A002D5068 /* MontageCreator.m */; };
@@ -265,6 +267,10 @@
 		84A2343B1D3F5F0D008AB7C0 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		84B52BD21D41F43D005995AC /* PendingRequestTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PendingRequestTableViewCell.h; sourceTree = "<group>"; };
 		84B52BD31D41F43D005995AC /* PendingRequestTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PendingRequestTableViewCell.m; sourceTree = "<group>"; };
+		84C656381D50D8460057E214 /* ReorderImagesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReorderImagesTableViewCell.h; sourceTree = "<group>"; };
+		84C656391D50D8460057E214 /* ReorderImagesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReorderImagesTableViewCell.m; sourceTree = "<group>"; };
+		84C6563A1D50D8460057E214 /* ReorderSpolightImagesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReorderSpolightImagesTableViewController.h; sourceTree = "<group>"; };
+		84C6563B1D50D8460057E214 /* ReorderSpolightImagesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReorderSpolightImagesTableViewController.m; sourceTree = "<group>"; };
 		880054E81C6B8D630034D639 /* Child.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Child.h; sourceTree = "<group>"; };
 		880054E91C6B8D630034D639 /* Child.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Child.m; sourceTree = "<group>"; };
 		880054EC1C6B9E8C0034D639 /* ChildTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildTableViewCell.h; sourceTree = "<group>"; };
@@ -738,6 +744,10 @@
 		88BDFC561BFD3314007A3EBB /* Spotlight */ = {
 			isa = PBXGroup;
 			children = (
+				84C656381D50D8460057E214 /* ReorderImagesTableViewCell.h */,
+				84C656391D50D8460057E214 /* ReorderImagesTableViewCell.m */,
+				84C6563A1D50D8460057E214 /* ReorderSpolightImagesTableViewController.h */,
+				84C6563B1D50D8460057E214 /* ReorderSpolightImagesTableViewController.m */,
 				884250AE1C1736D7009034A6 /* SpotlightDataSource.h */,
 				884250AF1C1736D7009034A6 /* SpotlightDataSource.m */,
 				88EE2CC41B9E08B2002DDB99 /* SpotlightFeedViewController.h */,
@@ -1048,6 +1058,7 @@
 				39D6343C1D40C86500CAA666 /* PEResizeControl.m in Sources */,
 				398D24A51D40D64D00647117 /* UIImage+MWPhotoBrowser.m in Sources */,
 				84A234411D3F5F0D008AB7C0 /* ELCImagePickerController.m in Sources */,
+				84C6563C1D50D8460057E214 /* ReorderImagesTableViewCell.m in Sources */,
 				846F75B01D40D41B00B5120E /* TeamRequest.m in Sources */,
 				84A234401D3F5F0D008AB7C0 /* ELCAssetTablePicker.m in Sources */,
 				8849A1E91BA2590800511DD5 /* IntroViewController.m in Sources */,
@@ -1070,6 +1081,7 @@
 				884250AD1C173076009034A6 /* TeamDetailsViewController.m in Sources */,
 				88E9E8F91BD5C46D0065AA0C /* SpotlightTableViewCell.m in Sources */,
 				880054EA1C6B8D630034D639 /* Child.m in Sources */,
+				84C6563D1D50D8460057E214 /* ReorderSpolightImagesTableViewController.m in Sources */,
 				88A736DA1B91318D00093B27 /* main.m in Sources */,
 				887EC7621C6974ED001DBDB3 /* FriendFinderTableViewController.m in Sources */,
 				88BDFC761BFF70E6007A3EBB /* CreateSpotlightTableViewController.m in Sources */,

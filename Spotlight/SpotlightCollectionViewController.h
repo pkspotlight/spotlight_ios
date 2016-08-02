@@ -11,7 +11,8 @@
 #import "MWPhotoBrowser.h"
 #import "ELCImagePickerController.h"
 #import <MediaPlayer/MediaPlayer.h>
-@interface SpotlightCollectionViewController : UICollectionViewController <MWPhotoBrowserDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegateFlowLayout,ELCImagePickerControllerDelegate,MPMediaPickerControllerDelegate>
+#import "ReorderSpolightImagesTableViewController.h"
+@interface SpotlightCollectionViewController : UICollectionViewController <MWPhotoBrowserDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegateFlowLayout,ELCImagePickerControllerDelegate,MPMediaPickerControllerDelegate,RefreshTableDelegate>
 
 @property (strong, nonatomic) Spotlight* spotlight;
 

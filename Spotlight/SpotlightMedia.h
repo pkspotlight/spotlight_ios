@@ -14,7 +14,7 @@
 @class User;
 
 @interface SpotlightMedia : MediaObject <PFSubclassing>
-
+@property (assign, nonatomic) double timeStamp;
 + (NSString *)parseClassName;
 
 - (void)likeInBackgroundFromUser:(User*)user completion:(void (^)(void))completion;

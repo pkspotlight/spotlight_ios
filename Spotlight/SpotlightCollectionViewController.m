@@ -21,6 +21,7 @@
 #import <AVKit/AVKit.h>
 #import "PECropViewController.h"
 
+
 @interface SpotlightCollectionViewController ()<PECropViewControllerDelegate>
 
 @property (strong, nonatomic) NSArray* mediaList;
@@ -28,6 +29,7 @@
 @property (assign, nonatomic) BOOL isShowingMontage;
 @property (weak, nonatomic) IBOutlet UIButton *viewSpotlightButton;
 @property (weak, nonatomic) IBOutlet UIButton *shareSpotlightButton;
+
 @property (strong, nonatomic) MWPhotoBrowser *browser;
 
 @end
@@ -43,15 +45,19 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
     [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     [self.collectionView addSubview:refreshControl];
     self.collectionView.alwaysBounceVertical = YES;
+  
     [refreshControl beginRefreshing];
     [self refresh:refreshControl];
     
     // Do any additional setup after loading the view.
 }
 
+
+
 - (void)refresh:(UIRefreshControl*)refresh {
     [self.spotlight allMedia:^(NSArray *media, NSError *error) {
-        self.mediaList = media;
+         self.mediaList = [self getSortedArray:media];
+      //  self.mediaList = media;
         [self.collectionView reloadData];
         [refresh endRefreshing];
     }];
@@ -360,9 +366,17 @@ if(!media.isVideo)
     if ([mediaType isEqualToString:(NSString *)kUTTypeVideo] ||
         [mediaType isEqualToString:(NSString *)kUTTypeMovie]){
         
+        NSURL *videoUrlDate=(NSURL*)[infoDict objectForKey:UIImagePickerControllerReferenceURL];
+        PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[videoUrlDate] options:nil];
+        PHAsset *asset = result.firstObject;
+        NSDate *date = asset.creationDate;
+        double timestamp = [date timeIntervalSince1970];
+
+        
         NSURL *videoUrl=(NSURL*)[infoDict objectForKey:UIImagePickerControllerMediaURL];
         NSString *videoPath = [videoUrl path];
         media = [[SpotlightMedia alloc] initWithVideoPath:videoPath];
+        media.timeStamp =timestamp;
         
     } else if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
         UIImage *image = [infoDict valueForKey:UIImagePickerControllerOriginalImage];
@@ -379,7 +393,8 @@ if(!media.isVideo)
             NSLog(@"fuck: %@", [error localizedDescription]);
         } else {
             [self.spotlight allMedia:^(NSArray *media, NSError *error) {
-                self.mediaList = media;
+                 self.mediaList = [self getSortedArray:media];
+                //self.mediaList = media;
                 [self.collectionView reloadData];
                 [hud hide:YES];
             }];
@@ -404,6 +419,10 @@ if(!media.isVideo)
         NSURL *videoUrl=(NSURL*)[infoDict objectForKey:UIImagePickerControllerReferenceURL];
         PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[videoUrl] options:nil];
         PHAsset *asset = result.firstObject;
+        NSDate *date = asset.creationDate;
+        double timestamp = [date timeIntervalSince1970];
+        
+
         PHVideoRequestOptions *options=[[PHVideoRequestOptions alloc]init];
         options.version=PHVideoRequestOptionsVersionOriginal;
         [[PHImageManager defaultManager] requestAVAssetForVideo:asset options:options resultHandler:^(AVAsset * avasset, AVAudioMix * audioMix, NSDictionary * info) {
@@ -414,6 +433,8 @@ if(!media.isVideo)
                 NSLog(@"url is %@",url);
                 NSString *videoPath = [url path];
                 media = [[SpotlightMedia alloc] initWithVideoPath:videoPath];
+                media.timeStamp = timestamp;
+
                 if (title) {
                     media.title = title;
                 }
@@ -428,7 +449,8 @@ if(!media.isVideo)
                         NSLog(@"fuck: %@", [error localizedDescription]);
                     } else {
                         [self.spotlight allMedia:^(NSArray *media, NSError *error) {
-                            self.mediaList = media;
+                            //self.mediaList = media;
+                             self.mediaList = [self getSortedArray:media];
                             [self.collectionView reloadData];
                             [hud hide:YES];
                         }];
@@ -443,7 +465,16 @@ if(!media.isVideo)
         
     } else if ([mediaType isEqualToString:(NSString *)ALAssetTypePhoto]) {
         UIImage *image = [infoDict valueForKey:UIImagePickerControllerOriginalImage];
+        
+        NSURL *imageUrl=(NSURL*)[infoDict objectForKey:UIImagePickerControllerReferenceURL];
+        PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[imageUrl] options:nil];
+        PHAsset *asset = result.firstObject;
+        NSDate *date = asset.creationDate;
+          double timestamp = [date timeIntervalSince1970];
+
+        
         media = [[SpotlightMedia alloc] initWithImage:image];
+        media.timeStamp = timestamp;
         
         if (title) {
             media.title = title;
@@ -458,7 +489,9 @@ if(!media.isVideo)
                 NSLog(@"fuck: %@", [error localizedDescription]);
             } else {
                 [self.spotlight allMedia:^(NSArray *media, NSError *error) {
-                    self.mediaList = media;
+                    //self.mediaList = media;
+                     self.mediaList = [self getSortedArray:media];
+                    
                     [self.collectionView reloadData];
                     [hud hide:YES];
                 }];
@@ -547,6 +580,13 @@ if(!media.isVideo)
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
+
+-(NSArray*)getSortedArray:(NSArray*)arr{
+    NSSortDescriptor *valueDescriptor = [[NSSortDescriptor alloc] initWithKey:@"timeStamp" ascending:YES];
+    NSArray *descriptors = [NSArray arrayWithObject:valueDescriptor];
+    NSArray *sortedArray = [arr sortedArrayUsingDescriptors:descriptors];
+    return sortedArray;
+}
 
 #pragma mark - Montage Functions
 
@@ -997,8 +1037,19 @@ if(!media.isVideo)
     
     
 }
+- (IBAction)reorderSpotlightController:(id)sender {
+    
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    ReorderSpolightImagesTableViewController *reorderRequestController = [storyboard instantiateViewControllerWithIdentifier:@"ReorderSpotlight"];
+    reorderRequestController.mediaSpotlightList = [self.mediaList mutableCopy];
+    reorderRequestController.delegate = self;
+    [self.navigationController pushViewController:reorderRequestController animated:YES];
 
+}
 
+-(void)refreshSpotlightCollectionImages{
+    [self refresh:nil];
+}
 
 -(void)deleteMyFile:(NSString *)path
 

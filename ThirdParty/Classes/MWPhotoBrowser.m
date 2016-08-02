@@ -275,7 +275,7 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
     } else {
         // We're not showing the toolbar so try and show in top right
         if (_actionButton && _cropButton)
-                  self.navigationItem.rightBarButtonItems = @[_deleteBtn,_cropButton,_actionButton];
+                  self.navigationItem.rightBarButtonItems = @[_deleteBtn,_actionButton,_cropButton];
         [items addObject:fixedSpace];
     }
 
@@ -1352,7 +1352,7 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
     
     // Hide action button on nav bar if it exists
     if (self.navigationItem.rightBarButtonItems[1] == _actionButton && self.navigationItem.rightBarButtonItems[2] == _cropButton) {
-        _gridPreviousRightNavItems = @[_actionButton, _cropButton];
+        _gridPreviousRightNavItems = @[_deleteBtn,_actionButton, _cropButton];
         [self.navigationItem setRightBarButtonItems:nil animated:YES];
     } else {
         _gridPreviousRightNavItems = nil;

@@ -573,6 +573,7 @@ if(!media.isVideo)
         
     } else {
         
+       
         [[MontageCreator sharedCreator] createMontageWithMedia:[self.mediaList copy] songTitle:songTitle  isShare:NO completion:^(AVPlayerItem *item, NSURL *fileURL) {
             AVPlayer *player = [AVPlayer playerWithPlayerItem:item];
             AVPlayerViewController* VC = [[AVPlayerViewController alloc] init];

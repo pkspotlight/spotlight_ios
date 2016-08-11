@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "Parse.h"
 #import "SpotlightDataSource.h"
+#import "TeamRequest.h"
 @class User;
 @class SpotlightDataSource;
 
-@interface SpotlightFeedViewController : UITableViewController<RefreshTableDelegate,UITableViewDelegate>
+@interface SpotlightFeedViewController : UITableViewController<RefreshTableDelegate,UITableViewDelegate,UIAlertViewDelegate>
 
 @property (strong, nonatomic) SpotlightDataSource *dataSource;
 

@@ -12,6 +12,7 @@
 #import "SpotlightDataSource.h"
 #import "TeamsTableViewController.h"
 #import "User.h"
+#import <MobileCoreServices/UTCoreTypes.h>
 #import "Child.h"
 #import "ProfilePictureMedia.h"
 #import <AFNetworking/UIImageView+AFNetworking.h>
@@ -21,9 +22,13 @@
 @property (weak, nonatomic) IBOutlet UIImageView *friendImageView;
 @property (weak, nonatomic) IBOutlet UILabel *friendNameLabel;
 @property (weak, nonatomic) IBOutlet UIView *teamsContainerView;
+@property (weak, nonatomic) IBOutlet UIButton *editChildProfile;
 @property (weak, nonatomic) IBOutlet UIView *spotlightsContainerView;
 @property (weak, nonatomic) IBOutlet UIView *familyContainerView;
+@property (strong, nonatomic) UIImagePickerController* imagePickerController;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
+@property (strong, nonatomic) ProfilePictureMedia* profilePic;
+
 
 @property (assign, nonatomic) BOOL hasFamily;
 
@@ -94,10 +99,12 @@
 }
 
 - (void)formatForUser {
+     self.editChildProfile.hidden = YES;
     [self formatWithName:[self.user displayName] profilePicture:self.user.profilePic];
 }
 
 - (void)formatForChild {
+    self.editChildProfile.hidden = NO;
     [self formatWithName:[self.child displayName] profilePicture:self.child.profilePic];
 }
      
@@ -125,6 +132,42 @@
         [(FriendsTableViewController*)[segue destinationViewController] setUser:self.user];
         [(FriendsTableViewController*)[segue destinationViewController] setJustFamily:YES];
     }
+}
+
+- (IBAction)editPictureButtonPressed:(id)sender {
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
+    {
+        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+        imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
+        imagePickerController.delegate = self;
+        imagePickerController.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeImage, nil];
+        imagePickerController.videoMaximumDuration = 15;
+        [imagePickerController setAllowsEditing:YES];
+        
+        self.imagePickerController = imagePickerController;
+        [self.navigationController.tabBarController presentViewController:self.imagePickerController animated:YES completion:nil];
+    }
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)infoDict {
+    
+    UIImage *image = [infoDict valueForKey:UIImagePickerControllerOriginalImage];
+    self.profilePic = [[ProfilePictureMedia alloc] initWithImage:image];
+    [self.friendImageView setImage:image];
+    [self.profilePic saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        
+    }];
+    [self.imagePickerController dismissViewControllerAnimated:YES completion:nil];
+    self.child.profilePic = self.profilePic;
+    [self.child saveInBackground];
+}
+
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {

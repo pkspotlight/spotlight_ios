@@ -124,7 +124,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {
         [self showFeedbackEmail];
-    } else {
+    } else if(indexPath.section == 2) {
+        NSLog(@"%d",indexPath.section);
         [self logout];
     }
 }

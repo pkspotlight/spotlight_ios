@@ -9,9 +9,9 @@
 #import <Parse/Parse.h>
 
 //@class ProfilePictureMedia;
+#import "User.h"
 #import "ProfilePictureMedia.h"
 @class Team;
-
 @interface Child : PFObject <PFSubclassing>
 
 @property (strong, nonatomic) ProfilePictureMedia* profilePic;

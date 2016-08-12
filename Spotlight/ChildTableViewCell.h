@@ -11,7 +11,7 @@
 @class Child;
 
 @interface ChildTableViewCell : UITableViewCell
-
+@property (weak, nonatomic) IBOutlet UILabel *userDisplayNameLabel;
 - (void)formatForChild:(Child*)child isFollowing:(BOOL)isFollowing;
 
 @end

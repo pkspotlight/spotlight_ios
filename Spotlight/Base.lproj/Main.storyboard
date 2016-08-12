@@ -11,13 +11,13 @@
             <objects>
                 <tableViewController storyboardIdentifier="SpotlightFeedViewController" id="8hb-z5-ol4" customClass="SpotlightFeedViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="192" sectionHeaderHeight="22" sectionFooterHeight="22" id="9Pj-Xg-5pY">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="352"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="0.96078437569999997" blue="0.96078437569999997" alpha="1" colorSpace="deviceRGB"/>
                         <color key="sectionIndexBackgroundColor" red="1" green="0.96078437569999997" blue="0.96078437569999997" alpha="1" colorSpace="deviceRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SpotlightTableViewCell" rowHeight="192" id="cV8-cF-CTj" customClass="SpotlightTableViewCell">
-                                <rect key="frame" x="0.0" y="86" width="600" height="192"/>
+                                <rect key="frame" x="0.0" y="66" width="600" height="192"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" tableViewCell="cV8-cF-CTj" id="6wP-Er-nX9">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="192"/>
@@ -526,7 +526,7 @@
         <!--Friend Details-->
         <scene sceneID="gul-e3-xpF">
             <objects>
-                <viewController id="IAe-cA-R6E" customClass="FriendProfileViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FriendsProfile" id="IAe-cA-R6E" customClass="FriendProfileViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xgB-Z2-PoW"/>
                         <viewControllerLayoutGuide type="bottom" id="hne-WX-yBm"/>
@@ -535,7 +535,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IsX-JN-Mbi">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IsX-JN-Mbi">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="248"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Greg Mann" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Exd-GK-0ex">
@@ -593,19 +593,19 @@
                                     <constraint firstAttribute="bottom" secondItem="aRt-nH-S3E" secondAttribute="bottom" constant="11" id="xZW-Fk-D7f"/>
                                 </constraints>
                             </view>
-                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GQq-CA-1SY">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GQq-CA-1SY">
                                 <rect key="frame" x="0.0" y="248" width="600" height="352"/>
                                 <connections>
                                     <segue destination="mfN-W3-7S4" kind="embed" identifier="friendTeamsEmbedSegue" id="oT6-GV-6Bb"/>
                                 </connections>
                             </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rL5-qc-i6g">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rL5-qc-i6g">
                                 <rect key="frame" x="0.0" y="248" width="600" height="352"/>
                                 <connections>
                                     <segue destination="8hb-z5-ol4" kind="embed" identifier="EmbedSpotlightSegue" id="MtQ-jd-zmN"/>
                                 </connections>
                             </containerView>
-                            <containerView opaque="NO" alpha="0.0" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t2I-S8-bER">
+                            <containerView opaque="NO" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t2I-S8-bER">
                                 <rect key="frame" x="0.0" y="248" width="600" height="352"/>
                                 <connections>
                                     <segue destination="KaG-P1-Sfy" kind="embed" identifier="EmbedFamilySegue" id="M8J-oH-n9R"/>
@@ -719,7 +719,6 @@
                                     <outlet property="followButton" destination="b6f-QZ-V5S" id="Zb4-fX-tWA"/>
                                     <outlet property="userDisplayNameLabel" destination="2e0-7i-mU2" id="vcH-sr-A1f"/>
                                     <outlet property="userImageView" destination="wO9-Wt-bN3" id="mq4-1y-Yud"/>
-                                    <segue destination="IAe-cA-R6E" kind="show" identifier="ViewFriendProfileSegue" id="wWX-UK-6Ue"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="NoResultsTableViewCell" rowHeight="68" id="KLb-G9-r60">
@@ -823,7 +822,7 @@
                         <viewControllerLayoutGuide type="bottom" id="u0L-dv-84F"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="HYy-yF-zdT">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="352"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TOd-AQ-irE">
@@ -863,10 +862,18 @@
                                             <segue destination="WCb-DW-cH7" kind="show" identifier="createSpotLightFromTeamDetail" id="G4n-FP-84S"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YfZ-uw-cct">
+                                        <rect key="frame" x="556" y="212" width="22" height="22"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <action selector="addChildToTeamAsMember:" destination="G7Z-mU-6An" eventType="touchUpInside" id="Zd1-P7-rkD"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.14901960780000001" green="0.60392156860000001" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="248" id="0mJ-Lt-H9m"/>
+                                    <constraint firstAttribute="trailing" secondItem="YfZ-uw-cct" secondAttribute="trailing" constant="22" id="6xB-1d-AmV"/>
                                     <constraint firstItem="ENb-YQ-djp" firstAttribute="centerX" secondItem="TOd-AQ-irE" secondAttribute="centerX" id="7aA-QE-bQt"/>
                                     <constraint firstItem="5s6-aT-kQP" firstAttribute="top" secondItem="ENb-YQ-djp" secondAttribute="bottom" constant="8" id="80O-u5-0LF"/>
                                     <constraint firstAttribute="bottom" secondItem="5s6-aT-kQP" secondAttribute="bottom" constant="47" id="Wrj-f9-Hxh"/>
@@ -874,6 +881,7 @@
                                     <constraint firstAttribute="bottom" secondItem="xMt-ON-ZoP" secondAttribute="bottom" constant="11" id="cg8-DR-E3z"/>
                                     <constraint firstItem="xMt-ON-ZoP" firstAttribute="centerX" secondItem="TOd-AQ-irE" secondAttribute="centerX" id="d14-mZ-wPZ"/>
                                     <constraint firstItem="ENb-YQ-djp" firstAttribute="top" secondItem="TOd-AQ-irE" secondAttribute="top" constant="16" id="e5O-Tl-J0j"/>
+                                    <constraint firstItem="YfZ-uw-cct" firstAttribute="centerY" secondItem="TOd-AQ-irE" secondAttribute="centerY" constant="99" id="frV-SM-nTs"/>
                                     <constraint firstItem="afZ-RQ-hgx" firstAttribute="centerY" secondItem="xMt-ON-ZoP" secondAttribute="centerY" id="lXN-Tj-NcD"/>
                                     <constraint firstItem="afZ-RQ-hgx" firstAttribute="leading" secondItem="TOd-AQ-irE" secondAttribute="leading" constant="16" id="qxl-nw-npd"/>
                                     <constraint firstItem="xMt-ON-ZoP" firstAttribute="top" secondItem="5s6-aT-kQP" secondAttribute="bottom" constant="8" id="taL-w2-I7u"/>
@@ -1415,7 +1423,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="TeamTableViewCell" rowHeight="68" id="20l-YH-MoY" customClass="TeamTableViewCell">
-                                <rect key="frame" x="0.0" y="92" width="600" height="68"/>
+                                <rect key="frame" x="0.0" y="72" width="600" height="68"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" tableViewCell="20l-YH-MoY" id="t8f-mZ-SBM">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="67"/>
@@ -1493,11 +1501,11 @@
             <objects>
                 <tableViewController storyboardIdentifier="CreateSpotlightTableViewController" id="WCb-DW-cH7" customClass="CreateSpotlightTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="64" sectionHeaderHeight="28" sectionFooterHeight="28" id="44W-nD-88x">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="352"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="DpV-UE-4y4">
-                            <rect key="frame" x="0.0" y="64" width="600" height="209"/>
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="209"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unknown_user.png" translatesAutoresizingMaskIntoConstraints="NO" id="e7Z-HN-3NL">
@@ -1526,7 +1534,7 @@
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CreateSpotlightButtonCell" rowHeight="64" id="vIu-SN-1DP">
-                                <rect key="frame" x="0.0" y="301" width="600" height="64"/>
+                                <rect key="frame" x="0.0" y="237" width="600" height="64"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vIu-SN-1DP" id="0VG-1E-Cia">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="63"/>
@@ -1887,12 +1895,12 @@
             <objects>
                 <tableViewController title="Teams" id="mfN-W3-7S4" customClass="TeamsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="87" sectionHeaderHeight="28" sectionFooterHeight="28" id="UMH-0L-rim">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="352"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="TeamTableViewCell" rowHeight="87" id="EL9-ur-SaO" customClass="TeamTableViewCell">
-                                <rect key="frame" x="0.0" y="72" width="600" height="87"/>
+                                <rect key="frame" x="0.0" y="28" width="600" height="87"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" tableViewCell="EL9-ur-SaO" id="bTH-LZ-mad">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="86"/>
@@ -2589,11 +2597,11 @@
         <image name="unknown_user.png" width="500" height="500"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="VZn-Uf-dUM"/>
-        <segue reference="M8J-oH-n9R"/>
+        <segue reference="G4n-FP-84S"/>
         <segue reference="oT6-GV-6Bb"/>
+        <segue reference="VZn-Uf-dUM"/>
+        <segue reference="fJj-m3-4F5"/>
         <segue reference="MtQ-jd-zmN"/>
-        <segue reference="JxX-hR-H3e"/>
-        <segue reference="iqR-Ks-HcN"/>
+        <segue reference="LEx-VJ-MlG"/>
     </inferredMetricsTieBreakers>
 </document>

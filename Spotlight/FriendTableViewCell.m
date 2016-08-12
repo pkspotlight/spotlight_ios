@@ -17,7 +17,7 @@
 
 @property (strong, nonatomic) User *user;
 
-@property (weak, nonatomic) IBOutlet UILabel *userDisplayNameLabel;
+//@property (weak, nonatomic) IBOutlet UILabel *userDisplayNameLabel;
 @property (weak, nonatomic) IBOutlet UIButton *followButton;
 @property (weak, nonatomic) IBOutlet UIImageView *userImageView;
 @property (assign, nonatomic) BOOL isFollowing;

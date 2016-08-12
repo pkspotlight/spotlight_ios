@@ -7,10 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-@protocol RecieptAlertViewDelegate
+@protocol ChildToAddToTeam
 @required
-- (void)RecieptAlertViewdialogButtonWithRemNoSelected:(NSString *)remNo clickedButtonAtIndex:(NSInteger)buttonIndex;
-
+- (void)RecieptAlertViewdialogButtonWithChildSelected:(NSMutableArray *)childArray;
 @end
 @interface RecieptAlertView : UIView
 {
@@ -18,6 +17,6 @@
     UIButton *okButton;
 }
 -(void)createAlertWithRemmitances:(NSArray *)remArray;
-@property (nonatomic, assign) id<RecieptAlertViewDelegate> delegate;
+@property (nonatomic, assign) id<ChildToAddToTeam> delegate;
 @property (strong, nonatomic) NSMutableArray* selectedChild;
 @end

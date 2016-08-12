@@ -10,5 +10,5 @@
 #import "Child.h"
 @interface remittanceSelectionView : UIView
 @property (strong) UIButton *remButton;
-@property (strong) Child *remNumber;
+@property (strong) Child *childSelected;
  @end

@@ -71,6 +71,8 @@
 
 - (void)unfollowTeam:(Team*)team completion:(void (^)(void))completion{
     [[self teams] removeObject:team];
+//    User *user = [User currentUser];
+//    [user.teams removeObject:team];
     [self saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if(succeeded){
             [[NSNotificationCenter defaultCenter] postNotificationName:@"SpotLightRefersh" object:nil];

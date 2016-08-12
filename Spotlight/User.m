@@ -65,6 +65,27 @@
 
 -(void)unfollowTeam:(Team*)team completion:(void (^)(void))completion{
     [[self teams] removeObject:team];
+    __block NSMutableArray *childArray = [NSMutableArray new];
+    [[[self children] query] findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        childArray = objects.mutableCopy;
+        for (Child* child in objects){
+            [child.teams removeObject:team];
+            
+        }
+        
+        [Child saveAllInBackground:childArray block:^(BOOL succeeded, NSError * _Nullable error) {
+            if(succeeded){
+                // [[NSNotificationCenter defaultCenter] postNotificationName:@"SpotLightRefersh" object:nil];
+            }
+            if (completion) {
+                
+                completion();
+            }
+            
+        }];
+
+        
+    }];
     [self saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if(succeeded){
              [[NSNotificationCenter defaultCenter] postNotificationName:@"SpotLightRefersh" object:nil];

@@ -49,22 +49,22 @@ const static CGFloat kCustomIOS7AlertViewDefaultButtonSpacerHeight = 1;
     for(int i = 0 ; i < remArray.count ; i ++)
     {
         remittanceSelectionView *view = [[remittanceSelectionView alloc] init];
-        view.remNumber = remArray[i];
+        view.childSelected = remArray[i];
         view.frame = CGRectMake(0, YOffset, scroll.frame.size.width, 30);
         view.remButton = [UIButton buttonWithType:UIButtonTypeCustom];
         view.remButton.frame = CGRectMake(view.frame.size.width - 20, (view.frame.size.height - 20 )/2.0,20,20);
-        [view.remButton setImage:[UIImage imageNamed:@"radio_btn_ic"] forState:UIControlStateNormal];
-
+        [view.remButton setImage:[UIImage imageNamed:@"Unchecked"] forState:UIControlStateNormal];
+        [view.remButton setImage:[UIImage imageNamed:@"Checked"] forState:UIControlStateSelected];
         
         view.remButton.userInteractionEnabled = NO;
         
         [view addSubview:view.remButton];
         
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, view.frame.size.width - 30, 30)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, view.frame.size.width - 30, 30)];
         label.text = displayNameArray[i];
         label.textColor = [UIColor blackColor];
         label.font = [UIFont systemFontOfSize:14];
-        label.textAlignment = NSTextAlignmentCenter;
+        label.textAlignment = NSTextAlignmentLeft;
         [view addSubview:label];
         
         UITapGestureRecognizer *tapGes  = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(remButtonClicked:)];
@@ -94,7 +94,7 @@ const static CGFloat kCustomIOS7AlertViewDefaultButtonSpacerHeight = 1;
     dialogHeight += 10;
     UILabel *titleLabel1 = [[UILabel alloc] initWithFrame:CGRectMake(10, dialogHeight, dialogContainer.frame.size.width - 20, 0)];
     titleLabel1.text = @"";
-    titleLabel1.textAlignment = NSTextAlignmentCenter;
+    titleLabel1.textAlignment = NSTextAlignmentLeft;
     titleLabel1.numberOfLines = 0;
     [titleLabel1 sizeToFit];
     [dialogContainer addSubview:titleLabel1];
@@ -186,15 +186,7 @@ const static CGFloat kCustomIOS7AlertViewDefaultButtonSpacerHeight = 1;
 {
     remittanceSelectionView *view  = (remittanceSelectionView *)tapGes.view;
     
-    for(remittanceSelectionView *remView in scroll.subviews)
-    {
-        if([remView isKindOfClass:[remittanceSelectionView class]])
-        {
-            remView.remButton.selected = NO;
-        }
-    }
-    
-    view.remButton.selected = YES;
+    view.remButton.selected = !view.remButton.selected;
     
     okButton.alpha = 1.0;
     okButton.userInteractionEnabled = YES;
@@ -211,8 +203,7 @@ const static CGFloat kCustomIOS7AlertViewDefaultButtonSpacerHeight = 1;
         {
             if(remView.remButton.isSelected)
             {
-                [self.selectedChild addObject:remView.remNumber];
-            break;
+                [self.selectedChild addObject:remView.childSelected];
             }
         }
     }
@@ -222,21 +213,8 @@ const static CGFloat kCustomIOS7AlertViewDefaultButtonSpacerHeight = 1;
 
 - (IBAction)customIOS7dialogButtonTouchUpInside:(id)sender
 {
-    NSMutableArray *selRemNum = [self getSelectedRemNumber];
-
-    if (_delegate != NULL) {
-        UIButton *btn = (UIButton *)sender;
-        if(btn.tag == 1)
-        {
-                       if(selRemNum)
-            {
-        [_delegate RecieptAlertViewdialogButtonWithRemNoSelected:selRemNum clickedButtonAtIndex:[sender tag]];
-            [self removeFromSuperview];
-            }
-            return;
-        }
-    }
-    
+    NSMutableArray *childSelectedArray = [self getSelectedRemNumber];
+    [self.delegate RecieptAlertViewdialogButtonWithChildSelected:childSelectedArray];
     [self removeFromSuperview];
 }
 

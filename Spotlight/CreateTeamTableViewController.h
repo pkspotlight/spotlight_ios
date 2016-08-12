@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "FieldEntryTableViewCell.h"
+#import "RecieptAlertView.h"
 
 @class Team;
 
-@interface CreateTeamTableViewController : UITableViewController <FieldEntryTextFieldCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate>
+@interface CreateTeamTableViewController : UITableViewController <FieldEntryTextFieldCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate,ChildToAddToTeam>
 
 @property (strong, nonatomic) Team* team;
 

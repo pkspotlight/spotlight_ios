@@ -10,9 +10,7 @@
 #import <Foundation/Foundation.h>
 #import <StoreKit/StoreKit.h>
 
-#import <Parse/PFConstants.h>
-
-@class BFTask PF_GENERIC(__covariant BFGenericType);
+@class BFTask;
 
 @interface PFProductsRequestResult : NSObject
 

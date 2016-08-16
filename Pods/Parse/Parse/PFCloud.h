@@ -28,8 +28,7 @@ PF_ASSUME_NONNULL_BEGIN
 
  @returns The response from the cloud function.
  */
-+ (PF_NULLABLE_S id)callFunction:(NSString *)function
-                  withParameters:(PF_NULLABLE NSDictionary *)parameters PF_SWIFT_UNAVAILABLE;
++ (PF_NULLABLE_S id)callFunction:(NSString *)function withParameters:(PF_NULLABLE NSDictionary *)parameters;
 
 /*!
  @abstract Calls the given cloud function *synchronously* with the parameters provided and

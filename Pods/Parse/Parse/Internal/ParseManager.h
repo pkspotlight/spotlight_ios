@@ -9,13 +9,9 @@
 
 #import <Foundation/Foundation.h>
 
-#import <Parse/PFConstants.h>
-
 #import "PFDataProvider.h"
 #import "PFOfflineStore.h"
-#import "PFMacros.h"
 
-@class BFTask PF_GENERIC(__covariant BFGenericType);
 @class PFAnalyticsController;
 @class PFCoreManager;
 @class PFInstallationIdentifierStore;

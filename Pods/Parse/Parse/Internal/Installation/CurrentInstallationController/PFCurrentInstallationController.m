@@ -78,7 +78,7 @@ NSString *const PFCurrentInstallationPinName = @"_currentInstallation";
 - (BFTask *)getCurrentObjectAsync {
     @weakify(self);
     return [_dataTaskQueue enqueue:^BFTask *(BFTask *unused) {
-        return [[[BFTask taskFromExecutor:[BFExecutor defaultExecutor] withBlock:^id {
+        return [[[BFTask taskFromExecutor:[BFExecutor defaultExecutor] withBlock:^id(BFTask *task) {
             @strongify(self);
             if (self.currentInstallation) {
                 return self.currentInstallation;

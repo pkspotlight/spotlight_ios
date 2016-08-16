@@ -9,14 +9,11 @@
 
 #import <Foundation/Foundation.h>
 
-#import <Parse/PFConstants.h>
-
 #import "PFCoreDataProvider.h"
 #import "PFCurrentObjectControlling.h"
 #import "PFDataProvider.h"
-#import "PFMacros.h"
 
-@class BFTask PF_GENERIC(__covariant BFGenericType);
+@class BFTask;
 @class PFUser;
 
 typedef NS_OPTIONS(NSUInteger, PFCurrentUserLoadingOptions) {

@@ -10,8 +10,6 @@
 
 #import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
 /*!
  Represents the registration of a cancellation observer with a cancellation token.
  Can be used to unregister the observer at a later time.
@@ -25,5 +23,3 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)dispose;
 
 @end
-
-NS_ASSUME_NONNULL_END

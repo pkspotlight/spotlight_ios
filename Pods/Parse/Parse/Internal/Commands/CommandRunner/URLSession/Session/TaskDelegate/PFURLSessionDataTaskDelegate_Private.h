@@ -9,8 +9,6 @@
 
 #import "PFURLSessionDataTaskDelegate.h"
 
-NS_ASSUME_NONNULL_BEGIN
-
 @interface PFURLSessionDataTaskDelegate ()
 
 @property (nonatomic, strong, readonly) dispatch_queue_t dataQueue;
@@ -21,14 +19,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly) NSOutputStream *dataOutputStream;
 @property (nonatomic, assign, readonly) uint64_t downloadedBytes;
 
-@property (nullable, nonatomic, strong) id result;
-@property (nullable, nonatomic, strong) NSError *error;
-
-@property (nullable, nonatomic, copy, readwrite) NSString *responseString;
+@property (nonatomic, strong) id result;
+@property (nonatomic, strong) NSError *error;
 
 - (void)_taskDidFinish NS_REQUIRES_SUPER;
 - (void)_taskDidCancel NS_REQUIRES_SUPER;
 
 @end
-
-NS_ASSUME_NONNULL_END

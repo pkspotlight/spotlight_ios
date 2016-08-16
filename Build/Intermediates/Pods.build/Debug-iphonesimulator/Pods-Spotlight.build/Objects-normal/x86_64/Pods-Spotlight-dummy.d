@@ -1,2 +1,2 @@
 dependencies: \
-  /Users/pkamm/Documents/ios/Spotlight/Pods/Target\ Support\ Files/Pods-Spotlight/Pods-Spotlight-dummy.m
+  /Users/pkamm/Documents/spotlight/spotlight_ios/Pods/Target\ Support\ Files/Pods-Spotlight/Pods-Spotlight-dummy.m

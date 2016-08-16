@@ -26,7 +26,7 @@ A shared instance of `PFLogger` that should be used for all logging.
 
 @returns An shared singleton instance of `PFLogger`.
 */
-+ (instancetype)sharedLogger; //TODO: (nlutsenko) Convert to use an instance everywhere instead of a shared singleton.
++ (instancetype)sharedLogger;
 
 ///--------------------------------------
 /// @name Logging Messages

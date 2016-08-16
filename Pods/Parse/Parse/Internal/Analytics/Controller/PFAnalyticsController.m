@@ -15,12 +15,6 @@
 #import "PFEventuallyQueue.h"
 #import "PFRESTAnalyticsCommand.h"
 
-@interface PFAnalyticsController ()
-
-@property (nonatomic, weak, readonly) PFEventuallyQueue *eventuallyQueue;
-
-@end
-
 @implementation PFAnalyticsController
 
 ///--------------------------------------
@@ -31,17 +25,17 @@
     PFNotDesignatedInitializer();
 }
 
-- (instancetype)initWithDataSource:(id<PFEventuallyQueueProvider>)dataSource {
+- (instancetype)initWithEventuallyQueue:(PFEventuallyQueue *)eventuallyQueue {
     self = [super init];
     if (!self) return nil;
 
-    _dataSource = dataSource;
+    _eventuallyQueue = eventuallyQueue;
 
     return self;
 }
 
-+ (instancetype)controllerWithDataSource:(id<PFEventuallyQueueProvider>)dataSource {
-    return [[self alloc] initWithDataSource:dataSource];
++ (instancetype)controllerWithEventuallyQueue:(PFEventuallyQueue *)eventuallyQueue {
+    return [[self alloc] initWithEventuallyQueue:eventuallyQueue];
 }
 
 ///--------------------------------------
@@ -50,19 +44,15 @@
 
 - (BFTask *)trackAppOpenedEventAsyncWithRemoteNotificationPayload:(NSDictionary *)payload
                                                      sessionToken:(NSString *)sessionToken {
-    @weakify(self);
-    return [[BFTask taskFromExecutor:[BFExecutor defaultPriorityBackgroundExecutor] withBlock:^id{
-        @strongify(self);
-        // If the Remote Notification payload had a message sent along with it, make
-        // sure to send that along so the server can identify "app opened from push"
-        // instead.
-        id alert = payload[@"aps"][@"alert"];
-        NSString *pushDigest = (alert ? [PFAnalyticsUtilities md5DigestFromPushPayload:alert] : nil);
+    // If the Remote Notification payload had a message sent along with it, make
+    // sure to send that along so the server can identify "app opened from push"
+    // instead.
+    id alert = payload[@"aps"][@"alert"];
+    NSString *pushDigest = (alert ? [PFAnalyticsUtilities md5DigestFromPushPayload:alert] : nil);
 
-        PFRESTCommand *command = [PFRESTAnalyticsCommand trackAppOpenedEventCommandWithPushHash:pushDigest
-                                                                                   sessionToken:sessionToken];
-        return [self.eventuallyQueue enqueueCommandInBackground:command];
-    }] continueWithSuccessResult:@YES];
+    PFRESTCommand *command = [PFRESTAnalyticsCommand trackAppOpenedEventCommandWithPushHash:pushDigest
+                                                                               sessionToken:sessionToken];
+    return [[self.eventuallyQueue enqueueCommandInBackground:command] continueWithSuccessResult:@YES];
 }
 
 - (BFTask *)trackEventAsyncWithName:(NSString *)name
@@ -79,22 +69,14 @@
     }
 
     @weakify(self);
-    return [[BFTask taskFromExecutor:[BFExecutor defaultPriorityBackgroundExecutor] withBlock:^id{
+    return [BFTask taskFromExecutor:[BFExecutor defaultPriorityBackgroundExecutor] withBlock:^id{
         @strongify(self);
         NSDictionary *encodedDimensions = [[PFNoObjectEncoder objectEncoder] encodeObject:dimensions];
         PFRESTCommand *command = [PFRESTAnalyticsCommand trackEventCommandWithEventName:name
                                                                              dimensions:encodedDimensions
                                                                            sessionToken:sessionToken];
-        return [self.eventuallyQueue enqueueCommandInBackground:command];
-    }] continueWithSuccessResult:@YES];
-}
-
-///--------------------------------------
-#pragma mark - Accessors
-///--------------------------------------
-
-- (PFEventuallyQueue *)eventuallyQueue {
-    return self.dataSource.eventuallyQueue;
+        return [[self.eventuallyQueue enqueueCommandInBackground:command] continueWithSuccessResult:@YES];
+    }];
 }
 
 @end

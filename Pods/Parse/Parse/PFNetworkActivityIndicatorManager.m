@@ -9,8 +9,6 @@
 
 #import "PFNetworkActivityIndicatorManager.h"
 
-#import <Parse/PFConstants.h>
-
 #import "PFApplication.h"
 #import "PFCommandRunningConstants.h"
 
@@ -54,11 +52,11 @@ static NSTimeInterval const PFNetworkActivityIndicatorVisibilityDelay = 0.17;
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(_handleWillSendURLRequestNotification:)
-                                                 name:PFNetworkWillSendURLRequestNotification
+                                                 name:PFCommandRunnerWillSendURLRequestNotification
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(_handleDidReceiveURLResponseNotification:)
-                                                 name:PFNetworkDidReceiveURLResponseNotification
+                                                 name:PFCommandRunnerDidReceiveURLResponseNotification
                                                object:nil];
 
     return self;

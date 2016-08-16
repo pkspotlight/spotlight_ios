@@ -42,11 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (nullable id)responseObjectForResponse:(nullable NSURLResponse *)response
                            data:(nullable NSData *)data
-                          error:(NSError * __nullable __autoreleasing *)error
-#ifdef NS_SWIFT_NOTHROW
-NS_SWIFT_NOTHROW
-#endif
-;
+                          error:(NSError * __nullable __autoreleasing *)error;
 
 @end
 
@@ -290,7 +286,7 @@ NS_SWIFT_NOTHROW
  `AFURLResponseSerializationErrorDomain`
  AFURLResponseSerializer errors. Error codes for `AFURLResponseSerializationErrorDomain` correspond to codes in `NSURLErrorDomain`.
  */
-FOUNDATION_EXPORT NSString * const AFURLResponseSerializationErrorDomain;
+extern NSString * const AFURLResponseSerializationErrorDomain;
 
 /**
  ## User info dictionary keys
@@ -308,8 +304,8 @@ FOUNDATION_EXPORT NSString * const AFURLResponseSerializationErrorDomain;
  `AFNetworkingOperationFailingURLResponseDataErrorKey`
  The corresponding value is an `NSData` containing the original data of the operation associated with an error. This key is only present in the `AFURLResponseSerializationErrorDomain`.
  */
-FOUNDATION_EXPORT NSString * const AFNetworkingOperationFailingURLResponseErrorKey;
+extern NSString * const AFNetworkingOperationFailingURLResponseErrorKey;
 
-FOUNDATION_EXPORT NSString * const AFNetworkingOperationFailingURLResponseDataErrorKey;
+extern NSString * const AFNetworkingOperationFailingURLResponseDataErrorKey;
 
 NS_ASSUME_NONNULL_END

@@ -1,5 +1,5 @@
 dependencies: \
-  /Users/pkamm/Documents/ios/Spotlight/Spotlight/MontageCreator.m \
-  /Users/pkamm/Documents/ios/Spotlight/Spotlight/MontageCreator.h \
-  /Users/pkamm/Documents/ios/Spotlight/Spotlight/SpotlightMedia.h \
-  /Users/pkamm/Documents/ios/Spotlight/Spotlight/MediaObject.h
+  /Users/pkamm/Documents/spotlight/spotlight_ios/Spotlight/MontageCreator.m \
+  /Users/pkamm/Documents/spotlight/spotlight_ios/Spotlight/MontageCreator.h \
+  /Users/pkamm/Documents/spotlight/spotlight_ios/Spotlight/SpotlightMedia.h \
+  /Users/pkamm/Documents/spotlight/spotlight_ios/Spotlight/MediaObject.h

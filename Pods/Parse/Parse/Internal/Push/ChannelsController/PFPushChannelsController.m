@@ -53,8 +53,8 @@
         PFInstallation *installation = task.result;
 
         BFTask *installationTask = (installation.objectId
-                                    ? (BFTask *)[installation fetchInBackground]
-                                    : (BFTask *)[installation saveInBackground]);
+                                    ? [installation fetchInBackground]
+                                    : [installation saveInBackground]);
 
         return [installationTask continueWithSuccessBlock:^id(BFTask *task) {
             return [NSSet setWithArray:installation.channels];

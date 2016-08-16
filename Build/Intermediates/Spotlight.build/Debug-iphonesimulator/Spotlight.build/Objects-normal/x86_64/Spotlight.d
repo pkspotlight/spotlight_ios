@@ -1,4 +1,5 @@
-dependencies: /Users/pkamm/Documents/ios/Spotlight/Spotlight/Spotlight.m \
-  /Users/pkamm/Documents/ios/Spotlight/Spotlight/Spotlight.h \
-  /Users/pkamm/Documents/ios/Spotlight/Spotlight/SpotlightMedia.h \
-  /Users/pkamm/Documents/ios/Spotlight/Spotlight/MediaObject.h
+dependencies: \
+  /Users/pkamm/Documents/spotlight/spotlight_ios/Spotlight/Spotlight.m \
+  /Users/pkamm/Documents/spotlight/spotlight_ios/Spotlight/Spotlight.h \
+  /Users/pkamm/Documents/spotlight/spotlight_ios/Spotlight/SpotlightMedia.h \
+  /Users/pkamm/Documents/spotlight/spotlight_ios/Spotlight/MediaObject.h

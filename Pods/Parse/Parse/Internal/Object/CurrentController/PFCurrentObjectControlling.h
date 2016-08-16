@@ -9,11 +9,9 @@
 
 #import <Foundation/Foundation.h>
 
-#import <Parse/PFConstants.h>
-
 NS_ASSUME_NONNULL_BEGIN
 
-@class BFTask PF_GENERIC(__covariant BFGenericType);
+@class BFTask;
 @class PFObject;
 
 typedef NS_ENUM(NSUInteger, PFCurrentObjectStorageType) {

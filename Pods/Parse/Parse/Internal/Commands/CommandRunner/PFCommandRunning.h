@@ -14,8 +14,7 @@
 #import "PFDataProvider.h"
 
 @class BFCancellationToken;
-@class BFTask PF_GENERIC(__covariant BFGenericType);
-@class PFCommandResult;
+@class BFTask;
 @class PFRESTCommand;
 @protocol PFNetworkCommand;
 

@@ -10,8 +10,12 @@
 
 #import "Bolts.h"
 
-NS_ASSUME_NONNULL_BEGIN
+NSInteger const kBFMultipleErrorsError = 80175001;
 
-NSString *const BoltsFrameworkVersionString = @"1.8.4";
+@implementation Bolts
 
-NS_ASSUME_NONNULL_END
++ (NSString *)version {
+    return BOLTS_VERSION;
+}
+
+@end

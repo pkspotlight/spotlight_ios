@@ -11,13 +11,9 @@
 
 #import <Parse/PFConstants.h>
 
-#import "PFMacros.h"
-
-@class BFTask PF_GENERIC(__covariant BFGenericType);
+@class BFTask;
 @class PFFileManager;
 @class PFPaymentTransactionObserver;
-@class PFProductsRequestResult;
-
 @protocol PFCommandRunning;
 @class SKPaymentQueue;
 @class SKPaymentTransaction;

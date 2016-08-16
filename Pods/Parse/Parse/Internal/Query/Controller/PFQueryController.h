@@ -9,16 +9,12 @@
 
 #import <Foundation/Foundation.h>
 
-#import <Parse/PFConstants.h>
-
 #import "PFDataProvider.h"
 
 @class BFCancellationToken;
-
-@class BFTask PF_GENERIC(__covariant BFGenericType);
+@class BFTask;
 @class PFQueryState;
 @class PFRESTCommand;
-@class PFCommandResult;
 @class PFUser;
 
 NS_ASSUME_NONNULL_BEGIN

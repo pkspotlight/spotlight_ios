@@ -9,12 +9,11 @@
 
 #import <Foundation/Foundation.h>
 
-#import <Parse/PFConstants.h>
-#import <Parse/PFUserAuthenticationDelegate.h>
+#import "PFAuthenticationProvider.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class BFTask PF_GENERIC(__covariant BFGenericType);
+@class BFTask;
 @class PFUser;
 
 @interface PFUserAuthenticationController : NSObject
@@ -23,24 +22,34 @@ NS_ASSUME_NONNULL_BEGIN
 /// @name Authentication Providers
 ///--------------------------------------
 
-- (void)registerAuthenticationDelegate:(id<PFUserAuthenticationDelegate>)delegate forAuthType:(NSString *)authType;
-- (void)unregisterAuthenticationDelegateForAuthType:(NSString *)authType;
+- (void)registerAuthenticationProvider:(id<PFAuthenticationProvider>)provider;
+- (void)unregisterAuthenticationProvider:(id<PFAuthenticationProvider>)provider;
 
-- (id<PFUserAuthenticationDelegate>)authenticationDelegateForAuthType:(NSString *)authType;
+- (id<PFAuthenticationProvider>)authenticationProviderForAuthType:(NSString *)authType;
 
 ///--------------------------------------
 /// @name Authentication
 ///--------------------------------------
 
-- (BFTask PF_GENERIC(NSNumber *) *)restoreAuthenticationAsyncWithAuthData:(nullable NSDictionary *)authData
-                                                              forAuthType:(NSString *)authType;
-- (BFTask PF_GENERIC(NSNumber *) *)deauthenticateAsyncWithAuthType:(NSString *)authType;
+- (BFTask *)authenticateAsyncWithProviderForAuthType:(NSString *)authType;
+- (BFTask *)deauthenticateAsyncWithProviderForAuthType:(NSString *)authType;
+
+- (BOOL)restoreAuthenticationWithAuthData:(nullable NSDictionary *)authData
+                  withProviderForAuthType:(NSString *)authType;
 
 ///--------------------------------------
 /// @name Log In
 ///--------------------------------------
 
+- (BFTask *)logInUserAsyncWithAuthType:(NSString *)authType;
 - (BFTask *)logInUserAsyncWithAuthType:(NSString *)authType authData:(NSDictionary *)authData;
+
+///--------------------------------------
+/// @name Link
+///--------------------------------------
+
+- (BFTask *)linkUserAsync:(PFUser *)user withAuthType:(NSString *)authType;
+- (BFTask *)linkUserAsync:(PFUser *)user withAuthType:(NSString *)authType authData:(NSDictionary *)authData;
 
 @end
 

@@ -9,12 +9,10 @@
 
 #import <Foundation/Foundation.h>
 
-#import <Parse/PFConstants.h>
-
 #import "PFObject.h"
 #import "PFSubclassing.h"
 
-@class BFTask PF_GENERIC(__covariant BFGenericType);
+@class BFTask;
 @protocol PFNetworkCommand;
 
 extern NSString *const PFEventuallyPinPinName;

@@ -57,7 +57,7 @@ static PFDefaultACLController *defaultController_;
 #pragma mark - ACL
 ///--------------------------------------
 
-- (BFTask PF_GENERIC(PFACL *)*)getDefaultACLAsync {
+- (BFTask *)getDefaultACLAsync {
     return [_taskQueue enqueue:^id(BFTask *task) {
         if (!_defaultACL || !_useCurrentUser) {
             return _defaultACL;
@@ -82,7 +82,7 @@ static PFDefaultACLController *defaultController_;
     }];
 }
 
-- (BFTask PF_GENERIC(PFACL *)*)setDefaultACLAsync:(PFACL *)acl withCurrentUserAccess:(BOOL)accessForCurrentUser {
+- (BFTask *)setDefaultACLAsync:(PFACL *)acl withCurrentUserAccess:(BOOL)accessForCurrentUser {
     return [_taskQueue enqueue:^id(BFTask *task) {
         _defaultACLWithCurrentUser = nil;
         _lastCurrentUser = nil;

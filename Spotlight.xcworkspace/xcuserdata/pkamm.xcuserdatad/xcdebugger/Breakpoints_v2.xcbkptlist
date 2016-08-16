@@ -195,12 +195,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Spotlight/FriendsTableViewController.m"
-            timestampString = "478572299.498636"
+            timestampString = "492999247.082527"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "175"
-            endingLineNumber = "175"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            startingLineNumber = "176"
+            endingLineNumber = "176"
+            landmarkName = "-tableView:numberOfRowsInSection:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -296,7 +296,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "181"
             endingLineNumber = "181"
-            landmarkName = "-unwindAddTeams:"
+            landmarkName = "-addTeamButtonPressed:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -323,13 +323,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Spotlight/FriendFinderTableViewController.m"
-            timestampString = "479784770.939141"
+            timestampString = "492485182.615569"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "165"
-            endingLineNumber = "165"
-            landmarkName = "@implementation FriendFinderTableViewController"
-            landmarkType = "3">
+            startingLineNumber = "169"
+            endingLineNumber = "169"
+            landmarkName = "-prepareForSegue:sender:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -360,7 +360,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "165"
             endingLineNumber = "165"
-            landmarkName = "-photoBrowser:likePhotoAtIndex:"
+            landmarkName = "-editPhotoAtIndex:withImage:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -376,7 +376,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "159"
             endingLineNumber = "159"
-            landmarkName = "-photoBrowser:likePhotoAtIndex:"
+            landmarkName = "-editPhotoAtIndex:withImage:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -408,40 +408,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "205"
             endingLineNumber = "205"
-            landmarkName = "-followButtonPressed:completion:"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[TeamsTableViewController followButtonPressed:completion:]"
-                  moduleName = "Spotlight"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/pkamm/Documents/ios/Spotlight/Spotlight/TeamsTableViewController.m"
-                  timestampString = "481497124.255393"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "205"
-                  endingLineNumber = "205"
-                  offsetFromSymbolStart = "77">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__59-[TeamsTableViewController followButtonPressed:completion:]_block_invoke"
-                  moduleName = "Spotlight"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/pkamm/Documents/ios/Spotlight/Spotlight/TeamsTableViewController.m"
-                  timestampString = "481497124.255491"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "205"
-                  endingLineNumber = "205"
-                  offsetFromSymbolStart = "16">
-               </Location>
-            </Locations>
+            landmarkName = "@implementation TeamsTableViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -458,38 +426,6 @@
             endingLineNumber = "249"
             landmarkName = "-showAlertWithChildren:team:completion:"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[TeamsTableViewController showAlertWithChildren:team:completion:]"
-                  moduleName = "Spotlight"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/pkamm/Documents/ios/Spotlight/Spotlight/TeamsTableViewController.m"
-                  timestampString = "481497124.257357"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "249"
-                  endingLineNumber = "249"
-                  offsetFromSymbolStart = "1876">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__66-[TeamsTableViewController showAlertWithChildren:team:completion:]_block_invoke.204"
-                  moduleName = "Spotlight"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/pkamm/Documents/ios/Spotlight/Spotlight/TeamsTableViewController.m"
-                  timestampString = "481497124.257503"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "249"
-                  endingLineNumber = "249"
-                  offsetFromSymbolStart = "12">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -506,6 +442,53 @@
             endingLineNumber = "85"
             landmarkName = "-followButtonPressed:"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__41-[TeamTableViewCell followButtonPressed:]_block_invoke.87"
+                  moduleName = "Spotlight"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pkamm/Documents/spotlight/spotlight_ios/Spotlight/TeamTableViewCell.m"
+                  timestampString = "492955290.475538"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "85"
+                  endingLineNumber = "85"
+                  offsetFromSymbolStart = "78">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__copy_helper_block_.88"
+                  moduleName = "Spotlight"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pkamm/Documents/spotlight/spotlight_ios/Spotlight/TeamTableViewCell.m"
+                  timestampString = "492955290.475635"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "85"
+                  endingLineNumber = "85"
+                  offsetFromSymbolStart = "51">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__destroy_helper_block_.89"
+                  moduleName = "Spotlight"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pkamm/Documents/spotlight/spotlight_ios/Spotlight/TeamTableViewCell.m"
+                  timestampString = "492955290.475713"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "85"
+                  endingLineNumber = "85"
+                  offsetFromSymbolStart = "29">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -515,11 +498,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Spotlight/FriendFinderTableViewController.m"
-            timestampString = "480992698.680663"
+            timestampString = "492485182.615569"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "96"
-            endingLineNumber = "96"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
             landmarkName = "-searchBarSearchButtonClicked:"
             landmarkType = "5">
          </BreakpointContent>
@@ -531,12 +514,44 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Spotlight/FriendFinderTableViewController.m"
-            timestampString = "480993659.648024"
+            timestampString = "492485182.615569"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "117"
-            endingLineNumber = "117"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
             landmarkName = "-searchBarSearchButtonClicked:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Spotlight/TeamTableViewCell.m"
+            timestampString = "492485765.491995"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "-followButtonPressed:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Spotlight/ProfileTableViewController.m"
+            timestampString = "492955220.633884"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "238"
+            endingLineNumber = "238"
+            landmarkName = "-saveAccountPressed:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

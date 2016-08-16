@@ -18,7 +18,7 @@
 #import "PFMulticastDelegate.h"
 #import "PFObjectControlling.h"
 
-@class BFTask PF_GENERIC(__covariant BFGenericType);
+@class BFTask;
 @class PFCurrentUserController;
 @class PFFieldOperation;
 @class PFJSONCacheItem;
@@ -38,8 +38,6 @@
 
 @protocol PFObjectPrivateSubclass <NSObject>
 
-@required
-
 ///--------------------------------------
 /// @name State
 ///--------------------------------------
@@ -48,17 +46,17 @@
                                             objectId:(NSString *)objectId
                                           isComplete:(BOOL)complete;
 
-@optional
-
 ///--------------------------------------
-/// @name Before Save
+/// @name Validation
 ///--------------------------------------
 
 /*!
- Called before an object is going to be saved. Called in a context of object lock.
- Subclasses can override this method to do any custom updates before an object gets saved.
+ Validate the save eventually operation with the current state.
+ The result of this task is ignored. The error/cancellation/exception will prevent `saveEventually`.
+
+ @returns Task that encapsulates the validtion.
  */
-- (void)_objectWillSave;
+- (BFTask *)_validateSaveEventuallyAsync;
 
 @end
 
@@ -88,27 +86,12 @@
 #if PARSE_OSX_ONLY
 // Not available publicly, but available for testing
 
-- (instancetype)refresh;
-- (instancetype)refresh:(NSError **)error;
+- (void)refresh;
+- (void)refresh:(NSError **)error;
 - (void)refreshInBackgroundWithBlock:(PFObjectResultBlock)block;
 - (void)refreshInBackgroundWithTarget:(id)target selector:(SEL)selector;
 
 #endif
-
-///--------------------------------------
-/// @name Validation
-///--------------------------------------
-
-- (BFTask PF_GENERIC(PFVoid) *)_validateFetchAsync NS_REQUIRES_SUPER;
-- (BFTask PF_GENERIC(PFVoid) *)_validateDeleteAsync NS_REQUIRES_SUPER;
-
-/*!
- Validate the save eventually operation with the current state.
- The result of this task is ignored. The error/cancellation/exception will prevent `saveEventually`.
-
- @returns Task that encapsulates the validation.
- */
-- (BFTask PF_GENERIC(PFVoid) *)_validateSaveEventuallyAsync NS_REQUIRES_SUPER;
 
 ///--------------------------------------
 /// @name Pin
@@ -180,6 +163,7 @@
 ///--------------------------------------
 #pragma mark - Validations
 ///--------------------------------------
+- (void)checkDeleteParams;
 - (void)_checkSaveParametersWithCurrentUser:(PFUser *)currentUser;
 /*!
  Checks if Parse class name could be used to initialize a given instance of PFObject or it's subclass.

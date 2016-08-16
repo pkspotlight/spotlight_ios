@@ -9,12 +9,9 @@
 
 #import <Foundation/Foundation.h>
 
-#import <Parse/PFConstants.h>
-
 #import "PFDataProvider.h"
 
-@class BFTask PF_GENERIC(__covariant BFGenericType);
-@class PFSession;
+@class BFTask;
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -14,16 +14,17 @@
 
 #import "PFFileState.h"
 
-NS_ASSUME_NONNULL_BEGIN
+@class BFTask;
 
 @interface PFFile (Private)
 
 @property (nonatomic, strong, readonly) PFFileState *state;
 
-+ (instancetype)fileWithName:(nullable NSString *)name url:(nullable NSString *)url;
++ (instancetype)fileWithName:(NSString *)name url:(NSString *)url;
 
-- (nullable NSString *)_cachedFilePath;
+//
+// Download
+- (BFTask *)_getDataAsyncWithProgressBlock:(PFProgressBlock)block;
+- (NSString *)_cachedFilePath;
 
 @end
-
-NS_ASSUME_NONNULL_END

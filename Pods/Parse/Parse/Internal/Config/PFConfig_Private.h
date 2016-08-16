@@ -11,7 +11,7 @@
 
 #import <Parse/PFConfig.h>
 
-extern NSString *const PFConfigParametersRESTKey;
+NSString *const PFConfigParametersRESTKey;
 
 @interface PFConfig (Private)
 

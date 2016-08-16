@@ -9,9 +9,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import <Parse/PFConstants.h>
-
-@class BFTask PF_GENERIC(__covariant BFGenericType);
+#import <Bolts/BFTask.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

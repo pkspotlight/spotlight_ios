@@ -14,7 +14,7 @@
 #import "PFBase64Encoder.h"
 #import "PFDateFormatter.h"
 #import "PFFieldOperation.h"
-#import "PFFile_Private.h"
+#import "PFFile.h"
 #import "PFGeoPointPrivate.h"
 #import "PFObjectPrivate.h"
 #import "PFOfflineStore.h"
@@ -62,7 +62,7 @@
         }
         return @{
                  @"__type" : @"File",
-                 @"url" : ((PFFile *)object).state.urlString,
+                 @"url" : ((PFFile *)object).url,
                  @"name" : ((PFFile *)object).name
                  };
 

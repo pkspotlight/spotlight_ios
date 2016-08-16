@@ -9,13 +9,8 @@
 
 #import <Foundation/Foundation.h>
 
-#import <Parse/PFConstants.h>
-
-#import "PFMacros.h"
-
-@class BFTask PF_GENERIC(__covariant BFGenericType);
+@class BFTask;
 @class PFFileManager;
-@class PFSQLiteDatabaseResult;
 
 /*!
  Argument count given in executeSQLAsync or executeQueryAsync is invalid.

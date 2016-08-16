@@ -47,7 +47,7 @@ static const unsigned long long PFFileMaxFileSize = 10 * 1024 * 1024; // 10 MB
 
 @implementation PFFile
 
-@synthesize stagedFilePath = _stagedFilePath;
+@synthesize stagedFilePath=_stagedFilePath;
 
 ///--------------------------------------
 #pragma mark - Public
@@ -112,6 +112,14 @@ static const unsigned long long PFFileMaxFileSize = 10 * 1024 * 1024; // 10 MB
 
 + (instancetype)fileWithData:(NSData *)data contentType:(NSString *)contentType {
     return [self fileWithName:nil data:data contentType:contentType];
+}
+
+#pragma mark Dealloc
+
+- (void)dealloc {
+#if !OS_OBJECT_USE_OBJC
+    dispatch_release(_synchronizationQueue);
+#endif
 }
 
 #pragma mark Uploading
@@ -307,13 +315,13 @@ static const unsigned long long PFFileMaxFileSize = 10 * 1024 * 1024; // 10 MB
 #pragma mark Download
 
 - (BFTask *)_getDataAsyncWithProgressBlock:(PFProgressBlock)progressBlock {
-    return [[self _downloadAsyncWithProgressBlock:progressBlock] continueWithSuccessBlock:^id(BFTask *task) {
+    return [[self _downloadAsyncWithProgressBlock:progressBlock] continueAsyncWithSuccessBlock:^id(BFTask *task) {
         return [self _cachedData];
     }];
 }
 
 - (BFTask *)_getDataStreamAsyncWithProgressBlock:(PFProgressBlock)progressBlock {
-    return [[self _downloadAsyncWithProgressBlock:progressBlock] continueWithSuccessBlock:^id(BFTask *task) {
+    return [[self _downloadAsyncWithProgressBlock:progressBlock] continueAsyncWithSuccessBlock:^id(BFTask *task) {
         return [self _cachedDataStream];
     }];
 }
@@ -327,6 +335,23 @@ static const unsigned long long PFFileMaxFileSize = 10 * 1024 * 1024; // 10 MB
         cancellationToken = self.cancellationTokenSource.token;
     }];
 
+    return [self _downloadAsyncWithCancellationToken:cancellationToken progressBlock:progressBlock];
+}
+
+- (BFTask *)_downloadStreamAsyncWithProgressBlock:(PFProgressBlock)progressBlock {
+    __block BFCancellationToken *cancellationToken = nil;
+    [self _performDataAccessBlock:^{
+        if (!self.cancellationTokenSource || self.cancellationTokenSource.cancellationRequested) {
+            self.cancellationTokenSource = [BFCancellationTokenSource cancellationTokenSource];
+        }
+        cancellationToken = self.cancellationTokenSource.token;
+    }];
+
+    return [self _downloadStreamAsyncWithCancellationToken:cancellationToken progressBlock:progressBlock];
+}
+
+- (BFTask *)_downloadAsyncWithCancellationToken:(BFCancellationToken *)cancellationToken
+                                  progressBlock:(PFProgressBlock)progressBlock {
     @weakify(self);
     return [self.taskQueue enqueue:^id(BFTask *task) {
         @strongify(self);
@@ -347,15 +372,8 @@ static const unsigned long long PFFileMaxFileSize = 10 * 1024 * 1024; // 10 MB
     }];
 }
 
-- (BFTask *)_downloadStreamAsyncWithProgressBlock:(PFProgressBlock)progressBlock {
-    __block BFCancellationToken *cancellationToken = nil;
-    [self _performDataAccessBlock:^{
-        if (!self.cancellationTokenSource || self.cancellationTokenSource.cancellationRequested) {
-            self.cancellationTokenSource = [BFCancellationTokenSource cancellationTokenSource];
-        }
-        cancellationToken = self.cancellationTokenSource.token;
-    }];
-
+- (BFTask *)_downloadStreamAsyncWithCancellationToken:(BFCancellationToken *)cancellationToken
+                                        progressBlock:(PFProgressBlock)progressBlock {
     @weakify(self);
     return [self.taskQueue enqueue:^id(BFTask *task) {
         @strongify(self);
@@ -435,7 +453,7 @@ static const unsigned long long PFFileMaxFileSize = 10 * 1024 * 1024; // 10 MB
 - (NSString *)url {
     __block NSString *url = nil;
     [self _performDataAccessBlock:^{
-        url = self.state.secureURLString;
+        url = self.state.urlString;
     }];
     return url;
 }

@@ -12,11 +12,19 @@
 
 #import "BFTask.h"
 
-NS_ASSUME_NONNULL_BEGIN
+@interface BFTaskCompletionSource ()
+
+@property (nonatomic, strong, readwrite) BFTask *task;
+
+@end
 
 @interface BFTask (BFTaskCompletionSource)
 
-- (BOOL)trySetResult:(nullable id)result;
+- (void)setResult:(id)result;
+- (void)setError:(NSError *)error;
+- (void)setException:(NSException *)exception;
+- (void)cancel;
+- (BOOL)trySetResult:(id)result;
 - (BOOL)trySetError:(NSError *)error;
 - (BOOL)trySetException:(NSException *)exception;
 - (BOOL)trySetCancelled;
@@ -32,45 +40,31 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (instancetype)init {
-    self = [super init];
-    if (!self) return self;
-
-    _task = [[BFTask alloc] init];
-
+    if (self = [super init]) {
+        _task = [[BFTask alloc] init];
+    }
     return self;
 }
 
 #pragma mark - Custom Setters/Getters
 
-- (void)setResult:(nullable id)result {
-    if (![self.task trySetResult:result]) {
-        [NSException raise:NSInternalInconsistencyException
-                    format:@"Cannot set the result on a completed task."];
-    }
+- (void)setResult:(id)result {
+    [self.task setResult:result];
 }
 
 - (void)setError:(NSError *)error {
-    if (![self.task trySetError:error]) {
-        [NSException raise:NSInternalInconsistencyException
-                    format:@"Cannot set the error on a completed task."];
-    }
+    [self.task setError:error];
 }
 
 - (void)setException:(NSException *)exception {
-    if (![self.task trySetException:exception]) {
-        [NSException raise:NSInternalInconsistencyException
-                    format:@"Cannot set the exception on a completed task."];
-    }
+    [self.task setException:exception];
 }
 
 - (void)cancel {
-    if (![self.task trySetCancelled]) {
-        [NSException raise:NSInternalInconsistencyException
-                    format:@"Cannot cancel a completed task."];
-    }
+    [self.task cancel];
 }
 
-- (BOOL)trySetResult:(nullable id)result {
+- (BOOL)trySetResult:(id)result {
     return [self.task trySetResult:result];
 }
 
@@ -87,5 +81,3 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 @end
-
-NS_ASSUME_NONNULL_END

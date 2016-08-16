@@ -12,10 +12,9 @@
 #import <Parse/PFConstants.h>
 
 #import "PFDataProvider.h"
-#import "PFMacros.h"
 
 @class BFCancellationToken;
-@class BFTask PF_GENERIC(__covariant BFGenericType);
+@class BFTask;
 @class PFFileState;
 @class PFFileStagingController;
 

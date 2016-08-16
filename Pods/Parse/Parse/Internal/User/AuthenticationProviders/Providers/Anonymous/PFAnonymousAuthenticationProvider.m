@@ -11,13 +11,23 @@
 
 #import <Bolts/BFTask.h>
 
-NSString *const PFAnonymousUserAuthenticationType = @"anonymous";
-
 @implementation PFAnonymousAuthenticationProvider
 
 ///--------------------------------------
-#pragma mark - PFAnonymousAuthenticationProvider
+#pragma mark - PFAuthenticationProvider
 ///--------------------------------------
+
++ (NSString *)authType {
+    return @"anonymous";
+}
+
+- (BFTask *)authenticateAsync {
+    return [BFTask taskWithResult:self.authData];
+}
+
+- (BFTask *)deauthenticateAsync {
+    return [BFTask taskWithResult:nil];
+}
 
 - (BOOL)restoreAuthenticationWithAuthData:(NSDictionary *)authData {
     return YES;

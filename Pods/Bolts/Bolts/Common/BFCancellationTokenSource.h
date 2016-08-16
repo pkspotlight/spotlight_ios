@@ -10,8 +10,6 @@
 
 #import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
 @class BFCancellationToken;
 
 /*!
@@ -56,5 +54,3 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)dispose;
 
 @end
-
-NS_ASSUME_NONNULL_END

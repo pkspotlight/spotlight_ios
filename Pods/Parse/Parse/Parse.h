@@ -25,7 +25,6 @@
 #import <Parse/PFSession.h>
 #import <Parse/PFSubclassing.h>
 #import <Parse/PFUser.h>
-#import <Parse/PFUserAuthenticationDelegate.h>
 #import <Parse/PFInstallation.h>
 #import <Parse/PFNullability.h>
 #import <Parse/PFPush.h>

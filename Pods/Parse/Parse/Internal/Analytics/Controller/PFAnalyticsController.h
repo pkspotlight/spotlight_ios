@@ -9,24 +9,21 @@
 
 #import <Foundation/Foundation.h>
 
-#import <Parse/PFConstants.h>
-
-#import "PFDataProvider.h"
-
-@class BFTask PF_GENERIC(__covariant BFGenericType);
+@class BFTask;
+@class PFEventuallyQueue;
 
 @interface PFAnalyticsController : NSObject
 
-@property (nonatomic, weak, readonly) id<PFEventuallyQueueProvider> dataSource;
+@property (nonatomic, strong, readonly) PFEventuallyQueue *eventuallyQueue;
 
 ///--------------------------------------
 /// @name Init
 ///--------------------------------------
 
 - (instancetype)init NS_UNAVAILABLE;
-- (instancetype)initWithDataSource:(id<PFEventuallyQueueProvider>)dataSource NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithEventuallyQueue:(PFEventuallyQueue *)eventuallyQueue NS_DESIGNATED_INITIALIZER;
 
-+ (instancetype)controllerWithDataSource:(id<PFEventuallyQueueProvider>)dataSource;
++ (instancetype)controllerWithEventuallyQueue:(PFEventuallyQueue *)eventuallyQueue;
 
 ///--------------------------------------
 /// @name Track Event

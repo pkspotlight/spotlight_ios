@@ -45,7 +45,7 @@ PF_ASSUME_NONNULL_BEGIN
 
  @returns The task, that encapsulates the work being done.
  */
-+ (BFTask PF_GENERIC(PFUser *)*)logInInBackground;
++ (BFTask *)logInInBackground;
 
 /*!
  @abstract Creates an anonymous user.

@@ -669,11 +669,11 @@ didReceiveResponse:(NSURLResponse *)response
             }
 
             break;
-        } else {
+        }
+
+        if (self.outputStream.streamError) {
             [self.connection cancel];
-            if (self.outputStream.streamError) {
-                [self performSelector:@selector(connection:didFailWithError:) withObject:self.connection withObject:self.outputStream.streamError];
-            }
+            [self performSelector:@selector(connection:didFailWithError:) withObject:self.connection withObject:self.outputStream.streamError];
             return;
         }
     }
@@ -743,7 +743,7 @@ didReceiveResponse:(NSURLResponse *)response
         return nil;
     }
 
-    self.state = (AFOperationState)[[decoder decodeObjectOfClass:[NSNumber class] forKey:NSStringFromSelector(@selector(state))] integerValue];
+    self.state = [[decoder decodeObjectOfClass:[NSNumber class] forKey:NSStringFromSelector(@selector(state))] integerValue];
     self.response = [decoder decodeObjectOfClass:[NSHTTPURLResponse class] forKey:NSStringFromSelector(@selector(response))];
     self.error = [decoder decodeObjectOfClass:[NSError class] forKey:NSStringFromSelector(@selector(error))];
     self.responseData = [decoder decodeObjectOfClass:[NSData class] forKey:NSStringFromSelector(@selector(responseData))];

@@ -9,17 +9,14 @@
 
 #import <Foundation/Foundation.h>
 
-#import <Parse/PFConstants.h>
-
 #import "PFCoreDataProvider.h"
 #import "PFCurrentObjectControlling.h"
 #import "PFDataProvider.h"
-#import "PFMacros.h"
 
 extern NSString *const PFCurrentInstallationFileName;
 extern NSString *const PFCurrentInstallationPinName;
 
-@class BFTask PF_GENERIC(__covariant BFGenericType);
+@class BFTask;
 @class PFInstallation;
 
 @interface PFCurrentInstallationController : NSObject <PFCurrentObjectControlling>

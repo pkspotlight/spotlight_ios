@@ -115,9 +115,12 @@
 #pragma mark - CLLocationManagerDelegate
 ///--------------------------------------
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-    CLLocation *location = [locations lastObject];
-
+// TODO: (nlutsenko) Remove usage of this method, when we drop support for OSX 10.8
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
+- (void)locationManager:(CLLocationManager *)manager
+    didUpdateToLocation:(CLLocation *)newLocation
+           fromLocation:(CLLocation *)oldLocation {
     [manager stopUpdatingLocation];
 
     NSMutableSet *callbacks = [NSMutableSet setWithCapacity:1];
@@ -125,9 +128,21 @@
         [callbacks setSet:self.blockSet];
         [self.blockSet removeAllObjects];
     }
-    for (PFLocationManagerLocationUpdateBlock block in callbacks) {
-        block(location, nil);
+    for (void(^block)(CLLocation *, NSError *) in callbacks) {
+        block(newLocation, nil);
     }
+}
+#pragma clang diagnostic pop
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    CLLocation *location = [locations lastObject];
+    CLLocation *oldLocation = [locations count] > 1 ? [locations objectAtIndex:[locations count] - 2] : nil;
+
+    // TODO: (nlutsenko) Remove usage of this method, when we drop support for OSX 10.8 (didUpdateLocations is 10.9+)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+    [self locationManager:manager didUpdateToLocation:location fromLocation:oldLocation];
+#pragma clang diagnostic pop
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {

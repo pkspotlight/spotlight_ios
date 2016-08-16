@@ -1,10 +1,10 @@
 dependencies: \
-  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/Push/Manager/PFPushManager.m \
-  /Users/pkamm/Documents/ios/Spotlight/Pods/Target\ Support\ Files/Parse/Parse-prefix.pch \
-  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/Push/Manager/PFPushManager.h \
-  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFCoreDataProvider.h \
-  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFDataProvider.h \
-  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFAssert.h \
-  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/PFMacros.h \
-  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/Push/ChannelsController/PFPushChannelsController.h \
-  /Users/pkamm/Documents/ios/Spotlight/Pods/Parse/Parse/Internal/Push/Controller/PFPushController.h
+  /Users/pkamm/Documents/spotlight/spotlight_ios/Pods/Parse/Parse/Internal/Push/Manager/PFPushManager.m \
+  /Users/pkamm/Documents/spotlight/spotlight_ios/Pods/Target\ Support\ Files/Parse/Parse-prefix.pch \
+  /Users/pkamm/Documents/spotlight/spotlight_ios/Pods/Parse/Parse/Internal/Push/Manager/PFPushManager.h \
+  /Users/pkamm/Documents/spotlight/spotlight_ios/Pods/Parse/Parse/Internal/PFCoreDataProvider.h \
+  /Users/pkamm/Documents/spotlight/spotlight_ios/Pods/Parse/Parse/Internal/PFDataProvider.h \
+  /Users/pkamm/Documents/spotlight/spotlight_ios/Pods/Parse/Parse/Internal/PFAssert.h \
+  /Users/pkamm/Documents/spotlight/spotlight_ios/Pods/Parse/Parse/Internal/PFMacros.h \
+  /Users/pkamm/Documents/spotlight/spotlight_ios/Pods/Parse/Parse/Internal/Push/ChannelsController/PFPushChannelsController.h \
+  /Users/pkamm/Documents/spotlight/spotlight_ios/Pods/Parse/Parse/Internal/Push/Controller/PFPushController.h

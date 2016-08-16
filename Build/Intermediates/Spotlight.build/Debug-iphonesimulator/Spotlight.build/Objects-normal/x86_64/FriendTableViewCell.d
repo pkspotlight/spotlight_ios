@@ -1,6 +1,6 @@
 dependencies: \
-  /Users/pkamm/Documents/ios/Spotlight/Spotlight/FriendTableViewCell.m \
-  /Users/pkamm/Documents/ios/Spotlight/Spotlight/FriendTableViewCell.h \
-  /Users/pkamm/Documents/ios/Spotlight/Spotlight/User.h \
-  /Users/pkamm/Documents/ios/Spotlight/Spotlight/ProfilePictureMedia.h \
-  /Users/pkamm/Documents/ios/Spotlight/Spotlight/MediaObject.h
+  /Users/pkamm/Documents/spotlight/spotlight_ios/Spotlight/FriendTableViewCell.m \
+  /Users/pkamm/Documents/spotlight/spotlight_ios/Spotlight/FriendTableViewCell.h \
+  /Users/pkamm/Documents/spotlight/spotlight_ios/Spotlight/User.h \
+  /Users/pkamm/Documents/spotlight/spotlight_ios/Spotlight/ProfilePictureMedia.h \
+  /Users/pkamm/Documents/spotlight/spotlight_ios/Spotlight/MediaObject.h

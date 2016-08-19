@@ -16,6 +16,12 @@ enum requestStates{
     requestStateAccepted,
     requestStateRejected
 };
+//enum type{
+//    typeTeam = 1,
+//    typeFriend
+//    
+//};
+
 
 @interface TeamRequest : PFObject  <PFSubclassing>
 + (NSString *)parseClassName;
@@ -30,6 +36,7 @@ enum requestStates{
 @property (assign, nonatomic) NSString *teamName;
 @property (assign, nonatomic) NSNumber *requestState;
 @property (assign, nonatomic) NSNumber *isChild;
+//@property (assign, nonatomic) NSNumber *type;
 
 @property (strong, nonatomic) ProfilePictureMedia* PicOfRequester;
 

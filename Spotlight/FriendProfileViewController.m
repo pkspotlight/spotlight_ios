@@ -23,6 +23,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *friendNameLabel;
 @property (weak, nonatomic) IBOutlet UIView *teamsContainerView;
 @property (weak, nonatomic) IBOutlet UIButton *editChildProfile;
+@property (weak, nonatomic) IBOutlet UIButton *editChildCemeraButton;
+
 @property (weak, nonatomic) IBOutlet UIView *spotlightsContainerView;
 @property (weak, nonatomic) IBOutlet UIView *familyContainerView;
 @property (strong, nonatomic) UIImagePickerController* imagePickerController;
@@ -49,6 +51,16 @@
         [self formatForChild];
     }
 }
+
+//-(void)viewWillAppear:(BOOL)animated{
+//    [super viewWillAppear:animated];
+//        if (self.user) {
+//            [self formatForUser];
+//        } else {
+//            [self formatForChild];
+//        }
+//
+//}
 
 - (IBAction)segmentControllerValueChanged:(UISegmentedControl*)sender {
     if( sender.selectedSegmentIndex == 0) {
@@ -78,6 +90,7 @@
 
 - (void)formatWithName:(NSString*)name profilePicture:(ProfilePictureMedia*)profilePic {
     [self.friendNameLabel setText:name];
+   
     [self.friendImageView cancelImageRequestOperation];
     [profilePic fetchIfNeeded];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:profilePic.thumbnailImageFile.url]];
@@ -85,6 +98,7 @@
      setImageWithURLRequest:request
      placeholderImage:nil
      success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, UIImage * _Nonnull image) {
+         
          [self.friendImageView setImage:image];
      } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, NSError * _Nonnull error) {
          NSLog(@"fuck thumbnail failure");
@@ -100,11 +114,14 @@
 
 - (void)formatForUser {
      self.editChildProfile.hidden = YES;
+    self.editChildCemeraButton.hidden = YES;
+
     [self formatWithName:[self.user displayName] profilePicture:self.user.profilePic];
 }
 
 - (void)formatForChild {
     self.editChildProfile.hidden = NO;
+    self.editChildCemeraButton.hidden = NO;
     [self formatWithName:[self.child displayName] profilePicture:self.child.profilePic];
 }
      
@@ -152,16 +169,26 @@
 #pragma mark - UIImagePickerControllerDelegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)infoDict {
-    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [hud setLabelText:@"Updating Info..."];
     UIImage *image = [infoDict valueForKey:UIImagePickerControllerOriginalImage];
     self.profilePic = [[ProfilePictureMedia alloc] initWithImage:image];
     [self.friendImageView setImage:image];
     [self.profilePic saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-        
+                if(succeeded){
+            
+        }
     }];
     [self.imagePickerController dismissViewControllerAnimated:YES completion:nil];
     self.child.profilePic = self.profilePic;
-    [self.child saveInBackground];
+    [self.child saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        [hud hide:YES afterDelay:.5];
+
+        if(succeeded){
+            NSLog(@"child saved");
+        }
+    }];
+    
 }
 
 

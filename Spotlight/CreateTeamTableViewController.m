@@ -128,38 +128,64 @@
 }
 
 - (IBAction)saveAccountPressed:(id)sender {
-   __block NSError *error;
+    NSError *error;
     [self.view endEditing:NO];
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:@"Do you want to associate your family members" preferredStyle:UIAlertControllerStyleAlert];
     
-    [alertController addAction:[UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        
-        if ([self savePendingChangesToTeam:&error]) {
-            //[self dismissViewControllerAnimated:YES completion:nil];
-            [self performSegueWithIdentifier:@"UnwindEditSegue" sender:sender];
-        } else {
-            //Show some error
+//    if ([self savePendingChangesToTeam:&error]) {
+//        //[self dismissViewControllerAnimated:YES completion:nil];
+//        [self performSegueWithIdentifier:@"UnwindEditSegue" sender:nil];
+//    } else {
+//        //Show some error
+//    }
+
+    
+    [[[[User currentUser] children] query] findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if(objects.count>0){
+           __block NSError *error;
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:@"Do you want to associate your family members" preferredStyle:UIAlertControllerStyleAlert];
+            
+            [alertController addAction:[UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                
+                if ([self savePendingChangesToTeam:&error]) {
+                    //[self dismissViewControllerAnimated:YES completion:nil];
+                    [self performSegueWithIdentifier:@"UnwindEditSegue" sender:sender];
+                } else {
+                    //Show some error
+                }
+                
+            }]];
+            [alertController addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                
+                
+                RecieptAlertView *alert = [[RecieptAlertView alloc]init];
+                alert.delegate = self;
+                
+                [alert createAlertWithRemmitances:objects];
+                                
+            }]];
+            
+            
+            dispatch_async(dispatch_get_main_queue(), ^ {
+                [self presentViewController:alertController animated:YES completion:nil];
+            });
+            
+            
+
+            
+        }
+        else{
+            if ([self savePendingChangesToTeam:&error]) {
+                //[self dismissViewControllerAnimated:YES completion:nil];
+                [self performSegueWithIdentifier:@"UnwindEditSegue" sender:nil];
+            } else {
+                //Show some error
+            }
         }
         
-    }]];
-    [alertController addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         
-        [[[[User currentUser] children] query] findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-            RecieptAlertView *alert = [[RecieptAlertView alloc]init];
-            alert.delegate = self;
-           
-            [alert createAlertWithRemmitances:objects];
-            //[self showAlertWithChildren:objects team:teamCell.team completion:completion];
-        }];
-      
-    }]];
-    
-    
-    dispatch_async(dispatch_get_main_queue(), ^ {
-        [self presentViewController:alertController animated:YES completion:nil];
-    });
-    
+    }];
 
+    
     
 
 }

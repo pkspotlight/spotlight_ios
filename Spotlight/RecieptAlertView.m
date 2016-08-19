@@ -38,6 +38,8 @@ const static CGFloat kCustomIOS7AlertViewDefaultButtonSpacerHeight = 1;
     dialogHeight += 10;
     scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, dialogHeight, titleLabel.frame.size.width, 0)];
     scroll.clipsToBounds = YES;
+    scroll.showsHorizontalScrollIndicator = NO;
+    scroll.showsVerticalScrollIndicator = NO;
     int YOffset = 0;
     NSMutableArray *displayNameArray = [NSMutableArray new];
     [displayNameArray removeAllObjects];
@@ -77,9 +79,9 @@ const static CGFloat kCustomIOS7AlertViewDefaultButtonSpacerHeight = 1;
     
     
     CGRect rect = scroll.frame;
-   if(YOffset > 700)
+   if(YOffset > 300)
    {
-    rect.size.height = 700;
+    rect.size.height = 300;
    }
      else
     {
@@ -164,7 +166,7 @@ const static CGFloat kCustomIOS7AlertViewDefaultButtonSpacerHeight = 1;
         [closeButton setFrame:CGRectMake(i * buttonWidth, container.bounds.size.height - kCustomIOS7AlertViewDefaultButtonHeight, buttonWidth, kCustomIOS7AlertViewDefaultButtonHeight)];
         
         [closeButton addTarget:self action:@selector(customIOS7dialogButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
-        [closeButton setTag:i];
+        closeButton.tag = i;
         closeButton.layer.borderColor=[[UIColor lightGrayColor] CGColor] ;
         closeButton.layer.borderWidth=0.5f;
         [closeButton setTitle:[buttonTitles objectAtIndex:i] forState:UIControlStateNormal];
@@ -211,12 +213,23 @@ const static CGFloat kCustomIOS7AlertViewDefaultButtonSpacerHeight = 1;
     return self.selectedChild;
 }
 
-- (IBAction)customIOS7dialogButtonTouchUpInside:(id)sender
+- (IBAction)customIOS7dialogButtonTouchUpInside:(UIButton*)sender
 {
-    NSMutableArray *childSelectedArray = [self getSelectedRemNumber];
-    [self.delegate RecieptAlertViewdialogButtonWithChildSelected:childSelectedArray];
-    [self removeFromSuperview];
-}
+    
+    if(sender.tag == 0){
+       // NSMutableArray *childSelectedArray = [self getSelectedRemNumber];
+        
+        [self.delegate RecieptAlertViewdialogButtonWithChildSelected:@[].mutableCopy];
+        [self removeFromSuperview];
+
+    }
+    else  if(sender.tag == 1){
+        
+        NSMutableArray *childSelectedArray = [self getSelectedRemNumber];
+        [self.delegate RecieptAlertViewdialogButtonWithChildSelected:childSelectedArray];
+          [self removeFromSuperview];
+    }
+        }
 
 
 

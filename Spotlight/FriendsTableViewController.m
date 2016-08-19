@@ -240,7 +240,7 @@ static CGFloat const BasicHeaderHeight = 50;
             
             [(FriendTableViewCell*)cell formatForUser:self.teamsMemberArray[indexPath.row] isFollowing:YES];
             
-            [(FriendTableViewCell*)cell userDisplayNameLabel].textColor = [UIColor purpleColor];
+           // [(FriendTableViewCell*)cell userDisplayNameLabel].textColor = [UIColor purpleColor];
         }
     } else {
         if (indexPath.section == 0) {

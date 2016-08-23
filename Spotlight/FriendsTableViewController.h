@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol TeamMembersdelegate <NSObject>
 
+-(void)getTeamMembers:(NSMutableArray*)teamMembers;
+
+
+@end
 @class User;
 @class Team;
 
@@ -15,6 +20,7 @@
 
 @property (strong, nonatomic) User* user;
 @property (strong, nonatomic) Team* team;
+@property (weak,atomic) id <TeamMembersdelegate> delegate;
 @property (assign, nonatomic) BOOL justFamily;
 
 @end

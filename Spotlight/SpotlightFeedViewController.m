@@ -281,7 +281,7 @@
                     
                     TeamRequest *teamRequest = [[TeamRequest alloc]init];
                     
-                    [teamRequest saveTeam:spotLightCellSelected.team andAdmin:user  followby:[User currentUser] orChild:nil withTimestamp:timestamp isChild:@0 completion:^{
+                    [teamRequest saveTeam:spotLightCellSelected.team andAdmin:user  followby:[User currentUser] orChild:nil withTimestamp:timestamp isChild:@0 isType:@1 completion:^{
 //                        if (completion) {
 //                            
 //                            completion();

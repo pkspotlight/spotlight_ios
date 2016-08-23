@@ -21,7 +21,7 @@
 @interface TeamTableViewCell : UITableViewCell
 
 - (void)formatForTeam:(Team*)team isFollowing:(BOOL)isFollowing;
-
+@property (weak, nonatomic) IBOutlet UIButton *followButton;
 @property (readonly, nonatomic) Team* team;
 @property (weak, nonatomic) id<TeamTableViewCellDelegate> delegate;
 

@@ -64,7 +64,7 @@
 
 -(void)followAcceptedRequest:(TeamRequest *)request
 {
-  
+    if([request.type intValue]==1){
     if(!request.isChild.boolValue)
     {
         [request.team fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
@@ -103,8 +103,22 @@
         }];
         
     }
-    
-    
+    }
+    else if([request.type intValue]==2){
+        PFRelation *friendRelation = [[User currentUser] relationForKey:@"friends"];
+         [friendRelation addObject:request.admin];
+        [[User currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+            if (succeeded) {
+                [request deleteInBackground];
+
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"SpotLightRefersh" object:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"Frdfollowunfollow" object:nil];
+                
+            }
+
+       
+                 }];
+    }
 }
 
 -(void)FollowAcceptedRequests:(BOOL)isMessage
@@ -124,6 +138,7 @@
     [spotlightQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         
         NSString *teams = @"";
+        NSString *friends = @"";
         if(objects.count > 0)
         {
             for(TeamRequest *request in objects)
@@ -140,7 +155,12 @@
                     {
                         [appDel.acceptedTeamIDs addObject:request.objectId];
                     
-                     teams = (teams.length == 0)? [NSString stringWithFormat:@"%@",request.teamName] : [NSString stringWithFormat:@"%@, %@",teams,request.teamName];
+                        if([request.type intValue] ==1){
+                               teams = (teams.length == 0)? [NSString stringWithFormat:@"%@",request.teamName] : [NSString stringWithFormat:@"%@, %@",teams,request.teamName];
+                        }else{
+                            friends =   (friends.length == 0)? [NSString stringWithFormat:@"%@",request.nameOfRequester] : [NSString stringWithFormat:@"%@, %@",friends,request.nameOfRequester];
+                        }
+                  
                     
                     }
                     
@@ -157,6 +177,14 @@
             {
                 [[[UIAlertView alloc] initWithTitle:@""
                                             message:[NSString stringWithFormat:@"Your follow request for %@ has been accepted",teams]
+                                           delegate:nil
+                                  cancelButtonTitle:nil
+                                  otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] performSelectorOnMainThread:@selector(show)  withObject:nil waitUntilDone:NO];
+            }
+            
+            else if(friends.length>0){
+                [[[UIAlertView alloc] initWithTitle:@""
+                                            message:[NSString stringWithFormat:@"%@ has accepted your friend request",friends]
                                            delegate:nil
                                   cancelButtonTitle:nil
                                   otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] performSelectorOnMainThread:@selector(show)  withObject:nil waitUntilDone:NO];
@@ -183,25 +211,43 @@
         if(objects.count > 0)
         {
             NSMutableArray *array = [NSMutableArray new];
+            NSMutableArray *friendsArray = [NSMutableArray new];
             for(TeamRequest *request in objects)
             {
                 if( (request.requestState.intValue == reqestStatePending))
                 {
-                    [array addObject:request];
+                    
+                    if([request.type intValue]==1){
+                        [array addObject:request];
+                    }else  if([request.type intValue]==2){
+                        [friendsArray addObject:request];
+                    }
+                    
                 }
                 
             }
-            if(array.count>0){
+            if(array.count>0 ){
                 [[[self  tabBar]items] objectAtIndex:2].badgeValue = [NSString stringWithFormat:@"%ld",(unsigned long)array.count];
+              
             }
             else{
-                [[[self  tabBar]items] objectAtIndex:2].badgeValue  = nil;
+                  [[[self  tabBar]items] objectAtIndex:2].badgeValue  = nil;
             }
+            
+            if(friendsArray.count>0){
+                   [[[self  tabBar]items] objectAtIndex:1].badgeValue = [NSString stringWithFormat:@"%ld",(unsigned long)friendsArray.count];
+            }
+            else{
+              
+                 [[[self  tabBar]items] objectAtIndex:1].badgeValue  = nil;
+            }
+            
             
             
         }
         else{
             [[[self  tabBar]items] objectAtIndex:2].badgeValue  = nil;
+             [[[self  tabBar]items] objectAtIndex:1].badgeValue  = nil;
         }
         
         //        for(TeamRequest *request in objects)
@@ -233,26 +279,43 @@
            if(objects.count > 0)
         {
             NSMutableArray *array = [NSMutableArray new];
+            NSMutableArray *friendsArray = [NSMutableArray new];
+
             for(TeamRequest *request in objects)
             {
                  if((request.requestState.intValue == reqestStatePending))
                 {
-                    [array addObject:request];
+                    if([request.type intValue]==1){
+                        [array addObject:request];
+                    }else  if([request.type intValue]==2){
+                        [friendsArray addObject:request];
+                    }
+
                 }
                 
             }
-            if(array.count>0){
-            [[[self  tabBar]items] objectAtIndex:2].badgeValue = [NSString stringWithFormat:@"%ld",(unsigned long)array.count];
+            if(array.count>0 ){
+                [[[self  tabBar]items] objectAtIndex:2].badgeValue = [NSString stringWithFormat:@"%ld",(unsigned long)array.count];
+                
             }
             else{
-                  [[[self  tabBar]items] objectAtIndex:2].badgeValue  = nil;
+                [[[self  tabBar]items] objectAtIndex:2].badgeValue  = nil;
+            }
+            
+            if(friendsArray.count>0){
+                [[[self  tabBar]items] objectAtIndex:1].badgeValue = [NSString stringWithFormat:@"%ld",(unsigned long)friendsArray.count];
+            }
+            else{
+                
+                [[[self  tabBar]items] objectAtIndex:1].badgeValue  = nil;
             }
             
             
         }
-        else{
-            [[[self  tabBar]items] objectAtIndex:2].badgeValue  = nil;
-        }
+           else{
+               [[[self  tabBar]items] objectAtIndex:2].badgeValue  = nil;
+               [[[self  tabBar]items] objectAtIndex:1].badgeValue  = nil;
+           }
         
 //        for(TeamRequest *request in objects)
 //        {

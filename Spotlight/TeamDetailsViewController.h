@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FriendsTableViewController.h"
 
 @class Team;
 
-@interface TeamDetailsViewController : UIViewController
+@interface TeamDetailsViewController : UIViewController<TeamMembersdelegate>
 
 @property (strong, nonatomic) Team* team;
+@property (strong,nonatomic) NSMutableArray *teamMembersArray;
 
 @end

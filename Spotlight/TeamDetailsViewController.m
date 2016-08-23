@@ -22,13 +22,15 @@
 {
     BOOL doRefresh;
       NSMutableArray *pendingRequestArray;
-}
+   }
 
 @property (weak, nonatomic) IBOutlet UIImageView *teamLogoImageView;
 @property (weak, nonatomic) IBOutlet UILabel *teamNameLabel;
 @property (weak, nonatomic) IBOutlet UIView *teamMemberViewContainer;
 @property (weak, nonatomic) IBOutlet UIView *spotlightContainer;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
+
+
 
 @end
 
@@ -37,13 +39,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
      pendingRequestArray = [NSMutableArray new];
+ 
     doRefresh = false;
     [self fetchAllPendingRequest];
+    
+
 
     [self.teamLogoImageView.layer setCornerRadius:self.teamLogoImageView.bounds.size.width/2];
     [self.teamLogoImageView.layer setBorderColor:[UIColor whiteColor].CGColor];
     [self.teamLogoImageView.layer setBorderWidth:3];
     [self.teamLogoImageView setClipsToBounds:YES];
+
     [self formatPage];
 
     PFQuery* moderatorQuery = [self.team.moderators query];
@@ -56,6 +62,9 @@
         }
     }];
 }
+
+
+
 
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -78,6 +87,10 @@
         }
     }
 }
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.teamMembersArray removeAllObjects];
+}
 - (IBAction)teamSegmentControllerValueChanged:(UISegmentedControl*)sender {
     if( sender.selectedSegmentIndex == 0) {
         [UIView animateWithDuration:.5
@@ -96,7 +109,9 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"teamMemberEmbedSegue"]) {
+    
         [(FriendsTableViewController*)[segue destinationViewController] setTeam:self.team];
+          [(FriendsTableViewController*)[segue destinationViewController] setDelegate:self];
     } else if ([segue.identifier isEqualToString:@"EditTeamSegue"]){
         [(CreateTeamTableViewController*)[(UINavigationController*)[segue destinationViewController] viewControllers][0] setTeam:self.team];
     } else if ([segue.identifier isEqualToString:@"EmbedSpotlightDataSource"]){
@@ -111,6 +126,9 @@
         }
 }
 
+
+
+
 - (void)formatPage {
     [self.teamNameLabel setText:self.team.teamName];
     
@@ -124,6 +142,10 @@
          NSLog(@"fuck thumbnail failure");
      }];
 
+}
+
+-(void)getTeamMembers:(NSMutableArray *)teamMembers{
+    self.teamMembersArray = teamMembers;
 }
 
 -(void)fetchAllPendingRequest{
@@ -165,17 +187,30 @@
 
 - (IBAction)addChildToTeamAsMember:(UIButton*)sender {
     [[[[User currentUser] children] query] findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-//        NSMutableArray *filteredArrayOfObjects = [NSMutableArray new];
-//        [filteredArrayOfObjects removeAllObjects];
-//        for (Child *child in objects)
-//        {
-//            if(!([[filteredArrayOfObjects valueForKeyPath:@"objectId"] containsObject:child.objectId]))
-//            {
-//                [filteredArrayOfObjects addObject:child];
-//            }
-//        }
+        
+        if(objects.count>0){
+            NSMutableArray *filteredArrayOfObjects = [NSMutableArray new];
+            [filteredArrayOfObjects removeAllObjects];
+            for (Child *child in objects)
+            {
+                if(!([[self.teamMembersArray valueForKeyPath:@"objectId"] containsObject:child.objectId]))
+                {
+                    [filteredArrayOfObjects addObject:child];
+                }
+            }
+            
+            [self showAlertWithChildren:filteredArrayOfObjects team:self.team completion:nil];
+        }
+        else{
+            [[[UIAlertView alloc] initWithTitle:@""
+                                        message:@"No child is associated with this user"
+                                       delegate:nil
+                              cancelButtonTitle:nil
+                              otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
 
-        [self showAlertWithChildren:objects team:self.team completion:nil];
+        }
+        
+       
     }];
 }
 
@@ -218,12 +253,13 @@
                                                                         
                                                                         TeamRequest *teamRequest = [[TeamRequest alloc]init];
                                                                         
-                                                                        [teamRequest saveTeam:team andAdmin:user  followby:[User currentUser] orChild:child withTimestamp:timestamp isChild:@1 completion:^{
+                                                                        [teamRequest saveTeam:team andAdmin:user  followby:[User currentUser] orChild:child withTimestamp:timestamp isChild:@1 isType:@1 completion:^{
                                                                             if (completion) {
                                                                                 
                                                                                 completion();
                                                                             }
                                                                             [pendingRequestArray addObject:teamRequest];
+                                                                            [self.teamMembersArray addObject:child];
                                                                           //  [self.tableView reloadData];
                                                                         }];
                                                                         break;

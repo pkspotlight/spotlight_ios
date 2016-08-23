@@ -17,17 +17,20 @@
 #import "Child.h"
 #import "BasicHeaderView.h"
 #import "SpotlightBoardView.h"
-
+#import "PendingRequestTableViewController.h"
 #define SpotlightFriendsBoardingText @"This is where you can find all of your friends or teamsMemberArray and follow thier activity. Click on the '+' in the top right to search for your friends!"
 static CGFloat const BasicHeaderHeight = 50;
 
 
-@interface FriendsTableViewController ()
+@interface FriendsTableViewController (){
+      long count;
+}
 
 @property (strong, nonatomic) NSArray* friends;
 @property (strong, nonatomic) NSArray* children;
+@property (strong, nonatomic) NSMutableArray *pendingRequestArray;
 @property (strong, nonatomic) NSMutableArray* teamsMemberArray;
-
+@property (strong, nonatomic) NSMutableArray* friendsArray;
 
 @end
 
@@ -35,12 +38,18 @@ static CGFloat const BasicHeaderHeight = 50;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    count = 0;
     _teamsMemberArray = [NSMutableArray new];
+     _friendsArray = [NSMutableArray new];
     [self.tableView
      registerNib:[UINib nibWithNibName:@"BasicHeaderView" bundle:nil]
      forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self addSpotlightFriendScreenBoardingPopUp];
+    _pendingRequestArray = [NSMutableArray new];
+    [self fetchAllPendingRequest];
+
+    [self loadFriends];
     [self.refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     [self setRefreshControl:self.refreshControl];
     [self.refreshControl beginRefreshing];
@@ -50,6 +59,7 @@ static CGFloat const BasicHeaderHeight = 50;
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+      [self fetchRequest];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [[NSNotificationCenter defaultCenter] postNotificationName:@"PendingRequest" object:nil];
     });
@@ -57,7 +67,60 @@ static CGFloat const BasicHeaderHeight = 50;
     [self refresh:self.refreshControl];
 }
 
+- (void)loadFriends{
+    PFQuery *query = [[User currentUser].friends query];
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        self.friendsArray = [objects copy];
+        
+    }];
+}
 
+
+-(void)fetchRequest{
+    
+    
+    
+    PFQuery *spotlightQuery = [PFQuery queryWithClassName:@"TeamRequest"];
+    [spotlightQuery whereKey:@"admin" equalTo:[User currentUser]];
+    
+    [spotlightQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        
+        if(objects.count > 0)
+        {
+            NSMutableArray *array = [NSMutableArray new];
+            for(TeamRequest *request in objects)
+            {
+                if((request.requestState.intValue == reqestStatePending)&&([request.type intValue]==2))
+                {
+                    
+                    [array addObject:request];
+                }
+                
+            }
+            count = array.count;
+            [self.tableView reloadData];
+            //  pendingRequest = [NSString stringWithFormat:@"You have %ld request pendings",array.count];
+            if(array.count>0){
+                  [self makeHeaderView];
+                [[self navigationController] tabBarItem].badgeValue = [NSString stringWithFormat:@"%ld",array.count];
+            }
+            else{
+                self.tableView.tableHeaderView = nil;
+                [[self navigationController] tabBarItem].badgeValue  = nil;
+            }
+          
+            
+            
+            
+        }
+        else{
+              self.tableView.tableHeaderView = nil;
+            [[self navigationController] tabBarItem].badgeValue  = nil;
+        }
+        
+        
+    }];
+}
 
 -(void)refreshScreen
 {
@@ -119,6 +182,7 @@ static CGFloat const BasicHeaderHeight = 50;
 
 - (void)loadTeamMembers:(UIRefreshControl*)refresh {
     [_teamsMemberArray removeAllObjects];
+    
     [self.tableView reloadData];
     PFQuery *query = [PFQuery queryWithClassName:@"Child"];
     [query whereKey:@"teams" equalTo:self.team];
@@ -127,6 +191,8 @@ static CGFloat const BasicHeaderHeight = 50;
         if(objects.count > 0)
         {
             [_teamsMemberArray addObjectsFromArray:objects];
+            [self.delegate getTeamMembers:_teamsMemberArray];
+
         }
         
         PFQuery *query1 = [PFQuery queryWithClassName:@"_User"];
@@ -140,6 +206,7 @@ static CGFloat const BasicHeaderHeight = 50;
             
             [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
             [refresh performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:NO];
+            
             
         }];
         
@@ -200,7 +267,10 @@ static CGFloat const BasicHeaderHeight = 50;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+  
     BasicHeaderView *cell = [self.tableView dequeueReusableHeaderFooterViewWithIdentifier:@"BasicHeaderView"];
+ 
     cell.headerTitleLabel.text = (section == 0) ? @"My Family" : @"Friends";
     return cell;
 }
@@ -225,6 +295,9 @@ static CGFloat const BasicHeaderHeight = 50;
     }
 }
 
+
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell* cell;
     
@@ -239,8 +312,7 @@ static CGFloat const BasicHeaderHeight = 50;
                                                                          forIndexPath:indexPath];
             
             [(FriendTableViewCell*)cell formatForUser:self.teamsMemberArray[indexPath.row] isFollowing:YES];
-            
-           // [(FriendTableViewCell*)cell userDisplayNameLabel].textColor = [UIColor purpleColor];
+                     // [(FriendTableViewCell*)cell userDisplayNameLabel].textColor = [UIColor purpleColor];
         }
     } else {
         if (indexPath.section == 0) {
@@ -253,6 +325,7 @@ static CGFloat const BasicHeaderHeight = 50;
                                                                          forIndexPath:indexPath];
             
             [(FriendTableViewCell*)cell formatForUser:self.friends[indexPath.row] isFollowing:YES];
+           
         }
     }
     return cell;
@@ -263,16 +336,239 @@ static CGFloat const BasicHeaderHeight = 50;
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"FriendDetailsSegue"]) {
-        id user = (self.team) ? self.teamsMemberArray[[self.tableView indexPathForCell:sender].row] : self.friends[[self.tableView indexPathForCell:sender].row];
-        [(FriendProfileViewController*)[segue destinationViewController] setUser:user];
-    } else if ([segue.identifier isEqualToString:@"SearchFriendsSegue"]) {
+//    if ([segue.identifier isEqualToString:@"FriendDetailsSegue"]) {
+//        id user = (self.team) ? self.teamsMemberArray[[self.tableView indexPathForCell:sender].row] : self.friends[[self.tableView indexPathForCell:sender].row];
+//        [(FriendProfileViewController*)[segue destinationViewController] setUser:user];
+//    }
+    if ([segue.identifier isEqualToString:@"SearchFriendsSegue"]) {
     } else if ([segue.identifier isEqualToString:@"CreateFamilyMemberSegue"]) {
-    } else if ([segue.identifier isEqualToString:@"ChildDetailsSegue"]) {
-        id user = (self.team) ? self.teamsMemberArray[[self.tableView indexPathForCell:sender].row] : self.children[[self.tableView indexPathForCell:sender].row];
-         [(FriendProfileViewController*)[segue destinationViewController] setChild:user];
     }
+//    } else if ([segue.identifier isEqualToString:@"ChildDetailsSegue"]) {
+//        id user = (self.team) ? self.teamsMemberArray[[self.tableView indexPathForCell:sender].row] : self.children[[self.tableView indexPathForCell:sender].row];
+//         [(FriendProfileViewController*)[segue destinationViewController] setChild:user];
+//    }
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    User *user;
+    Child *child;
+   
+    if(self.team){
+    
+        if ([self.teamsMemberArray[indexPath.row] isKindOfClass:[Child class]]){
+              child   = self.teamsMemberArray[indexPath.row];
+            UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            FriendProfileViewController *friendProfileViewController = [storyboard instantiateViewControllerWithIdentifier:@"FriendsProfile"];
+            [friendProfileViewController setChild:child];
+            [self.navigationController pushViewController:friendProfileViewController animated:YES];
+            return;
+
+        }
+        else{
+              user   = self.teamsMemberArray[indexPath.row];
+            
+            if(([[self.friendsArray valueForKeyPath:@"objectId"] containsObject:user.objectId]))
+            {
+                
+                UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                FriendProfileViewController *friendProfileViewController = [storyboard instantiateViewControllerWithIdentifier:@"FriendsProfile"];
+                [friendProfileViewController setUser:user];
+                [self.navigationController pushViewController:friendProfileViewController animated:YES];
+                
+                
+                
+                
+            }
+            else{
+                [[[UIAlertView alloc] initWithTitle:@""
+                                            message:@"You do not have access to view Profile. Please request to view this friend profile."
+                                           delegate:self
+                                  cancelButtonTitle:@"Cancel"
+                                  otherButtonTitles:NSLocalizedString(@"Send Invite", nil), nil] show];
+            }
+            
+            
+
+        }
+          }
+    else{
+       
+        
+        if([[tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[ChildTableViewCell class]])
+        {
+            child = self.children[indexPath.row];
+            UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            FriendProfileViewController *friendProfileViewController = [storyboard instantiateViewControllerWithIdentifier:@"FriendsProfile"];
+            [friendProfileViewController setChild:child];
+            [self.navigationController pushViewController:friendProfileViewController animated:YES];
+            return;
+        }
+        else
+        {
+            user = self.friendsArray[indexPath.row];
+            if(([[self.friendsArray valueForKeyPath:@"objectId"] containsObject:user.objectId]))
+            {
+                
+                UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                FriendProfileViewController *friendProfileViewController = [storyboard instantiateViewControllerWithIdentifier:@"FriendsProfile"];
+                [friendProfileViewController setUser:user];
+                [self.navigationController pushViewController:friendProfileViewController animated:YES];
+                
+                
+                
+                
+            }
+            else{
+                [[[UIAlertView alloc] initWithTitle:@""
+                                            message:@"You do not have access to view Profile. Please request to view this friend profile."
+                                           delegate:self
+                                  cancelButtonTitle:@"Cancel"
+                                  otherButtonTitles:NSLocalizedString(@"Send Invite", nil), nil] show];
+            }
+            
+
+        }
+       
+    }
+    
+  }
+
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    
+    if(buttonIndex ==1){
+        [self sendFriendRequest];
+    }
+    
+    
+}
+
+
+
+-(void)sendFriendRequest{
+    
+    NSString *timestamp =  [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970] * 1000];
+    
+    TeamRequest *teamRequest = [[TeamRequest alloc]init];
+    
+    if(![self isRequestAllowed:NO withUser:self.user withChild:nil withTeam:nil]){
+        [[[UIAlertView alloc] initWithTitle:@""
+                                    message:@"A request to follow this team is already sent to admin."
+                                   delegate:nil
+                          cancelButtonTitle:nil
+                          otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
+    }
+    
+    else{
+        
+        [teamRequest saveTeam:nil andAdmin:self.user  followby:[User currentUser] orChild:nil withTimestamp:timestamp isChild:nil isType:@2 completion:^{
+            
+            [self.tableView reloadData];
+            [_pendingRequestArray addObject:teamRequest];
+            
+        }];
+  
+
+}
+}
+
+-(void)makeHeaderView{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 30)];
+    /* Create custom view to display section header... */
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 30)];
+    [label setFont:[UIFont boldSystemFontOfSize:12]];
+    
+    UITapGestureRecognizer *singleFingerTap =
+    [[UITapGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(handleSingleTap:)];
+    [view addGestureRecognizer:singleFingerTap];
+    
+    
+    //The event handling method
+    
+    
+    
+    /* Section header is in 0th index... */
+    [label setText:[NSString stringWithFormat:@"You have %ld pending %@",count , (count==1)?@"Request":@"Requests"]];
+    label.textAlignment = NSTextAlignmentCenter;
+    [view addSubview:label];
+    view.backgroundColor = [UIColor redColor];
+    label.textColor = [UIColor whiteColor];
+    self.tableView.tableHeaderView = view;
+
+}
+
+- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    PendingRequestTableViewController *pendingRequestController = [storyboard instantiateViewControllerWithIdentifier:@"PendingRequest"];
+    [self.navigationController pushViewController:pendingRequestController animated:YES];
+    
+    //Do stuff here...
+}
+
+-(void)fetchAllPendingRequest{
+        
+        PFQuery *spotlightQuery = [PFQuery queryWithClassName:@"TeamRequest"];
+        [spotlightQuery whereKey:@"user" equalTo:[User currentUser]];
+        
+        [spotlightQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if(objects.count > 0)
+            {
+                // NSMutableArray *array = [NSMutableArray new];
+                for(TeamRequest *request in objects)
+                {
+                    if((request.requestState.intValue == reqestStatePending) && [request.type intValue]==2)
+                    {
+                        
+                        [_pendingRequestArray addObject:request];
+                        
+                    }
+                    
+                }
+                
+                
+            }
+            else{
+                //[[[self  tabBar]items] objectAtIndex:2].badgeValue  = nil;
+            }
+            
+            //        for(TeamRequest *request in objects)
+            //        {
+            //            [request.admin fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+            //                //   NSString *data =[NSString stringWithFormat:@"%@       %@",request.admin.firstName,request.user.firstName];
+            //
+            //                NSLog(@"%@",request.admin.firstName);
+            //            }];
+            //
+            //
+            //
+            //        }
+            
+        }];
+        
+    }
+    
+    
+-(BOOL)isRequestAllowed:(BOOL)isChild withUser:(User*)user withChild:(Child*)child withTeam:(Team*)team {
+        
+        
+        for(TeamRequest *request in _pendingRequestArray){
+            
+            if(([request.admin.objectId isEqualToString:self.user.objectId])){
+                return NO;
+            }
+            
+        }
+        
+        return YES;
+        
+        
+        
+    }
+    
+   
 
 - (IBAction)unwindAddFriends:(UIStoryboardSegue*)sender {
    // [self.refreshControl beginRefreshing];

@@ -15,7 +15,7 @@
 @interface TeamTableViewCell()
 
 @property (weak, nonatomic) IBOutlet UILabel *teamNameLabel;
-@property (weak, nonatomic) IBOutlet UIButton *followButton;
+//@property (weak, nonatomic) IBOutlet UIButton *followButton;
 @property (weak, nonatomic) IBOutlet UIImageView *teamImageView;
 @property (weak, nonatomic) IBOutlet UILabel *seasonLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sportLabel;

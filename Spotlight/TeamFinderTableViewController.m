@@ -260,7 +260,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                                                                     
                                                                     TeamRequest *teamRequest = [[TeamRequest alloc]init];
                                                                     
-                                                                    [teamRequest saveTeam:team andAdmin:user  followby:[User currentUser] orChild:nil withTimestamp:timestamp isChild:@0 completion:^{
+                                                                    [teamRequest saveTeam:team andAdmin:user  followby:[User currentUser] orChild:nil withTimestamp:timestamp isChild:@0 isType:@1  completion:^{
                                                                         if (completion) {
                                                                           
                                                                             completion();
@@ -319,7 +319,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                                                                         
                                                                         TeamRequest *teamRequest = [[TeamRequest alloc]init];
                                                                         
-                                                                        [teamRequest saveTeam:team andAdmin:user  followby:[User currentUser] orChild:child withTimestamp:timestamp isChild:@1 completion:^{
+                                                                        [teamRequest saveTeam:team andAdmin:user  followby:[User currentUser] orChild:child withTimestamp:timestamp isChild:@1 isType:@1 completion:^{
                                                                             if (completion) {
                                                                                 
                                                                                 completion();
@@ -378,7 +378,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                     
                         TeamRequest *teamRequest = [[TeamRequest alloc]init];
                     
-                        [teamRequest saveTeam:team andAdmin:user  followby:[User currentUser] orChild:nil withTimestamp:timestamp isChild:@0 completion:^{
+                        [teamRequest saveTeam:team andAdmin:user  followby:[User currentUser] orChild:nil withTimestamp:timestamp isChild:@0 isType:@1 completion:^{
                             if (completion) {
                                 
                                 completion();

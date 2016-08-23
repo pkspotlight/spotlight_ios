@@ -132,10 +132,15 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([segue.identifier isEqualToString:@"friendTeamsEmbedSegue"]) {
+         TeamsTableViewController *team = (TeamsTableViewController*)[segue destinationViewController];
         if (self.user) {
             [(TeamsTableViewController*)[segue destinationViewController] setUser:self.user];
-        } else {
+           
+            team.isFollowingShow = YES;
+             
+            } else {
             [(TeamsTableViewController*)[segue destinationViewController] setChild:self.child];
+               team.isFollowingShow = YES;
         }
     } else if ([segue.identifier isEqualToString:@"EmbedSpotlightSegue"]){
         SpotlightDataSource* datasource;

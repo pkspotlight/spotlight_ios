@@ -14,7 +14,7 @@
 #import <MBProgressHUD.h>
 @interface PendingRequestTableViewController ()
 @property (strong, nonatomic) NSMutableArray *requestArray;
-
+@property (strong, nonatomic) NSMutableArray *requestFriendArray;
 @end
 
 
@@ -34,6 +34,8 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     _requestArray = [[NSMutableArray alloc]init];
+    _requestFriendArray = [[NSMutableArray alloc]init];
+
       [self fetchRequest];
     
 }
@@ -55,12 +57,27 @@
             NSMutableArray *array = [NSMutableArray new];
             for(TeamRequest *request in objects)
             {
+                
+                
+                
                 if((request.requestState.intValue == reqestStatePending))
                 {
+                    if([request.type intValue]==1){
                     [_requestArray addObject:request];
-                     [self.tableView reloadData];
+                    
                     [array addObject:request];
+                         [self.tableView reloadData];
+                    }
+                    
+                    else if([request.type intValue]==2){
+                        [_requestFriendArray addObject:request];
+                        
+                        [array addObject:request];
+                        [self.tableView reloadData];
+                    }
                 }
+                
+               
                 
             }
             [hud hide:YES];
@@ -94,21 +111,55 @@
 
 #pragma mark - Table view data source
 
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return _requestArray.count;
+    if (section==0)
+    {
+        return _requestArray.count;
+    }
+    else{
+        return _requestFriendArray.count;
+    }
+    
+    
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if ([tableView.dataSource tableView:tableView numberOfRowsInSection:section] == 0) {
+        return nil;
+    } else {
+        // return your normal return
+        if(section == 0)
+            return @"Team Request";
+        else
+            return @"Friend Request";
+    }
+   
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PendingRequestTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"pendingRequest" forIndexPath:indexPath];
-   TeamRequest* request = self.requestArray[indexPath.row];
-    [cell setData:request.nameOfRequester teamName:request.teamName fromUser:request.user forChild:request.child isChild:request.isChild.boolValue];
+   
+    
+    if (indexPath.section==0) {
+        TeamRequest* request = self.requestArray[indexPath.row];
+        [cell setData:request.nameOfRequester teamName:request.teamName fromUser:request.user forChild:request.child isChild:request.isChild.boolValue withType:request.type];
+
+    
+    }
+    else {
+        TeamRequest* request = self.requestFriendArray[indexPath.row];
+        [cell setData:request.nameOfRequester teamName:request.teamName fromUser:request.user forChild:request.child isChild:request.isChild.boolValue withType:request.type];
+
+    }
+    
     
     cell.acceptButton.tag = 1001;
     cell.rejectButton.tag = 1002;
@@ -123,7 +174,15 @@
 -(void)requestAction:(UIButton *)sender
 {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:(PendingRequestTableViewCell *)sender.superview.superview];
-    TeamRequest* request = self.requestArray[indexPath.row];
+    TeamRequest* request;
+    if(indexPath.section == 0){
+       request    = self.requestArray[indexPath.row];
+        
+    }
+    else{
+        request = self.requestFriendArray[indexPath.row];
+    }
+  
     MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [hud setLabelText:@"Please Wait..."];
    
@@ -137,8 +196,15 @@
         
         [request saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
             if(succeeded){
-                [_requestArray removeObjectAtIndex:indexPath.row];
-                if(_requestArray.count==0){
+               
+                if(indexPath.section == 0){
+                   [_requestArray removeObjectAtIndex:indexPath.row];
+                }
+                else{
+                   [_requestFriendArray removeObjectAtIndex:indexPath.row];
+                }
+
+                if(_requestArray.count==0&&_requestFriendArray.count == 0){
                     [self.navigationController popViewControllerAnimated:YES];
                     
                 }
@@ -178,14 +244,21 @@
         [request deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
             if(succeeded){
               
-                [_requestArray removeObjectAtIndex:indexPath.row];
-                if(_requestArray.count==0){
+                if(indexPath.section == 0){
+                    [_requestArray removeObjectAtIndex:indexPath.row];
+                }
+                else{
+                    [_requestFriendArray removeObjectAtIndex:indexPath.row];
+                }
+                if(_requestArray.count==0&&_requestFriendArray.count == 0){
                     [self.navigationController popViewControllerAnimated:YES];
                     
                 }
                 else{
+                    
                     [self.tableView reloadData];
                 }
+
             
             }
             

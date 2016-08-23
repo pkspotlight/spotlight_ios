@@ -12,6 +12,8 @@
 
 @interface FriendTableViewCell : UITableViewCell<UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *userDisplayNameLabel;
+@property (weak, nonatomic) IBOutlet UIButton *followButton;
+
 - (void)formatForUser:(User*)user isFollowing:(BOOL)isFollowing;
 
 @end

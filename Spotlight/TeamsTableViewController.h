@@ -19,5 +19,6 @@
 
 @property (strong, nonatomic) User* user;
 @property (strong, nonatomic) Child* child;
+@property (assign, nonatomic) BOOL isFollowingShow;
 
 @end

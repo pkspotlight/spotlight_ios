@@ -246,7 +246,14 @@
                                 if(!request.team.spectatorsArray){
                                     request.team.spectatorsArray = [NSMutableArray new];
                                 }
-                            [request.team.spectatorsArray addObject:request.user.objectId];
+                                
+                                if(request.isChild.boolValue){
+                                     [request.team.spectatorsArray addObject:request.child.objectId];
+                                }
+                                else{
+                                      [request.team.spectatorsArray addObject:request.user.objectId];
+                                }
+                          
                             
                             [request saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                                 if(succeeded){

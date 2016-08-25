@@ -61,7 +61,13 @@
     
     }
     else{
-        [self.userDisplayNameLabel setText:[self.user displayName]];
+        
+        if([user.objectId isEqualToString:[User currentUser].objectId ]){
+             [self.userDisplayNameLabel setText:@"ME"];
+        }else{
+              [self.userDisplayNameLabel setText:[self.user displayName]];
+        }
+      
 
     }
    
@@ -193,7 +199,7 @@
                
         if(![self isRequestAllowed:NO withUser:self.user withChild:nil withTeam:nil withTag:@2]){
             [[[UIAlertView alloc] initWithTitle:@""
-                                        message:@"A request to follow this team is already sent to admin."
+                                        message:@"An invitation request has already been sent."
                                        delegate:nil
                               cancelButtonTitle:nil
                               otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];

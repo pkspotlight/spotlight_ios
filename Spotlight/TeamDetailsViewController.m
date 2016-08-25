@@ -278,6 +278,9 @@
 }
 
 - (IBAction)addChildToTeamAsMember:(UIButton*)sender {
+    
+    MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication].delegate window] animated:YES];
+            [hud setLabelText:@"Please Wait..."];
     [[[[User currentUser] children] query] findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         
         if(objects.count>0){
@@ -293,6 +296,7 @@
                     [filteredArrayOfObjects addObject:child];
                 }
             }
+           
             
             [self showAlertWithChildren:filteredArrayOfObjects team:self.team completion:nil];
         }
@@ -305,7 +309,7 @@
 
         }
         
-       
+        [hud hide:YES];
     }];
 }
 

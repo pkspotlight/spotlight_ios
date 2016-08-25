@@ -98,41 +98,33 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
           
         }
         else{
-            [(FriendTableViewCell*)cell followButton].hidden = NO;
+           // [(FriendTableViewCell*)cell followButton].hidden = NO;
+            
+            if([self.controllerType intValue]==1&&self.controllerType!=nil){
+                [(FriendTableViewCell*)cell followButton].hidden = YES;
+                [(FriendTableViewCell*)cell inviteButton].hidden = NO;
+                FriendTableViewCell *friendCell = (FriendTableViewCell*)cell;
+                friendCell.team = self.selectedTeam;
+                
+            }else{
+                [(FriendTableViewCell*)cell followButton].hidden = NO;
+                [(FriendTableViewCell*)cell inviteButton].hidden = YES;
+            }
+
+            
           
             if(([[self.friendsArray valueForKeyPath:@"objectId"] containsObject:user.objectId]))
             {
                 isFollowing = true;
-                if([self.controllerType intValue]==1&&self.controllerType!=nil){
-               
-                    [(FriendTableViewCell*)cell inviteButton].hidden = YES;
-                    
-                }
-            
+                
                 
             }
             else{
                 isFollowing = false;
-                if([self.controllerType intValue]==1&&self.controllerType!=nil){
-                    
-                    [(FriendTableViewCell*)cell inviteButton].hidden = NO;
-                    
                 }
-                
-            }
 
         }
         
-        if([self.controllerType intValue]==1&&self.controllerType!=nil){
-            [(FriendTableViewCell*)cell followButton].hidden = YES;
-            [(FriendTableViewCell*)cell inviteButton].hidden = NO;
-            FriendTableViewCell *friendCell = (FriendTableViewCell*)cell;
-                friendCell.team = self.selectedTeam;
-
-        }else{
-            [(FriendTableViewCell*)cell followButton].hidden = NO;
-            [(FriendTableViewCell*)cell inviteButton].hidden = YES;
-        }
         
         [(FriendTableViewCell*)cell formatForUser:self.searchResults[indexPath.row] isSpectator:NO  isFollowing:isFollowing];
        

@@ -18,6 +18,7 @@
 @dynamic grade;
 @dynamic sport;
 @dynamic moderators;
+@dynamic spectatorsArray;
 
 #pragma mark - Parse Stuff
 + (void)load {

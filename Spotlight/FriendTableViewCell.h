@@ -7,13 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Team.h"
 @class User;
 
 @interface FriendTableViewCell : UITableViewCell<UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *userDisplayNameLabel;
 @property (weak, nonatomic) IBOutlet UIButton *followButton;
-
-- (void)formatForUser:(User*)user isFollowing:(BOOL)isFollowing;
+@property (weak, nonatomic) IBOutlet UIButton *inviteButton;
+@property (weak, nonatomic) Team *team ;
+- (void)formatForUser:(User*)user isSpectator:(BOOL)isSpectator isFollowing:(BOOL)isFollowing;
+//- (void)formatForUser:(User*)user isFollowing:(BOOL)isFollowing;
 
 @end

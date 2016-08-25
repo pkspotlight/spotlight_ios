@@ -11,6 +11,7 @@
 #import "FriendTableViewCell.h"
 #import "Parse.h"
 #import "User.h"
+#import "BasicHeaderView.h"
 
 
 @interface FriendFinderTableViewController ()
@@ -18,6 +19,7 @@
     UIRefreshControl* refresh;
 }
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UINavigationItem *navigationItem;
 @property (strong, nonatomic) NSArray* searchResults;
 @property (strong, nonatomic) NSMutableArray* friendsArray;
 @property (strong, nonatomic) UITapGestureRecognizer* hideKeyboardTap;
@@ -35,6 +37,13 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     [refresh addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
     [self setRefreshControl:refresh];
     [self loadFriends];
+    if([self.controllerType intValue]==1&&self.controllerType!=nil){
+        self.navigationItem.title = @"Send Invites";
+        
+    }else{
+        
+    }
+    
     self.hideKeyboardTap = [[UITapGestureRecognizer alloc]
                             initWithTarget:self
                             action:@selector(dismissKeyboard)];
@@ -94,16 +103,38 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
             if(([[self.friendsArray valueForKeyPath:@"objectId"] containsObject:user.objectId]))
             {
                 isFollowing = true;
+                if([self.controllerType intValue]==1&&self.controllerType!=nil){
+               
+                    [(FriendTableViewCell*)cell inviteButton].hidden = YES;
+                    
+                }
+            
                 
             }
             else{
                 isFollowing = false;
+                if([self.controllerType intValue]==1&&self.controllerType!=nil){
+                    
+                    [(FriendTableViewCell*)cell inviteButton].hidden = NO;
+                    
+                }
+                
             }
 
         }
         
+        if([self.controllerType intValue]==1&&self.controllerType!=nil){
+            [(FriendTableViewCell*)cell followButton].hidden = YES;
+            [(FriendTableViewCell*)cell inviteButton].hidden = NO;
+            FriendTableViewCell *friendCell = (FriendTableViewCell*)cell;
+                friendCell.team = self.selectedTeam;
+
+        }else{
+            [(FriendTableViewCell*)cell followButton].hidden = NO;
+            [(FriendTableViewCell*)cell inviteButton].hidden = YES;
+        }
         
-        [(FriendTableViewCell*)cell formatForUser:self.searchResults[indexPath.row] isFollowing:isFollowing];
+        [(FriendTableViewCell*)cell formatForUser:self.searchResults[indexPath.row] isSpectator:NO  isFollowing:isFollowing];
        
     }
     return cell;

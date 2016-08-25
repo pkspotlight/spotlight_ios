@@ -26,12 +26,33 @@
 
 @implementation ChildTableViewCell
 
-- (void)formatForChild:(Child*)child isFollowing:(BOOL)isFollowing {
+- (void)formatForChild:(Child*)child isSpectator:(BOOL)isSpectator isFollowing:(BOOL)isFollowing {
     _child = child;
     self.userImageView.image = nil;
     [self.userImageView.layer setCornerRadius:self.userImageView.bounds.size.width/2];
     [self.userImageView setClipsToBounds:YES];
-    [self.userDisplayNameLabel setText:[self.child displayName]];
+    
+    if(isSpectator){
+        if([self.team.spectatorsArray containsObject:self.child.objectId]){
+            NSLog(@"spec");
+            [self.userDisplayNameLabel setText:[self.child displayName]];
+            
+            
+        }
+        else{
+            NSString *name = [NSString stringWithFormat:@"%@ *",[self.child displayName]];
+            [self.userDisplayNameLabel setText:name];
+            NSLog(@"part");
+            
+            
+        }
+
+    }
+    else{
+         [self.userDisplayNameLabel setText:[self.child displayName]];
+    }
+   
+//
     self.userImageView.image = [UIImage imageNamed:@"unknown_user.png"];
     
     NSString* buttonText = (isFollowing) ? @"Following" : @"Follow";

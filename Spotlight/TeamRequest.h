@@ -38,6 +38,7 @@ enum type{
 @property (assign, nonatomic) NSNumber *isChild;
 @property (assign, nonatomic) NSNumber *type;
 
+
 @property (strong, nonatomic) ProfilePictureMedia* PicOfRequester;
 
 

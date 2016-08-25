@@ -166,6 +166,65 @@
 
     }
     
+   else if([type intValue]==3){
+       
+       if(name != nil ){
+           
+           if( [name isEqualToString:@"(null) (null)"]){
+               NSString  *str =  [[name stringByReplacingOccurrencesOfString:@"(null) (null)"
+                                                                  withString:@"This"] mutableCopy];
+               
+               requestText =   [NSString stringWithFormat:@"%@ has invited you to follow  %@",str,teamName];
+           }
+           
+           else if([name isEqualToString:@" "]){
+               
+               
+               requestText =   [NSString stringWithFormat:@"This has invited you to follow %@",teamName];
+               
+           }
+           
+           else{
+               NSString  *str =  [[name stringByReplacingOccurrencesOfString:@"(null)"
+                                                                  withString:@""] mutableCopy];
+               
+               requestText =   [NSString stringWithFormat:@"%@ has invited you to follow %@",str,teamName];
+           }
+           
+       }
+
+        self.requestName.text = requestText;
+        self.profilePic.image = [UIImage imageNamed:@"unknown_user"];
+        
+        if(!isChild)
+        {
+            [user fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+                
+                [user.profilePic fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+                    
+                    if(!error)
+                    {
+                        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:user.profilePic.thumbnailImageFile.url]];
+                        [self.profilePic
+                         setImageWithURLRequest:request
+                         placeholderImage:nil
+                         success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, UIImage * _Nonnull image) {
+                             [self.profilePic setImage:image];
+                         } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, NSError * _Nonnull error) {
+                             NSLog(@"fuck thumbnail failure");
+                         }];
+                        
+                    }
+                    
+                }];
+                
+                
+            }];
+        }
+       
+        
+        
+    }
 
     
 }

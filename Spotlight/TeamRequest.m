@@ -20,6 +20,7 @@
 @dynamic isChild;
 @dynamic teamName;
 @dynamic type;
+
 + (void)load {
     [self registerSubclass];
 }
@@ -38,9 +39,11 @@
     self.requestState = [NSNumber numberWithInt:reqestStatePending];
      self.isChild = isChild;
     
-    if([self.type intValue]==1){
+    if([self.type intValue]==1 || [self.type intValue]==3){
+        
     if(!isChild.boolValue)
     {
+        
         self.nameOfRequester = [NSString stringWithFormat:@"%@ %@",user.firstName,user.lastName];
         self.PicOfRequester = user.profilePic;
        
@@ -58,12 +61,23 @@
         if(succeeded){
             NSLog(@"success team");
             
-            [[[UIAlertView alloc] initWithTitle:@""
-                                        message:@"Your request has been sent to Admin. Team will appear in your list Once admin approves your request."
-                                       delegate:nil
-                              cancelButtonTitle:nil
-                              otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
-            if (completion) {
+            if([self.type intValue]==1){
+                [[[UIAlertView alloc] initWithTitle:@""
+                                            message:@"Your request has been sent to Admin. Team will appear in your list Once admin approves your request."
+                                           delegate:nil
+                                  cancelButtonTitle:nil
+                                  otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
+
+            }else{
+                [[[UIAlertView alloc] initWithTitle:@""
+                                            message:@"Your invite has been sent."
+                                           delegate:nil
+                                  cancelButtonTitle:nil
+                                  otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
+
+            }
+            
+                     if (completion) {
                 
                 completion();
             }
@@ -115,6 +129,8 @@
         }];
 
     }
+    
+    
 }
 
 //- (void)unfollowTeam:(Team*)team completion:(void (^)(void))completion{

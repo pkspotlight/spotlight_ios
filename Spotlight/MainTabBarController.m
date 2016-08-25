@@ -64,7 +64,7 @@
 
 -(void)followAcceptedRequest:(TeamRequest *)request
 {
-    if([request.type intValue]==1){
+    if([request.type intValue]==1 ||[request.type intValue]==3){
     if(!request.isChild.boolValue)
     {
         [request.team fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
@@ -90,7 +90,7 @@
             [request.child fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
                 if(!error)
                 {
-                    [request.child followTeamWithBlockCallback:request.team completion:^(BOOL succeeded, NSError * _Nullable error) {
+                    [request.child followTeamWithBlockCallback:request.team  completion:^(BOOL succeeded, NSError * _Nullable error) {
                         if(succeeded)
                         {
                             [request deleteInBackground];
@@ -119,6 +119,36 @@
        
                  }];
     }
+    
+//    else if([request.type intValue]==3){
+//           [request.team fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+//                if(!error)
+//                {
+//                    [request.admin fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+//                        if(!error)
+//                        {
+//                            [request.admin followTeamWithBlockCallback:request.team completion:^(BOOL succeeded, NSError * _Nullable error) {
+//                                if(succeeded)
+//                                {
+//                                    [[NSNotificationCenter defaultCenter] postNotificationName:@"SpotLightRefersh" object:nil];
+//                                    
+//                                    [request deleteInBackground];
+//                                }
+//                            }];
+//
+//                        
+//                        }
+//                        
+//                        
+//                        
+//                    }];
+//
+//            }
+//                
+//            }];
+//        }
+    
+    
 }
 
 -(void)FollowAcceptedRequests:(BOOL)isMessage
@@ -138,7 +168,8 @@
     [spotlightQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         
         NSString *teams = @"";
-        NSString *friends = @"";
+        __block  NSString *friends = @"";
+     
         if(objects.count > 0)
         {
             for(TeamRequest *request in objects)
@@ -151,17 +182,37 @@
                if(request.requestState.intValue == requestStateAccepted)
                 {
                     
+                   
+                    
                     if(![appDel.acceptedTeamIDs containsObject:request.objectId])
                     {
                         [appDel.acceptedTeamIDs addObject:request.objectId];
                     
                         if([request.type intValue] ==1){
                                teams = (teams.length == 0)? [NSString stringWithFormat:@"%@",request.teamName] : [NSString stringWithFormat:@"%@, %@",teams,request.teamName];
-                        }else{
-                            friends =   (friends.length == 0)? [NSString stringWithFormat:@"%@",request.nameOfRequester] : [NSString stringWithFormat:@"%@, %@",friends,request.nameOfRequester];
+                        }else if([request.type intValue] ==2){
+                          [request.admin fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+                                
+                                User *user = (User*)object;
+                                NSString *name = [NSString stringWithFormat:@"%@,%@",user.firstName,user.lastName];
+                              friends =   (friends.length == 0)? [NSString stringWithFormat:@"%@",name] : [NSString stringWithFormat:@"%@, %@",friends,name];
+                              
+                              if(friends.length>0){
+                                  [[[UIAlertView alloc] initWithTitle:@""
+                                                              message:[NSString stringWithFormat:@"%@ has accepted your friend request",friends]
+                                                             delegate:nil
+                                                    cancelButtonTitle:nil
+                                                    otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] performSelectorOnMainThread:@selector(show)  withObject:nil waitUntilDone:NO];
+                              }
+
+
+                                NSLog(@"friends request%@",user.firstName);
+                            } ];
+                            
+                            
                         }
-                  
-                    
+                        
+                        
                     }
                     
                     [self followAcceptedRequest:request];
@@ -182,13 +233,6 @@
                                   otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] performSelectorOnMainThread:@selector(show)  withObject:nil waitUntilDone:NO];
             }
             
-            else if(friends.length>0){
-                [[[UIAlertView alloc] initWithTitle:@""
-                                            message:[NSString stringWithFormat:@"%@ has accepted your friend request",friends]
-                                           delegate:nil
-                                  cancelButtonTitle:nil
-                                  otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] performSelectorOnMainThread:@selector(show)  withObject:nil waitUntilDone:NO];
-            }
             
         }
         
@@ -217,7 +261,7 @@
                 if( (request.requestState.intValue == reqestStatePending))
                 {
                     
-                    if([request.type intValue]==1){
+                    if([request.type intValue]==1 || [request.type intValue]==3){
                         [array addObject:request];
                     }else  if([request.type intValue]==2){
                         [friendsArray addObject:request];
@@ -285,7 +329,7 @@
             {
                  if((request.requestState.intValue == reqestStatePending))
                 {
-                    if([request.type intValue]==1){
+                    if([request.type intValue]==1 || [request.type intValue]==3){
                         [array addObject:request];
                     }else  if([request.type intValue]==2){
                         [friendsArray addObject:request];

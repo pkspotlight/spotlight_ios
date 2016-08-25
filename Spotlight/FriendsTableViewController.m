@@ -17,6 +17,7 @@
 #import "Child.h"
 #import "BasicHeaderView.h"
 #import "SpotlightBoardView.h"
+#import "FriendFinderTableViewController.h"
 #import "PendingRequestTableViewController.h"
 #define SpotlightFriendsBoardingText @"This is where you can find all of your friends or teamsMemberArray and follow thier activity. Click on the '+' in the top right to search for your friends!"
 static CGFloat const BasicHeaderHeight = 50;
@@ -235,8 +236,10 @@ static CGFloat const BasicHeaderHeight = 50;
     [alert addAction:[UIAlertAction actionWithTitle:@"Search/Add Spotlighters"
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * _Nonnull action) {
-                                                [self performSegueWithIdentifier:@"SearchFriendsSegue"
-                                                                          sender:sender];
+                                                UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                                                FriendFinderTableViewController *friendFinderController = [storyboard instantiateViewControllerWithIdentifier:@"SearchFriends"];
+                                                                                               [self.navigationController pushViewController:friendFinderController animated:YES];
+                                              
                                             }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"Add Family Members"
                                               style:UIAlertActionStyleDefault
@@ -305,13 +308,13 @@ static CGFloat const BasicHeaderHeight = 50;
         if ([self.teamsMemberArray[indexPath.row] isKindOfClass:[Child class]]){
             cell = (ChildTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"ChildTableViewCell"
                                                                         forIndexPath:indexPath];
-            
-            [(ChildTableViewCell*)cell formatForChild:self.teamsMemberArray[indexPath.row] isFollowing:YES];
+            [(ChildTableViewCell*)cell setTeam:self.team];
+            [(ChildTableViewCell*)cell formatForChild:self.teamsMemberArray [indexPath.row] isSpectator:YES isFollowing:YES];
         } else if ([self.teamsMemberArray[indexPath.row] isKindOfClass:[User class]]){
             cell = (FriendTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"FriendTableViewCell"
                                                                          forIndexPath:indexPath];
-            
-            [(FriendTableViewCell*)cell formatForUser:self.teamsMemberArray[indexPath.row] isFollowing:YES];
+             [(FriendTableViewCell*)cell setTeam:self.team];
+            [(FriendTableViewCell*)cell formatForUser:self.teamsMemberArray[indexPath.row] isSpectator:YES  isFollowing:YES];
                      // [(FriendTableViewCell*)cell userDisplayNameLabel].textColor = [UIColor purpleColor];
         }
     } else {
@@ -319,12 +322,12 @@ static CGFloat const BasicHeaderHeight = 50;
             cell = (ChildTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"ChildTableViewCell"
                                                                         forIndexPath:indexPath];
             
-            [(ChildTableViewCell*)cell formatForChild:self.children[indexPath.row] isFollowing:YES];
+            [(ChildTableViewCell*)cell formatForChild:self.children[indexPath.row] isSpectator:NO isFollowing:YES];
         } else {
             cell = (FriendTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"FriendTableViewCell"
                                                                          forIndexPath:indexPath];
             
-            [(FriendTableViewCell*)cell formatForUser:self.friends[indexPath.row] isFollowing:YES];
+            [(FriendTableViewCell*)cell formatForUser:self.friends[indexPath.row] isSpectator:NO isFollowing:YES];
            
         }
     }
@@ -340,8 +343,9 @@ static CGFloat const BasicHeaderHeight = 50;
 //        id user = (self.team) ? self.teamsMemberArray[[self.tableView indexPathForCell:sender].row] : self.friends[[self.tableView indexPathForCell:sender].row];
 //        [(FriendProfileViewController*)[segue destinationViewController] setUser:user];
 //    }
-    if ([segue.identifier isEqualToString:@"SearchFriendsSegue"]) {
-    } else if ([segue.identifier isEqualToString:@"CreateFamilyMemberSegue"]) {
+//    if ([segue.identifier isEqualToString:@"SearchFriendsSegue"]) {
+//    } else
+    if ([segue.identifier isEqualToString:@"CreateFamilyMemberSegue"]) {
     }
 //    } else if ([segue.identifier isEqualToString:@"ChildDetailsSegue"]) {
 //        id user = (self.team) ? self.teamsMemberArray[[self.tableView indexPathForCell:sender].row] : self.children[[self.tableView indexPathForCell:sender].row];

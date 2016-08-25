@@ -16,8 +16,8 @@
 @interface FriendTableViewCell()
 
 @property (strong, nonatomic) User *user;
-@property (strong, nonatomic) NSMutableArray *pendingRequestArray;;
-
+@property (strong, nonatomic) NSMutableArray *pendingRequestArray;
+@property (strong, nonatomic) NSMutableArray *pendingInviteRequestArray;
 
 //@property (weak, nonatomic) IBOutlet UILabel *userDisplayNameLabel;
 //@property (weak, nonatomic) IBOutlet UIButton *followButton;
@@ -31,17 +31,41 @@
 
 -(void)awakeFromNib{
     _pendingRequestArray = [NSMutableArray new];
+    _pendingInviteRequestArray = [NSMutableArray new];
     [self fetchAllPendingRequest];
 
     
 }
-- (void)formatForUser:(User*)user isFollowing:(BOOL)isFollowing {
+- (void)formatForUser:(User*)user isSpectator:(BOOL)isSpectator isFollowing:(BOOL)isFollowing {
     _user = user;
 
     [self.userImageView.layer setCornerRadius:self.userImageView.bounds.size.width/2];
     [self.userImageView setClipsToBounds:YES];
-    [self.userDisplayNameLabel setText:[self.user displayName]];
-    _isFollowing = isFollowing;
+    
+    if(isSpectator){
+        
+        if([self.team.spectatorsArray containsObject:self.user.objectId]){
+            NSLog(@"spec");
+            [self.userDisplayNameLabel setText:[self.user displayName]];
+            
+            
+        }
+        else{
+            NSString *name = [NSString stringWithFormat:@"%@ *",[self.user displayName]];
+            [self.userDisplayNameLabel setText:name];
+            NSLog(@"part");
+            
+            
+        }
+
+    
+    }
+    else{
+        [self.userDisplayNameLabel setText:[self.user displayName]];
+
+    }
+   
+   //     _isFollowing = isFollowing;
     NSString* buttonText = (isFollowing) ? @"Following" : @"Follow";
     [self.followButton setTitle:buttonText
                        forState:UIControlStateNormal];
@@ -69,6 +93,9 @@
    
 }
 
+
+
+
 - (void)formatButtonText {
     NSString* buttonText = (_isFollowing) ? @"Following" : @"Follow";
     [self.followButton setTitle:buttonText
@@ -92,7 +119,7 @@
     
     TeamRequest *teamRequest = [[TeamRequest alloc]init];
     
-    if(![self isRequestAllowed:NO withUser:self.user withChild:nil withTeam:nil]){
+    if(![self isRequestAllowed:NO withUser:self.user withChild:nil withTeam:nil withTag:@1]){
         [[[UIAlertView alloc] initWithTitle:@""
                                     message:@"A request to follow this team is already sent to admin."
                                    delegate:nil
@@ -147,6 +174,83 @@
     }
 
 
+- (IBAction)inviteButtonPressed:(id)sender {
+    NSString *timestamp =  [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970] * 1000];
+    
+    TeamRequest *teamRequest = [[TeamRequest alloc]init];
+    
+    
+    
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:@"Do you want to associate this user Spectator or Participant" preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alertController addAction:[UIAlertAction actionWithTitle:@"Spectator" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        if(!self.team.spectatorsArray){
+            self.team.spectatorsArray = [NSMutableArray new];
+        }
+        [self.team.spectatorsArray addObject:self.user.objectId];
+        
+               
+        if(![self isRequestAllowed:NO withUser:self.user withChild:nil withTeam:nil withTag:@2]){
+            [[[UIAlertView alloc] initWithTitle:@""
+                                        message:@"A request to follow this team is already sent to admin."
+                                       delegate:nil
+                              cancelButtonTitle:nil
+                              otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
+        }
+        
+        else{
+            
+            [teamRequest saveTeam:self.team andAdmin:self.user  followby:[User currentUser] orChild:nil withTimestamp:timestamp isChild:@0 isType:@3 completion:^{
+                
+                
+                [_pendingInviteRequestArray addObject:teamRequest];
+                
+            }];
+            
+        }
+
+        
+        
+    }]];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"Participant" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    
+        while( [self.team.spectatorsArray containsObject:self.user.objectId])
+        {
+            [self.team.spectatorsArray removeObject:self.user.objectId];
+        }
+        if(![self isRequestAllowed:NO withUser:self.user withChild:nil withTeam:nil withTag:@2]){
+            [[[UIAlertView alloc] initWithTitle:@""
+                                        message:@"A request to follow this team is already sent to admin."
+                                       delegate:nil
+                              cancelButtonTitle:nil
+                              otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
+        }
+        
+        else{
+            
+            [teamRequest saveTeam:self.team andAdmin:self.user  followby:[User currentUser] orChild:nil withTimestamp:timestamp isChild:@0 isType:@3 completion:^{
+                
+                
+                [_pendingInviteRequestArray addObject:teamRequest];
+                
+            }];
+            
+        }
+
+    
+    }]];
+    
+    
+    dispatch_async(dispatch_get_main_queue(), ^ {
+        [self.window.rootViewController presentViewController:alertController animated:YES completion:nil];
+    });
+    
+}
+
+
+
+
 -(void)fetchAllPendingRequest{
     
     PFQuery *spotlightQuery = [PFQuery queryWithClassName:@"TeamRequest"];
@@ -162,6 +266,12 @@
                 {
                     
                     [_pendingRequestArray addObject:request];
+                    
+                }
+              else  if((request.requestState.intValue == reqestStatePending) && [request.type intValue]==3)
+                {
+                    
+                    [_pendingInviteRequestArray addObject:request];
                     
                 }
                 
@@ -191,9 +301,8 @@
 
 
 
--(BOOL)isRequestAllowed:(BOOL)isChild withUser:(User*)user withChild:(Child*)child withTeam:(Team*)team {
-    
-    
+-(BOOL)isRequestAllowed:(BOOL)isChild withUser:(User*)user withChild:(Child*)child withTeam:(Team*)team withTag:(NSNumber*)tag{
+    if([tag intValue]==1){
         for(TeamRequest *request in _pendingRequestArray){
             
             if(([request.admin.objectId isEqualToString:self.user.objectId])){
@@ -202,6 +311,20 @@
             
         }
         
+
+    }
+    
+    else{
+        for(TeamRequest *request in _pendingInviteRequestArray){
+            
+            if(([request.admin.objectId isEqualToString:self.user.objectId])){
+                return NO;
+            }
+            
+        }
+    }
+    
+    
         return YES;
     
     

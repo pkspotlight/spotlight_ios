@@ -55,7 +55,8 @@
     }];
 }
 
-- (void)followTeamWithBlockCallback:(Team*)team completion:(PFBooleanResultBlock)block{
+- (void)followTeamWithBlockCallback:(Team*)team  completion:(PFBooleanResultBlock)block{
+    
     [[self teams] addObject:team];
     [self saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if(succeeded){

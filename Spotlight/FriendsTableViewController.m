@@ -310,11 +310,14 @@ static CGFloat const BasicHeaderHeight = 50;
                                                                         forIndexPath:indexPath];
             [(ChildTableViewCell*)cell setTeam:self.team];
             [(ChildTableViewCell*)cell formatForChild:self.teamsMemberArray [indexPath.row] isSpectator:YES isFollowing:YES];
+         
         } else if ([self.teamsMemberArray[indexPath.row] isKindOfClass:[User class]]){
             cell = (FriendTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"FriendTableViewCell"
                                                                          forIndexPath:indexPath];
              [(FriendTableViewCell*)cell setTeam:self.team];
             [(FriendTableViewCell*)cell formatForUser:self.teamsMemberArray[indexPath.row] isSpectator:YES  isFollowing:YES];
+            
+             [(FriendTableViewCell*)cell followButton].hidden = YES;
                      // [(FriendTableViewCell*)cell userDisplayNameLabel].textColor = [UIColor purpleColor];
         }
     } else {
@@ -331,6 +334,7 @@ static CGFloat const BasicHeaderHeight = 50;
            
         }
     }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 

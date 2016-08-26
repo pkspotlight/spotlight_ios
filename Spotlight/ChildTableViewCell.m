@@ -18,7 +18,6 @@
 @property (strong, nonatomic) Child *child;
 
 //@property (weak, nonatomic) IBOutlet UILabel *userDisplayNameLabel;
-@property (weak, nonatomic) IBOutlet UIButton *followButton;
 @property (weak, nonatomic) IBOutlet UIImageView *userImageView;
 @property (assign, nonatomic) BOOL isFollowing;
 
@@ -44,6 +43,9 @@
         else{
             
             self.userDisplayNameLabel.textColor = [UIColor colorWithRed:62/255.0 green:194/255.0 blue:89/255.0 alpha:1.0];
+            
+            NSString *name = [NSString stringWithFormat:@"%@ *",[self.child displayName]];
+            [self.userDisplayNameLabel setText:name];
             
             NSLog(@"part");
             

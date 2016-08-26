@@ -13,6 +13,7 @@
 @interface ChildTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *userDisplayNameLabel;
 @property (weak, nonatomic) Team *team ;
+@property (weak, nonatomic) IBOutlet UIButton *followButton;
 
 //- (void)formatForChild:(Child*)child isFollowing:(BOOL)isFollowing;
 - (void)formatForChild:(Child*)child isSpectator:(BOOL)isSpectator isFollowing:(BOOL)isFollowing;

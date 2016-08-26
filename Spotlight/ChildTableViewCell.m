@@ -31,24 +31,30 @@
     self.userImageView.image = nil;
     [self.userImageView.layer setCornerRadius:self.userImageView.bounds.size.width/2];
     [self.userImageView setClipsToBounds:YES];
+    [self.userDisplayNameLabel setText:[self.child displayName]];
+
     
     if(isSpectator){
+        
         if([self.team.spectatorsArray containsObject:self.child.objectId]){
             NSLog(@"spec");
-            [self.userDisplayNameLabel setText:[self.child displayName]];
-            
+            self.userDisplayNameLabel.textColor = [UIColor blackColor];
             
         }
         else{
-            NSString *name = [NSString stringWithFormat:@"%@ *",[self.child displayName]];
-            [self.userDisplayNameLabel setText:name];
+            
+            self.userDisplayNameLabel.textColor = [UIColor colorWithRed:62/255.0 green:194/255.0 blue:89/255.0 alpha:1.0];
+            
             NSLog(@"part");
             
             
         }
-
+    
+    
     }
     else{
+        self.userDisplayNameLabel.textColor = [UIColor blackColor];
+
          [self.userDisplayNameLabel setText:[self.child displayName]];
     }
    

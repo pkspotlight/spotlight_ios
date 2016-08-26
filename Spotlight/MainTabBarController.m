@@ -194,7 +194,7 @@
                           [request.admin fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
                                 
                                 User *user = (User*)object;
-                                NSString *name = [NSString stringWithFormat:@"%@%@",user.firstName,user.lastName];
+                                NSString *name = [NSString stringWithFormat:@"%@ %@",user.firstName,user.lastName];
                               friends =   (friends.length == 0)? [NSString stringWithFormat:@"%@",name] : [NSString stringWithFormat:@"%@, %@",friends,name];
                               
                               if(friends.length>0){

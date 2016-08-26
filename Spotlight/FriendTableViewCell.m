@@ -41,18 +41,19 @@
 
     [self.userImageView.layer setCornerRadius:self.userImageView.bounds.size.width/2];
     [self.userImageView setClipsToBounds:YES];
-    
+    [self.userDisplayNameLabel setText:[self.user displayName]];
+
     if(isSpectator){
         
         if([self.team.spectatorsArray containsObject:self.user.objectId]){
             NSLog(@"spec");
-            [self.userDisplayNameLabel setText:[self.user displayName]];
-            
+            self.userDisplayNameLabel.textColor = [UIColor blackColor];
             
         }
         else{
-            NSString *name = [NSString stringWithFormat:@"%@ *",[self.user displayName]];
-            [self.userDisplayNameLabel setText:name];
+           
+            self.userDisplayNameLabel.textColor = [UIColor colorWithRed:62/255.0 green:194/255.0 blue:89/255.0 alpha:1.0];
+            
             NSLog(@"part");
             
             
@@ -61,9 +62,10 @@
     
     }
     else{
-        
+        self.userDisplayNameLabel.textColor = [UIColor blackColor];
+
         if([user.objectId isEqualToString:[User currentUser].objectId ]){
-             [self.userDisplayNameLabel setText:@"ME"];
+             [self.userDisplayNameLabel setText:[NSString stringWithFormat:@"%@ (Me)",[self.user displayName]]];
         }else{
               [self.userDisplayNameLabel setText:[self.user displayName]];
         }

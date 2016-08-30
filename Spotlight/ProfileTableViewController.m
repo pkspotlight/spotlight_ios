@@ -236,8 +236,7 @@
     NSError *error;
     [self.view endEditing:NO];
     if ([self savePendingChangesToUser:error]) {
-        [self.usernameLabel setText:[self.user displayName]];
-    
+        [self dismissViewControllerAnimated:YES completion:nil];
     } else {
         //Show some error
     }

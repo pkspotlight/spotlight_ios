@@ -208,11 +208,9 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 // make all this superclass eventually
 
 
-- (void)followButtonPressed:(TeamTableViewCell*)teamCell completion:(void (^)(void))completion {
+- (void)followButtonPressed:(TeamTableViewCell*)teamCell completion:(void (^)(void))completion{
     [[[[User currentUser] children] query] findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-        [self showAlertWithChildren:objects
-                               team:teamCell.team
-                         completion:completion];
+        [self showAlertWithChildren:objects team:teamCell.team completion:completion];
     }];
 }
 
@@ -246,7 +244,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 
 - (void)showAlertWithChildren:(NSArray*)children team:(Team*)team completion:(void (^)(void))completion {
     if (children && [children count] > 0) {
-        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Which child is on this team?"
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Which Child is on this Team?"
                                                                        message:@""
                                                                 preferredStyle:UIAlertControllerStyleActionSheet];
         [alert addAction:[UIAlertAction actionWithTitle:@"None, I just want to follow it"

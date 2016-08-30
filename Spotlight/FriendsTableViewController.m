@@ -46,16 +46,18 @@ static CGFloat const BasicHeaderHeight = 50;
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshScreen) name:@"FriendFollowUnfollow" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshScreen) name:@"Frdfollowunfollow" object:nil];
     [self refresh:self.refreshControl];
 }
 
--(void)refreshScreen {
+-(void)refreshScreen
+{
     [self refresh:self.refreshControl];
 }
 
 
--(void)viewWillDisappear:(BOOL)animated {
+-(void)viewWillDisappear:(BOOL)animated
+{
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"Frdfollowunfollow" object:nil];
 }
 
@@ -89,6 +91,7 @@ static CGFloat const BasicHeaderHeight = 50;
     [query whereKey:@"teams" equalTo:self.team];
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         self.teammates = [objects copy];
+       
         [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
         [refresh performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:NO];
     }];
@@ -140,8 +143,6 @@ static CGFloat const BasicHeaderHeight = 50;
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     if (self.team || self.justFamily) {
         return 1;
-    } else if (self.children.count == 0){
-        return 1;
     } else {
         return 2;
     }
@@ -149,7 +150,7 @@ static CGFloat const BasicHeaderHeight = 50;
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     BasicHeaderView *cell = [self.tableView dequeueReusableHeaderFooterViewWithIdentifier:@"BasicHeaderView"];
-    cell.headerTitleLabel.text = (section == 0 && self.children.count != 0) ? @"My Family" : @"Friends";
+    cell.headerTitleLabel.text = (section == 0) ? @"My Family" : @"Friends";
     return cell;
 }
 
@@ -165,7 +166,7 @@ static CGFloat const BasicHeaderHeight = 50;
     if (self.team) {
         return self.teammates.count;
     } else {
-        if (section == 0 || self.children.count == 0) {
+        if (section == 0) {
             return self.children.count;
         } else {
             return self.friends.count;
@@ -189,7 +190,7 @@ static CGFloat const BasicHeaderHeight = 50;
             [(FriendTableViewCell*)cell formatForUser:self.teammates[indexPath.row] isFollowing:YES];
         }
     } else {
-        if (indexPath.section == 0 || self.children.count == 0) {
+        if (indexPath.section == 0) {
             cell = (ChildTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"ChildTableViewCell"
                                                                         forIndexPath:indexPath];
             

@@ -1,6 +1,6 @@
 dependencies: \
-  /Users/pkamm/Documents/spotlight/spotlight_ios/Spotlight/FriendFinderTableViewController.m \
-  /Users/pkamm/Documents/spotlight/spotlight_ios/Spotlight/FriendFinderTableViewController.h \
-  /Users/pkamm/Documents/spotlight/spotlight_ios/Spotlight/FriendProfileViewController.h \
-  /Users/pkamm/Documents/spotlight/spotlight_ios/Spotlight/FriendTableViewCell.h \
-  /Users/pkamm/Documents/spotlight/spotlight_ios/Spotlight/User.h
+  /Users/pkamm/Documents/ios/Spotlight/Spotlight/FriendFinderTableViewController.m \
+  /Users/pkamm/Documents/ios/Spotlight/Spotlight/FriendFinderTableViewController.h \
+  /Users/pkamm/Documents/ios/Spotlight/Spotlight/FriendProfileViewController.h \
+  /Users/pkamm/Documents/ios/Spotlight/Spotlight/FriendTableViewCell.h \
+  /Users/pkamm/Documents/ios/Spotlight/Spotlight/User.h

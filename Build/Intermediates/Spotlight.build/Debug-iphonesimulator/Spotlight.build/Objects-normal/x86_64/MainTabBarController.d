@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/pkamm/Documents/spotlight/spotlight_ios/Spotlight/MainTabBarController.m \
-  /Users/pkamm/Documents/spotlight/spotlight_ios/Spotlight/MainTabBarController.h
+  /Users/pkamm/Documents/ios/Spotlight/Spotlight/MainTabBarController.m \
+  /Users/pkamm/Documents/ios/Spotlight/Spotlight/MainTabBarController.h

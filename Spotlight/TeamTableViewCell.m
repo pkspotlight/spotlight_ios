@@ -35,7 +35,7 @@
 }
 
 - (void)formatForTeam:(Team*)team isFollowing:(BOOL)isFollowing {
-    self.isFollowing = isFollowing;
+    _isFollowing = isFollowing;
     [self.teamImageView.layer setCornerRadius:self.teamImageView.bounds.size.width/2];
     [self.teamImageView setClipsToBounds:YES];
     
@@ -69,7 +69,7 @@
 }
 
 - (IBAction)followButtonPressed:(id)sender {
-    if (self.isFollowing) {
+    if (_isFollowing) {
         [self.delegate
          unfollowButtonPressed:self
          completion:^(void){

@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/pkamm/Documents/spotlight/spotlight_ios/Spotlight/FieldEntryTableViewCell.m \
-  /Users/pkamm/Documents/spotlight/spotlight_ios/Spotlight/FieldEntryTableViewCell.h
+  /Users/pkamm/Documents/ios/Spotlight/Spotlight/FieldEntryTableViewCell.m \
+  /Users/pkamm/Documents/ios/Spotlight/Spotlight/FieldEntryTableViewCell.h

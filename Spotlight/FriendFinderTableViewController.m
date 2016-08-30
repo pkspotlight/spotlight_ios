@@ -76,10 +76,10 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     //dismiss keyboard
-    [searchBar resignFirstResponder];
+    [self.searchBar resignFirstResponder];
     
     //Strip the whitespace off the end of the search text
-    NSArray* components = [searchBar.text componentsSeparatedByString:@" "];
+    NSArray* components = [self.searchBar.text componentsSeparatedByString:@" "];
 //    NSString *searchText = [self.searchBar.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
     if (![components[0] isEqualToString:@""]) {
@@ -90,18 +90,14 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
         PFQuery *lastNameQuery = [User query];
 
         
-        [firstQuery whereKey:@"firstName" matchesRegex:components[0] modifiers:@"i"];
-        [secondQuery whereKey:@"lastName" matchesRegex:components[0] modifiers:@"i"];
-
-        
-//        [firstQuery whereKey:@"firstName" containsString:components[0]];
-//        [secondQuery whereKey:@"lastName" containsString:components[0]];
+        [firstQuery whereKey:@"firstName" containsString:components[0]];
+        [secondQuery whereKey:@"lastName" containsString:components[0]];
         [usernameQuery whereKey:@"username" containsString:[components[0] lowercaseString]];
         [emailQuery whereKey:@"email" containsString:[components[0] lowercaseString]];
         
         PFQuery *query;
         if (components.count > 1) {
-            [firstQuery whereKey:@"lastName" matchesRegex:components[1] modifiers:@"i"];
+            [lastNameQuery whereKey:@"lastName" containsString:components[1]];
             query = [PFQuery orQueryWithSubqueries:@[firstQuery,
                                                      secondQuery,
                                                      usernameQuery,

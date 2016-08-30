@@ -33,6 +33,7 @@
     self.child = child;
     self.timeStamp = time;
     self.admin = admin;
+    //self.type =
     self.requestState = [NSNumber numberWithInt:reqestStatePending];
      self.isChild = isChild;
     if(!isChild.boolValue)

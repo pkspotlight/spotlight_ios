@@ -14,6 +14,7 @@
 #import <MBProgressHUD.h>
 #import <MobileCoreServices/UTCoreTypes.h>
 #import "Child.h"
+#import "RecieptAlertView.h"
 @interface CreateTeamTableViewController ()
 
 @property (strong, nonatomic) NSArray* teamPropertyArray;
@@ -25,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *photoUploadIndicator;
 @property (assign, nonatomic) BOOL isNewTeam;
 @property (strong, nonatomic) Child* selfChild;
+@property (strong, nonatomic) NSMutableArray* childSelectedarray;
 
 @end
 
@@ -38,7 +40,7 @@
     [self.addTeamLogoButton.layer setBorderColor:[UIColor whiteColor].CGColor];
     [self.addTeamLogoButton.layer setBorderWidth:3];
     [self.addTeamLogoButton setClipsToBounds:YES];
-    
+    self.childSelectedarray = [NSMutableArray new];
     _selfChild = [Child new];
     
     _selfChild.firstName = [User currentUser].firstName;
@@ -100,11 +102,17 @@
     [self.team.moderators addObject:[User currentUser]];
     [self.team saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
+            for(Child *child in self.childSelectedarray){
+                [child.teams addObject:self.team];
+            }
             User* user = [User currentUser];
             [user.teams addObject:self.team];
             
             [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                 [self dismissViewControllerAnimated:YES completion:nil];
+            }];
+            [Child saveAllInBackground:self.childSelectedarray block:^(BOOL succeeded, NSError * _Nullable error) {
+                
             }];
             
             
@@ -122,14 +130,82 @@
 - (IBAction)saveAccountPressed:(id)sender {
     NSError *error;
     [self.view endEditing:NO];
-    if ([self savePendingChangesToTeam:&error]) {
-        //[self dismissViewControllerAnimated:YES completion:nil];
-        [self performSegueWithIdentifier:@"UnwindEditSegue" sender:sender];
-    } else {
-        //Show some error
-    }
+    
+//    if ([self savePendingChangesToTeam:&error]) {
+//        //[self dismissViewControllerAnimated:YES completion:nil];
+//        [self performSegueWithIdentifier:@"UnwindEditSegue" sender:nil];
+//    } else {
+//        //Show some error
+//    }
+
+    
+    [[[[User currentUser] children] query] findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if(objects.count>0){
+           __block NSError *error;
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:@"Do you want to associate your family members" preferredStyle:UIAlertControllerStyleAlert];
+            
+            [alertController addAction:[UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                
+                if ([self savePendingChangesToTeam:&error]) {
+                    //[self dismissViewControllerAnimated:YES completion:nil];
+                    [self performSegueWithIdentifier:@"UnwindEditSegue" sender:sender];
+                } else {
+                    //Show some error
+                }
+                
+            }]];
+            [alertController addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                
+                
+                RecieptAlertView *alert = [[RecieptAlertView alloc]init];
+                alert.delegate = self;
+                
+                [alert createAlertWithRemmitances:objects];
+                                
+            }]];
+            
+            
+            dispatch_async(dispatch_get_main_queue(), ^ {
+                [self presentViewController:alertController animated:YES completion:nil];
+            });
+            
+            
+
+            
+        }
+        else{
+            if ([self savePendingChangesToTeam:&error]) {
+                //[self dismissViewControllerAnimated:YES completion:nil];
+                [self performSegueWithIdentifier:@"UnwindEditSegue" sender:nil];
+            } else {
+                //Show some error
+            }
+        }
+        
+        
+    }];
+
+    
+    
+
 }
 
+
+-(void)RecieptAlertViewdialogButtonWithChildSelected:(NSMutableArray *)childArray{
+    NSError *error;
+    [self.view endEditing:NO];
+    if(childArray!=nil){
+         self.childSelectedarray = childArray;
+    }
+   
+        if ([self savePendingChangesToTeam:&error]) {
+            //[self dismissViewControllerAnimated:YES completion:nil];
+            [self performSegueWithIdentifier:@"UnwindEditSegue" sender:nil];
+        } else {
+            //Show some error
+        }
+    
+}
 #pragma mark - Delegate Methods
 
 - (void)accountTextFieldCell:(FieldEntryTableViewCell *)cell didChangeToValue:(NSString *)text {

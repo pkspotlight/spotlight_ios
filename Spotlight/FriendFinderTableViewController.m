@@ -19,6 +19,7 @@
 }
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) NSArray* searchResults;
+@property (strong, nonatomic) NSMutableArray* friendsArray;
 @property (strong, nonatomic) UITapGestureRecognizer* hideKeyboardTap;
 
 @end
@@ -27,14 +28,24 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.friendsArray = [NSMutableArray new];
     [self.tableView registerNib:[UINib nibWithNibName:@"BasicHeaderView" bundle:nil]
 forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     refresh = [[UIRefreshControl alloc] init];
     [refresh addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
     [self setRefreshControl:refresh];
+    [self loadFriends];
     self.hideKeyboardTap = [[UITapGestureRecognizer alloc]
                             initWithTarget:self
                             action:@selector(dismissKeyboard)];
+}
+
+- (void)loadFriends{
+    PFQuery *query = [[User currentUser].friends query];
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        self.friendsArray = [objects copy];
+        
+    }];
 }
 
 
@@ -66,7 +77,22 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     } else {
         cell = (FriendTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"FriendTableViewCell"
                                                                      forIndexPath:indexPath];
-        [(FriendTableViewCell*)cell formatForUser:self.searchResults[indexPath.row] isFollowing:NO];
+        
+        
+        
+        bool isFollowing = false;
+     
+        User *user = (User*)self.searchResults[indexPath.row];
+            if(([[self.friendsArray valueForKeyPath:@"objectId"] containsObject:user.objectId]))
+            {
+                isFollowing = true;
+                
+            }
+            else{
+                isFollowing = false;
+            }
+        
+        [(FriendTableViewCell*)cell formatForUser:self.searchResults[indexPath.row] isFollowing:isFollowing];
     }
     return cell;
 }
@@ -169,11 +195,55 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    User *user = (User*)self.searchResults[indexPath.row];
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    FriendProfileViewController *friendProfileViewController = [storyboard instantiateViewControllerWithIdentifier:@"FriendsProfile"];
+    [friendProfileViewController setUser:user];
+    [self.navigationController pushViewController:friendProfileViewController animated:YES];
+    
+    
+    
+    
+//    
+//    if(([[self.friendsArray valueForKeyPath:@"objectId"] containsObject:user.objectId]))
+//    {
+//        
+//        UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//        FriendProfileViewController *friendProfileViewController = [storyboard instantiateViewControllerWithIdentifier:@"FriendsProfile"];
+//        [friendProfileViewController setUser:user];
+//        [self.navigationController pushViewController:friendProfileViewController animated:YES];
+//        
+//        
+//        
+//        
+//    }
+//    else{
+//        [[[UIAlertView alloc] initWithTitle:@""
+//                                    message:@"You do not have access to view Profile. Please request to view this friend profile."
+//                                   delegate:self
+//                          cancelButtonTitle:@"Cancel"
+//                          otherButtonTitles:NSLocalizedString(@"Send Invite", nil), nil] show];
+//    }
+//    
+    
+    
+    
+    
+  }
+
+
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"ViewFriendProfileSegue"]) {
-        [(FriendProfileViewController*)[segue destinationViewController]
-         setUser:self.searchResults[[self.tableView indexPathForCell:sender].row]];
-    }
+    
+    
+    
+
+    
+    
+ 
+
 }
 
 @end

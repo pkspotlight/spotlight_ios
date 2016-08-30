@@ -22,6 +22,7 @@
 @interface SpotlightFeedViewController ()
 {
     UIRefreshControl* refresh;
+    Spotlight *spotLightCellSelected;
 }
 @end
 
@@ -167,7 +168,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     SpotlightTableViewCell *cell = (SpotlightTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
-    Spotlight *spotLight = [cell spotlight];
+    spotLightCellSelected = [cell spotlight];
     
     __block BOOL isAllowed = false;
     
@@ -185,12 +186,12 @@
             
             for(Team *team in objects)
             {
-                if([team.objectId isEqualToString:spotLight.team.objectId])
+                if([team.objectId isEqualToString:spotLightCellSelected.team.objectId])
                 {
                     isAllowed = true;
                     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                     SpotlightCollectionViewController *spotLightCollection = [storyboard instantiateViewControllerWithIdentifier:@"SpotLightCollectionView"];
-                    [spotLightCollection setSpotlight:spotLight];
+                    [spotLightCollection setSpotlight:spotLightCellSelected];
                     [self.navigationController pushViewController:spotLightCollection animated:YES];
                     
                     break;
@@ -200,13 +201,14 @@
             }
             
             if(!isAllowed){
+                             
                 
                 
                 [[[UIAlertView alloc] initWithTitle:@""
                                             message:@"You do not have access to view this Spotlight. Please request to follow this team in order to gain access."
-                                           delegate:nil
-                                  cancelButtonTitle:nil
-                                  otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
+                                           delegate:self
+                                  cancelButtonTitle:@"Cancel"
+                                  otherButtonTitles:NSLocalizedString(@"Send Invite", nil), nil] show];
             }
             
             
@@ -218,7 +220,7 @@
     else{
         UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         SpotlightCollectionViewController *spotLightCollection = [storyboard instantiateViewControllerWithIdentifier:@"SpotLightCollectionView"];
-        [spotLightCollection setSpotlight:spotLight];
+        [spotLightCollection setSpotlight:spotLightCellSelected];
         [self.navigationController pushViewController:spotLightCollection animated:YES];
     }
     
@@ -238,51 +240,114 @@
 }
 
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    
+        if(buttonIndex ==1){
+            [self sendRequestToFollowTeam];
+        }
+   
+    
+}
 
+
+
+-(void)sendRequestToFollowTeam{
+   
+    
+    PFQuery* moderatorQuery = [spotLightCellSelected.team.moderators query];
+    [moderatorQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if(objects.count==0){
+            [[[UIAlertView alloc] initWithTitle:@""
+                                        message:@"No admin found for this team"
+                                       delegate:nil
+                              cancelButtonTitle:nil
+                              otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
+        }
+        
+        else{
+            for (User* user in objects) {
+                
+//                if(![self isRequestAllowed:NO withUser:user withChild:nil withTeam:team]){
+//                    [[[UIAlertView alloc] initWithTitle:@""
+//                                                message:@"A request to follow this team is already sent to admin."
+//                                               delegate:nil
+//                                      cancelButtonTitle:nil
+//                                      otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
+//                }
+                
+               // else{
+                    NSString *timestamp =  [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970] * 1000];
+                    
+                    TeamRequest *teamRequest = [[TeamRequest alloc]init];
+                    
+                    [teamRequest saveTeam:spotLightCellSelected.team andAdmin:user  followby:[User currentUser] orChild:nil withTimestamp:timestamp isChild:@0 completion:^{
+//                        if (completion) {
+//                            
+//                            completion();
+//                        }
+                       // [pendingRequestArray addObject:teamRequest];
+                        [self.tableView reloadData];
+                    }];
+                    break;
+                    
+                //}
+
+    
+    
+    
+    
+    
+   
+}
+        }
+        
+    }];
+}
 //- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(nullable id)sender NS_AVAILABLE_IOS(6_0)
 //{
-//    
-//    
+//
+//
 //}
 
 
 //- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//    
-//    
-//    
+//
+//
+//
 //    if ([[segue identifier] isEqualToString:@"SpotlightSegue"]) {
 //        Spotlight *spotLight = [(SpotlightTableViewCell*)sender spotlight];
 //
 //        __block BOOL isAllowed = false;
-//        
-//        
+//
+//
 //            PFQuery *query = [[[User currentUser] teams] query];
 //            [query includeKey:@"teamLogoMedia"];
 //            [query orderByDescending:@"year"];
-//        
-//        
+//
+//
 //        for(Team *team in [User currentUser].teams)
 //        {
-//            
+//
 //        }
-//        
-//        
-//        
+//
+//
+//
 //            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-//                
+//
 //                for(Team *team in objects)
 //                {
 //                    if([team.objectId isEqualToString:spotLight.team.objectId])
 //                    {
 //                        isAllowed = true;
-//                        
-//                        
-//                        
+//
+//
+//
 //                        break;
 //                    }
-//                    
+//
 //                }
-//                
+//
 //            }];
 //            
 //        

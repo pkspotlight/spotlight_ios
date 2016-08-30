@@ -17,7 +17,7 @@
 
 @property (strong, nonatomic) Child *child;
 
-@property (weak, nonatomic) IBOutlet UILabel *userDisplayNameLabel;
+//@property (weak, nonatomic) IBOutlet UILabel *userDisplayNameLabel;
 @property (weak, nonatomic) IBOutlet UIButton *followButton;
 @property (weak, nonatomic) IBOutlet UIImageView *userImageView;
 @property (assign, nonatomic) BOOL isFollowing;
@@ -28,10 +28,11 @@
 
 - (void)formatForChild:(Child*)child isFollowing:(BOOL)isFollowing {
     _child = child;
-    
+    self.userImageView.image = nil;
     [self.userImageView.layer setCornerRadius:self.userImageView.bounds.size.width/2];
     [self.userImageView setClipsToBounds:YES];
     [self.userDisplayNameLabel setText:[self.child displayName]];
+    self.userImageView.image = [UIImage imageNamed:@"unknown_user.png"];
     
     NSString* buttonText = (isFollowing) ? @"Following" : @"Follow";
     [self.followButton setTitle:buttonText
@@ -39,6 +40,8 @@
     
     [self.userImageView cancelImageRequestOperation];
     [child.profilePic fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        
+        
         if(!error)
         {
             NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:child.profilePic.thumbnailImageFile.url]];
@@ -46,6 +49,7 @@
              setImageWithURLRequest:request
              placeholderImage:nil
              success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, UIImage * _Nonnull image) {
+                 
                  [self.userImageView setImage:image];
              } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, NSError * _Nonnull error) {
                  NSLog(@"fuck thumbnail failure");

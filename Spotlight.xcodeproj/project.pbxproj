@@ -65,6 +65,8 @@
 		6C6E74CACF9F9F670411D756 /* libPods-Spotlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6304B3F6E75DF67CB2C75299 /* libPods-Spotlight.a */; };
 		8404D5831D3E51BC00B2D325 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8404D5821D3E51BC00B2D325 /* MediaPlayer.framework */; };
 		841FAE121D3CE26700772B23 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841FAE111D3CE26700772B23 /* Photos.framework */; };
+		8455EB701D5CABB000A3A365 /* RecieptAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8455EB6F1D5CABB000A3A365 /* RecieptAlertView.m */; };
+		8455EB731D5CAC1600A3A365 /* remittanceSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8455EB721D5CAC1600A3A365 /* remittanceSelectionView.m */; };
 		846B56081D4899BB00F3DBB0 /* SpotlightBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 846B56071D4899BB00F3DBB0 /* SpotlightBoardView.m */; };
 		846B560A1D4899EF00F3DBB0 /* SpotlightBoardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 846B56091D4899EF00F3DBB0 /* SpotlightBoardView.xib */; };
 		846F75B01D40D41B00B5120E /* TeamRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 846F75AF1D40D41B00B5120E /* TeamRequest.m */; };
@@ -240,6 +242,10 @@
 		6304B3F6E75DF67CB2C75299 /* libPods-Spotlight.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Spotlight.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8404D5821D3E51BC00B2D325 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		841FAE111D3CE26700772B23 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		8455EB6E1D5CABB000A3A365 /* RecieptAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecieptAlertView.h; sourceTree = "<group>"; };
+		8455EB6F1D5CABB000A3A365 /* RecieptAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecieptAlertView.m; sourceTree = "<group>"; };
+		8455EB711D5CAC1600A3A365 /* remittanceSelectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = remittanceSelectionView.h; sourceTree = "<group>"; };
+		8455EB721D5CAC1600A3A365 /* remittanceSelectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = remittanceSelectionView.m; sourceTree = "<group>"; };
 		846B56061D4899BB00F3DBB0 /* SpotlightBoardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotlightBoardView.h; sourceTree = "<group>"; };
 		846B56071D4899BB00F3DBB0 /* SpotlightBoardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotlightBoardView.m; sourceTree = "<group>"; };
 		846B56091D4899EF00F3DBB0 /* SpotlightBoardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpotlightBoardView.xib; sourceTree = "<group>"; };
@@ -706,6 +712,10 @@
 		88BDFC541BFD32D0007A3EBB /* Team */ = {
 			isa = PBXGroup;
 			children = (
+				8455EB711D5CAC1600A3A365 /* remittanceSelectionView.h */,
+				8455EB721D5CAC1600A3A365 /* remittanceSelectionView.m */,
+				8455EB6E1D5CABB000A3A365 /* RecieptAlertView.h */,
+				8455EB6F1D5CABB000A3A365 /* RecieptAlertView.m */,
 				883D63F71C0719E300AE99CC /* TeamLogoMedia.h */,
 				883D63F81C0719E300AE99CC /* TeamLogoMedia.m */,
 				88BDFC581BFD33E0007A3EBB /* TeamsTableViewController.h */,
@@ -1051,6 +1061,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				88EC50311C12F19200077E85 /* User.m in Sources */,
+				8455EB731D5CAC1600A3A365 /* remittanceSelectionView.m in Sources */,
 				84B52BD41D41F43D005995AC /* PendingRequestTableViewCell.m in Sources */,
 				88EE2CC61B9E08B2002DDB99 /* SpotlightFeedViewController.m in Sources */,
 				88EC502B1C0DCE5200077E85 /* ProfilePictureMedia.m in Sources */,
@@ -1075,6 +1086,7 @@
 				887FF4CE1BD530B400F3679D /* Spotlight.m in Sources */,
 				88BDFC5D1BFD3635007A3EBB /* TeamTableViewCell.m in Sources */,
 				88BDFC681BFD5034007A3EBB /* BasicHeaderView.m in Sources */,
+				8455EB701D5CABB000A3A365 /* RecieptAlertView.m in Sources */,
 				88BDFC601BFD4602007A3EBB /* ProfileTableViewController.m in Sources */,
 				398D249D1D40D64D00647117 /* MWCaptionView.m in Sources */,
 				883D63F91C0719E300AE99CC /* TeamLogoMedia.m in Sources */,

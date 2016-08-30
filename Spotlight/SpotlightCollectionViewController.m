@@ -370,7 +370,7 @@ if(!media.isVideo)
         PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[videoUrlDate] options:nil];
         PHAsset *asset = result.firstObject;
         NSDate *date = asset.creationDate;
-        double timestamp = [[NSDate date ] timeIntervalSince1970];
+        double timestamp = [date timeIntervalSince1970];
 
         
         NSURL *videoUrl=(NSURL*)[infoDict objectForKey:UIImagePickerControllerMediaURL];
@@ -420,7 +420,7 @@ if(!media.isVideo)
         PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[videoUrl] options:nil];
         PHAsset *asset = result.firstObject;
         NSDate *date = asset.creationDate;
-        double timestamp = [[NSDate date ] timeIntervalSince1970];
+        double timestamp = [date timeIntervalSince1970];
         
 
         PHVideoRequestOptions *options=[[PHVideoRequestOptions alloc]init];
@@ -470,7 +470,7 @@ if(!media.isVideo)
         PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[imageUrl] options:nil];
         PHAsset *asset = result.firstObject;
         NSDate *date = asset.creationDate;
-          double timestamp = [[NSDate date ] timeIntervalSince1970];
+          double timestamp = [date timeIntervalSince1970];
 
         
         media = [[SpotlightMedia alloc] initWithImage:image];

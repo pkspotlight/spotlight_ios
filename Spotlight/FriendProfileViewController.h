@@ -12,7 +12,7 @@
 @class User;
 @class Child;
 
-@interface FriendProfileViewController : UIViewController
+@interface FriendProfileViewController : UIViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property (strong, nonatomic) User* user;
 @property (strong, nonatomic) Child* child;

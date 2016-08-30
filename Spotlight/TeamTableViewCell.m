@@ -35,7 +35,7 @@
 }
 
 - (void)formatForTeam:(Team*)team isFollowing:(BOOL)isFollowing {
-    self.isFollowing = isFollowing;
+    _isFollowing = isFollowing;
     [self.teamImageView.layer setCornerRadius:self.teamImageView.bounds.size.width/2];
     [self.teamImageView setClipsToBounds:YES];
     
@@ -63,25 +63,40 @@
 }
 
 - (void)formatButtonText {
+  
     NSString* buttonText = (_isFollowing) ? @"Following" : @"Follow";
     [self.followButton setTitle:buttonText
                        forState:UIControlStateNormal];
 }
 
+
+
+
 - (IBAction)followButtonPressed:(id)sender {
-    if (self.isFollowing) {
+//    [self.followButton setTitle:@""
+//                       forState:UIControlStateNormal];
+   
+    if (_isFollowing) {
+        
         [self.delegate
          unfollowButtonPressed:self
          completion:^(void){
              self.isFollowing = NO;
+//             [self.followButton setTitle:@"Following"
+//                                forState:UIControlStateNormal];
+
              [self formatButtonText];
          }];
     } else {
+        
+       
         [self.delegate
          followButtonPressed:self
          completion:^(void){
+//             [self.followButton setTitle:@""
+//                                forState:UIControlStateNormal];
              self.isFollowing = YES;
-             [self formatButtonText];
+            [self formatButtonText];
          }];
     }
     

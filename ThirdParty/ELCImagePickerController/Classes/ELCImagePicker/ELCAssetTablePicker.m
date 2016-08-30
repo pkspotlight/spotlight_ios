@@ -30,7 +30,16 @@
     if (self) {
         //Sets a reasonable default bigger then 0 for columns
         //So that we don't have a divide by 0 scenario
-        self.columns = 4;
+        
+        if(UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation))
+        {
+            self.columns = 6;
+        }
+        else
+        {
+            self.columns = 4;
+        }
+        
     }
     return self;
 }
@@ -169,9 +178,18 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (self.columns <= 0) { //Sometimes called before we know how many columns we have
+    
+    if(UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation))
+    {
+        self.columns = 6;
+    }
+    else
+    {
         self.columns = 4;
     }
+   
+    
+    
     NSInteger numRows = ceil([self.elcAssets count] / (float)self.columns);
     return numRows;
 }
@@ -201,14 +219,14 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    if(UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation))
-//    {
-//    return  (([UIScreen mainScreen].bounds.size.height  - 6) /4) + 2;
-//    }
-//    else if (UIDeviceOrientationIsPortrait([UIDevice currentDevice].orientation))
-//    {
-//      return  (([UIScreen mainScreen].bounds.size.width  - 6) /4) + 2;
-//    }
+    if(UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation))
+    {
+    return  (([UIScreen mainScreen].bounds.size.width  - 6) / 6) + 2;
+    }
+    else 
+    {
+      return  (([UIScreen mainScreen].bounds.size.width  - 6) / 4) + 2;
+    }
     
       return  79;
 }

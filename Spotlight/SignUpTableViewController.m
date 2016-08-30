@@ -11,6 +11,12 @@
 #import "MainTabBarController.h"
 #import "User.h"
 #import <Parse.h>
+#import <ParseFacebookUtilsV4/PFFacebookUtils.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import "SDWebImageManager.h"
+#import "ProfilePictureMedia.h"
+
 
 
 @interface SignUpTableViewController ()
@@ -36,6 +42,7 @@
     
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -73,13 +80,32 @@
 }
 
 - (void)loadMainTabBar {
+    
+   
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     MainTabBarController *mainTabBarController = [storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
+    
+    
+    if([User currentUser].isNew){
+       [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SpotlightPopUp"];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SpotlightFriendsPopUp"];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SpotlightTeamPopUp"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+
+        
+    }
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"PendingRequest" object:nil];
+    });
+
     [[UIApplication sharedApplication].delegate.window setRootViewController:mainTabBarController];
     
 }
 
 - (IBAction)createAccountButtonPressed:(id)sender {
+    
+     [self.view endEditing:YES];
     
     if (self.pendingInputDict[@"email"] &&
         [self.pendingInputDict[@"email"] length] > 4 &&
@@ -115,15 +141,22 @@
     }
 }
 - (IBAction)LogInButtonPressed:(id)sender {
+    
+     [self.view endEditing:YES];
     if (self.pendingInputDict[@"username"] &&
         [self.pendingInputDict[@"username"] length] > 4 &&
         self.pendingInputDict[@"password"] &&
         [self.pendingInputDict[@"password"] length] > 4) {
+        MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication].delegate window] animated:YES];
+                  [hud setLabelText:@"Please Wait..."];
         [User logInWithUsernameInBackground:self.pendingInputDict[@"username"]
                                      password:self.pendingInputDict[@"password"]
                                         block:^(PFUser *user, NSError *error) {
+                                            [hud hide:YES];
+                                            
                                             if (user) {
                                                 NSLog(@"sweet");
+                                                
                                                 [self loadMainTabBar];
                                             } else {
                                                 NSString *errorString = [error userInfo][@"error"];
@@ -142,6 +175,74 @@
         [self presentViewController:alert animated:YES completion:nil];
     }
 }
+
+- (IBAction)logInWithFacebookBtnClicked:(UIButton *)sender {
+    
+    NSArray *permissionArray = @[@"public_profile",@"email"];
+    [PFFacebookUtils logInInBackgroundWithReadPermissions:permissionArray block:^(PFUser * _Nullable user, NSError * _Nullable error) {
+        if (user) {
+            NSLog(@"sweet");
+            if(user.isNew)
+            [self fetchFbData];
+            [self loadMainTabBar];
+        } else {
+            NSString *errorString = [error userInfo][@"error"];
+            if(error!= nil){
+            
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Facebook Login Failed" message:errorString preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"OK"
+                                                      style:UIAlertActionStyleCancel
+                                                    handler:nil]];
+            [self presentViewController:alert animated:YES completion:nil];
+            }
+            NSLog(@"shit, %@",errorString);
+        }
+    }];
+    
+    
+}
+
+-(void)fetchFbData
+{
+    if ([FBSDKAccessToken currentAccessToken]) {
+        [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{ @"fields" : @"id,first_name,last_name,picture.width(500).height(500),email"}]
+         startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+             if (!error) {
+                   User *user = [User currentUser];
+               //  if (user.isNew)
+                 {
+                     user.email = result[@"email"];
+                     user.firstName = result[@"first_name"];
+                     user.lastName = result[@"last_name"];
+                 SDWebImageManager *manager = [SDWebImageManager sharedManager];
+                 [manager downloadImageWithURL:[NSURL URLWithString:result[@"picture"][@"data"][@"url"]]
+                                       options:0
+                                      progress:^(NSInteger receivedSize, NSInteger expectedSize)
+                  {
+                      
+                  }
+                                     completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished,NSURL *imageURL)
+                  {
+                      if (image)
+                      {
+                          // do something with image
+                          
+                          user.profilePic = [[ProfilePictureMedia alloc] initWithImage:image];
+                          
+                         [user.profilePic saveInBackground];
+                         // PFFile *imageFile = [PFFile fileWithName:@"profilePic" data:imageNSData];
+                       //   user[@"profilePic"] = imageFile;
+                          [user saveInBackground];
+                          
+                      }
+                  }];
+                 }
+                 NSLog(@"fetched user:%@", result);
+             }
+         }];
+    }
+}
+
 
 #pragma mark - Delegate Methods
 

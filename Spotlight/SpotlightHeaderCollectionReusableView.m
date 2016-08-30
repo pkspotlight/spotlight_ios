@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *viewMontageButton;
 @property (weak, nonatomic) IBOutlet UIButton *shareMontageButton;
 @property (weak, nonatomic) IBOutlet UILabel *sportLabel;
+@property (weak, nonatomic) IBOutlet UIButton *reorderingSpotlightButton;
 
 @end
 
@@ -35,6 +36,10 @@
     [self.viewMontageButton.layer setBorderColor:[UIColor whiteColor].CGColor];
     [self.viewMontageButton.layer setBorderWidth:1];
     [self.viewMontageButton.layer setCornerRadius:5];
+    
+    [self.reorderingSpotlightButton.layer setBorderColor:[UIColor whiteColor].CGColor];
+    [self.reorderingSpotlightButton.layer setBorderWidth:1];
+    [self.reorderingSpotlightButton.layer setCornerRadius:5];
     
     [self.shareMontageButton.layer setBorderColor:[UIColor whiteColor].CGColor];
     [self.shareMontageButton.layer setBorderWidth:1];

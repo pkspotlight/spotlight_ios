@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 
 #import "TeamTableViewCell.h"
+#import "TeamRequest.h"
+
 @interface TeamFinderTableViewController : UITableViewController <TeamTableViewCellDelegate>
+@property(strong, nonatomic) TeamRequest* teamRequest;
 
 - (void)followButtonPressed:(TeamTableViewCell*)teamCell completion:(void (^)(void))completion;
 

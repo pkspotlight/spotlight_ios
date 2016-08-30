@@ -14,10 +14,22 @@
 #import "Parse.h"
 #import "User.h"
 #import "Child.h"
+#import "TeamRequest.h"
+#import "SpotlightBoardView.h"
+#import "PendingRequestTableViewController.h"
+
+
+#define SpotlightTeamBoardingText @"This is where you can find all of the teams that you are interested in. Search for existing team by clicking the '+' or create your own!"
+
+
 
 static CGFloat const BasicHeaderHeight = 50;
 
-@interface TeamsTableViewController ()
+@interface TeamsTableViewController (){
+    NSString *pendingRequest;
+    long count;
+    NSMutableArray *filteredArrayOfObjects;
+}
 
 @property (strong, nonatomic) NSMutableArray *teams;
 
@@ -27,25 +39,98 @@ static CGFloat const BasicHeaderHeight = 50;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.tableView registerNib:[UINib nibWithNibName:@"BasicHeaderView" bundle:nil]
-forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
+     count = 0;
+     filteredArrayOfObjects = [[NSMutableArray alloc] init];
+    pendingRequest = [[NSString alloc]init];
+ //   [self.tableView registerNib:[UINib nibWithNibName:@"BasicHeaderView" bundle:nil]
+//forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl  addTarget:self
                              action:@selector(refresh:)
                    forControlEvents:UIControlEventValueChanged];
     [self setRefreshControl:self.refreshControl];
+    [self.refreshControl beginRefreshing];
+
+    //[self.tableView addSubview:self.refreshControl];
     self.teams = [NSMutableArray array];
+    [self addSpotlightTeamScreenBoardingPopUp];
     if (!self.child && !self.user) {
         self.user = [User currentUser];
     }
+   // self.tableView.contentInset = UIEdgeInsetsMake(30, 0, 0, 0);
+   
    // [self refresh:self.refreshControl];
 }
 
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
+    count = 0;
+     [self fetchRequest];
+    [ filteredArrayOfObjects removeAllObjects];
     [self refresh:self.refreshControl];
+}
+-(void)addSpotlightTeamScreenBoardingPopUp{
+    
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"SpotlightTeamPopUp"] == FALSE)
+    {
+        
+        SpotlightBoardView *spotlightBoardingView = [[[NSBundle mainBundle] loadNibNamed:@"SpotlightBoardView" owner:self options:nil] objectAtIndex:0];
+        spotlightBoardingView.lblSpotLightScreenDetailTextBold.text = @"";
+        spotlightBoardingView.lblSpotLightScreenDetail.text =SpotlightTeamBoardingText;
+        
+        CGRect frameRect =spotlightBoardingView.frame;
+        frameRect.size.width = [UIScreen mainScreen].bounds.size.width;
+        frameRect.size.height = [UIScreen mainScreen].bounds.size.height;
+        spotlightBoardingView.frame = frameRect;
+        [ [[UIApplication sharedApplication].delegate window] addSubview:spotlightBoardingView];
+        [[NSUserDefaults standardUserDefaults] setBool:TRUE forKey:@"SpotlightTeamPopUp"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        //Alert code will go here...
+    }
+    
+}
+
+-(void)fetchRequest{
+  
+    
+    
+    PFQuery *spotlightQuery = [PFQuery queryWithClassName:@"TeamRequest"];
+    [spotlightQuery whereKey:@"admin" equalTo:[User currentUser]];
+    
+    [spotlightQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        
+        if(objects.count > 0)
+        {
+            NSMutableArray *array = [NSMutableArray new];
+            for(TeamRequest *request in objects)
+            {
+              if((request.requestState.intValue == reqestStatePending))
+              {
+                 [array addObject:request];
+             }
+                
+            }
+            count = array.count;
+            [self.tableView reloadData];
+          //  pendingRequest = [NSString stringWithFormat:@"You have %ld request pendings",array.count];
+            if(array.count>0){
+               [[self navigationController] tabBarItem].badgeValue = [NSString stringWithFormat:@"%ld",array.count];
+            }
+            else{
+                [[self navigationController] tabBarItem].badgeValue  = nil;
+            }
+
+          
+
+            
+        }
+        else{
+             [[self navigationController] tabBarItem].badgeValue  = nil;
+        }
+        
+               
+    }];
 }
 
 - (void)refresh:(UIRefreshControl*)sender {
@@ -71,6 +156,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
         if (!error) {
             NSLog(@"Successfully retrieved my %lu Teams.", (unsigned long)objects.count);
             [self.teams addObjectsFromArray:[objects copy]];
+         
             [self sortTeamsArray:self.teams];
             PFQuery *query = [self.user.children query];
             [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
@@ -95,6 +181,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
         if (!error) {
             NSLog(@"Successfully retrieved child's %lu Teams.", (unsigned long)objects.count);
             [self.teams addObjectsFromArray:[objects copy]];
+            
             [self sortTeamsArray:self.teams];
             [self.tableView reloadData];
             [sender endRefreshing];
@@ -130,7 +217,19 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
         }
         return (NSComparisonResult)NSOrderedDescending;
     }];
-    self.teams = [NSMutableArray arrayWithArray:sortedArray];
+    [filteredArrayOfObjects removeAllObjects];
+ 
+    for (Team *team in sortedArray)
+    {
+        if(!([[filteredArrayOfObjects valueForKeyPath:@"objectId"] containsObject:team.objectId]))
+        {
+            [filteredArrayOfObjects addObject:team];
+        }
+    }
+    
+    self.teams = filteredArrayOfObjects;
+    
+   // [NSMutableArray arrayWithArray:sortedArray];
 }
     
     
@@ -139,6 +238,10 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    
+    return (count > 0)?30:0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -153,10 +256,45 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     return cell;
 }
 
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 30)];
+    /* Create custom view to display section header... */
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 30)];
+    [label setFont:[UIFont boldSystemFontOfSize:12]];
+    
+    UITapGestureRecognizer *singleFingerTap =
+    [[UITapGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(handleSingleTap:)];
+    [view addGestureRecognizer:singleFingerTap];
+ 
+    
+    //The event handling method
+  
+
+    
+    /* Section header is in 0th index... */
+    [label setText:[NSString stringWithFormat:@"You have %ld pending %@",count , (count==1)?@"Request":@"Requests"]];
+    label.textAlignment = NSTextAlignmentCenter;
+    [view addSubview:label];
+    view.backgroundColor = [UIColor redColor];
+    label.textColor = [UIColor whiteColor];
+       
+    //your background color...
+    return view;
+}
+
 - (void)reloadTable {
  //   [self refresh:nil];
 }
 
+- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    PendingRequestTableViewController *pendingRequestController = [storyboard instantiateViewControllerWithIdentifier:@"PendingRequest"];
+    [self.navigationController pushViewController:pendingRequestController animated:YES];
+    
+    //Do stuff here...
+}
 
 - (IBAction)addTeamButtonPressed:(id)sender {
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Search/Add a New Team"
@@ -208,11 +346,9 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 // make all this superclass eventually
 
 
-- (void)followButtonPressed:(TeamTableViewCell*)teamCell completion:(void (^)(void))completion {
+- (void)followButtonPressed:(TeamTableViewCell*)teamCell completion:(void (^)(void))completion{
     [[[[User currentUser] children] query] findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-        [self showAlertWithChildren:objects
-                               team:teamCell.team
-                         completion:completion];
+        [self showAlertWithChildren:objects team:teamCell.team completion:completion];
     }];
 }
 
@@ -246,7 +382,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 
 - (void)showAlertWithChildren:(NSArray*)children team:(Team*)team completion:(void (^)(void))completion {
     if (children && [children count] > 0) {
-        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Which child is on this team?"
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Which Child is on this Team?"
                                                                        message:@""
                                                                 preferredStyle:UIAlertControllerStyleActionSheet];
         [alert addAction:[UIAlertAction actionWithTitle:@"None, I just want to follow it"

@@ -17,6 +17,9 @@
 
 
 @interface ProfileTableViewController ()
+{
+    NSString *userName;
+}
 
 @property (strong, nonatomic) NSMutableDictionary *pendingFieldDictionary;
 @property (strong, nonatomic) NSArray* userPropertyArray;
@@ -33,8 +36,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+   
     self.user = [User currentUser];
+     userName = self.user.username;
     self.userPropertyArray = @[ @"username",
                                 @"firstName",
                                 @"lastName",
@@ -80,6 +84,8 @@
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"
                                                                  bundle: nil];
+        
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SpotlightLoginPopUp"];
         
         UIViewController *controller = [mainStoryboard instantiateViewControllerWithIdentifier: @"IntroNavigationController"];
         [[UIApplication sharedApplication].delegate.window setRootViewController:controller];
@@ -145,7 +151,7 @@
         UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
         imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
         imagePickerController.delegate = self;
-        imagePickerController.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeMovie, (NSString *)kUTTypeImage, nil];
+        imagePickerController.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeImage, nil];
         imagePickerController.videoMaximumDuration = 15;
         [imagePickerController setAllowsEditing:YES];
         
@@ -236,8 +242,7 @@
     NSError *error;
     [self.view endEditing:NO];
     if ([self savePendingChangesToUser:error]) {
-        [self.usernameLabel setText:[self.user displayName]];
-    
+        [self dismissViewControllerAnimated:YES completion:nil];
     } else {
         //Show some error
     }
@@ -251,10 +256,30 @@
     }
     [self.user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         [hud hide:YES afterDelay:.5];
+        if (error) {
+            NSString *errorString = [error userInfo][@"error"];
+            if(error!= nil){
+                
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:errorString preferredStyle:UIAlertControllerStyleAlert];
+                [alert addAction:[UIAlertAction actionWithTitle:@"OK"
+                                                          style:UIAlertActionStyleCancel
+                                                        handler:nil]];
+                [self presentViewController:alert animated:YES completion:nil];
+                self.user.username = userName;
+                self.pendingFieldDictionary[@"username"] = userName;
+                [self.user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.tableView reloadData];
+                    });
+                }];
+                
+            }
+            
+            
+        }
     }];
     return YES;
 }
-
 
 - (IBAction)cancelButtonPressed:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -267,7 +292,7 @@
         UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
         imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
         imagePickerController.delegate = self;
-        imagePickerController.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeMovie, (NSString *)kUTTypeImage, nil];
+        imagePickerController.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeImage, nil];
         imagePickerController.videoMaximumDuration = 15;
         [imagePickerController setAllowsEditing:YES];
         

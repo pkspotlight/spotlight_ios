@@ -1,7 +1,7 @@
 dependencies: \
-  /Users/pkamm/Documents/spotlight/spotlight_ios/Spotlight/SpotlightHeaderCollectionReusableView.m \
-  /Users/pkamm/Documents/spotlight/spotlight_ios/Spotlight/SpotlightHeaderCollectionReusableView.h \
-  /Users/pkamm/Documents/spotlight/spotlight_ios/Spotlight/Team.h \
-  /Users/pkamm/Documents/spotlight/spotlight_ios/Spotlight/TeamLogoMedia.h \
-  /Users/pkamm/Documents/spotlight/spotlight_ios/Spotlight/MediaObject.h \
-  /Users/pkamm/Documents/spotlight/spotlight_ios/Spotlight/Spotlight.h
+  /Users/pkamm/Documents/ios/Spotlight/Spotlight/SpotlightHeaderCollectionReusableView.m \
+  /Users/pkamm/Documents/ios/Spotlight/Spotlight/SpotlightHeaderCollectionReusableView.h \
+  /Users/pkamm/Documents/ios/Spotlight/Spotlight/Team.h \
+  /Users/pkamm/Documents/ios/Spotlight/Spotlight/TeamLogoMedia.h \
+  /Users/pkamm/Documents/ios/Spotlight/Spotlight/MediaObject.h \
+  /Users/pkamm/Documents/ios/Spotlight/Spotlight/Spotlight.h

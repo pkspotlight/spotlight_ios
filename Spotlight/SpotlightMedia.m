@@ -10,7 +10,7 @@
 #import "User.h"
 
 @implementation SpotlightMedia
-
+@dynamic timeStamp;
 + (void)load {
     [self registerSubclass];
 }

@@ -1,7 +1,5 @@
-dependencies: \
-  /Users/pkamm/Documents/spotlight/spotlight_ios/Spotlight/Child.m \
-  /Users/pkamm/Documents/spotlight/spotlight_ios/Spotlight/Child.h \
-  /Users/pkamm/Documents/spotlight/spotlight_ios/Spotlight/ProfilePictureMedia.h \
-  /Users/pkamm/Documents/spotlight/spotlight_ios/Spotlight/MediaObject.h \
-  /Users/pkamm/Documents/spotlight/spotlight_ios/Spotlight/Team.h \
-  /Users/pkamm/Documents/spotlight/spotlight_ios/Spotlight/TeamLogoMedia.h
+dependencies: /Users/pkamm/Documents/ios/Spotlight/Spotlight/Child.m \
+  /Users/pkamm/Documents/ios/Spotlight/Spotlight/Child.h \
+  /Users/pkamm/Documents/ios/Spotlight/Spotlight/Team.h \
+  /Users/pkamm/Documents/ios/Spotlight/Spotlight/TeamLogoMedia.h \
+  /Users/pkamm/Documents/ios/Spotlight/Spotlight/MediaObject.h

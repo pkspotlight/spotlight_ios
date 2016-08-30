@@ -25,5 +25,5 @@
 - (NSString*)displayName;
 - (void)followTeam:(Team*)team completion:(void (^)(void))completion;
 - (void)unfollowTeam:(Team*)team completion:(void (^)(void))completion;
-
+- (void)followTeamWithBlockCallback:(Team*)team completion:(PFBooleanResultBlock)block;
 @end

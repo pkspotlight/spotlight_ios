@@ -27,7 +27,7 @@
 @implementation FriendTableViewCell
 
 - (void)formatForUser:(User*)user isFollowing:(BOOL)isFollowing {
-    self.user = user;
+    _user = user;
 
     [self.userImageView.layer setCornerRadius:self.userImageView.bounds.size.width/2];
     [self.userImageView setClipsToBounds:YES];
@@ -38,11 +38,11 @@
                        forState:UIControlStateNormal];
     
     [self.userImageView cancelImageRequestOperation];
-    [self.userImageView setImage:nil];
    // [user.profilePic fetchIfNeeded];
     
     [user.profilePic fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-        if(!error) {
+        if(!error)
+        {
             NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:user.profilePic.thumbnailImageFile.url]];
             [self.userImageView
              setImageWithURLRequest:request
@@ -55,27 +55,30 @@
             
         }
     }];
+    
+    
+   
 }
 
 - (void)formatButtonText {
-    NSString* buttonText = (self.isFollowing) ? @"Following" : @"Follow";
+    NSString* buttonText = (_isFollowing) ? @"Following" : @"Follow";
     [self.followButton setTitle:buttonText
                        forState:UIControlStateNormal];
 }
 
 - (IBAction)followButtonPressed:(id)sender {
-    //    [self.followingActivityIndicator startAnimating];
+//    [self.followingActivityIndicator startAnimating];
     
     PFRelation *friendRelation = [[User currentUser] relationForKey:@"friends"];
     _isFollowing ? [friendRelation removeObject:self.user] :
-    [friendRelation addObject:self.user];
-    if(self.isFollowing) {
-        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Are You Sure ?"
-                                                          message:nil
-                                                         delegate:self
-                                                cancelButtonTitle:@"Yes"
-                                                otherButtonTitles:@"No",nil];
-        [message show];
+                   [friendRelation addObject:self.user];
+    if(_isFollowing){
+    UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Are You Sure ?"
+                                                      message:nil
+                                                     delegate:self
+                                            cancelButtonTitle:@"Yes"
+                                            otherButtonTitles:@"No",nil];
+    [message show];
     }
     
     else{
@@ -87,30 +90,46 @@
             }
             [self formatButtonText];
             
+                
+            
+            
+            //        [self.followingActivityIndicator stopAnimating];
+            //        [self.delegate performSelector:@selector(reloadTable)];
         }];
         
-        
-    }
-    
-}
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    
-    if(buttonIndex ==0) {
+    }
+
+    }
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+   
+    if(buttonIndex ==0)
+    {
         [[User currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
             if (succeeded) {
                 self.isFollowing = !self.isFollowing;
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"SpotLightRefersh" object:nil];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"Frdfollowunfollow" object:nil];
-                
+               
             }
             [self formatButtonText];
+            
+         
 
+            
+            
             //        [self.followingActivityIndicator stopAnimating];
             //        [self.delegate performSelector:@selector(reloadTable)];
         }];
+
+        
+
     }
+        
+    
 }
 
 

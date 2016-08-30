@@ -8,6 +8,10 @@ target 'Spotlight' do
   pod 'MBProgressHUD', '~> 0.9'
   pod 'DACircularProgress', '~> 2.3'
   pod 'SDWebImage', '~> 3.7'
+  pod 'FBSDKCoreKit'
+  pod 'FBSDKLoginKit'
+  pod 'ParseUI'
+  pod 'ParseFacebookUtilsV4'
 end
 
 target 'SpotlightTests' do

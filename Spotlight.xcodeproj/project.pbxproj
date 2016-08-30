@@ -10,10 +10,10 @@
 		07FCD23C1D46019C0030E8DC /* video_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 07FCD23B1D46019C0030E8DC /* video_Icon.png */; };
 		39574E1E1D420F050059029C /* edit@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39574E1C1D420F050059029C /* edit@3x.png */; };
 		39574E1F1D420F050059029C /* edit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39574E1D1D420F050059029C /* edit@2x.png */; };
-		39574E221D421FD30059029C /* delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39574E201D421FD30059029C /* delete@2x.png */; };
-		39574E231D421FD30059029C /* delete@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39574E211D421FD30059029C /* delete@3x.png */; };
 		39574E261D4220B70059029C /* upload@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39574E241D4220B70059029C /* upload@2x.png */; };
 		39574E271D4220B70059029C /* upload@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39574E251D4220B70059029C /* upload@3x.png */; };
+		395C8BA71D50B3B100BC6087 /* delete@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 395C8BA51D50B3B100BC6087 /* delete@3x.png */; };
+		395C8BA81D50B3B100BC6087 /* delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 395C8BA61D50B3B100BC6087 /* delete@2x.png */; };
 		396C0E771D40F90A009654EA /* PEPhotoCropEditor.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 396C0E761D40F90A009654EA /* PEPhotoCropEditor.bundle */; };
 		398D247C1D40D64D00647117 /* ImageError.png in Resources */ = {isa = PBXBuildFile; fileRef = 398D24451D40D64D00647117 /* ImageError.png */; };
 		398D247D1D40D64D00647117 /* ImageError@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 398D24461D40D64D00647117 /* ImageError@2x.png */; };
@@ -62,9 +62,13 @@
 		39D6343B1D40C86500CAA666 /* PECropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39D634341D40C86500CAA666 /* PECropViewController.m */; };
 		39D6343C1D40C86500CAA666 /* PEResizeControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 39D634361D40C86500CAA666 /* PEResizeControl.m */; };
 		39D6343D1D40C86500CAA666 /* UIImage+PECrop.m in Sources */ = {isa = PBXBuildFile; fileRef = 39D634381D40C86500CAA666 /* UIImage+PECrop.m */; };
-		79C352A4B6FF14D340115C69 /* libPods-SpotlightTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A3AB833CC0A40B326896B47 /* libPods-SpotlightTests.a */; };
+		6C6E74CACF9F9F670411D756 /* libPods-Spotlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6304B3F6E75DF67CB2C75299 /* libPods-Spotlight.a */; };
 		8404D5831D3E51BC00B2D325 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8404D5821D3E51BC00B2D325 /* MediaPlayer.framework */; };
 		841FAE121D3CE26700772B23 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841FAE111D3CE26700772B23 /* Photos.framework */; };
+		846B56081D4899BB00F3DBB0 /* SpotlightBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 846B56071D4899BB00F3DBB0 /* SpotlightBoardView.m */; };
+		846B560A1D4899EF00F3DBB0 /* SpotlightBoardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 846B56091D4899EF00F3DBB0 /* SpotlightBoardView.xib */; };
+		846F75B01D40D41B00B5120E /* TeamRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 846F75AF1D40D41B00B5120E /* TeamRequest.m */; };
+		8493C2551D40FF85004F694F /* PendingRequestTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8493C2541D40FF85004F694F /* PendingRequestTableViewController.m */; };
 		84A2343D1D3F5F0D008AB7C0 /* ELCAlbumPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A2342A1D3F5F0D008AB7C0 /* ELCAlbumPickerController.m */; };
 		84A2343E1D3F5F0D008AB7C0 /* ELCAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A2342C1D3F5F0D008AB7C0 /* ELCAsset.m */; };
 		84A2343F1D3F5F0D008AB7C0 /* ELCAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A2342E1D3F5F0D008AB7C0 /* ELCAssetCell.m */; };
@@ -77,6 +81,9 @@
 		84A234461D3F5F0D008AB7C0 /* Overlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A2343A1D3F5F0D008AB7C0 /* Overlay@2x.png */; };
 		84A234471D3F5F0D008AB7C0 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 84A2343B1D3F5F0D008AB7C0 /* README.md */; };
 		84B0066A1D45F2320040E778 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		84B52BD41D41F43D005995AC /* PendingRequestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B52BD31D41F43D005995AC /* PendingRequestTableViewCell.m */; };
+		84C6563C1D50D8460057E214 /* ReorderImagesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C656391D50D8460057E214 /* ReorderImagesTableViewCell.m */; };
+		84C6563D1D50D8460057E214 /* ReorderSpolightImagesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C6563B1D50D8460057E214 /* ReorderSpolightImagesTableViewController.m */; };
 		880054EA1C6B8D630034D639 /* Child.m in Sources */ = {isa = PBXBuildFile; fileRef = 880054E91C6B8D630034D639 /* Child.m */; };
 		880054EE1C6B9E8C0034D639 /* ChildTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 880054ED1C6B9E8C0034D639 /* ChildTableViewCell.m */; };
 		880207A41C15DF7A002D5068 /* MontageCreator.m in Sources */ = {isa = PBXBuildFile; fileRef = 880207A31C15DF7A002D5068 /* MontageCreator.m */; };
@@ -145,7 +152,6 @@
 		88EE2CC61B9E08B2002DDB99 /* SpotlightFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88EE2CC51B9E08B2002DDB99 /* SpotlightFeedViewController.m */; };
 		88FDB88E1C8EA2A1008C9A3D /* TB - Disney Funk 124bpm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 88FDB87E1C8EA2A1008C9A3D /* TB - Disney Funk 124bpm.mp3 */; };
 		88FDB8941C8EA2A1008C9A3D /* DT_TheDuff_CoolKids_INST130.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 88FDB8841C8EA2A1008C9A3D /* DT_TheDuff_CoolKids_INST130.mp3 */; };
-		E686A57AE14B8A2BA74D71A6 /* libPods-Spotlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C7D9B20ACFBAD994253E05 /* libPods-Spotlight.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -160,13 +166,12 @@
 
 /* Begin PBXFileReference section */
 		07FCD23B1D46019C0030E8DC /* video_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = video_Icon.png; sourceTree = "<group>"; };
-		2C6C2704F703502E93EA94D3 /* Pods-Spotlight.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spotlight.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Spotlight/Pods-Spotlight.debug.xcconfig"; sourceTree = "<group>"; };
 		39574E1C1D420F050059029C /* edit@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "edit@3x.png"; sourceTree = "<group>"; };
 		39574E1D1D420F050059029C /* edit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "edit@2x.png"; sourceTree = "<group>"; };
-		39574E201D421FD30059029C /* delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete@2x.png"; sourceTree = "<group>"; };
-		39574E211D421FD30059029C /* delete@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete@3x.png"; sourceTree = "<group>"; };
 		39574E241D4220B70059029C /* upload@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "upload@2x.png"; sourceTree = "<group>"; };
 		39574E251D4220B70059029C /* upload@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "upload@3x.png"; sourceTree = "<group>"; };
+		395C8BA51D50B3B100BC6087 /* delete@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete@3x.png"; sourceTree = "<group>"; };
+		395C8BA61D50B3B100BC6087 /* delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete@2x.png"; sourceTree = "<group>"; };
 		396C0E761D40F90A009654EA /* PEPhotoCropEditor.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = PEPhotoCropEditor.bundle; sourceTree = "<group>"; };
 		398D24451D40D64D00647117 /* ImageError.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ImageError.png; sourceTree = "<group>"; };
 		398D24461D40D64D00647117 /* ImageError@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ImageError@2x.png"; sourceTree = "<group>"; };
@@ -232,10 +237,16 @@
 		39D634361D40C86500CAA666 /* PEResizeControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PEResizeControl.m; sourceTree = "<group>"; };
 		39D634371D40C86500CAA666 /* UIImage+PECrop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+PECrop.h"; sourceTree = "<group>"; };
 		39D634381D40C86500CAA666 /* UIImage+PECrop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+PECrop.m"; sourceTree = "<group>"; };
-		410C7EA8831A16C63E4024E5 /* Pods-SpotlightTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpotlightTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SpotlightTests/Pods-SpotlightTests.release.xcconfig"; sourceTree = "<group>"; };
-		68C7D9B20ACFBAD994253E05 /* libPods-Spotlight.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Spotlight.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6304B3F6E75DF67CB2C75299 /* libPods-Spotlight.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Spotlight.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8404D5821D3E51BC00B2D325 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		841FAE111D3CE26700772B23 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		846B56061D4899BB00F3DBB0 /* SpotlightBoardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotlightBoardView.h; sourceTree = "<group>"; };
+		846B56071D4899BB00F3DBB0 /* SpotlightBoardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotlightBoardView.m; sourceTree = "<group>"; };
+		846B56091D4899EF00F3DBB0 /* SpotlightBoardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpotlightBoardView.xib; sourceTree = "<group>"; };
+		846F75AE1D40D41B00B5120E /* TeamRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamRequest.h; sourceTree = "<group>"; };
+		846F75AF1D40D41B00B5120E /* TeamRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamRequest.m; sourceTree = "<group>"; };
+		8493C2531D40FF85004F694F /* PendingRequestTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PendingRequestTableViewController.h; sourceTree = "<group>"; };
+		8493C2541D40FF85004F694F /* PendingRequestTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PendingRequestTableViewController.m; sourceTree = "<group>"; };
 		84A234291D3F5F0D008AB7C0 /* ELCAlbumPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAlbumPickerController.h; sourceTree = "<group>"; };
 		84A2342A1D3F5F0D008AB7C0 /* ELCAlbumPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCAlbumPickerController.m; sourceTree = "<group>"; };
 		84A2342B1D3F5F0D008AB7C0 /* ELCAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAsset.h; sourceTree = "<group>"; };
@@ -254,7 +265,12 @@
 		84A234391D3F5F0D008AB7C0 /* Overlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Overlay.png; sourceTree = "<group>"; };
 		84A2343A1D3F5F0D008AB7C0 /* Overlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Overlay@2x.png"; sourceTree = "<group>"; };
 		84A2343B1D3F5F0D008AB7C0 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		84EE7F02A34DE84437E2CAC4 /* Pods-SpotlightTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpotlightTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SpotlightTests/Pods-SpotlightTests.debug.xcconfig"; sourceTree = "<group>"; };
+		84B52BD21D41F43D005995AC /* PendingRequestTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PendingRequestTableViewCell.h; sourceTree = "<group>"; };
+		84B52BD31D41F43D005995AC /* PendingRequestTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PendingRequestTableViewCell.m; sourceTree = "<group>"; };
+		84C656381D50D8460057E214 /* ReorderImagesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReorderImagesTableViewCell.h; sourceTree = "<group>"; };
+		84C656391D50D8460057E214 /* ReorderImagesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReorderImagesTableViewCell.m; sourceTree = "<group>"; };
+		84C6563A1D50D8460057E214 /* ReorderSpolightImagesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReorderSpolightImagesTableViewController.h; sourceTree = "<group>"; };
+		84C6563B1D50D8460057E214 /* ReorderSpolightImagesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReorderSpolightImagesTableViewController.m; sourceTree = "<group>"; };
 		880054E81C6B8D630034D639 /* Child.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Child.h; sourceTree = "<group>"; };
 		880054E91C6B8D630034D639 /* Child.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Child.m; sourceTree = "<group>"; };
 		880054EC1C6B9E8C0034D639 /* ChildTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildTableViewCell.h; sourceTree = "<group>"; };
@@ -364,8 +380,8 @@
 		88EE2CC51B9E08B2002DDB99 /* SpotlightFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotlightFeedViewController.m; sourceTree = "<group>"; };
 		88FDB87E1C8EA2A1008C9A3D /* TB - Disney Funk 124bpm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "TB - Disney Funk 124bpm.mp3"; sourceTree = "<group>"; };
 		88FDB8841C8EA2A1008C9A3D /* DT_TheDuff_CoolKids_INST130.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = DT_TheDuff_CoolKids_INST130.mp3; sourceTree = "<group>"; };
-		9A3AB833CC0A40B326896B47 /* libPods-SpotlightTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SpotlightTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F9672908F8A2C10EA8042801 /* Pods-Spotlight.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spotlight.release.xcconfig"; path = "Pods/Target Support Files/Pods-Spotlight/Pods-Spotlight.release.xcconfig"; sourceTree = "<group>"; };
+		A18D079BCFAB299658BDF57C /* Pods-Spotlight.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spotlight.release.xcconfig"; path = "Pods/Target Support Files/Pods-Spotlight/Pods-Spotlight.release.xcconfig"; sourceTree = "<group>"; };
+		D373EE3193DFC78DC9BEE3E3 /* Pods-Spotlight.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spotlight.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Spotlight/Pods-Spotlight.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -378,7 +394,7 @@
 				889DEECC1C98B90000726D83 /* MessageUI.framework in Frameworks */,
 				88450BFC1BC4CC30004BB6B4 /* Crashlytics.framework in Frameworks */,
 				88450BFB1BC4CC30004BB6B4 /* Fabric.framework in Frameworks */,
-				E686A57AE14B8A2BA74D71A6 /* libPods-Spotlight.a in Frameworks */,
+				6C6E74CACF9F9F670411D756 /* libPods-Spotlight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,7 +402,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				79C352A4B6FF14D340115C69 /* libPods-SpotlightTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,10 +419,10 @@
 		398D24441D40D64C00647117 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				395C8BA51D50B3B100BC6087 /* delete@3x.png */,
+				395C8BA61D50B3B100BC6087 /* delete@2x.png */,
 				39574E241D4220B70059029C /* upload@2x.png */,
 				39574E251D4220B70059029C /* upload@3x.png */,
-				39574E201D421FD30059029C /* delete@2x.png */,
-				39574E211D421FD30059029C /* delete@3x.png */,
 				39574E1C1D420F050059029C /* edit@3x.png */,
 				39574E1D1D420F050059029C /* edit@2x.png */,
 				398D24451D40D64D00647117 /* ImageError.png */,
@@ -508,10 +523,18 @@
 				8404D5821D3E51BC00B2D325 /* MediaPlayer.framework */,
 				841FAE111D3CE26700772B23 /* Photos.framework */,
 				889DEECB1C98B90000726D83 /* MessageUI.framework */,
-				68C7D9B20ACFBAD994253E05 /* libPods-Spotlight.a */,
-				9A3AB833CC0A40B326896B47 /* libPods-SpotlightTests.a */,
+				6304B3F6E75DF67CB2C75299 /* libPods-Spotlight.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		733A7571D08406CF745D000B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D373EE3193DFC78DC9BEE3E3 /* Pods-Spotlight.debug.xcconfig */,
+				A18D079BCFAB299658BDF57C /* Pods-Spotlight.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		84A234251D3F5F0D008AB7C0 /* ThirdParty */ = {
@@ -583,6 +606,8 @@
 				88EC50301C12F19200077E85 /* User.m */,
 				880054E81C6B8D630034D639 /* Child.h */,
 				880054E91C6B8D630034D639 /* Child.m */,
+				846F75AE1D40D41B00B5120E /* TeamRequest.h */,
+				846F75AF1D40D41B00B5120E /* TeamRequest.m */,
 				887FF4CC1BD530B400F3679D /* Spotlight.h */,
 				887FF4CD1BD530B400F3679D /* Spotlight.m */,
 				88E9E8F41BD5791E0065AA0C /* SpotlightMedia.h */,
@@ -605,7 +630,7 @@
 				88450BF91BC4CC30004BB6B4 /* Fabric.framework */,
 				88450BFA1BC4CC30004BB6B4 /* Crashlytics.framework */,
 				4C8670A663CEB02CAA8F6223 /* Frameworks */,
-				E98BD5190BB464D71F3AD0C6 /* Pods */,
+				733A7571D08406CF745D000B /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -623,6 +648,9 @@
 			children = (
 				88A736DB1B91318D00093B27 /* AppDelegate.h */,
 				88A736DC1B91318D00093B27 /* AppDelegate.m */,
+				846B56061D4899BB00F3DBB0 /* SpotlightBoardView.h */,
+				846B56071D4899BB00F3DBB0 /* SpotlightBoardView.m */,
+				846B56091D4899EF00F3DBB0 /* SpotlightBoardView.xib */,
 				88BDFC611BFD4BFB007A3EBB /* MainTabBarController.h */,
 				88BDFC621BFD4BFB007A3EBB /* MainTabBarController.m */,
 				880054EB1C6B8E6F0034D639 /* Models */,
@@ -692,6 +720,10 @@
 				88BDFC721BFF6A38007A3EBB /* TeamSelectTableViewController.m */,
 				88BDFC5B1BFD3635007A3EBB /* TeamTableViewCell.h */,
 				88BDFC5C1BFD3635007A3EBB /* TeamTableViewCell.m */,
+				8493C2531D40FF85004F694F /* PendingRequestTableViewController.h */,
+				8493C2541D40FF85004F694F /* PendingRequestTableViewController.m */,
+				84B52BD21D41F43D005995AC /* PendingRequestTableViewCell.h */,
+				84B52BD31D41F43D005995AC /* PendingRequestTableViewCell.m */,
 			);
 			name = Team;
 			sourceTree = "<group>";
@@ -712,6 +744,10 @@
 		88BDFC561BFD3314007A3EBB /* Spotlight */ = {
 			isa = PBXGroup;
 			children = (
+				84C656381D50D8460057E214 /* ReorderImagesTableViewCell.h */,
+				84C656391D50D8460057E214 /* ReorderImagesTableViewCell.m */,
+				84C6563A1D50D8460057E214 /* ReorderSpolightImagesTableViewController.h */,
+				84C6563B1D50D8460057E214 /* ReorderSpolightImagesTableViewController.m */,
 				884250AE1C1736D7009034A6 /* SpotlightDataSource.h */,
 				884250AF1C1736D7009034A6 /* SpotlightDataSource.m */,
 				88EE2CC41B9E08B2002DDB99 /* SpotlightFeedViewController.h */,
@@ -787,17 +823,6 @@
 			name = Music;
 			sourceTree = "<group>";
 		};
-		E98BD5190BB464D71F3AD0C6 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				2C6C2704F703502E93EA94D3 /* Pods-Spotlight.debug.xcconfig */,
-				F9672908F8A2C10EA8042801 /* Pods-Spotlight.release.xcconfig */,
-				84EE7F02A34DE84437E2CAC4 /* Pods-SpotlightTests.debug.xcconfig */,
-				410C7EA8831A16C63E4024E5 /* Pods-SpotlightTests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -805,13 +830,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 88A736F71B91318D00093B27 /* Build configuration list for PBXNativeTarget "Spotlight" */;
 			buildPhases = (
-				6993250EFE48FA15385C730D /* [CP] Check Pods Manifest.lock */,
+				EEF913DF976A2899C3685F9B /* Check Pods Manifest.lock */,
 				88A736D01B91318D00093B27 /* Sources */,
 				88A736D11B91318D00093B27 /* Frameworks */,
 				88A736D21B91318D00093B27 /* Resources */,
 				8849A1E01B9FB6CA00511DD5 /* ShellScript */,
-				1E870BE2C4669B6EFF0726C0 /* [CP] Embed Pods Frameworks */,
-				946FF0CF2BBCABB8F5DF0ABF /* [CP] Copy Pods Resources */,
+				B0D666822C13099FABCCF74E /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -826,12 +850,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 88A736FA1B91318D00093B27 /* Build configuration list for PBXNativeTarget "SpotlightTests" */;
 			buildPhases = (
-				FA63C7D2A324013B581F2E2A /* [CP] Check Pods Manifest.lock */,
 				88A736E91B91318D00093B27 /* Sources */,
 				88A736EA1B91318D00093B27 /* Frameworks */,
 				88A736EB1B91318D00093B27 /* Resources */,
-				9E42BDB687684C97A40FD7DB /* [CP] Embed Pods Frameworks */,
-				A016868E8C2204B461946637 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -907,6 +928,7 @@
 				398D24881D40D64D00647117 /* ImageSelectedSmallOn.png in Resources */,
 				84A234421D3F5F0D008AB7C0 /* ELCAlbumPickerController.xib in Resources */,
 				398D24931D40D64D00647117 /* UIBarButtonItemArrowLeft@3x.png in Resources */,
+				395C8BA81D50B3B100BC6087 /* delete@2x.png in Resources */,
 				84A234451D3F5F0D008AB7C0 /* Overlay.png in Resources */,
 				88A736E31B91318D00093B27 /* Main.storyboard in Resources */,
 				88A736E81B91318D00093B27 /* LaunchScreen.xib in Resources */,
@@ -916,10 +938,10 @@
 				39574E261D4220B70059029C /* upload@2x.png in Resources */,
 				8893FD731BFC1C4600711779 /* profile@3x.png in Resources */,
 				398D248F1D40D64D00647117 /* PlayButtonOverlayLargeTap@2x.png in Resources */,
-				39574E221D421FD30059029C /* delete@2x.png in Resources */,
 				398D24971D40D64D00647117 /* UIBarButtonItemGrid.png in Resources */,
 				398D24911D40D64D00647117 /* UIBarButtonItemArrowLeft.png in Resources */,
 				88EC50281C0DCC2C00077E85 /* unknown_user.png in Resources */,
+				846B560A1D4899EF00F3DBB0 /* SpotlightBoardView.xib in Resources */,
 				88E98E891BAF508400292B14 /* Softball.JPG in Resources */,
 				889DEED01C98E6E100726D83 /* spotlightWriting.png in Resources */,
 				8893FD771BFC1E0400711779 /* teams@3x.png in Resources */,
@@ -943,7 +965,6 @@
 				884250B21C18929B009034A6 /* spotlight_logo.png in Resources */,
 				88FDB88E1C8EA2A1008C9A3D /* TB - Disney Funk 124bpm.mp3 in Resources */,
 				398D249C1D40D64D00647117 /* VideoOverlay@3x.png in Resources */,
-				39574E231D421FD30059029C /* delete@3x.png in Resources */,
 				398D24861D40D64D00647117 /* ImageSelectedSmallOff@2x.png in Resources */,
 				84A234431D3F5F0D008AB7C0 /* ELCAssetPicker.xib in Resources */,
 				39574E1F1D420F050059029C /* edit@2x.png in Resources */,
@@ -958,6 +979,7 @@
 				8893FD751BFC1CF600711779 /* friends@3x.png in Resources */,
 				398D24991D40D64D00647117 /* UIBarButtonItemGrid@3x.png in Resources */,
 				398D24831D40D64D00647117 /* ImageSelectedOn@2x.png in Resources */,
+				395C8BA71D50B3B100BC6087 /* delete@3x.png in Resources */,
 				398D248C1D40D64D00647117 /* PlayButtonOverlayLarge@2x.png in Resources */,
 				889DEEC91C97370100726D83 /* heart@2x.png in Resources */,
 				398D248A1D40D64D00647117 /* ImageSelectedSmallOn@3x.png in Resources */,
@@ -978,39 +1000,9 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1E870BE2C4669B6EFF0726C0 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Spotlight/Pods-Spotlight-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6993250EFE48FA15385C730D /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
 		8849A1E01B9FB6CA00511DD5 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
@@ -1021,14 +1013,14 @@
 			shellPath = /bin/sh;
 			shellScript = "./Fabric.framework/run 1f3dc97cb296c416a691168cae8634f266e98641 ca2e2e6269a77a78e209a012d8dd69f84b0edbd92ebb3f443d2a6f08938ae991";
 		};
-		946FF0CF2BBCABB8F5DF0ABF /* [CP] Copy Pods Resources */ = {
+		B0D666822C13099FABCCF74E /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "[CP] Copy Pods Resources";
+			name = "Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1036,44 +1028,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Spotlight/Pods-Spotlight-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		9E42BDB687684C97A40FD7DB /* [CP] Embed Pods Frameworks */ = {
+		EEF913DF976A2899C3685F9B /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SpotlightTests/Pods-SpotlightTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A016868E8C2204B461946637 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SpotlightTests/Pods-SpotlightTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FA63C7D2A324013B581F2E2A /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
+			name = "Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1089,15 +1051,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				88EC50311C12F19200077E85 /* User.m in Sources */,
+				84B52BD41D41F43D005995AC /* PendingRequestTableViewCell.m in Sources */,
 				88EE2CC61B9E08B2002DDB99 /* SpotlightFeedViewController.m in Sources */,
 				88EC502B1C0DCE5200077E85 /* ProfilePictureMedia.m in Sources */,
 				88E953461BEB8B7D0094F73D /* FriendsTableViewController.m in Sources */,
 				39D6343C1D40C86500CAA666 /* PEResizeControl.m in Sources */,
 				398D24A51D40D64D00647117 /* UIImage+MWPhotoBrowser.m in Sources */,
 				84A234411D3F5F0D008AB7C0 /* ELCImagePickerController.m in Sources */,
+				84C6563C1D50D8460057E214 /* ReorderImagesTableViewCell.m in Sources */,
+				846F75B01D40D41B00B5120E /* TeamRequest.m in Sources */,
 				84A234401D3F5F0D008AB7C0 /* ELCAssetTablePicker.m in Sources */,
 				8849A1E91BA2590800511DD5 /* IntroViewController.m in Sources */,
 				8893FD7D1BFD1FCB00711779 /* FieldEntryTableViewCell.m in Sources */,
+				8493C2551D40FF85004F694F /* PendingRequestTableViewController.m in Sources */,
 				39D634391D40C86500CAA666 /* PECropRectView.m in Sources */,
 				398D24A31D40D64D00647117 /* MWTapDetectingView.m in Sources */,
 				398D249F1D40D64D00647117 /* MWGridViewController.m in Sources */,
@@ -1115,12 +1081,14 @@
 				884250AD1C173076009034A6 /* TeamDetailsViewController.m in Sources */,
 				88E9E8F91BD5C46D0065AA0C /* SpotlightTableViewCell.m in Sources */,
 				880054EA1C6B8D630034D639 /* Child.m in Sources */,
+				84C6563D1D50D8460057E214 /* ReorderSpolightImagesTableViewController.m in Sources */,
 				88A736DA1B91318D00093B27 /* main.m in Sources */,
 				887EC7621C6974ED001DBDB3 /* FriendFinderTableViewController.m in Sources */,
 				88BDFC761BFF70E6007A3EBB /* CreateSpotlightTableViewController.m in Sources */,
 				880726F61C778F0400F2C1B9 /* TeamFinderTableViewController.m in Sources */,
 				39D6343B1D40C86500CAA666 /* PECropViewController.m in Sources */,
 				88E9E8FF1BD6A6470065AA0C /* SpotlightMediaTableViewCell.m in Sources */,
+				846B56081D4899BB00F3DBB0 /* SpotlightBoardView.m in Sources */,
 				880207A41C15DF7A002D5068 /* MontageCreator.m in Sources */,
 				88EC502E1C0E041F00077E85 /* FriendTableViewCell.m in Sources */,
 				88BDFC791BFF82FD007A3EBB /* SpotlightHeaderCollectionReusableView.m in Sources */,
@@ -1204,8 +1172,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1228,7 +1196,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "ef172fea-b124-4c37-83f8-432340f0550a";
+				PROVISIONING_PROFILE = "8cd4d716-2b6c-4f4e-bf2a-dbeeca18397d";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1251,8 +1219,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1267,7 +1235,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "ef172fea-b124-4c37-83f8-432340f0550a";
+				PROVISIONING_PROFILE = "8cd4d716-2b6c-4f4e-bf2a-dbeeca18397d";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -1276,22 +1244,22 @@
 		};
 		88A736F81B91318D00093B27 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2C6C2704F703502E93EA94D3 /* Pods-Spotlight.debug.xcconfig */;
+			baseConfigurationReference = D373EE3193DFC78DC9BEE3E3 /* Pods-Spotlight.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Spotlight/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.spotlight.info;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "8cd4d716-2b6c-4f4e-bf2a-dbeeca18397d";
 				SWIFT_OBJC_BRIDGING_HEADER = "Spotlight/Spotlight-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1300,22 +1268,22 @@
 		};
 		88A736F91B91318D00093B27 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F9672908F8A2C10EA8042801 /* Pods-Spotlight.release.xcconfig */;
+			baseConfigurationReference = A18D079BCFAB299658BDF57C /* Pods-Spotlight.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Spotlight/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.spotlight.info;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "8cd4d716-2b6c-4f4e-bf2a-dbeeca18397d";
 				SWIFT_OBJC_BRIDGING_HEADER = "Spotlight/Spotlight-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1323,7 +1291,6 @@
 		};
 		88A736FB1B91318D00093B27 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 84EE7F02A34DE84437E2CAC4 /* Pods-SpotlightTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
@@ -1347,7 +1314,6 @@
 		};
 		88A736FC1B91318D00093B27 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 410C7EA8831A16C63E4024E5 /* Pods-SpotlightTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";

@@ -21,6 +21,7 @@
 #import <AVKit/AVKit.h>
 #import "PECropViewController.h"
 
+
 @interface SpotlightCollectionViewController ()<PECropViewControllerDelegate>
 
 @property (strong, nonatomic) NSArray* mediaList;
@@ -28,6 +29,7 @@
 @property (assign, nonatomic) BOOL isShowingMontage;
 @property (weak, nonatomic) IBOutlet UIButton *viewSpotlightButton;
 @property (weak, nonatomic) IBOutlet UIButton *shareSpotlightButton;
+
 @property (strong, nonatomic) MWPhotoBrowser *browser;
 
 @end
@@ -43,15 +45,19 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
     [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     [self.collectionView addSubview:refreshControl];
     self.collectionView.alwaysBounceVertical = YES;
+  
     [refreshControl beginRefreshing];
     [self refresh:refreshControl];
     
     // Do any additional setup after loading the view.
 }
 
+
+
 - (void)refresh:(UIRefreshControl*)refresh {
     [self.spotlight allMedia:^(NSArray *media, NSError *error) {
-        self.mediaList = media;
+         self.mediaList = [self getSortedArray:media];
+      //  self.mediaList = media;
         [self.collectionView reloadData];
         [refresh endRefreshing];
     }];
@@ -233,7 +239,7 @@ if(!media.isVideo)
     
     
     
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Select"
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Select Source"
                                                                    message:@""
                                                             preferredStyle:UIAlertControllerStyleActionSheet];
     
@@ -360,9 +366,17 @@ if(!media.isVideo)
     if ([mediaType isEqualToString:(NSString *)kUTTypeVideo] ||
         [mediaType isEqualToString:(NSString *)kUTTypeMovie]){
         
+        NSURL *videoUrlDate=(NSURL*)[infoDict objectForKey:UIImagePickerControllerReferenceURL];
+        PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[videoUrlDate] options:nil];
+        PHAsset *asset = result.firstObject;
+        NSDate *date = asset.creationDate;
+        double timestamp = [[NSDate date ] timeIntervalSince1970];
+
+        
         NSURL *videoUrl=(NSURL*)[infoDict objectForKey:UIImagePickerControllerMediaURL];
         NSString *videoPath = [videoUrl path];
         media = [[SpotlightMedia alloc] initWithVideoPath:videoPath];
+        media.timeStamp =timestamp;
         
     } else if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
         UIImage *image = [infoDict valueForKey:UIImagePickerControllerOriginalImage];
@@ -379,7 +393,8 @@ if(!media.isVideo)
             NSLog(@"fuck: %@", [error localizedDescription]);
         } else {
             [self.spotlight allMedia:^(NSArray *media, NSError *error) {
-                self.mediaList = media;
+                 self.mediaList = [self getSortedArray:media];
+                //self.mediaList = media;
                 [self.collectionView reloadData];
                 [hud hide:YES];
             }];
@@ -404,6 +419,10 @@ if(!media.isVideo)
         NSURL *videoUrl=(NSURL*)[infoDict objectForKey:UIImagePickerControllerReferenceURL];
         PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[videoUrl] options:nil];
         PHAsset *asset = result.firstObject;
+        NSDate *date = asset.creationDate;
+        double timestamp = [[NSDate date ] timeIntervalSince1970];
+        
+
         PHVideoRequestOptions *options=[[PHVideoRequestOptions alloc]init];
         options.version=PHVideoRequestOptionsVersionOriginal;
         [[PHImageManager defaultManager] requestAVAssetForVideo:asset options:options resultHandler:^(AVAsset * avasset, AVAudioMix * audioMix, NSDictionary * info) {
@@ -414,6 +433,8 @@ if(!media.isVideo)
                 NSLog(@"url is %@",url);
                 NSString *videoPath = [url path];
                 media = [[SpotlightMedia alloc] initWithVideoPath:videoPath];
+                media.timeStamp = timestamp;
+
                 if (title) {
                     media.title = title;
                 }
@@ -428,7 +449,8 @@ if(!media.isVideo)
                         NSLog(@"fuck: %@", [error localizedDescription]);
                     } else {
                         [self.spotlight allMedia:^(NSArray *media, NSError *error) {
-                            self.mediaList = media;
+                            //self.mediaList = media;
+                             self.mediaList = [self getSortedArray:media];
                             [self.collectionView reloadData];
                             [hud hide:YES];
                         }];
@@ -443,7 +465,16 @@ if(!media.isVideo)
         
     } else if ([mediaType isEqualToString:(NSString *)ALAssetTypePhoto]) {
         UIImage *image = [infoDict valueForKey:UIImagePickerControllerOriginalImage];
+        
+        NSURL *imageUrl=(NSURL*)[infoDict objectForKey:UIImagePickerControllerReferenceURL];
+        PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[imageUrl] options:nil];
+        PHAsset *asset = result.firstObject;
+        NSDate *date = asset.creationDate;
+          double timestamp = [[NSDate date ] timeIntervalSince1970];
+
+        
         media = [[SpotlightMedia alloc] initWithImage:image];
+        media.timeStamp = timestamp;
         
         if (title) {
             media.title = title;
@@ -458,7 +489,9 @@ if(!media.isVideo)
                 NSLog(@"fuck: %@", [error localizedDescription]);
             } else {
                 [self.spotlight allMedia:^(NSArray *media, NSError *error) {
-                    self.mediaList = media;
+                    //self.mediaList = media;
+                     self.mediaList = [self getSortedArray:media];
+                    
                     [self.collectionView reloadData];
                     [hud hide:YES];
                 }];
@@ -548,6 +581,13 @@ if(!media.isVideo)
 }
 
 
+-(NSArray*)getSortedArray:(NSArray*)arr{
+    NSSortDescriptor *valueDescriptor = [[NSSortDescriptor alloc] initWithKey:@"timeStamp" ascending:NO];
+    NSArray *descriptors = [NSArray arrayWithObject:valueDescriptor];
+    NSArray *sortedArray = [arr sortedArrayUsingDescriptors:descriptors];
+    return sortedArray;
+}
+
 #pragma mark - Montage Functions
 
 - (IBAction)viewMontageButtonPressed:(id)sender {
@@ -556,26 +596,56 @@ if(!media.isVideo)
                                                                    message:@""
                                                             preferredStyle:UIAlertControllerStyleActionSheet];
     
+    
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"Choose Music from Device"
+                      
+                                              style:UIAlertActionStyleDefault
+                      
+                                            handler:^(UIAlertAction * _Nonnull action) {
+                                                
+                                                [self openMedia];
+                                                
+                                            }]];
+    
+    
+    
+    
+    
+    
     [alert addAction:[UIAlertAction actionWithTitle:@"Cool Kids"
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * _Nonnull action) {
-                                                [self createMontageWithSongTitle:@"DT_TheDuff_CoolKids_INST130" share:NO];
+                                                [self createMontageWithSongTitle:@"DT_TheDuff_CoolKids_INST130" share:NO AssetURL:nil];
                                             }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"Disney Funk"
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * _Nonnull action) {
-                                                [self createMontageWithSongTitle:@"TB - Disney Funk 124bpm" share:NO];
+                                                [self createMontageWithSongTitle:@"TB - Disney Funk 124bpm" share:NO AssetURL:nil];
                                             }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"Every Single Night"
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * _Nonnull action) {
-                                                [self createMontageWithSongTitle:@"DT_TheDUFF_EverySingleNight_INST_125" share:NO];
+                                                [self createMontageWithSongTitle:@"DT_TheDUFF_EverySingleNight_INST_125" share:NO AssetURL:nil];
                                             }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"Ready 2 Go"
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * _Nonnull action) {
-                                                [self createMontageWithSongTitle:@"DT_TheDuff_Ready2Go_128_INST" share:NO];
+                                                [self createMontageWithSongTitle:@"DT_TheDuff_Ready2Go_128_INST" share:NO AssetURL:nil];
                                             }]];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"No Music"
+                      
+                                              style:UIAlertActionStyleDefault
+                      
+                                            handler:^(UIAlertAction * _Nonnull action) {
+                                                
+                                                [self createMontageWithSongTitle:nil share:NO AssetURL:nil];
+                                                
+                                            }]];
+    
+
+    
     [alert addAction:[UIAlertAction actionWithTitle:@"Cancel"
                                               style:UIAlertActionStyleCancel
                                             handler:nil]];
@@ -588,26 +658,55 @@ if(!media.isVideo)
                                                                    message:@""
                                                             preferredStyle:UIAlertControllerStyleActionSheet];
     
+    
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"Choose Music from your device"
+                      
+                                              style:UIAlertActionStyleDefault
+                      
+                                            handler:^(UIAlertAction * _Nonnull action) {
+                                                
+                                                [self openMedia];
+                                                
+                                            }]];
+    
+    
+    
+    
     [alert addAction:[UIAlertAction actionWithTitle:@"Cool Kids"
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * _Nonnull action) {
-                                                [self createMontageWithSongTitle:@"DT_TheDuff_CoolKids_INST130" share:YES];
+                                                [self createMontageWithSongTitle:@"DT_TheDuff_CoolKids_INST130" share:YES AssetURL:nil];
                                             }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"Disney Funk"
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * _Nonnull action) {
-                                                [self createMontageWithSongTitle:@"TB - Disney Funk 124bpm" share:YES];
+                                                [self createMontageWithSongTitle:@"TB - Disney Funk 124bpm" share:YES AssetURL:nil];
                                             }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"Every Single Night"
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * _Nonnull action) {
-                                                [self createMontageWithSongTitle:@"DT_TheDUFF_EverySingleNight_INST_125"  share:YES];
+                                                [self createMontageWithSongTitle:@"DT_TheDUFF_EverySingleNight_INST_125"  share:YES AssetURL:nil];
                                             }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"Ready 2 Go"
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * _Nonnull action) {
-                                                [self createMontageWithSongTitle:@"DT_TheDuff_Ready2Go_128_INST" share:YES];
+                                                [self createMontageWithSongTitle:@"DT_TheDuff_Ready2Go_128_INST" share:YES AssetURL:nil];
                                             }]];
+    
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"No Music"
+                      
+                                              style:UIAlertActionStyleDefault
+                      
+                                            handler:^(UIAlertAction * _Nonnull action) {
+                                                
+                                                [self createMontageWithSongTitle:nil share:NO AssetURL:nil];
+                                                
+                                            }]];
+    
+
+    
     [alert addAction:[UIAlertAction actionWithTitle:@"Cancel"
                                               style:UIAlertActionStyleCancel
                                             handler:nil]];
@@ -615,13 +714,13 @@ if(!media.isVideo)
     
 }
 
-- (void)createMontageWithSongTitle:(NSString*)songTitle share:(BOOL)shouldShare{
+- (void)createMontageWithSongTitle:(NSString*)songTitle share:(BOOL)shouldShare AssetURL:(NSURL *)assetURL{
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [hud setLabelText:@"Creating Reel..."];
     
     if (shouldShare) {
-        [[MontageCreator sharedCreator] createMontageWithMedia:[self.mediaList copy] songTitle:songTitle isShare:YES completion:^(AVPlayerItem *item, NSURL *fileURL) {
+        [[MontageCreator sharedCreator] createMontageWithMedia:[self.mediaList copy] songTitle:songTitle assetURL:assetURL isShare:YES completion:^(AVPlayerItem *item, NSURL *fileURL) {
             
             UIActivityViewController* AVC =  [[UIActivityViewController alloc] initWithActivityItems:@[fileURL, @""] applicationActivities:nil];
             [self presentViewController:AVC
@@ -635,7 +734,7 @@ if(!media.isVideo)
         
     } else {
         
-        [[MontageCreator sharedCreator] createMontageWithMedia:[self.mediaList copy] songTitle:songTitle  isShare:NO completion:^(AVPlayerItem *item, NSURL *fileURL) {
+        [[MontageCreator sharedCreator] createMontageWithMedia:[self.mediaList copy] songTitle:songTitle assetURL:assetURL  isShare:NO completion:^(AVPlayerItem *item, NSURL *fileURL) {
             AVPlayer *player = [AVPlayer playerWithPlayerItem:item];
             AVPlayerViewController* VC = [[AVPlayerViewController alloc] init];
             
@@ -652,5 +751,330 @@ if(!media.isVideo)
     
     
 }
+
+-(void)openMedia{
+    
+    MPMediaPickerController *mediaPicker = [[MPMediaPickerController alloc] initWithMediaTypes:MPMediaTypeMusic];
+    
+    mediaPicker.delegate = self;
+    
+    mediaPicker.allowsPickingMultipleItems = NO;
+    mediaPicker.showsCloudItems = NO;
+    
+    [self presentViewController:mediaPicker animated:YES completion:nil];
+    
+}
+
+
+
+- (void)mediaPicker: (MPMediaPickerController *)mediaPicker didPickMediaItems:(MPMediaItemCollection *)mediaItemCollection {
+    
+    [self dismissModalViewControllerAnimated:YES];
+    
+    for (int i = 0; i < [mediaItemCollection.items count]; i++) {
+        
+        
+        
+        [self exportAssetAsSourceFormat:[[mediaItemCollection items] objectAtIndex:i]];
+        
+        break;
+        //NSLog(@"for loop : %d", i);
+        
+    }
+    
+}
+
+
+
+- (void)mediaPickerDidCancel:(MPMediaPickerController *)mediaPicker{
+    
+    [self dismissModalViewControllerAnimated:YES];
+    
+}
+
+
+
+- (void)exportAssetAsSourceFormat:(MPMediaItem *)item {
+    
+    
+    
+    NSURL *assetURL = [item valueForProperty:MPMediaItemPropertyAssetURL];
+    
+    [self createMontageWithSongTitle:nil share:NO AssetURL:assetURL];
+    
+    BOOL isCloud = FALSE;
+    
+    
+    
+    //    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0")) {
+    
+    //        NSNumber *isCloudNumber = [item valueForProperty:MPMediaItemPropertyIsCloudItem];
+    
+    //        isCloud = [isCloudNumber boolValue];
+    
+    //    }
+    
+    
+    
+    //
+    
+    //    if(assetURL != nil &&  ![assetURL isKindOfClass:[NSNull class]] && ! isCloud)
+    
+    //    {
+    
+    //        NSLog(@"ASSET URL :%@ ", assetURL);
+    
+    //
+    
+    //        NSLog(@"\n>>>> assetURL : %@",[assetURL absoluteString]);
+    
+    //        AVURLAsset *songAsset = [AVURLAsset URLAssetWithURL:assetURL options:nil];
+    
+    //
+    
+    //        AVAssetExportSession *exportSession = [[AVAssetExportSession alloc]
+    
+    //                                               initWithAsset:songAsset
+    
+    //                                               presetName:AVAssetExportPresetPassthrough];
+    
+    //
+    
+    //        NSArray *tracks = [songAsset tracksWithMediaType:AVMediaTypeAudio];
+    
+    //        AVAssetTrack *track = [tracks objectAtIndex:0];
+    
+    //
+    
+    //        id desc = [track.formatDescriptions objectAtIndex:0];
+    
+    //        const AudioStreamBasicDescription *audioDesc = CMAudioFormatDescriptionGetStreamBasicDescription((CMAudioFormatDescriptionRef)desc);
+    
+    //
+    
+    //        FourCharCode formatID = audioDesc->mFormatID;
+    
+    //
+    
+    //        NSString *fileType = nil;
+    
+    //        NSString *ex = nil;
+    
+    //
+    
+    //        switch (formatID) {
+    
+    //
+    
+    //            case kAudioFormatLinearPCM:
+    
+    //            {
+    
+    //                UInt32 flags = audioDesc->mFormatFlags;
+    
+    //                if (flags & kAudioFormatFlagIsBigEndian) {
+    
+    //                    fileType = @"public.aiff-audio";
+    
+    //                    ex = @"aif";
+    
+    //                } else {
+    
+    //                    fileType = @"com.microsoft.waveform-audio";
+    
+    //                    ex = @"wav";
+    
+    //                }
+    
+    //            }
+    
+    //                break;
+    
+    //
+    
+    //            case kAudioFormatMPEGLayer3:
+    
+    //                fileType = @"com.apple.quicktime-movie";
+    
+    //                ex = @"mp3";
+    
+    //                break;
+    
+    //
+    
+    //            case kAudioFormatMPEG4AAC:
+    
+    //                fileType = @"com.apple.m4a-audio";
+    
+    //                ex = @"m4a";
+    
+    //                break;
+    
+    //
+    
+    //            case kAudioFormatAppleLossless:
+    
+    //                fileType = @"com.apple.m4a-audio";
+    
+    //                ex = @"m4a";
+    
+    //                break;
+    
+    //
+    
+    //            default:
+    
+    //                break;
+    
+    //        }
+    
+    //
+    
+    //        exportSession.outputFileType = fileType;
+    
+    //
+    
+    //        NSString *fileName = nil;
+    
+    //
+    
+    //        fileName = [NSString stringWithString:[item valueForProperty:MPMediaItemPropertyTitle]];
+    
+    //
+    
+    //        NSArray *fileNameArray = nil;
+    
+    //        fileNameArray = [fileName componentsSeparatedByString:@" "];
+    
+    //        fileName = [fileNameArray componentsJoinedByString:@""];
+    
+    //
+    
+    //        NSString *docDir = [[AppDelegate sharedAppDelegate]applicationDocumentsDirectory];
+    
+    //
+    
+    //        NSString *filePath = [[docDir stringByAppendingPathComponent:fileName] stringByAppendingPathExtension:ex];
+    
+    //
+    
+    //        int fileNumber = 0;
+    
+    //        NSString *fileNumberString = nil;
+    
+    //        NSString *fileNameWithNumber = nil;
+    
+    //        while ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+    
+    //            fileNumber++;
+    
+    //            fileNumberString = [NSString stringWithFormat:@"-%02d", fileNumber];
+    
+    //            fileNameWithNumber = [fileName stringByAppendingString:fileNumberString];
+    
+    //            filePath = [[docDir stringByAppendingPathComponent:fileNameWithNumber] stringByAppendingPathExtension:ex];
+    
+    //            //NSLog(@"filePath = %@", filePath);
+    
+    //        }
+    
+    //
+    
+    //        // -------------------------------------
+    
+    //
+    
+    //        [self deleteMyFile:filePath];
+    
+    //        filePath = [filePath stringByAppendingString:@".mov"];
+    
+    //        [self deleteMyFile:filePath];
+    
+    //
+    
+    //        exportSession.outputURL = [NSURL fileURLWithPath:filePath];
+    
+    //
+    
+    //        [exportSession exportAsynchronouslyWithCompletionHandler:^{
+    
+    //
+    
+    //            if (exportSession.status == AVAssetExportSessionStatusCompleted) {
+    
+    //
+    
+    //                NSFileManager *fileMgr = [NSFileManager defaultManager];
+    
+    //                NSError *error;
+    
+    //                NSString *newpath = [filePath stringByReplacingOccurrencesOfString:@".mov" withString:@""];
+    
+    //                if ([fileMgr moveItemAtPath:filePath toPath:newpath error:&error] != YES)
+    
+    //                    NSLog(@"Unable to move file: %@", [error localizedDescription]);
+    
+    //            }
+    
+    //        }
+    
+    //         else
+    
+    //         {
+    
+    //             //NSLog(@"export session error");
+    
+    //         }
+    
+    //         [exportSession release];
+    
+    //         }];
+    
+    //        
+    
+    //    }   
+    
+    
+    
+}
+- (IBAction)reorderSpotlightController:(id)sender {
+    
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    ReorderSpolightImagesTableViewController *reorderRequestController = [storyboard instantiateViewControllerWithIdentifier:@"ReorderSpotlight"];
+    reorderRequestController.mediaSpotlightList = [self.mediaList mutableCopy];
+    reorderRequestController.delegate = self;
+    [self.navigationController pushViewController:reorderRequestController animated:YES];
+
+}
+
+-(void)refreshSpotlightCollectionImages{
+    [self refresh:nil];
+}
+
+-(void)deleteMyFile:(NSString *)path
+
+{
+    
+    
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+        
+        NSError *deleteErr = nil;
+        
+        [[NSFileManager defaultManager] removeItemAtPath:path error:&deleteErr];
+        
+        if (deleteErr) {
+            
+            NSLog (@"Can't delete %@: %@", path, deleteErr);
+            
+        }
+        
+    }
+    
+}
+
+
+
+
 
 @end

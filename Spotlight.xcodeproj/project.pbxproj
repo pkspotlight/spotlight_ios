@@ -666,10 +666,10 @@
 				88BDFC571BFD3370007A3EBB /* Friends */,
 				8893FD7B1BFD1FCB00711779 /* FieldEntryTableViewCell.h */,
 				8893FD7C1BFD1FCB00711779 /* FieldEntryTableViewCell.m */,
+				88BDFC661BFD5034007A3EBB /* BasicHeaderView.h */,
 				88BDFC5E1BFD4602007A3EBB /* ProfileTableViewController.h */,
 				88BDFC5F1BFD4602007A3EBB /* ProfileTableViewController.m */,
 				88BDFC641BFD4FD2007A3EBB /* BasicHeaderView.xib */,
-				88BDFC661BFD5034007A3EBB /* BasicHeaderView.h */,
 				88BDFC671BFD5034007A3EBB /* BasicHeaderView.m */,
 				880207A21C15DF7A002D5068 /* MontageCreator.h */,
 				880207A31C15DF7A002D5068 /* MontageCreator.m */,
@@ -1260,8 +1260,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Amandeep Singh (3D7BVR4WVH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Amandeep Singh (3D7BVR4WVH)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1284,8 +1284,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Amandeep Singh (3FZ88JX3CU)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Amandeep Singh (3D7BVR4WVH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Amandeep Singh (3D7BVR4WVH)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

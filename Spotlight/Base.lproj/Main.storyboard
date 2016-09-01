@@ -918,7 +918,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="fwn-cf-8LL" kind="presentation" id="LtX-VF-rDr"/>
+                                            <segue destination="fwn-cf-8LL" kind="presentation" identifier="EditTeamSegue" id="LtX-VF-rDr"/>
                                         </connections>
                                     </button>
                                 </subviews>

@@ -237,14 +237,14 @@
         }
         else if([request.type intValue]==1){
         
-          UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:@"Do you want to associate this user Spectator or Participant" preferredStyle:UIAlertControllerStyleAlert];
+          UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:@"Do you want to associate this user as Spectator or Participant" preferredStyle:UIAlertControllerStyleAlert];
         
                     [alertController addAction:[UIAlertAction actionWithTitle:@"Spectator" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-                        [request.team fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+                        [request.team fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
                             
                             if(!error){
                                 if(!request.team.spectatorsArray){
-                                    request.team.spectatorsArray = [NSMutableArray new];
+                                    request.team.spectatorsArray = [[NSMutableArray alloc] init];
                                 }
                                 
                                 if(request.isChild.boolValue){
@@ -306,14 +306,27 @@
                     }]];
                     [alertController addAction:[UIAlertAction actionWithTitle:@"Participant" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                         
-                        [request.team fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+                        [request.team fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
                             
                             if(!error){
-                                while( [request.team.spectatorsArray containsObject:request.user.objectId])
+                                
+                                if(request.isChild)
                                 {
-                                    [request.team.spectatorsArray removeObject:request.user.objectId];
+                                
+                                while( [request.team.spectatorsArray containsObject:request.child.objectId])
+                                {
+                                    [request.team.spectatorsArray removeObject:request.child.objectId];
                                 }
                                
+                                }
+                                else
+                                {
+                                    while( [request.team.spectatorsArray containsObject:request.user.objectId])
+                                    {
+                                        [request.team.spectatorsArray removeObject:request.user.objectId];
+                                    }
+   
+                                }
                                 
                                 [request saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                                     if(succeeded){

@@ -33,32 +33,32 @@
     [self.userDisplayNameLabel setText:[self.child displayName]];
 
     
-    if(isSpectator){
-        
-        if([self.team.spectatorsArray containsObject:self.child.objectId]){
-            NSLog(@"spec");
-            self.userDisplayNameLabel.textColor = [UIColor blackColor];
-            
-        }
-        else{
-            
-            self.userDisplayNameLabel.textColor = [UIColor colorWithRed:62/255.0 green:194/255.0 blue:89/255.0 alpha:1.0];
-            
-            NSString *name = [NSString stringWithFormat:@"%@ *",[self.child displayName]];
-            [self.userDisplayNameLabel setText:name];
-            
-            NSLog(@"part");
-            
-            
-        }
-    
-    
-    }
-    else{
-        self.userDisplayNameLabel.textColor = [UIColor blackColor];
-
-         [self.userDisplayNameLabel setText:[self.child displayName]];
-    }
+//    if(isSpectator){
+//        
+//        if([self.team.spectatorsArray containsObject:self.child.objectId]){
+//            NSLog(@"spec");
+//            self.userDisplayNameLabel.textColor = [UIColor blackColor];
+//            
+//        }
+//        else{
+//            
+//            self.userDisplayNameLabel.textColor = [UIColor colorWithRed:46/255.0 green:171/255.0 blue:21/255.0 alpha:1.0];
+//            
+//           // NSString *name = [NSString stringWithFormat:@"%@ *",[self.child displayName]];
+//           // [self.userDisplayNameLabel setText:name];
+//            
+//            NSLog(@"part");
+//            
+//            
+//        }
+//    
+//    
+//    }
+//    else{
+//        self.userDisplayNameLabel.textColor = [UIColor blackColor];
+//
+//         [self.userDisplayNameLabel setText:[self.child displayName]];
+//    }
    
 //
     self.userImageView.image = [UIImage imageNamed:@"unknown_user.png"];

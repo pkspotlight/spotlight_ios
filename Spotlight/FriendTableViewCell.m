@@ -43,38 +43,49 @@
     [self.userImageView setClipsToBounds:YES];
     [self.userDisplayNameLabel setText:[self.user displayName]];
 
-    if(isSpectator){
-        
-        if([self.team.spectatorsArray containsObject:self.user.objectId]){
-            NSLog(@"spec");
-            self.userDisplayNameLabel.textColor = [UIColor blackColor];
-            
-        }
-        else{
-           
-            self.userDisplayNameLabel.textColor = [UIColor colorWithRed:62/255.0 green:194/255.0 blue:89/255.0 alpha:1.0];
-            
-            NSLog(@"part");
-            NSString *name = [NSString stringWithFormat:@"%@ *",[self.user displayName]];
-            [self.userDisplayNameLabel setText:name];
-            
-        }
+//    if(isSpectator){
+//        
+//        if([self.team.spectatorsArray containsObject:self.user.objectId]){
+//            NSLog(@"spec");
+//            self.userDisplayNameLabel.textColor = [UIColor blackColor];
+//            
+//        }
+//        else{
+//           
+//            self.userDisplayNameLabel.textColor = [UIColor colorWithRed:46/255.0 green:171/255.0 blue:21/255.0 alpha:1.0];
+//            
+//            NSLog(@"part");
+//            NSString *name = [NSString stringWithFormat:@"%@ *",[self.user displayName]];
+//            [self.userDisplayNameLabel setText:name];
+//            
+//        }
+//
+//    
+//    }
+//    else{
+//        self.userDisplayNameLabel.textColor = [UIColor blackColor];
+//
+//        if([user.objectId isEqualToString:[User currentUser].objectId ]){
+//             [self.userDisplayNameLabel setText:[NSString stringWithFormat:@"%@ (Me)",[self.user displayName]]];
+//        }else{
+//              [self.userDisplayNameLabel setText:[self.user displayName]];
+//        }
+//      
+//
+//    }
+   
+    
+    self.userDisplayNameLabel.textColor = [UIColor blackColor];
+    
+    if([user.objectId isEqualToString:[User currentUser].objectId ]){
+        [self.userDisplayNameLabel setText:[NSString stringWithFormat:@"%@ (Me)",[self.user displayName]]];
+    }else{
+        [self.userDisplayNameLabel setText:[self.user displayName]];
+    }
+    
 
     
-    }
-    else{
-        self.userDisplayNameLabel.textColor = [UIColor blackColor];
-
-        if([user.objectId isEqualToString:[User currentUser].objectId ]){
-             [self.userDisplayNameLabel setText:[NSString stringWithFormat:@"%@ (Me)",[self.user displayName]]];
-        }else{
-              [self.userDisplayNameLabel setText:[self.user displayName]];
-        }
-      
-
-    }
-   
-   //     _isFollowing = isFollowing;
+        _isFollowing = isFollowing;
     NSString* buttonText = (isFollowing) ? @"Following" : @"Follow";
     [self.followButton setTitle:buttonText
                        forState:UIControlStateNormal];
@@ -191,7 +202,7 @@
     
     
     
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:@"Do you want to associate this user Spectator or Participant" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:@"Do you want to associate this user as Spectator or Participant" preferredStyle:UIAlertControllerStyleAlert];
     
     [alertController addAction:[UIAlertAction actionWithTitle:@"Spectator" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         if(!self.team.spectatorsArray){

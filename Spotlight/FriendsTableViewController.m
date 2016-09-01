@@ -31,6 +31,8 @@ static CGFloat const BasicHeaderHeight = 50;
 @property (strong, nonatomic) NSArray* children;
 @property (strong, nonatomic) NSMutableArray *pendingRequestArray;
 @property (strong, nonatomic) NSMutableArray* teamsMemberArray;
+@property (strong, nonatomic) NSMutableArray* teamsSpectMemberArray;
+
 @property (strong, nonatomic) NSMutableArray* friendsArray;
 
 @end
@@ -41,6 +43,7 @@ static CGFloat const BasicHeaderHeight = 50;
     [super viewDidLoad];
     count = 0;
     _teamsMemberArray = [NSMutableArray new];
+    _teamsSpectMemberArray = [NSMutableArray new];
      _friendsArray = [NSMutableArray new];
     [self.tableView
      registerNib:[UINib nibWithNibName:@"BasicHeaderView" bundle:nil]
@@ -183,26 +186,43 @@ static CGFloat const BasicHeaderHeight = 50;
 
 - (void)loadTeamMembers:(UIRefreshControl*)refresh {
     [_teamsMemberArray removeAllObjects];
-    
+    [_teamsSpectMemberArray removeAllObjects];
     [self.tableView reloadData];
     PFQuery *query = [PFQuery queryWithClassName:@"Child"];
     [query whereKey:@"teams" equalTo:self.team];
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
        
-        if(objects.count > 0)
+       
+        
+        for(Child *child in objects)
         {
-            [_teamsMemberArray addObjectsFromArray:objects];
-            [self.delegate getTeamMembers:_teamsMemberArray];
-
+          if([self.team.spectatorsArray containsObject:child.objectId])
+          {
+              [_teamsSpectMemberArray addObject:child];
+          }
+            else
+            {
+                [_teamsMemberArray addObject:child];
+  
+            }
         }
+        
         
         PFQuery *query1 = [PFQuery queryWithClassName:@"_User"];
         [query1 whereKey:@"teams" equalTo:self.team];
         
         [query1 findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-            if(objects.count > 0)
+            for(User *user in objects)
             {
-                [_teamsMemberArray addObjectsFromArray:objects];
+                if([self.team.spectatorsArray containsObject:user.objectId])
+                {
+                    [_teamsSpectMemberArray addObject:user];
+                }
+                else
+                {
+                    [_teamsMemberArray addObject:user];
+                    
+                }
             }
             
             [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
@@ -262,7 +282,12 @@ static CGFloat const BasicHeaderHeight = 50;
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    if (self.team || self.justFamily) {
+    if (self.team)
+    {
+        return 2;
+    }
+    
+    else if(self.justFamily) {
         return 1;
     } else {
         return 2;
@@ -271,15 +296,39 @@ static CGFloat const BasicHeaderHeight = 50;
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
+  if(self.team)
+  {
+      UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, BasicHeaderHeight)];
+      label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+      
+      label.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.4];
+      
+      label.text = (section == 0) ? @"    Participant" : @"    Spectator";
+      label.textColor = [UIColor blackColor];
+      
+      return label;
   
-    BasicHeaderView *cell = [self.tableView dequeueReusableHeaderFooterViewWithIdentifier:@"BasicHeaderView"];
- 
-    cell.headerTitleLabel.text = (section == 0) ? @"My Family" : @"Friends";
-    return cell;
+  }
+    else
+    {
+        BasicHeaderView *cell = [self.tableView dequeueReusableHeaderFooterViewWithIdentifier:@"BasicHeaderView"];
+        
+        cell.headerTitleLabel.text = (section == 0) ? @"My Family" : @"Friends";
+        return cell;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (self.team || self.justFamily) {
+    if (self.team)
+    {
+        if(section == 0)
+        
+        return  (_teamsMemberArray.count > 0)? BasicHeaderHeight:0;
+        else
+
+            return  (_teamsSpectMemberArray.count > 0)? BasicHeaderHeight:0;
+    }
+    else if(self.justFamily) {
         return 0;
     } else {
         return BasicHeaderHeight;
@@ -288,7 +337,15 @@ static CGFloat const BasicHeaderHeight = 50;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (self.team) {
+        if(section == 0)
+        {
         return self.teamsMemberArray.count;
+        }
+        else
+        {
+            return self.teamsSpectMemberArray.count;
+  
+        }
     } else {
         if (section == 0) {
             return self.children.count;
@@ -305,6 +362,8 @@ static CGFloat const BasicHeaderHeight = 50;
     UITableViewCell* cell;
     
     if (self.team) {
+        if(indexPath.section == 0)
+        {
         if ([self.teamsMemberArray[indexPath.row] isKindOfClass:[Child class]]){
             cell = (ChildTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"ChildTableViewCell"
                                                                         forIndexPath:indexPath];
@@ -319,6 +378,25 @@ static CGFloat const BasicHeaderHeight = 50;
             
              [(FriendTableViewCell*)cell followButton].hidden = YES;
                      // [(FriendTableViewCell*)cell userDisplayNameLabel].textColor = [UIColor purpleColor];
+        }
+        }
+        else
+        {
+            if ([self.teamsSpectMemberArray[indexPath.row] isKindOfClass:[Child class]]){
+                cell = (ChildTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"ChildTableViewCell"
+                                                                            forIndexPath:indexPath];
+                [(ChildTableViewCell*)cell setTeam:self.team];
+                [(ChildTableViewCell*)cell formatForChild:self.teamsSpectMemberArray [indexPath.row] isSpectator:YES isFollowing:YES];
+                
+            } else if ([self.teamsSpectMemberArray[indexPath.row] isKindOfClass:[User class]]){
+                cell = (FriendTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"FriendTableViewCell"
+                                                                             forIndexPath:indexPath];
+                [(FriendTableViewCell*)cell setTeam:self.team];
+                [(FriendTableViewCell*)cell formatForUser:self.teamsSpectMemberArray[indexPath.row] isSpectator:YES  isFollowing:YES];
+                
+                [(FriendTableViewCell*)cell followButton].hidden = YES;
+                // [(FriendTableViewCell*)cell userDisplayNameLabel].textColor = [UIColor purpleColor];
+            }
         }
     } else {
         if (indexPath.section == 0) {
@@ -364,6 +442,8 @@ static CGFloat const BasicHeaderHeight = 50;
    
     if(self.team){
     
+        if(indexPath.section == 0)
+        {
         if ([self.teamsMemberArray[indexPath.row] isKindOfClass:[Child class]]){
               child   = self.teamsMemberArray[indexPath.row];
             UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -399,6 +479,46 @@ static CGFloat const BasicHeaderHeight = 50;
             
 
         }
+    }
+        else
+        {
+            if ([self.teamsSpectMemberArray[indexPath.row] isKindOfClass:[Child class]]){
+                child   = self.teamsSpectMemberArray[indexPath.row];
+                UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                FriendProfileViewController *friendProfileViewController = [storyboard instantiateViewControllerWithIdentifier:@"FriendsProfile"];
+                [friendProfileViewController setChild:child];
+                [self.navigationController pushViewController:friendProfileViewController animated:YES];
+                return;
+                
+            }
+            else{
+                user   = self.teamsSpectMemberArray[indexPath.row];
+                
+                if(([[self.friendsArray valueForKeyPath:@"objectId"] containsObject:user.objectId]))
+                {
+                    
+                    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                    FriendProfileViewController *friendProfileViewController = [storyboard instantiateViewControllerWithIdentifier:@"FriendsProfile"];
+                    [friendProfileViewController setUser:user];
+                    [self.navigationController pushViewController:friendProfileViewController animated:YES];
+                    
+                    
+                    
+                    
+                }
+                else{
+                    [[[UIAlertView alloc] initWithTitle:@""
+                                                message:@"You do not have access to view Profile. Please request to view this friend profile."
+                                               delegate:self
+                                      cancelButtonTitle:@"Cancel"
+                                      otherButtonTitles:NSLocalizedString(@"Send Invite", nil), nil] show];
+                }
+                
+                
+                
+            }
+        }
+        
           }
     else{
        

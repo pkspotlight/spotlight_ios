@@ -18,9 +18,11 @@
 {
     UIRefreshControl* refresh;
     NSMutableArray *pendingRequestArray;
+    NSMutableArray *filteredArrayOfObjects;
+
 }
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
-
+@property (strong, nonatomic) NSMutableArray *teams;
 @property (strong, nonatomic) NSArray* searchResults;
 @property (strong, nonatomic) UITapGestureRecognizer* hideKeyboardTap;
 @end
@@ -30,7 +32,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     pendingRequestArray = [NSMutableArray new];
+    filteredArrayOfObjects = [[NSMutableArray alloc] init];
+    _teams = [[NSMutableArray alloc] init];
     [self fetchAllPendingRequest];
+    [self loadUserTeams:nil];
     [self.tableView registerNib:[UINib nibWithNibName:@"BasicHeaderView" bundle:nil]
 forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     refresh = [[UIRefreshControl alloc] init];
@@ -40,6 +45,95 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                             initWithTarget:self
                             action:@selector(dismissKeyboard)];
 }
+
+
+
+- (void)loadUserTeams:(UIRefreshControl*)sender  {
+    PFQuery *query = [[[User currentUser] teams] query];
+    [query includeKey:@"teamLogoMedia"];
+    [query orderByDescending:@"year"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            NSLog(@"Successfully retrieved my %lu Teams.", (unsigned long)objects.count);
+            [self.teams addObjectsFromArray:[objects copy]];
+            
+            [self sortTeamsArray:self.teams];
+            PFQuery *query = [[User currentUser].children query];
+            [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+                for (Child* child in objects) {
+                    [self loadChildTeams:child sender:sender];
+                }
+                [self.tableView reloadData];
+                [sender endRefreshing];
+            }];
+        } else {
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+            [sender endRefreshing];
+        }
+    }];
+}
+
+- (void)loadChildTeams:(Child*)child sender:(UIRefreshControl*)sender {
+    PFQuery *query = [child.teams query];
+    [query includeKey:@"teamLogoMedia"];
+    [query orderByDescending:@"year"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            NSLog(@"Successfully retrieved child's %lu Teams.", (unsigned long)objects.count);
+            [self.teams addObjectsFromArray:[objects copy]];
+            
+            [self sortTeamsArray:self.teams];
+            [self.tableView reloadData];
+            [sender endRefreshing];
+        } else {
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+            [sender endRefreshing];
+        }
+    }];
+}
+
+- (void)sortTeamsArray:(NSMutableArray*)teams {
+    NSArray *sortedArray = [teams sortedArrayUsingComparator:^NSComparisonResult(Team* a, Team* b) {
+        if (a.year == b.year) {
+            if ([[a.season lowercaseString] isEqualToString:@"fall"]) {
+                return (NSComparisonResult)NSOrderedAscending;
+            } else if ([[a.season lowercaseString] isEqualToString:@"winter"]) {
+                if ([[b.season lowercaseString] isEqualToString:@"fall"]) {
+                    return (NSComparisonResult)NSOrderedAscending;
+                }else{
+                    return (NSComparisonResult)NSOrderedDescending;
+                }
+            }  else if ([[a.season lowercaseString] isEqualToString:@"spring"]) {
+                if ([[b.season lowercaseString] isEqualToString:@"fall"] || [[b.season lowercaseString] isEqualToString:@"winter"]) {
+                    return (NSComparisonResult)NSOrderedDescending;
+                }else{
+                    return (NSComparisonResult)NSOrderedAscending;
+                }
+            } else {
+                return (NSComparisonResult)NSOrderedDescending;
+            }
+        } else if (a.year > b.year) {
+            return (NSComparisonResult)NSOrderedAscending;
+        }
+        return (NSComparisonResult)NSOrderedDescending;
+    }];
+    [filteredArrayOfObjects removeAllObjects];
+    
+    for (Team *team in sortedArray)
+    {
+        if(!([[filteredArrayOfObjects valueForKeyPath:@"objectId"] containsObject:team.objectId]))
+        {
+            [filteredArrayOfObjects addObject:team];
+        }
+    }
+    
+    self.teams = filteredArrayOfObjects;
+    
+    // [NSMutableArray arrayWithArray:sortedArray];
+}
+
+
+
 
 #pragma mark - Table view data source
 
@@ -59,7 +153,24 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     } else {
         cell = (TeamTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"TeamTableViewCell"
                                                                    forIndexPath:indexPath];
-        [(TeamTableViewCell*)cell formatForTeam:self.searchResults[indexPath.row] isFollowing:NO];
+        
+        
+        
+        bool isFollowing = false;
+        Team *team = (Team*)self.searchResults[indexPath.row];
+
+
+        if(([[self.teams valueForKeyPath:@"objectId"] containsObject:team.objectId]))
+        {
+            isFollowing = true;
+            
+            
+        }
+        else{
+            isFollowing = false;
+        }
+
+        [(TeamTableViewCell*)cell formatForTeam:self.searchResults[indexPath.row] isFollowing:isFollowing];
         
         [(TeamTableViewCell*)cell setDelegate:self];
     }

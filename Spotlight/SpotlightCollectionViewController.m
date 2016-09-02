@@ -20,14 +20,20 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AVKit/AVKit.h>
 #import "PECropViewController.h"
+#import "SpotlightTaggedParticipantView.h"
 
 
-@interface SpotlightCollectionViewController ()<PECropViewControllerDelegate>
+@interface SpotlightCollectionViewController ()<PECropViewControllerDelegate,PassTitleAndParticipantProtocol>{
+    id infoMedia;
+    BOOL isCamera;
+}
 
 @property (strong, nonatomic) NSArray* mediaList;
 @property (strong, nonatomic) UIImagePickerController* imagePickerController;
 @property (assign, nonatomic) BOOL isShowingMontage;
 @property (weak, nonatomic) IBOutlet UIButton *viewSpotlightButton;
+@property (strong, nonatomic) NSMutableArray* teamsMemberArray;
+@property (strong, nonatomic) NSMutableArray* teamsSpectMemberArray;
 @property (weak, nonatomic) IBOutlet UIButton *shareSpotlightButton;
 
 @property (strong, nonatomic) MWPhotoBrowser *browser;
@@ -40,12 +46,15 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _teamsMemberArray = [NSMutableArray new];
+    _teamsSpectMemberArray = [NSMutableArray new];
+    
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     refreshControl.tintColor = [UIColor grayColor];
     [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     [self.collectionView addSubview:refreshControl];
     self.collectionView.alwaysBounceVertical = YES;
-  
+    [self getParticipantArrayOfTeam];
     [refreshControl beginRefreshing];
     [self refresh:refreshControl];
     
@@ -53,6 +62,58 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
 }
 
 
+
+
+-(void)getParticipantArrayOfTeam{
+    [_teamsMemberArray removeAllObjects];
+    [_teamsSpectMemberArray removeAllObjects];
+   
+    PFQuery *query = [PFQuery queryWithClassName:@"Child"];
+    [query whereKey:@"teams" equalTo:self.spotlight.team];
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        
+        
+        
+        for(Child *child in objects)
+        {
+            if([self.spotlight.team.spectatorsArray containsObject:child.objectId])
+            {
+                [_teamsSpectMemberArray addObject:child];
+            }
+            else
+            {
+                [_teamsMemberArray addObject:child];
+                
+            }
+        }
+        
+        
+        PFQuery *query1 = [PFQuery queryWithClassName:@"_User"];
+        [query1 whereKey:@"teams" equalTo:self.spotlight.team];
+        
+        [query1 findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+            for(User *user in objects)
+            {
+                if([self.spotlight.team.spectatorsArray containsObject:user.objectId])
+                {
+                    [_teamsSpectMemberArray addObject:user];
+                }
+                else
+                {
+                    [_teamsMemberArray addObject:user];
+                    
+                }
+            }
+            
+            
+            
+        }];
+        
+        
+        
+    }];
+
+}
 
 - (void)refresh:(UIRefreshControl*)refresh {
     [self.spotlight allMedia:^(NSArray *media, NSError *error) {
@@ -235,6 +296,18 @@ if(!media.isVideo)
 }
 
 
+-(void)participant:(NSArray *)participant withTitle:(NSString *)title{
+  
+    if(isCamera){
+        [self saveImageWithMediaInfoVideo:infoMedia title:title];
+    }else{
+        [self saveImageWithMediaInfo:infoMedia title:title];
+    }
+    
+
+}
+
+
 - (IBAction)addMediaButtonPressed:(id)sender {
     
     
@@ -331,31 +404,35 @@ if(!media.isVideo)
 #pragma mark - UIImagePickerControllerDelegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)infoDict {
+    isCamera = YES;
+    infoMedia = infoDict;
     [self dismissViewControllerAnimated:YES completion:^{
-        UIAlertController* titleAlert = [UIAlertController alertControllerWithTitle:@"Would you like to add a title?"
-                                                                                   message:nil
-                                                                            preferredStyle:UIAlertControllerStyleAlert];
-        [titleAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-            
-        }];
         
-        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK"
-                                                                style:UIAlertActionStyleDefault
-                                                              handler:^(UIAlertAction * action) {
-                                                                  [self saveImageWithMediaInfoVideo:infoDict title:titleAlert.textFields[0].text];
-                                                              }];
-        UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"No Title"
-                                                               style:UIAlertActionStyleCancel
-                                                             handler:^(UIAlertAction * action) {
-                                                                 [self saveImageWithMediaInfoVideo:infoDict title:nil];
-                                                             }];
-        [titleAlert addAction:defaultAction];
-        [titleAlert addAction:cancelAction];
-        [self presentViewController:titleAlert
-                           animated:YES
-                         completion:^{
-                             
-                         }];
+          [self addSpotlightParticipantPopUp];
+//        UIAlertController* titleAlert = [UIAlertController alertControllerWithTitle:@"Would you like to add a title?"
+//                                                                                   message:nil
+//                                                                            preferredStyle:UIAlertControllerStyleAlert];
+//        [titleAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+//            
+//        }];
+//        
+//        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK"
+//                                                                style:UIAlertActionStyleDefault
+//                                                              handler:^(UIAlertAction * action) {
+//                                                                  [self saveImageWithMediaInfoVideo:infoDict title:titleAlert.textFields[0].text];
+//                                                              }];
+//        UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"No Title"
+//                                                               style:UIAlertActionStyleCancel
+//                                                             handler:^(UIAlertAction * action) {
+//                                                                 [self saveImageWithMediaInfoVideo:infoDict title:nil];
+//                                                             }];
+//        [titleAlert addAction:defaultAction];
+//        [titleAlert addAction:cancelAction];
+//        [self presentViewController:titleAlert
+//                           animated:YES
+//                         completion:^{
+//                             
+//                         }];
     }];
 }
 
@@ -511,63 +588,66 @@ if(!media.isVideo)
 
 - (void)elcImagePickerController:(ELCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)info{
     [self dismissViewControllerAnimated:YES completion:^{
-        
-      
+        infoMedia = info;
+        isCamera = NO;
         if(info.count>1){
             
-            
-            UIAlertController* titleAlert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Would you like to add a title to these %lu images",(unsigned long)info.count]
-                                                                                message:nil
-                                                                         preferredStyle:UIAlertControllerStyleAlert];
-            [titleAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-                
-            }];
-            
-            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK"
-                                                                    style:UIAlertActionStyleDefault
-                                                                  handler:^(UIAlertAction * action) {
-                                                                      [self saveImageWithMediaInfo:info title:titleAlert.textFields[0].text];
-                                                                  }];
-            UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"No Title"
-                                                                   style:UIAlertActionStyleCancel
-                                                                 handler:^(UIAlertAction * action) {
-                                                                     [self saveImageWithMediaInfo:info title:nil];
-                                                                 }];
-            [titleAlert addAction:defaultAction];
-            [titleAlert addAction:cancelAction];
-            [self presentViewController:titleAlert
-                               animated:YES
-                             completion:^{
-                                 
-                             }];
+            [self addSpotlightParticipantPopUp];
+//            
+//            UIAlertController* titleAlert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Would you like to add a title to these %lu images",(unsigned long)info.count]
+//                                                                                message:nil
+//                                                                         preferredStyle:UIAlertControllerStyleAlert];
+//            [titleAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+//                
+//            }];
+//            
+//            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK"
+//                                                                    style:UIAlertActionStyleDefault
+//                                                                  handler:^(UIAlertAction * action) {
+//                                                                      [self saveImageWithMediaInfo:info title:titleAlert.textFields[0].text];
+//                                                                  }];
+//            UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"No Title"
+//                                                                   style:UIAlertActionStyleCancel
+//                                                                 handler:^(UIAlertAction * action) {
+//                                                                     [self saveImageWithMediaInfo:info title:nil];
+//                                                                 }];
+//            [titleAlert addAction:defaultAction];
+//            [titleAlert addAction:cancelAction];
+//            [self presentViewController:titleAlert
+//                               animated:YES
+//                             completion:^{
+//                                 
+//                             }];
 
         }
         
         else{
-            UIAlertController* titleAlert = [UIAlertController alertControllerWithTitle:@"Would you like to add a title?"
-                                                                                message:nil
-                                                                         preferredStyle:UIAlertControllerStyleAlert];
-            [titleAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-                
-            }];
             
-            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK"
-                                                                    style:UIAlertActionStyleDefault
-                                                                  handler:^(UIAlertAction * action) {
-                                                                      [self saveImageWithMediaInfo:info title:titleAlert.textFields[0].text];
-                                                                  }];
-            UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"No Title"
-                                                                   style:UIAlertActionStyleCancel
-                                                                 handler:^(UIAlertAction * action) {
-                                                                     [self saveImageWithMediaInfo:info title:nil];
-                                                                 }];
-            [titleAlert addAction:defaultAction];
-            [titleAlert addAction:cancelAction];
-            [self presentViewController:titleAlert
-                               animated:YES
-                             completion:^{
-                                 
-                             }];
+             [self addSpotlightParticipantPopUp];
+//            UIAlertController* titleAlert = [UIAlertController alertControllerWithTitle:@"Would you like to add a title?"
+//                                                                                message:nil
+//                                                                         preferredStyle:UIAlertControllerStyleAlert];
+//            [titleAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+//                
+//            }];
+//            
+//            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK"
+//                                                                    style:UIAlertActionStyleDefault
+//                                                                  handler:^(UIAlertAction * action) {
+//                                                                      [self saveImageWithMediaInfo:info title:titleAlert.textFields[0].text];
+//                                                                  }];
+//            UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"No Title"
+//                                                                   style:UIAlertActionStyleCancel
+//                                                                 handler:^(UIAlertAction * action) {
+//                                                                     [self saveImageWithMediaInfo:info title:nil];
+//                                                                 }];
+//            [titleAlert addAction:defaultAction];
+//            [titleAlert addAction:cancelAction];
+//            [self presentViewController:titleAlert
+//                               animated:YES
+//                             completion:^{
+//                                 
+//                             }];
 
         }
         
@@ -651,6 +731,28 @@ if(!media.isVideo)
                                             handler:nil]];
     [self presentViewController:alert animated:YES completion:nil];
 }
+
+-(void)addSpotlightParticipantPopUp{
+    
+  
+        
+        SpotlightTaggedParticipantView *spotlightParticipantView = [[SpotlightTaggedParticipantView alloc]initWithParticipant:_teamsMemberArray withTitle:@"abcd"];
+    spotlightParticipantView.delegate = self;
+        CGRect frameRect =spotlightParticipantView.frame;
+        frameRect.size.width = [UIScreen mainScreen].bounds.size.width;
+        frameRect.size.height = [UIScreen mainScreen].bounds.size.height;
+        spotlightParticipantView.frame = frameRect;
+    
+        
+        [ [[UIApplication sharedApplication].delegate window] addSubview:spotlightParticipantView];
+        spotlightParticipantView.translatesAutoresizingMaskIntoConstraints = true;
+//        [spotlightBoardingView.superview layoutIfNeeded];
+//        [[NSUserDefaults standardUserDefaults] setBool:TRUE forKey:@"SpotlightPopUp"];
+//        [[NSUserDefaults standardUserDefaults] synchronize];
+    
+}
+
+
 
 - (IBAction)shareMontageButtonPressed:(id)sender {
     

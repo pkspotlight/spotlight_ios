@@ -205,6 +205,9 @@ static CGFloat const BasicHeaderHeight = 50;
                 [_teamsMemberArray addObject:child];
   
             }
+            NSArray *newArray=[_teamsMemberArray arrayByAddingObjectsFromArray:_teamsSpectMemberArray];
+
+            [self.delegate getTeamMembers:newArray.mutableCopy];
         }
         
         

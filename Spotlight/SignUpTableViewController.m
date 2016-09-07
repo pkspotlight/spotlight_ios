@@ -24,6 +24,8 @@
 @property (strong, nonatomic) NSMutableDictionary *pendingInputDict;
 @property (strong, nonatomic) NSArray* userPropertyArray;
 @property (strong, nonatomic) NSArray* userPropertyDisplayArray;
+@property (weak, nonatomic) IBOutlet UILabel *lblSignUp;
+@property (weak, nonatomic) IBOutlet UIButton *btnCreateAccount;
 
 @end
 
@@ -34,13 +36,28 @@
     if (self.isLoginScreen) {
         self.userPropertyArray = @[ @"username", @"password"];
         self.userPropertyDisplayArray = @[ @"Username", @"Password"];
+        self.lblSignUp.text = @"Login";
+        [self.btnCreateAccount setTitle:@"Login" forState:UIControlStateNormal];
+        [self.btnCreateAccount addTarget:self action:@selector(LogInButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        
     } else {
         self.userPropertyArray = @[ @"email", @"password", @"username"];
-        self.userPropertyDisplayArray = @[ @"Email", @"Password", @"Username"];
+        self.userPropertyDisplayArray = @[ @"Email Address", @"Password", @"Username"];
+        self.lblSignUp.text = @"Create An Account";
+        [self.btnCreateAccount setTitle:@"Create An Account" forState:UIControlStateNormal];
+        [self.btnCreateAccount addTarget:self action:@selector(createAccountButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+
+
     }
     self.pendingInputDict = [[NSMutableDictionary alloc] init];
+    UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    backgroundImageView.image = [UIImage imageNamed:@"BackgroundBasketballImage"];
+  //  self.parentViewController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage /imageNamed:@"BackgroundBasketballImage"]];
     
-    [[self navigationController] setNavigationBarHidden:NO animated:YES];
+    [self.view addSubview:backgroundImageView];
+    [self.view sendSubviewToBack:backgroundImageView];
+    
+    [[self navigationController] setNavigationBarHidden:YES animated:YES];
 }
 
 
@@ -140,6 +157,17 @@
         [self presentViewController:alert animated:YES completion:nil];
     }
 }
+
+
+
+
+- (IBAction)crossButton:(id)sender{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+
+
 - (IBAction)LogInButtonPressed:(id)sender {
     
      [self.view endEditing:YES];

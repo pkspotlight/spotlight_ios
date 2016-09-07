@@ -20,6 +20,12 @@
 
 @implementation SpotlightMediaCollectionViewCell
 
+- (void)awakeFromNib {
+    // Initialization code
+    [_mediaImageView.layer setBorderColor: [[UIColor yellowColor] CGColor]];
+    [_mediaImageView.layer setBorderWidth: 1.0];
+}
+
 - (void)formatCellForSpotlightMedia:(SpotlightMedia*)media {
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];

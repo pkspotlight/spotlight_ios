@@ -204,6 +204,17 @@
 
 
 
+- (IBAction)createSpotlight:(UIButton*)sender{
+    
+    doRefresh = true;
+
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    CreateSpotlightTableViewController *createSpotlight = [storyboard instantiateViewControllerWithIdentifier:@"CreateSpotlightTableViewController"];
+    createSpotlight.isFromTeamdetail = YES;
+    createSpotlight.team = _team;
+    [self.navigationController pushViewController:createSpotlight animated:YES];
+}
+
 
 - (void)formatPage {
     [self.teamNameLabel setText:self.team.teamName];

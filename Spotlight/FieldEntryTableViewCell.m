@@ -26,8 +26,12 @@
                      displayText:(NSString*)displayText
                        withValue:(NSString*)fieldValue {
     _attributeString = attributeString;
-    [self.fieldTitleLabel setText:displayText];
+    
+ 
     [self.valueTextField setText:fieldValue];
+     _valueTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:displayText attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+    _valueTextField.textAlignment = NSTextAlignmentCenter;
+  
 }
 
 - (void)setKeyboardType:(UIKeyboardType)keyboardType {

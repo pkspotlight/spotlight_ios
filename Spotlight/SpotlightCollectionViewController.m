@@ -56,6 +56,7 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
     self.collectionView.alwaysBounceVertical = YES;
     [self getParticipantArrayOfTeam];
     [refreshControl beginRefreshing];
+    [self.navigationController setNavigationBarHidden:YES];
     [self refresh:refreshControl];
     
     // Do any additional setup after loading the view.
@@ -181,7 +182,7 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    CGFloat width = self.collectionView.bounds.size.width/2;
+    CGFloat width = self.collectionView.bounds.size.width/3;
     return CGSizeMake(width, width);
 }
 
@@ -305,6 +306,10 @@ if(!media.isVideo)
     }
     
 
+}
+
+- (IBAction)backButtonPressed:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

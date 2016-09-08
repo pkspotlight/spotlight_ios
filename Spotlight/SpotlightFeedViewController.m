@@ -23,7 +23,10 @@
 {
     UIRefreshControl* refresh;
     Spotlight *spotLightCellSelected;
+    
 }
+
+
 @end
 
 @implementation SpotlightFeedViewController
@@ -50,6 +53,9 @@
     imgView.contentMode = UIViewContentModeScaleAspectFill;
     
     [headerView addSubview:imgView];
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 140;
+
   
     self.navigationItem.titleView = headerView;
 }

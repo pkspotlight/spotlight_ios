@@ -49,7 +49,7 @@
     headerView.frame = CGRectMake(0, 0, self.view.frame.size.width, 70);
     
     UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
-    imgView.frame = CGRectMake((self.view.frame.size.width-120)/2, 22, 120, 25);
+    imgView.frame = CGRectMake((self.view.frame.size.width-180)/2, 22, 180, 25);
     imgView.contentMode = UIViewContentModeScaleAspectFill;
     
     [headerView addSubview:imgView];
@@ -130,7 +130,7 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-      [self.navigationController setNavigationBarHidden:NO];
+     [self.navigationController setNavigationBarHidden:NO];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [[NSNotificationCenter defaultCenter] postNotificationName:@"PendingRequest" object:nil];
     });

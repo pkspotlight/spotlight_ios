@@ -10,7 +10,7 @@
 
 @class Team;
 
-@interface CreateSpotlightTableViewController : UIViewController
+@interface CreateSpotlightTableViewController : UIViewController<UITextFieldDelegate,UITextViewDelegate>
 
 @property(strong, nonatomic) Team* team;
 @property(assign, nonatomic) BOOL isFromTeamdetail;

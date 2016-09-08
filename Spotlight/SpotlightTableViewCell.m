@@ -74,7 +74,7 @@
    // NSTimeInterval spotlightTimeInterval = [[NSDate date] timeIntervalSinceDate:referencedate];
     long timeStamp = (long)[[NSDate date] timeIntervalSince1970];
     if([_spotlight.spotlightDescription length]<=0){
-        _lblHeightConstraint.constant = 0;
+        _lblHeightConstraint.constant = 10;
     }
     else{
 //        [NSLayoutConstraint deactivateConstraints:@[_lblHeightConstraint]];

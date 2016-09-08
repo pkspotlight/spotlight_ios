@@ -20,6 +20,8 @@
 @property (strong, nonatomic) Spotlight *spotlight;
 @property (weak, nonatomic) IBOutlet UIImageView *teamImageView;
 @property (weak, nonatomic) IBOutlet UILabel *teamNameLabel;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *bottomContraint;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollviewSpotlight;
 
 @property (weak, nonatomic) IBOutlet UIImageView *teamUserImageView;
 @property (weak, nonatomic) IBOutlet UITextField *spotlightTitle;
@@ -54,6 +56,27 @@
      }];
 
 }
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    
+    //[self.blackView setHidden:YES];
+    
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showKeyBoard:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideKeyBoard:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -70,6 +93,42 @@
             
         }];
 }
+
+#pragma mark: Notification For Showing keyboard
+
+-(void)showKeyBoard:(NSNotification *)notification{
+    
+   
+//    
+    
+        CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+        
+        
+        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+        
+        
+        [prefs setInteger:keyboardSize.height forKey:@"size"];
+        
+        
+        
+        self.bottomContraint.constant = keyboardSize.height ;
+   
+
+        
+    [_scrollviewSpotlight setContentOffset:CGPointMake(0,keyboardSize.height) animated:YES];
+ [self.view layoutIfNeeded];
+    
+}
+#pragma mark: Notification For Hiding keyboard
+-(void)hideKeyBoard:(NSNotification *)notification{
+    
+     
+    
+        self.bottomContraint.constant = 0;
+        
+  }
+
+
 
 - (IBAction)saveButtonPressed:(id)sender {
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -118,6 +177,27 @@
     [textField resignFirstResponder];
     return YES;
 }
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range
+ replacementText:(NSString *)text
+{
+    
+    if ([text isEqualToString:@"\n"]) {
+        
+        [textView resignFirstResponder];
+        // Return FALSE so that the final '\n' character doesn't get added
+        return NO;
+    }
+    
+    if(range.length + range.location > textView.text.length)
+    {
+        return NO;
+    }
+    
+    NSUInteger newLength = [textView.text length] + [text length] - range.length;
+    return newLength <= 120;
+}
+
 
 #pragma mark - Table view data source
 

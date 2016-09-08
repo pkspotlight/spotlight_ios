@@ -1658,7 +1658,26 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
 
 - (void)deleteButtonPressed:(id)sender
 {
-    [self.delegate photoBrowser:self deletePhotoAtIndex:self.currentIndex];
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Are sure you want to delete?"
+                                                                   message:@""
+                                                            preferredStyle:UIAlertControllerStyleActionSheet];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Yes"
+                                              style:UIAlertActionStyleDefault
+                                            handler:^(UIAlertAction * _Nonnull action) {
+                                                 [self.delegate photoBrowser:self deletePhotoAtIndex:self.currentIndex];
+                                             
+                                            }]];
+
+    
+                      [alert addAction:[UIAlertAction actionWithTitle:@"No"
+                                                                style:UIAlertActionStyleCancel
+                                                              handler:^(UIAlertAction * _Nonnull action) {
+                                                              }]];
+                      [self presentViewController:alert animated:YES completion:nil];
+
+    
+    
+   
 }
 
 

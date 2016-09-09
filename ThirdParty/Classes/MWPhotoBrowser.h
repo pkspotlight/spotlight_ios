@@ -27,6 +27,9 @@
 
 @optional
 
+
+-(void)photoBrowser:(MWPhotoBrowser *)photoBrowser shareMediaForVideo:(NSUInteger)index;
+
 - (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser thumbPhotoAtIndex:(NSUInteger)index;
 - (MWCaptionView *)photoBrowser:(MWPhotoBrowser *)photoBrowser captionViewForPhotoAtIndex:(NSUInteger)index;
 - (NSString *)photoBrowser:(MWPhotoBrowser *)photoBrowser titleForPhotoAtIndex:(NSUInteger)index;

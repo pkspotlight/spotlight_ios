@@ -37,11 +37,15 @@
     [self.navigationController setNavigationBarHidden:YES];
     [self.teamNameLabel setText:self.team.teamName];
     self.spotlight = [Spotlight object];
-      _spotlightTitle.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Title" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+    
     [self.teamUserImageView.layer setBorderColor:[[UIColor lightGrayColor] colorWithAlphaComponent:0.4].CGColor];
     [self.teamUserImageView.layer setCornerRadius:5];
     [self.teamUserImageView.layer setBorderWidth:2];
 
+    
+    _spotlightTitle.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"title" attributes:@{NSForegroundColorAttributeName: [UIColor colorWithRed:146.0/255.0f green:146.0/255.0f blue:146.0/255.0f alpha:1.0]}];
+
+    
         [self.teamImageView cancelImageRequestOperation];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.team.teamLogoMedia.thumbnailImageFile.url]];
     [self.teamImageView

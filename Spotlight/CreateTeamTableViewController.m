@@ -255,7 +255,7 @@
         FieldEntryTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"FieldEntryTableViewCell" forIndexPath:indexPath];
         [cell formatForAttributeString:self.teamPropertyArray[indexPath.row]
                            displayText:self.teamPropertyDisplay[indexPath.row]
-                             withValue:self.pendingFieldDictionary[self.teamPropertyArray[indexPath.row]]];
+                             withValue:self.pendingFieldDictionary[self.teamPropertyArray[indexPath.row]] isCenter:NO];
         [cell setDelegate:self];
         return cell;
     } else {

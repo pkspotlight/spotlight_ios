@@ -60,6 +60,14 @@
     _spotlightButton.selected = YES;
     
     [_friendImageViewFront setClipsToBounds:YES];
+    
+    UIBarButtonItem *barButton = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"BackImage"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonClicked:)];
+                                  
+                                  
+    self.navigationItem.leftBarButtonItem = barButton;
+    
+    self.navigationItem.title = @"Friend Details";
+    
      self.familyButton.hidden = YES;
     
     if (self.user) {
@@ -72,7 +80,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
    
-    [self.navigationController setNavigationBarHidden:YES];
+    //[self.navigationController setNavigationBarHidden:YES];
 
 }
 
@@ -242,6 +250,7 @@
     UIImage *image = [infoDict valueForKey:UIImagePickerControllerOriginalImage];
     self.profilePic = [[ProfilePictureMedia alloc] initWithImage:image];
     [self.friendImageView setImage:image];
+     [self.friendImageViewFront setImage:image];
     [self.profilePic saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                 if(succeeded){
             

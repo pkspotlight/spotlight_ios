@@ -12,7 +12,7 @@
 #import "MWPhotoBrowserPrivate.h"
 #import "SDImageCache.h"
 #import "UIImage+MWPhotoBrowser.h"
-
+#import "MontageCreator.h"
 #define PADDING                  10
 
 static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
@@ -1124,8 +1124,8 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
     // Disable action button if there is no image or it's a video
     MWPhoto *photo = [self photoAtIndex:_currentPageIndex];
     if ([photo underlyingImage] == nil || ([photo respondsToSelector:@selector(isVideo)] && photo.isVideo)) {
-        _actionButton.enabled = NO;
-        _actionButton.tintColor = [UIColor clearColor]; // Tint to hide button
+        _actionButton.enabled = YES;
+        _actionButton.tintColor = nil; // Tint to hide button
         _cropButton.enabled = NO;
         _cropButton.tintColor = [UIColor clearColor]; // Tint to hide button
     } else {
@@ -1600,7 +1600,25 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
 - (void)actionButtonPressed:(id)sender {
 
     // Only react when image has loaded
+    
+    
+    
+    
+    
     id <MWPhoto> photo = [self photoAtIndex:_currentPageIndex];
+    
+    if ([photo underlyingImage] == nil || ([photo respondsToSelector:@selector(isVideo)] && photo.isVideo)){
+        
+        if([_delegate respondsToSelector:@selector(photoBrowser:shareMediaForVideo:)]){
+            [ self.delegate photoBrowser:self shareMediaForVideo:_currentPageIndex];
+        }
+        
+        
+     
+        
+        return;
+    }
+    
     if ([self numberOfPhotos] > 0 && [photo underlyingImage]) {
         
         // If they have defined a delegate method then just message them
@@ -1662,7 +1680,7 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
                                                                    message:@""
                                                             preferredStyle:UIAlertControllerStyleActionSheet];
     [alert addAction:[UIAlertAction actionWithTitle:@"Yes"
-                                              style:UIAlertActionStyleDefault
+                                              style:UIAlertActionStyleDestructive
                                             handler:^(UIAlertAction * _Nonnull action) {
                                                  [self.delegate photoBrowser:self deletePhotoAtIndex:self.currentIndex];
                                              

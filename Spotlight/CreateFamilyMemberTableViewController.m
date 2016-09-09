@@ -57,7 +57,7 @@
         NSString* property = self.userPropertyArray[indexPath.row];
         [(FieldEntryTableViewCell*)cell formatForAttributeString:property
                                                      displayText:self.userPropertyArrayDisplayText[indexPath.row]
-                                                       withValue:self.pendingFieldDictionary[property]];
+                                                       withValue:self.pendingFieldDictionary[property] isCenter:NO];
         [(FieldEntryTableViewCell*)cell setDelegate:self];
     return cell;
 }

@@ -80,6 +80,10 @@
              NSLog(@"fuck thumbnail failure");
          }];
     }];
+    
+    
+    [self layoutIfNeeded];
+    [self updateConstraints];
 }
 
 - (IBAction)viewMontageButtonPressed:(id)sender {

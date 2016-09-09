@@ -83,7 +83,7 @@
     NSString* inputtedValue = (self.pendingInputDict[attribute]) ? self.pendingInputDict[attribute] : @"";
     [cell formatForAttributeString:self.userPropertyArray[indexPath.row]
                        displayText:self.userPropertyDisplayArray[indexPath.row]
-                         withValue:inputtedValue];
+                         withValue:inputtedValue isCenter:YES];
     [cell setDelegate:self];
     if ([attribute isEqualToString:@"email"]) {
         [cell setKeyboardType:UIKeyboardTypeEmailAddress];
@@ -109,7 +109,7 @@
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SpotlightTeamPopUp"];
         [[NSUserDefaults standardUserDefaults] synchronize];
 
-        
+        mainTabBarController.selectedIndex = 3;
     }
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{

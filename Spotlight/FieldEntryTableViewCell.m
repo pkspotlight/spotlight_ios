@@ -11,7 +11,7 @@
 
 @interface FieldEntryTableViewCell () <UITextFieldDelegate, UIToolbarDelegate>
 
-@property (weak, nonatomic) IBOutlet UITextField *valueTextField;
+//@property (weak, nonatomic) IBOutlet UITextField *valueTextField;
 @property (weak, nonatomic) IBOutlet UILabel *fieldTitleLabel;
 
 @end
@@ -24,13 +24,18 @@
 
 - (void)formatForAttributeString:(NSString*)attributeString
                      displayText:(NSString*)displayText
-                       withValue:(NSString*)fieldValue {
+                       withValue:(NSString*)fieldValue isCenter:(BOOL)isCenter{
     _attributeString = attributeString;
     
  
     [self.valueTextField setText:fieldValue];
-     _valueTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:displayText attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
-    _valueTextField.textAlignment = NSTextAlignmentCenter;
+    [self.fieldTitleLabel setText:displayText];
+     _valueTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:displayText attributes:@{NSForegroundColorAttributeName: [UIColor colorWithRed:146.0/255.0f green:146.0/255.0f blue:146.0/255.0f alpha:1.0]}];
+    if(isCenter){
+         _valueTextField.textAlignment = NSTextAlignmentCenter;
+         _valueTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:displayText attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+    }
+   
   
 }
 

@@ -239,6 +239,27 @@ if(!media.isVideo)
     
 }
 
+-(void)photoBrowser:(MWPhotoBrowser *)photoBrowser shareMediaForVideo:(NSUInteger)index{
+    SpotlightMedia *media = self.mediaList[index];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication].delegate window]animated:YES];
+    [hud setLabelText:@"Please Wait..."];
+    [[MontageCreator sharedCreator] createMontageWithMedia:@[media] songTitle:nil
+ assetURL:nil isShare:YES completion:^(AVPlayerItem *item, NSURL *fileURL) {
+        
+        UIActivityViewController* AVC =  [[UIActivityViewController alloc] initWithActivityItems:@[fileURL, @""] applicationActivities:nil];
+        [self presentViewController:AVC
+                           animated:YES
+                         completion:^{
+                             [hud hide:YES];
+                         }];
+        
+        
+    }];
+
+
+}
+
+
 - (void)cropViewController:(PECropViewController *)controller didFinishCroppingImage:(UIImage *)croppedImage
 {
   
@@ -808,7 +829,7 @@ if(!media.isVideo)
                       
                                             handler:^(UIAlertAction * _Nonnull action) {
                                                 
-                                                [self createMontageWithSongTitle:nil share:NO AssetURL:nil];
+                                                [self createMontageWithSongTitle:nil share:YES AssetURL:nil];
                                                 
                                             }]];
     

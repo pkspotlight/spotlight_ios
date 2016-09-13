@@ -10,6 +10,7 @@
 #import <AFNetworking/UIButton+AFNetworking.h>
 #import <MBProgressHUD.h>
 #import <MobileCoreServices/UTCoreTypes.h>
+#import <AFNetworking/UIImageView+AFNetworking.h>
 
 #import "User.h"
 #import "Child.h"
@@ -20,7 +21,8 @@
 @property (strong, nonatomic) NSMutableDictionary *pendingFieldDictionary;
 @property (strong, nonatomic) NSArray* userPropertyArray;
 @property (strong, nonatomic) NSArray* userPropertyArrayDisplayText;
-
+@property (weak, nonatomic) IBOutlet UIImageView *profilePictureImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *profilePictureImageViewFront;
 @property (strong, nonatomic) UIImagePickerController* imagePickerController;
 @property (weak, nonatomic) IBOutlet UIButton *editPhotoButton;
 @property (strong, nonatomic) ProfilePictureMedia* profilePic;
@@ -38,10 +40,24 @@
     
     self.pendingFieldDictionary = [NSMutableDictionary dictionary];
     
-    [self.editPhotoButton.layer setCornerRadius:self.editPhotoButton.bounds.size.width/2];
-    [self.editPhotoButton.layer setBorderWidth:3];
-    [self.editPhotoButton.layer setBorderColor:[UIColor whiteColor].CGColor];
-    [self.editPhotoButton setClipsToBounds:YES];
+//    [self.editPhotoButton.layer setCornerRadius:self.editPhotoButton.bounds.size.width/2];
+//    [self.editPhotoButton.layer setBorderWidth:3];
+//    [self.editPhotoButton.layer setBorderColor:[UIColor whiteColor].CGColor];
+//    [self.editPhotoButton setClipsToBounds:YES];
+    
+    [self.profilePictureImageViewFront.layer setBorderColor:[[UIColor lightGrayColor] colorWithAlphaComponent:0.4].CGColor];
+    [self.profilePictureImageViewFront.layer setCornerRadius:5];
+    [self.profilePictureImageViewFront.layer setBorderWidth:3];
+    
+    [[UIBarButtonItem appearance]setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                         [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0], NSForegroundColorAttributeName,
+                                                         [UIFont fontWithName:@"Helvetica" size:14.0], NSFontAttributeName, nil]
+                                               forState:UIControlStateNormal];
+    
+    [_profilePictureImageViewFront setClipsToBounds:YES];
+    
+    
+    
 }
 
 #pragma mark - Table view data source
@@ -175,6 +191,9 @@
     }];
     PFFile* thumbFile = self.profilePic.thumbnailImageFile;
     [thumbFile getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
+        self.profilePictureImageView.image = [UIImage imageWithData:data];
+        self.profilePictureImageViewFront.image = [UIImage imageWithData:data];
+
         [self.editPhotoButton setImage:[UIImage imageWithData:data] forState:UIControlStateNormal];
     }];
     [self.imagePickerController dismissViewControllerAnimated:YES completion:nil];

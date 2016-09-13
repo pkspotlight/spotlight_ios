@@ -49,7 +49,7 @@
     headerView.frame = CGRectMake(0, 0, self.view.frame.size.width, 70);
     
     UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
-    imgView.frame = CGRectMake((self.view.frame.size.width-180)/2, 22, 180, 25);
+    imgView.frame = CGRectMake((self.view.frame.size.width-140)/2, 22, 140, 25);
     imgView.contentMode = UIViewContentModeScaleAspectFill;
     
     [headerView addSubview:imgView];

@@ -30,7 +30,10 @@
  
     [self.valueTextField setText:fieldValue];
     [self.fieldTitleLabel setText:displayText];
-     _valueTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:displayText attributes:@{NSForegroundColorAttributeName: [UIColor colorWithRed:146.0/255.0f green:146.0/255.0f blue:146.0/255.0f alpha:1.0]}];
+//     _valueTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:displayText attributes:@{NSForegroundColorAttributeName: [UIColor colorWithRed:146.0/255.0f green:146.0/255.0f blue:146.0/255.0f alpha:1.0]}];
+    
+       _valueTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:displayText attributes:@{NSForegroundColorAttributeName: [UIColor blackColor]}];
+    
     if(isCenter){
          _valueTextField.textAlignment = NSTextAlignmentCenter;
          _valueTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:displayText attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];

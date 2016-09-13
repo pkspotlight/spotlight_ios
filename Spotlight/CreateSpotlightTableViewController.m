@@ -34,7 +34,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.navigationController setNavigationBarHidden:YES];
+    //[self.navigationController setNavigationBarHidden:YES];
     [self.teamNameLabel setText:self.team.teamName];
     self.spotlight = [Spotlight object];
     
@@ -44,6 +44,12 @@
 
     
     _spotlightTitle.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"title" attributes:@{NSForegroundColorAttributeName: [UIColor colorWithRed:146.0/255.0f green:146.0/255.0f blue:146.0/255.0f alpha:1.0]}];
+    UIBarButtonItem *barButton = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"BackImage"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonClicked:)];
+    
+    
+    self.navigationItem.leftBarButtonItem = barButton;
+    
+    self.navigationItem.title = @"Create Spotlight";
 
     
         [self.teamImageView cancelImageRequestOperation];
@@ -96,6 +102,11 @@
         [self.navigationController dismissViewControllerAnimated:YES completion:^{
             
         }];
+}
+
+- (IBAction)backButtonClicked:(UIButton*)sender{
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark: Notification For Showing keyboard

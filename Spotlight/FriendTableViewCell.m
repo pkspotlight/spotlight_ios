@@ -40,7 +40,19 @@
     _user = user;
 
     [self.userImageView.layer setCornerRadius:self.userImageView.bounds.size.width/2];
-    [self.userImageView setClipsToBounds:YES];
+       [self.userImageView setClipsToBounds:YES];
+    self.userImageView.layer.masksToBounds = YES;
+
+    if(isFollowing){
+           [self.userImageView.layer setBorderColor:[UIColor colorWithRed:73.0/255.0f green:160.0/255.0f blue:255.0/255.0f alpha:1.0].CGColor];
+        
+         [self.followButton setImage:[UIImage imageNamed:@"Following"] forState:UIControlStateNormal];
+    }else{
+            [self.userImageView.layer setBorderColor:[[UIColor lightGrayColor] colorWithAlphaComponent:0.4].CGColor];
+         [self.followButton setImage:[UIImage imageNamed:@"Follow"] forState:UIControlStateNormal];
+    }
+ 
+    [self.userImageView.layer setBorderWidth:2.0];
     [self.userDisplayNameLabel setText:[self.user displayName]];
 
 //    if(isSpectator){
@@ -86,9 +98,11 @@
 
     
         _isFollowing = isFollowing;
-    NSString* buttonText = (isFollowing) ? @"Following" : @"Follow";
-    [self.followButton setTitle:buttonText
-                       forState:UIControlStateNormal];
+//    NSString* buttonText = (isFollowing) ? @"Following" : @"Follow";
+//    [self.followButton setTitle:buttonText
+//                       forState:UIControlStateNormal];
+    
+    
     
     [self.userImageView cancelImageRequestOperation];
    // [user.profilePic fetchIfNeeded];
@@ -125,6 +139,7 @@
 - (IBAction)followButtonPressed:(id)sender {
 //    [self.followingActivityIndicator startAnimating];
         if(_isFollowing){
+            [self.followButton setImage:[UIImage imageNamed:@"Following"] forState:UIControlStateNormal];
         UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Are You Sure ?"
                                                           message:nil
                                                          delegate:self
@@ -134,7 +149,8 @@
            
         }
         else{
-    
+            [self.followButton setImage:[UIImage imageNamed:@"Follow"] forState:UIControlStateNormal];
+
     NSString *timestamp =  [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970] * 1000];
     
     TeamRequest *teamRequest = [[TeamRequest alloc]init];

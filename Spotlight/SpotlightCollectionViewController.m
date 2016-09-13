@@ -928,7 +928,7 @@ if(!media.isVideo)
     
     NSURL *assetURL = [item valueForProperty:MPMediaItemPropertyAssetURL];
     
-    [self createMontageWithSongTitle:nil share:NO AssetURL:assetURL];
+    [self createMontageWithSongTitle:nil share:YES AssetURL:assetURL];
     
     BOOL isCloud = FALSE;
     

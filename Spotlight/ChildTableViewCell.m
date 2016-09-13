@@ -31,6 +31,11 @@
     [self.userImageView.layer setCornerRadius:self.userImageView.bounds.size.width/2];
     [self.userImageView setClipsToBounds:YES];
     [self.userDisplayNameLabel setText:[self.child displayName]];
+   [self.userImageView.layer setBorderColor:[[UIColor lightGrayColor] colorWithAlphaComponent:0.4].CGColor];
+       
+   
+
+    [self.userImageView.layer setBorderWidth:2.0];
 
     
 //    if(isSpectator){

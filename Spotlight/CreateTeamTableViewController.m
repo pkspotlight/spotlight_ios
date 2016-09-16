@@ -48,6 +48,11 @@
     _selfChild.hometown = @"";
     _selfChild.profilePic = [User currentUser].profilePic;
     
+    if(self.isEdit){
+        self.navigationItem.title = @"Edit Team";
+
+    }
+    
     if (!self.team) {
         self.team = [Team new];
         self.pendingFieldDictionary = [self newPendingFieldDictionary];
@@ -278,6 +283,11 @@
 }
 
 - (IBAction)cancelButtonPressed:(id)sender {
+    
+    if(self.isEdit){
+        [self.navigationController popViewControllerAnimated:YES];
+        return;
+    }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

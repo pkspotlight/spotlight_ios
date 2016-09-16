@@ -49,10 +49,6 @@
     [self.profilePictureImageViewFront.layer setCornerRadius:5];
     [self.profilePictureImageViewFront.layer setBorderWidth:3];
     
-    [[UIBarButtonItem appearance]setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                         [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0], NSForegroundColorAttributeName,
-                                                         [UIFont fontWithName:@"Helvetica" size:14.0], NSFontAttributeName, nil]
-                                               forState:UIControlStateNormal];
     
     [_profilePictureImageViewFront setClipsToBounds:YES];
     
@@ -160,8 +156,10 @@
         imagePickerController.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeImage, nil];
         imagePickerController.videoMaximumDuration = 15;
         [imagePickerController setAllowsEditing:YES];
-        
+      
+
         self.imagePickerController = imagePickerController;
+//        self.imagePickerController.navigationBar.tintColor = [UIColor blackColor];
         [self.navigationController presentViewController:self.imagePickerController animated:YES completion:nil];
     }
     

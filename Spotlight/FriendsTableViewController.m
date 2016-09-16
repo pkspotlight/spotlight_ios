@@ -308,9 +308,9 @@ static CGFloat const BasicHeaderHeight = 50;
       UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, BasicHeaderHeight)];
       label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
       
-      label.backgroundColor = [UIColor colorWithRed:73.0/255.0f green:160.0/255.0f blue:255.0/255.0f alpha:1.0];
+      label.backgroundColor = [UIColor colorWithRed:40.0/255.0f green:47.0/255.0f blue:61.0/255.0f alpha:1.0];
       label.text = (section == 0) ? @"    Participant" : @"    Spectator";
-      label.textColor = [UIColor blackColor];
+      label.textColor = [UIColor whiteColor];
       
       return label;
   

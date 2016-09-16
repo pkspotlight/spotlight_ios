@@ -28,11 +28,18 @@
    }
 
 @property (weak, nonatomic) IBOutlet UIImageView *teamLogoImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *teamLogoImageViewFront;
+
 @property (weak, nonatomic) IBOutlet UILabel *teamNameLabel;
 @property (weak, nonatomic) IBOutlet UIView *teamMemberViewContainer;
 @property (weak, nonatomic) IBOutlet UIView *spotlightContainer;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
 @property (weak, nonatomic) IBOutlet UIButton *inviteButton;
+@property (weak, nonatomic) IBOutlet UIButton *spotlightButton;
+
+@property (weak, nonatomic) IBOutlet UIButton *teamMemberButton;
+@property (weak, nonatomic) IBOutlet UIButton *addButton;
+
 
 
 @end
@@ -48,16 +55,27 @@
     
     //[self checkWhetherTeamBelongsToAdministrator];
     [self checkUserFollowCurrentTeam];
-    [self.teamLogoImageView.layer setCornerRadius:self.teamLogoImageView.bounds.size.width/2];
-    [self.teamLogoImageView.layer setBorderColor:[UIColor whiteColor].CGColor];
-    [self.teamLogoImageView.layer setBorderWidth:3];
-    [self.teamLogoImageView setClipsToBounds:YES];
+//    [self.teamLogoImageView.layer setCornerRadius:self.teamLogoImageView.bounds.size.width/2];
+//    [self.teamLogoImageView.layer setBorderColor:[UIColor whiteColor].CGColor];
+//    [self.teamLogoImageView.layer setBorderWidth:3];
+//    [self.teamLogoImageView setClipsToBounds:YES];
     [self checkUserFollowCurrentTeam];
-    [self.inviteButton.layer setCornerRadius:5];
+//    [self.inviteButton.layer setCornerRadius:5];
+//
+//    [self.inviteButton.layer setBorderColor:[UIColor whiteColor].CGColor];
+//    [self.inviteButton.layer setBorderWidth:1];
+    [self.teamLogoImageViewFront.layer setBorderColor:[[UIColor lightGrayColor] colorWithAlphaComponent:0.4].CGColor];
+    [self.teamLogoImageViewFront.layer setCornerRadius:5];
+    [self.teamLogoImageViewFront.layer setBorderWidth:3];
+    _spotlightButton.selected = YES;
+    
+    [_teamLogoImageViewFront setClipsToBounds:YES];
+    
+    UIBarButtonItem *barButton = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"BackImage"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonClicked:)];
+    
+    
+    self.navigationItem.leftBarButtonItem = barButton;
 
-    [self.inviteButton.layer setBorderColor:[UIColor whiteColor].CGColor];
-    [self.inviteButton.layer setBorderWidth:1];
-   
 
     [self formatPage];
 
@@ -156,34 +174,72 @@
         }
     }
 }
+
+- (void)backButtonClicked:(UIBarButtonItem*)sender{
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [self.teamMembersArray removeAllObjects];
 }
-- (IBAction)teamSegmentControllerValueChanged:(UISegmentedControl*)sender {
-    if( sender.selectedSegmentIndex == 0) {
-        [UIView animateWithDuration:.5
-                         animations:^{
-                             [self.spotlightContainer setAlpha:1];
-                             [self.teamMemberViewContainer setAlpha:0];
-                         }];
-    } else {
-        [UIView animateWithDuration:.5
-                         animations:^{
-                             [self.teamMemberViewContainer setAlpha:1];
-                             [self.spotlightContainer setAlpha:0];
-                         }];
-    }
+//- (IBAction)teamSegmentControllerValueChanged:(UISegmentedControl*)sender {
+//    if( sender.selectedSegmentIndex == 0) {
+//        [UIView animateWithDuration:.5
+//                         animations:^{
+//                             [self.spotlightContainer setAlpha:1];
+//                             [self.teamMemberViewContainer setAlpha:0];
+//                         }];
+//    } else {
+//        [UIView animateWithDuration:.5
+//                         animations:^{
+//                             [self.teamMemberViewContainer setAlpha:1];
+//                             [self.spotlightContainer setAlpha:0];
+//                         }];
+//    }
+//}
+
+
+- (IBAction)spotlightClicked:(UIButton*)sender{
+    _spotlightButton.selected = YES;
+    _teamMemberButton.selected = NO;
+     _addButton.selected = NO;
+    [UIView animateWithDuration:.5
+                     animations:^{
+                         [self.spotlightContainer setAlpha:1];
+                         [self.teamMemberViewContainer setAlpha:0];
+                     }];
+    
 }
+- (IBAction)teamMemberClicked:(UIButton*)sender{
+    _spotlightButton.selected = NO;
+    _teamMemberButton.selected = YES;
+    _addButton.selected = NO;
+    [UIView animateWithDuration:.5
+                     animations:^{
+                         [self.teamMemberViewContainer setAlpha:1];
+                         [self.spotlightContainer setAlpha:0];
+                     }];
+    
+}
+
+
+
+
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"teamMemberEmbedSegue"]) {
     
         [(FriendsTableViewController*)[segue destinationViewController] setTeam:self.team];
           [(FriendsTableViewController*)[segue destinationViewController] setDelegate:self];
-    } else if ([segue.identifier isEqualToString:@"EditTeamSegue"]){
-        [(CreateTeamTableViewController*)[(UINavigationController*)[segue destinationViewController] viewControllers][0] setTeam:self.team];
-    } else if ([segue.identifier isEqualToString:@"EmbedSpotlightDataSource"]){
+    }
+//    else if ([segue.identifier isEqualToString:@"EditTeamSegue"]){
+//        [(CreateTeamTableViewController*)[(UINavigationController*)[segue destinationViewController] viewControllers][0] setTeam:self.team];
+//    }
+    
+    
+    else if ([segue.identifier isEqualToString:@"EmbedSpotlightDataSource"]){
         SpotlightDataSource* datasource = [[SpotlightDataSource alloc] initWithTeam:self.team];
         [(SpotlightFeedViewController*)[segue destinationViewController] setDataSource:datasource];
     }
@@ -203,8 +259,20 @@
 }
 
 
+- (IBAction)editBtnClicked:(UIButton*)sender{
+    
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    CreateTeamTableViewController *createTeam = [storyboard instantiateViewControllerWithIdentifier:@"CreateTeamTableViewController"];
+      createTeam.team = _team;
+    createTeam.isEdit = YES;
+    [self.navigationController pushViewController:createTeam animated:YES];
 
-- (IBAction)createSpotlight:(UIButton*)sender{
+    
+}
+
+
+
+- (void)createSpotlight{
     
     doRefresh = true;
 
@@ -225,6 +293,7 @@
      placeholderImage:nil
      success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, UIImage * _Nonnull image) {
          [self.teamLogoImageView setImage:image];
+          [self.teamLogoImageViewFront setImage:image];
      } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, NSError * _Nonnull error) {
          NSLog(@"fuck thumbnail failure");
      }];
@@ -290,7 +359,48 @@
     [self formatPage];
 }
 
-- (IBAction)addChildToTeamAsMember:(UIButton*)sender {
+
+- (IBAction)addChildOrSpotlight:(UIButton*)sender {
+    
+    _spotlightButton.selected = NO;
+    _teamMemberButton.selected = NO;
+    _addButton.selected = YES;
+    
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"What do you want to add?"
+                                                                   message:@""
+                                                            preferredStyle:UIAlertControllerStyleActionSheet];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Create Spotlight"
+                                              style:UIAlertActionStyleDefault
+                                            handler:^(UIAlertAction * _Nonnull action) {
+                                                [self createSpotlight];
+                                                
+                                            }]];
+    
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"Add Family Member"
+                                              style:UIAlertActionStyleDefault
+                                            handler:^(UIAlertAction * _Nonnull action) {
+                                                
+                                                [self addChildToTeamAsMember];
+                                            }]];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"Cancel"
+                                              style:UIAlertActionStyleCancel
+                                            handler:^(UIAlertAction * _Nonnull action) {
+                                                
+                                               
+                                            }]];
+
+    
+    [self presentViewController:alert animated:YES completion:nil];
+    
+    
+
+
+}
+
+
+- (void)addChildToTeamAsMember{
     MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication].delegate window] animated:YES];
     [hud setLabelText:@"Please Wait..."];
     if(isUserTeamAdmin){

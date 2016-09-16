@@ -21,7 +21,11 @@
     NSMutableArray *filteredArrayOfObjects;
 
 }
-@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+//@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UITextField *searchTxtField;
+@property (weak, nonatomic) IBOutlet UIImageView *searchImage;
+@property (weak, nonatomic) IBOutlet UIButton *crossImage;
+
 @property (strong, nonatomic) NSMutableArray *teams;
 @property (strong, nonatomic) NSArray* searchResults;
 @property (strong, nonatomic) UITapGestureRecognizer* hideKeyboardTap;
@@ -150,6 +154,12 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     if ([self.searchResults count] == 0) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"NoResultsTableViewCell"
                                                forIndexPath:indexPath];
+        if (self.searchResults == nil) {
+            cell.contentView.hidden = YES;
+        }else{
+            cell.contentView.hidden = NO;
+        }
+        
     } else {
         cell = (TeamTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"TeamTableViewCell"
                                                                    forIndexPath:indexPath];
@@ -182,12 +192,53 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 
 #pragma mark - SearchBar Delegate Methods
 
--(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    //dismiss keyboard
-    [self.searchBar resignFirstResponder];
+//-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+//    //dismiss keyboard
+//    [self.searchBar resignFirstResponder];
+//    
+//    //Strip the whitespace off the end of the search text
+//    NSString *searchText = [self.searchBar.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+//    
+//    if (![searchText isEqualToString:@""]) {
+//        
+//        [refresh beginRefreshing];
+//        
+//        PFQuery *firstQuery = [Team query];
+//        PFQuery *secondQuery = [Team query];
+//        
+//        [firstQuery whereKey:@"teamName" containsString:searchText];
+//        [secondQuery whereKey:@"town" containsString:searchText];
+//        
+//        PFQuery *query = [PFQuery orQueryWithSubqueries:@[firstQuery,
+//                                                          secondQuery]];
+//        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//            if (!error) {
+//                self.searchResults = objects;
+//                if (objects.count > 0) {
+//                    for (Team *team in objects) {
+//                        NSLog(@"team: %@, %@", team.teamName, team.town);
+//                    }
+//                } else {
+//                    //Show no search results message
+//                }
+//                
+//                //reload the tableView after the user searches
+//                [self.tableView reloadData];
+//            } else {
+//                
+//            }
+//            [refresh performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:NO];
+//        }];
+//    }
+//}
+//
+
+
+-(void)searchText:(NSString*)searchTeamText{
+  //  [self.searchBar resignFirstResponder];
     
     //Strip the whitespace off the end of the search text
-    NSString *searchText = [self.searchBar.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSString *searchText = [searchTeamText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
     if (![searchText isEqualToString:@""]) {
         
@@ -220,36 +271,104 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
             [refresh performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:NO];
         }];
     }
+    
+    
 }
+
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    
+    NSString *txtToSearch = [NSString new];
+    NSString *substring = [NSString stringWithString:self.searchTxtField.text];
+    substring = [substring stringByReplacingCharactersInRange:range withString:string];
+    txtToSearch = substring;
+    
+    
+    if([txtToSearch isEqualToString:@""] && txtToSearch.length == 0){
+        self.searchResults = @[];
+        [self.crossImage setHidden:YES];
+        
+        [self.tableView reloadData];
+        
+    }
+    else{
+        [self.crossImage setHidden:NO];
+    }
+    
+    
+    
+    
+    return YES; //If you don't your textfield won't get any text in it
+}
+
+
+-(IBAction)searchCancelButtonClicked:(UIButton *)sender {
+    self.searchResults = @[];
+    [self.crossImage setHidden:YES];
+    
+    self.searchTxtField.text = @"";
+    [self.tableView reloadData];
+    [refresh endRefreshing];
+}
+
+- (IBAction)backButtonClicked:(UIBarButtonItem*)sender{
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+
+
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [self searchText:textField.text];
+    [textField resignFirstResponder];
+    return YES;
+}
+
+
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+    [self.view removeGestureRecognizer:self.hideKeyboardTap];
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    [self.view addGestureRecognizer:self.hideKeyboardTap];
+    
+}
+
+
+
 
 -(void)refresh{
     [refresh endRefreshing];
 }
 
--(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-    self.searchResults = @[];
-    [self.tableView reloadData];
-    [refresh endRefreshing];
+//-(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+//    self.searchResults = @[];
+//    [self.tableView reloadData];
+//    [refresh endRefreshing];
+//
+//}
 
-}
-
--(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    if ([searchText isEqualToString:@""]) {
-        self.searchResults = @[];
-        [self.tableView reloadData];
-    }
-}
-
--(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
-    [self.view addGestureRecognizer:self.hideKeyboardTap];
-}
-
-- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
-    [self.view removeGestureRecognizer:self.hideKeyboardTap];
-}
+//-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+//    if ([searchText isEqualToString:@""]) {
+//        self.searchResults = @[];
+//        [self.tableView reloadData];
+//    }
+//}
+//
+//-(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+//    [self.view addGestureRecognizer:self.hideKeyboardTap];
+//}
+//
+//- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+//    [self.view removeGestureRecognizer:self.hideKeyboardTap];
+//}
 
 - (void) dismissKeyboard {
-    [self.searchBar resignFirstResponder];
+    [self.searchTxtField resignFirstResponder];
 }
 
 -(void)fetchAllPendingRequest{

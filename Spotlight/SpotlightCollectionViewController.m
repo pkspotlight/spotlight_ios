@@ -26,6 +26,8 @@
 @interface SpotlightCollectionViewController ()<PECropViewControllerDelegate,PassTitleAndParticipantProtocol>{
     id infoMedia;
     BOOL isCamera;
+    BOOL isView;
+
 }
 
 @property (strong, nonatomic) NSArray* mediaList;
@@ -56,7 +58,12 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
     self.collectionView.alwaysBounceVertical = YES;
     [self getParticipantArrayOfTeam];
     [refreshControl beginRefreshing];
-    [self.navigationController setNavigationBarHidden:YES];
+    if([_spotlight.spotlightTitle length]<=0){
+        self.navigationItem.title = @"Spotlight";
+    }else{
+          self.navigationItem.title = _spotlight.spotlightTitle;
+    }
+
     [self refresh:refreshControl];
     
     // Do any additional setup after loading the view.
@@ -373,7 +380,8 @@ if(!media.isVideo)
             imagePickerController.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeMovie,  nil];
             imagePickerController.videoMaximumDuration = 15;
             [imagePickerController setAllowsEditing:YES];
-    
+            
+
             self.imagePickerController = imagePickerController;
             [self.navigationController presentViewController:self.imagePickerController animated:YES completion:nil];
         }
@@ -385,7 +393,8 @@ if(!media.isVideo)
     ELCAlbumPickerController *albumController = [[ELCAlbumPickerController alloc] init];
     ELCImagePickerController *elcPicker = [[ELCImagePickerController alloc] initWithRootViewController:albumController];
     [albumController setParent:elcPicker];
-    
+
+
     elcPicker.imagePickerDelegate = self;
     [self presentModalViewController:elcPicker animated:YES];
 }
@@ -709,7 +718,7 @@ if(!media.isVideo)
                                               style:UIAlertActionStyleDefault
                       
                                             handler:^(UIAlertAction * _Nonnull action) {
-                                                
+                                                isView = true;
                                                 [self openMedia];
                                                 
                                             }]];
@@ -793,7 +802,7 @@ if(!media.isVideo)
                                               style:UIAlertActionStyleDefault
                       
                                             handler:^(UIAlertAction * _Nonnull action) {
-                                                
+                                                isView = false;
                                                 [self openMedia];
                                                 
                                             }]];
@@ -928,7 +937,14 @@ if(!media.isVideo)
     
     NSURL *assetURL = [item valueForProperty:MPMediaItemPropertyAssetURL];
     
-    [self createMontageWithSongTitle:nil share:YES AssetURL:assetURL];
+    if(isView){
+         [self createMontageWithSongTitle:nil share:NO AssetURL:assetURL];
+        
+    }else{
+         [self createMontageWithSongTitle:nil share:YES AssetURL:assetURL];
+    }
+    
+   
     
     BOOL isCloud = FALSE;
     

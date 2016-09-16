@@ -15,10 +15,14 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *spotlightCreatedTimeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *spotlightTitleLabel;
+
 @property (weak, nonatomic) IBOutlet UIImageView *mainImageView;
 @property (weak, nonatomic) IBOutlet UILabel *createdByLabel;
 @property (weak, nonatomic) IBOutlet UILabel *spotlightDescriptionLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *lblHeightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *lblTitleHeightConstraint;
+
 @property (weak, nonatomic) IBOutlet UIImageView *teamImageView;
 
 @end
@@ -61,6 +65,7 @@
     [self.mainImageView setImage:nil];
     [self.mainImageView cancelImageRequestOperation];
     [self.titleLabel setText:spotlight.team.teamName];
+    [self.spotlightTitleLabel setText:spotlight.spotlightTitle];
     
 //    [self.titleLabel setText:[NSString stringWithFormat:@"%@ %@ - Grade %@", team.teamName, team.sport, team.grade]];
 //
@@ -73,6 +78,15 @@
     NSTimeInterval timestampSmall = [formatter dateFromString:spotlightTime].timeIntervalSince1970;
    // NSTimeInterval spotlightTimeInterval = [[NSDate date] timeIntervalSinceDate:referencedate];
     long timeStamp = (long)[[NSDate date] timeIntervalSince1970];
+    
+    if([_spotlight.spotlightTitle length]<=0){
+        _lblTitleHeightConstraint.constant = 0;
+    }
+    else{
+        //        [NSLayoutConstraint deactivateConstraints:@[_lblHeightConstraint]];
+        _lblTitleHeightConstraint.constant = 20;
+    }
+
     if([_spotlight.spotlightDescription length]<=0){
         _lblHeightConstraint.constant = 10;
     }
@@ -80,6 +94,8 @@
 //        [NSLayoutConstraint deactivateConstraints:@[_lblHeightConstraint]];
         _lblHeightConstraint.constant = 50;
            }
+    
+    
     self.spotlightDescriptionLabel.text = _spotlight.spotlightDescription;
     NSString *getTime = [self timeforTimeDiffernceBetweenBigger:timeStamp andsmallTime:timestampSmall];
     

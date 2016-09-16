@@ -43,7 +43,7 @@
     [self.teamUserImageView.layer setBorderWidth:2];
 
     
-    _spotlightTitle.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"title" attributes:@{NSForegroundColorAttributeName: [UIColor colorWithRed:146.0/255.0f green:146.0/255.0f blue:146.0/255.0f alpha:1.0]}];
+    _spotlightTitle.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Title" attributes:@{NSForegroundColorAttributeName: [UIColor colorWithRed:146.0/255.0f green:146.0/255.0f blue:146.0/255.0f alpha:1.0]}];
     UIBarButtonItem *barButton = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"BackImage"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonClicked:)];
     
     
@@ -130,7 +130,7 @@
    
 
         
-    [_scrollviewSpotlight setContentOffset:CGPointMake(0,keyboardSize.height) animated:YES];
+    //[_scrollviewSpotlight setContentOffset:CGPointMake(0,keyboardSize.height) animated:YES];
  [self.view layoutIfNeeded];
     
 }
@@ -138,7 +138,7 @@
 -(void)hideKeyBoard:(NSNotification *)notification{
     
      
-    
+
         self.bottomContraint.constant = 0;
         
   }

@@ -45,16 +45,32 @@
     [self.sportLabel setText:[subtext uppercaseString]];
     
     [self.seasonLabel setText:[[NSString stringWithFormat:@"%@ %@",team.season, team.year] uppercaseString]];
-    [self formatButtonText];
+    
+    if(isFollowing){
+        [self.teamImageView.layer setBorderColor:[UIColor colorWithRed:73.0/255.0f green:160.0/255.0f blue:255.0/255.0f alpha:1.0].CGColor];
+        
+        [self.followButton setImage:[UIImage imageNamed:@"Following"] forState:UIControlStateNormal];
+    }else{
+        [self.teamImageView.layer setBorderColor:[[UIColor lightGrayColor] colorWithAlphaComponent:0.4].CGColor];
+        [self.followButton setImage:[UIImage imageNamed:@"Follow"] forState:UIControlStateNormal];
+    }
+    [self.teamImageView.layer setBorderWidth:2.0];
+
+    
+    //[self formatButtonText];
     _team = team;
     [self.teamImageView cancelImageRequestOperation];
     [self.teamImageView setImage:nil];
+    [self.teamImageView setImage:[UIImage imageNamed:@"UserPlaceholder"]];
+
     [team.teamLogoMedia fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:team.teamLogoMedia.thumbnailImageFile.url]];
         [self.teamImageView
          setImageWithURLRequest:request
-         placeholderImage:nil
+         placeholderImage:[UIImage imageNamed:@"UserPlaceholder"]
          success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, UIImage * _Nonnull image) {
+           
              [self.teamImageView setImage:image];
          } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, NSError * _Nonnull error) {
              NSLog(@"fuck thumbnail failure");
@@ -64,9 +80,21 @@
 
 - (void)formatButtonText {
   
-    NSString* buttonText = (_isFollowing) ? @"Following" : @"Follow";
-    [self.followButton setTitle:buttonText
-                       forState:UIControlStateNormal];
+    if(_isFollowing){
+        [self.teamImageView.layer setBorderColor:[UIColor colorWithRed:73.0/255.0f green:160.0/255.0f blue:255.0/255.0f alpha:1.0].CGColor];
+        
+        [self.followButton setImage:[UIImage imageNamed:@"Following"] forState:UIControlStateNormal];
+    }else{
+        [self.teamImageView.layer setBorderColor:[[UIColor lightGrayColor] colorWithAlphaComponent:0.4].CGColor];
+        [self.followButton setImage:[UIImage imageNamed:@"Follow"] forState:UIControlStateNormal];
+    }
+
+    [self.teamImageView.layer setBorderWidth:2.0];
+
+    
+//    NSString* buttonText = (_isFollowing) ? @"Following" : @"Follow";
+//    [self.followButton setTitle:buttonText
+//                       forState:UIControlStateNormal];
 }
 
 

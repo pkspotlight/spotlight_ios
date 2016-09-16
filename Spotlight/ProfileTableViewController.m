@@ -42,7 +42,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.navigationController setNavigationBarHidden:YES];
+    //[self.navigationController setNavigationBarHidden:YES];
     self.user = [User currentUser];
      userName = self.user.username;
     self.userPropertyArray = @[ @"username",
@@ -83,6 +83,13 @@
     }];
     
     //[self.profilePictureImageView.imageView setContentMode:UIViewContentModeScaleAspectFill];
+    
+    UIBarButtonItem *barButton = [[UIBarButtonItem alloc]initWithTitle:@"Logout" style:UIBarButtonItemStylePlain target:self action:@selector(logout:)];
+    barButton.tintColor = [UIColor whiteColor];
+    
+    
+    self.navigationItem.rightBarButtonItem = barButton;
+
     [self.usernameLabel setText:[self.user displayName]];
    
 }
@@ -181,7 +188,7 @@
 //}
 
 
-- (IBAction)logout:(UIButton*)sender {
+- (void)logout:(UIBarButtonItem*)sender {
     [self logout];
 }
 
@@ -359,8 +366,11 @@
         imagePickerController.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeImage, nil];
         imagePickerController.videoMaximumDuration = 15;
         [imagePickerController setAllowsEditing:YES];
+      
         
+
         self.imagePickerController = imagePickerController;
+         self.navigationController.navigationBar.tintColor = [UIColor blueColor];
         [self.navigationController presentViewController:self.imagePickerController animated:YES completion:nil];
     }
 }

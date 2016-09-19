@@ -134,6 +134,8 @@
              NSLog(@"fuck thumbnail failure");
          }];
     }];
+    
+    [self layoutIfNeeded];
 }
 
 

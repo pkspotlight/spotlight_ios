@@ -304,7 +304,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 
 
 -(IBAction)searchCancelButtonClicked:(UIButton *)sender {
-    self.searchResults = @[];
+    self.searchResults =  nil;
     [self.crossImage setHidden:YES];
     
     self.searchTxtField.text = @"";

@@ -247,6 +247,8 @@ static CGFloat const BasicHeaderHeight = 50;
     PFQuery *query = [self.user.children query];
     NSLog(@"User: %@",self.user.displayName);
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        
+        
         self.children = [objects copy];
        
         [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
@@ -305,11 +307,11 @@ static CGFloat const BasicHeaderHeight = 50;
     
   if(self.team)
   {
-      UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, BasicHeaderHeight)];
+      UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 30)];
       label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
       
       label.backgroundColor = [UIColor colorWithRed:40.0/255.0f green:47.0/255.0f blue:61.0/255.0f alpha:1.0];
-      label.text = (section == 0) ? @"    Participant" : @"    Spectator";
+      label.text = (section == 0) ? @"    Participant" : @"    Fans";
       label.textColor = [UIColor whiteColor];
       
       return label;
@@ -329,10 +331,10 @@ static CGFloat const BasicHeaderHeight = 50;
     {
         if(section == 0)
         
-        return  (_teamsMemberArray.count > 0)? BasicHeaderHeight:0;
+        return  (_teamsMemberArray.count > 0)? 30:0;
         else
 
-            return  (_teamsSpectMemberArray.count > 0)? BasicHeaderHeight:0;
+            return  (_teamsSpectMemberArray.count > 0)? 30:0;
     }
     else if(self.justFamily) {
         return 0;

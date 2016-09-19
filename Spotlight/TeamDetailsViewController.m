@@ -362,9 +362,9 @@
 
 - (IBAction)addChildOrSpotlight:(UIButton*)sender {
     
-    _spotlightButton.selected = NO;
-    _teamMemberButton.selected = NO;
-    _addButton.selected = YES;
+//    _spotlightButton.selected = NO;
+//    _teamMemberButton.selected = NO;
+//    _addButton.selected = YES;
     
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"What do you want to add?"
                                                                    message:@""
@@ -387,8 +387,7 @@
     [alert addAction:[UIAlertAction actionWithTitle:@"Cancel"
                                               style:UIAlertActionStyleCancel
                                             handler:^(UIAlertAction * _Nonnull action) {
-                                                
-                                               
+                                                                                             
                                             }]];
 
     

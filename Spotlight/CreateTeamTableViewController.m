@@ -23,6 +23,9 @@
 @property (strong, nonatomic) NSMutableDictionary *pendingFieldDictionary;
 @property (strong, nonatomic) UIImagePickerController* imagePickerController;
 @property (weak, nonatomic) IBOutlet UIButton *addTeamLogoButton;
+@property (weak, nonatomic) IBOutlet UIImageView *teamPictureImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *teamPictureImageViewFront;
+
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *photoUploadIndicator;
 @property (assign, nonatomic) BOOL isNewTeam;
 @property (strong, nonatomic) Child* selfChild;
@@ -36,10 +39,11 @@
     [super viewDidLoad];
     self.teamPropertyArray = @[ @"teamName", @"town", @"sport", @"grade", @"year", @"season", @"coach"];
     self.teamPropertyDisplay = @[ @"Team Name", @"Town", @"Sport", @"Grade", @"Year", @"Season", @"Coach"];
-    [self.addTeamLogoButton.layer setCornerRadius:self.addTeamLogoButton.bounds.size.width/2];
-    [self.addTeamLogoButton.layer setBorderColor:[UIColor whiteColor].CGColor];
-    [self.addTeamLogoButton.layer setBorderWidth:3];
-    [self.addTeamLogoButton setClipsToBounds:YES];
+//    [self.addTeamLogoButton.layer setCornerRadius:self.addTeamLogoButton.bounds.size.width/2];
+//    [self.addTeamLogoButton.layer setBorderColor:[UIColor whiteColor].CGColor];
+//    [self.addTeamLogoButton.layer setBorderWidth:3];
+//    [self.addTeamLogoButton setClipsToBounds:YES];
+    [self.photoUploadIndicator setHidden:YES];
     self.childSelectedarray = [NSMutableArray new];
     _selfChild = [Child new];
     
@@ -81,7 +85,10 @@
     self.teamLogo = self.team.teamLogoMedia;
     PFFile* thumbFile = self.teamLogo.thumbnailImageFile;
     [thumbFile getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
-        [self.addTeamLogoButton setImage:[UIImage imageWithData:data] forState:UIControlStateNormal];
+        self.teamPictureImageView.image = [UIImage imageWithData:data];
+        self.teamPictureImageViewFront.image = [UIImage imageWithData:data];
+
+        //[self.addTeamLogoButton setImage:[UIImage imageWithData:data] forState:UIControlStateNormal];
     }];
     return fieldDict;
 }
@@ -323,16 +330,24 @@
         UIImage *image = [infoDict valueForKey:UIImagePickerControllerOriginalImage];
         self.teamLogo = [[TeamLogoMedia alloc] initWithImage:image];
     }
+     [self.photoUploadIndicator setHidden:NO];
     [self.photoUploadIndicator startAnimating];
     [self.teamLogo saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         PFFile* thumbFile = self.teamLogo.thumbnailImageFile;
         [thumbFile getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
-            [self.addTeamLogoButton setImage:[UIImage imageWithData:data] forState:UIControlStateNormal];
+            
+            self.teamPictureImageView.image = [UIImage imageWithData:data];
+            self.teamPictureImageViewFront.image = [UIImage imageWithData:data];
+
+           // [self.addTeamLogoButton setImage:[UIImage imageWithData:data] forState:UIControlStateNormal];
             [self.photoUploadIndicator stopAnimating];
+            self.photoUploadIndicator.hidesWhenStopped = YES;
+
         }];
         if (error) {
             NSLog(@"fuck: %@", [error localizedDescription]);
             [self.photoUploadIndicator stopAnimating];
+            self.photoUploadIndicator.hidesWhenStopped = YES;
         }
     }];
     [self.imagePickerController dismissViewControllerAnimated:YES completion:nil];

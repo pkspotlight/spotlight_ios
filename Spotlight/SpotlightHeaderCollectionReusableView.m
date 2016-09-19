@@ -15,8 +15,12 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *teamImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *teamUserImageView;
+@property (weak, nonatomic) IBOutlet UIView *teamUserView;
+
 
 @property (weak, nonatomic) IBOutlet UILabel *teamNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *teamLocationLabel;
+
 @property (weak, nonatomic) IBOutlet UILabel *spotlightDateLabel;
 @property (weak, nonatomic) IBOutlet UIButton *viewMontageButton;
 @property (weak, nonatomic) IBOutlet UIButton *shareMontageButton;
@@ -29,9 +33,10 @@
 
 - (void)formatHeaderForTeam:(Team*)team spotlight:(Spotlight*)spotlight{
     
-    [self.teamNameLabel setText:[NSString stringWithFormat:@"%@ %@", team.town, team.teamName]];
+    [self.teamNameLabel setText:[NSString stringWithFormat:@"%@",team.teamName]];
+      [self.teamLocationLabel setText:[NSString stringWithFormat:@"Town:%@", team.town]];
     
-    NSString* subtext = [NSString stringWithFormat:@"Sport %@",team.sport];
+    NSString* subtext = [NSString stringWithFormat:@"Sport:%@",team.sport];
     [self.sportLabel setText:subtext];
 
     
@@ -82,8 +87,8 @@
     }];
     
     
-    [self layoutIfNeeded];
-    [self updateConstraints];
+    [self.teamUserView layoutIfNeeded];
+   
 }
 
 - (IBAction)viewMontageButtonPressed:(id)sender {

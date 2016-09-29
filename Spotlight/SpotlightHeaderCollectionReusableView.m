@@ -34,9 +34,9 @@
 - (void)formatHeaderForTeam:(Team*)team spotlight:(Spotlight*)spotlight{
     
     [self.teamNameLabel setText:[NSString stringWithFormat:@"%@",team.teamName]];
-      [self.teamLocationLabel setText:[NSString stringWithFormat:@"Town:%@", team.town]];
+      [self.teamLocationLabel setText:[NSString stringWithFormat:@"Town: %@", team.town]];
     
-    NSString* subtext = [NSString stringWithFormat:@"Sport:%@",team.sport];
+    NSString* subtext = [NSString stringWithFormat:@"Sport/Activity: %@",team.sport];
     [self.sportLabel setText:subtext];
 
     

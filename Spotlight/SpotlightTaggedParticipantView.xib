@@ -49,22 +49,6 @@
                                 </mask>
                             </variation>
                         </view>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Myf-Km-bbh">
-                            <rect key="frame" x="0.0" y="125" width="355" height="325"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="240" id="rfr-BF-YTH"/>
-                            </constraints>
-                            <variation key="default">
-                                <mask key="constraints">
-                                    <exclude reference="rfr-BF-YTH"/>
-                                </mask>
-                            </variation>
-                            <connections>
-                                <outlet property="dataSource" destination="uED-Ig-uDZ" id="Q4P-Db-0mo"/>
-                                <outlet property="delegate" destination="uED-Ig-uDZ" id="vc0-Xa-AVx"/>
-                            </connections>
-                        </tableView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zd4-X0-Ds5">
                             <rect key="frame" x="0.0" y="420" width="355" height="30"/>
                             <subviews>
@@ -80,6 +64,7 @@
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="eaN-1u-DCt" secondAttribute="trailing" id="7vH-n7-kw4"/>
                                 <constraint firstItem="eaN-1u-DCt" firstAttribute="leading" secondItem="Zd4-X0-Ds5" secondAttribute="leading" id="7vW-bh-Oki"/>
+                                <constraint firstAttribute="height" constant="30" id="Udt-yy-80M"/>
                                 <constraint firstItem="eaN-1u-DCt" firstAttribute="top" secondItem="Zd4-X0-Ds5" secondAttribute="top" id="bz8-pU-WQU"/>
                                 <constraint firstAttribute="bottom" secondItem="eaN-1u-DCt" secondAttribute="bottom" id="vyi-In-hez"/>
                             </constraints>
@@ -88,20 +73,46 @@
                             <rect key="frame" x="0.0" y="98" width="355" height="27"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tag Participant" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gnU-By-SlM">
-                                    <rect key="frame" x="10" y="5" width="335" height="17"/>
+                                    <rect key="frame" x="10" y="5" width="100" height="17"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NBd-Fc-DBx">
+                                    <rect key="frame" x="247" y="0.0" width="100" height="27"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="27" id="9tI-Hc-zWo"/>
+                                        <constraint firstAttribute="width" constant="100" id="SZo-D2-HRn"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <state key="normal" title="Select All">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="selectAllBtnClicked:" destination="uED-Ig-uDZ" eventType="touchUpInside" id="VTf-mp-yQn"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7CV-PZ-rkm">
+                                    <rect key="frame" x="221" y="1" width="25" height="25"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="25" id="TTR-Mt-XVN"/>
+                                        <constraint firstAttribute="height" constant="25" id="aC7-cv-Q6v"/>
+                                    </constraints>
+                                    <state key="normal" image="Unchecked"/>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="gnU-By-SlM" firstAttribute="top" secondItem="N5W-aD-TG4" secondAttribute="top" constant="5" id="1x1-5U-f8I"/>
                                 <constraint firstAttribute="bottom" secondItem="gnU-By-SlM" secondAttribute="bottom" id="E2K-4I-GzB"/>
                                 <constraint firstAttribute="trailing" secondItem="gnU-By-SlM" secondAttribute="trailing" constant="10" id="EjH-A9-KC2"/>
+                                <constraint firstItem="7CV-PZ-rkm" firstAttribute="top" secondItem="N5W-aD-TG4" secondAttribute="top" constant="1" id="Igz-1b-yhL"/>
+                                <constraint firstAttribute="trailing" secondItem="NBd-Fc-DBx" secondAttribute="trailing" constant="8" id="Q5l-ke-qhX"/>
+                                <constraint firstItem="NBd-Fc-DBx" firstAttribute="top" secondItem="N5W-aD-TG4" secondAttribute="top" id="cyH-yR-7jc"/>
                                 <constraint firstItem="gnU-By-SlM" firstAttribute="top" secondItem="N5W-aD-TG4" secondAttribute="top" id="eE7-fs-Gvq"/>
-                                <constraint firstAttribute="trailing" secondItem="gnU-By-SlM" secondAttribute="trailing" constant="10" id="hgQ-06-nmZ"/>
+                                <constraint firstAttribute="trailing" secondItem="gnU-By-SlM" secondAttribute="trailing" constant="245" id="hgQ-06-nmZ"/>
                                 <constraint firstAttribute="bottom" secondItem="gnU-By-SlM" secondAttribute="bottom" constant="5" id="q0b-bL-X2e"/>
+                                <constraint firstItem="NBd-Fc-DBx" firstAttribute="leading" secondItem="7CV-PZ-rkm" secondAttribute="trailing" constant="1" id="tYM-MG-hLa"/>
                                 <constraint firstItem="gnU-By-SlM" firstAttribute="leading" secondItem="N5W-aD-TG4" secondAttribute="leading" constant="10" id="xjx-gi-MON"/>
                                 <constraint firstItem="gnU-By-SlM" firstAttribute="leading" secondItem="N5W-aD-TG4" secondAttribute="leading" constant="10" id="y4u-LZ-9k8"/>
                             </constraints>
@@ -114,12 +125,29 @@
                                 </mask>
                             </variation>
                         </view>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Myf-Km-bbh">
+                            <rect key="frame" x="0.0" y="125" width="355" height="295"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="240" id="rfr-BF-YTH"/>
+                            </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="rfr-BF-YTH"/>
+                                </mask>
+                            </variation>
+                            <connections>
+                                <outlet property="dataSource" destination="uED-Ig-uDZ" id="Q4P-Db-0mo"/>
+                                <outlet property="delegate" destination="uED-Ig-uDZ" id="vc0-Xa-AVx"/>
+                            </connections>
+                        </tableView>
                     </subviews>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="N5W-aD-TG4" secondAttribute="trailing" id="0Yd-Y9-AEg"/>
                         <constraint firstAttribute="trailing" secondItem="Myf-Km-bbh" secondAttribute="trailing" id="2LR-0G-q0U"/>
                         <constraint firstItem="Zd4-X0-Ds5" firstAttribute="leading" secondItem="10K-Tx-SOW" secondAttribute="leading" id="46j-Gw-0S8"/>
+                        <constraint firstItem="Zd4-X0-Ds5" firstAttribute="top" secondItem="Myf-Km-bbh" secondAttribute="bottom" id="Cap-9J-vEZ"/>
                         <constraint firstItem="N5W-aD-TG4" firstAttribute="leading" secondItem="10K-Tx-SOW" secondAttribute="leading" id="Ext-oB-ehC"/>
                         <constraint firstAttribute="trailing" secondItem="ajm-K2-ZCN" secondAttribute="trailing" id="Mk8-e1-IpR"/>
                         <constraint firstItem="ajm-K2-ZCN" firstAttribute="leading" secondItem="10K-Tx-SOW" secondAttribute="leading" id="SpN-ae-TJv"/>
@@ -130,14 +158,17 @@
                         <constraint firstItem="Zd4-X0-Ds5" firstAttribute="top" secondItem="Myf-Km-bbh" secondAttribute="bottom" constant="-10" id="jaZ-nV-msF"/>
                         <constraint firstItem="N5W-aD-TG4" firstAttribute="top" secondItem="ajm-K2-ZCN" secondAttribute="bottom" id="pc6-LQ-uXW"/>
                         <constraint firstItem="Myf-Km-bbh" firstAttribute="leading" secondItem="10K-Tx-SOW" secondAttribute="leading" id="rTF-j4-UL9"/>
-                        <constraint firstItem="gnU-By-SlM" firstAttribute="width" secondItem="piU-gZ-IIB" secondAttribute="width" id="s9q-AJ-eoj"/>
+                        <constraint firstItem="gnU-By-SlM" firstAttribute="width" secondItem="piU-gZ-IIB" secondAttribute="width" constant="-235" id="s9q-AJ-eoj"/>
                         <constraint firstAttribute="trailing" secondItem="Zd4-X0-Ds5" secondAttribute="trailing" id="uNv-IY-B2D"/>
+                        <constraint firstAttribute="bottom" secondItem="Myf-Km-bbh" secondAttribute="bottom" constant="30" id="ubM-Fi-aXk"/>
                         <constraint firstItem="ajm-K2-ZCN" firstAttribute="top" secondItem="10K-Tx-SOW" secondAttribute="top" id="vhz-D8-00r"/>
                         <constraint firstItem="N5W-aD-TG4" firstAttribute="top" secondItem="ajm-K2-ZCN" secondAttribute="bottom" id="zJG-EU-Jq2"/>
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="aV5-af-p2C"/>
+                            <exclude reference="ubM-Fi-aXk"/>
+                            <exclude reference="fnn-up-DXO"/>
                             <exclude reference="jaZ-nV-msF"/>
                         </mask>
                     </variation>
@@ -152,10 +183,16 @@
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <connections>
+                <outlet property="btnSelectAll" destination="NBd-Fc-DBx" id="hil-gK-lpY"/>
+                <outlet property="btnSelectAllCheckmark" destination="7CV-PZ-rkm" id="pwk-cU-W8P"/>
                 <outlet property="lblHeader" destination="piU-gZ-IIB" id="uMp-tP-Egc"/>
                 <outlet property="participantView" destination="10K-Tx-SOW" id="t5t-Re-Qje"/>
+                <outlet property="tableView" destination="Myf-Km-bbh" id="bI1-iW-HmS"/>
                 <outlet property="txtTitle" destination="5PG-WH-Xrj" id="HTt-d2-5nz"/>
             </connections>
         </view>
     </objects>
+    <resources>
+        <image name="Unchecked" width="25" height="25"/>
+    </resources>
 </document>

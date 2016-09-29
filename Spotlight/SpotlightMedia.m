@@ -11,6 +11,7 @@
 
 @implementation SpotlightMedia
 @dynamic timeStamp;
+@dynamic participantArray;
 + (void)load {
     [self registerSubclass];
 }

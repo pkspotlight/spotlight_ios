@@ -60,6 +60,12 @@
     }
 
     
+    
+    
+    
+    
+    
+    
     if (cell == nil) {
         
         
@@ -67,8 +73,15 @@
         cell = [nib objectAtIndex:0];
     }
     
-    
-    [cell formatForParticipantName:user and:child];
+//    if(indexPath.row == 0){
+//        cell.lblHeader.text = @"Select All";
+//
+//    }else{
+//        [cell formatForParticipantName:user and:child];
+//
+//        
+//    }
+     [cell formatForParticipantName:user and:child];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     [cell setNeedsLayout];
@@ -90,6 +103,46 @@ return cell;
     [self removeFromSuperview];
 }
 
+- (IBAction)selectAllBtnClicked:(id)sender {
+    
+    if(!self.isSelected){
+        for (int i = 0; i < [self.tableView numberOfSections]; i++) {
+            for (int j = 0; j < [self.tableView numberOfRowsInSection:i]; j++) {
+                NSUInteger ints[2] = {i,j};
+                NSIndexPath *indexPath = [NSIndexPath indexPathWithIndexes:ints length:2];
+                TaggedParticipantTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+                //Here is your code
+                [cell.btnCheckMark setImage:[UIImage imageNamed:@"Checked"] forState:UIControlStateNormal];
+            }
+        }
+        [self.btnSelectAllCheckmark setImage:[UIImage imageNamed:@"Checked"] forState:UIControlStateNormal];
+
+
+        [self.btnSelectAll setTitle:@"Deselect All" forState:UIControlStateNormal];
+
+        [_selectedParticantArray  addObjectsFromArray:_teamsMemberArray];
+        self.isSelected = true;
+    }
+    else{
+        for (int i = 0; i < [self.tableView numberOfSections]; i++) {
+            for (int j = 0; j < [self.tableView numberOfRowsInSection:i]; j++) {
+                NSUInteger ints[2] = {i,j};
+                NSIndexPath *indexPath = [NSIndexPath indexPathWithIndexes:ints length:2];
+                TaggedParticipantTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+                //Here is your code
+                [cell.btnCheckMark setImage:[UIImage imageNamed:@"Unchecked"] forState:UIControlStateNormal];
+             
+            }
+        }
+        [self.btnSelectAll setTitle:@"Select All" forState:UIControlStateNormal];
+        [self.btnSelectAllCheckmark setImage:[UIImage imageNamed:@"Unchecked"] forState:UIControlStateNormal];
+
+        [_selectedParticantArray removeAllObjects];
+        self.isSelected = false;
+    }
+}
+
+
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -97,15 +150,25 @@ return cell;
       [cell.btnCheckMark setImage:[UIImage imageNamed:@"Checked"] forState:UIControlStateNormal];
     Child *child;
     User *user;
-    if ([_teamsMemberArray[indexPath.row] isKindOfClass:[Child class]]){
-        child   = _teamsMemberArray[indexPath.row];
-         [_selectedParticantArray  addObject:child];
-    }
-    else{
-        user   = _teamsMemberArray[indexPath.row];
-         [_selectedParticantArray  addObject:user];
-    }
+    
+//    if(indexPath.row == 0){
+//        [_selectedParticantArray  addObjectsFromArray:_teamsMemberArray];
+//
+//        
+//    }else{
+        if ([_teamsMemberArray[indexPath.row] isKindOfClass:[Child class]]){
+            child   = _teamsMemberArray[indexPath.row];
+            [_selectedParticantArray  addObject:child];
+        }
+        else{
+            user   = _teamsMemberArray[indexPath.row];
+            [_selectedParticantArray  addObject:user];
+        }
 
+        
+        
+   // }
+   
   
    
     

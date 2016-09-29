@@ -290,26 +290,26 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.44674572841726617" colorSpace="calibratedWhite"/>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="gGi-cu-aAX">
-                                            <rect key="frame" x="120" y="115" width="42" height="20"/>
-                                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="17"/>
+                                            <rect key="frame" x="120" y="121" width="30" height="14"/>
+                                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="5zR-AM-ujA">
-                                            <rect key="frame" x="553" y="99" width="37" height="18"/>
-                                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
+                                            <rect key="frame" x="560" y="107" width="30" height="14"/>
+                                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8e0-zm-O78">
-                                            <rect key="frame" x="120" y="94" width="42" height="20"/>
-                                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="17"/>
+                                            <rect key="frame" x="120" y="106" width="30" height="14"/>
+                                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="800" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="TbN-vM-dUq">
-                                            <rect key="frame" x="553" y="117" width="37" height="18"/>
-                                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
+                                            <rect key="frame" x="560" y="122" width="30" height="14"/>
+                                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -318,26 +318,26 @@
                                     <constraints>
                                         <constraint firstItem="gGi-cu-aAX" firstAttribute="top" secondItem="IWk-Wk-cI9" secondAttribute="top" constant="95" id="1WN-QK-ppf"/>
                                         <constraint firstItem="gGi-cu-aAX" firstAttribute="leading" secondItem="IWk-Wk-cI9" secondAttribute="leading" constant="120" id="8rI-Rr-gyn"/>
-                                        <constraint firstItem="TbN-vM-dUq" firstAttribute="top" secondItem="IWk-Wk-cI9" secondAttribute="top" constant="117" id="AS6-IC-zOV"/>
-                                        <constraint firstAttribute="trailing" secondItem="5zR-AM-ujA" secondAttribute="trailing" constant="10" id="BYj-H4-Hvh"/>
+                                        <constraint firstItem="TbN-vM-dUq" firstAttribute="top" secondItem="IWk-Wk-cI9" secondAttribute="top" constant="122" id="AS6-IC-zOV"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="TbN-vM-dUq" secondAttribute="trailing" id="Ccc-G8-c7q"/>
                                         <constraint firstAttribute="bottom" secondItem="gGi-cu-aAX" secondAttribute="bottom" constant="5" id="DFG-5h-NoQ"/>
+                                        <constraint firstAttribute="trailing" secondItem="5zR-AM-ujA" secondAttribute="trailing" constant="10" id="RgI-aL-9hH"/>
                                         <constraint firstAttribute="bottom" secondItem="1zA-fb-9dR" secondAttribute="bottom" id="T38-kF-JVt"/>
                                         <constraint firstItem="8e0-zm-O78" firstAttribute="leading" secondItem="IWk-Wk-cI9" secondAttribute="leading" constant="120" id="aO4-dw-daD"/>
                                         <constraint firstItem="1zA-fb-9dR" firstAttribute="leading" secondItem="IWk-Wk-cI9" secondAttribute="leading" id="aP6-nU-fZv"/>
-                                        <constraint firstItem="5zR-AM-ujA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8e0-zm-O78" secondAttribute="trailing" constant="10" id="byz-AU-G3a"/>
+                                        <constraint firstItem="5zR-AM-ujA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8e0-zm-O78" secondAttribute="trailing" constant="10" id="cd3-be-DtF"/>
                                         <constraint firstItem="8e0-zm-O78" firstAttribute="top" relation="greaterThanOrEqual" secondItem="IWk-Wk-cI9" secondAttribute="top" constant="10" id="dRf-4F-bp6"/>
                                         <constraint firstAttribute="bottom" secondItem="TbN-vM-dUq" secondAttribute="bottom" constant="6" id="eJ4-BP-0Bd"/>
                                         <constraint firstItem="1zA-fb-9dR" firstAttribute="top" secondItem="IWk-Wk-cI9" secondAttribute="top" id="fjB-Nq-5Tk"/>
-                                        <constraint firstItem="TbN-vM-dUq" firstAttribute="top" secondItem="5zR-AM-ujA" secondAttribute="bottom" id="gmZ-wu-WgU"/>
                                         <constraint firstAttribute="trailing" secondItem="gGi-cu-aAX" secondAttribute="trailing" constant="10" id="hC8-wZ-oi1"/>
+                                        <constraint firstItem="5zR-AM-ujA" firstAttribute="top" relation="greaterThanOrEqual" secondItem="IWk-Wk-cI9" secondAttribute="top" constant="10" id="iaV-SH-1cL"/>
                                         <constraint firstItem="gGi-cu-aAX" firstAttribute="leading" secondItem="IWk-Wk-cI9" secondAttribute="leading" constant="120" id="jSL-Ts-Iae"/>
                                         <constraint firstItem="gGi-cu-aAX" firstAttribute="top" secondItem="8e0-zm-O78" secondAttribute="bottom" constant="1" id="ljx-NP-wjJ"/>
+                                        <constraint firstItem="TbN-vM-dUq" firstAttribute="top" secondItem="5zR-AM-ujA" secondAttribute="bottom" constant="1" id="nMT-es-qWA"/>
                                         <constraint firstAttribute="trailing" secondItem="8e0-zm-O78" secondAttribute="trailing" constant="10" id="nOG-wf-4PN"/>
                                         <constraint firstAttribute="trailing" secondItem="1zA-fb-9dR" secondAttribute="trailing" id="o6b-uq-BBh"/>
                                         <constraint firstItem="TbN-vM-dUq" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gGi-cu-aAX" secondAttribute="trailing" constant="10" id="oqg-rB-vmt"/>
                                         <constraint firstAttribute="trailing" secondItem="gGi-cu-aAX" secondAttribute="trailing" constant="10" id="tlH-1Z-REM"/>
-                                        <constraint firstItem="5zR-AM-ujA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gGi-cu-aAX" secondAttribute="trailing" constant="10" id="vRP-zm-8Zq"/>
                                         <constraint firstAttribute="trailing" secondItem="TbN-vM-dUq" secondAttribute="trailing" constant="10" id="ys4-pC-GTs"/>
                                     </constraints>
                                     <variation key="default">
@@ -347,7 +347,6 @@
                                             <exclude reference="8rI-Rr-gyn"/>
                                             <exclude reference="hC8-wZ-oi1"/>
                                             <exclude reference="tlH-1Z-REM"/>
-                                            <exclude reference="vRP-zm-8Zq"/>
                                             <exclude reference="Ccc-G8-c7q"/>
                                             <exclude reference="eJ4-BP-0Bd"/>
                                         </mask>

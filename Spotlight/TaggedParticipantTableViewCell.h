@@ -12,5 +12,7 @@
 @interface TaggedParticipantTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *lblHeader;
 @property (weak, nonatomic) IBOutlet UIButton *btnCheckMark;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *btnCheckMarkWidth;
+
 -(void)formatForParticipantName:(User*)user and:(Child*)child;
 @end

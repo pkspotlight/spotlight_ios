@@ -67,6 +67,8 @@
 		8404D5831D3E51BC00B2D325 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8404D5821D3E51BC00B2D325 /* MediaPlayer.framework */; };
 		8407E0711D7DAC4D00E73652 /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8407E0701D7DAC4D00E73652 /* Images-2.xcassets */; };
 		841FAE121D3CE26700772B23 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841FAE111D3CE26700772B23 /* Photos.framework */; };
+		843BBBEC1D911EFB000F2169 /* TaggedParticipantView.m in Sources */ = {isa = PBXBuildFile; fileRef = 843BBBEB1D911EFB000F2169 /* TaggedParticipantView.m */; };
+		843BBBEE1D911F14000F2169 /* TaggedParticipantView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 843BBBED1D911F14000F2169 /* TaggedParticipantView.xib */; };
 		8455EB701D5CABB000A3A365 /* RecieptAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8455EB6F1D5CABB000A3A365 /* RecieptAlertView.m */; };
 		8455EB731D5CAC1600A3A365 /* remittanceSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8455EB721D5CAC1600A3A365 /* remittanceSelectionView.m */; };
 		846B56081D4899BB00F3DBB0 /* SpotlightBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 846B56071D4899BB00F3DBB0 /* SpotlightBoardView.m */; };
@@ -249,6 +251,9 @@
 		8404D5821D3E51BC00B2D325 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		8407E0701D7DAC4D00E73652 /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-2.xcassets"; sourceTree = "<group>"; };
 		841FAE111D3CE26700772B23 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		843BBBEA1D911EFB000F2169 /* TaggedParticipantView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaggedParticipantView.h; sourceTree = "<group>"; };
+		843BBBEB1D911EFB000F2169 /* TaggedParticipantView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaggedParticipantView.m; sourceTree = "<group>"; };
+		843BBBED1D911F14000F2169 /* TaggedParticipantView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaggedParticipantView.xib; sourceTree = "<group>"; };
 		8455EB6E1D5CABB000A3A365 /* RecieptAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecieptAlertView.h; sourceTree = "<group>"; };
 		8455EB6F1D5CABB000A3A365 /* RecieptAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecieptAlertView.m; sourceTree = "<group>"; };
 		8455EB711D5CAC1600A3A365 /* remittanceSelectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = remittanceSelectionView.h; sourceTree = "<group>"; };
@@ -793,6 +798,9 @@
 				84E0DF911D780B89005652F3 /* TaggedParticipantTableViewCell.h */,
 				84E0DF921D780B89005652F3 /* TaggedParticipantTableViewCell.m */,
 				84E0DF931D780B89005652F3 /* TaggedParticipantTableViewCell.xib */,
+				843BBBEA1D911EFB000F2169 /* TaggedParticipantView.h */,
+				843BBBEB1D911EFB000F2169 /* TaggedParticipantView.m */,
+				843BBBED1D911F14000F2169 /* TaggedParticipantView.xib */,
 			);
 			name = Spotlight;
 			sourceTree = "<group>";
@@ -952,6 +960,7 @@
 				398D24981D40D64D00647117 /* UIBarButtonItemGrid@2x.png in Resources */,
 				88FDB8941C8EA2A1008C9A3D /* DT_TheDuff_CoolKids_INST130.mp3 in Resources */,
 				398D24811D40D64D00647117 /* ImageSelectedOff@3x.png in Resources */,
+				843BBBEE1D911F14000F2169 /* TaggedParticipantView.xib in Resources */,
 				398D249B1D40D64D00647117 /* VideoOverlay@2x.png in Resources */,
 				398D249A1D40D64D00647117 /* VideoOverlay.png in Resources */,
 				84E0DF8D1D7800D1005652F3 /* SpotlightTaggedParticipantView.xib in Resources */,
@@ -1083,6 +1092,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				88EC50311C12F19200077E85 /* User.m in Sources */,
+				843BBBEC1D911EFB000F2169 /* TaggedParticipantView.m in Sources */,
 				8455EB731D5CAC1600A3A365 /* remittanceSelectionView.m in Sources */,
 				84B52BD41D41F43D005995AC /* PendingRequestTableViewCell.m in Sources */,
 				88EE2CC61B9E08B2002DDB99 /* SpotlightFeedViewController.m in Sources */,

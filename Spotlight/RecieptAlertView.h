@@ -17,6 +17,8 @@
     UIButton *okButton;
 }
 -(void)createAlertWithRemmitances:(NSArray *)remArray;
+-(void)createAlertWithRemmitancesForTagged:(NSArray *)remArray;
+
 @property (nonatomic, assign) id<ChildToAddToTeam> delegate;
 @property (strong, nonatomic) NSMutableArray* selectedChild;
 @end

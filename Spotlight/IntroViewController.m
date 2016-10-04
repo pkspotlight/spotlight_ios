@@ -29,10 +29,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    [self.signupButton.layer setCornerRadius:7];
-    [self.loginButton.layer setCornerRadius:7];
-    [self.loginWithFBBtn.layer setCornerRadius:7];
+//
+//    [self.signupButton.layer setCornerRadius:7];
+//    [self.loginButton.layer setCornerRadius:7];
+//    [self.loginWithFBBtn.layer setCornerRadius:7];
+    
+   
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,16 +49,37 @@
 
 #pragma mark - Navigation
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+//    
+//    if([segue.identifier isEqualToString:@"LoginSegueIdentifier"]) {
+//        [(SignUpTableViewController*)[segue destinationViewController] setIsLoginScreen:YES];
+//    } else {
+//        [(SignUpTableViewController*)[segue destinationViewController] setIsLoginScreen:NO];
+//    }
+//    // Get the new view controller using [segue destinationViewController].
+//    // Pass the selected object to the new view controller.
+//}
+
+- (IBAction)logIn:(UIButton *)sender {
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    SignUpTableViewController *signup = [storyboard instantiateViewControllerWithIdentifier:@"SignUP"];
+    signup.isLoginScreen = YES;
+    [self.navigationController pushViewController:signup animated:YES];
+
     
-    if([segue.identifier isEqualToString:@"LoginSegueIdentifier"]) {
-        [(SignUpTableViewController*)[segue destinationViewController] setIsLoginScreen:YES];
-    } else {
-        [(SignUpTableViewController*)[segue destinationViewController] setIsLoginScreen:NO];
-    }
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
 }
+
+- (IBAction)SignUpClicked:(UIButton *)sender {
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    SignUpTableViewController *signup = [storyboard instantiateViewControllerWithIdentifier:@"SignUP"];
+    signup.isLoginScreen = NO;
+    [self.navigationController pushViewController:signup animated:YES];
+
+    
+}
+
+
+
 
 - (IBAction)logInWithFacebookBtnClicked:(UIButton *)sender {
     

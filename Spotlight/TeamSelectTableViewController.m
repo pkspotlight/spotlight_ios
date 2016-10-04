@@ -81,7 +81,15 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return BasicHeaderHeight;
 }
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+     Team* team = self.myTeams[indexPath.row];
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    CreateSpotlightTableViewController *createSpotlight = [storyboard instantiateViewControllerWithIdentifier:@"CreateSpotlightTableViewController"];
+   
+    createSpotlight.team = team;
+    [self.navigationController pushViewController:createSpotlight animated:YES];
 
+}
 #pragma mark - Navigation
 
 - (IBAction)cancelButtonPressed:(id)sender {
@@ -90,13 +98,13 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     }];
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"CreateSpotlightSeque"]) {
-        Team* team = self.myTeams[[[self.tableView indexPathForCell:sender] row]];
-        CreateSpotlightTableViewController* vc = (CreateSpotlightTableViewController*)[segue destinationViewController];
-        [vc setTeam:team];
-    }
-    // Pass the selected object to the new view controller.
-}
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+//    if ([segue.identifier isEqualToString:@"CreateSpotlightSeque"]) {
+//        Team* team = self.myTeams[[[self.tableView indexPathForCell:sender] row]];
+//        CreateSpotlightTableViewController* vc = (CreateSpotlightTableViewController*)[segue destinationViewController];
+//        [vc setTeam:team];
+//    }
+//    // Pass the selected object to the new view controller.
+//}
 
 @end

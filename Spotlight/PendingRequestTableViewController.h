@@ -9,5 +9,4 @@
 #import <UIKit/UIKit.h>
 #import "PendingRequestTableViewCell.h"
 @interface PendingRequestTableViewController : UITableViewController<UITableViewDataSource,UITableViewDelegate>
-
 @end

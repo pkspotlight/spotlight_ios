@@ -14,7 +14,7 @@
 #import <MBProgressHUD.h>
 @interface PendingRequestTableViewController ()
 @property (strong, nonatomic) NSMutableArray *requestArray;
-
+@property (strong, nonatomic) NSMutableArray *requestFriendArray;
 @end
 
 
@@ -34,6 +34,8 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     _requestArray = [[NSMutableArray alloc]init];
+    _requestFriendArray = [[NSMutableArray alloc]init];
+
       [self fetchRequest];
     
 }
@@ -55,12 +57,27 @@
             NSMutableArray *array = [NSMutableArray new];
             for(TeamRequest *request in objects)
             {
+                
+                
+                
                 if((request.requestState.intValue == reqestStatePending))
                 {
+                    if([request.type intValue]==1 || [request.type intValue]==3){
                     [_requestArray addObject:request];
-                     [self.tableView reloadData];
+                    
                     [array addObject:request];
+                         [self.tableView reloadData];
+                    }
+                    
+                    else if([request.type intValue]==2){
+                        [_requestFriendArray addObject:request];
+                        
+                        [array addObject:request];
+                        [self.tableView reloadData];
+                    }
                 }
+                
+               
                 
             }
             [hud hide:YES];
@@ -71,17 +88,19 @@
           [hud hide:YES];
         }
         
-//        for(TeamRequest *request in objects)
-//        {
-//            [request.admin fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-//                //   NSString *data =[NSString stringWithFormat:@"%@       %@",request.admin.firstName,request.user.firstName];
-//                
-//                NSLog(@"%@",request.admin.firstName);
-//            }];
-//            
-//            
-//            
-//        }
+        
+        
+        for(TeamRequest *request in objects)
+        {
+            [request.team fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+                //   NSString *data =[NSString stringWithFormat:@"%@       %@",request.admin.firstName,request.user.firstName];
+                
+               
+            }];
+            
+            
+            
+        }
         
     }];
 }
@@ -94,21 +113,55 @@
 
 #pragma mark - Table view data source
 
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return _requestArray.count;
+    if (section==0)
+    {
+        return _requestArray.count;
+    }
+    else{
+        return _requestFriendArray.count;
+    }
+    
+    
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if ([tableView.dataSource tableView:tableView numberOfRowsInSection:section] == 0) {
+        return nil;
+    } else {
+        // return your normal return
+        if(section == 0)
+            return @"Team Request";
+        else
+            return @"Friend Request";
+    }
+   
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PendingRequestTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"pendingRequest" forIndexPath:indexPath];
-   TeamRequest* request = self.requestArray[indexPath.row];
-    [cell setData:request.nameOfRequester teamName:request.teamName fromUser:request.user forChild:request.child isChild:request.isChild.boolValue];
+   
+    
+    if (indexPath.section==0) {
+        TeamRequest* request = self.requestArray[indexPath.row];
+        [cell setData:request.nameOfRequester teamName:request.teamName fromUser:request.user forChild:request.child isChild:request.isChild.boolValue withType:request.type];
+
+    
+    }
+    else {
+        TeamRequest* request = self.requestFriendArray[indexPath.row];
+        [cell setData:request.nameOfRequester teamName:request.teamName fromUser:request.user forChild:request.child isChild:request.isChild.boolValue withType:request.type];
+
+    }
+    
     
     cell.acceptButton.tag = 1001;
     cell.rejectButton.tag = 1002;
@@ -123,69 +176,280 @@
 -(void)requestAction:(UIButton *)sender
 {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:(PendingRequestTableViewCell *)sender.superview.superview];
-    TeamRequest* request = self.requestArray[indexPath.row];
+    TeamRequest* request;
+    if(indexPath.section == 0){
+       request    = self.requestArray[indexPath.row];
+        
+    }
+    else{
+        request = self.requestFriendArray[indexPath.row];
+    }
+  
     MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [hud setLabelText:@"Please Wait..."];
    
     
     
     if(sender.tag == 1001){
-        
-     
+            
         
         request.requestState = [NSNumber numberWithInt:requestStateAccepted];
         
-        [request saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-            if(succeeded){
-                [_requestArray removeObjectAtIndex:indexPath.row];
-                if(_requestArray.count==0){
-                    [self.navigationController popViewControllerAnimated:YES];
+        if([request.type intValue]==3){
+            
+            [[User currentUser] followTeamWithBlockCallback:request.team completion:^(BOOL succeeded, NSError * _Nullable error) {
+                if(succeeded)
+                {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"SpotLightRefersh" object:nil];
                     
-                }
-                else{
+                    [request deleteInBackground];
+                        if(indexPath.section == 0){
+                            [_requestArray removeObjectAtIndex:indexPath.row];
+                        }
+                        else{
+                            [_requestFriendArray removeObjectAtIndex:indexPath.row];
+                        }
+                        
+                        if(_requestArray.count==0&&_requestFriendArray.count == 0){
+                            [self.navigationController popViewControllerAnimated:YES];
+                            
+                        }
+                        else{
+                            
+                            [self.tableView reloadData];
+                        }
+                    }
+                    else
+                    {
+                        UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"" message:@"Unable to accept the request. Please check your network and try again." preferredStyle:UIAlertControllerStyleAlert];
+                        UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                            
+                        }];
+                        [controller addAction:action];
+                        [self.navigationController presentViewController:controller animated:YES completion:nil];
+                    }
+                  
+
                     
-                    [self.tableView reloadData];
-                }
-            }
-            else
-            {
-                UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"" message:@"Unable to accept the request. Please check your network and try again." preferredStyle:UIAlertControllerStyleAlert];
-                UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                    
-                }];
-                [controller addAction:action];
-                [self.navigationController presentViewController:controller animated:YES completion:nil];
-            }
+               
+            }];
             [hud hide:YES];
-        }];
+        }
+        else if([request.type intValue]==1){
+        
+          UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:@"Do you want to associate this user as Fan or Participant" preferredStyle:UIAlertControllerStyleAlert];
+        
+                    [alertController addAction:[UIAlertAction actionWithTitle:@"Fan" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                        [request.team fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+                            
+                            if(!error){
+                                if(!request.team.spectatorsArray){
+                                    request.team.spectatorsArray = [[NSMutableArray alloc] init];
+                                }
+                                
+                                if(request.isChild.boolValue){
+                                     [request.team.spectatorsArray addObject:request.child.objectId];
+                                }
+                                else{
+                                      [request.team.spectatorsArray addObject:request.user.objectId];
+                                }
+                          
+                            
+                            [request saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                                if(succeeded){
+                                    
+                                    
+                                    if(indexPath.section == 0){
+                                        [_requestArray removeObjectAtIndex:indexPath.row];
+                                    }
+                                    else{
+                                        [_requestFriendArray removeObjectAtIndex:indexPath.row];
+                                    }
+                                    
+                                    if(_requestArray.count==0&&_requestFriendArray.count == 0){
+                                        [self.navigationController popViewControllerAnimated:YES];
+                                        
+                                    }
+                                    else{
+                                        
+                                        [self.tableView reloadData];
+                                    }
+                                }
+                                else
+                                {
+                                    UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"" message:@"Unable to accept the request. Please check your network and try again." preferredStyle:UIAlertControllerStyleAlert];
+                                    UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                                        
+                                    }];
+                                    [controller addAction:action];
+                                    [self.navigationController presentViewController:controller animated:YES completion:nil];
+                                }
+                                [hud hide:YES];
+                            }];
+                            }
+                            
+                            else{
+                                UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"" message:@"Unable to accept the request. Please check your network and try again." preferredStyle:UIAlertControllerStyleAlert];
+                                UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                                    
+                                }];
+                                [controller addAction:action];
+                                [self.navigationController presentViewController:controller animated:YES completion:nil];
+                            }
+                        }];
+                       
+                        
+        
+        
+        
+        
+                    }]];
+                    [alertController addAction:[UIAlertAction actionWithTitle:@"Participant" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                        
+                        [request.team fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+                            
+                            if(!error){
+                                
+                                if(request.isChild)
+                                {
+                                
+                                while( [request.team.spectatorsArray containsObject:request.child.objectId])
+                                {
+                                    [request.team.spectatorsArray removeObject:request.child.objectId];
+                                }
+                               
+                                }
+                                else
+                                {
+                                    while( [request.team.spectatorsArray containsObject:request.user.objectId])
+                                    {
+                                        [request.team.spectatorsArray removeObject:request.user.objectId];
+                                    }
+   
+                                }
+                                
+                                [request saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                                    if(succeeded){
+                                        
+                                        
+                                        if(indexPath.section == 0){
+                                            [_requestArray removeObjectAtIndex:indexPath.row];
+                                        }
+                                        else{
+                                            [_requestFriendArray removeObjectAtIndex:indexPath.row];
+                                        }
+                                        
+                                        if(_requestArray.count==0&&_requestFriendArray.count == 0){
+                                            [self.navigationController popViewControllerAnimated:YES];
+                                            
+                                        }
+                                        else{
+                                            
+                                            [self.tableView reloadData];
+                                        }
+                                    }
+                                    else
+                                    {
+                                        UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"" message:@"Unable to accept the request. Please check your network and try again." preferredStyle:UIAlertControllerStyleAlert];
+                                        UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                                            
+                                        }];
+                                        [controller addAction:action];
+                                        [self.navigationController presentViewController:controller animated:YES completion:nil];
+                                    }
+                                    [hud hide:YES];
+                                }];
+                            }
+                            
+                            else{
+                                UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"" message:@"Unable to accept the request. Please check your network and try again." preferredStyle:UIAlertControllerStyleAlert];
+                                UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                                    
+                                }];
+                                [controller addAction:action];
+                                [self.navigationController presentViewController:controller animated:YES completion:nil];
+                            }
+                        }];
+                        
+                        
+                        
+                        
+                        [hud hide:YES];
+                    }]];
+                    
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^ {
+                        [self presentViewController:alertController animated:YES completion:nil];
+                    });
+        
+                }
 
-
+        else if([request.type intValue]==2){
+            [request saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                if(succeeded){
+                    
+                    
+                    if(indexPath.section == 0){
+                        [_requestArray removeObjectAtIndex:indexPath.row];
+                    }
+                    else{
+                        [_requestFriendArray removeObjectAtIndex:indexPath.row];
+                    }
+                    
+                    if(_requestArray.count==0&&_requestFriendArray.count == 0){
+                        [self.navigationController popViewControllerAnimated:YES];
+                        
+                    }
+                    else{
+                        
+                        [self.tableView reloadData];
+                    }
+                }
+                else
+                {
+                    UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"" message:@"Unable to accept the request. Please check your network and try again." preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                        
+                    }];
+                    [controller addAction:action];
+                    [self.navigationController presentViewController:controller animated:YES completion:nil];
+                }
+                [hud hide:YES];
+            }];
             
-          
             
-        
-       
 
-        
-        
-        
-        
-        
-        //NSLog(@"%d",indexPath.row);
+        }
+    
     }
+    
+       // }
+    
+    
+    
+    
+        //NSLog(@"%d",indexPath.row);
+    
     else if(sender.tag == 1002){
         
         [request deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
             if(succeeded){
               
-                [_requestArray removeObjectAtIndex:indexPath.row];
-                if(_requestArray.count==0){
+                if(indexPath.section == 0){
+                    [_requestArray removeObjectAtIndex:indexPath.row];
+                }
+                else{
+                    [_requestFriendArray removeObjectAtIndex:indexPath.row];
+                }
+                if(_requestArray.count==0&&_requestFriendArray.count == 0){
                     [self.navigationController popViewControllerAnimated:YES];
                     
                 }
                 else{
+                    
                     [self.tableView reloadData];
                 }
+
             
             }
             

@@ -11,13 +11,20 @@
 #import "FriendTableViewCell.h"
 #import "Parse.h"
 #import "User.h"
+#import "BasicHeaderView.h"
 
 
 @interface FriendFinderTableViewController ()
 {
     UIRefreshControl* refresh;
 }
-@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+//@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UITextField *searchTxtField;
+@property (weak, nonatomic) IBOutlet UIImageView *searchImage;
+@property (weak, nonatomic) IBOutlet UIButton *crossImage;
+
+
+@property (weak, nonatomic) IBOutlet UINavigationItem *navigationItem;
 @property (strong, nonatomic) NSArray* searchResults;
 @property (strong, nonatomic) NSMutableArray* friendsArray;
 @property (strong, nonatomic) UITapGestureRecognizer* hideKeyboardTap;
@@ -35,6 +42,13 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     [refresh addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
     [self setRefreshControl:refresh];
     [self loadFriends];
+    if([self.controllerType intValue]==1&&self.controllerType!=nil){
+        self.navigationItem.title = @"Send Invites";
+        
+    }else{
+        
+    }
+    
     self.hideKeyboardTap = [[UITapGestureRecognizer alloc]
                             initWithTarget:self
                             action:@selector(dismissKeyboard)];
@@ -71,9 +85,18 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell* cell;
-    if ([self.searchResults count] == 0) {
+    
+   
+    if ([self.searchResults count] == 0 ) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"NoResultsTableViewCell"
                                                forIndexPath:indexPath];
+        if (self.searchResults == nil) {
+            cell.contentView.hidden = YES;
+        }else{
+             cell.contentView.hidden = NO;
+        }
+        
+        
     } else {
         cell = (FriendTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"FriendTableViewCell"
                                                                      forIndexPath:indexPath];
@@ -83,16 +106,42 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
         bool isFollowing = false;
      
         User *user = (User*)self.searchResults[indexPath.row];
+        
+        if([user.objectId isEqualToString:[User currentUser].objectId ]){
+            [(FriendTableViewCell*)cell followButton].hidden = YES;
+          
+        }
+        else{
+           // [(FriendTableViewCell*)cell followButton].hidden = NO;
+            
+            if([self.controllerType intValue]==1&&self.controllerType!=nil){
+                [(FriendTableViewCell*)cell followButton].hidden = YES;
+                [(FriendTableViewCell*)cell inviteButton].hidden = NO;
+                FriendTableViewCell *friendCell = (FriendTableViewCell*)cell;
+                friendCell.team = self.selectedTeam;
+                
+            }else{
+                [(FriendTableViewCell*)cell followButton].hidden = NO;
+                [(FriendTableViewCell*)cell inviteButton].hidden = YES;
+            }
+
+            
+          
             if(([[self.friendsArray valueForKeyPath:@"objectId"] containsObject:user.objectId]))
             {
                 isFollowing = true;
                 
+                
             }
             else{
                 isFollowing = false;
-            }
+                }
+
+        }
         
-        [(FriendTableViewCell*)cell formatForUser:self.searchResults[indexPath.row] isFollowing:isFollowing];
+        
+        [(FriendTableViewCell*)cell formatForUser:self.searchResults[indexPath.row] isSpectator:NO  isFollowing:isFollowing];
+       
     }
     return cell;
 }
@@ -100,13 +149,84 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 
 #pragma mark - SearchBar Delegate Methods
 
--(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    //dismiss keyboard
-    [self.searchBar resignFirstResponder];
-    
-    //Strip the whitespace off the end of the search text
-    NSArray* components = [self.searchBar.text componentsSeparatedByString:@" "];
-//    NSString *searchText = [self.searchBar.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+//-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+//    //dismiss keyboard
+//    [self.searchBar resignFirstResponder];
+//    
+//    //Strip the whitespace off the end of the search text
+//    NSArray* components = [self.searchBar.text componentsSeparatedByString:@" "];
+////    NSString *searchText = [self.searchBar.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+//    
+//    if (![components[0] isEqualToString:@""]) {
+//        PFQuery *firstQuery = [User query];
+//        PFQuery *secondQuery = [User query];
+//        PFQuery *usernameQuery = [User query];
+//        PFQuery *emailQuery = [User query];
+//        PFQuery *lastNameQuery = [User query];
+//
+//        
+//        [firstQuery whereKey:@"firstName" containsString:components[0]];
+//        [secondQuery whereKey:@"lastName" containsString:components[0]];
+//        [usernameQuery whereKey:@"username" containsString:[components[0] lowercaseString]];
+//        [emailQuery whereKey:@"email" containsString:[components[0] lowercaseString]];
+//        
+//        PFQuery *query;
+//        if (components.count > 1) {
+//            [lastNameQuery whereKey:@"lastName" containsString:components[1]];
+//            query = [PFQuery orQueryWithSubqueries:@[firstQuery,
+//                                                     secondQuery,
+//                                                     usernameQuery,
+//                                                     emailQuery,
+//                                                     lastNameQuery]];
+//        }else {
+//            query = [PFQuery orQueryWithSubqueries:@[firstQuery,
+//                                                     secondQuery,
+//                                                     usernameQuery,
+//                                                     emailQuery]];
+//        }
+//        [refresh beginRefreshing];
+//
+//        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//            if (!error) {
+//                self.searchResults = objects;
+//                if (objects.count > 0) {
+//                    for (User *user in objects) {
+//                        NSLog(@"user: %@ %@ -- %@ %@", user.firstName, user.lastName, user.email, user.username);
+//                    }
+//                } else {
+//                    //Show no search results message
+//                }
+//                
+//                //reload the tableView after the user searches
+//                [self.tableView reloadData];
+//            } else {
+//                
+//            }
+//            
+//            [refresh performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:NO];
+//
+//        }];
+//    }
+//}
+//
+//-(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+//    self.searchResults = @[];
+//    [self.tableView reloadData];
+//    [refresh endRefreshing];
+//
+//}
+//
+//-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+//    if ([searchText isEqualToString:@""]) {
+//        self.searchResults = @[];
+//        [self.tableView reloadData];
+//    }
+//}
+
+
+-(void)searchText:(NSString*)searchText{
+    NSArray* components = [searchText componentsSeparatedByString:@" "];
+    //    NSString *searchText = [self.searchBar.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
     if (![components[0] isEqualToString:@""]) {
         PFQuery *firstQuery = [User query];
@@ -114,7 +234,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
         PFQuery *usernameQuery = [User query];
         PFQuery *emailQuery = [User query];
         PFQuery *lastNameQuery = [User query];
-
+        
         
         [firstQuery whereKey:@"firstName" containsString:components[0]];
         [secondQuery whereKey:@"lastName" containsString:components[0]];
@@ -136,7 +256,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                                                      emailQuery]];
         }
         [refresh beginRefreshing];
-
+        
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             if (!error) {
                 self.searchResults = objects;
@@ -155,24 +275,55 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
             }
             
             [refresh performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:NO];
-
+            
         }];
     }
+    
+
 }
 
--(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-    self.searchResults = @[];
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    
+    NSString *txtToSearch = [NSString new];
+    NSString *substring = [NSString stringWithString:self.searchTxtField.text];
+    substring = [substring stringByReplacingCharactersInRange:range withString:string];
+    txtToSearch = substring;
+    
+    
+    if([txtToSearch isEqualToString:@""] && txtToSearch.length == 0){
+        self.searchResults = @[];
+        [self.crossImage setHidden:YES];
+        
+        [self.tableView reloadData];
+
+    }
+    else{
+         [self.crossImage setHidden:NO];
+    }
+    
+    
+    
+    
+    return YES; //If you don't your textfield won't get any text in it
+}
+
+
+-(IBAction)searchCancelButtonClicked:(UIButton *)sender {
+    self.searchResults = nil;
+    [self.crossImage setHidden:YES];
+
+    self.searchTxtField.text = @"";
     [self.tableView reloadData];
     [refresh endRefreshing];
-
 }
 
--(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    if ([searchText isEqualToString:@""]) {
-        self.searchResults = @[];
-        [self.tableView reloadData];
-    }
+- (IBAction)backButtonClicked:(UIBarButtonItem*)sender{
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
+
 
 
 -(void)refresh{
@@ -180,16 +331,36 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 }
 
 
--(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
-    [self.view addGestureRecognizer:self.hideKeyboardTap];
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [self searchText:textField.text];
+    [textField resignFirstResponder];
+    return YES;
 }
 
-- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
     [self.view removeGestureRecognizer:self.hideKeyboardTap];
 }
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    [self.view addGestureRecognizer:self.hideKeyboardTap];
+
+}
+
+
+
+//-(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+//    [self.view addGestureRecognizer:self.hideKeyboardTap];
+//}
+//
+//- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+//    [self.view removeGestureRecognizer:self.hideKeyboardTap];
+//}
+
 - (void) dismissKeyboard {
-    [self.searchBar resignFirstResponder];
+    [self.searchTxtField resignFirstResponder];
 }
 
 #pragma mark - Navigation
@@ -198,35 +369,35 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     User *user = (User*)self.searchResults[indexPath.row];
-    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    FriendProfileViewController *friendProfileViewController = [storyboard instantiateViewControllerWithIdentifier:@"FriendsProfile"];
-    [friendProfileViewController setUser:user];
-    [self.navigationController pushViewController:friendProfileViewController animated:YES];
+//    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    FriendProfileViewController *friendProfileViewController = [storyboard instantiateViewControllerWithIdentifier:@"FriendsProfile"];
+//    [friendProfileViewController setUser:user];
+//    [self.navigationController pushViewController:friendProfileViewController animated:YES];
     
     
     
     
-//    
-//    if(([[self.friendsArray valueForKeyPath:@"objectId"] containsObject:user.objectId]))
-//    {
-//        
-//        UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//        FriendProfileViewController *friendProfileViewController = [storyboard instantiateViewControllerWithIdentifier:@"FriendsProfile"];
-//        [friendProfileViewController setUser:user];
-//        [self.navigationController pushViewController:friendProfileViewController animated:YES];
-//        
-//        
-//        
-//        
-//    }
-//    else{
-//        [[[UIAlertView alloc] initWithTitle:@""
-//                                    message:@"You do not have access to view Profile. Please request to view this friend profile."
-//                                   delegate:self
-//                          cancelButtonTitle:@"Cancel"
-//                          otherButtonTitles:NSLocalizedString(@"Send Invite", nil), nil] show];
-//    }
-//    
+    
+    if(([[self.friendsArray valueForKeyPath:@"objectId"] containsObject:user.objectId]))
+    {
+        
+        UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        FriendProfileViewController *friendProfileViewController = [storyboard instantiateViewControllerWithIdentifier:@"FriendsProfile"];
+        [friendProfileViewController setUser:user];
+        [self.navigationController pushViewController:friendProfileViewController animated:YES];
+        
+        
+        
+        
+    }
+    else{
+        [[[UIAlertView alloc] initWithTitle:@""
+                                    message:@"You do not have access to view Profile. Please request to view this friend profile."
+                                   delegate:self
+                          cancelButtonTitle:@"Cancel"
+                          otherButtonTitles:NSLocalizedString(@"Send Invite", nil), nil] show];
+    }
+    
     
     
     

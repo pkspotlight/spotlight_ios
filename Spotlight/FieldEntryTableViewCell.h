@@ -19,12 +19,14 @@
 @end
 
 @interface FieldEntryTableViewCell : UITableViewCell <UITextFieldDelegate>
+@property (weak, nonatomic) IBOutlet UITextField *valueTextField;
 
 - (void)focusTextField;
 
 - (void)formatForAttributeString:(NSString*)attributeString
                      displayText:(NSString*)displayText
-                       withValue:(NSString*)fieldValue;
+                       withValue:(NSString*)fieldValue isCenter:(BOOL)isCenter;
+    
 - (void)setKeyboardType:(UIKeyboardType)keyboardType;
 - (void)setIsSecure:(BOOL)isSecure;
 @property (readonly, nonatomic) NSString *attributeString;

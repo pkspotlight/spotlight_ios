@@ -15,6 +15,7 @@
 
 @interface SpotlightMedia : MediaObject <PFSubclassing>
 @property (assign, nonatomic) double timeStamp;
+@property (assign, nonatomic) NSArray *participantArray;
 + (NSString *)parseClassName;
 
 - (void)likeInBackgroundFromUser:(User*)user completion:(void (^)(void))completion;

@@ -14,18 +14,24 @@
 #import <MobileCoreServices/UTCoreTypes.h>
 #import <AFNetworking/UIButton+AFNetworking.h>
 #import <MBProgressHUD.h>
+#import <AFNetworking/UIImageView+AFNetworking.h>
 
 
 @interface ProfileTableViewController ()
 {
     NSString *userName;
+    NSString *familyName;
 }
 
 @property (strong, nonatomic) NSMutableDictionary *pendingFieldDictionary;
 @property (strong, nonatomic) NSArray* userPropertyArray;
 @property (strong, nonatomic) NSArray* userPropertyArrayDisplayText;
 
-@property (weak, nonatomic) IBOutlet UIButton *profilePictureImageView;
+//@property (weak, nonatomic) IBOutlet UIButton *profilePictureImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *profilePictureImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *profilePictureImageViewFront;
+
+
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (strong, nonatomic) UIImagePickerController* imagePickerController;
 @property (strong, nonatomic) ProfilePictureMedia* profilePic;
@@ -36,7 +42,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
+    //[self.navigationController setNavigationBarHidden:YES];
     self.user = [User currentUser];
      userName = self.user.username;
     self.userPropertyArray = @[ @"username",
@@ -49,22 +55,62 @@
                                            @"Last Name",
                                            @"Hometown",
                                            @"Family" ];
-    self.pendingFieldDictionary = [self newPendingFieldDictionary];
+    
+    [self loadChildren:nil];
+//    self.pendingFieldDictionary = [self newPendingFieldDictionary];
     [self.user[@"profilePic"] fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
         self.profilePic = (ProfilePictureMedia*)object;
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.profilePic.thumbnailImageFile.url]];
+        [self.profilePictureImageViewFront.layer setBorderColor:[[UIColor lightGrayColor] colorWithAlphaComponent:0.4].CGColor];
+        [self.profilePictureImageViewFront.layer setCornerRadius:5];
+        [self.profilePictureImageViewFront.layer setBorderWidth:3];
         
-        [self.profilePictureImageView setImageForState:UIControlStateNormal withURLRequest:request placeholderImage:nil success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, UIImage * _Nonnull image) {
-            [self.profilePictureImageView setImage:image forState:UIControlStateNormal];
-        } failure:nil];
+        [_profilePictureImageViewFront setClipsToBounds:YES];
+
+        [_profilePictureImageView
+         setImageWithURLRequest:request
+         placeholderImage:nil
+         success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, UIImage * _Nonnull image) {
+             
+             [self.profilePictureImageView setImage:image];
+             [self.profilePictureImageViewFront setImage:image];
+         } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, NSError * _Nonnull error) {
+             NSLog(@"fuck thumbnail failure");
+         }];
+
+        
+     
     }];
     
-    [self.profilePictureImageView.imageView setContentMode:UIViewContentModeScaleAspectFill];
+    //[self.profilePictureImageView.imageView setContentMode:UIViewContentModeScaleAspectFill];
+    
+    UIBarButtonItem *barButton = [[UIBarButtonItem alloc]initWithTitle:@"Logout" style:UIBarButtonItemStylePlain target:self action:@selector(logout:)];
+    barButton.tintColor = [UIColor whiteColor];
+    
+    
+    self.navigationItem.rightBarButtonItem = barButton;
+
     [self.usernameLabel setText:[self.user displayName]];
-    [self.profilePictureImageView.layer setCornerRadius:self.profilePictureImageView.bounds.size.width/2];
-    [self.profilePictureImageView.layer setBorderWidth:3];
-    [self.profilePictureImageView.layer setBorderColor:[UIColor whiteColor].CGColor];
-    [self.profilePictureImageView setClipsToBounds:YES];
+   
+}
+
+
+- (void)loadChildren:(UIRefreshControl*)refresh {
+    PFQuery *query = [self.user.children query];
+    NSLog(@"User: %@",self.user.displayName);
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        NSMutableArray *name = [NSMutableArray new];
+        for(Child *child in objects){
+            NSString *displayName = [NSString stringWithFormat:@"%@ %@",child.firstName ,child.lastName];
+            [name addObject:displayName];
+        }
+    
+       
+        familyName = [name componentsJoinedByString:@","];
+          self.pendingFieldDictionary = [self newPendingFieldDictionary];
+        
+       
+    }];
 }
 
 - (NSMutableDictionary *)newPendingFieldDictionary {
@@ -72,7 +118,11 @@
     User* user = [User currentUser];
     for (NSString* attribute in self.userPropertyArray) {
         fieldDict[attribute] = user[attribute];
+        fieldDict[@"family"] = familyName;
     }
+    
+    
+    [self.tableView reloadData];
     return fieldDict;
 }
 
@@ -95,7 +145,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -110,25 +160,43 @@
         NSString* property = self.userPropertyArray[indexPath.row];
         [(FieldEntryTableViewCell*)cell formatForAttributeString:property
                                                      displayText:self.userPropertyArrayDisplayText[indexPath.row]
-                                                       withValue:self.pendingFieldDictionary[property]];
+                                                       withValue:self.pendingFieldDictionary[property] isCenter:NO];
+        if(indexPath.row == 4){
+          
+            [[(FieldEntryTableViewCell*)cell valueTextField] setEnabled:NO];
+        }
+        
         [(FieldEntryTableViewCell*)cell setDelegate:self];
     } else if (indexPath.section == 1) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"SendFeedbackCellId" forIndexPath:indexPath];
-    } else {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"LogoutCellId" forIndexPath:indexPath];
-
+        
     }
+//    } else {
+//        cell = [tableView dequeueReusableCellWithIdentifier:@"LogoutCellId" forIndexPath:indexPath];
+//
+//    }
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 1) {
-        [self showFeedbackEmail];
-    } else if(indexPath.section == 2) {
-        NSLog(@"%d",indexPath.section);
-        [self logout];
-    }
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+//    if (indexPath.section == 1) {
+//        [self showFeedbackEmail];
+//    } else if(indexPath.section == 2) {
+//        NSLog(@"%d",indexPath.section);
+//        [self logout];
+//    }
+//}
+
+
+- (void)logout:(UIBarButtonItem*)sender {
+    [self logout];
 }
+
+- (IBAction)showFeedback:(UIButton*)sender {
+     [self showFeedbackEmail];
+}
+
+
 
 - (void)showFeedbackEmail {
     if ([MFMailComposeViewController canSendMail]){
@@ -167,8 +235,10 @@
 
     UIImage *image = [infoDict valueForKey:UIImagePickerControllerOriginalImage];
     self.profilePic = [[ProfilePictureMedia alloc] initWithImage:image];
-    [self.profilePictureImageView setImage:image forState:UIControlStateNormal];
-    [self.profilePic saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+    self.profilePictureImageView.image = image;
+       self.profilePictureImageViewFront.image = image;
+     
+     [self.profilePic saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
 
     }];
     [self.imagePickerController dismissViewControllerAnimated:YES completion:nil];
@@ -296,8 +366,11 @@
         imagePickerController.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeImage, nil];
         imagePickerController.videoMaximumDuration = 15;
         [imagePickerController setAllowsEditing:YES];
+      
         
+
         self.imagePickerController = imagePickerController;
+         self.navigationController.navigationBar.tintColor = [UIColor blueColor];
         [self.navigationController presentViewController:self.imagePickerController animated:YES completion:nil];
     }
 }

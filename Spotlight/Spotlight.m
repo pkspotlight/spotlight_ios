@@ -15,6 +15,8 @@
 @dynamic title;
 @dynamic team;
 @dynamic moderators;
+@dynamic spotlightDescription;
+@dynamic spotlightTitle;
 
 - (void)allMedia:(void (^)(NSArray *media, NSError *error))completion {
     PFQuery *query = [PFQuery queryWithClassName:@"SpotlightMedia"];

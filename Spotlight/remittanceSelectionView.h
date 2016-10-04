@@ -11,4 +11,7 @@
 @interface remittanceSelectionView : UIView
 @property (strong) UIButton *remButton;
 @property (strong) Child *childSelected;
+@property (strong) User *participant;
+
+
  @end

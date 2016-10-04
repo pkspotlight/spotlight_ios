@@ -19,6 +19,8 @@
 
 @property(strong, nonatomic) NSString*  creatorName;
 @property(strong, nonatomic) NSString*  title;
+@property(strong, nonatomic) NSString*  spotlightTitle;
+@property(strong, nonatomic) NSString*  spotlightDescription;
 @property(strong, nonatomic) Team* team;
 @property (readonly, nonatomic) PFRelation* moderators;
 

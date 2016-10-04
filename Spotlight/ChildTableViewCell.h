@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Team.h"
 @class Child;
 
 @interface ChildTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *userDisplayNameLabel;
-- (void)formatForChild:(Child*)child isFollowing:(BOOL)isFollowing;
+@property (weak, nonatomic) Team *team ;
+@property (weak, nonatomic) IBOutlet UIButton *followButton;
 
+//- (void)formatForChild:(Child*)child isFollowing:(BOOL)isFollowing;
+- (void)formatForChild:(Child*)child isSpectator:(BOOL)isSpectator isFollowing:(BOOL)isFollowing;
 @end

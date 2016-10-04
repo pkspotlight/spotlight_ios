@@ -23,7 +23,10 @@
 {
     UIRefreshControl* refresh;
     Spotlight *spotLightCellSelected;
+    
 }
+
+
 @end
 
 @implementation SpotlightFeedViewController
@@ -43,14 +46,17 @@
     [self refresh:refresh];
     [refresh beginRefreshing];
     UIView *headerView = [[UIView alloc] init];
-    headerView.frame = CGRectMake(0, 0, 320, 70);
+    headerView.frame = CGRectMake(0, 0, self.view.frame.size.width, 70);
     
-    UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"spotlightWriting"]];
-    imgView.frame = CGRectMake(58, 0, 240, 70);
-    imgView.contentMode = UIViewContentModeScaleAspectFit;
+    UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
+    imgView.frame = CGRectMake((self.view.frame.size.width-140)/2, 22, 140, 25);
+    imgView.contentMode = UIViewContentModeScaleAspectFill;
     
     [headerView addSubview:imgView];
-    
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 140;
+
+  
     self.navigationItem.titleView = headerView;
 }
 
@@ -124,6 +130,7 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+     [self.navigationController setNavigationBarHidden:NO];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [[NSNotificationCenter defaultCenter] postNotificationName:@"PendingRequest" object:nil];
     });
@@ -281,7 +288,7 @@
                     
                     TeamRequest *teamRequest = [[TeamRequest alloc]init];
                     
-                    [teamRequest saveTeam:spotLightCellSelected.team andAdmin:user  followby:[User currentUser] orChild:nil withTimestamp:timestamp isChild:@0 completion:^{
+                    [teamRequest saveTeam:spotLightCellSelected.team andAdmin:user  followby:[User currentUser] orChild:nil withTimestamp:timestamp isChild:@0 isType:@1 completion:^{
 //                        if (completion) {
 //                            
 //                            completion();

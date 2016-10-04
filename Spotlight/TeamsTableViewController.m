@@ -29,6 +29,7 @@ static CGFloat const BasicHeaderHeight = 50;
     NSString *pendingRequest;
     long count;
     NSMutableArray *filteredArrayOfObjects;
+      NSMutableArray *userTeamArray;
 }
 
 @property (strong, nonatomic) NSMutableArray *teams;
@@ -41,6 +42,7 @@ static CGFloat const BasicHeaderHeight = 50;
     [super viewDidLoad];
      count = 0;
      filteredArrayOfObjects = [[NSMutableArray alloc] init];
+       userTeamArray = [[NSMutableArray alloc] init];
     pendingRequest = [[NSString alloc]init];
  //   [self.tableView registerNib:[UINib nibWithNibName:@"BasicHeaderView" bundle:nil]
 //forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
@@ -105,8 +107,9 @@ static CGFloat const BasicHeaderHeight = 50;
             NSMutableArray *array = [NSMutableArray new];
             for(TeamRequest *request in objects)
             {
-              if((request.requestState.intValue == reqestStatePending))
+              if((request.requestState.intValue == reqestStatePending)&&(([request.type intValue]==1)||([request.type intValue]==3)))
               {
+                  
                  [array addObject:request];
              }
                 
@@ -253,6 +256,13 @@ static CGFloat const BasicHeaderHeight = 50;
     Team* team = self.teams[indexPath.row];
     [cell setDelegate:self];
     [cell formatForTeam:team isFollowing:(indexPath.section == 0)];
+    if(self.isFollowingShow){
+        cell.followButton.hidden = YES;
+    }
+    else{
+        cell.followButton.hidden = NO;
+    }
+   
     return cell;
 }
 

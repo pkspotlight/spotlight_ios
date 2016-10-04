@@ -12,7 +12,8 @@
 #import "MWPhotoBrowserPrivate.h"
 #import "SDImageCache.h"
 #import "UIImage+MWPhotoBrowser.h"
-
+#import "TaggedParticipantView.h"
+#import "MontageCreator.h"
 #define PADDING                  10
 
 static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
@@ -182,6 +183,10 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
     }
 
     _cropButton = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"edit.png"] style:UIBarButtonItemStylePlain target:self action:@selector(cropButtonPressed:)];
+    
+    _tagButton = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"TagButton"] style:UIBarButtonItemStylePlain target:self action:@selector(tagButtonPressed:)];
+
+    
    //_cropButton.imageInsets = UIEdgeInsetsMake(0.0, 0.0, 0, -30);
     
     _deleteBtn = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"delete.png"] style:UIBarButtonItemStylePlain target:self action:@selector(deleteButtonPressed:)];
@@ -275,7 +280,7 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
     } else {
         // We're not showing the toolbar so try and show in top right
         if (_actionButton && _cropButton)
-                  self.navigationItem.rightBarButtonItems = @[_deleteBtn,_actionButton,_cropButton];
+                  self.navigationItem.rightBarButtonItems = @[_deleteBtn,_actionButton,_cropButton,_tagButton];
         [items addObject:fixedSpace];
     }
 
@@ -1124,8 +1129,8 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
     // Disable action button if there is no image or it's a video
     MWPhoto *photo = [self photoAtIndex:_currentPageIndex];
     if ([photo underlyingImage] == nil || ([photo respondsToSelector:@selector(isVideo)] && photo.isVideo)) {
-        _actionButton.enabled = NO;
-        _actionButton.tintColor = [UIColor clearColor]; // Tint to hide button
+        _actionButton.enabled = YES;
+        _actionButton.tintColor = nil; // Tint to hide button
         _cropButton.enabled = NO;
         _cropButton.tintColor = [UIColor clearColor]; // Tint to hide button
     } else {
@@ -1352,7 +1357,7 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
     
     // Hide action button on nav bar if it exists
     if (self.navigationItem.rightBarButtonItems[1] == _actionButton && self.navigationItem.rightBarButtonItems[2] == _cropButton) {
-        _gridPreviousRightNavItems = @[_deleteBtn,_actionButton, _cropButton];
+        _gridPreviousRightNavItems = @[_deleteBtn,_actionButton, _cropButton,_tagButton];
         [self.navigationItem setRightBarButtonItems:nil animated:YES];
     } else {
         _gridPreviousRightNavItems = nil;
@@ -1600,7 +1605,25 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
 - (void)actionButtonPressed:(id)sender {
 
     // Only react when image has loaded
+    
+    
+    
+    
+    
     id <MWPhoto> photo = [self photoAtIndex:_currentPageIndex];
+    
+    if ([photo underlyingImage] == nil || ([photo respondsToSelector:@selector(isVideo)] && photo.isVideo)){
+        
+        if([_delegate respondsToSelector:@selector(photoBrowser:shareMediaForVideo:)]){
+            [ self.delegate photoBrowser:self shareMediaForVideo:_currentPageIndex];
+        }
+        
+        
+     
+        
+        return;
+    }
+    
     if ([self numberOfPhotos] > 0 && [photo underlyingImage]) {
         
         // If they have defined a delegate method then just message them
@@ -1656,9 +1679,56 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
     [self.delegate cropBtnClicked:self.currentIndex withImage:photo.underlyingImage];
 }
 
+- (void)tagButtonPressed:(id)sender
+
+{
+    if(_participantArray.count>0){
+        TaggedParticipantView *spotlightParticipantView = [[TaggedParticipantView alloc]initWithParticipant:_participantArray withTitle:@"abcd"];
+        CGRect frameRect =spotlightParticipantView.frame;
+        frameRect.size.width = [UIScreen mainScreen].bounds.size.width;
+        frameRect.size.height = [UIScreen mainScreen].bounds.size.height;
+        spotlightParticipantView.frame = frameRect;
+        
+        
+        [ [[UIApplication sharedApplication].delegate window] addSubview:spotlightParticipantView];
+        spotlightParticipantView.translatesAutoresizingMaskIntoConstraints = true;
+    }else{
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"No Tagged Participants"
+                                                          message:nil
+                                                         delegate:self
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles:nil,nil];
+                [message show];
+
+    }
+    
+ 
+}
+
+
+
 - (void)deleteButtonPressed:(id)sender
 {
-    [self.delegate photoBrowser:self deletePhotoAtIndex:self.currentIndex];
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Are sure you want to delete?"
+                                                                   message:@""
+                                                            preferredStyle:UIAlertControllerStyleActionSheet];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Yes"
+                                              style:UIAlertActionStyleDestructive
+                                            handler:^(UIAlertAction * _Nonnull action) {
+                                                 [self.delegate photoBrowser:self deletePhotoAtIndex:self.currentIndex];
+                                             
+                                            }]];
+
+    
+                      [alert addAction:[UIAlertAction actionWithTitle:@"No"
+                                                                style:UIAlertActionStyleCancel
+                                                              handler:^(UIAlertAction * _Nonnull action) {
+                                                              }]];
+                      [self presentViewController:alert animated:YES completion:nil];
+
+    
+    
+   
 }
 
 

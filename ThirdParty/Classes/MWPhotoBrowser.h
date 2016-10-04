@@ -27,6 +27,9 @@
 
 @optional
 
+
+-(void)photoBrowser:(MWPhotoBrowser *)photoBrowser shareMediaForVideo:(NSUInteger)index;
+
 - (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser thumbPhotoAtIndex:(NSUInteger)index;
 - (MWCaptionView *)photoBrowser:(MWPhotoBrowser *)photoBrowser captionViewForPhotoAtIndex:(NSUInteger)index;
 - (NSString *)photoBrowser:(MWPhotoBrowser *)photoBrowser titleForPhotoAtIndex:(NSUInteger)index;
@@ -37,6 +40,8 @@
 - (void)photoBrowserDidFinishModalPresentation:(MWPhotoBrowser *)photoBrowser;
 -(void)cropBtnClicked:(NSUInteger)currentIndex withImage:(UIImage *)image;
 -(void)photoBrowser:(MWPhotoBrowser *)photoBrowser deletePhotoAtIndex:(NSUInteger)index;
+-(void)photoBrowser:(MWPhotoBrowser *)photoBrowser getTaggedUsers:(NSArray*)users;
+
 
 
 @end
@@ -59,8 +64,11 @@
 // Customise image selection icons as they are the only icons with a colour tint
 // Icon should be located in the app's main bundle
 @property (nonatomic, strong) NSString *customImageSelectedIconName;
+@property (nonatomic, strong) NSArray *participantArray;
+
 @property (nonatomic, strong) NSString *customImageSelectedSmallIconName;
 @property (nonatomic, strong) UIBarButtonItem *cropButton;
+@property (nonatomic, strong) UIBarButtonItem *tagButton;
 @property (nonatomic, strong) UIBarButtonItem *deleteBtn;
 @property (nonatomic, strong) UIBarButtonItem *likeBtn;
 

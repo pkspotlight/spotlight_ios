@@ -18,7 +18,6 @@
 @property (strong, nonatomic) Child *child;
 
 //@property (weak, nonatomic) IBOutlet UILabel *userDisplayNameLabel;
-@property (weak, nonatomic) IBOutlet UIButton *followButton;
 @property (weak, nonatomic) IBOutlet UIImageView *userImageView;
 @property (assign, nonatomic) BOOL isFollowing;
 
@@ -26,12 +25,47 @@
 
 @implementation ChildTableViewCell
 
-- (void)formatForChild:(Child*)child isFollowing:(BOOL)isFollowing {
+- (void)formatForChild:(Child*)child isSpectator:(BOOL)isSpectator isFollowing:(BOOL)isFollowing {
     _child = child;
     self.userImageView.image = nil;
     [self.userImageView.layer setCornerRadius:self.userImageView.bounds.size.width/2];
     [self.userImageView setClipsToBounds:YES];
     [self.userDisplayNameLabel setText:[self.child displayName]];
+   [self.userImageView.layer setBorderColor:[[UIColor lightGrayColor] colorWithAlphaComponent:0.4].CGColor];
+       
+   
+
+    [self.userImageView.layer setBorderWidth:2.0];
+
+    
+//    if(isSpectator){
+//        
+//        if([self.team.spectatorsArray containsObject:self.child.objectId]){
+//            NSLog(@"spec");
+//            self.userDisplayNameLabel.textColor = [UIColor blackColor];
+//            
+//        }
+//        else{
+//            
+//            self.userDisplayNameLabel.textColor = [UIColor colorWithRed:46/255.0 green:171/255.0 blue:21/255.0 alpha:1.0];
+//            
+//           // NSString *name = [NSString stringWithFormat:@"%@ *",[self.child displayName]];
+//           // [self.userDisplayNameLabel setText:name];
+//            
+//            NSLog(@"part");
+//            
+//            
+//        }
+//    
+//    
+//    }
+//    else{
+//        self.userDisplayNameLabel.textColor = [UIColor blackColor];
+//
+//         [self.userDisplayNameLabel setText:[self.child displayName]];
+//    }
+   
+//
     self.userImageView.image = [UIImage imageNamed:@"unknown_user.png"];
     
     NSString* buttonText = (isFollowing) ? @"Following" : @"Follow";

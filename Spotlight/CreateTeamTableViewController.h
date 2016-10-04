@@ -15,5 +15,7 @@
 @interface CreateTeamTableViewController : UITableViewController <FieldEntryTextFieldCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate,ChildToAddToTeam>
 
 @property (strong, nonatomic) Team* team;
+@property (assign, nonatomic) BOOL isEdit;
+
 
 @end

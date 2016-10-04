@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface FriendFinderTableViewController : UITableViewController <UISearchBarDelegate>
-
+#import "Team.h"
+@interface FriendFinderTableViewController : UITableViewController <UISearchBarDelegate,UITextFieldDelegate>
+@property (strong, nonatomic) NSNumber* controllerType;
+@property (strong, nonatomic) Team* selectedTeam;
 @end

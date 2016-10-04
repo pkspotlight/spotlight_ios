@@ -18,6 +18,7 @@
 @property (strong, nonatomic) NSString* firstName;
 @property (strong, nonatomic) NSString* lastName;
 @property (strong, nonatomic) NSString* hometown;
+
 @property (strong, nonatomic) NSDate* birthDate;
 @property (readonly, nonatomic) PFRelation* friends;
 @property (readonly, nonatomic) PFRelation* teams;
@@ -26,4 +27,5 @@
 - (void)followTeam:(Team*)team completion:(void (^)(void))completion;
 - (void)unfollowTeam:(Team*)team completion:(void (^)(void))completion;
 - (void)followTeamWithBlockCallback:(Team*)team completion:(PFBooleanResultBlock)block;
+//- (void)followTeamWithBlockCallback:(Team*)team withSpectator:(BOOL)isParticipant completion:(PFBooleanResultBlock)block;
 @end

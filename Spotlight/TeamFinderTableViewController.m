@@ -18,9 +18,15 @@
 {
     UIRefreshControl* refresh;
     NSMutableArray *pendingRequestArray;
-}
-@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+    NSMutableArray *filteredArrayOfObjects;
 
+}
+//@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UITextField *searchTxtField;
+@property (weak, nonatomic) IBOutlet UIImageView *searchImage;
+@property (weak, nonatomic) IBOutlet UIButton *crossImage;
+
+@property (strong, nonatomic) NSMutableArray *teams;
 @property (strong, nonatomic) NSArray* searchResults;
 @property (strong, nonatomic) UITapGestureRecognizer* hideKeyboardTap;
 @end
@@ -30,7 +36,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     pendingRequestArray = [NSMutableArray new];
+    filteredArrayOfObjects = [[NSMutableArray alloc] init];
+    _teams = [[NSMutableArray alloc] init];
     [self fetchAllPendingRequest];
+    [self loadUserTeams:nil];
     [self.tableView registerNib:[UINib nibWithNibName:@"BasicHeaderView" bundle:nil]
 forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     refresh = [[UIRefreshControl alloc] init];
@@ -40,6 +49,95 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                             initWithTarget:self
                             action:@selector(dismissKeyboard)];
 }
+
+
+
+- (void)loadUserTeams:(UIRefreshControl*)sender  {
+    PFQuery *query = [[[User currentUser] teams] query];
+    [query includeKey:@"teamLogoMedia"];
+    [query orderByDescending:@"year"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            NSLog(@"Successfully retrieved my %lu Teams.", (unsigned long)objects.count);
+            [self.teams addObjectsFromArray:[objects copy]];
+            
+            [self sortTeamsArray:self.teams];
+            PFQuery *query = [[User currentUser].children query];
+            [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+                for (Child* child in objects) {
+                    [self loadChildTeams:child sender:sender];
+                }
+                [self.tableView reloadData];
+                [sender endRefreshing];
+            }];
+        } else {
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+            [sender endRefreshing];
+        }
+    }];
+}
+
+- (void)loadChildTeams:(Child*)child sender:(UIRefreshControl*)sender {
+    PFQuery *query = [child.teams query];
+    [query includeKey:@"teamLogoMedia"];
+    [query orderByDescending:@"year"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            NSLog(@"Successfully retrieved child's %lu Teams.", (unsigned long)objects.count);
+            [self.teams addObjectsFromArray:[objects copy]];
+            
+            [self sortTeamsArray:self.teams];
+            [self.tableView reloadData];
+            [sender endRefreshing];
+        } else {
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+            [sender endRefreshing];
+        }
+    }];
+}
+
+- (void)sortTeamsArray:(NSMutableArray*)teams {
+    NSArray *sortedArray = [teams sortedArrayUsingComparator:^NSComparisonResult(Team* a, Team* b) {
+        if (a.year == b.year) {
+            if ([[a.season lowercaseString] isEqualToString:@"fall"]) {
+                return (NSComparisonResult)NSOrderedAscending;
+            } else if ([[a.season lowercaseString] isEqualToString:@"winter"]) {
+                if ([[b.season lowercaseString] isEqualToString:@"fall"]) {
+                    return (NSComparisonResult)NSOrderedAscending;
+                }else{
+                    return (NSComparisonResult)NSOrderedDescending;
+                }
+            }  else if ([[a.season lowercaseString] isEqualToString:@"spring"]) {
+                if ([[b.season lowercaseString] isEqualToString:@"fall"] || [[b.season lowercaseString] isEqualToString:@"winter"]) {
+                    return (NSComparisonResult)NSOrderedDescending;
+                }else{
+                    return (NSComparisonResult)NSOrderedAscending;
+                }
+            } else {
+                return (NSComparisonResult)NSOrderedDescending;
+            }
+        } else if (a.year > b.year) {
+            return (NSComparisonResult)NSOrderedAscending;
+        }
+        return (NSComparisonResult)NSOrderedDescending;
+    }];
+    [filteredArrayOfObjects removeAllObjects];
+    
+    for (Team *team in sortedArray)
+    {
+        if(!([[filteredArrayOfObjects valueForKeyPath:@"objectId"] containsObject:team.objectId]))
+        {
+            [filteredArrayOfObjects addObject:team];
+        }
+    }
+    
+    self.teams = filteredArrayOfObjects;
+    
+    // [NSMutableArray arrayWithArray:sortedArray];
+}
+
+
+
 
 #pragma mark - Table view data source
 
@@ -56,10 +154,33 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     if ([self.searchResults count] == 0) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"NoResultsTableViewCell"
                                                forIndexPath:indexPath];
+        if (self.searchResults == nil) {
+            cell.contentView.hidden = YES;
+        }else{
+            cell.contentView.hidden = NO;
+        }
+        
     } else {
         cell = (TeamTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"TeamTableViewCell"
                                                                    forIndexPath:indexPath];
-        [(TeamTableViewCell*)cell formatForTeam:self.searchResults[indexPath.row] isFollowing:NO];
+        
+        
+        
+        bool isFollowing = false;
+        Team *team = (Team*)self.searchResults[indexPath.row];
+
+
+        if(([[self.teams valueForKeyPath:@"objectId"] containsObject:team.objectId]))
+        {
+            isFollowing = true;
+            
+            
+        }
+        else{
+            isFollowing = false;
+        }
+
+        [(TeamTableViewCell*)cell formatForTeam:self.searchResults[indexPath.row] isFollowing:isFollowing];
         
         [(TeamTableViewCell*)cell setDelegate:self];
     }
@@ -71,12 +192,53 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 
 #pragma mark - SearchBar Delegate Methods
 
--(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    //dismiss keyboard
-    [self.searchBar resignFirstResponder];
+//-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+//    //dismiss keyboard
+//    [self.searchBar resignFirstResponder];
+//    
+//    //Strip the whitespace off the end of the search text
+//    NSString *searchText = [self.searchBar.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+//    
+//    if (![searchText isEqualToString:@""]) {
+//        
+//        [refresh beginRefreshing];
+//        
+//        PFQuery *firstQuery = [Team query];
+//        PFQuery *secondQuery = [Team query];
+//        
+//        [firstQuery whereKey:@"teamName" containsString:searchText];
+//        [secondQuery whereKey:@"town" containsString:searchText];
+//        
+//        PFQuery *query = [PFQuery orQueryWithSubqueries:@[firstQuery,
+//                                                          secondQuery]];
+//        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//            if (!error) {
+//                self.searchResults = objects;
+//                if (objects.count > 0) {
+//                    for (Team *team in objects) {
+//                        NSLog(@"team: %@, %@", team.teamName, team.town);
+//                    }
+//                } else {
+//                    //Show no search results message
+//                }
+//                
+//                //reload the tableView after the user searches
+//                [self.tableView reloadData];
+//            } else {
+//                
+//            }
+//            [refresh performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:NO];
+//        }];
+//    }
+//}
+//
+
+
+-(void)searchText:(NSString*)searchTeamText{
+  //  [self.searchBar resignFirstResponder];
     
     //Strip the whitespace off the end of the search text
-    NSString *searchText = [self.searchBar.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSString *searchText = [searchTeamText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
     if (![searchText isEqualToString:@""]) {
         
@@ -109,36 +271,104 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
             [refresh performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:NO];
         }];
     }
+    
+    
 }
+
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    
+    NSString *txtToSearch = [NSString new];
+    NSString *substring = [NSString stringWithString:self.searchTxtField.text];
+    substring = [substring stringByReplacingCharactersInRange:range withString:string];
+    txtToSearch = substring;
+    
+    
+    if([txtToSearch isEqualToString:@""] && txtToSearch.length == 0){
+        self.searchResults = @[];
+        [self.crossImage setHidden:YES];
+        
+        [self.tableView reloadData];
+        
+    }
+    else{
+        [self.crossImage setHidden:NO];
+    }
+    
+    
+    
+    
+    return YES; //If you don't your textfield won't get any text in it
+}
+
+
+-(IBAction)searchCancelButtonClicked:(UIButton *)sender {
+    self.searchResults =  nil;
+    [self.crossImage setHidden:YES];
+    
+    self.searchTxtField.text = @"";
+    [self.tableView reloadData];
+    [refresh endRefreshing];
+}
+
+- (IBAction)backButtonClicked:(UIBarButtonItem*)sender{
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+
+
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [self searchText:textField.text];
+    [textField resignFirstResponder];
+    return YES;
+}
+
+
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+    [self.view removeGestureRecognizer:self.hideKeyboardTap];
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    [self.view addGestureRecognizer:self.hideKeyboardTap];
+    
+}
+
+
+
 
 -(void)refresh{
     [refresh endRefreshing];
 }
 
--(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-    self.searchResults = @[];
-    [self.tableView reloadData];
-    [refresh endRefreshing];
+//-(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+//    self.searchResults = @[];
+//    [self.tableView reloadData];
+//    [refresh endRefreshing];
+//
+//}
 
-}
-
--(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    if ([searchText isEqualToString:@""]) {
-        self.searchResults = @[];
-        [self.tableView reloadData];
-    }
-}
-
--(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
-    [self.view addGestureRecognizer:self.hideKeyboardTap];
-}
-
-- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
-    [self.view removeGestureRecognizer:self.hideKeyboardTap];
-}
+//-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+//    if ([searchText isEqualToString:@""]) {
+//        self.searchResults = @[];
+//        [self.tableView reloadData];
+//    }
+//}
+//
+//-(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+//    [self.view addGestureRecognizer:self.hideKeyboardTap];
+//}
+//
+//- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+//    [self.view removeGestureRecognizer:self.hideKeyboardTap];
+//}
 
 - (void) dismissKeyboard {
-    [self.searchBar resignFirstResponder];
+    [self.searchTxtField resignFirstResponder];
 }
 
 -(void)fetchAllPendingRequest{
@@ -260,7 +490,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                                                                     
                                                                     TeamRequest *teamRequest = [[TeamRequest alloc]init];
                                                                     
-                                                                    [teamRequest saveTeam:team andAdmin:user  followby:[User currentUser] orChild:nil withTimestamp:timestamp isChild:@0 completion:^{
+                                                                    [teamRequest saveTeam:team andAdmin:user  followby:[User currentUser] orChild:nil withTimestamp:timestamp isChild:@0 isType:@1  completion:^{
                                                                         if (completion) {
                                                                           
                                                                             completion();
@@ -319,7 +549,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                                                                         
                                                                         TeamRequest *teamRequest = [[TeamRequest alloc]init];
                                                                         
-                                                                        [teamRequest saveTeam:team andAdmin:user  followby:[User currentUser] orChild:child withTimestamp:timestamp isChild:@1 completion:^{
+                                                                        [teamRequest saveTeam:team andAdmin:user  followby:[User currentUser] orChild:child withTimestamp:timestamp isChild:@1 isType:@1 completion:^{
                                                                             if (completion) {
                                                                                 
                                                                                 completion();
@@ -378,7 +608,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                     
                         TeamRequest *teamRequest = [[TeamRequest alloc]init];
                     
-                        [teamRequest saveTeam:team andAdmin:user  followby:[User currentUser] orChild:nil withTimestamp:timestamp isChild:@0 completion:^{
+                        [teamRequest saveTeam:team andAdmin:user  followby:[User currentUser] orChild:nil withTimestamp:timestamp isChild:@0 isType:@1 completion:^{
                             if (completion) {
                                 
                                 completion();

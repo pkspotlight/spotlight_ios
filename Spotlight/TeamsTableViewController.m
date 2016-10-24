@@ -21,18 +21,14 @@
 
 #define SpotlightTeamBoardingText @"This is where you can find all of the teams that you are interested in. Search for existing team by clicking the '+' or create your own!"
 
-
-
-static CGFloat const BasicHeaderHeight = 50;
-
 @interface TeamsTableViewController (){
     NSString *pendingRequest;
     long count;
-    NSMutableArray *filteredArrayOfObjects;
-      NSMutableArray *userTeamArray;
 }
 
-@property (strong, nonatomic) NSMutableArray *teams;
+@property (strong, nonatomic) NSMutableDictionary *teamsByYearDictionary;
+@property (strong, nonatomic) NSMutableArray *seasons;
+@property (strong, nonatomic) NSMutableArray *allTeams;
 
 @end
 
@@ -41,11 +37,8 @@ static CGFloat const BasicHeaderHeight = 50;
 - (void)viewDidLoad {
     [super viewDidLoad];
      count = 0;
-     filteredArrayOfObjects = [[NSMutableArray alloc] init];
-       userTeamArray = [[NSMutableArray alloc] init];
     pendingRequest = [[NSString alloc]init];
- //   [self.tableView registerNib:[UINib nibWithNibName:@"BasicHeaderView" bundle:nil]
-//forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
+
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl  addTarget:self
                              action:@selector(refresh:)
@@ -53,15 +46,10 @@ static CGFloat const BasicHeaderHeight = 50;
     [self setRefreshControl:self.refreshControl];
     [self.refreshControl beginRefreshing];
 
-    //[self.tableView addSubview:self.refreshControl];
-    self.teams = [NSMutableArray array];
     [self addSpotlightTeamScreenBoardingPopUp];
     if (!self.child && !self.user) {
         self.user = [User currentUser];
     }
-   // self.tableView.contentInset = UIEdgeInsetsMake(30, 0, 0, 0);
-   
-   // [self refresh:self.refreshControl];
 }
 
 
@@ -69,13 +57,12 @@ static CGFloat const BasicHeaderHeight = 50;
     [super viewWillAppear:animated];
     count = 0;
      [self fetchRequest];
-    [ filteredArrayOfObjects removeAllObjects];
     [self refresh:self.refreshControl];
 }
+
 -(void)addSpotlightTeamScreenBoardingPopUp{
     
-    if([[NSUserDefaults standardUserDefaults] boolForKey:@"SpotlightTeamPopUp"] == FALSE)
-    {
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"SpotlightTeamPopUp"] == FALSE){
         
         SpotlightBoardView *spotlightBoardingView = [[[NSBundle mainBundle] loadNibNamed:@"SpotlightBoardView" owner:self options:nil] objectAtIndex:0];
         spotlightBoardingView.lblSpotLightScreenDetailTextBold.text = @"";
@@ -90,56 +77,41 @@ static CGFloat const BasicHeaderHeight = 50;
         [[NSUserDefaults standardUserDefaults] synchronize];
         //Alert code will go here...
     }
-    
 }
 
 -(void)fetchRequest{
-  
-    
-    
+
     PFQuery *spotlightQuery = [PFQuery queryWithClassName:@"TeamRequest"];
     [spotlightQuery whereKey:@"admin" equalTo:[User currentUser]];
     
     [spotlightQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         
-        if(objects.count > 0)
-        {
+        if(objects.count > 0){
             NSMutableArray *array = [NSMutableArray new];
-            for(TeamRequest *request in objects)
-            {
-              if((request.requestState.intValue == reqestStatePending)&&(([request.type intValue]==1)||([request.type intValue]==3)))
-              {
-                  
+            for(TeamRequest *request in objects){
+              if((request.requestState.intValue == reqestStatePending)&&(([request.type intValue]==1)||([request.type intValue]==3))){
                  [array addObject:request];
              }
-                
             }
             count = array.count;
-            [self.tableView reloadData];
-          //  pendingRequest = [NSString stringWithFormat:@"You have %ld request pendings",array.count];
             if(array.count>0){
                [[self navigationController] tabBarItem].badgeValue = [NSString stringWithFormat:@"%ld",array.count];
-            }
-            else{
+            }else{
                 [[self navigationController] tabBarItem].badgeValue  = nil;
             }
-
-          
-
-            
-        }
-        else{
+            [self setRequestHeader];
+        }else{
              [[self navigationController] tabBarItem].badgeValue  = nil;
         }
-        
-               
     }];
 }
 
 - (void)refresh:(UIRefreshControl*)sender {
     [sender beginRefreshing];
-    self.teams = [NSMutableArray array];
-    [self.tableView reloadData];
+    self.allTeams = [[NSMutableArray alloc] init];
+    self.seasons = [[NSMutableArray alloc] init];
+    self.teamsByYearDictionary = [[NSMutableDictionary alloc] init];
+    
     if (self.child){
         [self loadChildTeams:self.child sender:sender];
     } else {
@@ -158,9 +130,8 @@ static CGFloat const BasicHeaderHeight = 50;
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             NSLog(@"Successfully retrieved my %lu Teams.", (unsigned long)objects.count);
-            [self.teams addObjectsFromArray:[objects copy]];
          
-            [self sortTeamsArray:self.teams];
+            [self sortTeamsArray:objects];
             PFQuery *query = [self.user.children query];
             [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
                 for (Child* child in objects) {
@@ -183,9 +154,7 @@ static CGFloat const BasicHeaderHeight = 50;
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             NSLog(@"Successfully retrieved child's %lu Teams.", (unsigned long)objects.count);
-            [self.teams addObjectsFromArray:[objects copy]];
-            
-            [self sortTeamsArray:self.teams];
+            [self sortTeamsArray:objects];
             [self.tableView reloadData];
             [sender endRefreshing];
         } else {
@@ -195,7 +164,7 @@ static CGFloat const BasicHeaderHeight = 50;
     }];
 }
 
-- (void)sortTeamsArray:(NSMutableArray*)teams {
+- (void)sortTeamsArray:(NSArray*)teams {
     NSArray *sortedArray = [teams sortedArrayUsingComparator:^NSComparisonResult(Team* a, Team* b) {
         if (a.year == b.year) {
             if ([[a.season lowercaseString] isEqualToString:@"fall"]) {
@@ -220,90 +189,102 @@ static CGFloat const BasicHeaderHeight = 50;
         }
         return (NSComparisonResult)NSOrderedDescending;
     }];
-    [filteredArrayOfObjects removeAllObjects];
- 
-    for (Team *team in sortedArray)
-    {
-        if(!([[filteredArrayOfObjects valueForKeyPath:@"objectId"] containsObject:team.objectId]))
-        {
-            [filteredArrayOfObjects addObject:team];
+    
+    for (Team* team in sortedArray) {
+        NSString* season = [NSString stringWithFormat:@"%@ - %@", team.year, team.season];
+        if (![self.seasons containsObject:season]) {
+            [self.seasons addObject:season];
         }
     }
     
-    self.teams = filteredArrayOfObjects;
-    
-   // [NSMutableArray arrayWithArray:sortedArray];
+    for (NSString* year in self.seasons) {
+        if (!self.teamsByYearDictionary[year]) {
+            [self.teamsByYearDictionary setValue:[NSMutableArray array] forKey:year];
+        }
+        for (Team* team in sortedArray) {
+            NSString* season = [NSString stringWithFormat:@"%@ - %@", team.year, team.season];
+            if ([season isEqualToString:year] && ![self.teamsByYearDictionary[year] containsObject:team] ) {
+                [self.teamsByYearDictionary[year] addObject:team];
+                [self.allTeams addObject:team];
+            }
+        }
+    }
+    [self.tableView reloadData];
 }
-    
-    
+
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return self.seasons.count;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
-    return (count > 0)?30:0;
+    return (self.seasons.count > 0)?30:0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.teams.count;
+    return [[self.teamsByYearDictionary objectForKey:self.seasons[section]] count];
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TeamTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TeamTableViewCell" forIndexPath:indexPath];
-    Team* team = self.teams[indexPath.row];
+    Team* team = self.teamsByYearDictionary[self.seasons[indexPath.section]][indexPath.row];
     [cell setDelegate:self];
-    [cell formatForTeam:team isFollowing:(indexPath.section == 0)];
+    [cell formatForTeam:team isFollowing:(([[self.allTeams valueForKeyPath:@"objectId"] containsObject:team.objectId]))];
     if(self.isFollowingShow){
         cell.followButton.hidden = YES;
-    }
-    else{
+    }else{
         cell.followButton.hidden = NO;
     }
-   
     return cell;
 }
 
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 30)];
+- (void)setRequestHeader{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 30)];
     /* Create custom view to display section header... */
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 30)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 30)];
     [label setFont:[UIFont boldSystemFontOfSize:12]];
     
     UITapGestureRecognizer *singleFingerTap =
     [[UITapGestureRecognizer alloc] initWithTarget:self
                                             action:@selector(handleSingleTap:)];
     [view addGestureRecognizer:singleFingerTap];
- 
     
-    //The event handling method
-  
-
     
     /* Section header is in 0th index... */
-    [label setText:[NSString stringWithFormat:@"You have %ld pending %@",count , (count==1)?@"Request":@"Requests"]];
+    [label setText:[NSString stringWithFormat:@"You have %ld pending %@",count , (count==1)?@"request":@"requests"]];
     label.textAlignment = NSTextAlignmentCenter;
     [view addSubview:label];
     view.backgroundColor = [UIColor redColor];
     label.textColor = [UIColor whiteColor];
-       
-    //your background color...
-    return view;
+    
+    self.tableView.tableHeaderView = view;
+    
 }
 
-- (void)reloadTable {
- //   [self refresh:nil];
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 30)];
+    /* Create custom view to display section header... */
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, tableView.frame.size.width, 30)];
+    [label setFont:[UIFont boldSystemFontOfSize:12]];
+
+    [label setText:self.seasons[section]];
+    label.textAlignment = NSTextAlignmentLeft;
+    [view addSubview:label];
+    view.backgroundColor = [UIColor colorWithRed:40.0/255.0f green:47.0/255.0f blue:61.0/255.0f alpha:1.0];
+    label.textColor = [UIColor whiteColor];
+    
+    //your background color...
+    return view;
 }
 
 - (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     PendingRequestTableViewController *pendingRequestController = [storyboard instantiateViewControllerWithIdentifier:@"PendingRequest"];
     [self.navigationController pushViewController:pendingRequestController animated:YES];
-    
-    //Do stuff here...
+
 }
 
 - (IBAction)addTeamButtonPressed:(id)sender {
@@ -342,9 +323,9 @@ static CGFloat const BasicHeaderHeight = 50;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    NSIndexPath *path = [self.tableView indexPathForCell:sender];
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
     if ([segue.identifier isEqualToString:@"teamDetailsSegue"]) {
-        Team* team = self.teams[path.row];
+        Team* team = self.teamsByYearDictionary[self.seasons[indexPath.section]][indexPath.row];
         [(TeamDetailsViewController*)[segue destinationViewController] setTeam:team];
     } else if ([segue.identifier isEqualToString:@"SearchTeamsSegue"]) {
     } else if ([segue.identifier isEqualToString:@"CreateTeamSegue"]) {

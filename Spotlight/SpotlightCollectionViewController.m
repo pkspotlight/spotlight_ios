@@ -82,12 +82,7 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
     self.navigationItem.titleView = label;
 
     [self refresh:refreshControl];
-    
-    // Do any additional setup after loading the view.
 }
-
-
-
 
 -(void)getParticipantArrayOfTeam{
     [_teamsMemberArray removeAllObjects];
@@ -96,46 +91,27 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
     PFQuery *query = [PFQuery queryWithClassName:@"Child"];
     [query whereKey:@"teams" equalTo:self.spotlight.team];
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-        
-        
-        
-        for(Child *child in objects)
-        {
-            if([self.spotlight.team.spectatorsArray containsObject:child.objectId])
-            {
+
+        for(Child *child in objects){
+            if([self.spotlight.team.spectatorsArray containsObject:child.objectId]){
                 [_teamsSpectMemberArray addObject:child];
-            }
-            else
-            {
+            }else{
                 [_teamsMemberArray addObject:child];
-                
             }
         }
-        
-        
         PFQuery *query1 = [PFQuery queryWithClassName:@"_User"];
         [query1 whereKey:@"teams" equalTo:self.spotlight.team];
         
         [query1 findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-            for(User *user in objects)
-            {
-                if([self.spotlight.team.spectatorsArray containsObject:user.objectId])
-                {
+            for(User *user in objects){
+                if([self.spotlight.team.spectatorsArray containsObject:user.objectId]){
                     [_teamsSpectMemberArray addObject:user];
-                }
-                else
-                {
+                }else{
                     [_teamsMemberArray addObject:user];
                     
                 }
             }
-            
-            
-            
         }];
-        
-        
-        
     }];
 
 }
@@ -383,9 +359,7 @@ if(!media.isVideo)
 
 
 - (IBAction)addMediaButtonPressed:(id)sender {
-    
-    
-    
+
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Select Source"
                                                                    message:@""
                                                             preferredStyle:UIAlertControllerStyleActionSheet];
@@ -404,11 +378,6 @@ if(!media.isVideo)
                                               style:UIAlertActionStyleCancel
                                             handler:nil]];
     [self presentViewController:alert animated:YES completion:nil];
-    
-    
-    
-    
-
 }
 
 
@@ -566,10 +535,7 @@ if(!media.isVideo)
     NSString *mediaType = [infoDict objectForKey: UIImagePickerControllerMediaType];
     
     if ([mediaType isEqualToString:(NSString *)ALAssetTypeVideo]){
-        
-        
-        
-        
+
         NSURL *videoUrl=(NSURL*)[infoDict objectForKey:UIImagePickerControllerReferenceURL];
         PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[videoUrl] options:nil];
         PHAsset *asset = result.firstObject;
@@ -603,7 +569,6 @@ if(!media.isVideo)
                         NSLog(@"fuck: %@", [error localizedDescription]);
                     } else {
                         [self.spotlight allMedia:^(NSArray *media, NSError *error) {
-                            //self.mediaList = media;
                              self.mediaList = [self getSortedArray:media];
                                 [[NSNotificationCenter defaultCenter] postNotificationName:@"SpotLightRefersh" object:nil];
                             [self.collectionView reloadData];
@@ -672,65 +637,10 @@ if(!media.isVideo)
         if(info.count>1){
             
             [self addSpotlightParticipantPopUp];
-//            
-//            UIAlertController* titleAlert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Would you like to add a title to these %lu images",(unsigned long)info.count]
-//                                                                                message:nil
-//                                                                         preferredStyle:UIAlertControllerStyleAlert];
-//            [titleAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-//                
-//            }];
-//            
-//            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK"
-//                                                                    style:UIAlertActionStyleDefault
-//                                                                  handler:^(UIAlertAction * action) {
-//                                                                      [self saveImageWithMediaInfo:info title:titleAlert.textFields[0].text];
-//                                                                  }];
-//            UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"No Title"
-//                                                                   style:UIAlertActionStyleCancel
-//                                                                 handler:^(UIAlertAction * action) {
-//                                                                     [self saveImageWithMediaInfo:info title:nil];
-//                                                                 }];
-//            [titleAlert addAction:defaultAction];
-//            [titleAlert addAction:cancelAction];
-//            [self presentViewController:titleAlert
-//                               animated:YES
-//                             completion:^{
-//                                 
-//                             }];
-
-        }
-        
-        else{
+        } else{
             
              [self addSpotlightParticipantPopUp];
-//            UIAlertController* titleAlert = [UIAlertController alertControllerWithTitle:@"Would you like to add a title?"
-//                                                                                message:nil
-//                                                                         preferredStyle:UIAlertControllerStyleAlert];
-//            [titleAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-//                
-//            }];
-//            
-//            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK"
-//                                                                    style:UIAlertActionStyleDefault
-//                                                                  handler:^(UIAlertAction * action) {
-//                                                                      [self saveImageWithMediaInfo:info title:titleAlert.textFields[0].text];
-//                                                                  }];
-//            UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"No Title"
-//                                                                   style:UIAlertActionStyleCancel
-//                                                                 handler:^(UIAlertAction * action) {
-//                                                                     [self saveImageWithMediaInfo:info title:nil];
-//                                                                 }];
-//            [titleAlert addAction:defaultAction];
-//            [titleAlert addAction:cancelAction];
-//            [self presentViewController:titleAlert
-//                               animated:YES
-//                             completion:^{
-//                                 
-//                             }];
-
         }
-        
-
     }];
      }
 
@@ -812,9 +722,6 @@ if(!media.isVideo)
 }
 
 -(void)addSpotlightParticipantPopUp{
-    
-  
-        
         SpotlightTaggedParticipantView *spotlightParticipantView = [[SpotlightTaggedParticipantView alloc]initWithParticipant:_teamsMemberArray withTitle:@"abcd"];
     spotlightParticipantView.delegate = self;
         CGRect frameRect =spotlightParticipantView.frame;
@@ -825,10 +732,6 @@ if(!media.isVideo)
         
         [ [[UIApplication sharedApplication].delegate window] addSubview:spotlightParticipantView];
         spotlightParticipantView.translatesAutoresizingMaskIntoConstraints = true;
-//        [spotlightBoardingView.superview layoutIfNeeded];
-//        [[NSUserDefaults standardUserDefaults] setBool:TRUE forKey:@"SpotlightPopUp"];
-//        [[NSUserDefaults standardUserDefaults] synchronize];
-    
 }
 
 
@@ -943,7 +846,6 @@ if(!media.isVideo)
     mediaPicker.showsCloudItems = NO;
     
     [self presentViewController:mediaPicker animated:YES completion:nil];
-    
 }
 
 
@@ -953,16 +855,9 @@ if(!media.isVideo)
     [self dismissModalViewControllerAnimated:YES];
     
     for (int i = 0; i < [mediaItemCollection.items count]; i++) {
-        
-        
-        
         [self exportAssetAsSourceFormat:[[mediaItemCollection items] objectAtIndex:i]];
-        
         break;
-        //NSLog(@"for loop : %d", i);
-        
     }
-    
 }
 
 
@@ -970,15 +865,10 @@ if(!media.isVideo)
 - (void)mediaPickerDidCancel:(MPMediaPickerController *)mediaPicker{
     
     [self dismissModalViewControllerAnimated:YES];
-    
 }
 
-
-
 - (void)exportAssetAsSourceFormat:(MPMediaItem *)item {
-    
-    
-    
+
     NSURL *assetURL = [item valueForProperty:MPMediaItemPropertyAssetURL];
     
     if(isView){
@@ -987,244 +877,8 @@ if(!media.isVideo)
     }else{
          [self createMontageWithSongTitle:nil share:YES AssetURL:assetURL];
     }
-    
-   
-    
-    BOOL isCloud = FALSE;
-    
-    
-    
-    //    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0")) {
-    
-    //        NSNumber *isCloudNumber = [item valueForProperty:MPMediaItemPropertyIsCloudItem];
-    
-    //        isCloud = [isCloudNumber boolValue];
-    
-    //    }
-    
-    
-    
-    //
-    
-    //    if(assetURL != nil &&  ![assetURL isKindOfClass:[NSNull class]] && ! isCloud)
-    
-    //    {
-    
-    //        NSLog(@"ASSET URL :%@ ", assetURL);
-    
-    //
-    
-    //        NSLog(@"\n>>>> assetURL : %@",[assetURL absoluteString]);
-    
-    //        AVURLAsset *songAsset = [AVURLAsset URLAssetWithURL:assetURL options:nil];
-    
-    //
-    
-    //        AVAssetExportSession *exportSession = [[AVAssetExportSession alloc]
-    
-    //                                               initWithAsset:songAsset
-    
-    //                                               presetName:AVAssetExportPresetPassthrough];
-    
-    //
-    
-    //        NSArray *tracks = [songAsset tracksWithMediaType:AVMediaTypeAudio];
-    
-    //        AVAssetTrack *track = [tracks objectAtIndex:0];
-    
-    //
-    
-    //        id desc = [track.formatDescriptions objectAtIndex:0];
-    
-    //        const AudioStreamBasicDescription *audioDesc = CMAudioFormatDescriptionGetStreamBasicDescription((CMAudioFormatDescriptionRef)desc);
-    
-    //
-    
-    //        FourCharCode formatID = audioDesc->mFormatID;
-    
-    //
-    
-    //        NSString *fileType = nil;
-    
-    //        NSString *ex = nil;
-    
-    //
-    
-    //        switch (formatID) {
-    
-    //
-    
-    //            case kAudioFormatLinearPCM:
-    
-    //            {
-    
-    //                UInt32 flags = audioDesc->mFormatFlags;
-    
-    //                if (flags & kAudioFormatFlagIsBigEndian) {
-    
-    //                    fileType = @"public.aiff-audio";
-    
-    //                    ex = @"aif";
-    
-    //                } else {
-    
-    //                    fileType = @"com.microsoft.waveform-audio";
-    
-    //                    ex = @"wav";
-    
-    //                }
-    
-    //            }
-    
-    //                break;
-    
-    //
-    
-    //            case kAudioFormatMPEGLayer3:
-    
-    //                fileType = @"com.apple.quicktime-movie";
-    
-    //                ex = @"mp3";
-    
-    //                break;
-    
-    //
-    
-    //            case kAudioFormatMPEG4AAC:
-    
-    //                fileType = @"com.apple.m4a-audio";
-    
-    //                ex = @"m4a";
-    
-    //                break;
-    
-    //
-    
-    //            case kAudioFormatAppleLossless:
-    
-    //                fileType = @"com.apple.m4a-audio";
-    
-    //                ex = @"m4a";
-    
-    //                break;
-    
-    //
-    
-    //            default:
-    
-    //                break;
-    
-    //        }
-    
-    //
-    
-    //        exportSession.outputFileType = fileType;
-    
-    //
-    
-    //        NSString *fileName = nil;
-    
-    //
-    
-    //        fileName = [NSString stringWithString:[item valueForProperty:MPMediaItemPropertyTitle]];
-    
-    //
-    
-    //        NSArray *fileNameArray = nil;
-    
-    //        fileNameArray = [fileName componentsSeparatedByString:@" "];
-    
-    //        fileName = [fileNameArray componentsJoinedByString:@""];
-    
-    //
-    
-    //        NSString *docDir = [[AppDelegate sharedAppDelegate]applicationDocumentsDirectory];
-    
-    //
-    
-    //        NSString *filePath = [[docDir stringByAppendingPathComponent:fileName] stringByAppendingPathExtension:ex];
-    
-    //
-    
-    //        int fileNumber = 0;
-    
-    //        NSString *fileNumberString = nil;
-    
-    //        NSString *fileNameWithNumber = nil;
-    
-    //        while ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-    
-    //            fileNumber++;
-    
-    //            fileNumberString = [NSString stringWithFormat:@"-%02d", fileNumber];
-    
-    //            fileNameWithNumber = [fileName stringByAppendingString:fileNumberString];
-    
-    //            filePath = [[docDir stringByAppendingPathComponent:fileNameWithNumber] stringByAppendingPathExtension:ex];
-    
-    //            //NSLog(@"filePath = %@", filePath);
-    
-    //        }
-    
-    //
-    
-    //        // -------------------------------------
-    
-    //
-    
-    //        [self deleteMyFile:filePath];
-    
-    //        filePath = [filePath stringByAppendingString:@".mov"];
-    
-    //        [self deleteMyFile:filePath];
-    
-    //
-    
-    //        exportSession.outputURL = [NSURL fileURLWithPath:filePath];
-    
-    //
-    
-    //        [exportSession exportAsynchronouslyWithCompletionHandler:^{
-    
-    //
-    
-    //            if (exportSession.status == AVAssetExportSessionStatusCompleted) {
-    
-    //
-    
-    //                NSFileManager *fileMgr = [NSFileManager defaultManager];
-    
-    //                NSError *error;
-    
-    //                NSString *newpath = [filePath stringByReplacingOccurrencesOfString:@".mov" withString:@""];
-    
-    //                if ([fileMgr moveItemAtPath:filePath toPath:newpath error:&error] != YES)
-    
-    //                    NSLog(@"Unable to move file: %@", [error localizedDescription]);
-    
-    //            }
-    
-    //        }
-    
-    //         else
-    
-    //         {
-    
-    //             //NSLog(@"export session error");
-    
-    //         }
-    
-    //         [exportSession release];
-    
-    //         }];
-    
-    //        
-    
-    //    }   
-    
-    
-    
 }
+
 - (IBAction)reorderSpotlightController:(id)sender {
     
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -1239,12 +893,7 @@ if(!media.isVideo)
     [self refresh:nil];
 }
 
--(void)deleteMyFile:(NSString *)path
-
-{
-    
-    
-    
+-(void)deleteMyFile:(NSString *)path{
     if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
         
         NSError *deleteErr = nil;

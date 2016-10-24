@@ -39,20 +39,6 @@
     NSString* subtext = [NSString stringWithFormat:@"Sport/Activity: %@",team.sport];
     [self.sportLabel setText:subtext];
 
-    
-//    [self.viewMontageButton.layer setBorderColor:[UIColor whiteColor].CGColor];
-//    [self.viewMontageButton.layer setBorderWidth:1];
-//    [self.viewMontageButton.layer setCornerRadius:5];
-//    
-//    [self.reorderingSpotlightButton.layer setBorderColor:[UIColor whiteColor].CGColor];
-//    [self.reorderingSpotlightButton.layer setBorderWidth:1];
-//    [self.reorderingSpotlightButton.layer setCornerRadius:5];
-//    
-//    [self.shareMontageButton.layer setBorderColor:[UIColor whiteColor].CGColor];
-//    [self.shareMontageButton.layer setBorderWidth:1];
-//    [self.shareMontageButton.layer setCornerRadius:5];
-//    
-  
     [self.teamUserImageView.layer setBorderColor:[[UIColor lightGrayColor] colorWithAlphaComponent:0.4].CGColor];
       [self.teamUserImageView.layer setCornerRadius:5];
     [self.teamUserImageView.layer setBorderWidth:2];
@@ -68,9 +54,6 @@
     NSString *spotlightTime = [NSString stringWithFormat:@"%@",[dateformate stringFromDate:date]];
 
     
-//    NSString* dateString = [NSDateFormatter localizedStringFromDate:date
-//                                                          dateStyle:NSDateFormatterLongStyle
-//                                                          timeStyle:NSDateFormatterNoStyle];
     [self.spotlightDateLabel setText:spotlightTime];
     [team.teamLogoMedia fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:team.teamLogoMedia.thumbnailImageFile.url]];

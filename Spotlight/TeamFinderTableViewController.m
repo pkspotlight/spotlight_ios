@@ -133,7 +133,6 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     
     self.teams = filteredArrayOfObjects;
     
-    // [NSMutableArray arrayWithArray:sortedArray];
 }
 
 
@@ -159,29 +158,19 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
         }else{
             cell.contentView.hidden = NO;
         }
-        
     } else {
         cell = (TeamTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"TeamTableViewCell"
                                                                    forIndexPath:indexPath];
-        
-        
-        
         bool isFollowing = false;
         Team *team = (Team*)self.searchResults[indexPath.row];
-
-
         if(([[self.teams valueForKeyPath:@"objectId"] containsObject:team.objectId]))
         {
             isFollowing = true;
-            
-            
         }
         else{
             isFollowing = false;
         }
-
         [(TeamTableViewCell*)cell formatForTeam:self.searchResults[indexPath.row] isFollowing:isFollowing];
-        
         [(TeamTableViewCell*)cell setDelegate:self];
     }
     return cell;

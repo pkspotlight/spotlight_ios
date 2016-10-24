@@ -14,6 +14,7 @@
 #import <MobileCoreServices/UTCoreTypes.h>
 #import <MBProgressHUD.h>
 #import <AFNetworking/UIImageView+AFNetworking.h>
+#import "SpotlightCollectionViewController.h"
 
 @interface CreateSpotlightTableViewController ()
 
@@ -34,7 +35,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //[self.navigationController setNavigationBarHidden:YES];
     [self.teamNameLabel setText:self.team.teamName];
     self.spotlight = [Spotlight object];
     
@@ -42,15 +42,12 @@
     [self.teamUserImageView.layer setCornerRadius:5];
     [self.teamUserImageView.layer setBorderWidth:2];
 
-    
     _spotlightTitle.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Title" attributes:@{NSForegroundColorAttributeName: [UIColor colorWithRed:146.0/255.0f green:146.0/255.0f blue:146.0/255.0f alpha:1.0]}];
     UIBarButtonItem *barButton = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"BackImage"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonClicked:)];
-    
     
     self.navigationItem.leftBarButtonItem = barButton;
     
     self.navigationItem.title = @"Create Spotlight";
-
     
         [self.teamImageView cancelImageRequestOperation];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.team.teamLogoMedia.thumbnailImageFile.url]];
@@ -69,15 +66,9 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    
-    //[self.blackView setHidden:YES];
-    
-    
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showKeyBoard:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideKeyBoard:) name:UIKeyboardWillHideNotification object:nil];
 }
-
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
@@ -94,14 +85,13 @@
 }
 
 - (IBAction)cancelButtonPressed:(id)sender {
-    if(_isFromTeamdetail)
-        
+    if(_isFromTeamdetail){
         [self.navigationController popViewControllerAnimated:YES];
-    
-    else
+    }else{
         [self.navigationController dismissViewControllerAnimated:YES completion:^{
             
         }];
+    }
 }
 
 - (IBAction)backButtonClicked:(UIButton*)sender{
@@ -113,37 +103,19 @@
 
 -(void)showKeyBoard:(NSNotification *)notification{
     
-   
-//    
-    
-        CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-        
-        
-        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-        
-        
-        [prefs setInteger:keyboardSize.height forKey:@"size"];
-        
-        
-        
-        self.bottomContraint.constant = keyboardSize.height ;
-   
-
-        
-    //[_scrollviewSpotlight setContentOffset:CGPointMake(0,keyboardSize.height) animated:YES];
- [self.view layoutIfNeeded];
+    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    [prefs setInteger:keyboardSize.height forKey:@"size"];
+    self.bottomContraint.constant = keyboardSize.height ;
+    [self.view layoutIfNeeded];
     
 }
+
 #pragma mark: Notification For Hiding keyboard
+
 -(void)hideKeyBoard:(NSNotification *)notification{
-    
-     
-
-        self.bottomContraint.constant = 0;
-        
-  }
-
-
+    self.bottomContraint.constant = 0;
+}
 
 - (IBAction)saveButtonPressed:(id)sender {
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -158,34 +130,35 @@
     [self.spotlight setCreatorName:[NSString stringWithFormat:@"%@ %@", user.firstName, user.lastName]];
     [self.spotlight saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if(succeeded){
-         [[NSNotificationCenter defaultCenter] postNotificationName:@"SpotLightRefersh" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"SpotLightRefersh" object:nil];
         }
-        if(_isFromTeamdetail)
-       
-            [self.navigationController popViewControllerAnimated:YES];
         
-        else
-        [self.navigationController dismissViewControllerAnimated:YES completion:^{
-            
-        }];
+        if(_isFromTeamdetail){
+            [self.navigationController popViewControllerAnimated:YES];
+        }else{
+            [self.navigationController dismissViewControllerAnimated:YES completion:^{
+                UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                SpotlightCollectionViewController *spotLightCollection = [storyboard instantiateViewControllerWithIdentifier:@"SpotLightCollectionView"];
+                [spotLightCollection setSpotlight:self.spotlight];
+                [self.navigationController presentViewController:spotLightCollection animated:YES completion:nil];
+            }];
+        }
     }];
-    
-    
 }
 
 - (void)dismissView:(MBProgressHUD*)hud {
     [hud hide:YES afterDelay:1.5];
-    if(_isFromTeamdetail)
+    if(_isFromTeamdetail){
         
         [self.navigationController popViewControllerAnimated:YES];
     
-    else
+    }else{
+        
         [self.navigationController dismissViewControllerAnimated:YES completion:^{
             
         }];
-
+    }
 }
-
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     NSLog(@"textFieldShouldReturn:");
@@ -212,27 +185,5 @@
     NSUInteger newLength = [textView.text length] + [text length] - range.length;
     return newLength <= 120;
 }
-
-
-#pragma mark - Table view data source
-
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-//    return 1;
-//}
-//
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    return 1;
-//}
-//
-//
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CreateSpotlightButtonCell" forIndexPath:indexPath];
-//    
-//    return cell;
-//}
-//
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    [self saveButtonPressed:nil];
-//}
 
 @end

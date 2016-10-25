@@ -39,10 +39,7 @@
     [super viewDidLoad];
     self.teamPropertyArray = @[ @"teamName", @"town", @"sport", @"grade", @"year", @"season", @"coach"];
     self.teamPropertyDisplay = @[ @"Team Name", @"Town", @"Sport", @"Grade", @"Year", @"Season", @"Coach"];
-//    [self.addTeamLogoButton.layer setCornerRadius:self.addTeamLogoButton.bounds.size.width/2];
-//    [self.addTeamLogoButton.layer setBorderColor:[UIColor whiteColor].CGColor];
-//    [self.addTeamLogoButton.layer setBorderWidth:3];
-//    [self.addTeamLogoButton setClipsToBounds:YES];
+
     [self.photoUploadIndicator setHidden:YES];
     self.childSelectedarray = [NSMutableArray new];
     _selfChild = [Child new];
@@ -98,8 +95,38 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (BOOL)hasEnteredRequiredFields{
+    if ([self.pendingFieldDictionary[@"teamName"] length] == 0) {
+        [self showAlertforMissingField:@"team name"];
+        return NO;
+    } else if ([self.pendingFieldDictionary[@"town"] length] == 0) {
+        [self showAlertforMissingField:@"town"];
+        return NO;
+    } else if ([self.pendingFieldDictionary[@"sport"] length] == 0) {
+        [self showAlertforMissingField:@"sport"];
+        return NO;
+    } else if ([self.pendingFieldDictionary[@"year"] length] == 0) {
+        [self showAlertforMissingField:@"year"];
+        return NO;
+    } else if ([self.pendingFieldDictionary[@"season"] length] == 0) {
+        [self showAlertforMissingField:@"season"];
+        return NO;
+    }
+    return YES;
+}
+
+- (void)showAlertforMissingField:(NSString*)fieldText {
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Missing Field" message:[NSString stringWithFormat:@"Please enter information for the %@ field.", fieldText] preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleCancel handler:nil]];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
 - (BOOL)savePendingChangesToTeam:(NSError **)error {
 
+    if (![self hasEnteredRequiredFields]) {
+        return NO;
+    }
+    
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [hud setLabelText:@"Saving Profile..."];
     

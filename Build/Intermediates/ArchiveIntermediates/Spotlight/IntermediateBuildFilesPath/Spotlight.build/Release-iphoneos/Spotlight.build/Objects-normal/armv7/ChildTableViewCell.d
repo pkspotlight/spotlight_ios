@@ -1,6 +1,9 @@
 dependencies: \
-  /Users/pkamm/Documents/ios/Spotlight/Spotlight/ChildTableViewCell.m \
-  /Users/pkamm/Documents/ios/Spotlight/Spotlight/ChildTableViewCell.h \
-  /Users/pkamm/Documents/ios/Spotlight/Spotlight/ProfilePictureMedia.h \
-  /Users/pkamm/Documents/ios/Spotlight/Spotlight/MediaObject.h \
-  /Users/pkamm/Documents/ios/Spotlight/Spotlight/Child.h
+  /Users/pkamm/Documents/spotlight/new_ios/Spotlight/ChildTableViewCell.m \
+  /Users/pkamm/Documents/spotlight/new_ios/Spotlight/ChildTableViewCell.h \
+  /Users/pkamm/Documents/spotlight/new_ios/Spotlight/Team.h \
+  /Users/pkamm/Documents/spotlight/new_ios/Spotlight/TeamLogoMedia.h \
+  /Users/pkamm/Documents/spotlight/new_ios/Spotlight/MediaObject.h \
+  /Users/pkamm/Documents/spotlight/new_ios/Spotlight/ProfilePictureMedia.h \
+  /Users/pkamm/Documents/spotlight/new_ios/Spotlight/Child.h \
+  /Users/pkamm/Documents/spotlight/new_ios/Spotlight/User.h

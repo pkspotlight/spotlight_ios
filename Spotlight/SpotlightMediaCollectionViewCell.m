@@ -22,6 +22,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    [super awakeFromNib];
     [_mediaImageView.layer setBorderColor: [[UIColor yellowColor] CGColor]];
     [_mediaImageView.layer setBorderWidth: 1.0];
 }

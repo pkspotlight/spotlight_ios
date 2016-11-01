@@ -1,1 +1,1 @@
-/Users/pkamm/Documents/ios/Spotlight/Build/Intermediates/ArchiveIntermediates/Spotlight/InstallationBuildProductsLocation/Applications/Spotlight.app
+/Users/pkamm/Documents/spotlight/new_ios/Build/Intermediates/ArchiveIntermediates/Spotlight/InstallationBuildProductsLocation/Applications/Spotlight.app

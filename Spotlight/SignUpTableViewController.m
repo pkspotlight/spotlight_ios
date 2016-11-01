@@ -42,7 +42,7 @@
         
     } else {
         self.userPropertyArray = @[ @"email", @"password", @"username"];
-        self.userPropertyDisplayArray = @[ @"Email Address", @"Password", @"Username"];
+        self.userPropertyDisplayArray = @[ @"Email Address", @"Password", @"Username", @"Birthdate"];
         self.lblSignUp.text = @"Create An Account";
         [self.btnCreateAccount setTitle:@"Create An Account" forState:UIControlStateNormal];
         [self.btnCreateAccount addTarget:self action:@selector(createAccountButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -98,7 +98,6 @@
 
 - (void)loadMainTabBar {
     
-   
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     MainTabBarController *mainTabBarController = [storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
     

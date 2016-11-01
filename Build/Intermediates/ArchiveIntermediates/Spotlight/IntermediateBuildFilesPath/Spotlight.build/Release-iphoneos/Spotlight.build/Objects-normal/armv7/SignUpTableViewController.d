@@ -1,7 +1,23 @@
 dependencies: \
-  /Users/pkamm/Documents/ios/Spotlight/Spotlight/SignUpTableViewController.m \
-  /Users/pkamm/Documents/ios/Spotlight/Spotlight/SignUpTableViewController.h \
-  /Users/pkamm/Documents/ios/Spotlight/Spotlight/FieldEntryTableViewCell.h \
-  /Users/pkamm/Documents/ios/Spotlight/Spotlight/SpotlightFeedViewController.h \
-  /Users/pkamm/Documents/ios/Spotlight/Spotlight/MainTabBarController.h \
-  /Users/pkamm/Documents/ios/Spotlight/Spotlight/User.h
+  /Users/pkamm/Documents/spotlight/new_ios/Spotlight/SignUpTableViewController.m \
+  /Users/pkamm/Documents/spotlight/new_ios/Spotlight/SignUpTableViewController.h \
+  /Users/pkamm/Documents/spotlight/new_ios/Spotlight/FieldEntryTableViewCell.h \
+  /Users/pkamm/Documents/spotlight/new_ios/Spotlight/SpotlightFeedViewController.h \
+  /Users/pkamm/Documents/spotlight/new_ios/Spotlight/SpotlightDataSource.h \
+  /Users/pkamm/Documents/spotlight/new_ios/Spotlight/SpotlightCollectionViewController.h \
+  /Users/pkamm/Documents/spotlight/new_ios/Spotlight/Spotlight.h \
+  /Users/pkamm/Documents/spotlight/new_ios/ThirdParty/Classes/MWPhotoBrowser.h \
+  /Users/pkamm/Documents/spotlight/new_ios/ThirdParty/Classes/MWPhoto.h \
+  /Users/pkamm/Documents/spotlight/new_ios/ThirdParty/Classes/MWPhotoProtocol.h \
+  /Users/pkamm/Documents/spotlight/new_ios/ThirdParty/Classes/MWCaptionView.h \
+  /Users/pkamm/Documents/spotlight/new_ios/ThirdParty/ELCImagePickerController/Classes/ELCImagePicker/ELCImagePickerController.h \
+  /Users/pkamm/Documents/spotlight/new_ios/ThirdParty/ELCImagePickerController/Classes/ELCImagePicker/ELCAssetSelectionDelegate.h \
+  /Users/pkamm/Documents/spotlight/new_ios/Spotlight/ReorderSpolightImagesTableViewController.h \
+  /Users/pkamm/Documents/spotlight/new_ios/Spotlight/TeamRequest.h \
+  /Users/pkamm/Documents/spotlight/new_ios/Spotlight/Child.h \
+  /Users/pkamm/Documents/spotlight/new_ios/Spotlight/User.h \
+  /Users/pkamm/Documents/spotlight/new_ios/Spotlight/ProfilePictureMedia.h \
+  /Users/pkamm/Documents/spotlight/new_ios/Spotlight/MediaObject.h \
+  /Users/pkamm/Documents/spotlight/new_ios/Spotlight/Team.h \
+  /Users/pkamm/Documents/spotlight/new_ios/Spotlight/TeamLogoMedia.h \
+  /Users/pkamm/Documents/spotlight/new_ios/Spotlight/MainTabBarController.h

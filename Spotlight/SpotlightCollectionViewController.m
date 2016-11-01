@@ -41,6 +41,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *shareSpotlightButton;
 
 @property (strong, nonatomic) MWPhotoBrowser *browser;
+@property (strong, nonatomic)MPMediaPickerController* musicMediaPicker;
+
 
 @end
 
@@ -245,8 +247,11 @@ if(!media.isVideo)
     SpotlightMedia *media = self.mediaList[index];
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication].delegate window]animated:YES];
     [hud setLabelText:@"Please Wait..."];
-    [[MontageCreator sharedCreator] createMontageWithMedia:@[media] songTitle:nil
- assetURL:nil isShare:YES completion:^(AVPlayerItem *item, NSURL *fileURL) {
+    [[MontageCreator sharedCreator] createMontageWithMedia:@[media]
+                                                 songTitle:nil
+                                                  assetURL:nil
+                                                   isShare:YES
+                                                completion:^(AVPlayerItem *item, NSURL *fileURL) {
         
         UIActivityViewController* AVC =  [[UIActivityViewController alloc] initWithActivityItems:@[fileURL, @""] applicationActivities:nil];
         [self presentViewController:AVC
@@ -254,11 +259,7 @@ if(!media.isVideo)
                          completion:^{
                              [hud hide:YES];
                          }];
-        
-        
     }];
-
-
 }
 
 
@@ -664,24 +665,14 @@ if(!media.isVideo)
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Select your background music"
                                                                    message:@""
                                                             preferredStyle:UIAlertControllerStyleActionSheet];
-    
-    
-    
+
     [alert addAction:[UIAlertAction actionWithTitle:@"Choose Music from Device"
-                      
                                               style:UIAlertActionStyleDefault
-                      
                                             handler:^(UIAlertAction * _Nonnull action) {
                                                 isView = true;
                                                 [self openMedia];
-                                                
                                             }]];
-    
-    
-    
-    
-    
-    
+
     [alert addAction:[UIAlertAction actionWithTitle:@"Cool Kids"
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * _Nonnull action) {
@@ -704,17 +695,10 @@ if(!media.isVideo)
                                             }]];
     
     [alert addAction:[UIAlertAction actionWithTitle:@"No Music"
-                      
                                               style:UIAlertActionStyleDefault
-                      
                                             handler:^(UIAlertAction * _Nonnull action) {
-                                                
                                                 [self createMontageWithSongTitle:nil share:NO AssetURL:nil];
-                                                
                                             }]];
-    
-
-    
     [alert addAction:[UIAlertAction actionWithTitle:@"Cancel"
                                               style:UIAlertActionStyleCancel
                                             handler:nil]];
@@ -722,28 +706,23 @@ if(!media.isVideo)
 }
 
 -(void)addSpotlightParticipantPopUp{
-        SpotlightTaggedParticipantView *spotlightParticipantView = [[SpotlightTaggedParticipantView alloc]initWithParticipant:_teamsMemberArray withTitle:@"abcd"];
-    spotlightParticipantView.delegate = self;
+        SpotlightTaggedParticipantView *spotlightParticipantView = [[SpotlightTaggedParticipantView alloc] initWithParticipant:_teamsMemberArray withTitle:@"abcd"];
+        spotlightParticipantView.delegate = self;
         CGRect frameRect =spotlightParticipantView.frame;
         frameRect.size.width = [UIScreen mainScreen].bounds.size.width;
         frameRect.size.height = [UIScreen mainScreen].bounds.size.height;
         spotlightParticipantView.frame = frameRect;
     
-        
         [ [[UIApplication sharedApplication].delegate window] addSubview:spotlightParticipantView];
         spotlightParticipantView.translatesAutoresizingMaskIntoConstraints = true;
 }
-
-
 
 - (IBAction)shareMontageButtonPressed:(id)sender {
     
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Select your background music"
                                                                    message:@""
                                                             preferredStyle:UIAlertControllerStyleActionSheet];
-    
-    
-    
+
     [alert addAction:[UIAlertAction actionWithTitle:@"Choose Music from your device"
                       
                                               style:UIAlertActionStyleDefault
@@ -751,12 +730,7 @@ if(!media.isVideo)
                                             handler:^(UIAlertAction * _Nonnull action) {
                                                 isView = false;
                                                 [self openMedia];
-                                                
                                             }]];
-    
-    
-    
-    
     [alert addAction:[UIAlertAction actionWithTitle:@"Cool Kids"
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * _Nonnull action) {
@@ -810,12 +784,9 @@ if(!media.isVideo)
             [self presentViewController:AVC
                                animated:YES
                              completion:^{
-                                               [hud hide:YES];
+                                [hud hide:YES];
                                }];
-            
-            
         }];
-        
     } else {
         
         [[MontageCreator sharedCreator] createMontageWithMedia:[self.mediaList copy] songTitle:songTitle assetURL:assetURL  isShare:NO completion:^(AVPlayerItem *item, NSURL *fileURL) {
@@ -828,41 +799,68 @@ if(!media.isVideo)
                                animated:YES
                              completion:^{
                                  [VC.player play];
-                             }];
+            }];
             [hud hide:YES];
         }];
     }
-    
-    
 }
 
--(void)openMedia{
+-(void)openMedia {
     
-    MPMediaPickerController *mediaPicker = [[MPMediaPickerController alloc] initWithMediaTypes:MPMediaTypeMusic];
-    
-    mediaPicker.delegate = self;
-    
-    mediaPicker.allowsPickingMultipleItems = NO;
-    mediaPicker.showsCloudItems = NO;
-    
-    [self presentViewController:mediaPicker animated:YES completion:nil];
+    switch ([MPMediaLibrary authorizationStatus]){
+        case MPMediaLibraryAuthorizationStatusDenied: {
+            NSLog(@"denied");
+            [MPMediaLibrary requestAuthorization:^(MPMediaLibraryAuthorizationStatus status) {
+                if ([MPMediaLibrary authorizationStatus] == MPMediaLibraryAuthorizationStatusAuthorized){
+                    [self pickTheMusic];
+                }
+            }];
+            break;
+        }
+        case MPMediaLibraryAuthorizationStatusAuthorized:
+            NSLog(@"authorized");
+            [self pickTheMusic];
+            break;
+        case MPMediaLibraryAuthorizationStatusRestricted: {
+            NSLog(@"restricted");
+            [MPMediaLibrary requestAuthorization:^(MPMediaLibraryAuthorizationStatus status) {
+                if ([MPMediaLibrary authorizationStatus] == MPMediaLibraryAuthorizationStatusAuthorized){
+                    [self pickTheMusic];
+                }
+            }];
+            break;
+        }
+        case MPMediaLibraryAuthorizationStatusNotDetermined:{
+            NSLog(@"not det");
+            [MPMediaLibrary requestAuthorization:^(MPMediaLibraryAuthorizationStatus status) {
+                if ([MPMediaLibrary authorizationStatus] == MPMediaLibraryAuthorizationStatusAuthorized){
+                    [self pickTheMusic];
+                }
+            }];
+            break;
+        }
+    }
 }
 
-
+- (void)pickTheMusic{
+    self.musicMediaPicker = [[MPMediaPickerController alloc] initWithMediaTypes:MPMediaTypeMusic];
+    self.musicMediaPicker.delegate = self;
+    self.musicMediaPicker.allowsPickingMultipleItems = NO;
+    self.musicMediaPicker.showsCloudItems = NO;
+    [self.navigationController presentViewController:self.musicMediaPicker animated:YES completion:nil];
+}
 
 - (void)mediaPicker: (MPMediaPickerController *)mediaPicker didPickMediaItems:(MPMediaItemCollection *)mediaItemCollection {
     
     [self dismissModalViewControllerAnimated:YES];
     
-    for (int i = 0; i < [mediaItemCollection.items count]; i++) {
-        [self exportAssetAsSourceFormat:[[mediaItemCollection items] objectAtIndex:i]];
-        break;
-    }
+//    for (int i = 0; i < [mediaItemCollection.items count]; i++) {
+        [self exportAssetAsSourceFormat:[[mediaItemCollection items] objectAtIndex:0]];
+//        break;
+//    }
 }
 
-
-
-- (void)mediaPickerDidCancel:(MPMediaPickerController *)mediaPicker{
+- (void)mediaPickerDidCancel:(MPMediaPickerController *)mediaPicker {
     
     [self dismissModalViewControllerAnimated:YES];
 }
@@ -873,14 +871,12 @@ if(!media.isVideo)
     
     if(isView){
          [self createMontageWithSongTitle:nil share:NO AssetURL:assetURL];
-        
     }else{
          [self createMontageWithSongTitle:nil share:YES AssetURL:assetURL];
     }
 }
 
 - (IBAction)reorderSpotlightController:(id)sender {
-    
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     ReorderSpolightImagesTableViewController *reorderRequestController = [storyboard instantiateViewControllerWithIdentifier:@"ReorderSpotlight"];
     reorderRequestController.mediaSpotlightList = [self.mediaList mutableCopy];
@@ -901,17 +897,10 @@ if(!media.isVideo)
         [[NSFileManager defaultManager] removeItemAtPath:path error:&deleteErr];
         
         if (deleteErr) {
-            
             NSLog (@"Can't delete %@: %@", path, deleteErr);
-            
         }
-        
     }
-    
 }
-
-
-
 
 
 @end

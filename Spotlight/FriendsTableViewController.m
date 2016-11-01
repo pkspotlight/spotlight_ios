@@ -57,7 +57,6 @@ static CGFloat const BasicHeaderHeight = 50;
     [self.refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     [self setRefreshControl:self.refreshControl];
     [self.refreshControl beginRefreshing];
-    //[self refresh:self.refreshControl];
 }
 
 
@@ -110,7 +109,7 @@ static CGFloat const BasicHeaderHeight = 50;
             //  pendingRequest = [NSString stringWithFormat:@"You have %ld request pendings",array.count];
             if(array.count>0){
                   [self makeHeaderView];
-                [[self navigationController] tabBarItem].badgeValue = [NSString stringWithFormat:@"%ld",array.count];
+                [[self navigationController] tabBarItem].badgeValue = [NSString stringWithFormat:@"%ul",array.count];
             }
             else{
                 self.tableView.tableHeaderView = nil;
@@ -268,7 +267,6 @@ static CGFloat const BasicHeaderHeight = 50;
                                                 UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                                                 FriendFinderTableViewController *friendFinderController = [storyboard instantiateViewControllerWithIdentifier:@"SearchFriends"];
                                                                                                [self.navigationController pushViewController:friendFinderController animated:YES];
-                                              
                                             }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"Add Family Members"
                                               style:UIAlertActionStyleDefault
@@ -291,54 +289,43 @@ static CGFloat const BasicHeaderHeight = 50;
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    if (self.team)
-    {
+    if (self.team) {
         return 2;
-    }
-    
-    else if(self.justFamily) {
+    }else if(self.justFamily) {
         return 1;
-    } else {
+    }else {
         return 2;
     }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
-  if(self.team)
-  {
-      UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 30)];
-      label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-      
-      label.backgroundColor = [UIColor colorWithRed:40.0/255.0f green:47.0/255.0f blue:61.0/255.0f alpha:1.0];
-      label.text = (section == 0) ? @"    Participant" : @"    Fans";
-      label.textColor = [UIColor whiteColor];
-      
-      return label;
-  
-  }
-    else
-    {
-        BasicHeaderView *cell = [self.tableView dequeueReusableHeaderFooterViewWithIdentifier:@"BasicHeaderView"];
+    if(self.team) {
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 30)];
+        label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         
+        label.backgroundColor = [UIColor colorWithRed:40.0/255.0f green:47.0/255.0f blue:61.0/255.0f alpha:1.0];
+        label.text = (section == 0) ? @"    Participant" : @"    Fans";
+        label.textColor = [UIColor whiteColor];
+        
+        return label;
+    } else {
+        BasicHeaderView *cell = [self.tableView dequeueReusableHeaderFooterViewWithIdentifier:@"BasicHeaderView"];
         cell.headerTitleLabel.text = (section == 0) ? @"My Family" : @"Friends";
         return cell;
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (self.team)
-    {
-        if(section == 0)
-        
-        return  (_teamsMemberArray.count > 0)? 30:0;
-        else
-
+    if (self.team) {
+        if(section == 0){
+            return  (_teamsMemberArray.count > 0)? 30:0;
+        } else {
             return  (_teamsSpectMemberArray.count > 0)? 30:0;
-    }
-    else if(self.justFamily) {
+        }
+    }else if(self.justFamily) {
         return 0;
-    } else {
+    }else {
         return BasicHeaderHeight;
     }
 }

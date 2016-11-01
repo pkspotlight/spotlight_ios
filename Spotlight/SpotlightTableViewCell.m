@@ -32,8 +32,7 @@
 
 
 - (void)awakeFromNib {
-    // Initialization code
-    
+    [super awakeFromNib];    
     self.mainImageView.layer.cornerRadius = 5;
     [self.mainImageView.layer setBorderColor:[UIColor clearColor].CGColor];
     [self.mainImageView.layer setBorderWidth:1];
@@ -60,15 +59,11 @@
         }
     }];
     
-    
-    Team* team = self.spotlight.team;
     [self.mainImageView setImage:nil];
     [self.mainImageView cancelImageRequestOperation];
     [self.titleLabel setText:spotlight.team.teamName];
     [self.spotlightTitleLabel setText:spotlight.spotlightTitle];
     
-//    [self.titleLabel setText:[NSString stringWithFormat:@"%@ %@ - Grade %@", team.teamName, team.sport, team.grade]];
-//
     NSDate* referencedate = self.spotlight.createdAt;
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
@@ -134,17 +129,12 @@
              NSLog(@"fuck thumbnail failure");
          }];
     }];
-    
     [self layoutIfNeeded];
 }
 
 
 -(NSString*)timeforTimeDiffernceBetweenBigger:(NSTimeInterval)timeBigger andsmallTime:(NSTimeInterval)smallTime{
-  //  NSDate *currentDate = [NSDate date];
-    //NSCalendar *calender = [[NSCalendar alloc]init];
-    
-    
-    
+
     NSInteger differenceInSeconds = (timeBigger - smallTime);
     if(differenceInSeconds <59){
         return @"Just Now";

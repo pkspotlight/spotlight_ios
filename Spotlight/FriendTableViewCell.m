@@ -30,6 +30,8 @@
 @implementation FriendTableViewCell
 
 -(void)awakeFromNib{
+    [super awakeFromNib];
+
     _pendingRequestArray = [NSMutableArray new];
     _pendingInviteRequestArray = [NSMutableArray new];
     [self fetchAllPendingRequest];

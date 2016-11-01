@@ -22,10 +22,10 @@
 @interface TeamDetailsViewController()
 {
     BOOL doRefresh;
-      NSMutableArray *pendingRequestArray;
+    NSMutableArray *pendingRequestArray;
     BOOL isUserFollowCurrentTeam;
-     BOOL isUserTeamAdmin;
-   }
+    BOOL isUserTeamAdmin;
+}
 
 @property (weak, nonatomic) IBOutlet UIImageView *teamLogoImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *teamLogoImageViewFront;
@@ -48,22 +48,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-     pendingRequestArray = [NSMutableArray new];
- 
+    pendingRequestArray = [NSMutableArray new];
+    
     doRefresh = false;
     [self fetchAllPendingRequest];
     
     //[self checkWhetherTeamBelongsToAdministrator];
     [self checkUserFollowCurrentTeam];
-//    [self.teamLogoImageView.layer setCornerRadius:self.teamLogoImageView.bounds.size.width/2];
-//    [self.teamLogoImageView.layer setBorderColor:[UIColor whiteColor].CGColor];
-//    [self.teamLogoImageView.layer setBorderWidth:3];
-//    [self.teamLogoImageView setClipsToBounds:YES];
+    //    [self.teamLogoImageView.layer setCornerRadius:self.teamLogoImageView.bounds.size.width/2];
+    //    [self.teamLogoImageView.layer setBorderColor:[UIColor whiteColor].CGColor];
+    //    [self.teamLogoImageView.layer setBorderWidth:3];
+    //    [self.teamLogoImageView setClipsToBounds:YES];
     [self checkUserFollowCurrentTeam];
-//    [self.inviteButton.layer setCornerRadius:5];
-//
-//    [self.inviteButton.layer setBorderColor:[UIColor whiteColor].CGColor];
-//    [self.inviteButton.layer setBorderWidth:1];
+    //    [self.inviteButton.layer setCornerRadius:5];
+    //
+    //    [self.inviteButton.layer setBorderColor:[UIColor whiteColor].CGColor];
+    //    [self.inviteButton.layer setBorderWidth:1];
     [self.teamLogoImageViewFront.layer setBorderColor:[[UIColor lightGrayColor] colorWithAlphaComponent:0.4].CGColor];
     [self.teamLogoImageViewFront.layer setCornerRadius:5];
     [self.teamLogoImageViewFront.layer setBorderWidth:3];
@@ -75,10 +75,10 @@
     
     
     self.navigationItem.leftBarButtonItem = barButton;
-
-
+    
+    
     [self formatPage];
-
+    
     PFQuery* moderatorQuery = [self.team.moderators query];
     [moderatorQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         for (User* user in objects) {
@@ -113,12 +113,12 @@
                 }
                 else{
                     self.inviteButton.hidden = YES;
-
+                    
                 }
-                }
+            }
         }
     }];
-
+    
 }
 
 
@@ -131,21 +131,16 @@
             for (Team *team in objects) {
                 if([team.objectId isEqualToString:self.team.objectId]){
                     isUserFollowCurrentTeam = YES;
-                }
-                else{
+                } else{
                     isUserFollowCurrentTeam = NO;
                 }
             }
-           
-        
-        }
-        
-        else {
+        } else {
             NSLog(@"Error: %@ %@", error, [error userInfo]);
-                   }
+        }
     }];
-
 }
+
 //-(void)inviteButtonactive{
 //    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithTitle:@"Invite" style:UIBarButtonItemStylePlain target:self action:@selector(invite)];
 //    [barButton setTitle:@"Invite"];
@@ -160,15 +155,15 @@
         doRefresh = !doRefresh;
         if(self.spotlightContainer.subviews.count > 0)
         {
-        UITableView *tableView = self.spotlightContainer.subviews[0];
+            UITableView *tableView = self.spotlightContainer.subviews[0];
             if([tableView isKindOfClass:[UITableView class]])
             {
-               
+                
                 SpotlightDataSource *dataSource = (SpotlightDataSource *)[tableView dataSource];
                 if([dataSource isKindOfClass:[SpotlightDataSource class]])
-                [dataSource loadSpotlights:^{
-                    
-                }];
+                    [dataSource loadSpotlights:^{
+                        
+                    }];
                 
             }
         }
@@ -184,27 +179,11 @@
     [super viewWillDisappear:animated];
     [self.teamMembersArray removeAllObjects];
 }
-//- (IBAction)teamSegmentControllerValueChanged:(UISegmentedControl*)sender {
-//    if( sender.selectedSegmentIndex == 0) {
-//        [UIView animateWithDuration:.5
-//                         animations:^{
-//                             [self.spotlightContainer setAlpha:1];
-//                             [self.teamMemberViewContainer setAlpha:0];
-//                         }];
-//    } else {
-//        [UIView animateWithDuration:.5
-//                         animations:^{
-//                             [self.teamMemberViewContainer setAlpha:1];
-//                             [self.spotlightContainer setAlpha:0];
-//                         }];
-//    }
-//}
-
 
 - (IBAction)spotlightClicked:(UIButton*)sender{
     _spotlightButton.selected = YES;
     _teamMemberButton.selected = NO;
-     _addButton.selected = NO;
+    _addButton.selected = NO;
     [UIView animateWithDuration:.5
                      animations:^{
                          [self.spotlightContainer setAlpha:1];
@@ -224,38 +203,20 @@
     
 }
 
-
-
-
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"teamMemberEmbedSegue"]) {
-    
+        
         [(FriendsTableViewController*)[segue destinationViewController] setTeam:self.team];
-          [(FriendsTableViewController*)[segue destinationViewController] setDelegate:self];
-    }
-//    else if ([segue.identifier isEqualToString:@"EditTeamSegue"]){
-//        [(CreateTeamTableViewController*)[(UINavigationController*)[segue destinationViewController] viewControllers][0] setTeam:self.team];
-//    }
-    
-    
-    else if ([segue.identifier isEqualToString:@"EmbedSpotlightDataSource"]){
+        [(FriendsTableViewController*)[segue destinationViewController] setDelegate:self];
+    } else if ([segue.identifier isEqualToString:@"EmbedSpotlightDataSource"]){
         SpotlightDataSource* datasource = [[SpotlightDataSource alloc] initWithTeam:self.team];
         [(SpotlightFeedViewController*)[segue destinationViewController] setDataSource:datasource];
-    }
-    else if ([segue.identifier isEqualToString:@"createSpotLightFromTeamDetail"]) {
+    } else if ([segue.identifier isEqualToString:@"createSpotLightFromTeamDetail"]) {
         doRefresh = true;
-            CreateSpotlightTableViewController* vc = (CreateSpotlightTableViewController*)[segue destinationViewController];
+        CreateSpotlightTableViewController* vc = (CreateSpotlightTableViewController*)[segue destinationViewController];
         vc.isFromTeamdetail = YES;
-            [vc setTeam:_team];
-        }
-    
-//    else if ([segue.identifier isEqualToString:@"SearchFriendsSegue"]) {
-//        FriendFinderTableViewController *friendsFinder  =  (FriendFinderTableViewController*)[segue destinationViewController];
-//        friendsFinder.controllerType = [NSNumber numberWithInt:1];
-//        friendsFinder.selectedTeam = self.team;
-//    }
-
+        [vc setTeam:_team];
+    }
 }
 
 
@@ -263,19 +224,15 @@
     
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     CreateTeamTableViewController *createTeam = [storyboard instantiateViewControllerWithIdentifier:@"CreateTeamTableViewController"];
-      createTeam.team = _team;
+    createTeam.team = _team;
     createTeam.isEdit = YES;
     [self.navigationController pushViewController:createTeam animated:YES];
-
-    
 }
-
-
 
 - (void)createSpotlight{
     
     doRefresh = true;
-
+    
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     CreateSpotlightTableViewController *createSpotlight = [storyboard instantiateViewControllerWithIdentifier:@"CreateSpotlightTableViewController"];
     createSpotlight.isFromTeamdetail = YES;
@@ -293,11 +250,11 @@
      placeholderImage:nil
      success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, UIImage * _Nonnull image) {
          [self.teamLogoImageView setImage:image];
-          [self.teamLogoImageViewFront setImage:image];
+         [self.teamLogoImageViewFront setImage:image];
      } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, NSError * _Nonnull error) {
          NSLog(@"fuck thumbnail failure");
      }];
-
+    
 }
 
 -(void)getTeamMembers:(NSMutableArray *)teamMembers{
@@ -305,37 +262,19 @@
 }
 
 -(void)fetchAllPendingRequest{
-    
     PFQuery *spotlightQuery = [PFQuery queryWithClassName:@"TeamRequest"];
     [spotlightQuery whereKey:@"user" equalTo:[User currentUser]];
-    
     [spotlightQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if(objects.count > 0)
-        {
-            // NSMutableArray *array = [NSMutableArray new];
-            for(TeamRequest *request in objects)
-            {
-                if((request.requestState.intValue == reqestStatePending))
-                {
-                    
+        if(objects.count > 0) {
+            for(TeamRequest *request in objects) {
+                if((request.requestState.intValue == reqestStatePending)) {
                     [pendingRequestArray addObject:request];
-                    
-                    [request.team fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-                     
-                        
-                        
-                    }];
+                    [request.team fetchIfNeededInBackgroundWithBlock:nil];
                 }
-                
             }
-            
-            
         }
-        
     }];
-    
 }
-
 
 - (IBAction)inviteMembersToFollowTeam:(UIButton*)sender{
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -343,17 +282,8 @@
     friendFinderController.selectedTeam = self.team;
     friendFinderController.controllerType = [NSNumber numberWithInt:1];
     [self.navigationController pushViewController:friendFinderController animated:YES];
-
+    
 }
-
-//-(void)invite{
-//    
-//    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    FriendFinderTableViewController *friendFinderController = [storyboard instantiateViewControllerWithIdentifier:@"SearchFriends"];
-//    friendFinderController.selectedTeam = self.team;
-//    friendFinderController.controllerType = [NSNumber numberWithInt:1];
-//    [self.navigationController pushViewController:friendFinderController animated:YES];
-//   }
 
 - (IBAction)unwindEditTeam:(UIStoryboardSegue*)sender {
     [self formatPage];
@@ -361,10 +291,6 @@
 
 
 - (IBAction)addChildOrSpotlight:(UIButton*)sender {
-    
-//    _spotlightButton.selected = NO;
-//    _teamMemberButton.selected = NO;
-//    _addButton.selected = YES;
     
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"What do you want to add?"
                                                                    message:@""
@@ -387,15 +313,11 @@
     [alert addAction:[UIAlertAction actionWithTitle:@"Cancel"
                                               style:UIAlertActionStyleCancel
                                             handler:^(UIAlertAction * _Nonnull action) {
-                                                                                             
+                                                
                                             }]];
-
+    
     
     [self presentViewController:alert animated:YES completion:nil];
-    
-    
-
-
 }
 
 
@@ -408,18 +330,13 @@
             if(objects.count>0){
                 NSMutableArray *filteredArrayOfObjects = [NSMutableArray new];
                 [filteredArrayOfObjects removeAllObjects];
-                
-                for (Child *child in objects)
-                {
-                    if(!([[self.teamMembersArray valueForKeyPath:@"objectId"] containsObject:child.objectId]))
-                    {
-                        
-                        
+                for (Child *child in objects) {
+                    if(!([[self.teamMembersArray valueForKeyPath:@"objectId"] containsObject:child.objectId])) {
                         [filteredArrayOfObjects addObject:child];
                     }
                 }
                 if(filteredArrayOfObjects.count>0){
-                     [self showAlertWithChildrenAdmin:filteredArrayOfObjects team:self.team completion:nil];
+                    [self showAlertWithChildrenAdmin:filteredArrayOfObjects team:self.team completion:nil];
                 }
                 else{
                     [[[UIAlertView alloc] initWithTitle:@""
@@ -427,12 +344,8 @@
                                                delegate:nil
                                       cancelButtonTitle:nil
                                       otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
-
                 }
-                
-               
-            }
-            else{
+            } else{
                 [[[UIAlertView alloc] initWithTitle:@""
                                             message:@"No child is associated with this user"
                                            delegate:nil
@@ -443,7 +356,7 @@
             
             [hud hide:YES];
         }];
-
+        
     }else{
         [[[[User currentUser] children] query] findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
             
@@ -451,35 +364,23 @@
                 NSMutableArray *filteredArrayOfObjects = [NSMutableArray new];
                 [filteredArrayOfObjects removeAllObjects];
                 
-                for (Child *child in objects)
-                {
-                    if(!([[self.teamMembersArray valueForKeyPath:@"objectId"] containsObject:child.objectId]))
-                    {
-                        
-                        
+                for (Child *child in objects) {
+                    if(!([[self.teamMembersArray valueForKeyPath:@"objectId"] containsObject:child.objectId])) {
                         [filteredArrayOfObjects addObject:child];
                     }
                 }
-                
-                
                 [self showAlertWithChildren:filteredArrayOfObjects team:self.team completion:nil];
-            }
-            else{
+            }else{
                 [[[UIAlertView alloc] initWithTitle:@""
                                             message:@"No child is associated with this user"
                                            delegate:nil
                                   cancelButtonTitle:nil
                                   otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
-                
             }
-            
             [hud hide:YES];
         }];
-
     }
-    
-    
-   }
+}
 
 
 
@@ -537,18 +438,8 @@
                                                                 }
                                                             }
                                                         }];
-                                                        
-                                                        
-                                                        
-                                                        
                                                     }]];
         }
-        
-       
-        
-        
-        
-        
         for (Child* child in children) {
             [alert addAction:[UIAlertAction actionWithTitle:[child displayName]
                                                       style:UIAlertActionStyleDefault
@@ -588,7 +479,7 @@
                                                                                 completion();
                                                                             }
                                                                             
-                                                                          //  [self.tableView reloadData];
+                                                                            //  [self.tableView reloadData];
                                                                         }];
                                                                         break;
                                                                         
@@ -614,11 +505,11 @@
                                                 }]];
         [self presentViewController:alert animated:YES completion:nil];
     }
-        
-        
-        
-        
-         }
+    
+    
+    
+    
+}
 
 
 - (void)showAlertWithChildrenAdmin:(NSArray*)children team:(Team*)team completion:(void (^)(void))completion {
@@ -650,44 +541,24 @@
                                                                                                    delegate:nil
                                                                                           cancelButtonTitle:nil
                                                                                           otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
-                                                                    }
-                                                                    
-                                                                    else{
-                                                                        
-                                                                        NSString *timestamp =  [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970] * 1000];
-                                                                        
+                                                                    }else{
                                                                         [[User currentUser] followTeamWithBlockCallback:team completion:^(BOOL succeeded, NSError * _Nullable error) {
                                                                             if(succeeded)
                                                                             {
                                                                                 [[NSNotificationCenter defaultCenter] postNotificationName:@"SpotLightRefersh" object:nil];
                                                                                 isUserFollowCurrentTeam = YES;
                                                                                 [self.teamMembersArray addObject:[User currentUser]];
-                                                                               
+                                                                                
                                                                             }
                                                                         }];
-                                                                       
-                                                                     
-                                                                        
-                                                                       
                                                                         break;
-                                                                        
                                                                     }
                                                                     
                                                                 }
                                                             }
                                                         }];
-                                                        
-                                                        
-                                                        
-                                                        
                                                     }]];
         }
-        
-        
-        
-        
-        
-        
         for (Child* child in children) {
             [alert addAction:[UIAlertAction actionWithTitle:[child displayName]
                                                       style:UIAlertActionStyleDefault
@@ -712,36 +583,14 @@
                                                                                                    delegate:nil
                                                                                           cancelButtonTitle:nil
                                                                                           otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
-                                                                    }
-                                                                    
-                                                                    else{
-                                                                        
-                                                                        NSString *timestamp =  [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970] * 1000];
-                                                                        
-                                                                        [child followTeamWithBlockCallback:team  completion:^(BOOL succeeded, NSError * _Nullable error) {
-                                                                            if(succeeded)
-                                                                            {
-                                                                               
-                                                                            }
-                                                                        }];
-                                                                      
+                                                                    }else{
+                                                                        [child followTeamWithBlockCallback:team  completion:nil];
                                                                         [self.teamMembersArray addObject:child];
                                                                         break;
-                                                                        
                                                                     }
-                                                                    
                                                                 }
                                                             }
                                                         }];
-                                                        
-                                                        
-                                                        
-                                                        //                                                        [child followTeam:team completion:^{
-                                                        //                                                            if (completion) {
-                                                        //
-                                                        //                                                                completion();
-                                                        //                                                            }
-                                                        //                                                        }];
                                                     }]];
         }
         [alert addAction:[UIAlertAction actionWithTitle:@"Cancel"
@@ -750,53 +599,28 @@
                                                 }]];
         [self presentViewController:alert animated:YES completion:nil];
     }
-    
-    
-    
-    
 }
-
-
-
-
-
 
 -(BOOL)isRequestAllowed:(BOOL)isChild withUser:(User*)user withChild:(Child*)child withTeam:(Team*)team {
     
     if(!isChild){
         for(TeamRequest *request in pendingRequestArray){
-            
             if((!request.isChild.boolValue)&&([request.team.objectId isEqualToString:team.objectId])){
                 return NO;
             }
-            
         }
-        
         return YES;
-        
-    }
-    else{
+    }else{
         for(TeamRequest *request in pendingRequestArray){
-            
-            if(([child.objectId isEqualToString:request.child.objectId])&&([request.team.objectId isEqualToString:team.objectId])&& (request.isChild.boolValue)){
+            if(([child.objectId isEqualToString:request.child.objectId]) &&
+               ([request.team.objectId isEqualToString:team.objectId]) &&
+               (request.isChild.boolValue)){
                 
                 return NO;
-                
-                
-                
             }
-            
-            
-            
-            
-            
         }
         return YES;
-        
     }
-    
-    
-    
 }
 
 
@@ -807,8 +631,6 @@
 -(BOOL)hidesBottomBarWhenPushed {
     return YES;
 }
-
-
 
 
 @end

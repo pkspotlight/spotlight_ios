@@ -27,7 +27,7 @@
     id infoMedia;
     BOOL isCamera;
     BOOL isView;
-
+    
 }
 
 @property (strong, nonatomic) NSArray* mediaList;
@@ -55,7 +55,7 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
     _teamsMemberArray = [NSMutableArray new];
     _teamsSpectMemberArray = [NSMutableArray new];
     _participantArray = [NSMutableArray new];
-
+    
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     refreshControl.tintColor = [UIColor grayColor];
     [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
@@ -63,37 +63,37 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
     self.collectionView.alwaysBounceVertical = YES;
     [self getParticipantArrayOfTeam];
     [refreshControl beginRefreshing];
-   
+    
     UILabel *label = [[UILabel alloc] initWithFrame: CGRectMake((self.view.frame.size.width-140)/2, 12, 140, 40)];
     label.numberOfLines = 3;
     
-   
+    
     label.font = [UIFont fontWithName:@"Helvetica" size:15.0f];
     
     label.minimumFontSize = 13.0f;
-
+    
     //label.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
-    label.textAlignment = UITextAlignmentCenter;
+    label.textAlignment = NSTextAlignmentCenter;
     label.textColor =[UIColor whiteColor];
-   
+    
     if([_spotlight.spotlightTitle length]<=0){
-       label.text = @"Spotlight";
+        label.text = @"Spotlight";
     }else{
-          label.text = _spotlight.spotlightTitle;
+        label.text = _spotlight.spotlightTitle;
     }
     self.navigationItem.titleView = label;
-
+    
     [self refresh:refreshControl];
 }
 
 -(void)getParticipantArrayOfTeam{
     [_teamsMemberArray removeAllObjects];
     [_teamsSpectMemberArray removeAllObjects];
-   
+    
     PFQuery *query = [PFQuery queryWithClassName:@"Child"];
     [query whereKey:@"teams" equalTo:self.spotlight.team];
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-
+        
         for(Child *child in objects){
             if([self.spotlight.team.spectatorsArray containsObject:child.objectId]){
                 [_teamsSpectMemberArray addObject:child];
@@ -115,13 +115,13 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
             }
         }];
     }];
-
+    
 }
 
 - (void)refresh:(UIRefreshControl*)refresh {
     [self.spotlight allMedia:^(NSArray *media, NSError *error) {
-         self.mediaList = [self getSortedArray:media];
-      //  self.mediaList = media;
+        self.mediaList = [self getSortedArray:media];
+        //  self.mediaList = media;
         [self.collectionView reloadData];
         [refresh endRefreshing];
     }];
@@ -142,14 +142,14 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 #pragma mark <UICollectionViewDataSource>
 
@@ -175,7 +175,7 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
 {
     
     SpotlightHeaderCollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:
-                                   UICollectionElementKindSectionHeader withReuseIdentifier:@"SpotlightHeaderCollectionReusableView" forIndexPath:indexPath];
+                                                         UICollectionElementKindSectionHeader withReuseIdentifier:@"SpotlightHeaderCollectionReusableView" forIndexPath:indexPath];
     [headerView formatHeaderForTeam:self.spotlight.team spotlight:self.spotlight ];
     [headerView setDelegate:self];
     return headerView;
@@ -206,7 +206,7 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
     
     // Optionally set the current visible photo before displaying
     [self.browser setCurrentPhotoIndex:indexPath.row];
-     SpotlightMedia *media = self.mediaList[indexPath.row];
+    SpotlightMedia *media = self.mediaList[indexPath.row];
     self.browser.participantArray = media.participantArray;
     
     // Present
@@ -225,21 +225,21 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
 
 -(void)editPhotoAtIndex:(NSUInteger)index withImage:(UIImage *)image
 {
-   if( self.mediaList.count > index && image)
-   {
-       SpotlightMedia *media = self.mediaList[index];
-if(!media.isVideo)
-{
-
-    PECropViewController *controller = [[PECropViewController alloc] init];
-    controller.delegate = self;
-    controller.image = image;
-    
-    
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:controller];
-    [self presentViewController:navigationController animated:YES completion:NULL];
-}
-   }
+    if( self.mediaList.count > index && image)
+    {
+        SpotlightMedia *media = self.mediaList[index];
+        if(!media.isVideo)
+        {
+            
+            PECropViewController *controller = [[PECropViewController alloc] init];
+            controller.delegate = self;
+            controller.image = image;
+            
+            
+            UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:controller];
+            [self presentViewController:navigationController animated:YES completion:NULL];
+        }
+    }
     
 }
 
@@ -252,23 +252,21 @@ if(!media.isVideo)
                                                   assetURL:nil
                                                    isShare:YES
                                                 completion:^(AVPlayerItem *item, NSURL *fileURL) {
-        
-        UIActivityViewController* AVC =  [[UIActivityViewController alloc] initWithActivityItems:@[fileURL, @""] applicationActivities:nil];
-        [self presentViewController:AVC
-                           animated:YES
-                         completion:^{
-                             [hud hide:YES];
-                         }];
-    }];
+                                                    
+                                                    UIActivityViewController* AVC =  [[UIActivityViewController alloc] initWithActivityItems:@[fileURL, @""] applicationActivities:nil];
+                                                    [self presentViewController:AVC
+                                                                       animated:YES
+                                                                     completion:^{
+                                                                         [hud hide:YES];
+                                                                     }];
+                                                }];
 }
 
 
-- (void)cropViewController:(PECropViewController *)controller didFinishCroppingImage:(UIImage *)croppedImage
-{
-  
+- (void)cropViewController:(PECropViewController *)controller didFinishCroppingImage:(UIImage *)croppedImage{
     
-     [controller dismissViewControllerAnimated:YES completion:NULL];
-     SpotlightMedia* media = self.mediaList[self.browser.currentIndex];
+    [controller dismissViewControllerAnimated:YES completion:NULL];
+    SpotlightMedia* media = self.mediaList[self.browser.currentIndex];
     media.mediaFile = [PFFile fileWithName:@"image.png" data:UIImageJPEGRepresentation(croppedImage, 1.0)];
     media.thumbnailImageFile = [PFFile fileWithName:@"image.png" data:UIImageJPEGRepresentation(croppedImage, 0.5)];
     
@@ -285,7 +283,7 @@ if(!media.isVideo)
 
 - (void)cropViewControllerDidCancel:(PECropViewController *)controller
 {
-      [controller dismissViewControllerAnimated:YES completion:NULL];
+    [controller dismissViewControllerAnimated:YES completion:NULL];
 }
 
 
@@ -316,7 +314,7 @@ if(!media.isVideo)
 -(void)photoBrowser:(MWPhotoBrowser *)photoBrowser populateLikesForPhotoAtIndex:(NSUInteger)index {
     SpotlightMedia *media = self.mediaList[index];
     [media likeCountWithCompletion:^(NSInteger likes) {
-      //  [self.browser populateLikeCount:likes atIndex:index];
+        //  [self.browser populateLikeCount:likes atIndex:index];
     }];
 }
 
@@ -328,18 +326,18 @@ if(!media.isVideo)
         NSString *name = [NSString stringWithFormat:@"%@ %@",child.firstName
                           ,child.lastName];
         [childArray addObject:name];
-
+        
     }
     for(User *user in participant) {
         NSString *userName = [NSString stringWithFormat:@"%@ %@",user.firstName
-                          ,user.lastName];
+                              ,user.lastName];
         [userArray addObject:userName];
         
     }
     
     NSMutableArray *combinedArray = [NSMutableArray new];
     
-
+    
     combinedArray = [userArray arrayByAddingObjectsFromArray:childArray].mutableCopy;
     
     NSSet *distinctSet = [NSSet setWithArray:combinedArray];
@@ -351,7 +349,7 @@ if(!media.isVideo)
         [self saveImageWithMediaInfo:infoMedia title:title];
     }
     
-
+    
 }
 
 - (IBAction)backButtonPressed:(id)sender {
@@ -360,7 +358,7 @@ if(!media.isVideo)
 
 
 - (IBAction)addMediaButtonPressed:(id)sender {
-
+    
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Select Source"
                                                                    message:@""
                                                             preferredStyle:UIAlertControllerStyleActionSheet];
@@ -375,7 +373,7 @@ if(!media.isVideo)
                                             handler:^(UIAlertAction * _Nonnull action) {
                                                 [self selectVideoFromNativeImagePicker];
                                             }]];
-        [alert addAction:[UIAlertAction actionWithTitle:@"Cancel"
+    [alert addAction:[UIAlertAction actionWithTitle:@"Cancel"
                                               style:UIAlertActionStyleCancel
                                             handler:nil]];
     [self presentViewController:alert animated:YES completion:nil];
@@ -383,20 +381,20 @@ if(!media.isVideo)
 
 
 -(void)selectVideoFromNativeImagePicker{
-        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
-        {
-            UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-            imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
-            imagePickerController.delegate = self;
-            imagePickerController.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeMovie,  nil];
-            imagePickerController.videoMaximumDuration = 15;
-            [imagePickerController setAllowsEditing:YES];
-            
-
-            self.imagePickerController = imagePickerController;
-            [self.navigationController presentViewController:self.imagePickerController animated:YES completion:nil];
-        }
-
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
+    {
+        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+        imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
+        imagePickerController.delegate = self;
+        imagePickerController.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeMovie,  nil];
+        imagePickerController.videoMaximumDuration = 15;
+        [imagePickerController setAllowsEditing:YES];
+        
+        
+        self.imagePickerController = imagePickerController;
+        [self.navigationController presentViewController:self.imagePickerController animated:YES completion:nil];
+    }
+    
 }
 
 -(void)selectImagesFromElcImagePicker{
@@ -404,10 +402,8 @@ if(!media.isVideo)
     ELCAlbumPickerController *albumController = [[ELCAlbumPickerController alloc] init];
     ELCImagePickerController *elcPicker = [[ELCImagePickerController alloc] initWithRootViewController:albumController];
     [albumController setParent:elcPicker];
-
-
     elcPicker.imagePickerDelegate = self;
-    [self presentModalViewController:elcPicker animated:YES];
+    [self presentViewController:elcPicker animated:YES completion:nil];
 }
 
 
@@ -453,32 +449,7 @@ if(!media.isVideo)
     isCamera = YES;
     infoMedia = infoDict;
     [self dismissViewControllerAnimated:YES completion:^{
-        
-          [self addSpotlightParticipantPopUp];
-//        UIAlertController* titleAlert = [UIAlertController alertControllerWithTitle:@"Would you like to add a title?"
-//                                                                                   message:nil
-//                                                                            preferredStyle:UIAlertControllerStyleAlert];
-//        [titleAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-//            
-//        }];
-//        
-//        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK"
-//                                                                style:UIAlertActionStyleDefault
-//                                                              handler:^(UIAlertAction * action) {
-//                                                                  [self saveImageWithMediaInfoVideo:infoDict title:titleAlert.textFields[0].text];
-//                                                              }];
-//        UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"No Title"
-//                                                               style:UIAlertActionStyleCancel
-//                                                             handler:^(UIAlertAction * action) {
-//                                                                 [self saveImageWithMediaInfoVideo:infoDict title:nil];
-//                                                             }];
-//        [titleAlert addAction:defaultAction];
-//        [titleAlert addAction:cancelAction];
-//        [self presentViewController:titleAlert
-//                           animated:YES
-//                         completion:^{
-//                             
-//                         }];
+        [self addSpotlightParticipantPopUp];
     }];
 }
 
@@ -494,13 +465,13 @@ if(!media.isVideo)
         PHAsset *asset = result.firstObject;
         NSDate *date = asset.creationDate;
         double timestamp = [date timeIntervalSince1970];
-
+        
         
         NSURL *videoUrl=(NSURL*)[infoDict objectForKey:UIImagePickerControllerMediaURL];
         NSString *videoPath = [videoUrl path];
         media = [[SpotlightMedia alloc] initWithVideoPath:videoPath];
         media.timeStamp =timestamp;
-          media.participantArray = _participantArray;
+        media.participantArray = _participantArray;
     } else if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
         UIImage *image = [infoDict valueForKey:UIImagePickerControllerOriginalImage];
         media = [[SpotlightMedia alloc] initWithImage:image];
@@ -516,9 +487,9 @@ if(!media.isVideo)
             NSLog(@"fuck: %@", [error localizedDescription]);
         } else {
             [self.spotlight allMedia:^(NSArray *media, NSError *error) {
-                 self.mediaList = [self getSortedArray:media];
+                self.mediaList = [self getSortedArray:media];
                 //self.mediaList = media;
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"SpotLightRefersh" object:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"SpotLightRefersh" object:nil];
                 [self.collectionView reloadData];
                 [hud hide:YES];
             }];
@@ -530,24 +501,24 @@ if(!media.isVideo)
 
 
 - (void)saveImageWithMediaInfo:(NSArray *)info title:(NSString*)title{
-   __block SpotlightMedia *media;
+    __block SpotlightMedia *media;
     
-      for (NSDictionary *infoDict in info){
-    NSString *mediaType = [infoDict objectForKey: UIImagePickerControllerMediaType];
-    
-    if ([mediaType isEqualToString:(NSString *)ALAssetTypeVideo]){
-
-        NSURL *videoUrl=(NSURL*)[infoDict objectForKey:UIImagePickerControllerReferenceURL];
-        PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[videoUrl] options:nil];
-        PHAsset *asset = result.firstObject;
-        NSDate *date = asset.creationDate;
-        double timestamp = [date timeIntervalSince1970];
+    for (NSDictionary *infoDict in info){
+        NSString *mediaType = [infoDict objectForKey: UIImagePickerControllerMediaType];
         
-
-        PHVideoRequestOptions *options=[[PHVideoRequestOptions alloc]init];
-        options.version=PHVideoRequestOptionsVersionOriginal;
-        [[PHImageManager defaultManager] requestAVAssetForVideo:asset options:options resultHandler:^(AVAsset * avasset, AVAudioMix * audioMix, NSDictionary * info) {
-           
+        if ([mediaType isEqualToString:(NSString *)ALAssetTypeVideo]){
+            
+            NSURL *videoUrl=(NSURL*)[infoDict objectForKey:UIImagePickerControllerReferenceURL];
+            PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[videoUrl] options:nil];
+            PHAsset *asset = result.firstObject;
+            NSDate *date = asset.creationDate;
+            double timestamp = [date timeIntervalSince1970];
+            
+            
+            PHVideoRequestOptions *options=[[PHVideoRequestOptions alloc]init];
+            options.version=PHVideoRequestOptionsVersionOriginal;
+            [[PHImageManager defaultManager] requestAVAssetForVideo:asset options:options resultHandler:^(AVAsset * avasset, AVAudioMix * audioMix, NSDictionary * info) {
+                
                 
                 AVURLAsset *asset = (AVURLAsset *)avasset;
                 NSURL *url = asset.URL;
@@ -555,73 +526,70 @@ if(!media.isVideo)
                 NSString *videoPath = [url path];
                 media = [[SpotlightMedia alloc] initWithVideoPath:videoPath];
                 media.timeStamp = timestamp;
-            media.participantArray = _participantArray;
+                media.participantArray = _participantArray;
                 if (title) {
                     media.title = title;
                 }
-             dispatch_async(dispatch_get_main_queue(), ^{
-                MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                [hud setLabelText:@"Adding Media..."];
-                media[@"parent"] = self.spotlight;
-                [media saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-                    if (error) {
-                        [hud hide:YES];
-
-                        NSLog(@"fuck: %@", [error localizedDescription]);
-                    } else {
-                        [self.spotlight allMedia:^(NSArray *media, NSError *error) {
-                             self.mediaList = [self getSortedArray:media];
-                                [[NSNotificationCenter defaultCenter] postNotificationName:@"SpotLightRefersh" object:nil];
-                            [self.collectionView reloadData];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                    [hud setLabelText:@"Adding Media..."];
+                    media[@"parent"] = self.spotlight;
+                    [media saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                        if (error) {
                             [hud hide:YES];
-                        }];
-                    }
-                }];
-
-
-              
-            });
-        }];
-
-        
-    } else if ([mediaType isEqualToString:(NSString *)ALAssetTypePhoto]) {
-        UIImage *image = [infoDict valueForKey:UIImagePickerControllerOriginalImage];
-        
-        NSURL *imageUrl=(NSURL*)[infoDict objectForKey:UIImagePickerControllerReferenceURL];
-        PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[imageUrl] options:nil];
-        PHAsset *asset = result.firstObject;
-        NSDate *date = asset.creationDate;
-          double timestamp = [date timeIntervalSince1970];
-
-        
-        media = [[SpotlightMedia alloc] initWithImage:image];
-        media.timeStamp = timestamp;
-           media.participantArray = _participantArray;
-        
-        if (title) {
-            media.title = title;
-        }
-        MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        [hud setLabelText:@"Adding Media..."];
-        media[@"parent"] = self.spotlight;
-        [media saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-            if (error) {
-                [hud hide:YES];
-
-                NSLog(@"fuck: %@", [error localizedDescription]);
-            } else {
-                [self.spotlight allMedia:^(NSArray *media, NSError *error) {
-                    //self.mediaList = media;
-                     self.mediaList = [self getSortedArray:media];
-                        [[NSNotificationCenter defaultCenter] postNotificationName:@"SpotLightRefersh" object:nil];
-                    [self.collectionView reloadData];
-                    [hud hide:YES];
-                }];
+                            
+                            NSLog(@"fuck: %@", [error localizedDescription]);
+                        } else {
+                            [self.spotlight allMedia:^(NSArray *media, NSError *error) {
+                                self.mediaList = [self getSortedArray:media];
+                                [[NSNotificationCenter defaultCenter] postNotificationName:@"SpotLightRefersh" object:nil];
+                                [self.collectionView reloadData];
+                                [hud hide:YES];
+                            }];
+                        }
+                    }];
+                });
+            }];
+            
+            
+        } else if ([mediaType isEqualToString:(NSString *)ALAssetTypePhoto]) {
+            UIImage *image = [infoDict valueForKey:UIImagePickerControllerOriginalImage];
+            
+            NSURL *imageUrl=(NSURL*)[infoDict objectForKey:UIImagePickerControllerReferenceURL];
+            PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[imageUrl] options:nil];
+            PHAsset *asset = result.firstObject;
+            NSDate *date = asset.creationDate;
+            double timestamp = [date timeIntervalSince1970];
+            
+            
+            media = [[SpotlightMedia alloc] initWithImage:image];
+            media.timeStamp = timestamp;
+            media.participantArray = _participantArray;
+            
+            if (title) {
+                media.title = title;
             }
-        }];
-
+            MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            [hud setLabelText:@"Adding Media..."];
+            media[@"parent"] = self.spotlight;
+            [media saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                if (error) {
+                    [hud hide:YES];
+                    
+                    NSLog(@"fuck: %@", [error localizedDescription]);
+                } else {
+                    [self.spotlight allMedia:^(NSArray *media, NSError *error) {
+                        //self.mediaList = media;
+                        self.mediaList = [self getSortedArray:media];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"SpotLightRefersh" object:nil];
+                        [self.collectionView reloadData];
+                        [hud hide:YES];
+                    }];
+                }
+            }];
+            
+        }
     }
-          }
     self.imagePickerController = nil;
 }
 
@@ -640,10 +608,10 @@ if(!media.isVideo)
             [self addSpotlightParticipantPopUp];
         } else{
             
-             [self addSpotlightParticipantPopUp];
+            [self addSpotlightParticipantPopUp];
         }
     }];
-     }
+}
 
 - (void)elcImagePickerControllerDidCancel:(ELCImagePickerController *)picker{
     
@@ -665,14 +633,14 @@ if(!media.isVideo)
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Select your background music"
                                                                    message:@""
                                                             preferredStyle:UIAlertControllerStyleActionSheet];
-
+    
     [alert addAction:[UIAlertAction actionWithTitle:@"Choose Music from Device"
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * _Nonnull action) {
                                                 isView = true;
                                                 [self openMedia];
                                             }]];
-
+    
     [alert addAction:[UIAlertAction actionWithTitle:@"Cool Kids"
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * _Nonnull action) {
@@ -706,15 +674,15 @@ if(!media.isVideo)
 }
 
 -(void)addSpotlightParticipantPopUp{
-        SpotlightTaggedParticipantView *spotlightParticipantView = [[SpotlightTaggedParticipantView alloc] initWithParticipant:_teamsMemberArray withTitle:@"abcd"];
-        spotlightParticipantView.delegate = self;
-        CGRect frameRect =spotlightParticipantView.frame;
-        frameRect.size.width = [UIScreen mainScreen].bounds.size.width;
-        frameRect.size.height = [UIScreen mainScreen].bounds.size.height;
-        spotlightParticipantView.frame = frameRect;
+    SpotlightTaggedParticipantView *spotlightParticipantView = [[SpotlightTaggedParticipantView alloc] initWithParticipant:_teamsMemberArray withTitle:@"abcd"];
+    spotlightParticipantView.delegate = self;
+    CGRect frameRect =spotlightParticipantView.frame;
+    frameRect.size.width = [UIScreen mainScreen].bounds.size.width;
+    frameRect.size.height = [UIScreen mainScreen].bounds.size.height;
+    spotlightParticipantView.frame = frameRect;
     
-        [ [[UIApplication sharedApplication].delegate window] addSubview:spotlightParticipantView];
-        spotlightParticipantView.translatesAutoresizingMaskIntoConstraints = true;
+    [ [[UIApplication sharedApplication].delegate window] addSubview:spotlightParticipantView];
+    spotlightParticipantView.translatesAutoresizingMaskIntoConstraints = true;
 }
 
 - (IBAction)shareMontageButtonPressed:(id)sender {
@@ -722,7 +690,7 @@ if(!media.isVideo)
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Select your background music"
                                                                    message:@""
                                                             preferredStyle:UIAlertControllerStyleActionSheet];
-
+    
     [alert addAction:[UIAlertAction actionWithTitle:@"Choose Music from your device"
                       
                                               style:UIAlertActionStyleDefault
@@ -740,7 +708,7 @@ if(!media.isVideo)
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * _Nonnull action) {
                                                 [self createMontageWithSongTitle:@"TB - Disney Funk 124bpm" share:YES AssetURL:nil];
-                                            }]];
+                                                }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"Every Single Night"
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * _Nonnull action) {
@@ -763,7 +731,7 @@ if(!media.isVideo)
                                                 
                                             }]];
     
-
+    
     
     [alert addAction:[UIAlertAction actionWithTitle:@"Cancel"
                                               style:UIAlertActionStyleCancel
@@ -784,8 +752,8 @@ if(!media.isVideo)
             [self presentViewController:AVC
                                animated:YES
                              completion:^{
-                                [hud hide:YES];
-                               }];
+                                 [hud hide:YES];
+                             }];
         }];
     } else {
         
@@ -799,7 +767,7 @@ if(!media.isVideo)
                                animated:YES
                              completion:^{
                                  [VC.player play];
-            }];
+                             }];
             [hud hide:YES];
         }];
     }
@@ -852,27 +820,27 @@ if(!media.isVideo)
 
 - (void)mediaPicker: (MPMediaPickerController *)mediaPicker didPickMediaItems:(MPMediaItemCollection *)mediaItemCollection {
     
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
     
-//    for (int i = 0; i < [mediaItemCollection.items count]; i++) {
-        [self exportAssetAsSourceFormat:[[mediaItemCollection items] objectAtIndex:0]];
-//        break;
-//    }
+    //    for (int i = 0; i < [mediaItemCollection.items count]; i++) {
+    [self exportAssetAsSourceFormat:[[mediaItemCollection items] objectAtIndex:0]];
+    //        break;
+    //    }
 }
 
 - (void)mediaPickerDidCancel:(MPMediaPickerController *)mediaPicker {
     
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)exportAssetAsSourceFormat:(MPMediaItem *)item {
-
+    
     NSURL *assetURL = [item valueForProperty:MPMediaItemPropertyAssetURL];
     
     if(isView){
-         [self createMontageWithSongTitle:nil share:NO AssetURL:assetURL];
+        [self createMontageWithSongTitle:nil share:NO AssetURL:assetURL];
     }else{
-         [self createMontageWithSongTitle:nil share:YES AssetURL:assetURL];
+        [self createMontageWithSongTitle:nil share:YES AssetURL:assetURL];
     }
 }
 
@@ -882,7 +850,7 @@ if(!media.isVideo)
     reorderRequestController.mediaSpotlightList = [self.mediaList mutableCopy];
     reorderRequestController.delegate = self;
     [self.navigationController pushViewController:reorderRequestController animated:YES];
-
+    
 }
 
 -(void)refreshSpotlightCollectionImages{

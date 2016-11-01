@@ -25,7 +25,7 @@
 }
 
 - (void)awakeFromNib {
- 
+    [super awakeFromNib];
     _selectedParticantArray = [NSMutableArray new];
     
     

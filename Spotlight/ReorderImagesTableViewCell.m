@@ -7,14 +7,9 @@
 //
 
 #import "ReorderImagesTableViewCell.h"
-
-
 #import <AFNetworking/UIImageView+AFNetworking.h>
-@implementation ReorderImagesTableViewCell
 
-- (void)awakeFromNib {
-    // Initialization code
-}
+@implementation ReorderImagesTableViewCell
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

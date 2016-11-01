@@ -29,11 +29,8 @@
 }
 
 - (void)awakeFromNib {
-    
-  
-    
-    
-    // border
+
+    [super awakeFromNib];
     self.participantView.layer.cornerRadius = 10;
     self.participantView.layer.borderColor = [UIColor whiteColor].CGColor;
     self.participantView.layer.borderWidth = 1;

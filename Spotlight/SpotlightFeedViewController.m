@@ -25,14 +25,12 @@
 {
     UIRefreshControl* refresh;
     Spotlight *spotLightCellSelected;
-    
 }
 
 
 @end
 
 @implementation SpotlightFeedViewController
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];

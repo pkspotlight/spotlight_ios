@@ -65,8 +65,6 @@ static CGFloat const BasicHeaderHeight = 50;
       [self fetchRequest];
     if(!self.user)
     [self.navigationController setNavigationBarHidden:NO];
-
-
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [[NSNotificationCenter defaultCenter] postNotificationName:@"PendingRequest" object:nil];
     });
@@ -81,11 +79,14 @@ static CGFloat const BasicHeaderHeight = 50;
         
     }];
 }
+- (IBAction)searchButtonPressed:(id)sender {
+     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    FriendFinderTableViewController *friendFinderController = [storyboard instantiateViewControllerWithIdentifier:@"SearchFriends"];
+    [self.navigationController pushViewController:friendFinderController animated:YES];
+}
 
 
 -(void)fetchRequest{
-    
-    
     
     PFQuery *spotlightQuery = [PFQuery queryWithClassName:@"TeamRequest"];
     [spotlightQuery whereKey:@"admin" equalTo:[User currentUser]];
@@ -109,30 +110,21 @@ static CGFloat const BasicHeaderHeight = 50;
             //  pendingRequest = [NSString stringWithFormat:@"You have %ld request pendings",array.count];
             if(array.count>0){
                   [self makeHeaderView];
-                [[self navigationController] tabBarItem].badgeValue = [NSString stringWithFormat:@"%ul",array.count];
+                [[self navigationController] tabBarItem].badgeValue = [NSString stringWithFormat:@"%lul",(unsigned long)array.count];
             }
             else{
                 self.tableView.tableHeaderView = nil;
                 [[self navigationController] tabBarItem].badgeValue  = nil;
             }
-          
-            
-            
-            
         }
         else{
               self.tableView.tableHeaderView = nil;
             [[self navigationController] tabBarItem].badgeValue  = nil;
         }
-        
-        
     }];
 }
 
--(void)refreshScreen
-{
-    //[self.tableView setContentOffset:CGPointMake(0, -refresh.frame.size.height) animated:YES];
-    
+-(void)refreshScreen{
     [self refresh:self.refreshControl];
 }
 
@@ -153,7 +145,6 @@ static CGFloat const BasicHeaderHeight = 50;
         [[NSUserDefaults standardUserDefaults] synchronize];
         //Alert code will go here...
     }
-    
 }
 
 
@@ -233,12 +224,7 @@ static CGFloat const BasicHeaderHeight = 50;
             
             [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
             [refresh performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:NO];
-            
-            
         }];
-        
-       
-        
     }];
 }
 
@@ -255,31 +241,8 @@ static CGFloat const BasicHeaderHeight = 50;
     }];
 }
 
-
-
 - (IBAction)plusButtonPressed:(id)sender {
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Search/Add Spotlighters"
-                                                                    message:@""
-                                                             preferredStyle:UIAlertControllerStyleActionSheet];
-    [alert addAction:[UIAlertAction actionWithTitle:@"Search/Add Spotlighters"
-                                              style:UIAlertActionStyleDefault
-                                            handler:^(UIAlertAction * _Nonnull action) {
-                                                UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                                                FriendFinderTableViewController *friendFinderController = [storyboard instantiateViewControllerWithIdentifier:@"SearchFriends"];
-                                                                                               [self.navigationController pushViewController:friendFinderController animated:YES];
-                                            }]];
-    [alert addAction:[UIAlertAction actionWithTitle:@"Add Family Members"
-                                              style:UIAlertActionStyleDefault
-                                            handler:^(UIAlertAction * _Nonnull action) {
-                                                [self performSegueWithIdentifier:@"CreateFamilyMemberSegue"
-                                                                          sender:sender];
-                                            }]];
-    [alert addAction:[UIAlertAction actionWithTitle:@"Cancel"
-                                              style:UIAlertActionStyleCancel
-                                            handler:^(UIAlertAction * _Nonnull action) {
-                                                
-                                            }]];
-    [self presentViewController:alert animated:YES completion:nil];
+    [self performSegueWithIdentifier:@"CreateFamilyMemberSegue" sender:sender];
 }
 
 - (void)didReceiveMemoryWarning {

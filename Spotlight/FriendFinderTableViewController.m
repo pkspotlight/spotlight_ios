@@ -42,13 +42,9 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     [refresh addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
     [self setRefreshControl:refresh];
     [self loadFriends];
-    if([self.controllerType intValue]==1&&self.controllerType!=nil){
+    if([self.controllerType intValue]==1 && self.controllerType!=nil){
         self.navigationItem.title = @"Send Invites";
-        
-    }else{
-        
     }
-    
     self.hideKeyboardTap = [[UITapGestureRecognizer alloc]
                             initWithTarget:self
                             action:@selector(dismissKeyboard)];
@@ -58,7 +54,6 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     PFQuery *query = [[User currentUser].friends query];
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         self.friendsArray = [objects copy];
-        
     }];
 }
 
@@ -95,8 +90,6 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
         }else{
              cell.contentView.hidden = NO;
         }
-        
-        
     } else {
         cell = (FriendTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"FriendTableViewCell"
                                                                      forIndexPath:indexPath];
@@ -110,10 +103,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
         if([user.objectId isEqualToString:[User currentUser].objectId ]){
             [(FriendTableViewCell*)cell followButton].hidden = YES;
           
-        }
-        else{
-           // [(FriendTableViewCell*)cell followButton].hidden = NO;
-            
+        } else {
             if([self.controllerType intValue]==1&&self.controllerType!=nil){
                 [(FriendTableViewCell*)cell followButton].hidden = YES;
                 [(FriendTableViewCell*)cell inviteButton].hidden = NO;
@@ -124,22 +114,12 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                 [(FriendTableViewCell*)cell followButton].hidden = NO;
                 [(FriendTableViewCell*)cell inviteButton].hidden = YES;
             }
-
-            
-          
-            if(([[self.friendsArray valueForKeyPath:@"objectId"] containsObject:user.objectId]))
-            {
+            if(([[self.friendsArray valueForKeyPath:@"objectId"] containsObject:user.objectId])) {
                 isFollowing = true;
-                
-                
-            }
-            else{
+            } else {
                 isFollowing = false;
-                }
-
+            }
         }
-        
-        
         [(FriendTableViewCell*)cell formatForUser:self.searchResults[indexPath.row] isSpectator:NO  isFollowing:isFollowing];
        
     }
@@ -278,8 +258,12 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
             
         }];
     }
-    
+}
 
+- (IBAction)searchTextEditingChanged:(UITextView*)textView {
+    if (textView.text.length > 3) {
+        [self searchText:textView.text];
+    }
 }
 
 
@@ -290,22 +274,16 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     NSString *substring = [NSString stringWithString:self.searchTxtField.text];
     substring = [substring stringByReplacingCharactersInRange:range withString:string];
     txtToSearch = substring;
-    
-    
+
     if([txtToSearch isEqualToString:@""] && txtToSearch.length == 0){
         self.searchResults = @[];
         [self.crossImage setHidden:YES];
         
         [self.tableView reloadData];
 
-    }
-    else{
+    }else{
          [self.crossImage setHidden:NO];
     }
-    
-    
-    
-    
     return YES; //If you don't your textfield won't get any text in it
 }
 
@@ -323,8 +301,6 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     
     [self.navigationController popViewControllerAnimated:YES];
 }
-
-
 
 -(void)refresh{
     [refresh endRefreshing];

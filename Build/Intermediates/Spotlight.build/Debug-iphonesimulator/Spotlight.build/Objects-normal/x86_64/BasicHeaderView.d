@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/pkamm/Documents/ios/Spotlight/Spotlight/BasicHeaderView.m \
-  /Users/pkamm/Documents/ios/Spotlight/Spotlight/BasicHeaderView.h
+  /Users/pkamm/Documents/spotlight/new_ios/Spotlight/BasicHeaderView.m \
+  /Users/pkamm/Documents/spotlight/new_ios/Spotlight/BasicHeaderView.h

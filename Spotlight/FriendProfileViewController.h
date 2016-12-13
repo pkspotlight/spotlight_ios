@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <Parse.h>
+#import <Parse/Parse.h>
 
 @class User;
 @class Child;

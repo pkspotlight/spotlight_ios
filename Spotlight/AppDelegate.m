@@ -7,12 +7,11 @@
 //
 
 #import "AppDelegate.h"
-#import <ParseFacebookUtilsV4/PFFacebookUtils.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
-#import <Parse.h>
+#import <Parse/Parse.h>
 #import "Spotlight.h"
 #import "SpotlightMedia.h"
 #import "User.h"
@@ -30,11 +29,18 @@
     [Fabric with:@[[Crashlytics class]]];
     [Spotlight registerSubclass];
     [SpotlightMedia registerSubclass];
-    [Parse setApplicationId:@"nuNuhBJQp4cYfeUnWlNFo27QUCKeAgWBX5D74r4F"
-                  clientKey:@"vMH2XfoFKQAy8vbOYzgXZtJrRJ8LjCD5933k3kPF"];
-   //  PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions);
-    
-    [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:launchOptions];
+//    [Parse setApplicationId:@"nuNuhBJQp4cYfeUnWlNFo27QUCKeAgWBX5D74r4F"
+//                  clientKey:@"vMH2XfoFKQAy8vbOYzgXZtJrRJ8LjCD5933k3kPF"];
+//    ParseClientConfiguration *config = [ParseClientConfiguration configurationWithBlock:^(id<ParseMutableClientConfiguration>  _Nonnull configuration) {
+//        
+//    }];
+    [Parse initializeWithConfiguration:[ParseClientConfiguration configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
+        configuration.applicationId = @"nuNuhBJQp4cYfeUnWlNFo27QUCKeAgWBX5D74r4F";
+        configuration.clientKey = @"vMH2XfoFKQAy8vbOYzgXZtJrRJ8LjCD5933k3kPF";
+        configuration.server = @"http://parse-spotlight.us-east-1.elasticbeanstalk.com/parse";
+    }]];
+    [[FBSDKApplicationDelegate sharedInstance] application:application
+                             didFinishLaunchingWithOptions:launchOptions];
     
     if (![PFUser currentUser]){
         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"
@@ -109,7 +115,10 @@
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(id)annotation
 {
-    return [[FBSDKApplicationDelegate sharedInstance] application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
+    return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                          openURL:url
+                                                sourceApplication:sourceApplication
+                                                       annotation:annotation];
 }
 
 @end

@@ -9,11 +9,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Bolts.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>DACircularProgress.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -24,17 +19,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Parse.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-Spotlight.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-SpotlightTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -52,27 +37,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0D1C2F53730DA7D7BC55391497EAE126</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>175B076ED45EB1A3E40F58BA14036467</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6CCAF20345FFEA318C6250FA9A564FE2</key>
+		<key>77FFD125C1CC2566FEEFBE1A4169671D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>751252366A13A8A5185122F7B6915D10</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>8783AD7ECD6C185B81E4A22D7FDE4569</key>
+		<key>A87092F740380E64E97AB3D27F0C6790</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -82,17 +57,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BB263DFA423FBA5D07F51AD73371574C</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>C791F0A928C1A8FE97074DFC9ACF4E75</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D96FA1025D6DC1FD953A010E2761CE69</key>
+		<key>CFA0ECF4A97CF8CFD92E6B8F64F2DD7A</key>
 		<dict>
 			<key>primary</key>
 			<true/>

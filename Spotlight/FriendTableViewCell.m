@@ -10,7 +10,7 @@
 #import "User.h"
 #import "ProfilePictureMedia.h"
 #import "TeamRequest.h"
-#import <Parse.h>
+#import <Parse/Parse.h>
 #import <AFNetworking/UIImageView+AFNetworking.h>
 
 @interface FriendTableViewCell()

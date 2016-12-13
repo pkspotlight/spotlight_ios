@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Parse.h"
+#import <Parse/Parse.h>
 #import "SpotlightDataSource.h"
 #import "TeamRequest.h"
 @class User;

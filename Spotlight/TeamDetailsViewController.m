@@ -505,12 +505,7 @@
                                                 }]];
         [self presentViewController:alert animated:YES completion:nil];
     }
-    
-    
-    
-    
 }
-
 
 - (void)showAlertWithChildrenAdmin:(NSArray*)children team:(Team*)team completion:(void (^)(void))completion {
     if (children && [children count] > 0) {

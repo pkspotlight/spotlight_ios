@@ -11,7 +11,7 @@
 #import "FriendTableViewCell.h"
 #import "ChildTableViewCell.h"
 #import "FriendProfileViewController.h"
-#import "Parse.h"
+#import <Parse/Parse.h>
 #import "User.h"
 #import "Team.h"
 #import "Child.h"

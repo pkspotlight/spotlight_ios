@@ -9,7 +9,7 @@
 #import "FriendFinderTableViewController.h"
 #import "FriendProfileViewController.h"
 #import "FriendTableViewCell.h"
-#import "Parse.h"
+#import <Parse/Parse.h>
 #import "User.h"
 #import "BasicHeaderView.h"
 

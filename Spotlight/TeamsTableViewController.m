@@ -11,7 +11,7 @@
 #import "TeamTableViewCell.h"
 #import "Team.h"
 #import "BasicHeaderView.h"
-#import "Parse.h"
+#import <Parse/Parse.h>
 #import "User.h"
 #import "Child.h"
 #import "TeamRequest.h"

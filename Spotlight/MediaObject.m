@@ -79,4 +79,8 @@
     }];
 }
 
++ (NSString *)parseClassName {
+    return @"MediaObject";
+}
+
 @end

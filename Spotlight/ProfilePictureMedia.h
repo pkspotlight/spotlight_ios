@@ -7,12 +7,23 @@
 //
 
 #import "MediaObject.h"
-#import <Parse.h>
+#import <Parse/Parse.h>
 #import <Parse/PFObject.h>
 #import <Parse/PFObject+Subclass.h>
 
-@interface ProfilePictureMedia : MediaObject <PFSubclassing>
+@interface ProfilePictureMedia : PFObject <PFSubclassing>
 
 + (NSString *)parseClassName;
+
+- (instancetype)initWithVideoPath:(NSString*)path;
+- (instancetype)initWithImage:(UIImage*)image;
+- (instancetype)initWithVideoData:(NSData*)data;
+- (void)likeCountWithCompletion:(void (^)(NSInteger likes))completion;
+
+@property (strong, nonatomic) PFFile *mediaFile;
+@property (strong, nonatomic) PFFile *thumbnailImageFile;
+@property (strong, nonatomic) NSString* title;
+@property (assign, nonatomic) BOOL isVideo;
+@property (readonly, nonatomic) PFRelation* likes;
 
 @end

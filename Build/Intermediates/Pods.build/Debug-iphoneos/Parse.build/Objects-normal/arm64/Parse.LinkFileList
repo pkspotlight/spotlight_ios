@@ -1,6 +1,7 @@
 /Users/pkamm/Documents/spotlight/new_ios/Build/Intermediates/Pods.build/Debug-iphoneos/Parse.build/Objects-normal/arm64/BFTask+Private.o
 /Users/pkamm/Documents/spotlight/new_ios/Build/Intermediates/Pods.build/Debug-iphoneos/Parse.build/Objects-normal/arm64/Parse-dummy.o
 /Users/pkamm/Documents/spotlight/new_ios/Build/Intermediates/Pods.build/Debug-iphoneos/Parse.build/Objects-normal/arm64/Parse.o
+/Users/pkamm/Documents/spotlight/new_ios/Build/Intermediates/Pods.build/Debug-iphoneos/Parse.build/Objects-normal/arm64/ParseClientConfiguration.o
 /Users/pkamm/Documents/spotlight/new_ios/Build/Intermediates/Pods.build/Debug-iphoneos/Parse.build/Objects-normal/arm64/ParseManager.o
 /Users/pkamm/Documents/spotlight/new_ios/Build/Intermediates/Pods.build/Debug-iphoneos/Parse.build/Objects-normal/arm64/ParseModule.o
 /Users/pkamm/Documents/spotlight/new_ios/Build/Intermediates/Pods.build/Debug-iphoneos/Parse.build/Objects-normal/arm64/PFACL.o
@@ -43,7 +44,9 @@
 /Users/pkamm/Documents/spotlight/new_ios/Build/Intermediates/Pods.build/Debug-iphoneos/Parse.build/Objects-normal/arm64/PFFieldOperationDecoder.o
 /Users/pkamm/Documents/spotlight/new_ios/Build/Intermediates/Pods.build/Debug-iphoneos/Parse.build/Objects-normal/arm64/PFFile.o
 /Users/pkamm/Documents/spotlight/new_ios/Build/Intermediates/Pods.build/Debug-iphoneos/Parse.build/Objects-normal/arm64/PFFileController.o
+/Users/pkamm/Documents/spotlight/new_ios/Build/Intermediates/Pods.build/Debug-iphoneos/Parse.build/Objects-normal/arm64/PFFileDataStream.o
 /Users/pkamm/Documents/spotlight/new_ios/Build/Intermediates/Pods.build/Debug-iphoneos/Parse.build/Objects-normal/arm64/PFFileManager.o
+/Users/pkamm/Documents/spotlight/new_ios/Build/Intermediates/Pods.build/Debug-iphoneos/Parse.build/Objects-normal/arm64/PFFilePersistenceGroup.o
 /Users/pkamm/Documents/spotlight/new_ios/Build/Intermediates/Pods.build/Debug-iphoneos/Parse.build/Objects-normal/arm64/PFFileStagingController.o
 /Users/pkamm/Documents/spotlight/new_ios/Build/Intermediates/Pods.build/Debug-iphoneos/Parse.build/Objects-normal/arm64/PFFileState.o
 /Users/pkamm/Documents/spotlight/new_ios/Build/Intermediates/Pods.build/Debug-iphoneos/Parse.build/Objects-normal/arm64/PFGeoPoint.o
@@ -89,6 +92,7 @@
 /Users/pkamm/Documents/spotlight/new_ios/Build/Intermediates/Pods.build/Debug-iphoneos/Parse.build/Objects-normal/arm64/PFOfflineStore.o
 /Users/pkamm/Documents/spotlight/new_ios/Build/Intermediates/Pods.build/Debug-iphoneos/Parse.build/Objects-normal/arm64/PFOperationSet.o
 /Users/pkamm/Documents/spotlight/new_ios/Build/Intermediates/Pods.build/Debug-iphoneos/Parse.build/Objects-normal/arm64/PFPaymentTransactionObserver.o
+/Users/pkamm/Documents/spotlight/new_ios/Build/Intermediates/Pods.build/Debug-iphoneos/Parse.build/Objects-normal/arm64/PFPersistenceController.o
 /Users/pkamm/Documents/spotlight/new_ios/Build/Intermediates/Pods.build/Debug-iphoneos/Parse.build/Objects-normal/arm64/PFPin.o
 /Users/pkamm/Documents/spotlight/new_ios/Build/Intermediates/Pods.build/Debug-iphoneos/Parse.build/Objects-normal/arm64/PFPinningEventuallyQueue.o
 /Users/pkamm/Documents/spotlight/new_ios/Build/Intermediates/Pods.build/Debug-iphoneos/Parse.build/Objects-normal/arm64/PFPinningObjectStore.o
@@ -105,6 +109,7 @@
 /Users/pkamm/Documents/spotlight/new_ios/Build/Intermediates/Pods.build/Debug-iphoneos/Parse.build/Objects-normal/arm64/PFPushState.o
 /Users/pkamm/Documents/spotlight/new_ios/Build/Intermediates/Pods.build/Debug-iphoneos/Parse.build/Objects-normal/arm64/PFPushUtilities.o
 /Users/pkamm/Documents/spotlight/new_ios/Build/Intermediates/Pods.build/Debug-iphoneos/Parse.build/Objects-normal/arm64/PFQuery.o
+/Users/pkamm/Documents/spotlight/new_ios/Build/Intermediates/Pods.build/Debug-iphoneos/Parse.build/Objects-normal/arm64/PFQueryConstants.o
 /Users/pkamm/Documents/spotlight/new_ios/Build/Intermediates/Pods.build/Debug-iphoneos/Parse.build/Objects-normal/arm64/PFQueryController.o
 /Users/pkamm/Documents/spotlight/new_ios/Build/Intermediates/Pods.build/Debug-iphoneos/Parse.build/Objects-normal/arm64/PFQueryState.o
 /Users/pkamm/Documents/spotlight/new_ios/Build/Intermediates/Pods.build/Debug-iphoneos/Parse.build/Objects-normal/arm64/PFQueryUtilities.o
@@ -143,6 +148,7 @@
 /Users/pkamm/Documents/spotlight/new_ios/Build/Intermediates/Pods.build/Debug-iphoneos/Parse.build/Objects-normal/arm64/PFUserAuthenticationController.o
 /Users/pkamm/Documents/spotlight/new_ios/Build/Intermediates/Pods.build/Debug-iphoneos/Parse.build/Objects-normal/arm64/PFUserConstants.o
 /Users/pkamm/Documents/spotlight/new_ios/Build/Intermediates/Pods.build/Debug-iphoneos/Parse.build/Objects-normal/arm64/PFUserController.o
+/Users/pkamm/Documents/spotlight/new_ios/Build/Intermediates/Pods.build/Debug-iphoneos/Parse.build/Objects-normal/arm64/PFUserDefaultsPersistenceGroup.o
 /Users/pkamm/Documents/spotlight/new_ios/Build/Intermediates/Pods.build/Debug-iphoneos/Parse.build/Objects-normal/arm64/PFUserFileCodingLogic.o
 /Users/pkamm/Documents/spotlight/new_ios/Build/Intermediates/Pods.build/Debug-iphoneos/Parse.build/Objects-normal/arm64/PFUserState.o
 /Users/pkamm/Documents/spotlight/new_ios/Build/Intermediates/Pods.build/Debug-iphoneos/Parse.build/Objects-normal/arm64/PFWeakValue.o

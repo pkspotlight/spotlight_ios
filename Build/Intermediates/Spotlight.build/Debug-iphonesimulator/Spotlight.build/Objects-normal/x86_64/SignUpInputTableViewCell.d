@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/pkamm/Documents/ios/Spotlight/Spotlight/SignUpInputTableViewCell.m \
-  /Users/pkamm/Documents/ios/Spotlight/Spotlight/SignUpInputTableViewCell.h
+  /Users/pkamm/Documents/spotlight/new_ios/Spotlight/SignUpInputTableViewCell.m \
+  /Users/pkamm/Documents/spotlight/new_ios/Spotlight/SignUpInputTableViewCell.h

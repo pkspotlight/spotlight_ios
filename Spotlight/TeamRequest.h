@@ -6,7 +6,7 @@
 //  Copyright © 2016 Spotlight. All rights reserved.
 //
 
-#import "PFObject.h"
+#import "Parse/PFObject.h"
 #import "Child.h"
 #import "Team.h"
 #import "User.h"

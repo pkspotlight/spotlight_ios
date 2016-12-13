@@ -12,7 +12,7 @@
 #import "Team.h"
 
 #import "BasicHeaderView.h"
-#import "Parse.h"
+#import <Parse/Parse.h>
 #import "User.h"
 
 static CGFloat const BasicHeaderHeight = 50;

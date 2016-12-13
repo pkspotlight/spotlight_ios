@@ -62,7 +62,6 @@
 		39D6343B1D40C86500CAA666 /* PECropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39D634341D40C86500CAA666 /* PECropViewController.m */; };
 		39D6343C1D40C86500CAA666 /* PEResizeControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 39D634361D40C86500CAA666 /* PEResizeControl.m */; };
 		39D6343D1D40C86500CAA666 /* UIImage+PECrop.m in Sources */ = {isa = PBXBuildFile; fileRef = 39D634381D40C86500CAA666 /* UIImage+PECrop.m */; };
-		6C6E74CACF9F9F670411D756 /* libPods-Spotlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6304B3F6E75DF67CB2C75299 /* libPods-Spotlight.a */; };
 		8400ED191D7EA68100E4600A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8400ED171D7EA68100E4600A /* Main.storyboard */; };
 		8404D5831D3E51BC00B2D325 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8404D5821D3E51BC00B2D325 /* MediaPlayer.framework */; };
 		8407E0711D7DAC4D00E73652 /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8407E0701D7DAC4D00E73652 /* Images-2.xcassets */; };
@@ -98,6 +97,8 @@
 		880054EE1C6B9E8C0034D639 /* ChildTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 880054ED1C6B9E8C0034D639 /* ChildTableViewCell.m */; };
 		880207A41C15DF7A002D5068 /* MontageCreator.m in Sources */ = {isa = PBXBuildFile; fileRef = 880207A31C15DF7A002D5068 /* MontageCreator.m */; };
 		880726F61C778F0400F2C1B9 /* TeamFinderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 880726F51C778F0400F2C1B9 /* TeamFinderTableViewController.m */; };
+		88261E0B1E002467001C11E9 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88261E091E002467001C11E9 /* FBSDKCoreKit.framework */; };
+		88261E0C1E002467001C11E9 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88261E0A1E002467001C11E9 /* FBSDKLoginKit.framework */; };
 		883265491C8F79E80063D1F9 /* DT_TheDUFF_EverySingleNight_INST_125.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 883265481C8F79E80063D1F9 /* DT_TheDUFF_EverySingleNight_INST_125.mp3 */; };
 		8832654B1C8F79F80063D1F9 /* DT_TheDuff_Ready2Go_128_INST.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8832654A1C8F79F80063D1F9 /* DT_TheDuff_Ready2Go_128_INST.mp3 */; };
 		883D63F41C07151700AE99CC /* MediaObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 883D63F31C07151700AE99CC /* MediaObject.m */; };
@@ -110,6 +111,8 @@
 		8849A1E31BA0CB8400511DD5 /* SignUpTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8849A1E21BA0CB8400511DD5 /* SignUpTableViewController.m */; };
 		8849A1E61BA0CC7A00511DD5 /* SignUpInputTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8849A1E51BA0CC7A00511DD5 /* SignUpInputTableViewCell.m */; };
 		8849A1E91BA2590800511DD5 /* IntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8849A1E81BA2590800511DD5 /* IntroViewController.m */; };
+		886DAD071E00219E0025CF43 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 886DAD061E00219E0025CF43 /* Parse.framework */; };
+		886DAD0A1E0021C90025CF43 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 886DAD091E0021C90025CF43 /* Bolts.framework */; };
 		887EC7621C6974ED001DBDB3 /* FriendFinderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 887EC7611C6974ED001DBDB3 /* FriendFinderTableViewController.m */; };
 		887EC7651C697778001DBDB3 /* CreateFamilyMemberTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 887EC7641C697778001DBDB3 /* CreateFamilyMemberTableViewController.m */; };
 		887FF4CE1BD530B400F3679D /* Spotlight.m in Sources */ = {isa = PBXBuildFile; fileRef = 887FF4CD1BD530B400F3679D /* Spotlight.m */; };
@@ -128,7 +131,6 @@
 		88A736DD1B91318D00093B27 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A736DC1B91318D00093B27 /* AppDelegate.m */; };
 		88A736E51B91318D00093B27 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88A736E41B91318D00093B27 /* Images.xcassets */; };
 		88A736E81B91318D00093B27 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88A736E61B91318D00093B27 /* LaunchScreen.xib */; };
-		88A736F41B91318D00093B27 /* SpotlightTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A736F31B91318D00093B27 /* SpotlightTests.m */; };
 		88BDFC521BFD22B8007A3EBB /* CreateTeamTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88BDFC511BFD22B8007A3EBB /* CreateTeamTableViewController.m */; };
 		88BDFC5A1BFD33E0007A3EBB /* TeamsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88BDFC591BFD33E0007A3EBB /* TeamsTableViewController.m */; };
 		88BDFC5D1BFD3635007A3EBB /* TeamTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88BDFC5C1BFD3635007A3EBB /* TeamTableViewCell.m */; };
@@ -161,20 +163,13 @@
 		88EE2CC61B9E08B2002DDB99 /* SpotlightFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88EE2CC51B9E08B2002DDB99 /* SpotlightFeedViewController.m */; };
 		88FDB88E1C8EA2A1008C9A3D /* TB - Disney Funk 124bpm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 88FDB87E1C8EA2A1008C9A3D /* TB - Disney Funk 124bpm.mp3 */; };
 		88FDB8941C8EA2A1008C9A3D /* DT_TheDuff_CoolKids_INST130.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 88FDB8841C8EA2A1008C9A3D /* DT_TheDuff_CoolKids_INST130.mp3 */; };
+		FC4F359EA32F39CBF10D5525 /* libPods-Spotlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DCBB464380C17488F0B2051 /* libPods-Spotlight.a */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		88A736EE1B91318D00093B27 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 88A736CC1B91318D00093B27 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 88A736D31B91318D00093B27;
-			remoteInfo = Spotlight;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
+		0387FCE2E5441E20BD09784D /* Pods-SpotlightTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpotlightTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SpotlightTests/Pods-SpotlightTests.debug.xcconfig"; sourceTree = "<group>"; };
 		07FCD23B1D46019C0030E8DC /* video_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = video_Icon.png; sourceTree = "<group>"; };
+		0DCBB464380C17488F0B2051 /* libPods-Spotlight.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Spotlight.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		39574E1C1D420F050059029C /* edit@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "edit@3x.png"; sourceTree = "<group>"; };
 		39574E1D1D420F050059029C /* edit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "edit@2x.png"; sourceTree = "<group>"; };
 		39574E241D4220B70059029C /* upload@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "upload@2x.png"; sourceTree = "<group>"; };
@@ -246,7 +241,7 @@
 		39D634361D40C86500CAA666 /* PEResizeControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PEResizeControl.m; sourceTree = "<group>"; };
 		39D634371D40C86500CAA666 /* UIImage+PECrop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+PECrop.h"; sourceTree = "<group>"; };
 		39D634381D40C86500CAA666 /* UIImage+PECrop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+PECrop.m"; sourceTree = "<group>"; };
-		6304B3F6E75DF67CB2C75299 /* libPods-Spotlight.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Spotlight.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		604C6C052E264CB7A123ED0A /* Pods-SpotlightTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpotlightTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SpotlightTests/Pods-SpotlightTests.release.xcconfig"; sourceTree = "<group>"; };
 		8400ED181D7EA68100E4600A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Spotlight/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8404D5821D3E51BC00B2D325 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		8407E0701D7DAC4D00E73652 /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-2.xcassets"; sourceTree = "<group>"; };
@@ -303,6 +298,8 @@
 		880207A31C15DF7A002D5068 /* MontageCreator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MontageCreator.m; sourceTree = "<group>"; };
 		880726F41C778F0400F2C1B9 /* TeamFinderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamFinderTableViewController.h; sourceTree = "<group>"; };
 		880726F51C778F0400F2C1B9 /* TeamFinderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamFinderTableViewController.m; sourceTree = "<group>"; };
+		88261E091E002467001C11E9 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		88261E0A1E002467001C11E9 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		883265481C8F79E80063D1F9 /* DT_TheDUFF_EverySingleNight_INST_125.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = DT_TheDUFF_EverySingleNight_INST_125.mp3; sourceTree = "<group>"; };
 		8832654A1C8F79F80063D1F9 /* DT_TheDuff_Ready2Go_128_INST.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = DT_TheDuff_Ready2Go_128_INST.mp3; sourceTree = "<group>"; };
 		883D63F21C07151700AE99CC /* MediaObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaObject.h; sourceTree = "<group>"; };
@@ -322,6 +319,8 @@
 		8849A1E51BA0CC7A00511DD5 /* SignUpInputTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpInputTableViewCell.m; sourceTree = "<group>"; };
 		8849A1E71BA2590800511DD5 /* IntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroViewController.h; sourceTree = "<group>"; };
 		8849A1E81BA2590800511DD5 /* IntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroViewController.m; sourceTree = "<group>"; };
+		886DAD061E00219E0025CF43 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		886DAD091E0021C90025CF43 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		887EC7601C6974ED001DBDB3 /* FriendFinderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendFinderTableViewController.h; sourceTree = "<group>"; };
 		887EC7611C6974ED001DBDB3 /* FriendFinderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendFinderTableViewController.m; sourceTree = "<group>"; };
 		887EC7631C697778001DBDB3 /* CreateFamilyMemberTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateFamilyMemberTableViewController.h; sourceTree = "<group>"; };
@@ -348,7 +347,6 @@
 		88A736DC1B91318D00093B27 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		88A736E41B91318D00093B27 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		88A736E71B91318D00093B27 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		88A736ED1B91318D00093B27 /* SpotlightTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpotlightTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		88A736F21B91318D00093B27 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88A736F31B91318D00093B27 /* SpotlightTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpotlightTests.m; sourceTree = "<group>"; };
 		88BDFC501BFD22B8007A3EBB /* CreateTeamTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateTeamTableViewController.h; sourceTree = "<group>"; };
@@ -404,6 +402,7 @@
 		88FDB87E1C8EA2A1008C9A3D /* TB - Disney Funk 124bpm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "TB - Disney Funk 124bpm.mp3"; sourceTree = "<group>"; };
 		88FDB8841C8EA2A1008C9A3D /* DT_TheDuff_CoolKids_INST130.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = DT_TheDuff_CoolKids_INST130.mp3; sourceTree = "<group>"; };
 		A18D079BCFAB299658BDF57C /* Pods-Spotlight.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spotlight.release.xcconfig"; path = "Pods/Target Support Files/Pods-Spotlight/Pods-Spotlight.release.xcconfig"; sourceTree = "<group>"; };
+		C9EF640CCA8ED05A107596FF /* libPods-SpotlightTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SpotlightTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D373EE3193DFC78DC9BEE3E3 /* Pods-Spotlight.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spotlight.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Spotlight/Pods-Spotlight.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -414,17 +413,14 @@
 			files = (
 				8404D5831D3E51BC00B2D325 /* MediaPlayer.framework in Frameworks */,
 				841FAE121D3CE26700772B23 /* Photos.framework in Frameworks */,
+				88261E0C1E002467001C11E9 /* FBSDKLoginKit.framework in Frameworks */,
 				889DEECC1C98B90000726D83 /* MessageUI.framework in Frameworks */,
+				886DAD071E00219E0025CF43 /* Parse.framework in Frameworks */,
 				88450BFC1BC4CC30004BB6B4 /* Crashlytics.framework in Frameworks */,
 				88450BFB1BC4CC30004BB6B4 /* Fabric.framework in Frameworks */,
-				6C6E74CACF9F9F670411D756 /* libPods-Spotlight.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		88A736EA1B91318D00093B27 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				FC4F359EA32F39CBF10D5525 /* libPods-Spotlight.a in Frameworks */,
+				88261E0B1E002467001C11E9 /* FBSDKCoreKit.framework in Frameworks */,
+				886DAD0A1E0021C90025CF43 /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -546,7 +542,8 @@
 				8404D5821D3E51BC00B2D325 /* MediaPlayer.framework */,
 				841FAE111D3CE26700772B23 /* Photos.framework */,
 				889DEECB1C98B90000726D83 /* MessageUI.framework */,
-				6304B3F6E75DF67CB2C75299 /* libPods-Spotlight.a */,
+				0DCBB464380C17488F0B2051 /* libPods-Spotlight.a */,
+				C9EF640CCA8ED05A107596FF /* libPods-SpotlightTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -556,6 +553,8 @@
 			children = (
 				D373EE3193DFC78DC9BEE3E3 /* Pods-Spotlight.debug.xcconfig */,
 				A18D079BCFAB299658BDF57C /* Pods-Spotlight.release.xcconfig */,
+				0387FCE2E5441E20BD09784D /* Pods-SpotlightTests.debug.xcconfig */,
+				604C6C052E264CB7A123ED0A /* Pods-SpotlightTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -651,6 +650,10 @@
 				88A736D61B91318D00093B27 /* Spotlight */,
 				88A736F01B91318D00093B27 /* SpotlightTests */,
 				88A736D51B91318D00093B27 /* Products */,
+				88261E091E002467001C11E9 /* FBSDKCoreKit.framework */,
+				88261E0A1E002467001C11E9 /* FBSDKLoginKit.framework */,
+				886DAD091E0021C90025CF43 /* Bolts.framework */,
+				886DAD061E00219E0025CF43 /* Parse.framework */,
 				88450BF91BC4CC30004BB6B4 /* Fabric.framework */,
 				88450BFA1BC4CC30004BB6B4 /* Crashlytics.framework */,
 				4C8670A663CEB02CAA8F6223 /* Frameworks */,
@@ -662,7 +665,6 @@
 			isa = PBXGroup;
 			children = (
 				88A736D41B91318D00093B27 /* Spotlight.app */,
-				88A736ED1B91318D00093B27 /* SpotlightTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -867,12 +869,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 88A736F71B91318D00093B27 /* Build configuration list for PBXNativeTarget "Spotlight" */;
 			buildPhases = (
-				EEF913DF976A2899C3685F9B /* Check Pods Manifest.lock */,
+				EEF913DF976A2899C3685F9B /* [CP] Check Pods Manifest.lock */,
 				88A736D01B91318D00093B27 /* Sources */,
 				88A736D11B91318D00093B27 /* Frameworks */,
 				88A736D21B91318D00093B27 /* Resources */,
 				8849A1E01B9FB6CA00511DD5 /* ShellScript */,
-				B0D666822C13099FABCCF74E /* Copy Pods Resources */,
+				B0D666822C13099FABCCF74E /* [CP] Copy Pods Resources */,
+				228725A21C13468045BF0D2E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -882,24 +885,6 @@
 			productName = Spotlight;
 			productReference = 88A736D41B91318D00093B27 /* Spotlight.app */;
 			productType = "com.apple.product-type.application";
-		};
-		88A736EC1B91318D00093B27 /* SpotlightTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 88A736FA1B91318D00093B27 /* Build configuration list for PBXNativeTarget "SpotlightTests" */;
-			buildPhases = (
-				88A736E91B91318D00093B27 /* Sources */,
-				88A736EA1B91318D00093B27 /* Frameworks */,
-				88A736EB1B91318D00093B27 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				88A736EF1B91318D00093B27 /* PBXTargetDependency */,
-			);
-			name = SpotlightTests;
-			productName = SpotlightTests;
-			productReference = 88A736ED1B91318D00093B27 /* SpotlightTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -921,11 +906,6 @@
 							};
 						};
 					};
-					88A736EC1B91318D00093B27 = {
-						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = YKL5CRQW8Z;
-						TestTargetID = 88A736D31B91318D00093B27;
-					};
 				};
 			};
 			buildConfigurationList = 88A736CF1B91318D00093B27 /* Build configuration list for PBXProject "Spotlight" */;
@@ -942,7 +922,6 @@
 			projectRoot = "";
 			targets = (
 				88A736D31B91318D00093B27 /* Spotlight */,
-				88A736EC1B91318D00093B27 /* SpotlightTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1033,16 +1012,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		88A736EB1B91318D00093B27 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		228725A21C13468045BF0D2E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Spotlight/Pods-Spotlight-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		8849A1E01B9FB6CA00511DD5 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 12;
@@ -1056,14 +1043,14 @@
 			shellPath = /bin/sh;
 			shellScript = "./Fabric.framework/run 1f3dc97cb296c416a691168cae8634f266e98641 ca2e2e6269a77a78e209a012d8dd69f84b0edbd92ebb3f443d2a6f08938ae991";
 		};
-		B0D666822C13099FABCCF74E /* Copy Pods Resources */ = {
+		B0D666822C13099FABCCF74E /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1071,19 +1058,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Spotlight/Pods-Spotlight-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EEF913DF976A2899C3685F9B /* Check Pods Manifest.lock */ = {
+		EEF913DF976A2899C3685F9B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1165,23 +1152,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		88A736E91B91318D00093B27 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				88A736F41B91318D00093B27 /* SpotlightTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		88A736EF1B91318D00093B27 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 88A736D31B91318D00093B27 /* Spotlight */;
-			targetProxy = 88A736EE1B91318D00093B27 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		8400ED171D7EA68100E4600A /* Main.storyboard */ = {
@@ -1243,7 +1214,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "";
@@ -1285,7 +1256,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -1300,6 +1271,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1307,10 +1279,60 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/ThirdParty",
 				);
 				INFOPLIST_FILE = Spotlight/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-l\"AFNetworking\"",
+					"-l\"DACircularProgress\"",
+					"-l\"MBProgressHUD\"",
+					"-l\"SDWebImage\"",
+					"-l\"TPKeyboardAvoiding\"",
+					"-l\"sqlite3\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AudioToolbox\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreLocation\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"StoreKit\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-weak_framework",
+					"\"Accounts\"",
+					"-weak_framework",
+					"\"AudioToolbox\"",
+					"-weak_framework",
+					"\"CoreGraphics\"",
+					"-weak_framework",
+					"\"CoreLocation\"",
+					"-weak_framework",
+					"\"Foundation\"",
+					"-weak_framework",
+					"\"QuartzCore\"",
+					"-weak_framework",
+					"\"Security\"",
+					"-weak_framework",
+					"\"Social\"",
+					"-weak_framework",
+					"\"UIKit\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.myspotlight.spotlight;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1327,6 +1349,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1334,60 +1357,66 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/ThirdParty",
 				);
 				INFOPLIST_FILE = Spotlight/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-l\"AFNetworking\"",
+					"-l\"DACircularProgress\"",
+					"-l\"MBProgressHUD\"",
+					"-l\"SDWebImage\"",
+					"-l\"TPKeyboardAvoiding\"",
+					"-l\"sqlite3\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AudioToolbox\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreLocation\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"StoreKit\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-weak_framework",
+					"\"Accounts\"",
+					"-weak_framework",
+					"\"AudioToolbox\"",
+					"-weak_framework",
+					"\"CoreGraphics\"",
+					"-weak_framework",
+					"\"CoreLocation\"",
+					"-weak_framework",
+					"\"Foundation\"",
+					"-weak_framework",
+					"\"QuartzCore\"",
+					"-weak_framework",
+					"\"Security\"",
+					"-weak_framework",
+					"\"Social\"",
+					"-weak_framework",
+					"\"UIKit\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.myspotlight.spotlight;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Spotlight/Spotlight-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		88A736FB1B91318D00093B27 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = YKL5CRQW8Z;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = SpotlightTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.spotlight.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Spotlight.app/Spotlight";
-			};
-			name = Debug;
-		};
-		88A736FC1B91318D00093B27 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = YKL5CRQW8Z;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = SpotlightTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.spotlight.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Spotlight.app/Spotlight";
 			};
 			name = Release;
 		};
@@ -1408,15 +1437,6 @@
 			buildConfigurations = (
 				88A736F81B91318D00093B27 /* Debug */,
 				88A736F91B91318D00093B27 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		88A736FA1B91318D00093B27 /* Build configuration list for PBXNativeTarget "SpotlightTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				88A736FB1B91318D00093B27 /* Debug */,
-				88A736FC1B91318D00093B27 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

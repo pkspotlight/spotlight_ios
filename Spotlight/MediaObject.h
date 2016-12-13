@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <Parse.h>
+#import <Parse/Parse.h>
 #import <Parse/PFObject.h>
 #import <Parse/PFObject+Subclass.h>
 

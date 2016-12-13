@@ -9,7 +9,7 @@
 #import "TeamFinderTableViewController.h"
 #import "TeamDetailsViewController.h"
 #import "TeamTableViewCell.h"
-#import "Parse.h"
+#import <Parse/Parse.h>
 #import "User.h"
 #import "Child.h"
 #import "Team.h"

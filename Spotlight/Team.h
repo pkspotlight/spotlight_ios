@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PFObject.h"
-#import <Parse.h>
+#import "Parse/PFObject.h"
+#import <Parse/Parse.h>
 #import <Parse/PFObject+Subclass.h>
 #import "TeamLogoMedia.h"
 

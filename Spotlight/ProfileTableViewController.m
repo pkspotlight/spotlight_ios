@@ -7,7 +7,7 @@
 //
 
 #import "ProfileTableViewController.h"
-#import "Parse.h"
+#import <Parse/Parse.h>
 #import "ProfilePictureMedia.h"
 #import "User.h"
 

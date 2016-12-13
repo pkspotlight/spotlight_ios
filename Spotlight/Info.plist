@@ -58,22 +58,22 @@
 		<string>fbauth2</string>
 		<string>fbshareextension</string>
 	</array>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSExceptionDomains</key>
-		<dict>
-			<key>files.parsetfss.com</key>
-			<dict>
+    <key>LSRequiresIPhoneOS</key>
+    <true/>
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <true/>
+        <key>NSExceptionDomains</key>
+        <dict>
+            <key>files.parsetfss.com</key>
+            <dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
 				<true/>
 				<key>NSIncludesSubdomains</key>
 				<true/>
 			</dict>
 		</dict>
-		<key>SEMDebugAllowsArbitraryLoads</key>
-		<true/>
 	</dict>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Spotlight would like to access your photo library so that you are able to upload your photos.</string>

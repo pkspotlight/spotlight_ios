@@ -10,7 +10,7 @@
 #import "ProfilePictureMedia.h"
 #import "Child.h"
 
-#import <Parse.h>
+#import <Parse/Parse.h>
 #import <AFNetworking/UIImageView+AFNetworking.h>
 
 @interface ChildTableViewCell()

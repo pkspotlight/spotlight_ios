@@ -1,2 +1,2 @@
-dependencies: /Users/pkamm/Documents/ios/Spotlight/Spotlight/main.m \
-  /Users/pkamm/Documents/ios/Spotlight/Spotlight/AppDelegate.h
+dependencies: /Users/pkamm/Documents/spotlight/new_ios/Spotlight/main.m \
+  /Users/pkamm/Documents/spotlight/new_ios/Spotlight/AppDelegate.h

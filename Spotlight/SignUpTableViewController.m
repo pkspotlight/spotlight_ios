@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Spotlight. All rights reserved.
 //
 
+#define thirteenYearsInSeconds 409968000
+
 #import "SignUpTableViewController.h"
 #import "SpotlightFeedViewController.h"
 #import "MainTabBarController.h"
@@ -38,37 +40,28 @@
         self.lblSignUp.text = @"Login";
         [self.btnCreateAccount setTitle:@"Login" forState:UIControlStateNormal];
         [self.btnCreateAccount addTarget:self action:@selector(LogInButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-        
     } else {
-        self.userPropertyArray = @[ @"email", @"password", @"username"];
+        self.userPropertyArray = @[ @"email", @"password", @"username", @"birthdate"];
         self.userPropertyDisplayArray = @[ @"Email Address", @"Password", @"Username", @"Birthdate"];
         self.lblSignUp.text = @"Create An Account";
         [self.btnCreateAccount setTitle:@"Create An Account" forState:UIControlStateNormal];
         [self.btnCreateAccount addTarget:self action:@selector(createAccountButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-
-
     }
     self.pendingInputDict = [[NSMutableDictionary alloc] init];
     UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     backgroundImageView.image = [UIImage imageNamed:@"BackgroundBasketballImage"];
-  //  self.parentViewController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage /imageNamed:@"BackgroundBasketballImage"]];
-    
-    [self.view addSubview:backgroundImageView];
-    [self.view sendSubviewToBack:backgroundImageView];
-    
+    self.tableView.backgroundView = backgroundImageView;
     [[self navigationController] setNavigationBarHidden:YES animated:YES];
 }
 
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    
     return 1;
 }
 
@@ -77,21 +70,28 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    FieldEntryTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"FieldEntryTableViewCell" forIndexPath:indexPath];
+    
+    UITableViewCell* cell;
     NSString* attribute = self.userPropertyArray[indexPath.row];
     NSString* inputtedValue = (self.pendingInputDict[attribute]) ? self.pendingInputDict[attribute] : @"";
-    [cell formatForAttributeString:self.userPropertyArray[indexPath.row]
-                       displayText:self.userPropertyDisplayArray[indexPath.row]
-                         withValue:inputtedValue isCenter:YES];
-    [cell setDelegate:self];
-    if ([attribute isEqualToString:@"email"]) {
-        [cell setKeyboardType:UIKeyboardTypeEmailAddress];
-    }
     
-    if ([attribute isEqualToString:@"password"]) {
-        [cell setIsSecure:YES];
+    if ([attribute isEqualToString:@"birthdate"]) {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"DateFieldTableViewCell" forIndexPath:indexPath];
+        [(DateFieldTableViewCell*)cell setDelegate:self];
+        [(DateFieldTableViewCell*)cell formatWithDateValue:nil isCenter:YES];
+    } else {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"FieldEntryTableViewCell" forIndexPath:indexPath];
+        [(FieldEntryTableViewCell*)cell formatForAttributeString:self.userPropertyArray[indexPath.row]
+                                                     displayText:self.userPropertyDisplayArray[indexPath.row]
+                                                       withValue:inputtedValue isCenter:YES];
+        [(FieldEntryTableViewCell*)cell setDelegate:self];
+        if ([attribute isEqualToString:@"email"]) {
+            [(FieldEntryTableViewCell*)cell setKeyboardType:UIKeyboardTypeEmailAddress];
+        }
+        if ([attribute isEqualToString:@"password"]) {
+            [(FieldEntryTableViewCell*)cell setIsSecure:YES];
+        }
     }
-    
     return cell;
 }
 
@@ -99,7 +99,6 @@
     
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     MainTabBarController *mainTabBarController = [storyboard instantiateViewControllerWithIdentifier:@"MainTabBarController"];
-    
     
     if([User currentUser].isNew){
        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SpotlightPopUp"];
@@ -120,9 +119,16 @@
 
 - (IBAction)createAccountButtonPressed:(id)sender {
     
-     [self.view endEditing:YES];
+    [self.view endEditing:YES];
     
-    if (self.pendingInputDict[@"email"] &&
+    if (![self isOlderThanThirteen]) {
+        UIAlertController* alert = [UIAlertController
+                                    alertControllerWithTitle:@"Invalid Date of Birth"
+                                    message:@"Please validate that you are over 13 years of age.  If you are under 13, please have your parents sign up!"
+                                    preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil]];
+        [self presentViewController:alert animated:YES completion:nil];
+    }else if (self.pendingInputDict[@"email"] &&
         [self.pendingInputDict[@"email"] length] > 4 &&
         self.pendingInputDict[@"password"] &&
         [self.pendingInputDict[@"password"] length] > 4 &&
@@ -156,14 +162,14 @@
     }
 }
 
-
-
+- (BOOL)isOlderThanThirteen {
+    NSDate *minDate =  [[NSDate date] initWithTimeInterval:-thirteenYearsInSeconds sinceDate:[NSDate date]];
+    return ([minDate compare:self.userDOB] == NSOrderedDescending);
+}
 
 - (IBAction)crossButton:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
 }
-
-
 
 
 - (IBAction)LogInButtonPressed:(id)sender {
@@ -241,15 +247,12 @@
                                                    NSLog(@"shit, %@",errorString);
                                                }
                                            }];
-                                           
-                                           
                                        }
                                    }];
      
 }
 
--(void)fetchFbData
-{
+-(void)fetchFbData {
     if ([FBSDKAccessToken currentAccessToken]) {
         [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{ @"fields" : @"id,first_name,last_name,picture.width(500).height(500),email"}]
          startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
@@ -259,22 +262,20 @@
                      user.email = result[@"email"];
                      user.firstName = result[@"first_name"];
                      user.lastName = result[@"last_name"];
-                 SDWebImageManager *manager = [SDWebImageManager sharedManager];
-                 [manager downloadImageWithURL:[NSURL URLWithString:result[@"picture"][@"data"][@"url"]]
-                                       options:0
-                                      progress:^(NSInteger receivedSize, NSInteger expectedSize)
-                  {
-                      
-                  }
-                                     completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished,NSURL *imageURL)
-                  {
-                      if (image){
-                          user.profilePic = [[ProfilePictureMedia alloc] initWithImage:image];
-                         [user.profilePic saveInBackground];
-                          [user saveInBackground];
-                          
-                      }
-                  }];
+                     SDWebImageManager *manager = [SDWebImageManager sharedManager];
+                     [manager downloadImageWithURL:[NSURL URLWithString:result[@"picture"][@"data"][@"url"]]
+                                           options:0
+                                          progress:^(NSInteger receivedSize, NSInteger expectedSize){
+                                              
+                                          }
+                                         completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished,NSURL *imageURL){
+                                             if (image){
+                                                 user.profilePic = [[ProfilePictureMedia alloc] initWithImage:image];
+                                                 [user.profilePic saveInBackground];
+                                                 [user saveInBackground];
+                                                 
+                                             }
+                                         }];
                  }
                  NSLog(@"fetched user:%@", result);
              }
@@ -303,7 +304,6 @@
             }else {
                 [self createAccountButtonPressed:nil];
             }
-        
         }
     }
 }

@@ -111,6 +111,7 @@
 		8849A1E31BA0CB8400511DD5 /* SignUpTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8849A1E21BA0CB8400511DD5 /* SignUpTableViewController.m */; };
 		8849A1E61BA0CC7A00511DD5 /* SignUpInputTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8849A1E51BA0CC7A00511DD5 /* SignUpInputTableViewCell.m */; };
 		8849A1E91BA2590800511DD5 /* IntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8849A1E81BA2590800511DD5 /* IntroViewController.m */; };
+		88599C191E022F1F003FB9A0 /* DateFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88599C181E022F1F003FB9A0 /* DateFieldTableViewCell.m */; };
 		886DAD071E00219E0025CF43 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 886DAD061E00219E0025CF43 /* Parse.framework */; };
 		886DAD0A1E0021C90025CF43 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 886DAD091E0021C90025CF43 /* Bolts.framework */; };
 		887EC7621C6974ED001DBDB3 /* FriendFinderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 887EC7611C6974ED001DBDB3 /* FriendFinderTableViewController.m */; };
@@ -319,6 +320,8 @@
 		8849A1E51BA0CC7A00511DD5 /* SignUpInputTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpInputTableViewCell.m; sourceTree = "<group>"; };
 		8849A1E71BA2590800511DD5 /* IntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroViewController.h; sourceTree = "<group>"; };
 		8849A1E81BA2590800511DD5 /* IntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroViewController.m; sourceTree = "<group>"; };
+		88599C171E022F1F003FB9A0 /* DateFieldTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateFieldTableViewCell.h; sourceTree = "<group>"; };
+		88599C181E022F1F003FB9A0 /* DateFieldTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateFieldTableViewCell.m; sourceTree = "<group>"; };
 		886DAD061E00219E0025CF43 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		886DAD091E0021C90025CF43 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		887EC7601C6974ED001DBDB3 /* FriendFinderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendFinderTableViewController.h; sourceTree = "<group>"; };
@@ -686,6 +689,8 @@
 				88BDFC571BFD3370007A3EBB /* Friends */,
 				8893FD7B1BFD1FCB00711779 /* FieldEntryTableViewCell.h */,
 				8893FD7C1BFD1FCB00711779 /* FieldEntryTableViewCell.m */,
+				88599C171E022F1F003FB9A0 /* DateFieldTableViewCell.h */,
+				88599C181E022F1F003FB9A0 /* DateFieldTableViewCell.m */,
 				88BDFC661BFD5034007A3EBB /* BasicHeaderView.h */,
 				88BDFC5E1BFD4602007A3EBB /* ProfileTableViewController.h */,
 				88BDFC5F1BFD4602007A3EBB /* ProfileTableViewController.m */,
@@ -1084,6 +1089,7 @@
 				843BBBEC1D911EFB000F2169 /* TaggedParticipantView.m in Sources */,
 				8455EB731D5CAC1600A3A365 /* RemittanceSelectionView.m in Sources */,
 				84B52BD41D41F43D005995AC /* PendingRequestTableViewCell.m in Sources */,
+				88599C191E022F1F003FB9A0 /* DateFieldTableViewCell.m in Sources */,
 				88EE2CC61B9E08B2002DDB99 /* SpotlightFeedViewController.m in Sources */,
 				88EC502B1C0DCE5200077E85 /* ProfilePictureMedia.m in Sources */,
 				88E953461BEB8B7D0094F73D /* FriendsTableViewController.m in Sources */,

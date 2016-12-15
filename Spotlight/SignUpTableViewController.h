@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "FieldEntryTableViewCell.h"
+#import "DateFieldTableViewCell.h"
 
-@interface SignUpTableViewController : UITableViewController <FieldEntryTextFieldCellDelegate>
+
+@interface SignUpTableViewController : UITableViewController <FieldEntryTextFieldCellDelegate, DateFieldTableViewCellDelegate>
 
 @property (assign, nonatomic) BOOL isLoginScreen;
+@property (strong, nonatomic) NSDate* userDOB;
 
 @end

@@ -32,12 +32,6 @@
 @property (readonly, nonatomic) NSString *attributeString;
 
 
-//- (void)displayField:(SEMTemplateField *)field
-//               value:(NSString *)value
-//           returnKey:(UIReturnKeyType)returnKeyType
-// showProtectedValues:(BOOL)showProtectedFields
-//showImportPasswordButton:(BOOL)showImport;
-
 @property (weak, nonatomic) id<FieldEntryTextFieldCellDelegate> delegate;
 
 @end

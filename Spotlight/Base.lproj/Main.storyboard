@@ -190,7 +190,7 @@
         <scene sceneID="xo6-Hu-DTm">
             <objects>
                 <collectionViewController storyboardIdentifier="SpotLightCollectionView" id="h9E-yE-X25" customClass="SpotlightCollectionViewController" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="Vyx-SG-6aQ">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Vyx-SG-6aQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.99878907203674316" green="0.94971704483032227" blue="0.95082443952560425" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2163,7 +2163,7 @@
                             </variation>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="fCm-li-SY6">
-                            <rect key="frame" x="0.0" y="316" width="375" height="199"/>
+                            <rect key="frame" x="0.0" y="370" width="375" height="199"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h7F-LZ-Czy">
@@ -2249,6 +2249,53 @@
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="valueTextField" destination="s9M-Dj-9Rk" id="3SP-0x-sfF"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="DateFieldTableViewCell" rowHeight="54" id="5aR-NI-UlG" customClass="DateFieldTableViewCell">
+                                <rect key="frame" x="0.0" y="316" width="375" height="54"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5aR-NI-UlG" id="5T0-of-cIQ">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="54"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kSJ-p3-Sk5">
+                                            <rect key="frame" x="65" y="27" width="245" height="25"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="245" id="QSh-Uk-7GS"/>
+                                                <constraint firstAttribute="height" constant="25" id="eSN-RS-lVD"/>
+                                            </constraints>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="23"/>
+                                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                                            <connections>
+                                                <action selector="textFieldTextDidChange:" destination="5aR-NI-UlG" eventType="editingChanged" id="uRC-qP-bdX"/>
+                                                <outlet property="delegate" destination="5aR-NI-UlG" id="6qZ-zq-7or"/>
+                                            </connections>
+                                        </textField>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LoginLine" translatesAutoresizingMaskIntoConstraints="NO" id="f6U-5g-BvD">
+                                            <rect key="frame" x="67.5" y="52" width="244" height="2"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="2" id="n0A-94-yN2"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="kSJ-p3-Sk5" secondAttribute="bottom" constant="7" id="5Pt-KH-Plc"/>
+                                        <constraint firstItem="f6U-5g-BvD" firstAttribute="centerX" secondItem="5T0-of-cIQ" secondAttribute="centerX" constant="2" id="MMX-cK-Jkz"/>
+                                        <constraint firstAttribute="bottom" secondItem="f6U-5g-BvD" secondAttribute="bottom" id="QnM-GX-4pN"/>
+                                        <constraint firstItem="kSJ-p3-Sk5" firstAttribute="centerX" secondItem="5T0-of-cIQ" secondAttribute="centerX" id="Slx-dr-IvM"/>
+                                        <constraint firstItem="f6U-5g-BvD" firstAttribute="top" secondItem="kSJ-p3-Sk5" secondAttribute="bottom" id="n6h-mu-1HV"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="5Pt-KH-Plc"/>
+                                        </mask>
+                                    </variation>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <outlet property="valueTextField" destination="kSJ-p3-Sk5" id="8mz-6O-lxL"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

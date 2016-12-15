@@ -50,7 +50,7 @@ const static CGFloat kCustomIOS7AlertViewDefaultButtonSpacerHeight = 1;
     
     for(int i = 0 ; i < remArray.count ; i ++)
     {
-        remittanceSelectionView *view = [[remittanceSelectionView alloc] init];
+        RemittanceSelectionView *view = [[RemittanceSelectionView alloc] init];
         view.childSelected = remArray[i];
         view.frame = CGRectMake(0, YOffset, scroll.frame.size.width, 30);
         view.remButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -190,7 +190,7 @@ const static CGFloat kCustomIOS7AlertViewDefaultButtonSpacerHeight = 1;
     
     for(int i = 0 ; i < remArray.count ; i ++)
     {
-        remittanceSelectionView *view = [[remittanceSelectionView alloc] init];
+        RemittanceSelectionView *view = [[RemittanceSelectionView alloc] init];
         view.childSelected = remArray[i];
         view.frame = CGRectMake(0, YOffset, scroll.frame.size.width, 30);
         view.remButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -329,7 +329,7 @@ const static CGFloat kCustomIOS7AlertViewDefaultButtonSpacerHeight = 1;
 
 -(void)remButtonClicked:(UITapGestureRecognizer *)tapGes
 {
-    remittanceSelectionView *view  = (remittanceSelectionView *)tapGes.view;
+    RemittanceSelectionView *view  = (RemittanceSelectionView *)tapGes.view;
     
     view.remButton.selected = !view.remButton.selected;
     
@@ -342,9 +342,9 @@ const static CGFloat kCustomIOS7AlertViewDefaultButtonSpacerHeight = 1;
 -(NSMutableArray *)getSelectedRemNumber
 {
     
-    for(remittanceSelectionView *remView in scroll.subviews)
+    for(RemittanceSelectionView *remView in scroll.subviews)
     {
-        if([remView isKindOfClass:[remittanceSelectionView class]])
+        if([remView isKindOfClass:[RemittanceSelectionView class]])
         {
             if(remView.remButton.isSelected)
             {

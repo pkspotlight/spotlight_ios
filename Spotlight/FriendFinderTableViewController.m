@@ -228,13 +228,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
         [emailQuery whereKey:@"email"
                 matchesRegex:[NSString stringWithFormat:@"%@(.*?)", firstSearchStringPart]
                    modifiers:@"i"];
-//        
-//        
-//        [firstQuery whereKey:@"firstName" containsString:components[0]];
-//        [secondQuery whereKey:@"lastName" containsString:components[0]];
-//        [usernameQuery whereKey:@"username" containsString:[components[0] lowercaseString]];
-//        [emailQuery whereKey:@"email" containsString:[components[0] lowercaseString]];
-//        
+        
         PFQuery *query;
         if (components.count > 1) {
             [secondQuery whereKey:@"lastName"
@@ -278,7 +272,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 }
 
 - (IBAction)searchTextEditingChanged:(UITextView*)textView {
-    if (textView.text.length > 3) {
+    if (textView.text.length >= 3) {
         [self searchText:textView.text];
     }
 }

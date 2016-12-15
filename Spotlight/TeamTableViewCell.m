@@ -37,9 +37,13 @@
     [self.teamImageView setClipsToBounds:YES];
     
     [self.teamNameLabel setText:[NSString stringWithFormat:@"%@ %@", team.town, team.teamName]];
-    
-    NSString* subtext = [NSString stringWithFormat:@"GRADE %@ - %@", team.grade, team.sport];
-    [self.sportLabel setText:[subtext uppercaseString]];
+        
+    if (team.grade) {
+        NSString* subtext = [NSString stringWithFormat:@"GRADE %@ - %@", team.grade, team.sport];
+        [self.sportLabel setText:[subtext uppercaseString]];
+    } else {
+        [self.sportLabel setText:[team.sport uppercaseString]];
+    }
     
     [self.seasonLabel setText:[[NSString stringWithFormat:@"%@ %@",team.season, team.year] uppercaseString]];
     

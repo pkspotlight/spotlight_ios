@@ -150,7 +150,8 @@
     [spotlightQuery includeKey:@"teamLogoMedia"];
     [spotlightQuery includeKey:@"thumbnailImageFile"];
     
-    [spotlightQuery whereKey:@"team" matchesKey:@"objectId" inQuery:teamQuery];
+//    [spotlightQuery whereKey:@"team" matchesKey:@"objectId" inQuery:teamQuery];
+    [spotlightQuery whereKey:@"team" matchesQuery:teamQuery];
     [spotlightQuery orderByDescending:@"createdAt"];
 
     [spotlightQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {

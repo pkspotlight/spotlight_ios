@@ -42,15 +42,15 @@ static CGFloat const BasicHeaderHeight = 50;
 - (void)viewDidLoad {
     [super viewDidLoad];
     count = 0;
-    _teamsMemberArray = [NSMutableArray new];
-    _teamsSpectMemberArray = [NSMutableArray new];
-     _friendsArray = [NSMutableArray new];
+    self.teamsMemberArray = [NSMutableArray new];
+    self.teamsSpectMemberArray = [NSMutableArray new];
+     self.friendsArray = [NSMutableArray new];
     [self.tableView
      registerNib:[UINib nibWithNibName:@"BasicHeaderView" bundle:nil]
      forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self addSpotlightFriendScreenBoardingPopUp];
-    _pendingRequestArray = [NSMutableArray new];
+    self.pendingRequestArray = [NSMutableArray new];
     [self fetchAllPendingRequest];
 
     [self loadFriends];
@@ -62,9 +62,10 @@ static CGFloat const BasicHeaderHeight = 50;
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-      [self fetchRequest];
-    if(!self.user)
-    [self.navigationController setNavigationBarHidden:NO];
+    [self fetchRequest];
+    if(!self.user){
+        [self.navigationController setNavigationBarHidden:NO];
+    }
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [[NSNotificationCenter defaultCenter] postNotificationName:@"PendingRequest" object:nil];
     });
@@ -75,10 +76,16 @@ static CGFloat const BasicHeaderHeight = 50;
 - (void)loadFriends{
     PFQuery *query = [[User currentUser].friends query];
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-        self.friendsArray = [objects copy];
-        
+        self.friendsArray = [self alphabetizeArrayOfUsers:[objects copy]];
     }];
 }
+
+- (NSMutableArray*)alphabetizeArrayOfUsers:(NSArray*)users{
+    return [NSMutableArray arrayWithArray:[users sortedArrayUsingComparator:^NSComparisonResult(User* a, User* b)  {
+        return [a.firstName.lowercaseString compare:b.firstName.lowercaseString];
+    }]];
+}
+
 - (IBAction)searchButtonPressed:(id)sender {
      UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     FriendFinderTableViewController *friendFinderController = [storyboard instantiateViewControllerWithIdentifier:@"SearchFriends"];
@@ -86,39 +93,30 @@ static CGFloat const BasicHeaderHeight = 50;
 }
 
 
--(void)fetchRequest{
-    
+-(void)fetchRequest {
     PFQuery *spotlightQuery = [PFQuery queryWithClassName:@"TeamRequest"];
     [spotlightQuery whereKey:@"admin" equalTo:[User currentUser]];
-    
     [spotlightQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         
-        if(objects.count > 0)
-        {
+        if(objects.count > 0) {
             NSMutableArray *array = [NSMutableArray new];
-            for(TeamRequest *request in objects)
-            {
-                if((request.requestState.intValue == reqestStatePending)&&([request.type intValue]==2))
-                {
-                    
+            for(TeamRequest *request in objects){
+                if((request.requestState.intValue == reqestStatePending)&&([request.type intValue]==2)) {
                     [array addObject:request];
                 }
-                
             }
             count = array.count;
             [self.tableView reloadData];
             //  pendingRequest = [NSString stringWithFormat:@"You have %ld request pendings",array.count];
             if(array.count>0){
-                  [self makeHeaderView];
+                [self makeHeaderView];
                 [[self navigationController] tabBarItem].badgeValue = [NSString stringWithFormat:@"%lul",(unsigned long)array.count];
-            }
-            else{
+            } else {
                 self.tableView.tableHeaderView = nil;
                 [[self navigationController] tabBarItem].badgeValue  = nil;
             }
-        }
-        else{
-              self.tableView.tableHeaderView = nil;
+        } else {
+            self.tableView.tableHeaderView = nil;
             [[self navigationController] tabBarItem].badgeValue  = nil;
         }
     }];
@@ -130,7 +128,7 @@ static CGFloat const BasicHeaderHeight = 50;
 
 -(void)addSpotlightFriendScreenBoardingPopUp{
     
-   if([[NSUserDefaults standardUserDefaults] boolForKey:@"SpotlightFriendsPopUp"] == FALSE)
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"SpotlightFriendsPopUp"] == FALSE)
     {
         
         SpotlightBoardView *spotlightBoardingView = [[[NSBundle mainBundle] loadNibNamed:@"SpotlightBoardView" owner:self options:nil] objectAtIndex:0];
@@ -186,12 +184,9 @@ static CGFloat const BasicHeaderHeight = 50;
     [query whereKey:@"teams" equalTo:self.team];
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
        
-       
-        
         for(Child *child in objects)
         {
-          if([self.team.spectatorsArray containsObject:child.objectId])
-          {
+          if([self.team.spectatorsArray containsObject:child.objectId]){
               [_teamsSpectMemberArray addObject:child];
           }
             else
@@ -209,19 +204,13 @@ static CGFloat const BasicHeaderHeight = 50;
         [query1 whereKey:@"teams" equalTo:self.team];
         
         [query1 findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-            for(User *user in objects)
-            {
-                if([self.team.spectatorsArray containsObject:user.objectId])
-                {
+            for(User *user in objects){
+                if([self.team.spectatorsArray containsObject:user.objectId]){
                     [_teamsSpectMemberArray addObject:user];
-                }
-                else
-                {
+                }else{
                     [_teamsMemberArray addObject:user];
-                    
                 }
             }
-            
             [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
             [refresh performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:NO];
         }];
@@ -232,10 +221,7 @@ static CGFloat const BasicHeaderHeight = 50;
     PFQuery *query = [self.user.children query];
     NSLog(@"User: %@",self.user.displayName);
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-        
-        
         self.children = [objects copy];
-       
         [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
         [refresh performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:NO];
     }];

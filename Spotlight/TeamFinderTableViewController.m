@@ -130,9 +130,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
             [filteredArrayOfObjects addObject:team];
         }
     }
-    
     self.teams = filteredArrayOfObjects;
-    
 }
 
 
@@ -224,7 +222,6 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 
 
 -(void)searchText:(NSString*)searchTeamText{
-  //  [self.searchBar resignFirstResponder];
     
     //Strip the whitespace off the end of the search text
     NSString *searchText = [searchTeamText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
@@ -235,10 +232,10 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
         
         PFQuery *firstQuery = [Team query];
         PFQuery *secondQuery = [Team query];
-        
-        [firstQuery whereKey:@"teamName" containsString:searchText];
-        [secondQuery whereKey:@"town" containsString:searchText];
-        
+
+        [firstQuery whereKey:@"teamName" matchesRegex:[NSString stringWithFormat:@"%@(.*?)",searchText] modifiers:@"i"];
+        [secondQuery whereKey:@"town" matchesRegex:[NSString stringWithFormat:@"%@(.*?)",searchText] modifiers:@"i"];
+
         PFQuery *query = [PFQuery orQueryWithSubqueries:@[firstQuery,
                                                           secondQuery]];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -252,7 +249,6 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                     //Show no search results message
                 }
                 
-                //reload the tableView after the user searches
                 [self.tableView reloadData];
             } else {
                 
@@ -260,8 +256,6 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
             [refresh performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:NO];
         }];
     }
-    
-    
 }
 
 

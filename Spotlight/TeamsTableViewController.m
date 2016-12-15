@@ -175,7 +175,7 @@
                 }else{
                     return (NSComparisonResult)NSOrderedDescending;
                 }
-            }  else if ([[a.season lowercaseString] isEqualToString:@"spring"]) {
+            }  else if ([[a.season lowercaseString] isEqualToString:@"summer"]) {
                 if ([[b.season lowercaseString] isEqualToString:@"fall"] || [[b.season lowercaseString] isEqualToString:@"winter"]) {
                     return (NSComparisonResult)NSOrderedDescending;
                 }else{
@@ -211,6 +211,57 @@
     }
     [self.tableView reloadData];
 }
+
+
+
+//
+//- (void)sortTeamsArray:(NSArray*)teams {
+//    NSArray *sortedArray = [teams sortedArrayUsingComparator:^NSComparisonResult(Team* a, Team* b) {
+//        if (a.year == b.year) {
+//            if ([[a.season lowercaseString] isEqualToString:@"fall"]) {
+//                return (NSComparisonResult)NSOrderedAscending;
+//            } else if ([[a.season lowercaseString] isEqualToString:@"winter"]) {
+//                if ([[b.season lowercaseString] isEqualToString:@"fall"]) {
+//                    return (NSComparisonResult)NSOrderedAscending;
+//                }else{
+//                    return (NSComparisonResult)NSOrderedDescending;
+//                }
+//            }  else if ([[a.season lowercaseString] isEqualToString:@"spring"]) {
+//                if ([[b.season lowercaseString] isEqualToString:@"fall"] || [[b.season lowercaseString] isEqualToString:@"winter"]) {
+//                    return (NSComparisonResult)NSOrderedDescending;
+//                }else{
+//                    return (NSComparisonResult)NSOrderedAscending;
+//                }
+//            } else {
+//                return (NSComparisonResult)NSOrderedDescending;
+//            }
+//        } else if (a.year > b.year) {
+//            return (NSComparisonResult)NSOrderedAscending;
+//        }
+//        return (NSComparisonResult)NSOrderedDescending;
+//    }];
+//    
+//    for (Team* team in sortedArray) {
+//        NSString* season = [NSString stringWithFormat:@"%@ - %@", team.year, team.season];
+//        if (![self.seasons containsObject:season]) {
+//            [self.seasons addObject:season];
+//        }
+//    }
+//    
+//    for (NSString* year in self.seasons) {
+//        if (!self.teamsByYearDictionary[year]) {
+//            [self.teamsByYearDictionary setValue:[NSMutableArray array] forKey:year];
+//        }
+//        for (Team* team in sortedArray) {
+//            NSString* season = [NSString stringWithFormat:@"%@ - %@", team.year, team.season];
+//            if ([season isEqualToString:year] && ![self.teamsByYearDictionary[year] containsObject:team] ) {
+//                [self.teamsByYearDictionary[year] addObject:team];
+//                [self.allTeams addObject:team];
+//            }
+//        }
+//    }
+//    [self.tableView reloadData];
+//}
 
 
 #pragma mark - Table view data source

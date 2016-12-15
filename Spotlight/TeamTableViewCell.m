@@ -92,19 +92,12 @@
 
     [self.teamImageView.layer setBorderWidth:2.0];
 
-    
-//    NSString* buttonText = (_isFollowing) ? @"Following" : @"Follow";
-//    [self.followButton setTitle:buttonText
-//                       forState:UIControlStateNormal];
 }
 
 
 
 
 - (IBAction)followButtonPressed:(id)sender {
-//    [self.followButton setTitle:@""
-//                       forState:UIControlStateNormal];
-   
     if (_isFollowing) {
         
         [self.delegate

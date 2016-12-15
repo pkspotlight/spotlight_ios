@@ -207,22 +207,39 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 -(void)searchText:(NSString*)searchText{
     NSArray* components = [searchText componentsSeparatedByString:@" "];
     //    NSString *searchText = [self.searchBar.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSString* firstSearchStringPart = components[0];
     
-    if (![components[0] isEqualToString:@""]) {
+    if (![firstSearchStringPart isEqualToString:@""]) {
         PFQuery *firstQuery = [User query];
         PFQuery *secondQuery = [User query];
         PFQuery *usernameQuery = [User query];
         PFQuery *emailQuery = [User query];
         PFQuery *lastNameQuery = [User query];
         
-        
-        [firstQuery whereKey:@"firstName" containsString:components[0]];
-        [secondQuery whereKey:@"lastName" containsString:components[0]];
-        [usernameQuery whereKey:@"username" containsString:[components[0] lowercaseString]];
-        [emailQuery whereKey:@"email" containsString:[components[0] lowercaseString]];
-        
+        [firstQuery whereKey:@"firstName"
+                matchesRegex:[NSString stringWithFormat:@"%@(.*?)", firstSearchStringPart]
+                   modifiers:@"i"];
+        [secondQuery whereKey:@"lastName"
+                matchesRegex:[NSString stringWithFormat:@"%@(.*?)", firstSearchStringPart]
+                   modifiers:@"i"];
+        [usernameQuery whereKey:@"username"
+                matchesRegex:[NSString stringWithFormat:@"%@(.*?)", firstSearchStringPart]
+                   modifiers:@"i"];
+        [emailQuery whereKey:@"email"
+                matchesRegex:[NSString stringWithFormat:@"%@(.*?)", firstSearchStringPart]
+                   modifiers:@"i"];
+//        
+//        
+//        [firstQuery whereKey:@"firstName" containsString:components[0]];
+//        [secondQuery whereKey:@"lastName" containsString:components[0]];
+//        [usernameQuery whereKey:@"username" containsString:[components[0] lowercaseString]];
+//        [emailQuery whereKey:@"email" containsString:[components[0] lowercaseString]];
+//        
         PFQuery *query;
         if (components.count > 1) {
+            [secondQuery whereKey:@"lastName"
+                     matchesRegex:[NSString stringWithFormat:@"%@(.*?)", components[1]]
+                        modifiers:@"i"];
             [lastNameQuery whereKey:@"lastName" containsString:components[1]];
             query = [PFQuery orQueryWithSubqueries:@[firstQuery,
                                                      secondQuery,

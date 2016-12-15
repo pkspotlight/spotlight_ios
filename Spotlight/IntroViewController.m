@@ -30,12 +30,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//
-//    [self.signupButton.layer setCornerRadius:7];
-//    [self.loginButton.layer setCornerRadius:7];
-//    [self.loginWithFBBtn.layer setCornerRadius:7];
-    
-   
 }
 
 - (void)didReceiveMemoryWarning {
@@ -66,8 +60,6 @@
     SignUpTableViewController *signup = [storyboard instantiateViewControllerWithIdentifier:@"SignUP"];
     signup.isLoginScreen = YES;
     [self.navigationController pushViewController:signup animated:YES];
-
-    
 }
 
 - (IBAction)SignUpClicked:(UIButton *)sender {
@@ -75,14 +67,11 @@
     SignUpTableViewController *signup = [storyboard instantiateViewControllerWithIdentifier:@"SignUP"];
     signup.isLoginScreen = NO;
     [self.navigationController pushViewController:signup animated:YES];
-
-    
 }
-
 
 - (IBAction)logInWithFacebookBtnClicked:(UIButton *)sender {
     
-    NSArray *permissionArray = @[@"public_profile",@"email"];
+    NSArray *permissionArray = @[@"public_profile",@"email",@"user_birthday"];
     FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
     [loginManager logInWithReadPermissions:permissionArray
                         fromViewController:self
@@ -163,8 +152,7 @@
     
 }
 
--(void)fetchFbData
-{
+-(void)fetchFbData {
     if ([FBSDKAccessToken currentAccessToken]) {
         [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{ @"fields" : @"id,first_name,last_name,picture.width(500).height(500),email"}]
          startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
@@ -174,6 +162,8 @@
                  user.firstName = result[@"first_name"];
                  user.lastName = result[@"last_name"];
                  user.username = @"";
+                 [user saveInBackground];
+
                  SDWebImageManager *manager = [SDWebImageManager sharedManager];
                  [manager downloadImageWithURL:[NSURL URLWithString:result[@"picture"][@"data"][@"url"]]
                                        options:0
@@ -199,8 +189,6 @@
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SpotlightFriendsPopUp"];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SpotlightTeamPopUp"];
         [[NSUserDefaults standardUserDefaults] synchronize];
-        
-        
     }
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{

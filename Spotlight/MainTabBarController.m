@@ -119,51 +119,15 @@
        
                  }];
     }
-    
-//    else if([request.type intValue]==3){
-//           [request.team fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-//                if(!error)
-//                {
-//                    [request.admin fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-//                        if(!error)
-//                        {
-//                            [request.admin followTeamWithBlockCallback:request.team completion:^(BOOL succeeded, NSError * _Nullable error) {
-//                                if(succeeded)
-//                                {
-//                                    [[NSNotificationCenter defaultCenter] postNotificationName:@"SpotLightRefersh" object:nil];
-//                                    
-//                                    [request deleteInBackground];
-//                                }
-//                            }];
-//
-//                        
-//                        }
-//                        
-//                        
-//                        
-//                    }];
-//
-//            }
-//                
-//            }];
-//        }
-    
+
     
 }
 
--(void)FollowAcceptedRequests:(BOOL)isMessage
-{
-    
- 
-    
+-(void)FollowAcceptedRequests:(BOOL)isMessage{
+
     PFQuery *spotlightQuery = [PFQuery queryWithClassName:@"TeamRequest"];
     [spotlightQuery whereKey:@"user" equalTo:[User currentUser]];
     
-
-    
-    
-    
-   // [spotlightQuery whereKey:@"child" equalTo:[User currentUser].children];
 
     [spotlightQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         
@@ -172,18 +136,9 @@
      
         if(objects.count > 0)
         {
-            for(TeamRequest *request in objects)
-            {
-//                if(request.user.objectId == request.admin.objectId)
-//                {
-//                    [self deleteTeamRequest:request];
-//                }
-                
+            for(TeamRequest *request in objects) {
                if(request.requestState.intValue == requestStateAccepted)
                 {
-                    
-                   
-                    
                     if(![appDel.acceptedTeamIDs containsObject:request.objectId])
                     {
                         [appDel.acceptedTeamIDs addObject:request.objectId];
@@ -208,21 +163,11 @@
 
                                 NSLog(@"friends request%@",user.firstName);
                             } ];
-                            
-                            
                         }
-                        
-                        
                     }
-                    
                     [self followAcceptedRequest:request];
-
                 }
-                
-                
-                
             }
-            
             
             if(teams.length > 0)
             {
@@ -232,16 +177,9 @@
                                   cancelButtonTitle:nil
                                   otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] performSelectorOnMainThread:@selector(show)  withObject:nil waitUntilDone:NO];
             }
-            
-            
         }
-        
-        
     }];
-    
-    
-    
-    
+
 }
 
 -(void)updatePendingMessageRequest
@@ -293,19 +231,7 @@
             [[[self  tabBar]items] objectAtIndex:2].badgeValue  = nil;
              [[[self  tabBar]items] objectAtIndex:1].badgeValue  = nil;
         }
-        
-        //        for(TeamRequest *request in objects)
-        //        {
-        //            [request.admin fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-        //                //   NSString *data =[NSString stringWithFormat:@"%@       %@",request.admin.firstName,request.user.firstName];
-        //
-        //                NSLog(@"%@",request.admin.firstName);
-        //            }];
-        //
-        //            
-        //            
-        //        }
-        
+
     }];
     
 }

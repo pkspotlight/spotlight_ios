@@ -153,11 +153,6 @@
             [Child saveAllInBackground:self.childSelectedarray block:^(BOOL succeeded, NSError * _Nullable error) {
                 
             }];
-            
-            
-            
-            
-            
         }
         if (error) {
             NSLog(@"fuck: %@", [error localizedDescription]);
@@ -167,17 +162,14 @@
 }
 
 - (IBAction)saveAccountPressed:(id)sender {
-    NSError *error;
+    
+    if (![self hasEnteredRequiredFields]) {
+        return;
+    }
+    
+    
     [self.view endEditing:NO];
-    
-//    if ([self savePendingChangesToTeam:&error]) {
-//        //[self dismissViewControllerAnimated:YES completion:nil];
-//        [self performSegueWithIdentifier:@"UnwindEditSegue" sender:nil];
-//    } else {
-//        //Show some error
-//    }
 
-    
     [[[[User currentUser] children] query] findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if(objects.count>0){
            __block NSError *error;
@@ -202,31 +194,18 @@
                 [alert createAlertWithRemmitances:objects];
                                 
             }]];
-            
-            
             dispatch_async(dispatch_get_main_queue(), ^ {
                 [self presentViewController:alertController animated:YES completion:nil];
             });
-            
-            
-
-            
         }
         else{
             if ([self savePendingChangesToTeam:&error]) {
-                //[self dismissViewControllerAnimated:YES completion:nil];
                 [self performSegueWithIdentifier:@"UnwindEditSegue" sender:nil];
             } else {
                 //Show some error
             }
         }
-        
-        
     }];
-
-    
-    
-
 }
 
 

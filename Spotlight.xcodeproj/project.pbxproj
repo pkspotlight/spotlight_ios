@@ -69,7 +69,7 @@
 		843BBBEC1D911EFB000F2169 /* TaggedParticipantView.m in Sources */ = {isa = PBXBuildFile; fileRef = 843BBBEB1D911EFB000F2169 /* TaggedParticipantView.m */; };
 		843BBBEE1D911F14000F2169 /* TaggedParticipantView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 843BBBED1D911F14000F2169 /* TaggedParticipantView.xib */; };
 		8455EB701D5CABB000A3A365 /* RecieptAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8455EB6F1D5CABB000A3A365 /* RecieptAlertView.m */; };
-		8455EB731D5CAC1600A3A365 /* remittanceSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8455EB721D5CAC1600A3A365 /* remittanceSelectionView.m */; };
+		8455EB731D5CAC1600A3A365 /* RemittanceSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8455EB721D5CAC1600A3A365 /* RemittanceSelectionView.m */; };
 		846B56081D4899BB00F3DBB0 /* SpotlightBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 846B56071D4899BB00F3DBB0 /* SpotlightBoardView.m */; };
 		846B560A1D4899EF00F3DBB0 /* SpotlightBoardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 846B56091D4899EF00F3DBB0 /* SpotlightBoardView.xib */; };
 		846F75B01D40D41B00B5120E /* TeamRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 846F75AF1D40D41B00B5120E /* TeamRequest.m */; };
@@ -251,8 +251,8 @@
 		843BBBED1D911F14000F2169 /* TaggedParticipantView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaggedParticipantView.xib; sourceTree = "<group>"; };
 		8455EB6E1D5CABB000A3A365 /* RecieptAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecieptAlertView.h; sourceTree = "<group>"; };
 		8455EB6F1D5CABB000A3A365 /* RecieptAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecieptAlertView.m; sourceTree = "<group>"; };
-		8455EB711D5CAC1600A3A365 /* remittanceSelectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = remittanceSelectionView.h; sourceTree = "<group>"; };
-		8455EB721D5CAC1600A3A365 /* remittanceSelectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = remittanceSelectionView.m; sourceTree = "<group>"; };
+		8455EB711D5CAC1600A3A365 /* RemittanceSelectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemittanceSelectionView.h; sourceTree = "<group>"; };
+		8455EB721D5CAC1600A3A365 /* RemittanceSelectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemittanceSelectionView.m; sourceTree = "<group>"; };
 		846B56061D4899BB00F3DBB0 /* SpotlightBoardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotlightBoardView.h; sourceTree = "<group>"; };
 		846B56071D4899BB00F3DBB0 /* SpotlightBoardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotlightBoardView.m; sourceTree = "<group>"; };
 		846B56091D4899EF00F3DBB0 /* SpotlightBoardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpotlightBoardView.xib; sourceTree = "<group>"; };
@@ -732,8 +732,8 @@
 		88BDFC541BFD32D0007A3EBB /* Team */ = {
 			isa = PBXGroup;
 			children = (
-				8455EB711D5CAC1600A3A365 /* remittanceSelectionView.h */,
-				8455EB721D5CAC1600A3A365 /* remittanceSelectionView.m */,
+				8455EB711D5CAC1600A3A365 /* RemittanceSelectionView.h */,
+				8455EB721D5CAC1600A3A365 /* RemittanceSelectionView.m */,
 				8455EB6E1D5CABB000A3A365 /* RecieptAlertView.h */,
 				8455EB6F1D5CABB000A3A365 /* RecieptAlertView.m */,
 				883D63F71C0719E300AE99CC /* TeamLogoMedia.h */,
@@ -1082,7 +1082,7 @@
 			files = (
 				88EC50311C12F19200077E85 /* User.m in Sources */,
 				843BBBEC1D911EFB000F2169 /* TaggedParticipantView.m in Sources */,
-				8455EB731D5CAC1600A3A365 /* remittanceSelectionView.m in Sources */,
+				8455EB731D5CAC1600A3A365 /* RemittanceSelectionView.m in Sources */,
 				84B52BD41D41F43D005995AC /* PendingRequestTableViewCell.m in Sources */,
 				88EE2CC61B9E08B2002DDB99 /* SpotlightFeedViewController.m in Sources */,
 				88EC502B1C0DCE5200077E85 /* ProfilePictureMedia.m in Sources */,

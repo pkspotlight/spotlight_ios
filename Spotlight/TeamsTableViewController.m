@@ -165,6 +165,8 @@
 }
 
 - (void)sortTeamsArray:(NSArray*)teams {
+    
+    // sort all teams by year/season
     NSArray *sortedArray = [teams sortedArrayUsingComparator:^NSComparisonResult(Team* a, Team* b) {
         if (a.year == b.year) {
             if ([[a.season lowercaseString] isEqualToString:@"fall"]) {
@@ -190,6 +192,7 @@
         return (NSComparisonResult)NSOrderedDescending;
     }];
     
+    //create season title for each year/season of teams
     for (Team* team in sortedArray) {
         NSString* season = [NSString stringWithFormat:@"%@ - %@", team.year, team.season];
         if (![self.seasons containsObject:season]) {
@@ -198,20 +201,33 @@
     }
     
     for (NSString* year in self.seasons) {
-        if (!self.teamsByYearDictionary[year]) {
-            [self.teamsByYearDictionary setValue:[NSMutableArray array] forKey:year];
-        }
+
+        NSMutableArray* tempSeasonYearTeamsArray = [NSMutableArray array];
         for (Team* team in sortedArray) {
             NSString* season = [NSString stringWithFormat:@"%@ - %@", team.year, team.season];
             if ([season isEqualToString:year] && ![self.teamsByYearDictionary[year] containsObject:team] ) {
-                [self.teamsByYearDictionary[year] addObject:team];
+                [tempSeasonYearTeamsArray addObject:team];
                 [self.allTeams addObject:team];
             }
+        }
+        
+        if (!self.teamsByYearDictionary[year]) {
+            [self.teamsByYearDictionary setValue:[self alphabetizeArrayOfTeams:tempSeasonYearTeamsArray] forKey:year];
         }
     }
     [self.tableView reloadData];
 }
 
+- (NSArray*)alphabetizeArrayOfTeams:(NSArray*)teams{
+    NSArray* sortedTeams = [teams sortedArrayUsingComparator:^NSComparisonResult(Team* a, Team* b)  {
+        if ([a.town.lowercaseString compare:b.town.lowercaseString] == NSOrderedSame) {
+            return ([a.teamName.lowercaseString compare:b.teamName.lowercaseString]);
+        } else {
+            return [a.town.lowercaseString compare:b.town.lowercaseString];
+        }
+    }];
+    return sortedTeams;
+}
 
 
 //

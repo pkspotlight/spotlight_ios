@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <ParseFacebookUtilsV4/PFFacebookUtils.h>
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 #import <Parse/Parse.h>
@@ -39,8 +40,8 @@
         configuration.clientKey = @"vMH2XfoFKQAy8vbOYzgXZtJrRJ8LjCD5933k3kPF";
         configuration.server = @"http://parse-spotlight.us-east-1.elasticbeanstalk.com/parse";
     }]];
-    [[FBSDKApplicationDelegate sharedInstance] application:application
-                             didFinishLaunchingWithOptions:launchOptions];
+    [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:launchOptions];
+
     
     if (![PFUser currentUser]){
         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"

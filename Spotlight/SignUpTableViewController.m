@@ -12,7 +12,8 @@
 #import "SpotlightFeedViewController.h"
 #import "MainTabBarController.h"
 #import "User.h"
-#import <Parse/Parse.h>
+#import <Parse.h>
+#import <ParseFacebookUtilsV4/PFFacebookUtils.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "SDWebImageManager.h"
@@ -211,45 +212,27 @@
 - (IBAction)logInWithFacebookBtnClicked:(UIButton *)sender {
     
     NSArray *permissionArray = @[@"public_profile",@"email"];
-    FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
-    [loginManager logInWithReadPermissions:permissionArray
-                        fromViewController:self
-                                   handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-                                       if(error){
-                                           NSString *errorString = [error userInfo][@"error"];
-                                           if(error!= nil){
-                                               
-                                               UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Facebook Login Failed" message:errorString preferredStyle:UIAlertControllerStyleAlert];
-                                               [alert addAction:[UIAlertAction actionWithTitle:@"OK"
-                                                                                         style:UIAlertActionStyleCancel
-                                                                                       handler:nil]];
-                                               [self presentViewController:alert animated:YES completion:nil];
-                                           }
-                                           NSLog(@"shit, %@",errorString);
-
-                                       } else {
-                                           PFUser *user = [PFUser user];
-                                           user.username = self.pendingInputDict[@"username"];
-                                           user.email = self.pendingInputDict[@"email"];
-                                           user.password = self.pendingInputDict[@"password"];
-                                           
-                                           [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                                               if (succeeded) {   // Hooray! Let them use the app now.
-                                                   NSLog(@"sweet");
-                                                   [self loadMainTabBar];
-                                               } else {
-                                                   NSString *errorString = [error userInfo][@"error"];
-                                                   UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Nope" message:errorString preferredStyle:UIAlertControllerStyleAlert];
-                                                   [alert addAction:[UIAlertAction actionWithTitle:@"OK"
-                                                                                             style:UIAlertActionStyleCancel
-                                                                                           handler:nil]];
-                                                   [self presentViewController:alert animated:YES completion:nil];
-                                                   NSLog(@"shit, %@",errorString);
-                                               }
-                                           }];
-                                       }
-                                   }];
-     
+    [PFFacebookUtils logInInBackgroundWithReadPermissions:permissionArray block:^(PFUser * _Nullable user, NSError * _Nullable error) {
+        if (user) {
+            NSLog(@"sweet");
+            if(user.isNew)
+            [self fetchFbData];
+            [self loadMainTabBar];
+        } else {
+            NSString *errorString = [error userInfo][@"error"];
+            if(error!= nil){
+            
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Facebook Login Failed" message:errorString preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"OK"
+                                                      style:UIAlertActionStyleCancel
+                                                    handler:nil]];
+            [self presentViewController:alert animated:YES completion:nil];
+            }
+            NSLog(@"shit, %@",errorString);
+        }
+    }];
+    
+    
 }
 
 -(void)fetchFbData {

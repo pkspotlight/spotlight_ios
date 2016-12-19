@@ -607,17 +607,6 @@ static CGFloat const BasicHeaderHeight = 50;
                 //[[[self  tabBar]items] objectAtIndex:2].badgeValue  = nil;
             }
             
-            //        for(TeamRequest *request in objects)
-            //        {
-            //            [request.admin fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-            //                //   NSString *data =[NSString stringWithFormat:@"%@       %@",request.admin.firstName,request.user.firstName];
-            //
-            //                NSLog(@"%@",request.admin.firstName);
-            //            }];
-            //
-            //
-            //
-            //        }
             
         }];
         

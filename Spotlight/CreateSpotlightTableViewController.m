@@ -15,6 +15,7 @@
 #import <MBProgressHUD.h>
 #import <AFNetworking/UIImageView+AFNetworking.h>
 #import "SpotlightCollectionViewController.h"
+#import "UIViewController+MediaAddingFunctionality.h"
 
 @interface CreateSpotlightTableViewController ()
 
@@ -27,6 +28,11 @@
 @property (weak, nonatomic) IBOutlet UIImageView *teamUserImageView;
 @property (weak, nonatomic) IBOutlet UITextField *spotlightTitle;
 @property (weak, nonatomic) IBOutlet UITextView *spotlightDescription;
+
+@property (copy) void (^completion)(void);
+@property (strong, nonatomic) UIImagePickerController* imagePickerController;
+
+
 
 @end
 
@@ -72,11 +78,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    
-    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -130,32 +132,45 @@
     [self.spotlight setCreatorName:[NSString stringWithFormat:@"%@ %@", user.firstName, user.lastName]];
     [self.spotlight saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if(succeeded){
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"SpotLightRefersh" object:nil];
-        }
-        
-        if(_isFromTeamdetail){
-            [self.navigationController popViewControllerAnimated:YES];
-        }else{
-            [self.navigationController dismissViewControllerAnimated:YES completion:^{
-                UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                SpotlightCollectionViewController *spotLightCollection = [storyboard instantiateViewControllerWithIdentifier:@"SpotLightCollectionView"];
-                [spotLightCollection setSpotlight:self.spotlight];
-                [self.navigationController presentViewController:spotLightCollection animated:YES completion:nil];
-            }];
+            [hud hide:YES];
+            __weak id tempSelf = self;
+            UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Spotlight Created!"
+                                                                           message:@"Would you like to add photos or videos now?  You can also always add them later."
+                                                                    preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                [tempSelf addMediaButtonPressedCompletion:^{
+                    [tempSelf finishSaveProcess];
+                }];
+            }]];
+            [alert addAction:[UIAlertAction actionWithTitle:@"No Thanks" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                    [tempSelf finishSaveProcess];
+            }]];
+            [self presentViewController:alert animated:YES completion:nil];
         }
     }];
+}
+
+- (void)finishSaveProcess {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"SpotLightRefersh" object:nil];
+    if(_isFromTeamdetail){
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        [self.navigationController dismissViewControllerAnimated:YES completion:^{
+//            UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//            SpotlightCollectionViewController *spotLightCollection = [storyboard instantiateViewControllerWithIdentifier:@"SpotLightCollectionView"];
+//            [spotLightCollection setSpotlight:self.spotlight];
+//            [self.navigationController presentViewController:spotLightCollection animated:YES completion:nil];
+        }];
+    }
+
 }
 
 - (void)dismissView:(MBProgressHUD*)hud {
     [hud hide:YES afterDelay:1.5];
     if(_isFromTeamdetail){
-        
         [self.navigationController popViewControllerAnimated:YES];
-    
     }else{
-        
         [self.navigationController dismissViewControllerAnimated:YES completion:^{
-            
         }];
     }
 }

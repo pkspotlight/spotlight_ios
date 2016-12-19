@@ -774,7 +774,7 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
 }
 
 -(void)openMedia {
-    
+
     switch ([MPMediaLibrary authorizationStatus]){
         case MPMediaLibraryAuthorizationStatusDenied: {
             NSLog(@"denied");
@@ -821,11 +821,7 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
 - (void)mediaPicker: (MPMediaPickerController *)mediaPicker didPickMediaItems:(MPMediaItemCollection *)mediaItemCollection {
     
     [self dismissViewControllerAnimated:YES completion:nil];
-    
-    //    for (int i = 0; i < [mediaItemCollection.items count]; i++) {
     [self exportAssetAsSourceFormat:[[mediaItemCollection items] objectAtIndex:0]];
-    //        break;
-    //    }
 }
 
 - (void)mediaPickerDidCancel:(MPMediaPickerController *)mediaPicker {

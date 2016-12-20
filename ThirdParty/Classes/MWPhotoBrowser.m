@@ -13,6 +13,7 @@
 #import "SDImageCache.h"
 #import "UIImage+MWPhotoBrowser.h"
 #import "TaggedParticipantView.h"
+#import "SpotlightTaggedParticipantView.h"
 #import "MontageCreator.h"
 #define PADDING                  10
 
@@ -29,7 +30,7 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
     return self;
 }
 
-- (id)initWithDelegate:(id <MWPhotoBrowserDelegate>)delegate {
+- (id)initWithDelegate:(id <MWPhotoBrowserDelegate, PassTitleAndParticipantProtocol>)delegate {
     if ((self = [self init])) {
         _delegate = delegate;
 	}
@@ -644,7 +645,6 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
         [self performLayout];
         [self.view setNeedsLayout];
     }
-    
 }
 
 - (NSUInteger)numberOfPhotos {
@@ -1114,7 +1114,7 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
         }
     } else if (numberOfPhotos > 1) {
         if ([_delegate respondsToSelector:@selector(photoBrowser:titleForPhotoAtIndex:)]) {
-            self.title = [_delegate photoBrowser:self titleForPhotoAtIndex:_currentPageIndex];
+  //          self.title = [_delegate photoBrowser:self titleForPhotoAtIndex:_currentPageIndex];
         } else {
             self.title = [NSString stringWithFormat:@"%lu %@ %lu", (unsigned long)(_currentPageIndex+1), NSLocalizedString(@"of", @"Used in the context: 'Showing 1 of 3 items'"), (unsigned long)numberOfPhotos];
         }
@@ -1605,11 +1605,6 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
 - (void)actionButtonPressed:(id)sender {
 
     // Only react when image has loaded
-    
-    
-    
-    
-    
     id <MWPhoto> photo = [self photoAtIndex:_currentPageIndex];
     
     if ([photo underlyingImage] == nil || ([photo respondsToSelector:@selector(isVideo)] && photo.isVideo)){
@@ -1662,50 +1657,47 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
                 self.activityViewController.popoverPresentationController.barButtonItem = _actionButton;
             }
             [self presentViewController:self.activityViewController animated:YES completion:nil];
-
         }
-        
         // Keep controls hidden
         [self setControlsHidden:NO animated:YES permanent:YES];
-
     }
-    
 }
 
 
 - (void)cropButtonPressed:(id)sender
 {
-    MWPhoto *photo = [self photoAtIndex:_currentPageIndex];
+    MWPhoto *photo = [self photoAtIndex:self.currentIndex];
     [self.delegate cropBtnClicked:self.currentIndex withImage:photo.underlyingImage];
 }
 
-- (void)tagButtonPressed:(id)sender
-
-{
-    if(_participantArray.count>0){
-        TaggedParticipantView *spotlightParticipantView = [[TaggedParticipantView alloc]initWithParticipant:_participantArray withTitle:@"abcd"];
-        CGRect frameRect =spotlightParticipantView.frame;
-        frameRect.size.width = [UIScreen mainScreen].bounds.size.width;
-        frameRect.size.height = [UIScreen mainScreen].bounds.size.height;
-        spotlightParticipantView.frame = frameRect;
-        
-        
-        [ [[UIApplication sharedApplication].delegate window] addSubview:spotlightParticipantView];
-        spotlightParticipantView.translatesAutoresizingMaskIntoConstraints = true;
-    }else{
-        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"No Tagged Participants"
-                                                          message:nil
-                                                         delegate:self
-                                                cancelButtonTitle:@"OK"
-                                                otherButtonTitles:nil,nil];
-                [message show];
-
-    }
-    
- 
+- (void)tagButtonPressed:(id)sender {
+    NSArray* participants = [self.delegate photoBrowser:self participantNamesAtIndex:_currentPageIndex];
+    TaggedParticipantView *spotlightParticipantView = [[TaggedParticipantView alloc] initWithParticipant:participants];
+    spotlightParticipantView.delegate = self;
+    CGRect frameRect =spotlightParticipantView.frame;
+    frameRect.size.width = [UIScreen mainScreen].bounds.size.width;
+    frameRect.size.height = [UIScreen mainScreen].bounds.size.height;
+    spotlightParticipantView.frame = frameRect;
+    [[[UIApplication sharedApplication].delegate window] addSubview:spotlightParticipantView];
+    spotlightParticipantView.translatesAutoresizingMaskIntoConstraints = true;
 }
 
+-(void)showTagParticipantView:(NSArray*)participantArray{
+//    SpotlightTaggedParticipantView *spotlightParticipantView = [[SpotlightTaggedParticipantView alloc] initWithParticipant:self.teamMembers withTitle:@"abcd"];
+    SpotlightTaggedParticipantView *spotlightParticipantView = [[SpotlightTaggedParticipantView alloc] initWithParticipants:self.teamMembers selectedParticipants:participantArray title:[self.delegate photoBrowser:self titleForPhotoAtIndex:self.currentIndex]];
+    spotlightParticipantView.delegate = self;
+    CGRect frameRect =spotlightParticipantView.frame;
+    frameRect.size.width = [UIScreen mainScreen].bounds.size.width;
+    frameRect.size.height = [UIScreen mainScreen].bounds.size.height;
+    spotlightParticipantView.frame = frameRect;
+    
+    [ [[UIApplication sharedApplication].delegate window] addSubview:spotlightParticipantView];
+    spotlightParticipantView.translatesAutoresizingMaskIntoConstraints = true;
+}
 
+-(void)addParticipants:(NSArray*)participants withTitle:(NSString *)title{
+    [self.delegate photoBrowser:self addParticipants:participants withTitle:title atIndex:_currentPageIndex];
+}
 
 - (void)deleteButtonPressed:(id)sender
 {
@@ -1725,10 +1717,6 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
                                                               handler:^(UIAlertAction * _Nonnull action) {
                                                               }]];
                       [self presentViewController:alert animated:YES completion:nil];
-
-    
-    
-   
 }
 
 

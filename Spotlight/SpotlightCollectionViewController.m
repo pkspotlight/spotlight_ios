@@ -36,7 +36,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *viewSpotlightButton;
 @property (strong, nonatomic) NSMutableArray* teamsMemberArray;
 @property (strong, nonatomic) NSMutableArray* teamsSpectMemberArray;
-@property (strong, nonatomic) NSMutableArray* participantArray;
 
 @property (weak, nonatomic) IBOutlet UIButton *shareSpotlightButton;
 
@@ -54,7 +53,6 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
     [super viewDidLoad];
     _teamsMemberArray = [NSMutableArray new];
     _teamsSpectMemberArray = [NSMutableArray new];
-    _participantArray = [NSMutableArray new];
     
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     refreshControl.tintColor = [UIColor grayColor];
@@ -193,6 +191,7 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
     // Create browser (must be done each time photo browser is
     // displayed. Photo browser objects cannot be re-used)
     self.browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
+    [self.browser setTeamMembers:self.teamsMemberArray];
     
     // Set options
     self.browser.displayActionButton = YES; // Show action button to allow sharing, copying, etc (defaults to YES)
@@ -206,10 +205,6 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
     
     // Optionally set the current visible photo before displaying
     [self.browser setCurrentPhotoIndex:indexPath.row];
-    SpotlightMedia *media = self.mediaList[indexPath.row];
-    self.browser.participantArray = media.participantArray;
-    
-    // Present
     [self.navigationController pushViewController:self.browser animated:YES];
 }
 
@@ -228,13 +223,11 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
     if( self.mediaList.count > index && image)
     {
         SpotlightMedia *media = self.mediaList[index];
-        if(!media.isVideo)
-        {
+        if(!media.isVideo) {
             
             PECropViewController *controller = [[PECropViewController alloc] init];
             controller.delegate = self;
             controller.image = image;
-            
             
             UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:controller];
             [self presentViewController:navigationController animated:YES completion:NULL];
@@ -261,7 +254,6 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
                                                                      }];
                                                 }];
 }
-
 
 - (void)cropViewController:(PECropViewController *)controller didFinishCroppingImage:(UIImage *)croppedImage{
     
@@ -318,38 +310,55 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
     }];
 }
 
+-(void)photoBrowser:(MWPhotoBrowser *)photoBrowser addParticipants:(NSArray*)participants withTitle:(NSString*)title atIndex:(NSUInteger)index {
+    SpotlightMedia *media = self.mediaList[index];
+    NSMutableArray *childArray = [NSMutableArray new];
+    NSMutableArray *userArray = [NSMutableArray new];
+    for(User *user in participants) {
+        NSString *userName = [NSString stringWithFormat:@"%@ %@",user.firstName
+                              ,user.lastName];
+        [userArray addObject:userName];
+    }
+    NSMutableArray *combinedArray = [NSMutableArray new];
+    combinedArray = [userArray arrayByAddingObjectsFromArray:childArray].mutableCopy;
+    
+    NSSet *distinctSet = [NSSet setWithArray:combinedArray];
+    NSMutableArray *participantNameArray = [distinctSet allObjects].mutableCopy;
+    [media setParticipantArray:participantNameArray];
+    [media setTitle:title];
+    __weak SpotlightCollectionViewController* tempSelf = self;
+    [media saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        [tempSelf.browser reloadData];
+        [tempSelf refreshSpotlightCollectionImages];
+    }];
+}
 
--(void)participant:(NSArray *)participant withTitle:(NSString *)title{
+
+-(void)addParticipants:(NSArray *)participant withTitle:(NSString *)title{
+    
     NSMutableArray *childArray = [NSMutableArray new];
     NSMutableArray *userArray = [NSMutableArray new];
     for(Child *child in participant) {
         NSString *name = [NSString stringWithFormat:@"%@ %@",child.firstName
                           ,child.lastName];
         [childArray addObject:name];
-        
     }
     for(User *user in participant) {
         NSString *userName = [NSString stringWithFormat:@"%@ %@",user.firstName
                               ,user.lastName];
         [userArray addObject:userName];
-        
     }
-    
     NSMutableArray *combinedArray = [NSMutableArray new];
-    
-    
     combinedArray = [userArray arrayByAddingObjectsFromArray:childArray].mutableCopy;
     
     NSSet *distinctSet = [NSSet setWithArray:combinedArray];
-    _participantArray = [distinctSet allObjects].mutableCopy;
+    NSMutableArray *participantArray = [distinctSet allObjects].mutableCopy;
     
     if(isCamera){
-        [self saveImageWithMediaInfoVideo:infoMedia title:title];
+        [self saveImageWithMediaInfoVideo:infoMedia participants:participantArray title:title];
     }else{
-        [self saveImageWithMediaInfo:infoMedia title:title];
+        [self saveImageWithMediaInfo:infoMedia participants:participantArray title:title];
     }
-    
-    
 }
 
 - (IBAction)backButtonPressed:(id)sender {
@@ -379,26 +388,20 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
     [self presentViewController:alert animated:YES completion:nil];
 }
 
-
 -(void)selectVideoFromNativeImagePicker{
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
-    {
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
         UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
         imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
         imagePickerController.delegate = self;
         imagePickerController.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeMovie,  nil];
         imagePickerController.videoMaximumDuration = 15;
         [imagePickerController setAllowsEditing:YES];
-        
-        
         self.imagePickerController = imagePickerController;
         [self.navigationController presentViewController:self.imagePickerController animated:YES completion:nil];
     }
-    
 }
 
 -(void)selectImagesFromElcImagePicker{
-    
     ELCAlbumPickerController *albumController = [[ELCAlbumPickerController alloc] init];
     ELCImagePickerController *elcPicker = [[ELCImagePickerController alloc] initWithRootViewController:albumController];
     [albumController setParent:elcPicker];
@@ -406,11 +409,18 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
     [self presentViewController:elcPicker animated:YES completion:nil];
 }
 
-
-
-
 - (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
     return self.isShowingMontage ? 1 : self.mediaList.count;
+}
+
+- (NSArray *)photoBrowser:(MWPhotoBrowser *)photoBrowser participantNamesAtIndex:(NSUInteger)index {
+    SpotlightMedia *media = self.mediaList[index];
+    return media.participantArray;
+}
+
+- (NSString*)photoBrowser:(MWPhotoBrowser *)photoBrowser titleForPhotoAtIndex:(NSUInteger)index {
+    SpotlightMedia *media = self.mediaList[index];
+    return media.title;
 }
 
 - (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
@@ -428,6 +438,7 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
     }
     return nil;
 }
+
 
 - (MWPhoto*)mwphotoForSpotlightMedia:(SpotlightMedia*)media {
     MWPhoto *mwMedia;
@@ -453,7 +464,7 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
     }];
 }
 
-- (void)saveImageWithMediaInfoVideo:(NSDictionary<NSString *,id> *)infoDict title:(NSString*)title{
+- (void)saveImageWithMediaInfoVideo:(NSDictionary<NSString *,id> *)infoDict participants:participantArray title:(NSString*)title{
     SpotlightMedia *media;
     NSString *mediaType = [infoDict objectForKey: UIImagePickerControllerMediaType];
     
@@ -468,10 +479,10 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
         
         
         NSURL *videoUrl=(NSURL*)[infoDict objectForKey:UIImagePickerControllerMediaURL];
-        NSString *videoPath = [videoUrl path];
-        media = [[SpotlightMedia alloc] initWithVideoPath:videoPath];
+       // NSString *videoPath = [videoUrl path];
+        media = [[SpotlightMedia alloc] initWithVideoPath:videoUrl];
         media.timeStamp =timestamp;
-        media.participantArray = _participantArray;
+        media.participantArray = participantArray;
     } else if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
         UIImage *image = [infoDict valueForKey:UIImagePickerControllerOriginalImage];
         media = [[SpotlightMedia alloc] initWithImage:image];
@@ -488,7 +499,6 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
         } else {
             [self.spotlight allMedia:^(NSArray *media, NSError *error) {
                 self.mediaList = [self getSortedArray:media];
-                //self.mediaList = media;
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"SpotLightRefersh" object:nil];
                 [self.collectionView reloadData];
                 [hud hide:YES];
@@ -498,9 +508,7 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
     self.imagePickerController = nil;
 }
 
-
-
-- (void)saveImageWithMediaInfo:(NSArray *)info title:(NSString*)title{
+- (void)saveImageWithMediaInfo:(NSArray *)info participants:participantArray title:(NSString*)title{
     __block SpotlightMedia *media;
     
     for (NSDictionary *infoDict in info){
@@ -518,15 +526,12 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
             PHVideoRequestOptions *options=[[PHVideoRequestOptions alloc]init];
             options.version=PHVideoRequestOptionsVersionOriginal;
             [[PHImageManager defaultManager] requestAVAssetForVideo:asset options:options resultHandler:^(AVAsset * avasset, AVAudioMix * audioMix, NSDictionary * info) {
-                
-                
+
                 AVURLAsset *asset = (AVURLAsset *)avasset;
                 NSURL *url = asset.URL;
-                NSLog(@"url is %@",url);
-                NSString *videoPath = [url path];
-                media = [[SpotlightMedia alloc] initWithVideoPath:videoPath];
+                media = [[SpotlightMedia alloc] initWithVideoPath:url];
                 media.timeStamp = timestamp;
-                media.participantArray = _participantArray;
+                media.participantArray = participantArray;
                 if (title) {
                     media.title = title;
                 }
@@ -564,7 +569,7 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
             
             media = [[SpotlightMedia alloc] initWithImage:image];
             media.timeStamp = timestamp;
-            media.participantArray = _participantArray;
+            media.participantArray = participantArray;
             
             if (title) {
                 media.title = title;
@@ -674,7 +679,8 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
 }
 
 -(void)addSpotlightParticipantPopUp{
-    SpotlightTaggedParticipantView *spotlightParticipantView = [[SpotlightTaggedParticipantView alloc] initWithParticipant:_teamsMemberArray withTitle:@"abcd"];
+//    SpotlightTaggedParticipantView *spotlightParticipantView = [[SpotlightTaggedParticipantView alloc] initWithParticipant:_teamsMemberArray withTitle:@"abcd"];
+    SpotlightTaggedParticipantView *spotlightParticipantView = [[SpotlightTaggedParticipantView alloc] initWithParticipants:_teamsMemberArray selectedParticipants:@[] title:@"abcd"];
     spotlightParticipantView.delegate = self;
     CGRect frameRect =spotlightParticipantView.frame;
     frameRect.size.width = [UIScreen mainScreen].bounds.size.width;

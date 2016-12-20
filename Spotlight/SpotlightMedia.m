@@ -46,13 +46,15 @@
     }];
 }
 
-- (instancetype)initWithVideoPath:(NSString*)path {
+- (instancetype)initWithVideoPath:(NSURL*)urlPath {
     
     if ( (self = [super init]) ) {
-        UIImage* thumbImage = [self generateThumbImage:path];
+        UIImage* thumbImage = [self generateThumbImage:urlPath];
         self.thumbnailImageFile = [PFFile fileWithName:@"thumb.jpg" data:UIImageJPEGRepresentation(thumbImage, .7)];
         
-         NSData *videoData = [NSData dataWithContentsOfFile:path];
+        NSData *videoData = [NSData dataWithContentsOfURL:urlPath];
+        //[NSData dataWithContentsOfFile:path];
+        
    //        BOOL exists = [[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:false];
      //   NSData *videoData = [[NSFileManager defaultManager] contentsAtPath:path];
         self.isVideo = YES;
@@ -63,17 +65,22 @@
 
 - (instancetype)initWithVideoData:(NSData*)data {
     if ( (self = [super init]) ) {
-        
-        
         self.isVideo = YES;
         self.mediaFile = [PFFile fileWithName:@"video.mov" data:data];
     }
     return self;
 }
 
+- (void)removeAllParticipants{
+    PFRelation *participants = [self relationForKey:@"participantArray"];
+    PFQuery *query = [participants query];
+    NSArray *array = [query findObjects];
+    for(PFObject *object in array){
+        [participants removeObject:object];
+    }
+}
 
 - (instancetype)initWithImage:(UIImage*)image {
-    
     if ( (self = [super init]) ) {
         self.isVideo = NO;
         self.thumbnailImageFile = [PFFile fileWithName:@"thumb.jpg" data:UIImageJPEGRepresentation(image, .5)];
@@ -83,10 +90,8 @@
     return self;
 }
 
--(UIImage *)generateThumbImage : (NSString *)filepath
+-(UIImage *)generateThumbImage : (NSURL *)url
 {
-    NSURL *url = [NSURL fileURLWithPath:filepath];
-    
     AVAsset *asset = [AVAsset assetWithURL:url];
     AVAssetImageGenerator *imageGenerator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
     imageGenerator.appliesPreferredTrackTransform = YES;

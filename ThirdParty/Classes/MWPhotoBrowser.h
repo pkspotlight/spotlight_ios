@@ -10,6 +10,7 @@
 #import "MWPhoto.h"
 #import "MWPhotoProtocol.h"
 #import "MWCaptionView.h"
+#import "SpotlightTaggedParticipantView.h"
 
 // Debug Logging
 #if 0 // Set to 1 to enable debug logging
@@ -33,6 +34,8 @@
 - (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser thumbPhotoAtIndex:(NSUInteger)index;
 - (MWCaptionView *)photoBrowser:(MWPhotoBrowser *)photoBrowser captionViewForPhotoAtIndex:(NSUInteger)index;
 - (NSString *)photoBrowser:(MWPhotoBrowser *)photoBrowser titleForPhotoAtIndex:(NSUInteger)index;
+- (NSArray *)photoBrowser:(MWPhotoBrowser *)photoBrowser participantNamesAtIndex:(NSUInteger)index;
+
 - (void)photoBrowser:(MWPhotoBrowser *)photoBrowser didDisplayPhotoAtIndex:(NSUInteger)index;
 - (void)photoBrowser:(MWPhotoBrowser *)photoBrowser actionButtonPressedForPhotoAtIndex:(NSUInteger)index;
 - (BOOL)photoBrowser:(MWPhotoBrowser *)photoBrowser isPhotoSelectedAtIndex:(NSUInteger)index;
@@ -41,12 +44,12 @@
 -(void)cropBtnClicked:(NSUInteger)currentIndex withImage:(UIImage *)image;
 -(void)photoBrowser:(MWPhotoBrowser *)photoBrowser deletePhotoAtIndex:(NSUInteger)index;
 -(void)photoBrowser:(MWPhotoBrowser *)photoBrowser getTaggedUsers:(NSArray*)users;
-
+-(void)photoBrowser:(MWPhotoBrowser *)photoBrowser addParticipants:(NSArray*)participants withTitle:(NSString*)title atIndex:(NSUInteger)index;
 
 
 @end
 
-@interface MWPhotoBrowser : UIViewController <UIScrollViewDelegate, UIActionSheetDelegate>
+@interface MWPhotoBrowser : UIViewController <PassTitleAndParticipantProtocol, UIScrollViewDelegate, UIActionSheetDelegate>
 
 @property (nonatomic, weak) IBOutlet id<MWPhotoBrowserDelegate> delegate;
 @property (nonatomic) BOOL zoomPhotosToFill;
@@ -64,7 +67,6 @@
 // Customise image selection icons as they are the only icons with a colour tint
 // Icon should be located in the app's main bundle
 @property (nonatomic, strong) NSString *customImageSelectedIconName;
-@property (nonatomic, strong) NSArray *participantArray;
 
 @property (nonatomic, strong) NSString *customImageSelectedSmallIconName;
 @property (nonatomic, strong) UIBarButtonItem *cropButton;
@@ -72,10 +74,12 @@
 @property (nonatomic, strong) UIBarButtonItem *deleteBtn;
 @property (nonatomic, strong) UIBarButtonItem *likeBtn;
 
+@property (nonatomic, strong) NSArray* teamMembers;
+
 
 // Init
 - (id)initWithPhotos:(NSArray *)photosArray;
-- (id)initWithDelegate:(id <MWPhotoBrowserDelegate>)delegate;
+- (id)initWithDelegate:(id <MWPhotoBrowserDelegate >)delegate;
 
 // Reloads the photo browser and refetches data
 - (void)reloadData;

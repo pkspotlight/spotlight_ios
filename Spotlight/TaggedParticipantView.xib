@@ -1,8 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -13,10 +16,10 @@
             <subviews>
                 <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0t9-Ug-fEP">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <state key="normal">
-                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
                         <action selector="removeSpotlightBoardingView:" destination="CRm-Sz-8c4" eventType="touchUpInside" id="m3U-8D-xPS"/>
@@ -31,11 +34,11 @@
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Participants" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EOk-QD-usM">
                                     <rect key="frame" x="10" y="5" width="335" height="17"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <color key="textColor" red="0.28627450980000002" green="0.62745098040000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" red="0.28627450980000002" green="0.62745098040000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstItem="EOk-QD-usM" firstAttribute="leading" secondItem="Gax-Cg-uX6" secondAttribute="leading" constant="10" id="MaF-8d-MeH"/>
                                 <constraint firstAttribute="bottom" secondItem="EOk-QD-usM" secondAttribute="bottom" constant="5" id="gLh-w6-wWm"/>
@@ -45,14 +48,14 @@
                         </view>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9Hl-Iv-tLv">
                             <rect key="frame" x="0.0" y="27" width="355" height="373"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <outlet property="dataSource" destination="CRm-Sz-8c4" id="njf-RZ-shJ"/>
                                 <outlet property="delegate" destination="CRm-Sz-8c4" id="1gw-Sm-nEF"/>
                             </connections>
                         </tableView>
                     </subviews>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="9Hl-Iv-tLv" firstAttribute="top" secondItem="Gax-Cg-uX6" secondAttribute="bottom" id="3VL-Ef-5Dd"/>
                         <constraint firstItem="Gax-Cg-uX6" firstAttribute="leading" secondItem="PQu-bl-N0N" secondAttribute="leading" id="5uk-Tq-1S0"/>
@@ -65,7 +68,7 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="PQu-bl-N0N" firstAttribute="top" secondItem="CRm-Sz-8c4" secondAttribute="top" constant="109" id="1ZE-t8-NN0"/>
                 <constraint firstItem="0t9-Ug-fEP" firstAttribute="top" secondItem="CRm-Sz-8c4" secondAttribute="top" id="7mw-bE-B7D"/>
@@ -76,7 +79,6 @@
                 <constraint firstItem="0t9-Ug-fEP" firstAttribute="leading" secondItem="CRm-Sz-8c4" secondAttribute="leading" id="uBr-mn-aBg"/>
                 <constraint firstAttribute="trailing" secondItem="PQu-bl-N0N" secondAttribute="trailing" constant="10" id="y1o-rp-QtV"/>
             </constraints>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <connections>
                 <outlet property="participantView" destination="PQu-bl-N0N" id="B6R-ti-JLx"/>
             </connections>

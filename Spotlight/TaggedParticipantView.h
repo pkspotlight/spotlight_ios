@@ -9,8 +9,14 @@
 #import <UIKit/UIKit.h>
 
 @interface TaggedParticipantView : UIView<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
+
 @property (strong, nonatomic) NSMutableArray* participantArray;
 @property (weak, nonatomic) IBOutlet UIView *participantView;
-- (instancetype)initWithParticipant:(NSArray*)participantArray withTitle:(NSString*)title;
+
+@property (weak, nonatomic) id delegate;
+
+- (instancetype)initWithParticipant:(NSArray*)participantArray;
+
+
 
 @end

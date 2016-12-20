@@ -159,6 +159,7 @@
 		88EC50311C12F19200077E85 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 88EC50301C12F19200077E85 /* User.m */; };
 		88EE2CC61B9E08B2002DDB99 /* SpotlightFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88EE2CC51B9E08B2002DDB99 /* SpotlightFeedViewController.m */; };
 		88F2FFE81E05ACAB00CADDD6 /* UIViewController+MediaAddingFunctionality.m in Sources */ = {isa = PBXBuildFile; fileRef = 88F2FFE71E05ACAB00CADDD6 /* UIViewController+MediaAddingFunctionality.m */; };
+		88F2FFEC1E09905300CADDD6 /* AddMoreTaggedParticipantsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88F2FFEB1E09905300CADDD6 /* AddMoreTaggedParticipantsTableViewCell.xib */; };
 		88FDB88E1C8EA2A1008C9A3D /* TB - Disney Funk 124bpm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 88FDB87E1C8EA2A1008C9A3D /* TB - Disney Funk 124bpm.mp3 */; };
 		88FDB8941C8EA2A1008C9A3D /* DT_TheDuff_CoolKids_INST130.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 88FDB8841C8EA2A1008C9A3D /* DT_TheDuff_CoolKids_INST130.mp3 */; };
 		FC4F359EA32F39CBF10D5525 /* libPods-Spotlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DCBB464380C17488F0B2051 /* libPods-Spotlight.a */; };
@@ -397,6 +398,7 @@
 		88EE2CC51B9E08B2002DDB99 /* SpotlightFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotlightFeedViewController.m; sourceTree = "<group>"; };
 		88F2FFE61E05ACAB00CADDD6 /* UIViewController+MediaAddingFunctionality.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MediaAddingFunctionality.h"; sourceTree = "<group>"; };
 		88F2FFE71E05ACAB00CADDD6 /* UIViewController+MediaAddingFunctionality.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MediaAddingFunctionality.m"; sourceTree = "<group>"; };
+		88F2FFEB1E09905300CADDD6 /* AddMoreTaggedParticipantsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddMoreTaggedParticipantsTableViewCell.xib; sourceTree = "<group>"; };
 		88FDB87E1C8EA2A1008C9A3D /* TB - Disney Funk 124bpm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "TB - Disney Funk 124bpm.mp3"; sourceTree = "<group>"; };
 		88FDB8841C8EA2A1008C9A3D /* DT_TheDuff_CoolKids_INST130.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = DT_TheDuff_CoolKids_INST130.mp3; sourceTree = "<group>"; };
 		A18D079BCFAB299658BDF57C /* Pods-Spotlight.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spotlight.release.xcconfig"; path = "Pods/Target Support Files/Pods-Spotlight/Pods-Spotlight.release.xcconfig"; sourceTree = "<group>"; };
@@ -794,6 +796,7 @@
 				84E0DF911D780B89005652F3 /* TaggedParticipantTableViewCell.h */,
 				84E0DF921D780B89005652F3 /* TaggedParticipantTableViewCell.m */,
 				84E0DF931D780B89005652F3 /* TaggedParticipantTableViewCell.xib */,
+				88F2FFEB1E09905300CADDD6 /* AddMoreTaggedParticipantsTableViewCell.xib */,
 				843BBBEA1D911EFB000F2169 /* TaggedParticipantView.h */,
 				843BBBEB1D911EFB000F2169 /* TaggedParticipantView.m */,
 				843BBBED1D911F14000F2169 /* TaggedParticipantView.xib */,
@@ -935,6 +938,7 @@
 				398D24981D40D64D00647117 /* UIBarButtonItemGrid@2x.png in Resources */,
 				88FDB8941C8EA2A1008C9A3D /* DT_TheDuff_CoolKids_INST130.mp3 in Resources */,
 				398D24811D40D64D00647117 /* ImageSelectedOff@3x.png in Resources */,
+				88F2FFEC1E09905300CADDD6 /* AddMoreTaggedParticipantsTableViewCell.xib in Resources */,
 				843BBBEE1D911F14000F2169 /* TaggedParticipantView.xib in Resources */,
 				398D249B1D40D64D00647117 /* VideoOverlay@2x.png in Resources */,
 				398D249A1D40D64D00647117 /* VideoOverlay.png in Resources */,

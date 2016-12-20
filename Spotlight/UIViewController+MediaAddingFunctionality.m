@@ -125,8 +125,8 @@
         
         
         NSURL *videoUrl=(NSURL*)[infoDict objectForKey:UIImagePickerControllerMediaURL];
-        NSString *videoPath = [videoUrl absoluteString];
-        media = [[SpotlightMedia alloc] initWithVideoPath:videoPath];
+      //  NSString *videoPath = [videoUrl absoluteString];
+        media = [[SpotlightMedia alloc] initWithVideoPath:videoUrl];
         media.timeStamp =timestamp;
     } else if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
         UIImage *image = [infoDict valueForKey:UIImagePickerControllerOriginalImage];

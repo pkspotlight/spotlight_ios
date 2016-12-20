@@ -12,25 +12,12 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
     // Configure the view for the selected state
 }
 
-
--(void)formatForParticipantName:(User*)user and:(Child*)child{
-    if(child!=nil){
-        NSString *name = [NSString stringWithFormat:@"%@ %@",child.firstName
-                          ,child.lastName];
-         self.lblHeader.text = name;
-    }else{
-        NSString *name = [NSString stringWithFormat:@"%@ %@",user.firstName
-                          ,user.lastName];
-         self.lblHeader.text = name;
-    }
-    
-    
+- (void)formatForName:(NSString *)name {
+    self.lblHeader.text = name;
 }
-
 
 
 @end

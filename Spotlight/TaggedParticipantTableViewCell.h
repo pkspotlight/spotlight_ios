@@ -14,5 +14,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnCheckMark;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *btnCheckMarkWidth;
 
--(void)formatForParticipantName:(User*)user and:(Child*)child;
+- (void)formatForName:(NSString*)name;
+
 @end

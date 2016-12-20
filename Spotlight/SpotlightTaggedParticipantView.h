@@ -9,8 +9,7 @@
 #import <UIKit/UIKit.h>
 @protocol PassTitleAndParticipantProtocol <NSObject>
 
--(void)participant:(NSArray*)participant withTitle:(NSString*)title;
-
+-(void)addParticipants:(NSArray*)participants withTitle:(NSString*)title;
 
 @end
 
@@ -30,5 +29,6 @@
 @property (strong, nonatomic) NSMutableArray* selectedParticantArray;
 @property (weak,atomic) id <PassTitleAndParticipantProtocol> delegate;
 
-- (instancetype)initWithParticipant:(NSArray*)participantArray withTitle:(NSString*)title;
+- (instancetype)initWithParticipants:(NSArray*)participants selectedParticipants:(NSArray*)selectedParticipants title:(NSString*)title;
+
 @end

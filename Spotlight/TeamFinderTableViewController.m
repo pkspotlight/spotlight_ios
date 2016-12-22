@@ -19,7 +19,7 @@
     UIRefreshControl* refresh;
     NSMutableArray *pendingRequestArray;
     NSMutableArray *filteredArrayOfObjects;
-
+    
 }
 //@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITextField *searchTxtField;
@@ -161,8 +161,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                                                                    forIndexPath:indexPath];
         bool isFollowing = false;
         Team *team = (Team*)self.searchResults[indexPath.row];
-        if(([[self.teams valueForKeyPath:@"objectId"] containsObject:team.objectId]))
-        {
+        if(([[self.teams valueForKeyPath:@"objectId"] containsObject:team.objectId])) {
             isFollowing = true;
         }
         else{
@@ -174,7 +173,24 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    Team *team = (Team*)self.searchResults[indexPath.row];
+    if(([[self.teams valueForKeyPath:@"objectId"] containsObject:team.objectId])) {
+        UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        TeamDetailsViewController *teamDetails = [storyboard instantiateViewControllerWithIdentifier:@"TeamDetailsViewController"];
+        teamDetails.team = team;
+        [self.navigationController pushViewController:teamDetails animated:YES];
 
+    } else {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Follow This Team?" message:@"A request will be sent to the administrator" preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self followButtonPressed:[tableView cellForRowAtIndexPath:indexPath] completion:nil];
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+    
+}
 
 
 #pragma mark - SearchBar Delegate Methods
@@ -182,20 +198,20 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 //-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
 //    //dismiss keyboard
 //    [self.searchBar resignFirstResponder];
-//    
+//
 //    //Strip the whitespace off the end of the search text
 //    NSString *searchText = [self.searchBar.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-//    
+//
 //    if (![searchText isEqualToString:@""]) {
-//        
+//
 //        [refresh beginRefreshing];
-//        
+//
 //        PFQuery *firstQuery = [Team query];
 //        PFQuery *secondQuery = [Team query];
-//        
+//
 //        [firstQuery whereKey:@"teamName" containsString:searchText];
 //        [secondQuery whereKey:@"town" containsString:searchText];
-//        
+//
 //        PFQuery *query = [PFQuery orQueryWithSubqueries:@[firstQuery,
 //                                                          secondQuery]];
 //        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -208,11 +224,11 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 //                } else {
 //                    //Show no search results message
 //                }
-//                
+//
 //                //reload the tableView after the user searches
 //                [self.tableView reloadData];
 //            } else {
-//                
+//
 //            }
 //            [refresh performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:NO];
 //        }];
@@ -232,10 +248,10 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
         
         PFQuery *firstQuery = [Team query];
         PFQuery *secondQuery = [Team query];
-
+        
         [firstQuery whereKey:@"teamName" matchesRegex:[NSString stringWithFormat:@"%@(.*?)",searchText] modifiers:@"i"];
         [secondQuery whereKey:@"town" matchesRegex:[NSString stringWithFormat:@"%@(.*?)",searchText] modifiers:@"i"];
-
+        
         PFQuery *query = [PFQuery orQueryWithSubqueries:@[firstQuery,
                                                           secondQuery]];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -278,10 +294,6 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     else{
         [self.crossImage setHidden:NO];
     }
-    
-    
-    
-    
     return YES; //If you don't your textfield won't get any text in it
 }
 
@@ -300,10 +312,6 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-
-
-
-
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [self searchText:textField.text];
     [textField resignFirstResponder];
@@ -321,34 +329,10 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     
 }
 
-
-
-
 -(void)refresh{
     [refresh endRefreshing];
 }
 
-//-(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-//    self.searchResults = @[];
-//    [self.tableView reloadData];
-//    [refresh endRefreshing];
-//
-//}
-
-//-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-//    if ([searchText isEqualToString:@""]) {
-//        self.searchResults = @[];
-//        [self.tableView reloadData];
-//    }
-//}
-//
-//-(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
-//    [self.view addGestureRecognizer:self.hideKeyboardTap];
-//}
-//
-//- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
-//    [self.view removeGestureRecognizer:self.hideKeyboardTap];
-//}
 
 - (void) dismissKeyboard {
     [self.searchTxtField resignFirstResponder];
@@ -356,50 +340,50 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 
 -(void)fetchAllPendingRequest{
     
-        PFQuery *spotlightQuery = [PFQuery queryWithClassName:@"TeamRequest"];
-        [spotlightQuery whereKey:@"user" equalTo:[User currentUser]];
-        
-        [spotlightQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-            if(objects.count > 0)
+    PFQuery *spotlightQuery = [PFQuery queryWithClassName:@"TeamRequest"];
+    [spotlightQuery whereKey:@"user" equalTo:[User currentUser]];
+    
+    [spotlightQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if(objects.count > 0)
+        {
+            // NSMutableArray *array = [NSMutableArray new];
+            for(TeamRequest *request in objects)
             {
-               // NSMutableArray *array = [NSMutableArray new];
-                for(TeamRequest *request in objects)
+                if((request.requestState.intValue == reqestStatePending))
                 {
-                    if((request.requestState.intValue == reqestStatePending))
-                    {
-                        
-                        [pendingRequestArray addObject:request];
-
-                        [request.team fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-                                            //   NSString *data =[NSString stringWithFormat:@"%@       %@",request.admin.firstName,request.user.firstName];
-                          
-                            
-                                        }];
-                                            }
                     
+                    [pendingRequestArray addObject:request];
+                    
+                    [request.team fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+                        //   NSString *data =[NSString stringWithFormat:@"%@       %@",request.admin.firstName,request.user.firstName];
+                        
+                        
+                    }];
                 }
                 
-                
-            }
-            else{
-                //[[[self  tabBar]items] objectAtIndex:2].badgeValue  = nil;
             }
             
-            //        for(TeamRequest *request in objects)
-            //        {
-            //            [request.admin fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-            //                //   NSString *data =[NSString stringWithFormat:@"%@       %@",request.admin.firstName,request.user.firstName];
-            //                
-            //                NSLog(@"%@",request.admin.firstName);
-            //            }];
-            //            
-            //            
-            //            
-            //        }
             
-        }];
+        }
+        else{
+            //[[[self  tabBar]items] objectAtIndex:2].badgeValue  = nil;
+        }
         
-    }
+        //        for(TeamRequest *request in objects)
+        //        {
+        //            [request.admin fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        //                //   NSString *data =[NSString stringWithFormat:@"%@       %@",request.admin.firstName,request.user.firstName];
+        //
+        //                NSLog(@"%@",request.admin.firstName);
+        //            }];
+        //
+        //
+        //
+        //        }
+        
+    }];
+    
+}
 
 
 
@@ -475,30 +459,21 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                                                                     
                                                                     [teamRequest saveTeam:team andAdmin:user  followby:[User currentUser] orChild:nil withTimestamp:timestamp isChild:@0 isType:@1  completion:^{
                                                                         if (completion) {
-                                                                          
+                                                                            
                                                                             completion();
                                                                         }
-                                                                          [pendingRequestArray addObject:teamRequest];
-                                                                          [self.tableView reloadData];
+                                                                        [pendingRequestArray addObject:teamRequest];
+                                                                        [self.tableView reloadData];
                                                                     }];
                                                                     break;
-
+                                                                    
                                                                 }
-                                                               
+                                                                
                                                                 
                                                                 
                                                             }
                                                         }
                                                     }];
-                                                    
-                                                    
-                                                    
-                                                    //                                                    [[User currentUser] followTeam:team completion:^{
-                                                    //                                                        if (completion) {
-                                                    //
-                                                    //                                                            completion();
-                                                    //                                                        }
-                                                    //                                                    }];
                                                 }]];
         for (Child* child in children) {
             [alert addAction:[UIAlertAction actionWithTitle:[child displayName]
@@ -527,7 +502,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                                                                     }
                                                                     
                                                                     else{
-                                                                  
+                                                                        
                                                                         NSString *timestamp =  [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970] * 1000];
                                                                         
                                                                         TeamRequest *teamRequest = [[TeamRequest alloc]init];
@@ -538,11 +513,11 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                                                                                 completion();
                                                                             }
                                                                             [pendingRequestArray addObject:teamRequest];
-                                                                             [self.tableView reloadData];
+                                                                            [self.tableView reloadData];
                                                                         }];
                                                                         break;
                                                                         
-                                                                                                                                   }
+                                                                    }
                                                                     
                                                                 }
                                                             }
@@ -586,37 +561,26 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                                           otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
                     }
                     else{
-                   
+                        
                         NSString *timestamp =  [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970] * 1000];
-                    
+                        
                         TeamRequest *teamRequest = [[TeamRequest alloc]init];
-                    
+                        
                         [teamRequest saveTeam:team andAdmin:user  followby:[User currentUser] orChild:nil withTimestamp:timestamp isChild:@0 isType:@1 completion:^{
                             if (completion) {
                                 
                                 completion();
                             }
-                              [pendingRequestArray addObject:teamRequest];
-                             [self.tableView reloadData];
+                            [pendingRequestArray addObject:teamRequest];
+                            [self.tableView reloadData];
                         }];
                         break;
                         
-                    
-                }
+                        
+                    }
                 }
             }
         }];
-        
-
-        
-        
-        
-        //        [[User currentUser] followTeam:team completion:^{
-        //            if (completion) {
-        //
-        //                completion();
-        //            }
-        //        }];
     }
 }
 
@@ -629,35 +593,20 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
             if((!request.isChild.boolValue)&&([request.team.objectId isEqualToString:team.objectId])){
                 return NO;
             }
-        
-    }
-        
+        }
         return YES;
-
-    }
-    else{
+    } else {
         for(TeamRequest *request in pendingRequestArray){
             
             if(([child.objectId isEqualToString:request.child.objectId])&&([request.team.objectId isEqualToString:team.objectId])&& (request.isChild.boolValue)){
                 
                 return NO;
-                
-            
-            
             }
-
-            
-           
-            
-            
         }
-            return YES;
-
-        }
-        
-        
-    
+        return YES;
+    }
 }
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation

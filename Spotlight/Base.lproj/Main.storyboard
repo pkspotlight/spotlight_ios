@@ -2068,6 +2068,24 @@
                                     <action selector="logInWithFacebookBtnClicked:" destination="cWM-Yi-BmZ" eventType="touchUpInside" id="PGN-wN-db3"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cug-T8-Uvc">
+                                <rect key="frame" x="66" y="637" width="96" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <state key="normal" title="Terms of Use"/>
+                                <connections>
+                                    <action selector="termOfUserPressed:" destination="cWM-Yi-BmZ" eventType="touchUpInside" id="dli-KD-rnR"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r4V-SN-luD">
+                                <rect key="frame" x="214" y="637" width="96" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <state key="normal" title="Privacy Policy"/>
+                                <connections>
+                                    <action selector="privacyPolicyPressed:" destination="cWM-Yi-BmZ" eventType="touchUpInside" id="DpM-B4-tju"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -2103,7 +2121,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mZz-nl-F59" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="746" y="140"/>
+            <point key="canvasLocation" x="744.79999999999995" y="139.880059970015"/>
         </scene>
         <!--Sign Up Table View Controller-->
         <scene sceneID="sGu-d2-BaR">

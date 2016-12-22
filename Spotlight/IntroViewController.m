@@ -67,6 +67,13 @@
     signup.isLoginScreen = NO;
     [self.navigationController pushViewController:signup animated:YES];
 }
+- (IBAction)termOfUserPressed:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.myspotlight.me/terms-of-use/"]];
+}
+
+- (IBAction)privacyPolicyPressed:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.myspotlight.me/privacy-policy/"]];
+}
 //
 //- (IBAction)logInWithFacebookBtnClicked:(UIButton *)sender {
 //    

@@ -679,8 +679,7 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
 }
 
 -(void)addSpotlightParticipantPopUp{
-//    SpotlightTaggedParticipantView *spotlightParticipantView = [[SpotlightTaggedParticipantView alloc] initWithParticipant:_teamsMemberArray withTitle:@"abcd"];
-    SpotlightTaggedParticipantView *spotlightParticipantView = [[SpotlightTaggedParticipantView alloc] initWithParticipants:_teamsMemberArray selectedParticipants:@[] title:@"abcd"];
+    SpotlightTaggedParticipantView *spotlightParticipantView = [[SpotlightTaggedParticipantView alloc] initWithParticipants:_teamsMemberArray selectedParticipants:@[] title:nil];
     spotlightParticipantView.delegate = self;
     CGRect frameRect =spotlightParticipantView.frame;
     frameRect.size.width = [UIScreen mainScreen].bounds.size.width;

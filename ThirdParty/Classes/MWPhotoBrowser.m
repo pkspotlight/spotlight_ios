@@ -1683,7 +1683,6 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
 }
 
 -(void)showTagParticipantView:(NSArray*)participantArray{
-//    SpotlightTaggedParticipantView *spotlightParticipantView = [[SpotlightTaggedParticipantView alloc] initWithParticipant:self.teamMembers withTitle:@"abcd"];
     SpotlightTaggedParticipantView *spotlightParticipantView = [[SpotlightTaggedParticipantView alloc] initWithParticipants:self.teamMembers selectedParticipants:participantArray title:[self.delegate photoBrowser:self titleForPhotoAtIndex:self.currentIndex]];
     spotlightParticipantView.delegate = self;
     CGRect frameRect =spotlightParticipantView.frame;

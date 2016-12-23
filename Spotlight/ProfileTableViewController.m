@@ -46,18 +46,21 @@
     self.user = [User currentUser];
      userName = self.user.username;
     self.userPropertyArray = @[ @"username",
+                                @"email",
                                 @"firstName",
                                 @"lastName",
+                                @"birthdate",
                                 @"homeTown",
                                 @"family" ];
     self.userPropertyArrayDisplayText = @[ @"Username",
+                                           @"Email",
                                            @"First Name",
                                            @"Last Name",
+                                           @"Birthdate",
                                            @"Hometown",
                                            @"Family" ];
     
     [self loadChildren:nil];
-//    self.pendingFieldDictionary = [self newPendingFieldDictionary];
     [self.user[@"profilePic"] fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
         self.profilePic = (ProfilePictureMedia*)object;
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.profilePic.thumbnailImageFile.url]];
@@ -77,21 +80,13 @@
          } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, NSError * _Nonnull error) {
              NSLog(@"fuck thumbnail failure");
          }];
-
-        
-     
     }];
-    
-    //[self.profilePictureImageView.imageView setContentMode:UIViewContentModeScaleAspectFill];
-    
+
     UIBarButtonItem *barButton = [[UIBarButtonItem alloc]initWithTitle:@"Logout" style:UIBarButtonItemStylePlain target:self action:@selector(logout:)];
     barButton.tintColor = [UIColor whiteColor];
     
-    
     self.navigationItem.rightBarButtonItem = barButton;
-
     [self.usernameLabel setText:[self.user displayName]];
-   
 }
 
 
@@ -116,11 +111,14 @@
 - (NSMutableDictionary *)newPendingFieldDictionary {
     NSMutableDictionary *fieldDict = [NSMutableDictionary dictionary];
     User* user = [User currentUser];
-    for (NSString* attribute in self.userPropertyArray) {
-        fieldDict[attribute] = user[attribute];
-        fieldDict[@"family"] = familyName;
+    for (id attribute in self.userPropertyArray) {
+        if ([attribute isEqualToString:@"birthdate"]) {
+            fieldDict[@"birthdate"] = [self formatDate:(NSDate*)user[attribute]];
+        } else {
+            fieldDict[attribute] = user[attribute];
+        }
     }
-    
+    fieldDict[@"family"] = familyName;
     
     [self.tableView reloadData];
     return fieldDict;
@@ -129,6 +127,14 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
+
+- (NSString *)formatDate:(NSDate *)date {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterShortStyle];
+    NSString *formattedDate = [dateFormatter stringFromDate:date];
+    return formattedDate;
+}
+
 
 - (void)logout {
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
@@ -161,7 +167,7 @@
         [(FieldEntryTableViewCell*)cell formatForAttributeString:property
                                                      displayText:self.userPropertyArrayDisplayText[indexPath.row]
                                                        withValue:self.pendingFieldDictionary[property] isCenter:NO];
-        if(indexPath.row == 4){
+        if(indexPath.row == 6 || indexPath.row == 4){
           
             [[(FieldEntryTableViewCell*)cell valueTextField] setEnabled:NO];
         }

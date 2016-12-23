@@ -18,6 +18,7 @@
 @dynamic children;
 @dynamic teams;
 @dynamic teamsRequest;
+@dynamic birthdate;
 
 #pragma mark - Parse Stuff
 

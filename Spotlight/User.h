@@ -16,6 +16,7 @@
 @property (strong, nonatomic) ProfilePictureMedia* profilePic;
 @property (strong, nonatomic) NSString* firstName;
 @property (strong, nonatomic) NSString* lastName;
+@property (strong, nonnull) NSDate* birthdate;
 
 @property (readonly, nonatomic) PFRelation* friends;
 @property (readonly, nonatomic) PFRelation* children;

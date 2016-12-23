@@ -37,7 +37,6 @@
     self.date = [NSDate date];
     NSString* displayText = @"Birthdate";
 
-    
     [self.fieldTitleLabel setText:displayText];
     _valueTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:displayText attributes:@{NSForegroundColorAttributeName: [UIColor blackColor]}];
     

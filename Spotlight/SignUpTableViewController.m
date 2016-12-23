@@ -136,10 +136,11 @@
         self.pendingInputDict[@"username"] &&
         [self.pendingInputDict[@"username"] length] > 4) {
         
-        PFUser *user = [PFUser user];
+        User *user = [User user];
         user.username = self.pendingInputDict[@"username"];
         user.email = self.pendingInputDict[@"email"];
         user.password = self.pendingInputDict[@"password"];
+        user.birthdate = self.userDOB;
 
         [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (succeeded) {   // Hooray! Let them use the app now.

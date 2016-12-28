@@ -19,7 +19,7 @@
 #import "PendingRequestTableViewController.h"
 
 
-#define SpotlightTeamBoardingText @"This is where you can find all of the teams that you are interested in. Search for existing team by clicking the '+' or create your own!"
+#define SpotlightTeamBoardingText @"This is the teams page. You can create, search, and find the teams you or your family are apart of or want to follow. Click \"+\" in the top right to create a team or search for an already existing team that you want to be apart of"
 
 @interface TeamsTableViewController (){
     NSString *pendingRequest;
@@ -65,7 +65,7 @@
     if([[NSUserDefaults standardUserDefaults] boolForKey:@"SpotlightTeamPopUp"] == FALSE){
         
         SpotlightBoardView *spotlightBoardingView = [[[NSBundle mainBundle] loadNibNamed:@"SpotlightBoardView" owner:self options:nil] objectAtIndex:0];
-        spotlightBoardingView.lblSpotLightScreenDetailTextBold.text = @"";
+        spotlightBoardingView.lblSpotLightScreenDetailTextBold.text = @"Welcome to Spotlight";
         spotlightBoardingView.lblSpotLightScreenDetail.text =SpotlightTeamBoardingText;
         
         CGRect frameRect =spotlightBoardingView.frame;

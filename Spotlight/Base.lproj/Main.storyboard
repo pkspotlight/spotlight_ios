@@ -190,7 +190,7 @@
         <scene sceneID="xo6-Hu-DTm">
             <objects>
                 <collectionViewController storyboardIdentifier="SpotLightCollectionView" id="h9E-yE-X25" customClass="SpotlightCollectionViewController" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Vyx-SG-6aQ">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="Vyx-SG-6aQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.99878907203674316" green="0.94971704483032227" blue="0.95082443952560425" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1079,7 +1079,7 @@
         <scene sceneID="WB2-eN-56s">
             <objects>
                 <navigationController id="vxc-QD-Rlp" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="CHi-mq-Rc5">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="CHi-mq-Rc5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1100,7 +1100,7 @@
         <scene sceneID="3cq-gL-VXm">
             <objects>
                 <navigationController id="fwB-Ah-Eut" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6vC-ez-WCo">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="6vC-ez-WCo">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1854,7 +1854,7 @@
         <scene sceneID="pCn-gq-sCA">
             <objects>
                 <navigationController id="YFv-Q1-9uM" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="EbS-YP-ttb">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="EbS-YP-ttb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.14901960780000001" green="0.60392156860000001" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1874,7 +1874,7 @@
         <scene sceneID="HI6-ak-BnQ">
             <objects>
                 <navigationController id="fwn-cf-8LL" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1wM-KC-Xhr">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="1wM-KC-Xhr">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.14901960780000001" green="0.60392156860000001" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1894,7 +1894,7 @@
         <scene sceneID="BqG-Gh-fd1">
             <objects>
                 <navigationController id="Cwd-VN-fap" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vig-Sa-5ef">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="vig-Sa-5ef">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2339,7 +2339,7 @@
                 <navigationController storyboardIdentifier="IntroNavigationController" navigationBarHidden="YES" id="tC0-9Q-gbL" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="vhF-nP-Q11"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="A42-4y-VmE">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="A42-4y-VmE">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2503,7 +2503,7 @@
             <objects>
                 <navigationController id="RSS-gK-EsK" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Teams" image="teamtabbar" selectedImage="teamtabbarselected" id="dI3-sj-JxG"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="5HL-v2-fQm">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="5HL-v2-fQm">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2822,7 +2822,7 @@
             <objects>
                 <navigationController id="Kyo-co-iVE" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Profile" image="profiletabbar" selectedImage="profiletabbarselceted" id="BMx-7t-MgT"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="T9e-6P-jg2">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="T9e-6P-jg2">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.14901960780000001" green="0.60392156860000001" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2843,7 +2843,7 @@
             <objects>
                 <navigationController id="nSe-Oh-xM7" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Spotlights" image="spotlightTabBar" selectedImage="spotlightTabbarSelected" id="OLs-x5-Wst"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="uzd-gK-yf0">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="uzd-gK-yf0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2870,7 +2870,7 @@
             <objects>
                 <navigationController id="4Lh-Ol-a9y" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Friends" image="friends.png" id="vtG-es-LS5"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="YHL-ii-WFs">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="YHL-ii-WFs">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -19,7 +19,7 @@
 #import "SpotlightBoardView.h"
 #import "FriendFinderTableViewController.h"
 #import "PendingRequestTableViewController.h"
-#define SpotlightFriendsBoardingText @"This is where you can find all of your friends or teamsMemberArray and follow thier activity. Click on the '+' in the top right to search for your friends!"
+#define SpotlightFriendsBoardingText @"This is where you can find and add all of your friends that you play with and against. Click \"+\" in the top right to search for friends that you want to follow."
 static CGFloat const BasicHeaderHeight = 50;
 
 
@@ -132,7 +132,7 @@ static CGFloat const BasicHeaderHeight = 50;
     {
         
         SpotlightBoardView *spotlightBoardingView = [[[NSBundle mainBundle] loadNibNamed:@"SpotlightBoardView" owner:self options:nil] objectAtIndex:0];
-         spotlightBoardingView.lblSpotLightScreenDetailTextBold.text = @"";
+         spotlightBoardingView.lblSpotLightScreenDetailTextBold.text = @"Friends Feed";
         spotlightBoardingView.lblSpotLightScreenDetail.text = SpotlightFriendsBoardingText;
         CGRect frameRect =spotlightBoardingView.frame;
         frameRect.size.width = [UIScreen mainScreen].bounds.size.width;

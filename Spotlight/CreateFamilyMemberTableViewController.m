@@ -35,25 +35,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.userPropertyArray = @[ @"firstName", @"lastName", @"homeTown" ];
-    self.userPropertyArrayDisplayText = @[ @"First Name", @"Last Name", @"Hometown", @"Family" ];
+    self.userPropertyArray = @[ @"firstName", @"lastName", @"Birthdate", @"Email", @"homeTown" ];
+    self.userPropertyArrayDisplayText = @[ @"First Name", @"Last Name", @"Birthdate", @"Email", @"Hometown", @"Family" ];
     
     self.pendingFieldDictionary = [NSMutableDictionary dictionary];
-    
-//    [self.editPhotoButton.layer setCornerRadius:self.editPhotoButton.bounds.size.width/2];
-//    [self.editPhotoButton.layer setBorderWidth:3];
-//    [self.editPhotoButton.layer setBorderColor:[UIColor whiteColor].CGColor];
-//    [self.editPhotoButton setClipsToBounds:YES];
-    
+
     [self.profilePictureImageViewFront.layer setBorderColor:[[UIColor lightGrayColor] colorWithAlphaComponent:0.4].CGColor];
     [self.profilePictureImageViewFront.layer setCornerRadius:5];
     [self.profilePictureImageViewFront.layer setBorderWidth:3];
     
     
     [_profilePictureImageViewFront setClipsToBounds:YES];
-    
-    
-    
 }
 
 #pragma mark - Table view data source
@@ -142,9 +134,6 @@
 - (IBAction)cancelButtonPressed:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
-
-
 
 - (IBAction)editPhotoButtonPressed:(id)sender {
     

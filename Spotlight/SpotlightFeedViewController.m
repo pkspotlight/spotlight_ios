@@ -19,7 +19,7 @@
 #import <AFNetworking/UIImageView+AFNetworking.h>
 #import "SpotlightBoardView.h"
 
-#define SpotlightFeedBoardingText @"A Spotlight is group of shared media from an event. For example, you could create a Spotlight for basketball game and share all the pictures and videos you took. Click on our Spotlight to check it out!"
+#define SpotlightFeedBoardingText @"Click \"+\" on the top right to create a Spotlight for a team you created or follow. A Spotlight is a private group of shared media from a game or event. For example, you can create a Spotlight for a basketball game and share all of the photos and videos you captured to a private community of team members. You can then easily create a Spotlight Reel with music that is easily shared via SMS, Email, and social."
 
 @interface SpotlightFeedViewController ()
 {
@@ -66,7 +66,7 @@
     {
     
         SpotlightBoardView *spotlightBoardingView = [[[NSBundle mainBundle] loadNibNamed:@"SpotlightBoardView" owner:self options:nil] objectAtIndex:0];
-        spotlightBoardingView.lblSpotLightScreenDetailTextBold.text = @"Welcome to Spotlight";
+        spotlightBoardingView.lblSpotLightScreenDetailTextBold.text = @"Spotlight Feed";
 
         spotlightBoardingView.lblSpotLightScreenDetail.text = SpotlightFeedBoardingText;
     CGRect frameRect =spotlightBoardingView.frame;

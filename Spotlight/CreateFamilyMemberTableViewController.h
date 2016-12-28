@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "FieldEntryTableViewCell.h"
+#import "DateFieldTableViewCell.h"
 
-
-@interface CreateFamilyMemberTableViewController : UITableViewController <FieldEntryTextFieldCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate>
+@interface CreateFamilyMemberTableViewController : UITableViewController <FieldEntryTextFieldCellDelegate, DateFieldTableViewCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate>
 
 @end

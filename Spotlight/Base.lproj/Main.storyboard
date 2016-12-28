@@ -190,7 +190,7 @@
         <scene sceneID="xo6-Hu-DTm">
             <objects>
                 <collectionViewController storyboardIdentifier="SpotLightCollectionView" id="h9E-yE-X25" customClass="SpotlightCollectionViewController" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="Vyx-SG-6aQ">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Vyx-SG-6aQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.99878907203674316" green="0.94971704483032227" blue="0.95082443952560425" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -233,7 +233,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Spotlight" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fXN-tH-GFi">
-                                            <rect key="frame" x="138" y="-31.5" width="100" height="72"/>
+                                            <rect key="frame" x="138" y="-31" width="100" height="71"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="100" id="k39-S6-Ini"/>
                                             </constraints>
@@ -1079,7 +1079,7 @@
         <scene sceneID="WB2-eN-56s">
             <objects>
                 <navigationController id="vxc-QD-Rlp" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="CHi-mq-Rc5">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="CHi-mq-Rc5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1100,7 +1100,7 @@
         <scene sceneID="3cq-gL-VXm">
             <objects>
                 <navigationController id="fwB-Ah-Eut" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="6vC-ez-WCo">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6vC-ez-WCo">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1854,7 +1854,7 @@
         <scene sceneID="pCn-gq-sCA">
             <objects>
                 <navigationController id="YFv-Q1-9uM" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="EbS-YP-ttb">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="EbS-YP-ttb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.14901960780000001" green="0.60392156860000001" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1874,7 +1874,7 @@
         <scene sceneID="HI6-ak-BnQ">
             <objects>
                 <navigationController id="fwn-cf-8LL" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="1wM-KC-Xhr">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1wM-KC-Xhr">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.14901960780000001" green="0.60392156860000001" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1894,7 +1894,7 @@
         <scene sceneID="BqG-Gh-fd1">
             <objects>
                 <navigationController id="Cwd-VN-fap" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="vig-Sa-5ef">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vig-Sa-5ef">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2339,7 +2339,7 @@
                 <navigationController storyboardIdentifier="IntroNavigationController" navigationBarHidden="YES" id="tC0-9Q-gbL" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="vhF-nP-Q11"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="A42-4y-VmE">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="A42-4y-VmE">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2503,7 +2503,7 @@
             <objects>
                 <navigationController id="RSS-gK-EsK" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Teams" image="teamtabbar" selectedImage="teamtabbarselected" id="dI3-sj-JxG"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="5HL-v2-fQm">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="5HL-v2-fQm">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2822,7 +2822,7 @@
             <objects>
                 <navigationController id="Kyo-co-iVE" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Profile" image="profiletabbar" selectedImage="profiletabbarselceted" id="BMx-7t-MgT"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="T9e-6P-jg2">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="T9e-6P-jg2">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.14901960780000001" green="0.60392156860000001" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2843,7 +2843,7 @@
             <objects>
                 <navigationController id="nSe-Oh-xM7" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Spotlights" image="spotlightTabBar" selectedImage="spotlightTabbarSelected" id="OLs-x5-Wst"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="uzd-gK-yf0">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="uzd-gK-yf0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2870,7 +2870,7 @@
             <objects>
                 <navigationController id="4Lh-Ol-a9y" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Friends" image="friends.png" id="vtG-es-LS5"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="YHL-ii-WFs">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="YHL-ii-WFs">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2961,7 +2961,7 @@
                                             </connections>
                                         </textField>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="sXH-5I-D3W">
-                                            <rect key="frame" x="14" y="12" width="100" height="21"/>
+                                            <rect key="frame" x="14" y="11" width="100" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="100" id="EN5-tk-shC"/>
                                                 <constraint firstAttribute="height" constant="21" id="wUy-Yl-Jsb"/>
@@ -3166,13 +3166,94 @@
                                     <outlet property="valueTextField" destination="4Fq-8g-OSz" id="Kvb-dp-dz8"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="DateFieldTableViewCell" rowHeight="58" id="kor-Hz-cYk" customClass="DateFieldTableViewCell">
+                                <rect key="frame" x="0.0" y="276" width="375" height="58"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kor-Hz-cYk" id="7Vd-ZK-hZl">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="58"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="14" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="NvS-qG-pRE">
+                                            <rect key="frame" x="20" y="23" width="345" height="32"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="wlG-1v-iGk"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no"/>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="wlG-1v-iGk"/>
+                                                </mask>
+                                            </variation>
+                                            <connections>
+                                                <action selector="textFieldTextDidChange:" destination="kor-Hz-cYk" eventType="editingChanged" id="Ba8-89-0et"/>
+                                                <outlet property="delegate" destination="kor-Hz-cYk" id="A8F-Vs-oqZ"/>
+                                            </connections>
+                                        </textField>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Birthdate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="uhl-d1-piD">
+                                            <rect key="frame" x="10" y="5" width="66" height="18"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="100" id="WMm-Ez-BrT"/>
+                                                <constraint firstAttribute="height" constant="21" id="rXI-DB-Pzq"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
+                                            <color key="textColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="WMm-Ez-BrT"/>
+                                                    <exclude reference="rXI-DB-Pzq"/>
+                                                </mask>
+                                            </variation>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LoginLine" translatesAutoresizingMaskIntoConstraints="NO" id="lO5-BE-gMI">
+                                            <rect key="frame" x="20" y="51" width="335" height="2"/>
+                                            <color key="backgroundColor" red="0.91372549020000005" green="0.91372549020000005" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="2" id="pQh-cd-p8q"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="NvS-qG-pRE" secondAttribute="trailing" constant="10" id="2xP-ur-NgR"/>
+                                        <constraint firstItem="lO5-BE-gMI" firstAttribute="leading" secondItem="7Vd-ZK-hZl" secondAttribute="leading" constant="20" id="5ok-Xy-8Ef"/>
+                                        <constraint firstItem="NvS-qG-pRE" firstAttribute="top" secondItem="uhl-d1-piD" secondAttribute="bottom" id="7tr-fW-RC6"/>
+                                        <constraint firstItem="NvS-qG-pRE" firstAttribute="trailing" secondItem="7Vd-ZK-hZl" secondAttribute="trailingMargin" id="8jE-BI-4UU"/>
+                                        <constraint firstItem="uhl-d1-piD" firstAttribute="centerY" secondItem="7Vd-ZK-hZl" secondAttribute="centerY" id="9Um-UI-zqL"/>
+                                        <constraint firstItem="lO5-BE-gMI" firstAttribute="top" secondItem="NvS-qG-pRE" secondAttribute="bottom" constant="-4" id="BeR-Qa-9dB"/>
+                                        <constraint firstItem="uhl-d1-piD" firstAttribute="top" secondItem="7Vd-ZK-hZl" secondAttribute="top" constant="5" id="M9Q-iT-duY"/>
+                                        <constraint firstAttribute="centerY" secondItem="NvS-qG-pRE" secondAttribute="centerY" id="S7z-DT-Dkw"/>
+                                        <constraint firstItem="uhl-d1-piD" firstAttribute="leading" secondItem="7Vd-ZK-hZl" secondAttribute="leading" constant="10" id="TUI-br-sJc"/>
+                                        <constraint firstAttribute="bottom" secondItem="lO5-BE-gMI" secondAttribute="bottom" constant="5" id="TcI-J2-jhb"/>
+                                        <constraint firstItem="NvS-qG-pRE" firstAttribute="leading" secondItem="7Vd-ZK-hZl" secondAttribute="leading" constant="20" id="ber-xg-VFB"/>
+                                        <constraint firstItem="NvS-qG-pRE" firstAttribute="leading" secondItem="7Vd-ZK-hZl" secondAttribute="leadingMargin" id="jnB-g5-w10"/>
+                                        <constraint firstItem="uhl-d1-piD" firstAttribute="leading" secondItem="7Vd-ZK-hZl" secondAttribute="leadingMargin" constant="6" id="l68-Vi-rp8"/>
+                                        <constraint firstAttribute="trailing" secondItem="lO5-BE-gMI" secondAttribute="trailing" constant="20" id="qmi-4z-A2f"/>
+                                        <constraint firstItem="NvS-qG-pRE" firstAttribute="leading" secondItem="uhl-d1-piD" secondAttribute="trailing" constant="8" id="qpY-Qf-QRl"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="9Um-UI-zqL"/>
+                                            <exclude reference="l68-Vi-rp8"/>
+                                            <exclude reference="jnB-g5-w10"/>
+                                            <exclude reference="qpY-Qf-QRl"/>
+                                            <exclude reference="8jE-BI-4UU"/>
+                                            <exclude reference="S7z-DT-Dkw"/>
+                                        </mask>
+                                    </variation>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="fieldTitleLabel" destination="uhl-d1-piD" id="CXe-NW-buI"/>
+                                    <outlet property="valueTextField" destination="NvS-qG-pRE" id="Ney-ET-3Hd"/>
+                                </connections>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="GsY-JL-C3U" id="PlW-tn-k9H"/>
                             <outlet property="delegate" destination="GsY-JL-C3U" id="V1g-wf-4T6"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Add Family" id="2sf-db-MQn">
+                    <navigationItem key="navigationItem" title="Add Family Member" id="2sf-db-MQn">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="jSU-vR-7kW">
                             <connections>
                                 <segue destination="06D-Ls-7zj" kind="unwind" unwindAction="unwindCancelAddFamilyMember:" id="CdI-W1-Ie5"/>

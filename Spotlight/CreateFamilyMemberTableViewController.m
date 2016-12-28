@@ -16,6 +16,7 @@
 #import "Child.h"
 #import "ProfilePictureMedia.h"
 
+
 @interface CreateFamilyMemberTableViewController ()
 
 @property (strong, nonatomic) NSMutableDictionary *pendingFieldDictionary;
@@ -35,7 +36,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.userPropertyArray = @[ @"firstName", @"lastName", @"Birthdate", @"Email", @"homeTown" ];
+    self.userPropertyArray = @[ @"firstName", @"lastName", @"birthdate", @"email", @"homeTown" ];
     self.userPropertyArrayDisplayText = @[ @"First Name", @"Last Name", @"Birthdate", @"Email", @"Hometown", @"Family" ];
     
     self.pendingFieldDictionary = [NSMutableDictionary dictionary];
@@ -56,13 +57,22 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell;    
+    UITableViewCell *cell;
+    NSString* attribute = self.userPropertyArray[indexPath.row];
+
+    if ([attribute isEqualToString:@"birthdate"]) {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"DateFieldTableViewCell" forIndexPath:indexPath];
+        [(DateFieldTableViewCell*)cell setDelegate:self];
+        [(DateFieldTableViewCell*)cell formatWithDateValue:nil isCenter:NO];
+        
+    } else {
         cell = [tableView dequeueReusableCellWithIdentifier:@"FieldEntryTableViewCell" forIndexPath:indexPath];
         NSString* property = self.userPropertyArray[indexPath.row];
         [(FieldEntryTableViewCell*)cell formatForAttributeString:property
                                                      displayText:self.userPropertyArrayDisplayText[indexPath.row]
                                                        withValue:self.pendingFieldDictionary[property] isCenter:NO];
         [(FieldEntryTableViewCell*)cell setDelegate:self];
+    }
     return cell;
 }
 
@@ -74,6 +84,17 @@
 
 - (void)accountTextFieldCell:(FieldEntryTableViewCell *)cell didChangeToValue:(NSString *)text {
     self.pendingFieldDictionary[cell.attributeString] = text;
+}
+
+- (void)setUserDOB:(NSDate *)userDOB {
+    self.pendingFieldDictionary[@"birthdate"] = userDOB;
+}
+
+-(void)createAccountButtonPressed:(id)sender {
+    FieldEntryTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+    if (cell) {
+        [cell focusTextField];
+    }
 }
 
 - (void)accountTextFieldCellDidReturn:(FieldEntryTableViewCell *)cell {
@@ -115,7 +136,7 @@
     Child* child = [Child new];
     User* user = [User currentUser];
     for (NSString* key in [self.pendingFieldDictionary allKeys]) {
-        if (self.pendingFieldDictionary[key] && ![self.pendingFieldDictionary[key] isEqualToString:@""] ) {
+        if (([self.pendingFieldDictionary[key] isKindOfClass:[NSString class]] && self.pendingFieldDictionary[key] && ![self.pendingFieldDictionary[key] isEqualToString:@""]) || [self.pendingFieldDictionary[key] isKindOfClass:[NSDate class]]) {
             child[key] = self.pendingFieldDictionary[key];
         }
     }

@@ -105,7 +105,7 @@
     [spotlightQuery includeKey:@"team"];
     [spotlightQuery includeKey:@"teamLogoMedia"];
     [spotlightQuery includeKey:@"thumbnailImageFile"];
-    [spotlightQuery whereKey:@"team" matchesKey:@"objectId" inQuery:teamQuery];
+    [spotlightQuery whereKey:@"team" matchesQuery:teamQuery];
     [spotlightQuery orderByDescending:@"createdAt"];
     [spotlightQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
@@ -196,9 +196,6 @@
                 
             }];
         }
-       
-        
-        
     }];
     
 }
@@ -292,7 +289,6 @@
             if ([user.objectId isEqualToString:[[User currentUser] objectId]]) {
                 isCreatedByCurrentUser = true;
                 
-                
                 if(isCreatedByCurrentUser)
                 {
                     if (editingStyle == UITableViewCellEditingStyleDelete) {
@@ -308,11 +304,6 @@
                         
                     }
                 }
-                
-
-                
-                
-                
             }
         }
         

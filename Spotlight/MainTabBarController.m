@@ -28,16 +28,12 @@
     [self showLoginPopUp];
        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatePendingRequest) name:@"PendingRequest" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatePendingMessageRequest) name:@"ShowAlertForAcceptedRequest" object:nil];
-    
-    
-    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 -(void)showLoginPopUp{
     if([[NSUserDefaults standardUserDefaults] boolForKey:@"SpotlightLoginPopUp"] == FALSE)
@@ -49,7 +45,6 @@
                           cancelButtonTitle:nil
                           otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
         
-       
         [[NSUserDefaults standardUserDefaults] setBool:TRUE forKey:@"SpotlightLoginPopUp"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         //Alert code will go here...

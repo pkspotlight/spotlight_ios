@@ -1,8 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -11,45 +14,44 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AQ2-hP-bVs">
+                <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AQ2-hP-bVs">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <state key="normal">
-                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
                         <action selector="removeSpotlightBoardingView:" destination="iN0-l3-epB" eventType="touchUpInside" id="Kk4-vC-iP9"/>
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bkF-tb-g8G">
-                    <rect key="frame" x="5" y="320" width="365" height="21"/>
+                    <rect key="frame" x="5" y="230" width="365" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TtN-KQ-lAz">
-                    <rect key="frame" x="5" y="285" width="365" height="27"/>
+                    <rect key="frame" x="5" y="195" width="365" height="27"/>
                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="AQ2-hP-bVs" secondAttribute="trailing" id="3Ft-6T-MdS"/>
                 <constraint firstAttribute="bottom" secondItem="AQ2-hP-bVs" secondAttribute="bottom" id="5Y9-VC-gTV"/>
                 <constraint firstAttribute="trailing" secondItem="bkF-tb-g8G" secondAttribute="trailing" constant="5" id="FpX-tJ-xb0"/>
                 <constraint firstItem="bkF-tb-g8G" firstAttribute="top" secondItem="TtN-KQ-lAz" secondAttribute="bottom" constant="8" id="Hle-g7-8Gd"/>
                 <constraint firstItem="TtN-KQ-lAz" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="Q1g-vK-Anc"/>
+                <constraint firstItem="TtN-KQ-lAz" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="195" id="ZNO-pr-i96"/>
                 <constraint firstItem="AQ2-hP-bVs" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="eWt-bX-kLs"/>
                 <constraint firstItem="AQ2-hP-bVs" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="gN4-5h-oTG"/>
                 <constraint firstAttribute="trailing" secondItem="TtN-KQ-lAz" secondAttribute="trailing" constant="5" id="koS-qF-2uM"/>
                 <constraint firstItem="bkF-tb-g8G" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="oiC-3j-8Qd"/>
                 <constraint firstItem="bkF-tb-g8G" firstAttribute="top" secondItem="TtN-KQ-lAz" secondAttribute="bottom" constant="6" id="r8e-qk-tPq"/>
-                <constraint firstItem="TtN-KQ-lAz" firstAttribute="centerY" secondItem="AQ2-hP-bVs" secondAttribute="centerY" constant="-35" id="vEa-HB-c4m"/>
             </constraints>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <variation key="default">
                 <mask key="constraints">
                     <exclude reference="r8e-qk-tPq"/>

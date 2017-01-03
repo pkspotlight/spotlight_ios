@@ -233,21 +233,16 @@
                       {
                           
                       }
-                                         completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished,NSURL *imageURL)
-                      {
-                          if (image)
-                          {
-                              // do something with image
-                              
-                              user.profilePic = [[ProfilePictureMedia alloc] initWithImage:image];
-                              
-                              [user.profilePic saveInBackground];
-                              // PFFile *imageFile = [PFFile fileWithName:@"profilePic" data:imageNSData];
-                              //   user[@"profilePic"] = imageFile;
-                              [user saveInBackground];
-                              
-                          }
-                      }];
+                                         completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished,NSURL *imageURL) {
+                                             if (image) {
+                                                 user.profilePic = [[ProfilePictureMedia alloc] initWithImage:image];
+                                                 [user.profilePic saveInBackground];
+                                                 // PFFile *imageFile = [PFFile fileWithName:@"profilePic" data:imageNSData];
+                                                 //   user[@"profilePic"] = imageFile;
+                                                 [user saveInBackground];
+                                                 
+                                             }
+                                         }];
                  }
                  NSLog(@"fetched user:%@", result);
              }
@@ -263,6 +258,7 @@
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SpotlightFriendsPopUp"];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SpotlightTeamPopUp"];
         [[NSUserDefaults standardUserDefaults] synchronize];
+     //   mainTabBarController.
     }
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{

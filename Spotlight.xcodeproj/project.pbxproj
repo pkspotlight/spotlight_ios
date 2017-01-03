@@ -64,7 +64,6 @@
 		39D6343D1D40C86500CAA666 /* UIImage+PECrop.m in Sources */ = {isa = PBXBuildFile; fileRef = 39D634381D40C86500CAA666 /* UIImage+PECrop.m */; };
 		8400ED191D7EA68100E4600A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8400ED171D7EA68100E4600A /* Main.storyboard */; };
 		8404D5831D3E51BC00B2D325 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8404D5821D3E51BC00B2D325 /* MediaPlayer.framework */; };
-		8407E0711D7DAC4D00E73652 /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8407E0701D7DAC4D00E73652 /* Images-2.xcassets */; };
 		841FAE121D3CE26700772B23 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841FAE111D3CE26700772B23 /* Photos.framework */; };
 		843BBBEC1D911EFB000F2169 /* TaggedParticipantView.m in Sources */ = {isa = PBXBuildFile; fileRef = 843BBBEB1D911EFB000F2169 /* TaggedParticipantView.m */; };
 		843BBBEE1D911F14000F2169 /* TaggedParticipantView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 843BBBED1D911F14000F2169 /* TaggedParticipantView.xib */; };
@@ -243,7 +242,6 @@
 		604C6C052E264CB7A123ED0A /* Pods-SpotlightTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpotlightTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SpotlightTests/Pods-SpotlightTests.release.xcconfig"; sourceTree = "<group>"; };
 		8400ED181D7EA68100E4600A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Spotlight/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8404D5821D3E51BC00B2D325 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
-		8407E0701D7DAC4D00E73652 /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-2.xcassets"; sourceTree = "<group>"; };
 		841FAE111D3CE26700772B23 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		843BBBEA1D911EFB000F2169 /* TaggedParticipantView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaggedParticipantView.h; sourceTree = "<group>"; };
 		843BBBEB1D911EFB000F2169 /* TaggedParticipantView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaggedParticipantView.m; sourceTree = "<group>"; };
@@ -691,7 +689,6 @@
 				880207A31C15DF7A002D5068 /* MontageCreator.m */,
 				88A736E41B91318D00093B27 /* Images.xcassets */,
 				88A736E61B91318D00093B27 /* LaunchScreen.xib */,
-				8407E0701D7DAC4D00E73652 /* Images-2.xcassets */,
 				88A736D71B91318D00093B27 /* Supporting Files */,
 			);
 			path = Spotlight;
@@ -1002,7 +999,6 @@
 				398D248C1D40D64D00647117 /* PlayButtonOverlayLarge@2x.png in Resources */,
 				889DEEC91C97370100726D83 /* heart@2x.png in Resources */,
 				398D248A1D40D64D00647117 /* ImageSelectedSmallOn@3x.png in Resources */,
-				8407E0711D7DAC4D00E73652 /* Images-2.xcassets in Resources */,
 				8893FD711BFC1B5900711779 /* spotlight@3x.png in Resources */,
 				39574E271D4220B70059029C /* upload@3x.png in Resources */,
 				88CAE8D71BFB9AF30099A733 /* landingBg.jpg in Resources */,

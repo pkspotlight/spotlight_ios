@@ -189,7 +189,7 @@
 
 - (IBAction)logInWithFacebookBtnClicked:(UIButton *)sender {
     
-    NSArray *permissionArray = @[@"public_profile",@"email"];
+    NSArray *permissionArray = @[@"public_profile",@"email",@"user_birthday"];
     [PFFacebookUtils logInInBackgroundWithReadPermissions:permissionArray block:^(PFUser * _Nullable user, NSError * _Nullable error) {
         if (user) {
             NSLog(@"sweet");
@@ -216,7 +216,7 @@
 -(void)fetchFbData
 {
     if ([FBSDKAccessToken currentAccessToken]) {
-        [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{ @"fields" : @"id,first_name,last_name,picture.width(500).height(500),email"}]
+        [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{ @"fields" : @"id,first_name,last_name,picture.width(500).height(500),email,birthday"}]
          startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
              if (!error) {
                  User *user = [User currentUser];
@@ -225,7 +225,11 @@
                      user.email = result[@"email"];
                      user.firstName = result[@"first_name"];
                      user.lastName = result[@"last_name"];
-                     user.username = @"";
+                     user.username = [NSString stringWithFormat:@"%@.%@", user.lastName, user.firstName];
+                     NSDateFormatter *sdateFormatter = [[NSDateFormatter alloc] init];
+                     sdateFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+                     [sdateFormatter setDateFormat:@"MM/dd/yyyy"];
+                     user.birthdate = [sdateFormatter dateFromString:result[@"birthday"]];
                      SDWebImageManager *manager = [SDWebImageManager sharedManager];
                      [manager downloadImageWithURL:[NSURL URLWithString:result[@"picture"][@"data"][@"url"]]
                                            options:0
@@ -258,7 +262,6 @@
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SpotlightFriendsPopUp"];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SpotlightTeamPopUp"];
         [[NSUserDefaults standardUserDefaults] synchronize];
-     //   mainTabBarController.
     }
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{

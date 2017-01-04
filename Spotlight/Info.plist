@@ -75,6 +75,8 @@
 	<string>Spotlight would like to access your music library to use for your Spotlight reel creation.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Spotlight would like to access your photo library so that you are able to upload your photos.</string>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>

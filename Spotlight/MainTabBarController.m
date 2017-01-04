@@ -57,69 +57,52 @@
     [request deleteInBackground];
 }
 
--(void)followAcceptedRequest:(TeamRequest *)request
-{
+-(void)followAcceptedRequest:(TeamRequest *)request{
     if([request.type intValue]==1 ||[request.type intValue]==3){
-    if(!request.isChild.boolValue)
-    {
-        [request.team fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-            if(!error)
-            {
-            [[User currentUser] followTeamWithBlockCallback:request.team completion:^(BOOL succeeded, NSError * _Nullable error) {
-                if(succeeded)
-                {
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"SpotLightRefersh" object:nil];
-
-                    [request deleteInBackground];
-                }
-            }];
-            }
-
-        }];
-    }
-    else
-    {
-        
-        [request.team fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-    
-            [request.child fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-                if(!error)
-                {
-                    [request.child followTeamWithBlockCallback:request.team  completion:^(BOOL succeeded, NSError * _Nullable error) {
-                        if(succeeded)
-                        {
+        if(!request.isChild.boolValue){
+            [request.team fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+                if(!error){
+                    [[User currentUser] followTeamWithBlockCallback:request.team completion:^(BOOL succeeded, NSError * _Nullable error) {
+                        if(succeeded){
+                            [[NSNotificationCenter defaultCenter] postNotificationName:@"SpotLightRefersh" object:nil];
                             [request deleteInBackground];
                         }
                     }];
                 }
             }];
-            
-            
-        }];
-        
-    }
-    }
-    else if([request.type intValue]==2){
+        } else {
+            [request.team fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+                
+                [request.child fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+                    if(!error)
+                    {
+                        [request.child followTeamWithBlockCallback:request.team  completion:^(BOOL succeeded, NSError * _Nullable error) {
+                            if(succeeded)
+                            {
+                                [request deleteInBackground];
+                            }
+                        }];
+                    }
+                }];
+            }];
+        }
+    }else if([request.type intValue]==2) {
         PFRelation *friendRelation = [[User currentUser] relationForKey:@"friends"];
-         [friendRelation addObject:request.admin];
+        [friendRelation addObject:request.admin];
         [[User currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
             if (succeeded) {
                 [request deleteInBackground];
-
+                
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"SpotLightRefersh" object:nil];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"Frdfollowunfollow" object:nil];
                 
             }
-
-       
-                 }];
+        }];
     }
-
-    
 }
 
 -(void)FollowAcceptedRequests:(BOOL)isMessage{
-
+    
     PFQuery *spotlightQuery = [PFQuery queryWithClassName:@"TeamRequest"];
     [spotlightQuery whereKey:@"user" equalTo:[User currentUser]];
     
@@ -163,9 +146,7 @@
                     [self followAcceptedRequest:request];
                 }
             }
-            
-            if(teams.length > 0)
-            {
+            if(teams.length > 0) {
                 [[[UIAlertView alloc] initWithTitle:@""
                                             message:[NSString stringWithFormat:@"Your follow request for %@ has been accepted",teams]
                                            delegate:nil

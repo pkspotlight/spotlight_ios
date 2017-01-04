@@ -159,7 +159,7 @@
     
     if(![self isRequestAllowed:NO withUser:self.user withChild:nil withTeam:nil withTag:@1]){
         [[[UIAlertView alloc] initWithTitle:@""
-                                    message:@"A request to follow this team is already sent to admin."
+                                    message:@"A request to follow this user is already sent to admin."
                                    delegate:nil
                           cancelButtonTitle:nil
                           otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
@@ -259,7 +259,7 @@
         }
         if(![self isRequestAllowed:NO withUser:self.user withChild:nil withTeam:nil withTag:@2]){
             [[[UIAlertView alloc] initWithTitle:@""
-                                        message:@"A request to follow this team is already sent to admin."
+                                        message:@"A request to follow this user is already sent to admin."
                                        delegate:nil
                               cancelButtonTitle:nil
                               otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];

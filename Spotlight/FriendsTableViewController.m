@@ -528,7 +528,7 @@ static CGFloat const BasicHeaderHeight = 50;
     
     if(![self isRequestAllowed:NO withUser:self.user withChild:nil withTeam:nil]){
         [[[UIAlertView alloc] initWithTitle:@""
-                                    message:@"A request to follow this team is already sent to admin."
+                                    message:@"A request to follow this user is already sent to admin."
                                    delegate:nil
                           cancelButtonTitle:nil
                           otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];

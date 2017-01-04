@@ -209,8 +209,6 @@
             NSLog(@"shit, %@",errorString);
         }
     }];
-    
-    
 }
 
 -(void)fetchFbData

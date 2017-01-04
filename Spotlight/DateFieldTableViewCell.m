@@ -46,7 +46,7 @@
     }
     
     self.datePicker = [[UIDatePicker alloc] init];
-    [self.datePicker setDate:[NSDate date]];
+    [self.datePicker setDate:[[NSDate date] initWithTimeInterval:-409968000 sinceDate:[NSDate date]]];
     [self.datePicker setDatePickerMode:UIDatePickerModeDate];
     [self.datePicker setMaximumDate:[NSDate date]];
     [self.datePicker addTarget:self action:@selector(updateTextField:) forControlEvents:UIControlEventValueChanged];

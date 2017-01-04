@@ -28,7 +28,15 @@
 + (NSString *)parseClassName {
     return @"TeamRequest";
 }
-- (void)saveTeam:(Team*)team andAdmin:(User*)admin followby:(User*)user  orChild:(Child*)child withTimestamp:(NSString*)time isChild:(NSNumber*)isChild isType:(NSNumber*)type completion:(void (^)(void))completion{
+- (void)saveTeam:(Team*)team
+        andAdmin:(User*)admin
+        followby:(User*)user
+         orChild:(Child*)child
+   withTimestamp:(NSString*)time
+         isChild:(NSNumber*)isChild
+          isType:(NSNumber*)type
+      completion:(void (^)(void))completion {
+    
     self.team = team;
     self.user = user;
     self.child = child;

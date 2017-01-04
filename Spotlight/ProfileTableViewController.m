@@ -329,7 +329,9 @@
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [hud setLabelText:@"Updating Info..."];
     for (NSString* key in [self.pendingFieldDictionary allKeys]) {
-        self.user[key] = self.pendingFieldDictionary[key];
+        if (![key isEqualToString:@"birthdate"]) {
+            self.user[key] = self.pendingFieldDictionary[key];
+        }
     }
     [self.user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         [hud hide:YES afterDelay:.5];
@@ -351,8 +353,6 @@
                 }];
                 
             }
-            
-            
         }
     }];
     return YES;

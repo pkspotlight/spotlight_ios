@@ -147,7 +147,6 @@
             if(differenceInHours <23){
                 return [NSString stringWithFormat:@"%ld hrs ago",(long)differenceInHours];
             }else if(differenceInHours >=24){
-                NSInteger differenceInDays = differenceInHours/24;
                 NSDateFormatter *dateformate=[[NSDateFormatter alloc]init];
                 [dateformate setDateFormat:@"MMM d, yyyy"]; // Date formater
                 NSDate* referencedate = self.spotlight.createdAt;

@@ -129,7 +129,17 @@
     [self.spotlight setTeam:self.team];
     self.spotlight.spotlightTitle = self.spotlightTitle.text;
     self.spotlight.spotlightDescription = self.spotlightDescription.text;
-    [self.spotlight setCreatorName:[NSString stringWithFormat:@"%@ %@", user.firstName, user.lastName]];
+    if (user.firstName) {
+        if (user.lastName) {
+            [self.spotlight setCreatorName:[NSString stringWithFormat:@"%@ %@", user.firstName, user.lastName]];
+        } else {
+            [self.spotlight setCreatorName:[NSString stringWithFormat:@"%@", user.firstName]];
+        }
+    } else if (user.lastName) {
+        [self.spotlight setCreatorName:[NSString stringWithFormat:@"%@", user.lastName]];
+    } else {
+        [self.spotlight setCreatorName:[NSString stringWithFormat:@"%@", user.username]];
+    }
     [self.spotlight saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if(succeeded){
             [hud hide:YES];

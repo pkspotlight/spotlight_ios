@@ -254,7 +254,7 @@ static CGFloat const BasicHeaderHeight = 50;
         label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         
         label.backgroundColor = [UIColor colorWithRed:40.0/255.0f green:47.0/255.0f blue:61.0/255.0f alpha:1.0];
-        label.text = (section == 0) ? @"    Participant" : @"    Fans";
+        label.text = (section == 0) ? @"    Participants" : @"    Fans";
         label.textColor = [UIColor whiteColor];
         
         return label;

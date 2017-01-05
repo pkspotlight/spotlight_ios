@@ -100,7 +100,7 @@
     [moderatorQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if(objects.count==0){
             [[[UIAlertView alloc] initWithTitle:@""
-                                        message:@"No admin found for this team."
+                                        message:@"No admin was found for this team."
                                        delegate:nil
                               cancelButtonTitle:nil
                               otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
@@ -292,7 +292,7 @@
 
 - (IBAction)addChildOrSpotlight:(UIButton*)sender {
     
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"What do you want to add?"
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"What do you want to do?"
                                                                    message:@""
                                                             preferredStyle:UIAlertControllerStyleActionSheet];
     [alert addAction:[UIAlertAction actionWithTitle:@"Create Spotlight"
@@ -340,7 +340,7 @@
                 }
                 else{
                     [[[UIAlertView alloc] initWithTitle:@""
-                                                message:@"All child are team members already "
+                                                message:@"All children are members of this team already"
                                                delegate:nil
                                       cancelButtonTitle:nil
                                       otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];

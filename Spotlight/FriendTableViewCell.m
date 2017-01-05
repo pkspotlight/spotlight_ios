@@ -220,7 +220,7 @@
     
     
     
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:@"Do you want to associate this user as Fan or Participant" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:@"Do you want to associate this user as a Fan or Participant" preferredStyle:UIAlertControllerStyleAlert];
     
     [alertController addAction:[UIAlertAction actionWithTitle:@"Fan" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         if(!self.team.spectatorsArray){
@@ -259,7 +259,7 @@
         }
         if(![self isRequestAllowed:NO withUser:self.user withChild:nil withTeam:nil withTag:@2]){
             [[[UIAlertView alloc] initWithTitle:@""
-                                        message:@"A request to follow this user is already sent to admin."
+                                        message:@"A request to follow this user has already been sent to the admin."
                                        delegate:nil
                               cancelButtonTitle:nil
                               otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];

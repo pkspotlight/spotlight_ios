@@ -136,6 +136,7 @@
     
     if (indexPath.section==0) {
         TeamRequest* request = self.requestArray[indexPath.row];
+        [cell populatePendingInfoWithTeamRequest:self.requestArray[indexPath.row]];
         [cell setData:request.nameOfRequester teamName:request.teamName fromUser:request.user forChild:request.child isChild:request.isChild.boolValue withType:request.type];
     }
     else {

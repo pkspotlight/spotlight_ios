@@ -46,7 +46,6 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:@"SpotLightRefersh" object:nil];
         }
         if (block) {
-            
             block(succeeded,nil);
         }
     }];

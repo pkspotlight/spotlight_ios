@@ -53,17 +53,8 @@
     doRefresh = false;
     [self fetchAllPendingRequest];
     
-    //[self checkWhetherTeamBelongsToAdministrator];
     [self checkUserFollowCurrentTeam];
-    //    [self.teamLogoImageView.layer setCornerRadius:self.teamLogoImageView.bounds.size.width/2];
-    //    [self.teamLogoImageView.layer setBorderColor:[UIColor whiteColor].CGColor];
-    //    [self.teamLogoImageView.layer setBorderWidth:3];
-    //    [self.teamLogoImageView setClipsToBounds:YES];
     [self checkUserFollowCurrentTeam];
-    //    [self.inviteButton.layer setCornerRadius:5];
-    //
-    //    [self.inviteButton.layer setBorderColor:[UIColor whiteColor].CGColor];
-    //    [self.inviteButton.layer setBorderWidth:1];
     [self.teamLogoImageViewFront.layer setBorderColor:[[UIColor lightGrayColor] colorWithAlphaComponent:0.4].CGColor];
     [self.teamLogoImageViewFront.layer setCornerRadius:5];
     [self.teamLogoImageViewFront.layer setBorderWidth:3];

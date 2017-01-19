@@ -10,13 +10,15 @@
 #import "ProfilePictureMedia.h"
 #import "User.h"
 #import "Child.h"
+
+@class TeamRequest;
+
 @interface PendingRequestTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *requestName;
 @property (weak, nonatomic) IBOutlet UIButton *acceptButton;
 @property (weak, nonatomic) IBOutlet UIImageView *profilePic;
 @property (weak, nonatomic) IBOutlet UIButton *rejectButton;
 
-//- (void)setData:(NSString*)name teamName:(NSString*)teamName fromUser:(User *)user forChild:(Child *)child isChild:(BOOL)isChild;
-- (void)setData:(NSString*)name teamName:(NSString*)teamName fromUser:(User *)user forChild:(Child *)child isChild:(BOOL)isChild withType:(NSNumber*)type;
+- (void)populatePendingInfoWithTeamRequest:(TeamRequest*)request;
 
 @end

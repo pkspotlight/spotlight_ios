@@ -132,19 +132,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PendingRequestTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"pendingRequest" forIndexPath:indexPath];
-    
-    
-    if (indexPath.section==0) {
-        TeamRequest* request = self.requestArray[indexPath.row];
-        [cell populatePendingInfoWithTeamRequest:self.requestArray[indexPath.row]];
-        [cell setData:request.nameOfRequester teamName:request.teamName fromUser:request.user forChild:request.child isChild:request.isChild.boolValue withType:request.type];
-    }
-    else {
-        TeamRequest* request = self.requestFriendArray[indexPath.row];
-        [cell setData:request.nameOfRequester teamName:request.teamName fromUser:request.user forChild:request.child isChild:request.isChild.boolValue withType:request.type];
-        
-    }
-    
+    TeamRequest* request = (indexPath.section == 0) ? self.requestArray[indexPath.row] : self.requestFriendArray[indexPath.row];
+    [cell populatePendingInfoWithTeamRequest:request];
     cell.acceptButton.tag = 1001;
     cell.rejectButton.tag = 1002;
     [cell.acceptButton addTarget:self action:@selector(requestAction:) forControlEvents:UIControlEventTouchUpInside];

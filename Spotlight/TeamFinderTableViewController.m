@@ -446,7 +446,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                                                                 
                                                                 if(![self isRequestAllowed:NO withUser:user withChild:nil withTeam:team]){
                                                                     [[[UIAlertView alloc] initWithTitle:@""
-                                                                                                message:@"A request to follow this team is already sent to admin."
+                                                                                                message:@"A request to follow this team has already been sent to the team owner."
                                                                                                delegate:nil
                                                                                       cancelButtonTitle:nil
                                                                                       otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
@@ -495,7 +495,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                                                                     
                                                                     if(![self isRequestAllowed:YES withUser:nil withChild:child withTeam:team]){
                                                                         [[[UIAlertView alloc] initWithTitle:@""
-                                                                                                    message:@"A request to follow this team is already sent to admin."
+                                                                                                    message:@"A request to follow this team has already been sent to the team owner."
                                                                                                    delegate:nil
                                                                                           cancelButtonTitle:nil
                                                                                           otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
@@ -555,7 +555,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                     
                     if(![self isRequestAllowed:NO withUser:[User currentUser] withChild:nil withTeam:team]){
                         [[[UIAlertView alloc] initWithTitle:@""
-                                                    message:@"A request to follow this team is already sent to admin."
+                                                    message:@"A request to follow this team has already been sent to team owner."
                                                    delegate:nil
                                           cancelButtonTitle:nil
                                           otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];

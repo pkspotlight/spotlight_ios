@@ -96,12 +96,12 @@
 
 -(void)save{
   
-    double timestamp = [[NSDate date] timeIntervalSince1970];
+    double timestamp = [[NSDate date] timeIntervalSince1970] - [self.mediaSpotlightList count];
     MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication].delegate window] animated:YES];
-               [hud setLabelText:@"Please Wait..."];
+    [hud setLabelText:@"Please Wait..."];
 
     for(SpotlightMedia *media in self.mediaSpotlightList){
-        timestamp = timestamp-1;
+        timestamp = timestamp+1;
         media.timeStamp = timestamp;
     }
     [MediaObject saveAllInBackground:self.mediaSpotlightList block:^(BOOL succeeded, NSError * _Nullable error) {

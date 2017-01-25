@@ -63,16 +63,6 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
-//
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-//    BasicHeaderView *cell = [self.tableView dequeueReusableHeaderFooterViewWithIdentifier:@"BasicHeaderView"];
-//    cell.headerTitleLabel.text = (section == 0) ? @"Family" : @"Friends";
-//    return cell;
-//}
-//
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-//    return BasicHeaderHeight;
-//}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return (self.searchResults.count == 0) ? 1 : self.searchResults.count;
@@ -93,9 +83,6 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     } else {
         cell = (FriendTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"FriendTableViewCell"
                                                                      forIndexPath:indexPath];
-        
-        
-        
         bool isFollowing = false;
      
         User *user = (User*)self.searchResults[indexPath.row];
@@ -356,51 +343,20 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     User *user = (User*)self.searchResults[indexPath.row];
-//    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    FriendProfileViewController *friendProfileViewController = [storyboard instantiateViewControllerWithIdentifier:@"FriendsProfile"];
-//    [friendProfileViewController setUser:user];
-//    [self.navigationController pushViewController:friendProfileViewController animated:YES];
-    
-    
-    
-    
-    
-    if(([[self.friendsArray valueForKeyPath:@"objectId"] containsObject:user.objectId]))
-    {
-        
+    if(([[self.friendsArray valueForKeyPath:@"objectId"] containsObject:user.objectId])) {
         UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         FriendProfileViewController *friendProfileViewController = [storyboard instantiateViewControllerWithIdentifier:@"FriendsProfile"];
         [friendProfileViewController setUser:user];
         [self.navigationController pushViewController:friendProfileViewController animated:YES];
-        
-        
-        
-        
+    } else {
+        FriendTableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+        [cell followButtonPressed:nil];
     }
-    else{
-        [[[UIAlertView alloc] initWithTitle:@""
-                                    message:@"You do not have access to view Profile. Please request to view this friend profile."
-                                   delegate:self
-                          cancelButtonTitle:@"Cancel"
-                          otherButtonTitles:NSLocalizedString(@"Send Invite", nil), nil] show];
-    }
-    
-    
-    
-    
-    
-  }
+}
 
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
-    
-    
-
-    
-    
- 
 
 }
 

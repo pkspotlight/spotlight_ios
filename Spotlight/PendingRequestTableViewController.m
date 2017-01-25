@@ -316,14 +316,17 @@
                     } else{
                         [_requestFriendArray removeObjectAtIndex:indexPath.row];
                     }
-                    
-                    if(_requestArray.count==0&&_requestFriendArray.count == 0){
-                        [self.navigationController popViewControllerAnimated:YES];
-                        
-                    } else{
-                        
-                        [self.tableView reloadData];
-                    }
+                    NSString* msgText = [NSString stringWithFormat:@"%@ is now following you. To follow %@, search %@’s username/email and request to follow him/her.", [request.user displayName], [request.user displayName], [request.user displayName]];
+                    UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"" message:msgText preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                        if(_requestArray.count==0&&_requestFriendArray.count == 0){
+                            [self.navigationController popViewControllerAnimated:YES];
+                        } else{
+                            [self.tableView reloadData];
+                        }
+                    }];
+                    [controller addAction:action];
+                    [self.navigationController presentViewController:controller animated:YES completion:nil];
                 }
                 else
                 {

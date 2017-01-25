@@ -45,7 +45,6 @@
             NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"TaggedParticipantTableViewCell" owner:self options:nil];
             cell = [nib objectAtIndex:0];
         }
-        
         cell.lblHeader.text = _participantArray[indexPath.row];
         cell.btnCheckMark.hidden = YES;
         cell.btnCheckMarkWidth.constant = 0;
@@ -53,7 +52,6 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell setNeedsLayout];
         [cell.contentView layoutIfNeeded];
-        
         
         return cell;
     } else {

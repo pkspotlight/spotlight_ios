@@ -28,6 +28,7 @@
 }
 
 - (NSString*)displayName {
+    [self fetchIfNeeded];
     NSString* displayName = self.username;
     if (self.firstName) {
         displayName = self.firstName;

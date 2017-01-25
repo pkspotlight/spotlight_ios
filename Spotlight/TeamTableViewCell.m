@@ -94,9 +94,6 @@
 
 }
 
-
-
-
 - (IBAction)followButtonPressed:(id)sender {
     if (_isFollowing) {
         

@@ -400,7 +400,7 @@
                                                                     
                                                                     if(![self isRequestAllowed:YES withUser:[User currentUser] withChild:nil withTeam:team]){
                                                                         [[[UIAlertView alloc] initWithTitle:@""
-                                                                                                    message:@"A request to follow this team is already sent to admin."
+                                                                                                    message:@"A request to follow this team has already been sent to admin."
                                                                                                    delegate:nil
                                                                                           cancelButtonTitle:nil
                                                                                           otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
@@ -451,7 +451,7 @@
                                                                     
                                                                     if(![self isRequestAllowed:YES withUser:nil withChild:child withTeam:team]){
                                                                         [[[UIAlertView alloc] initWithTitle:@""
-                                                                                                    message:@"A request to follow this team is already sent to admin."
+                                                                                                    message:@"A request to follow this team has already been sent to the team owner."
                                                                                                    delegate:nil
                                                                                           cancelButtonTitle:nil
                                                                                           otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
@@ -523,7 +523,7 @@
                                                                     
                                                                     if(![self isRequestAllowed:YES withUser:[User currentUser] withChild:nil withTeam:team]){
                                                                         [[[UIAlertView alloc] initWithTitle:@""
-                                                                                                    message:@"A request to follow this team is already sent to admin."
+                                                                                                    message:@"A request to follow this team has already been sent to the team owner."
                                                                                                    delegate:nil
                                                                                           cancelButtonTitle:nil
                                                                                           otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
@@ -565,7 +565,7 @@
                                                                     
                                                                     if(![self isRequestAllowed:YES withUser:nil withChild:child withTeam:team]){
                                                                         [[[UIAlertView alloc] initWithTitle:@""
-                                                                                                    message:@"A request to follow this team is already sent to admin."
+                                                                                                    message:@"A request to follow this team has already been sent to the team owner."
                                                                                                    delegate:nil
                                                                                           cancelButtonTitle:nil
                                                                                           otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];

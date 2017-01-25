@@ -11,4 +11,5 @@
 @interface FriendFinderTableViewController : UITableViewController <UISearchBarDelegate,UITextFieldDelegate>
 @property (strong, nonatomic) NSNumber* controllerType;
 @property (strong, nonatomic) Team* selectedTeam;
+@property (strong, nonatomic) NSMutableArray *pendingRequestArray;
 @end

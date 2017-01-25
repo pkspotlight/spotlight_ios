@@ -14,7 +14,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.acceptButton.layer.cornerRadius = 10; // this value vary as per your desire
+    self.acceptButton.layer.cornerRadius = 10;
     self.acceptButton.clipsToBounds = YES;
     self.rejectButton.layer.cornerRadius = 10;
     self.rejectButton.clipsToBounds = YES;
@@ -28,7 +28,6 @@
     [self.profilePic.layer setCornerRadius:self.profilePic.bounds.size.width/2];
     [self.profilePic setClipsToBounds:YES];
     self.profilePic.image = [UIImage imageNamed:@"unknown_user"];
-
     switch ([request.type intValue]) {
         case 0:
             NSLog(@"Da fuq?");
@@ -49,62 +48,78 @@
 }
 
 - (void)userRequestToFollowCurrentUser:(TeamRequest*)request {
-    User* requester = request.user;
-    NSString *requestText = [NSString stringWithFormat:@"%@ wants to be your friend ", [requester displayName]];
-    self.requestName.text = requestText;
-    [self populatePictureForUser:requester];
+    if (request.isChild) {
+        [request.child fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+            NSString *requestText = [NSString stringWithFormat:@"%@ wants to follow you.", [request.child displayName]];
+            [self populatePictureForChild:request.child withText:requestText];
+        }];
+    } else {
+        [request.user fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+            NSString *requestText = [NSString stringWithFormat:@"%@ wants to follow you.", [request.user displayName]];
+            [self populatePictureForUser:request.user withText:requestText];
+        }];
+    }
 }
 
 - (void)otherUserInvitedCurrentUserToFollowTeam:(TeamRequest*)request {
-    User* requester = request.user;
-    NSString *requestText = [NSString stringWithFormat:@"%@ has invited you to follow %@", [requester displayName], request.teamName];
-    self.requestName.text = requestText;
-    if(!request.child) {
-        [self populatePictureForUser:requester];
+    if (request.isChild) {
+        [request.child fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+            NSString *requestText = [NSString stringWithFormat:@"%@ has invited you to follow %@", [request.child displayName], request.teamName];
+            [self populatePictureForChild:request.child withText:requestText];
+        }];
+    } else {
+        [request.user fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+            NSString *requestText = [NSString stringWithFormat:@"%@ has invited you to follow %@", [request.user displayName], request.teamName];
+            [self populatePictureForUser:request.user withText:requestText];
+        }];
     }
 }
 
 - (void)userRequestToFollowTeam:(TeamRequest*)request {
-    User* requester = request.user;
-    Child* child = request.child;
-    NSString *requestText = [NSString stringWithFormat:@"%@ wants to follow %@ ", [requester displayName], request.teamName];
-    self.requestName.text = requestText;
-    if(request.isChild){
-        [child fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-            [child.profilePic fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-                if(!error){
-                    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:child.profilePic.thumbnailImageFile.url]];
-                    [self.profilePic
-                     setImageWithURLRequest:request
-                     placeholderImage:nil
-                     success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, UIImage * _Nonnull image) {
-                         [self.profilePic setImage:image];
-                     } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, NSError * _Nonnull error) {
-                         NSLog(@"fuck thumbnail failure");
-                     }];
-                }
-            }];
+    if (request.isChild) {
+        [request.child fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+            NSString *requestText = [NSString stringWithFormat:@"%@ wants to follow %@ ", [request.child displayName], request.teamName];
+            [self populatePictureForChild:request.child withText:requestText];
         }];
     } else {
-        [self populatePictureForUser:requester];
+        [request.user fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+            NSString *requestText = [NSString stringWithFormat:@"%@ wants to follow %@ ", [request.user displayName], request.teamName];
+            [self populatePictureForUser:request.user withText:requestText];
+        }];
     }
 }
 
-- (void)populatePictureForUser:(User*)user {
-    [user fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-        [user.profilePic fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-            if(!error){
-                NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:user.profilePic.thumbnailImageFile.url]];
-                [self.profilePic
-                 setImageWithURLRequest:request
-                 placeholderImage:[UIImage imageNamed:@"unknown_user"]
-                 success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, UIImage * _Nonnull image) {
-                     [self.profilePic setImage:image];
-                 } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, NSError * _Nonnull error) {
-                     NSLog(@"fuck thumbnail failure");
-                 }];
-            }
-        }];
+- (void)populatePictureForChild:(Child*)child withText:(NSString*)requestText{
+    self.requestName.text = requestText;
+    [child.profilePic fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        if(!error){
+            NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:child.profilePic.thumbnailImageFile.url]];
+            [self.profilePic
+             setImageWithURLRequest:request
+             placeholderImage:[UIImage imageNamed:@"unknown_user"]
+             success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, UIImage * _Nonnull image) {
+                 [self.profilePic setImage:image];
+             } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, NSError * _Nonnull error) {
+                 NSLog(@"fuck thumbnail failure");
+             }];
+        }
+    }];
+}
+
+- (void)populatePictureForUser:(User*)user withText:(NSString*)requestText{
+    self.requestName.text = requestText;
+    [user.profilePic fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        if(!error){
+            NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:user.profilePic.thumbnailImageFile.url]];
+            [self.profilePic
+             setImageWithURLRequest:request
+             placeholderImage:[UIImage imageNamed:@"unknown_user"]
+             success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, UIImage * _Nonnull image) {
+                 [self.profilePic setImage:image];
+             } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, NSError * _Nonnull error) {
+                 NSLog(@"fuck thumbnail failure");
+             }];
+        }
     }];
 }
 

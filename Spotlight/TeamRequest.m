@@ -63,7 +63,7 @@
                 
                 if([self.type intValue]==1){
                     [[[UIAlertView alloc] initWithTitle:@""
-                                                message:@"Your request has been sent. If the account admin accepts your request, the team will appear on your teams list."
+                                                message:@"Your follow request has been sent. If the account admin accepts your request, the team will appear on your teams list."
                                                delegate:nil
                                       cancelButtonTitle:nil
                                       otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
@@ -93,7 +93,7 @@
                 NSLog(@"success team");
                 
                 [[[UIAlertView alloc] initWithTitle:@""
-                                            message:@"Your request has been sent. If the account admin accepts your request, he/she will appear on your friend list."
+                                            message:@"Your follow request has been sent. If the account admin accepts your request, he/she will appear on your friend list."
                                            delegate:nil
                                   cancelButtonTitle:nil
                                   otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];

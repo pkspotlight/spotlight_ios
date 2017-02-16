@@ -265,13 +265,11 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 }
 
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     
-    NSString *txtToSearch = [NSString new];
     NSString *substring = [NSString stringWithString:self.searchTxtField.text];
     substring = [substring stringByReplacingCharactersInRange:range withString:string];
-    txtToSearch = substring;
+    NSString *txtToSearch = substring;
 
     if([txtToSearch isEqualToString:@""] && txtToSearch.length == 0){
         self.searchResults = @[];

@@ -319,8 +319,7 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
                               ,user.lastName];
         [userArray addObject:userName];
     }
-    NSMutableArray *combinedArray = [NSMutableArray new];
-    combinedArray = [userArray arrayByAddingObjectsFromArray:childArray].mutableCopy;
+    NSMutableArray *combinedArray = [userArray arrayByAddingObjectsFromArray:childArray].mutableCopy;
     
     NSSet *distinctSet = [NSSet setWithArray:combinedArray];
     NSMutableArray *participantNameArray = [distinctSet allObjects].mutableCopy;
@@ -348,8 +347,7 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
                               ,user.lastName];
         [userArray addObject:userName];
     }
-    NSMutableArray *combinedArray = [NSMutableArray new];
-    combinedArray = [userArray arrayByAddingObjectsFromArray:childArray].mutableCopy;
+    NSMutableArray *combinedArray = [userArray arrayByAddingObjectsFromArray:childArray].mutableCopy;
     
     NSSet *distinctSet = [NSSet setWithArray:combinedArray];
     NSMutableArray *participantArray = [distinctSet allObjects].mutableCopy;

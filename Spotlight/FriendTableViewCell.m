@@ -10,6 +10,7 @@
 #import "User.h"
 #import "ProfilePictureMedia.h"
 #import "TeamRequest.h"
+#import "UIAlertController+Additions.h"
 #import <Parse/Parse.h>
 #import <AFNetworking/UIImageView+AFNetworking.h>
 
@@ -121,65 +122,69 @@
 
 - (IBAction)inviteButtonPressed:(id)sender {
     NSString *timestamp =  [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970] * 1000];
-    
     TeamRequest *teamRequest = [[TeamRequest alloc]init];
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:@"Do you want to associate this user as a Fan or Participant" preferredStyle:UIAlertControllerStyleAlert];
-    
-    [alertController addAction:[UIAlertAction actionWithTitle:@"Fan" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        if(!self.team.spectatorsArray){
-            self.team.spectatorsArray = [NSMutableArray new];
-        }
-        [self.team.spectatorsArray addObject:self.user.objectId];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@""
+                                                                             message:@"Do you want to associate this user as a Fan or Participant"
+                                                                      preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addAction:[UIAlertAction
+                                actionWithTitle:@"Fan"
+                                style:UIAlertActionStyleDefault
+                                handler:^(UIAlertAction *action) {
+                                    if(!self.team.spectatorsArray){
+                                        self.team.spectatorsArray = [NSMutableArray new];
+                                    }
+                                    [self.team.spectatorsArray addObject:self.user.objectId];
+
+                                    if(![self isRequestAllowed:NO withUser:self.user withChild:nil withTeam:nil withTag:@2]) {
+                                        [UIAlertController showOkMessage:@"An invitation request has already been sent."];
+                                    } else {
+                                        [teamRequest saveTeam:self.team andAdmin:self.user followby:[User currentUser] orChild:nil withTimestamp:timestamp isChild:@0 isType:@3 completion:^{
+                                            [_pendingInviteRequestArray addObject:teamRequest];
+                                        }];
+                                    }
+                                }]];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"Participant"
+                                                        style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         
-        
-        if(![self isRequestAllowed:NO withUser:self.user withChild:nil withTeam:nil withTag:@2]){
-            [[[UIAlertView alloc] initWithTitle:@""
-                                        message:@"An invitation request has already been sent."
-                                       delegate:nil
-                              cancelButtonTitle:nil
-                              otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
-        }
-        
-        else{
-            
-            [teamRequest saveTeam:self.team andAdmin:self.user followby:[User currentUser] orChild:nil withTimestamp:timestamp isChild:@0 isType:@3 completion:^{
-                
-                
-                [_pendingInviteRequestArray addObject:teamRequest];
-                
-            }];
-        }
-    }]];
-    [alertController addAction:[UIAlertAction actionWithTitle:@"Participant" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        
-        while( [self.team.spectatorsArray containsObject:self.user.objectId])
-        {
+        while( [self.team.spectatorsArray containsObject:self.user.objectId]) {
             [self.team.spectatorsArray removeObject:self.user.objectId];
         }
         if(![self isRequestAllowed:NO withUser:self.user withChild:nil withTeam:nil withTag:@2]){
-            [[[UIAlertView alloc] initWithTitle:@""
-                                        message:@"A request to follow this user has already been sent to the admin."
-                                       delegate:nil
-                              cancelButtonTitle:nil
-                              otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
-        }
-        
-        else{
-            
+            [UIAlertController showOkMessage:@"A request to follow this user has already been sent to the admin."];
+        } else {
             [teamRequest saveTeam:self.team andAdmin:self.user  followby:[User currentUser] orChild:nil withTimestamp:timestamp isChild:@0 isType:@3 completion:^{
-                
-                
                 [_pendingInviteRequestArray addObject:teamRequest];
-                
             }];
-            
         }
-        
-        
     }]];
     dispatch_async(dispatch_get_main_queue(), ^ {
         [self.window.rootViewController presentViewController:alertController animated:YES completion:nil];
     });
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    
+    if(buttonIndex ==0)
+    {
+        
+        PFRelation *friendRelation = [[User currentUser] relationForKey:@"friends"];
+        [friendRelation removeObject:self.user] ;
+        
+        [[User currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+            if (succeeded) {
+                self.isFollowing = !self.isFollowing;
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"SpotLightRefersh" object:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"Frdfollowunfollow" object:nil];
+                
+            }
+            [self formatButtonText];
+            
+        }];
+    }
+    
+    
 }
 
 -(void)fetchAllPendingRequest{
@@ -231,31 +236,6 @@
         }
     }
     return YES;
-    
-    
-}
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    
-    if(buttonIndex ==0)
-    {
-        
-        PFRelation *friendRelation = [[User currentUser] relationForKey:@"friends"];
-        [friendRelation removeObject:self.user] ;
-        
-        [[User currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-            if (succeeded) {
-                self.isFollowing = !self.isFollowing;
-                
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"SpotLightRefersh" object:nil];
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"Frdfollowunfollow" object:nil];
-                
-            }
-            [self formatButtonText];
-            
-        }];
-    }
     
     
 }

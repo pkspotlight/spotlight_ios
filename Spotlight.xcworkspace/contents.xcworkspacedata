@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:UIAlertController+Additions.h">
+   </FileRef>
+   <FileRef
+      location = "group:UIAlertController+Additions.m">
+   </FileRef>
+   <FileRef
       location = "group:Spotlight.xcodeproj">
    </FileRef>
    <FileRef

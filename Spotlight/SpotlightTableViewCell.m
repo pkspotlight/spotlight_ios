@@ -152,14 +152,9 @@
                 NSDate* referencedate = self.spotlight.createdAt;
                
                 NSString *spotlightTime = [NSString stringWithFormat:@"%@",[dateformate stringFromDate:referencedate]];
-
-            
                 return spotlightTime;
-
                 }
-            
             }
-            
         }
    
     return nil;

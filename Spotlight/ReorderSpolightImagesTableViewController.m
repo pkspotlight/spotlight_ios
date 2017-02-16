@@ -75,8 +75,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{   SpotlightMedia *media = [[SpotlightMedia alloc]init];
-    media= self.mediaSpotlightList[fromIndexPath.row];
+{   SpotlightMedia *media= self.mediaSpotlightList[fromIndexPath.row];
     [self.mediaSpotlightList removeObjectAtIndex:fromIndexPath.row];
     [self.mediaSpotlightList insertObject:media atIndex:toIndexPath.row]; // A method of your own to make new positions persistent
 }

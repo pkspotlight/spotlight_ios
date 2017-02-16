@@ -51,7 +51,7 @@
         if(!isChild.boolValue){
             self.nameOfRequester = [NSString stringWithFormat:@"%@ %@",user.firstName,user.lastName];
             self.PicOfRequester = user.profilePic;
-        }else{
+        } else {
             self.nameOfRequester = [NSString stringWithFormat:@"%@ %@",child.firstName,child.lastName];
             self.PicOfRequester = child.profilePic;
         }
@@ -84,8 +84,7 @@
                                   otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
             }
         }];
-    }
-    else if([self.type intValue]==2){
+    } else if([self.type intValue]==2){
         self.nameOfRequester = [NSString stringWithFormat:@"%@ %@",user.firstName,user.lastName];
         self.PicOfRequester = user.profilePic;
         [self saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
@@ -98,8 +97,7 @@
                                   cancelButtonTitle:nil
                                   otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
                 if (completion) completion();
-            }
-            else{
+            } else {
                 [[[UIAlertView alloc] initWithTitle:@""
                                             message:@"We are unable to send your request. Please try again later"
                                            delegate:nil

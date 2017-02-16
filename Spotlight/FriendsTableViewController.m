@@ -145,8 +145,8 @@ static CGFloat const BasicHeaderHeight = 50;
 }
 
 
--(void)viewWillDisappear:(BOOL)animated
-{
+-(void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"Frdfollowunfollow" object:nil];
 }
 
@@ -295,7 +295,7 @@ static CGFloat const BasicHeaderHeight = 50;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell* cell;
+    UITableViewCell* cell = [[UITableViewCell alloc] init];
     
     if (self.team) {
         if(indexPath.section == 0)

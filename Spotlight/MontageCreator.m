@@ -87,6 +87,7 @@
         NSError* error;
         AVURLAsset *asset;
         NSURL *fileURL;
+        AVMutableVideoCompositionLayerInstruction* layerInstruction = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:track];
         for (SpotlightMedia *media in mediaArray) {
             
             NSLog(@"downloading...");
@@ -94,17 +95,30 @@
             NSLog(@"done");
             if (media.isVideo) {
                 NSLog(@"attempt...");
-
+                
                 asset = [AVURLAsset URLAssetWithURL:[NSURL URLWithString:media.mediaFile.url]
-                                                        options:nil];
+                                            options:nil];
                 if (asset && [[asset tracksWithMediaType:AVMediaTypeVideo] count] > 0 ) {
-                [track insertTimeRange:CMTimeRangeMake(kCMTimeZero, asset.duration)
-                               ofTrack:[[asset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0]
-                                atTime:totalDuration
-                                 error:&error];
-                totalDuration = CMTimeAdd(totalDuration, asset.duration);
-                    NSLog(@"woo...");
 
+                    NSArray *tracks = [asset tracksWithMediaType:AVMediaTypeVideo];
+                    AVAssetTrack *videoTrack = [tracks objectAtIndex:0];
+                        
+                    CGAffineTransform t = videoTrack.preferredTransform;
+                    NSLog(@"%f %f %f %f %f %f", t.a, t.b, t.c, t.d, t.tx, t.tx);
+                    
+                    if (t.a != track.preferredTransform.a) {
+                        t.tx += 270;
+                    }
+                    
+                    [layerInstruction setTransform:t atTime:totalDuration];
+
+                    [track insertTimeRange:CMTimeRangeMake(kCMTimeZero, asset.duration)
+                                   ofTrack:[[asset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0]
+                                    atTime:totalDuration
+                                     error:&error];
+                    totalDuration = CMTimeAdd(totalDuration, asset.duration);
+                    NSLog(@"woo...");
+                    
                 } else {
                     continue;
                 }
@@ -141,34 +155,24 @@
                 NSLog(@"error: %@", [error localizedDescription]);
             }
         }
-        
-        
-        
-        
-        
-         if(songTitle){
-             
-        NSURL *audio_url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:songTitle ofType:@"mp3"]];
-        AVURLAsset  *audioAsset = [[AVURLAsset alloc]initWithURL:audio_url options:nil];
-        AVMutableCompositionTrack *audioTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio
-                                                                            preferredTrackID:kCMPersistentTrackID_Invalid];
-        [audioTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, totalDuration)
-                            ofTrack:[[audioAsset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0] atTime:kCMTimeZero error:nil];
-        [manager removeItemAtPath:myPathDocs error:nil];
-             
-         }
-        
-        
-        if(asseturl){
+        if(songTitle){
             
-           
+            NSURL *audio_url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:songTitle ofType:@"mp3"]];
+            AVURLAsset  *audioAsset = [[AVURLAsset alloc]initWithURL:audio_url options:nil];
+            AVMutableCompositionTrack *audioTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio
+                                                                                preferredTrackID:kCMPersistentTrackID_Invalid];
+            [audioTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, totalDuration)
+                                ofTrack:[[audioAsset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0] atTime:kCMTimeZero error:nil];
+            [manager removeItemAtPath:myPathDocs error:nil];
+        }
+
+        if(asseturl){
             AVURLAsset  *audioAsset = [[AVURLAsset alloc]initWithURL:asseturl options:nil];
             AVMutableCompositionTrack *audioTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio
                                                                                 preferredTrackID:kCMPersistentTrackID_Invalid];
             [audioTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, totalDuration)
                                 ofTrack:[[audioAsset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0] atTime:kCMTimeZero error:nil];
             [manager removeItemAtPath:myPathDocs error:nil];
-            
         }
         
         
@@ -176,7 +180,8 @@
         
         AVMutableVideoCompositionInstruction *videoCompositionInstruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
         videoCompositionInstruction.timeRange = CMTimeRangeMake(kCMTimeZero, totalDuration);
-        videoCompositionInstruction.layerInstructions = @[[AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:track]];
+        //videoCompositionInstruction.layerInstructions = @[[AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:track]];
+        videoCompositionInstruction.layerInstructions = @[layerInstruction];
         [instructions addObject:videoCompositionInstruction];
         
         AVMutableVideoComposition *mutableVideoComposition = [AVMutableVideoComposition videoComposition];
@@ -239,6 +244,57 @@
     });
 }
 
+- (AVMutableVideoCompositionLayerInstruction *)layerInstructionAfterFixingOrientationForAsset:(AVAsset *)inAsset
+                                                                                     forTrack:(AVMutableCompositionTrack *)inTrack
+                                                                                       atTime:(CMTime)inTime
+{
+    //FIXING ORIENTATION//
+    AVMutableVideoCompositionLayerInstruction *videolayerInstruction = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:inTrack];
+    AVAssetTrack *videoAssetTrack = [[inAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0];
+    UIImageOrientation videoAssetOrientation_  = UIImageOrientationUp;
+    BOOL  isVideoAssetPortrait_  = NO;
+    CGAffineTransform videoTransform = videoAssetTrack.preferredTransform;
+    
+    if(videoTransform.a == 0 && videoTransform.b == 1.0 && videoTransform.c == -1.0 && videoTransform.d == 0)  {videoAssetOrientation_= UIImageOrientationRight; isVideoAssetPortrait_ = YES;}
+    if(videoTransform.a == 0 && videoTransform.b == -1.0 && videoTransform.c == 1.0 && videoTransform.d == 0)  {videoAssetOrientation_ =  UIImageOrientationLeft; isVideoAssetPortrait_ = YES;}
+    if(videoTransform.a == 1.0 && videoTransform.b == 0 && videoTransform.c == 0 && videoTransform.d == 1.0)   {videoAssetOrientation_ =  UIImageOrientationUp;}
+    if(videoTransform.a == -1.0 && videoTransform.b == 0 && videoTransform.c == 0 && videoTransform.d == -1.0) {videoAssetOrientation_ = UIImageOrientationDown;}
+    
+    CGFloat FirstAssetScaleToFitRatio = 320.0 / videoAssetTrack.naturalSize.width;
+    
+    if(isVideoAssetPortrait_) {
+        FirstAssetScaleToFitRatio = 320.0/videoAssetTrack.naturalSize.height;
+        CGAffineTransform FirstAssetScaleFactor = CGAffineTransformMakeScale(FirstAssetScaleToFitRatio,FirstAssetScaleToFitRatio);
+        [videolayerInstruction setTransform:CGAffineTransformConcat(videoAssetTrack.preferredTransform, FirstAssetScaleFactor) atTime:kCMTimeZero];
+    }else{
+        CGAffineTransform FirstAssetScaleFactor = CGAffineTransformMakeScale(FirstAssetScaleToFitRatio,FirstAssetScaleToFitRatio);
+        [videolayerInstruction setTransform:CGAffineTransformConcat(CGAffineTransformConcat(videoAssetTrack.preferredTransform, FirstAssetScaleFactor),CGAffineTransformMakeTranslation(0, 160)) atTime:kCMTimeZero];
+    }
+    [videolayerInstruction setOpacity:0.0 atTime:inTime];
+    return videolayerInstruction;
+}
+
+-(CGAffineTransform)transformForAsset:(AVAsset*)asset {
+    UIImageOrientation videoAssetOrientation_  = UIImageOrientationUp;
+    BOOL  isVideoAssetPortrait_  = NO;
+    CGAffineTransform videoTransform = asset.preferredTransform;
+    
+    if(videoTransform.a == 0 && videoTransform.b == 1.0 && videoTransform.c == -1.0 && videoTransform.d == 0)  {videoAssetOrientation_= UIImageOrientationRight; isVideoAssetPortrait_ = YES;}
+    if(videoTransform.a == 0 && videoTransform.b == -1.0 && videoTransform.c == 1.0 && videoTransform.d == 0)  {videoAssetOrientation_ =  UIImageOrientationLeft; isVideoAssetPortrait_ = YES;}
+    if(videoTransform.a == 1.0 && videoTransform.b == 0 && videoTransform.c == 0 && videoTransform.d == 1.0)   {videoAssetOrientation_ =  UIImageOrientationUp;}
+    if(videoTransform.a == -1.0 && videoTransform.b == 0 && videoTransform.c == 0 && videoTransform.d == -1.0) {videoAssetOrientation_ = UIImageOrientationDown;}
+    
+    CGFloat FirstAssetScaleToFitRatio = 320.0 / asset.naturalSize.width;
+    
+    if(isVideoAssetPortrait_) {
+        FirstAssetScaleToFitRatio = 320.0/asset.naturalSize.height;
+        CGAffineTransform FirstAssetScaleFactor = CGAffineTransformMakeScale(FirstAssetScaleToFitRatio,FirstAssetScaleToFitRatio);
+        return CGAffineTransformConcat(asset.preferredTransform, FirstAssetScaleFactor);
+    }else{
+        CGAffineTransform FirstAssetScaleFactor = CGAffineTransformMakeScale(FirstAssetScaleToFitRatio,FirstAssetScaleToFitRatio);
+        return CGAffineTransformConcat(CGAffineTransformConcat(asset.preferredTransform, FirstAssetScaleFactor),CGAffineTransformMakeTranslation(0, 160));
+    }
+}
 
 - (void)createMovieFromImage:(UIImage *)image
 {

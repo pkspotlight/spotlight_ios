@@ -140,6 +140,7 @@
 		88BDFC761BFF70E6007A3EBB /* CreateSpotlightTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88BDFC751BFF70E6007A3EBB /* CreateSpotlightTableViewController.m */; };
 		88BDFC791BFF82FD007A3EBB /* SpotlightHeaderCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 88BDFC781BFF82FD007A3EBB /* SpotlightHeaderCollectionReusableView.m */; };
 		88BDFC7C1BFF8ABB007A3EBB /* SpotlightMediaCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88BDFC7B1BFF8ABB007A3EBB /* SpotlightMediaCollectionViewCell.m */; };
+		88C8777F1E560070004609AB /* UIViewController+AlertAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 88C8777E1E560070004609AB /* UIViewController+AlertAdditions.m */; };
 		88CAE8D71BFB9AF30099A733 /* landingBg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 88CAE8D61BFB9AF20099A733 /* landingBg.jpg */; };
 		88E953411BEB7ED50094F73D /* Contacts-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 88E953401BEB7ED50094F73D /* Contacts-50.png */; };
 		88E953431BEB7FDF0094F73D /* Conference_call-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 88E953421BEB7FDF0094F73D /* Conference_call-100.png */; };
@@ -161,7 +162,6 @@
 		88F2FFEC1E09905300CADDD6 /* AddMoreTaggedParticipantsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88F2FFEB1E09905300CADDD6 /* AddMoreTaggedParticipantsTableViewCell.xib */; };
 		88FDB88E1C8EA2A1008C9A3D /* TB - Disney Funk 124bpm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 88FDB87E1C8EA2A1008C9A3D /* TB - Disney Funk 124bpm.mp3 */; };
 		88FDB8941C8EA2A1008C9A3D /* DT_TheDuff_CoolKids_INST130.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 88FDB8841C8EA2A1008C9A3D /* DT_TheDuff_CoolKids_INST130.mp3 */; };
-		88FEF97C1E43EFD200C5DAAC /* UIAlertController+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FEF97B1E43EFD200C5DAAC /* UIAlertController+Additions.m */; };
 		FC4F359EA32F39CBF10D5525 /* libPods-Spotlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DCBB464380C17488F0B2051 /* libPods-Spotlight.a */; };
 /* End PBXBuildFile section */
 
@@ -369,6 +369,8 @@
 		88BDFC781BFF82FD007A3EBB /* SpotlightHeaderCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotlightHeaderCollectionReusableView.m; sourceTree = "<group>"; };
 		88BDFC7A1BFF8ABB007A3EBB /* SpotlightMediaCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotlightMediaCollectionViewCell.h; sourceTree = "<group>"; };
 		88BDFC7B1BFF8ABB007A3EBB /* SpotlightMediaCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotlightMediaCollectionViewCell.m; sourceTree = "<group>"; };
+		88C8777D1E560070004609AB /* UIViewController+AlertAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+AlertAdditions.h"; sourceTree = "<group>"; };
+		88C8777E1E560070004609AB /* UIViewController+AlertAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+AlertAdditions.m"; sourceTree = "<group>"; };
 		88CAE8D61BFB9AF20099A733 /* landingBg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = landingBg.jpg; sourceTree = "<group>"; };
 		88E953401BEB7ED50094F73D /* Contacts-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Contacts-50.png"; sourceTree = "<group>"; };
 		88E953421BEB7FDF0094F73D /* Conference_call-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Conference_call-100.png"; sourceTree = "<group>"; };
@@ -400,8 +402,6 @@
 		88F2FFEB1E09905300CADDD6 /* AddMoreTaggedParticipantsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddMoreTaggedParticipantsTableViewCell.xib; sourceTree = "<group>"; };
 		88FDB87E1C8EA2A1008C9A3D /* TB - Disney Funk 124bpm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "TB - Disney Funk 124bpm.mp3"; sourceTree = "<group>"; };
 		88FDB8841C8EA2A1008C9A3D /* DT_TheDuff_CoolKids_INST130.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = DT_TheDuff_CoolKids_INST130.mp3; sourceTree = "<group>"; };
-		88FEF97A1E43EFD200C5DAAC /* UIAlertController+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+Additions.h"; sourceTree = "<group>"; };
-		88FEF97B1E43EFD200C5DAAC /* UIAlertController+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+Additions.m"; sourceTree = "<group>"; };
 		A18D079BCFAB299658BDF57C /* Pods-Spotlight.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spotlight.release.xcconfig"; path = "Pods/Target Support Files/Pods-Spotlight/Pods-Spotlight.release.xcconfig"; sourceTree = "<group>"; };
 		C9EF640CCA8ED05A107596FF /* libPods-SpotlightTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SpotlightTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D373EE3193DFC78DC9BEE3E3 /* Pods-Spotlight.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spotlight.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Spotlight/Pods-Spotlight.debug.xcconfig"; sourceTree = "<group>"; };
@@ -679,8 +679,8 @@
 				88BDFC571BFD3370007A3EBB /* Friends */,
 				88F2FFE61E05ACAB00CADDD6 /* UIViewController+MediaAddingFunctionality.h */,
 				88F2FFE71E05ACAB00CADDD6 /* UIViewController+MediaAddingFunctionality.m */,
-				88FEF97A1E43EFD200C5DAAC /* UIAlertController+Additions.h */,
-				88FEF97B1E43EFD200C5DAAC /* UIAlertController+Additions.m */,
+				88C8777D1E560070004609AB /* UIViewController+AlertAdditions.h */,
+				88C8777E1E560070004609AB /* UIViewController+AlertAdditions.m */,
 				8893FD7B1BFD1FCB00711779 /* FieldEntryTableViewCell.h */,
 				8893FD7C1BFD1FCB00711779 /* FieldEntryTableViewCell.m */,
 				88599C171E022F1F003FB9A0 /* DateFieldTableViewCell.h */,
@@ -1128,10 +1128,10 @@
 				84A2343F1D3F5F0D008AB7C0 /* ELCAssetCell.m in Sources */,
 				84E0DF8B1D7800BD005652F3 /* SpotlightTaggedParticipantView.m in Sources */,
 				88BDFC731BFF6A38007A3EBB /* TeamSelectTableViewController.m in Sources */,
+				88C8777F1E560070004609AB /* UIViewController+AlertAdditions.m in Sources */,
 				88BDFC701BFD60B5007A3EBB /* SpotlightCollectionViewController.m in Sources */,
 				39D6343A1D40C86500CAA666 /* PECropView.m in Sources */,
 				398D24A41D40D64D00647117 /* MWZoomingScrollView.m in Sources */,
-				88FEF97C1E43EFD200C5DAAC /* UIAlertController+Additions.m in Sources */,
 				84E0DF941D780B89005652F3 /* TaggedParticipantTableViewCell.m in Sources */,
 				88BDFC521BFD22B8007A3EBB /* CreateTeamTableViewController.m in Sources */,
 				88F2FFE81E05ACAB00CADDD6 /* UIViewController+MediaAddingFunctionality.m in Sources */,

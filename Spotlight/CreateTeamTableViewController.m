@@ -186,9 +186,7 @@
                 
             }]];
             [alertController addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-                
-                
-                RecieptAlertView *alert = [[RecieptAlertView alloc]init];
+                RecieptAlertView *alert = [[RecieptAlertView alloc] init];
                 alert.delegate = self;
                 
                 [alert createAlertWithRemmitances:objects];
@@ -197,8 +195,7 @@
             dispatch_async(dispatch_get_main_queue(), ^ {
                 [self presentViewController:alertController animated:YES completion:nil];
             });
-        }
-        else{
+        } else {
             if ([self savePendingChangesToTeam:&error]) {
                 [self performSegueWithIdentifier:@"UnwindEditSegue" sender:nil];
             } else {

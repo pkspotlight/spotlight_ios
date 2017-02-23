@@ -12,6 +12,7 @@
 #import "Child.h"
 #import "TeamRequest.h"
 #import "AppDelegate.h"
+#import "UIViewController+AlertAdditions.h"
 
 #define appDel ((AppDelegate *)[UIApplication sharedApplication].delegate)
 
@@ -38,18 +39,10 @@
 -(void)showLoginPopUp{
     if([[NSUserDefaults standardUserDefaults] boolForKey:@"SpotlightLoginPopUp"] == FALSE)
     {
-        
-        [[[UIAlertView alloc] initWithTitle:@""
-                                    message:@"Successfully logged in."
-                                   delegate:nil
-                          cancelButtonTitle:nil
-                          otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
-        
+        [self showOkMessage:@"Successfully logged in."];
         [[NSUserDefaults standardUserDefaults] setBool:TRUE forKey:@"SpotlightLoginPopUp"];
         [[NSUserDefaults standardUserDefaults] synchronize];
-        //Alert code will go here...
     }
-    
 }
 
 -(void)deleteTeamRequest:(TeamRequest *)request {
@@ -125,11 +118,7 @@
                         }else if([request.type intValue] ==2){
                             [request.admin fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
                                 friends = [(User*)object displayName];
-                                [[[UIAlertView alloc] initWithTitle:@""
-                                                            message:[NSString stringWithFormat:@"%@ has accepted your friend request",friends]
-                                                           delegate:nil
-                                                  cancelButtonTitle:nil
-                                                  otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] performSelectorOnMainThread:@selector(show)  withObject:nil waitUntilDone:NO];
+                                [self showOkMessage:[NSString stringWithFormat:@"%@ has accepted your friend request",friends]];
                                 NSLog(@"friends request %@",[(User*)object displayName]);
                             } ];
                         }
@@ -138,11 +127,7 @@
                 }
             }
             if(teams.length > 0) {
-                [[[UIAlertView alloc] initWithTitle:@""
-                                            message:[NSString stringWithFormat:@"Your follow request for %@ has been accepted",teams]
-                                           delegate:nil
-                                  cancelButtonTitle:nil
-                                  otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] performSelectorOnMainThread:@selector(show)  withObject:nil waitUntilDone:NO];
+                [self showOkMessage:[NSString stringWithFormat:@"Your follow request for %@ has been accepted",teams]];
             }
         }
     }];

@@ -252,7 +252,7 @@
                 
                 [request.team fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
                     if(!error){
-                        if(request.isChild) {
+                        if(request.isChild.boolValue) {
                             while( [request.team.spectatorsArray containsObject:request.child.objectId])
                             {
                                 [request.team.spectatorsArray removeObject:request.child.objectId];

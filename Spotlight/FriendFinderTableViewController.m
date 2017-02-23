@@ -83,6 +83,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     } else {
         cell = (FriendTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"FriendTableViewCell"
                                                                      forIndexPath:indexPath];
+        [(FriendTableViewCell*)cell setPresentingView:self];
         bool isFollowing = false;
      
         User *user = (User*)self.searchResults[indexPath.row];

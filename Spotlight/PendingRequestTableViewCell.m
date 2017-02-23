@@ -48,7 +48,7 @@
 }
 
 - (void)userRequestToFollowCurrentUser:(TeamRequest*)request {
-    if (request.isChild) {
+    if ([request.isChild boolValue]) {
         [request.child fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
             NSString *requestText = [NSString stringWithFormat:@"%@ wants to follow you.", [request.child displayName]];
             [self populatePictureForChild:request.child withText:requestText];
@@ -62,7 +62,7 @@
 }
 
 - (void)otherUserInvitedCurrentUserToFollowTeam:(TeamRequest*)request {
-    if (request.isChild) {
+    if ([request.isChild boolValue]) {
         [request.child fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
             NSString *requestText = [NSString stringWithFormat:@"%@ has invited you to follow %@", [request.child displayName], request.teamName];
             [self populatePictureForChild:request.child withText:requestText];
@@ -76,7 +76,7 @@
 }
 
 - (void)userRequestToFollowTeam:(TeamRequest*)request {
-    if (request.isChild) {
+    if ([request.isChild boolValue]) {
         [request.child fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
             NSString *requestText = [NSString stringWithFormat:@"%@ wants to follow %@ ", [request.child displayName], request.teamName];
             [self populatePictureForChild:request.child withText:requestText];

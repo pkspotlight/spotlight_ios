@@ -10,7 +10,7 @@
 #import "User.h"
 #import "ProfilePictureMedia.h"
 #import "TeamRequest.h"
-#import "UIAlertController+Additions.h"
+#import "UIViewController+AlertAdditions.h"
 #import <Parse/Parse.h>
 #import <AFNetworking/UIImageView+AFNetworking.h>
 
@@ -105,11 +105,7 @@
         TeamRequest *teamRequest = [[TeamRequest alloc]init];
         
         if(![self isRequestAllowed:NO withUser:self.user withChild:nil withTeam:nil withTag:@1]){
-            [[[UIAlertView alloc] initWithTitle:@""
-                                        message:@"A request has already be sent to this user"
-                                       delegate:nil
-                              cancelButtonTitle:nil
-                              otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
+            [self.presentingView showOkMessage:@"A request has already be sent to this user"];
         } else{
             [teamRequest saveTeam:nil andAdmin:self.user  followby:[User currentUser] orChild:nil withTimestamp:timestamp isChild:nil isType:@2 completion:^{
                 [_pendingRequestArray addObject:teamRequest];
@@ -136,7 +132,7 @@
                                     [self.team.spectatorsArray addObject:self.user.objectId];
 
                                     if(![self isRequestAllowed:NO withUser:self.user withChild:nil withTeam:nil withTag:@2]) {
-                                        [UIAlertController showOkMessage:@"An invitation request has already been sent."];
+                                        [self.presentingView showOkMessage:@"An invitation request has already been sent."];
                                     } else {
                                         [teamRequest saveTeam:self.team andAdmin:self.user followby:[User currentUser] orChild:nil withTimestamp:timestamp isChild:@0 isType:@3 completion:^{
                                             [_pendingInviteRequestArray addObject:teamRequest];
@@ -150,7 +146,7 @@
             [self.team.spectatorsArray removeObject:self.user.objectId];
         }
         if(![self isRequestAllowed:NO withUser:self.user withChild:nil withTeam:nil withTag:@2]){
-            [UIAlertController showOkMessage:@"A request to follow this user has already been sent to the admin."];
+            [self.presentingView showOkMessage:@"A request to follow this user has already been sent to the admin."];
         } else {
             [teamRequest saveTeam:self.team andAdmin:self.user  followby:[User currentUser] orChild:nil withTimestamp:timestamp isChild:@0 isType:@3 completion:^{
                 [_pendingInviteRequestArray addObject:teamRequest];
@@ -180,11 +176,8 @@
                 
             }
             [self formatButtonText];
-            
         }];
     }
-    
-    
 }
 
 -(void)fetchAllPendingRequest{
@@ -204,16 +197,13 @@
                     [_pendingRequestArray addObject:request];
                     
                 }
-                else  if((request.requestState.intValue == reqestStatePending) && [request.type intValue]==3)
-                {
-                    
+                else  if((request.requestState.intValue == reqestStatePending) && [request.type intValue]==3) {
                     [_pendingInviteRequestArray addObject:request];
                     
                 }
             }
         }
     }];
-    
 }
 
 
@@ -226,18 +216,15 @@
                 return NO;
             }
         }
-    }else{
+    } else{
         for(TeamRequest *request in _pendingInviteRequestArray){
             
             if(([request.admin.objectId isEqualToString:self.user.objectId])){
                 return NO;
             }
-            
         }
     }
     return YES;
-    
-    
 }
 
 

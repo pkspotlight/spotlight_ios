@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *followButton;
 @property (weak, nonatomic) IBOutlet UIButton *inviteButton;
 @property (weak, nonatomic) Team *team ;
+@property (weak, nonatomic) UIViewController* presentingView;
+
 - (void)formatForUser:(User*)user isSpectator:(BOOL)isSpectator isFollowing:(BOOL)isFollowing;
 - (IBAction)followButtonPressed:(id)sender;
 @end

@@ -311,6 +311,7 @@ static CGFloat const BasicHeaderHeight = 50;
                                                                              forIndexPath:indexPath];
                 [(FriendTableViewCell*)cell setTeam:self.team];
                 [(FriendTableViewCell*)cell formatForUser:self.teamsMemberArray[indexPath.row] isSpectator:YES  isFollowing:YES];
+                [(FriendTableViewCell*)cell setPresentingView:self];
                 
                 [(FriendTableViewCell*)cell followButton].hidden = YES;
                 // [(FriendTableViewCell*)cell userDisplayNameLabel].textColor = [UIColor purpleColor];

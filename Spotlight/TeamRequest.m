@@ -60,8 +60,7 @@
         [self saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
             if(succeeded){
                 NSLog(@"success team");
-                
-                if([self.type intValue]==1){
+                                if([self.type intValue]==1){
                     [[[UIAlertView alloc] initWithTitle:@""
                                                 message:@"Your follow request has been sent. If the account admin accepts your request, the team will appear on your teams list."
                                                delegate:nil

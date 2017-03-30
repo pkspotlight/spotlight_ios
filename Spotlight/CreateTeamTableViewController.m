@@ -37,8 +37,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.teamPropertyArray = @[ @"teamName", @"town", @"sport", @"grade", @"year", @"season", @"coach"];
-    self.teamPropertyDisplay = @[ @"Team Name", @"Town", @"Sport", @"Grade", @"Year", @"Season", @"Coach"];
+    self.teamPropertyArray = @[ @"teamName", @"town", @"organization", @"sport", @"grade", @"year", @"season", @"coach"];
+    self.teamPropertyDisplay = @[ @"Team Name", @"Town", @"Organization", @"Sport", @"Grade", @"Year", @"Season", @"Coach"];
 
     [self.photoUploadIndicator setHidden:YES];
     self.childSelectedarray = [NSMutableArray new];

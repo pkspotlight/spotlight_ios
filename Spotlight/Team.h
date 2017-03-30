@@ -27,7 +27,7 @@
 @property (strong, nonatomic) NSString* grade;
 @property (strong, nonatomic) NSMutableArray* spectatorsArray;
 @property (readonly, nonatomic) PFRelation* moderators;
-
+@property (readonly, nonatomic) PFRelation* organization;
 
 
 @end

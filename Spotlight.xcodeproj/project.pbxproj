@@ -109,6 +109,8 @@
 		8849A1E61BA0CC7A00511DD5 /* SignUpInputTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8849A1E51BA0CC7A00511DD5 /* SignUpInputTableViewCell.m */; };
 		8849A1E91BA2590800511DD5 /* IntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8849A1E81BA2590800511DD5 /* IntroViewController.m */; };
 		88599C191E022F1F003FB9A0 /* DateFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88599C181E022F1F003FB9A0 /* DateFieldTableViewCell.m */; };
+		8862A1911E81945B0016139D /* Organization.m in Sources */ = {isa = PBXBuildFile; fileRef = 8862A1901E81945B0016139D /* Organization.m */; };
+		8862A1941E81CC5E0016139D /* OrganizationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8862A1931E81CC5E0016139D /* OrganizationTableViewController.m */; };
 		887EC7621C6974ED001DBDB3 /* FriendFinderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 887EC7611C6974ED001DBDB3 /* FriendFinderTableViewController.m */; };
 		887EC7651C697778001DBDB3 /* CreateFamilyMemberTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 887EC7641C697778001DBDB3 /* CreateFamilyMemberTableViewController.m */; };
 		887FF4CE1BD530B400F3679D /* Spotlight.m in Sources */ = {isa = PBXBuildFile; fileRef = 887FF4CD1BD530B400F3679D /* Spotlight.m */; };
@@ -317,6 +319,10 @@
 		8849A1E81BA2590800511DD5 /* IntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroViewController.m; sourceTree = "<group>"; };
 		88599C171E022F1F003FB9A0 /* DateFieldTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateFieldTableViewCell.h; sourceTree = "<group>"; };
 		88599C181E022F1F003FB9A0 /* DateFieldTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateFieldTableViewCell.m; sourceTree = "<group>"; };
+		8862A18F1E81945B0016139D /* Organization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Organization.h; sourceTree = "<group>"; };
+		8862A1901E81945B0016139D /* Organization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Organization.m; sourceTree = "<group>"; };
+		8862A1921E81CC5E0016139D /* OrganizationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrganizationTableViewController.h; sourceTree = "<group>"; };
+		8862A1931E81CC5E0016139D /* OrganizationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrganizationTableViewController.m; sourceTree = "<group>"; };
 		887EC7601C6974ED001DBDB3 /* FriendFinderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendFinderTableViewController.h; sourceTree = "<group>"; };
 		887EC7611C6974ED001DBDB3 /* FriendFinderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendFinderTableViewController.m; sourceTree = "<group>"; };
 		887EC7631C697778001DBDB3 /* CreateFamilyMemberTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateFamilyMemberTableViewController.h; sourceTree = "<group>"; };
@@ -635,6 +641,10 @@
 				88EC502A1C0DCE5200077E85 /* ProfilePictureMedia.m */,
 				8893FD781BFCCC2100711779 /* Team.h */,
 				8893FD791BFCCC2100711779 /* Team.m */,
+				883D63F71C0719E300AE99CC /* TeamLogoMedia.h */,
+				883D63F81C0719E300AE99CC /* TeamLogoMedia.m */,
+				8862A18F1E81945B0016139D /* Organization.h */,
+				8862A1901E81945B0016139D /* Organization.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -734,8 +744,6 @@
 				8455EB721D5CAC1600A3A365 /* RemittanceSelectionView.m */,
 				8455EB6E1D5CABB000A3A365 /* RecieptAlertView.h */,
 				8455EB6F1D5CABB000A3A365 /* RecieptAlertView.m */,
-				883D63F71C0719E300AE99CC /* TeamLogoMedia.h */,
-				883D63F81C0719E300AE99CC /* TeamLogoMedia.m */,
 				88BDFC581BFD33E0007A3EBB /* TeamsTableViewController.h */,
 				88BDFC591BFD33E0007A3EBB /* TeamsTableViewController.m */,
 				884250AB1C173076009034A6 /* TeamDetailsViewController.h */,
@@ -752,6 +760,8 @@
 				8493C2541D40FF85004F694F /* PendingRequestTableViewController.m */,
 				84B52BD21D41F43D005995AC /* PendingRequestTableViewCell.h */,
 				84B52BD31D41F43D005995AC /* PendingRequestTableViewCell.m */,
+				8862A1921E81CC5E0016139D /* OrganizationTableViewController.h */,
+				8862A1931E81CC5E0016139D /* OrganizationTableViewController.m */,
 			);
 			name = Team;
 			sourceTree = "<group>";
@@ -1104,6 +1114,7 @@
 				88BDFC7C1BFF8ABB007A3EBB /* SpotlightMediaCollectionViewCell.m in Sources */,
 				88BDFC631BFD4BFB007A3EBB /* MainTabBarController.m in Sources */,
 				88A736DD1B91318D00093B27 /* AppDelegate.m in Sources */,
+				8862A1911E81945B0016139D /* Organization.m in Sources */,
 				887FF4CE1BD530B400F3679D /* Spotlight.m in Sources */,
 				88BDFC5D1BFD3635007A3EBB /* TeamTableViewCell.m in Sources */,
 				88BDFC681BFD5034007A3EBB /* BasicHeaderView.m in Sources */,
@@ -1148,6 +1159,7 @@
 				84A2343D1D3F5F0D008AB7C0 /* ELCAlbumPickerController.m in Sources */,
 				88EC50241C0DB72500077E85 /* FriendProfileViewController.m in Sources */,
 				398D24A01D40D64D00647117 /* MWPhoto.m in Sources */,
+				8862A1941E81CC5E0016139D /* OrganizationTableViewController.m in Sources */,
 				880054EE1C6B9E8C0034D639 /* ChildTableViewCell.m in Sources */,
 				84A234471D3F5F0D008AB7C0 /* README.md in Sources */,
 				883D63F41C07151700AE99CC /* MediaObject.m in Sources */,

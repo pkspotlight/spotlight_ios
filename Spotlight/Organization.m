@@ -13,7 +13,7 @@
 @dynamic orgName;
 @dynamic orgLogo;
 @dynamic orgOwners;
-@dynamic teams;
+//@dynamic teams;
 
 
 #pragma mark - Parse Stuff

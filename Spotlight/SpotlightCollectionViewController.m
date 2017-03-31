@@ -27,7 +27,6 @@
     id infoMedia;
     BOOL isCamera;
     BOOL isView;
-    
 }
 
 @property (strong, nonatomic) NSArray* mediaList;
@@ -64,10 +63,7 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
     
     UILabel *label = [[UILabel alloc] initWithFrame: CGRectMake((self.view.frame.size.width-140)/2, 12, 140, 40)];
     label.numberOfLines = 3;
-    
-    
     label.font = [UIFont fontWithName:@"Helvetica" size:15.0f];
-    
     label.minimumFontSize = 13.0f;
     
     //label.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
@@ -108,12 +104,10 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
                     [_teamsSpectMemberArray addObject:user];
                 }else{
                     [_teamsMemberArray addObject:user];
-                    
                 }
             }
         }];
     }];
-    
 }
 
 - (void)refresh:(UIRefreshControl*)refresh {
@@ -474,7 +468,6 @@ static NSString * const reuseIdentifier = @"SpotlightMediaCollectionViewCell";
         PHAsset *asset = result.firstObject;
         NSDate *date = asset.creationDate;
         double timestamp = [date timeIntervalSince1970];
-        
         
         NSURL *videoUrl=(NSURL*)[infoDict objectForKey:UIImagePickerControllerMediaURL];
        // NSString *videoPath = [videoUrl path];

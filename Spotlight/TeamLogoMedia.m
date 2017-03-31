@@ -43,17 +43,13 @@
 
 - (instancetype)initWithVideoData:(NSData*)data {
     if ( (self = [super init]) ) {
-        
-        
         self.isVideo = YES;
         self.mediaFile = [PFFile fileWithName:@"video.mov" data:data];
     }
     return self;
 }
 
-
 - (instancetype)initWithImage:(UIImage*)image {
-    
     if ( (self = [super init]) ) {
         self.isVideo = NO;
         self.thumbnailImageFile = [PFFile fileWithName:@"thumb.jpg" data:UIImageJPEGRepresentation(image, .5)];

@@ -96,6 +96,7 @@
 		880054EE1C6B9E8C0034D639 /* ChildTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 880054ED1C6B9E8C0034D639 /* ChildTableViewCell.m */; };
 		880207A41C15DF7A002D5068 /* MontageCreator.m in Sources */ = {isa = PBXBuildFile; fileRef = 880207A31C15DF7A002D5068 /* MontageCreator.m */; };
 		880726F61C778F0400F2C1B9 /* TeamFinderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 880726F51C778F0400F2C1B9 /* TeamFinderTableViewController.m */; };
+		8811D5081E8EA10E0022C00D /* Big_Little_Skills_Academy.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8811D5071E8EA10E0022C00D /* Big_Little_Skills_Academy.jpg */; };
 		883265491C8F79E80063D1F9 /* DT_TheDUFF_EverySingleNight_INST_125.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 883265481C8F79E80063D1F9 /* DT_TheDUFF_EverySingleNight_INST_125.mp3 */; };
 		8832654B1C8F79F80063D1F9 /* DT_TheDuff_Ready2Go_128_INST.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8832654A1C8F79F80063D1F9 /* DT_TheDuff_Ready2Go_128_INST.mp3 */; };
 		883D63F41C07151700AE99CC /* MediaObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 883D63F31C07151700AE99CC /* MediaObject.m */; };
@@ -298,6 +299,7 @@
 		880207A31C15DF7A002D5068 /* MontageCreator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MontageCreator.m; sourceTree = "<group>"; };
 		880726F41C778F0400F2C1B9 /* TeamFinderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamFinderTableViewController.h; sourceTree = "<group>"; };
 		880726F51C778F0400F2C1B9 /* TeamFinderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamFinderTableViewController.m; sourceTree = "<group>"; };
+		8811D5071E8EA10E0022C00D /* Big_Little_Skills_Academy.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Big_Little_Skills_Academy.jpg; sourceTree = "<group>"; };
 		883265481C8F79E80063D1F9 /* DT_TheDUFF_EverySingleNight_INST_125.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = DT_TheDUFF_EverySingleNight_INST_125.mp3; sourceTree = "<group>"; };
 		8832654A1C8F79F80063D1F9 /* DT_TheDuff_Ready2Go_128_INST.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = DT_TheDuff_Ready2Go_128_INST.mp3; sourceTree = "<group>"; };
 		883D63F21C07151700AE99CC /* MediaObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaObject.h; sourceTree = "<group>"; };
@@ -652,6 +654,7 @@
 		88A736CB1B91318D00093B27 = {
 			isa = PBXGroup;
 			children = (
+				8811D5071E8EA10E0022C00D /* Big_Little_Skills_Academy.jpg */,
 				8400ED171D7EA68100E4600A /* Main.storyboard */,
 				84A234251D3F5F0D008AB7C0 /* ThirdParty */,
 				88A736D61B91318D00093B27 /* Spotlight */,
@@ -956,6 +959,7 @@
 				398D249A1D40D64D00647117 /* VideoOverlay.png in Resources */,
 				84E0DF8D1D7800D1005652F3 /* SpotlightTaggedParticipantView.xib in Resources */,
 				398D24881D40D64D00647117 /* ImageSelectedSmallOn.png in Resources */,
+				8811D5081E8EA10E0022C00D /* Big_Little_Skills_Academy.jpg in Resources */,
 				84A234421D3F5F0D008AB7C0 /* ELCAlbumPickerController.xib in Resources */,
 				398D24931D40D64D00647117 /* UIBarButtonItemArrowLeft@3x.png in Resources */,
 				395C8BA81D50B3B100BC6087 /* delete@2x.png in Resources */,

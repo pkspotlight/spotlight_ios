@@ -16,9 +16,8 @@
 
 @property (strong, nonatomic) TeamLogoMedia* orgLogo;
 @property (strong, nonatomic) NSString* orgName;
-@property (strong, nonatomic) NSString* sport;
 @property (readonly, nonatomic) PFRelation* orgOwners;
-@property (readonly, nonatomic) PFRelation* teams;
+//@property (readonly, nonatomic) PFRelation* teams;
 
 + (NSString *)parseClassName;
 

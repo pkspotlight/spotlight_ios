@@ -73,30 +73,19 @@
         childArray = objects.mutableCopy;
         for (Child* child in objects){
             [child.teams removeObject:team];
-            
         }
-        
         [Child saveAllInBackground:childArray block:^(BOOL succeeded, NSError * _Nullable error) {
             if(succeeded){
                 // [[NSNotificationCenter defaultCenter] postNotificationName:@"SpotLightRefersh" object:nil];
             }
-            if (completion) {
-                
-                completion();
-            }
-            
+            if (completion) completion();
         }];
-
-        
     }];
     [self saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if(succeeded){
              [[NSNotificationCenter defaultCenter] postNotificationName:@"SpotLightRefersh" object:nil];
         }
-        if (completion) {
-            
-            completion();
-        }
+        if (completion) completion();
     }];
 }
 @end

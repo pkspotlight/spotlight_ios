@@ -48,12 +48,12 @@
     [refresh beginRefreshing];
     UIView *headerView = [[UIView alloc] init];
     headerView.frame = CGRectMake(0, 0, self.view.frame.size.width, 70);
+
+//    UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"spotlight_logo_1000px"]];
+//    imgView.frame = CGRectMake((self.view.frame.size.width-140)/2, 22, 140, 25);
+//    imgView.contentMode = UIViewContentModeScaleAspectFill;
     
-    UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"spotlight_logo_1000px"]];
-    imgView.frame = CGRectMake((self.view.frame.size.width-140)/2, 22, 140, 25);
-    imgView.contentMode = UIViewContentModeScaleAspectFill;
-    
-    [headerView addSubview:imgView];
+ //   [headerView addSubview:imgView];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 140;
 

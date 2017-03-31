@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hOq-mx-7hw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hOq-mx-7hw">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Spotlights-->
+        <!--Big & Small-->
         <scene sceneID="mRq-rx-FAz">
             <objects>
-                <tableViewController storyboardIdentifier="SpotlightFeedViewController" id="8hb-z5-ol4" customClass="SpotlightFeedViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SpotlightFeedViewController" title="Big &amp; Small" id="8hb-z5-ol4" customClass="SpotlightFeedViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="342" sectionHeaderHeight="22" sectionFooterHeight="22" id="9Pj-Xg-5pY">
-                        <rect key="frame" x="0.0" y="0.0" width="383" height="223"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="sectionIndexBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SpotlightTableViewCell" rowHeight="365" id="cV8-cF-CTj" customClass="SpotlightTableViewCell">
-                                <rect key="frame" x="0.0" y="22" width="383" height="365"/>
+                                <rect key="frame" x="0.0" y="22" width="375" height="365"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" tableViewCell="cV8-cF-CTj" id="6wP-Er-nX9">
-                                    <rect key="frame" x="0.0" y="0.0" width="383" height="365"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="365"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1" verticalHuggingPriority="1" horizontalCompressionResistancePriority="1" verticalCompressionResistancePriority="1" image="spotlightCard" translatesAutoresizingMaskIntoConstraints="NO" id="GPI-3R-1PO">
@@ -172,7 +172,7 @@
                             <outlet property="delegate" destination="8hb-z5-ol4" id="Dc6-L6-b4v"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Spotlights" id="Cvw-k6-Ch2">
+                    <navigationItem key="navigationItem" title="Big &amp; Small" id="Cvw-k6-Ch2">
                         <barButtonItem key="rightBarButtonItem" image="AddSpotlight" id="FRe-nF-kA4">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
@@ -2054,11 +2054,11 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BackgroundBasketballImage" translatesAutoresizingMaskIntoConstraints="NO" id="AB0-W6-tW3">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="spotlight_logo_1000px" translatesAutoresizingMaskIntoConstraints="NO" id="tFt-Sb-tW2">
-                                <rect key="frame" x="73" y="65" width="230" height="101"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Big_Little_Skills_Academy.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="tFt-Sb-tW2">
+                                <rect key="frame" x="73" y="65" width="230" height="234"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="230" id="KPW-no-whf"/>
-                                    <constraint firstAttribute="height" constant="101" id="jpi-Ye-mW6"/>
+                                    <constraint firstAttribute="height" constant="234" id="jpi-Ye-mW6"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zUM-6N-rTd">
@@ -3716,6 +3716,7 @@
         <image name="AddSpotlight" width="20" height="20"/>
         <image name="BackImage" width="10" height="20"/>
         <image name="BackgroundBasketballImage" width="375" height="667"/>
+        <image name="Big_Little_Skills_Academy.jpg" width="559" height="570"/>
         <image name="ButtonSelected" width="244" height="47"/>
         <image name="ButtonUnselected" width="244" height="47"/>
         <image name="EditIcon" width="33" height="33"/>
@@ -3763,7 +3764,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="oT6-GV-6Bb"/>
-        <segue reference="KDg-Dy-czv"/>
+        <segue reference="ef7-JM-cSx"/>
         <segue reference="fJj-m3-4F5"/>
     </inferredMetricsTieBreakers>
 </document>

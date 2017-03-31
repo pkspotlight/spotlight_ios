@@ -17,6 +17,9 @@
 #import "SpotlightMedia.h"
 #import "User.h"
 #import "TeamRequest.h"
+
+#import "Organization.h"
+
 @interface AppDelegate ()
 
 @end
@@ -25,16 +28,10 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
     _acceptedTeamIDs = [[NSMutableArray alloc] init];
     [Fabric with:@[[Crashlytics class]]];
     [Spotlight registerSubclass];
     [SpotlightMedia registerSubclass];
-//    [Parse setApplicationId:@"nuNuhBJQp4cYfeUnWlNFo27QUCKeAgWBX5D74r4F"
-//                  clientKey:@"vMH2XfoFKQAy8vbOYzgXZtJrRJ8LjCD5933k3kPF"];
-//    ParseClientConfiguration *config = [ParseClientConfiguration configurationWithBlock:^(id<ParseMutableClientConfiguration>  _Nonnull configuration) {
-//        
-//    }];
     [Parse initializeWithConfiguration:[ParseClientConfiguration configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
         configuration.applicationId = @"nuNuhBJQp4cYfeUnWlNFo27QUCKeAgWBX5D74r4F";
         configuration.clientKey = @"vMH2XfoFKQAy8vbOYzgXZtJrRJ8LjCD5933k3kPF";
@@ -42,11 +39,9 @@
     }]];
     [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:launchOptions];
 
-    
     if (![PFUser currentUser]){
         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"
                                                                  bundle: nil];
-        
         UIViewController *controller = [mainStoryboard instantiateViewControllerWithIdentifier: @"IntroNavigationController"];
         [self.window setRootViewController:controller];
     }
@@ -61,8 +56,7 @@
        // [[NSNotificationCenter defaultCenter] postNotificationName:@"PendingRequest" object:nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ShowAlertForAcceptedRequest" object:nil];
     });
-    
-    
+//    [self createOrg];
     return YES;
 }
 
@@ -120,6 +114,22 @@
                                                           openURL:url
                                                 sourceApplication:sourceApplication
                                                        annotation:annotation];
+}
+
+- (void)createOrg{
+    Organization* org = [[Organization alloc] init];
+    TeamLogoMedia *orgLogo = [[TeamLogoMedia alloc] initWithImage:[UIImage imageNamed:@"Big_Little_Skills_Academy.jpg"]];
+    [orgLogo setTitle:@"BigSmallLogo"];
+    [org setOrgName:@"Big & Small"];
+    [org setOrgLogo:orgLogo];
+    //    [org.orgOwners addObject:nil];
+    [org saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (error || !succeeded) {
+            NSLog(@"SHIT DONE FUCKED");
+        } else {
+            NSLog(@"It's in");
+        }
+    }];
 }
 
 @end

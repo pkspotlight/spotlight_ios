@@ -130,6 +130,7 @@
 		88A736DD1B91318D00093B27 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 88A736DC1B91318D00093B27 /* AppDelegate.m */; };
 		88A736E51B91318D00093B27 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88A736E41B91318D00093B27 /* Images.xcassets */; };
 		88A736E81B91318D00093B27 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88A736E61B91318D00093B27 /* LaunchScreen.xib */; };
+		88B71EF41E9D641600B59A0F /* balsa_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 88B71EF31E9D641600B59A0F /* balsa_logo.png */; };
 		88BDFC521BFD22B8007A3EBB /* CreateTeamTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88BDFC511BFD22B8007A3EBB /* CreateTeamTableViewController.m */; };
 		88BDFC5A1BFD33E0007A3EBB /* TeamsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88BDFC591BFD33E0007A3EBB /* TeamsTableViewController.m */; };
 		88BDFC5D1BFD3635007A3EBB /* TeamTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88BDFC5C1BFD3635007A3EBB /* TeamTableViewCell.m */; };
@@ -353,6 +354,7 @@
 		88A736E71B91318D00093B27 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		88A736F21B91318D00093B27 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88A736F31B91318D00093B27 /* SpotlightTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpotlightTests.m; sourceTree = "<group>"; };
+		88B71EF31E9D641600B59A0F /* balsa_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = balsa_logo.png; sourceTree = "<group>"; };
 		88BDFC501BFD22B8007A3EBB /* CreateTeamTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateTeamTableViewController.h; sourceTree = "<group>"; };
 		88BDFC511BFD22B8007A3EBB /* CreateTeamTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateTeamTableViewController.m; sourceTree = "<group>"; };
 		88BDFC581BFD33E0007A3EBB /* TeamsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamsTableViewController.h; sourceTree = "<group>"; };
@@ -655,6 +657,7 @@
 			isa = PBXGroup;
 			children = (
 				8811D5071E8EA10E0022C00D /* Big_Little_Skills_Academy.jpg */,
+				88B71EF31E9D641600B59A0F /* balsa_logo.png */,
 				8400ED171D7EA68100E4600A /* Main.storyboard */,
 				84A234251D3F5F0D008AB7C0 /* ThirdParty */,
 				88A736D61B91318D00093B27 /* Spotlight */,
@@ -1011,6 +1014,7 @@
 				88EC50261C0DC98D00077E85 /* icon-edit-avatar@2x.png in Resources */,
 				39574E1E1D420F050059029C /* edit@3x.png in Resources */,
 				398D24801D40D64D00647117 /* ImageSelectedOff@2x.png in Resources */,
+				88B71EF41E9D641600B59A0F /* balsa_logo.png in Resources */,
 				8893FD751BFC1CF600711779 /* friends@3x.png in Resources */,
 				398D24991D40D64D00647117 /* UIBarButtonItemGrid@3x.png in Resources */,
 				398D24831D40D64D00647117 /* ImageSelectedOn@2x.png in Resources */,
@@ -1292,7 +1296,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = YKL5CRQW8Z;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1350,7 +1354,7 @@
 					"-weak_framework",
 					"\"UIKit\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.myspotlight.spotlight;
+				PRODUCT_BUNDLE_IDENTIFIER = com.spotlight.balsa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1369,7 +1373,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = YKL5CRQW8Z;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1427,7 +1431,7 @@
 					"-weak_framework",
 					"\"UIKit\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.myspotlight.spotlight;
+				PRODUCT_BUNDLE_IDENTIFIER = com.spotlight.balsa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";

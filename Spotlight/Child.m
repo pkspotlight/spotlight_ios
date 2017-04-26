@@ -21,7 +21,6 @@
 
 #pragma mark - Parse Stuff
 
-
 + (void)load {
     [self registerSubclass];
 }
@@ -29,7 +28,6 @@
 + (NSString *)parseClassName {
     return @"Child";
 }
-
 
 - (NSString*)displayName {
     NSString* displayName = @"Unnamed";

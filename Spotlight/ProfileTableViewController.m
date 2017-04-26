@@ -26,12 +26,8 @@
 @property (strong, nonatomic) NSMutableDictionary *pendingFieldDictionary;
 @property (strong, nonatomic) NSArray* userPropertyArray;
 @property (strong, nonatomic) NSArray* userPropertyArrayDisplayText;
-
-//@property (weak, nonatomic) IBOutlet UIButton *profilePictureImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *profilePictureImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *profilePictureImageViewFront;
-
-
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (strong, nonatomic) UIImagePickerController* imagePickerController;
 @property (strong, nonatomic) ProfilePictureMedia* profilePic;
@@ -44,7 +40,7 @@
     [super viewDidLoad];
     //[self.navigationController setNavigationBarHidden:YES];
     self.user = [User currentUser];
-     userName = self.user.username;
+    userName = self.user.username;
     self.userPropertyArray = @[ @"username",
                                 @"email",
                                 @"firstName",
@@ -69,7 +65,7 @@
         [self.profilePictureImageViewFront.layer setBorderWidth:3];
         
         [_profilePictureImageViewFront setClipsToBounds:YES];
-
+        
         [_profilePictureImageView
          setImageWithURLRequest:request
          placeholderImage:nil
@@ -81,7 +77,7 @@
              NSLog(@"fuck thumbnail failure");
          }];
     }];
-
+    
     UIBarButtonItem *barButton = [[UIBarButtonItem alloc]initWithTitle:@"Logout" style:UIBarButtonItemStylePlain target:self action:@selector(logout:)];
     barButton.tintColor = [UIColor whiteColor];
     
@@ -99,10 +95,8 @@
             NSString *displayName = [NSString stringWithFormat:@"%@ %@",child.firstName ,child.lastName];
             [name addObject:displayName];
         }
-    
-       
         familyName = [name componentsJoinedByString:@","];
-          self.pendingFieldDictionary = [self newPendingFieldDictionary];
+        self.pendingFieldDictionary = [self newPendingFieldDictionary];
     }];
 }
 
@@ -166,19 +160,16 @@
                                                      displayText:self.userPropertyArrayDisplayText[indexPath.row]
                                                        withValue:self.pendingFieldDictionary[property] isCenter:NO];
         if(indexPath.row >= 5){
-          
-            [[(FieldEntryTableViewCell*)cell valueTextField] setEnabled:NO];
+                      [[(FieldEntryTableViewCell*)cell valueTextField] setEnabled:NO];
         }
         
         [(FieldEntryTableViewCell*)cell setDelegate:self];
     } else if (indexPath.section == 1) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"SendFeedbackCellId" forIndexPath:indexPath];
         
+    } else {
+        cell = [[UITableViewCell alloc] init];
     }
-//    } else {
-//        cell = [tableView dequeueReusableCellWithIdentifier:@"LogoutCellId" forIndexPath:indexPath];
-//
-//    }
     return cell;
 }
 
@@ -197,7 +188,7 @@
 }
 
 - (IBAction)showFeedback:(UIButton*)sender {
-     [self showFeedbackEmail];
+    [self showFeedbackEmail];
 }
 
 
@@ -236,14 +227,14 @@
 #pragma mark - UIImagePickerControllerDelegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)infoDict {
-
+    
     UIImage *image = [infoDict valueForKey:UIImagePickerControllerOriginalImage];
     self.profilePic = [[ProfilePictureMedia alloc] initWithImage:image];
     self.profilePictureImageView.image = image;
-       self.profilePictureImageViewFront.image = image;
-     
-     [self.profilePic saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-
+    self.profilePictureImageViewFront.image = image;
+    
+    [self.profilePic saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        
     }];
     [self.imagePickerController dismissViewControllerAnimated:YES completion:nil];
     self.user.profilePic = self.profilePic;
@@ -281,8 +272,6 @@
     }
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
-
-
 
 #pragma mark - Delegate Methods
 
@@ -349,7 +338,6 @@
                         [self.tableView reloadData];
                     });
                 }];
-                
             }
         }
     }];
@@ -370,11 +358,11 @@
         imagePickerController.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeImage, nil];
         imagePickerController.videoMaximumDuration = 15;
         [imagePickerController setAllowsEditing:YES];
-      
         
-
+        
+        
         self.imagePickerController = imagePickerController;
-         self.navigationController.navigationBar.tintColor = [UIColor blueColor];
+        self.navigationController.navigationBar.tintColor = [UIColor blueColor];
         [self.navigationController presentViewController:self.imagePickerController animated:YES completion:nil];
     }
 }

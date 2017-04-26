@@ -11,6 +11,7 @@
 #import "SpotlightMedia.h"
 #import "Team.h"
 #import "User.h"
+#import "UIViewController+AlertAdditions.h"
 #import "FriendsTableViewController.h"
 #import "CreateTeamTableViewController.h"
 #import "SpotlightDataSource.h"
@@ -40,8 +41,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *teamMemberButton;
 @property (weak, nonatomic) IBOutlet UIButton *addButton;
 
-
-
 @end
 
 @implementation TeamDetailsViewController
@@ -53,17 +52,8 @@
     doRefresh = false;
     [self fetchAllPendingRequest];
     
-    //[self checkWhetherTeamBelongsToAdministrator];
     [self checkUserFollowCurrentTeam];
-    //    [self.teamLogoImageView.layer setCornerRadius:self.teamLogoImageView.bounds.size.width/2];
-    //    [self.teamLogoImageView.layer setBorderColor:[UIColor whiteColor].CGColor];
-    //    [self.teamLogoImageView.layer setBorderWidth:3];
-    //    [self.teamLogoImageView setClipsToBounds:YES];
     [self checkUserFollowCurrentTeam];
-    //    [self.inviteButton.layer setCornerRadius:5];
-    //
-    //    [self.inviteButton.layer setBorderColor:[UIColor whiteColor].CGColor];
-    //    [self.inviteButton.layer setBorderWidth:1];
     [self.teamLogoImageViewFront.layer setBorderColor:[[UIColor lightGrayColor] colorWithAlphaComponent:0.4].CGColor];
     [self.teamLogoImageViewFront.layer setCornerRadius:5];
     [self.teamLogoImageViewFront.layer setBorderWidth:3];
@@ -99,13 +89,8 @@
     PFQuery* moderatorQuery = [self.team.moderators query];
     [moderatorQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if(objects.count==0){
-            [[[UIAlertView alloc] initWithTitle:@""
-                                        message:@"No admin was found for this team."
-                                       delegate:nil
-                              cancelButtonTitle:nil
-                              otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
+            [self showOkMessage:@"No admin was found for this team."];
         }
-        
         else{
             for (User* user in objects) {
                 if([user.objectId isEqualToString:[User currentUser].objectId]){
@@ -150,6 +135,7 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
     if(doRefresh)
     {
         doRefresh = !doRefresh;
@@ -337,27 +323,15 @@
                 }
                 if(filteredArrayOfObjects.count>0){
                     [self showAlertWithChildrenAdmin:filteredArrayOfObjects team:self.team completion:nil];
+                } else {
+                    [self showOkMessage:@"All children are members of this team already"];
                 }
-                else{
-                    [[[UIAlertView alloc] initWithTitle:@""
-                                                message:@"All children are members of this team already"
-                                               delegate:nil
-                                      cancelButtonTitle:nil
-                                      otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
-                }
-            } else{
-                [[[UIAlertView alloc] initWithTitle:@""
-                                            message:@"No child is associated with this user"
-                                           delegate:nil
-                                  cancelButtonTitle:nil
-                                  otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
-                
+            } else {
+                [self showOkMessage:@"No child is associated with this user"];
             }
-            
             [hud hide:YES];
         }];
-        
-    }else{
+    } else {
         [[[[User currentUser] children] query] findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
             
             if(objects.count>0){
@@ -370,19 +344,13 @@
                     }
                 }
                 [self showAlertWithChildren:filteredArrayOfObjects team:self.team completion:nil];
-            }else{
-                [[[UIAlertView alloc] initWithTitle:@""
-                                            message:@"No child is associated with this user"
-                                           delegate:nil
-                                  cancelButtonTitle:nil
-                                  otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
+            } else {
+                [self showOkMessage:@"No child is associated with this user"];
             }
             [hud hide:YES];
         }];
     }
 }
-
-
 
 - (void)showAlertWithChildren:(NSArray*)children team:(Team*)team completion:(void (^)(void))completion {
     if (children && [children count] > 0) {
@@ -390,114 +358,73 @@
                                                                        message:@""
                                                                 preferredStyle:UIAlertControllerStyleActionSheet];
         if(!isUserFollowCurrentTeam){
-            [alert addAction:[UIAlertAction actionWithTitle:@"None, I just want to follow it"
-                                                      style:UIAlertActionStyleDefault
-                                                    handler:^(UIAlertAction * _Nonnull action) {
-                                                        
-                                                        PFQuery* moderatorQuery = [team.moderators query];
-                                                        [moderatorQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-                                                            if(objects.count==0){
-                                                                [[[UIAlertView alloc] initWithTitle:@""
-                                                                                            message:@"No admin found for this team."
-                                                                                           delegate:nil
-                                                                                  cancelButtonTitle:nil
-                                                                                  otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
-                                                            }
-                                                            
-                                                            else{
-                                                                for (User* user in objects) {
-                                                                    
-                                                                    if(![self isRequestAllowed:YES withUser:[User currentUser] withChild:nil withTeam:team]){
-                                                                        [[[UIAlertView alloc] initWithTitle:@""
-                                                                                                    message:@"A request to follow this team is already sent to admin."
-                                                                                                   delegate:nil
-                                                                                          cancelButtonTitle:nil
-                                                                                          otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
-                                                                    }
-                                                                    
-                                                                    else{
-                                                                        
-                                                                        NSString *timestamp =  [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970] * 1000];
-                                                                        
-                                                                        TeamRequest *teamRequest = [[TeamRequest alloc]init];
-                                                                        
-                                                                        [teamRequest saveTeam:team andAdmin:user  followby:[User currentUser] orChild:nil withTimestamp:timestamp isChild:@0 isType:@1 completion:^{
-                                                                            if (completion) {
-                                                                                
-                                                                                completion();
-                                                                            }
-                                                                            [pendingRequestArray addObject:teamRequest];
-                                                                            isUserFollowCurrentTeam = YES;
-                                                                            [self.teamMembersArray addObject:[User currentUser]];
-                                                                            //  [self.tableView reloadData];
-                                                                        }];
-                                                                        break;
-                                                                        
-                                                                    }
-                                                                    
-                                                                }
-                                                            }
-                                                        }];
-                                                    }]];
+            [alert addAction:[UIAlertAction
+                              actionWithTitle:@"None, I just want to follow it"
+                              style:UIAlertActionStyleDefault
+                              handler:^(UIAlertAction * _Nonnull action) {
+                                  
+                                  PFQuery* moderatorQuery = [team.moderators query];
+                                  [moderatorQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+                                      if(objects.count==0){
+                                          [self showOkMessage:@"No admin found for this team."];
+                                      } else {
+                                          for (User* user in objects) {
+                                              
+                                              if(![self isRequestAllowed:YES withUser:[User currentUser] withChild:nil withTeam:team]){
+                                                  [self showOkMessage:@"A request to follow this team has already been sent to admin."];
+                                              } else {
+                                                  NSString *timestamp =  [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970] * 1000];
+                                                  TeamRequest *teamRequest = [[TeamRequest alloc]init];
+                                                  [teamRequest saveTeam:team andAdmin:user  followby:[User currentUser] orChild:nil withTimestamp:timestamp isChild:@0 isType:@1 completion:^{
+                                                      if (completion) completion();
+                                                      [pendingRequestArray addObject:teamRequest];
+                                                      isUserFollowCurrentTeam = YES;
+                                                      [self.teamMembersArray addObject:[User currentUser]];
+                                                  }];
+                                                  break;
+                                              }
+                                          }
+                                      }
+                                  }];
+                              }]];
         }
         for (Child* child in children) {
-            [alert addAction:[UIAlertAction actionWithTitle:[child displayName]
-                                                      style:UIAlertActionStyleDefault
-                                                    handler:^(UIAlertAction * _Nonnull action) {
-                                                        
-                                                        PFQuery* moderatorQuery = [team.moderators query];
-                                                        [moderatorQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-                                                            if(objects.count==0){
-                                                                [[[UIAlertView alloc] initWithTitle:@""
-                                                                                            message:@"No admin found for this team."
-                                                                                           delegate:nil
-                                                                                  cancelButtonTitle:nil
-                                                                                  otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
-                                                            }
-                                                            
-                                                            else{
-                                                                for (User* user in objects) {
-                                                                    
-                                                                    if(![self isRequestAllowed:YES withUser:nil withChild:child withTeam:team]){
-                                                                        [[[UIAlertView alloc] initWithTitle:@""
-                                                                                                    message:@"A request to follow this team is already sent to admin."
-                                                                                                   delegate:nil
-                                                                                          cancelButtonTitle:nil
-                                                                                          otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
-                                                                    }
-                                                                    
-                                                                    else{
-                                                                        
-                                                                        NSString *timestamp =  [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970] * 1000];
-                                                                        
-                                                                        TeamRequest *teamRequest = [[TeamRequest alloc]init];
-                                                                        
-                                                                        [teamRequest saveTeam:team andAdmin:user  followby:nil orChild:child withTimestamp:timestamp isChild:@1 isType:@1 completion:^{
-                                                                            if (completion) {
-                                                                                [pendingRequestArray addObject:teamRequest];
-                                                                                [self.teamMembersArray addObject:child];
-                                                                                completion();
-                                                                            }
-                                                                            
-                                                                            //  [self.tableView reloadData];
-                                                                        }];
-                                                                        break;
-                                                                        
-                                                                    }
-                                                                    
-                                                                }
-                                                            }
-                                                        }];
-                                                        
-                                                        
-                                                        
-                                                        //                                                        [child followTeam:team completion:^{
-                                                        //                                                            if (completion) {
-                                                        //
-                                                        //                                                                completion();
-                                                        //                                                            }
-                                                        //                                                        }];
-                                                    }]];
+            [alert addAction:[UIAlertAction
+                              actionWithTitle:[child displayName]
+                              style:UIAlertActionStyleDefault
+                              handler:^(UIAlertAction * _Nonnull action) {
+                                  
+                                  PFQuery* moderatorQuery = [team.moderators query];
+                                  [moderatorQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+                                      if(objects.count==0){
+                                          [self showOkMessage:@"No admin found for this team."];
+                                      }
+                                      
+                                      else{
+                                          for (User* user in objects) {
+                                              
+                                              if(![self isRequestAllowed:YES withUser:nil withChild:child withTeam:team]){
+                                                  [self showOkMessage:@"A request to follow this team has already been sent to the team owner."];
+                                              } else {
+                                                  
+                                                  NSString *timestamp =  [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970] * 1000];
+                                                  
+                                                  TeamRequest *teamRequest = [[TeamRequest alloc]init];
+                                                  
+                                                  [teamRequest saveTeam:team andAdmin:user  followby:nil orChild:child withTimestamp:timestamp isChild:@1 isType:@1 completion:^{
+                                                      if (completion) {
+                                                          [pendingRequestArray addObject:teamRequest];
+                                                          [self.teamMembersArray addObject:child];
+                                                          completion();
+                                                      }
+                                                      
+                                                  }];
+                                                  break;
+                                              }
+                                          }
+                                      }
+                                  }];
+                              }]];
         }
         [alert addAction:[UIAlertAction actionWithTitle:@"Cancel"
                                                   style:UIAlertActionStyleCancel
@@ -513,80 +440,54 @@
                                                                        message:@""
                                                                 preferredStyle:UIAlertControllerStyleActionSheet];
         if(!isUserFollowCurrentTeam){
-            [alert addAction:[UIAlertAction actionWithTitle:@"None, I just want to follow it"
-                                                      style:UIAlertActionStyleDefault
-                                                    handler:^(UIAlertAction * _Nonnull action) {
-                                                        
-                                                        PFQuery* moderatorQuery = [team.moderators query];
-                                                        [moderatorQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-                                                            if(objects.count==0){
-                                                                [[[UIAlertView alloc] initWithTitle:@""
-                                                                                            message:@"No admin found for this team."
-                                                                                           delegate:nil
-                                                                                  cancelButtonTitle:nil
-                                                                                  otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
-                                                            }
-                                                            
-                                                            else{
-                                                                for (User* user in objects) {
-                                                                    
-                                                                    if(![self isRequestAllowed:YES withUser:[User currentUser] withChild:nil withTeam:team]){
-                                                                        [[[UIAlertView alloc] initWithTitle:@""
-                                                                                                    message:@"A request to follow this team is already sent to admin."
-                                                                                                   delegate:nil
-                                                                                          cancelButtonTitle:nil
-                                                                                          otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
-                                                                    }else{
-                                                                        [[User currentUser] followTeamWithBlockCallback:team completion:^(BOOL succeeded, NSError * _Nullable error) {
-                                                                            if(succeeded)
-                                                                            {
-                                                                                [[NSNotificationCenter defaultCenter] postNotificationName:@"SpotLightRefersh" object:nil];
-                                                                                isUserFollowCurrentTeam = YES;
-                                                                                [self.teamMembersArray addObject:[User currentUser]];
-                                                                                
-                                                                            }
-                                                                        }];
-                                                                        break;
-                                                                    }
-                                                                    
-                                                                }
-                                                            }
-                                                        }];
-                                                    }]];
+            [alert addAction:[UIAlertAction
+                              actionWithTitle:@"None, I just want to follow it"
+                              style:UIAlertActionStyleDefault
+                              handler:^(UIAlertAction * _Nonnull action) {
+                                  
+                                  PFQuery* moderatorQuery = [team.moderators query];
+                                  [moderatorQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+                                      if(objects.count==0){
+                                          [self showOkMessage:@"No admin found for this team."];
+                                      } else {
+                                          if(![self isRequestAllowed:YES withUser:[User currentUser] withChild:nil withTeam:team]){
+                                              [self showOkMessage:@"A request to follow this team has already been sent to the team owner."];
+                                          }else{
+                                              [[User currentUser] followTeamWithBlockCallback:team completion:^(BOOL succeeded, NSError * _Nullable error) {
+                                                  if(succeeded)
+                                                  {
+                                                      [[NSNotificationCenter defaultCenter] postNotificationName:@"SpotLightRefersh" object:nil];
+                                                      isUserFollowCurrentTeam = YES;
+                                                      [self.teamMembersArray addObject:[User currentUser]];
+                                                      
+                                                  }
+                                              }];
+                                          }
+                                          
+                                      }
+                                  }];
+                              }]];
         }
         for (Child* child in children) {
-            [alert addAction:[UIAlertAction actionWithTitle:[child displayName]
-                                                      style:UIAlertActionStyleDefault
-                                                    handler:^(UIAlertAction * _Nonnull action) {
-                                                        
-                                                        PFQuery* moderatorQuery = [team.moderators query];
-                                                        [moderatorQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-                                                            if(objects.count==0){
-                                                                [[[UIAlertView alloc] initWithTitle:@""
-                                                                                            message:@"No admin found for this team."
-                                                                                           delegate:nil
-                                                                                  cancelButtonTitle:nil
-                                                                                  otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
-                                                            }
-                                                            
-                                                            else{
-                                                                for (User* user in objects) {
-                                                                    
-                                                                    if(![self isRequestAllowed:YES withUser:nil withChild:child withTeam:team]){
-                                                                        [[[UIAlertView alloc] initWithTitle:@""
-                                                                                                    message:@"A request to follow this team is already sent to admin."
-                                                                                                   delegate:nil
-                                                                                          cancelButtonTitle:nil
-                                                                                          otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
-                                                                    }else{
-                                                                        [child followTeamWithBlockCallback:team  completion:nil];
-                                                                        [self.teamMembersArray addObject:child];
-                                                                        break;
-                                                                    }
-                                                                }
-                                                            }
-                                                        }];
-                                                    }]];
+            [alert addAction:[UIAlertAction
+                              actionWithTitle:[child displayName]
+                              style:UIAlertActionStyleDefault
+                              handler:^(UIAlertAction * _Nonnull action) {
+                                  
+                                  PFQuery* moderatorQuery = [team.moderators query];
+                                  [moderatorQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+                                      if(objects.count==0){
+                                          [self showOkMessage:@"No admin found for this team."];
+                                      } else {
+                                          if(![self isRequestAllowed:YES withUser:nil withChild:child withTeam:team]){
+                                              [self showOkMessage:@"A request to follow this team has already been sent to the team owner."];
+                                          } else {
+                                              [child followTeamWithBlockCallback:team  completion:nil];
+                                              [self.teamMembersArray addObject:child];
+                                          }
+                                      }
+                                  }];
+                              }]];
         }
         [alert addAction:[UIAlertAction actionWithTitle:@"Cancel"
                                                   style:UIAlertActionStyleCancel

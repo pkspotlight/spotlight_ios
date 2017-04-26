@@ -18,6 +18,7 @@
 #import "TeamSelectTableViewController.h"
 #import <AFNetworking/UIImageView+AFNetworking.h>
 #import "SpotlightBoardView.h"
+#import "UIViewController+AlertAdditions.h"
 
 #define SpotlightFeedBoardingText @"Click \"+\" on the top right to create a Spotlight for a team you created or follow. A Spotlight is a private group of shared media from a game or event. For example, you can create a Spotlight for a basketball game and share all of the photos and videos you captured to a private community of team members. You can then easily create a Spotlight Reel with music that is easily shared via SMS, Email, and social."
 
@@ -195,11 +196,16 @@
                 }
             }
             if(!isAllowed){
-              [[[UIAlertView alloc] initWithTitle:@""
-                                            message:@"You do not have access to view this Spotlight. Please request to follow this team in order to gain access."
-                                           delegate:self
-                                  cancelButtonTitle:@"Cancel"
-                                  otherButtonTitles:NSLocalizedString(@"Send Invite", nil), nil] show];
+                UIAlertController* noAccessAlert = [UIAlertController alertControllerWithTitle:nil
+                                                                                       message:@"You do not have access to view this Spotlight. Please request to follow this team in order to gain access."
+                                                                                preferredStyle:UIAlertControllerStyleAlert];
+                [noAccessAlert addAction:[UIAlertAction actionWithTitle:@"Send Invite"
+                                                                  style:UIAlertActionStyleDefault
+                                                                handler:^(UIAlertAction * _Nonnull action) {
+                                                                    [self sendRequestToFollowTeam];
+                                                                }]];
+                [noAccessAlert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
+                [self presentViewController:noAccessAlert animated:YES completion:nil];
             }
         }];
     }else{
@@ -210,27 +216,13 @@
     }
 }
 
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if(buttonIndex ==1){
-        [self sendRequestToFollowTeam];
-    }
-    
-}
-
-
-
 -(void)sendRequestToFollowTeam{
     
     
     PFQuery* moderatorQuery = [spotLightCellSelected.team.moderators query];
     [moderatorQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if(objects.count==0){
-            [[[UIAlertView alloc] initWithTitle:@""
-                                        message:@"No admin found for this team"
-                                       delegate:nil
-                              cancelButtonTitle:nil
-                              otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
+            [self showOkMessage:@"No admin found for this team"];
         }
         
         else{

@@ -94,9 +94,6 @@
 
 }
 
-
-
-
 - (IBAction)followButtonPressed:(id)sender {
     if (_isFollowing) {
         
@@ -121,33 +118,6 @@
             [self formatButtonText];
          }];
     }
-    
-    //
-    //    [self.followingActivityIndicator startAnimating];
-    //    PFUser* user = [PFUser currentUser];
-    //    PFRelation *participantRelation = [self.team relationForKey:@"teamParticipants"];
-    //    if (_isFollowing) {
-    //
-    //        [User currentUser] fol
-    //
-    //
-    //        [participantRelation removeObject:user];
-    //    } else {
-    //        [participantRelation addObject:user];
-    //    }
-//    
-//    
-//    
-//    [self.team saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-//        if (succeeded) {
-//            self.isFollowing = !self.isFollowing;
-//        }
-//        [self formatButtonText];
-//        [self.followingActivityIndicator stopAnimating];
-////        [self.delegate performSelector:@selector(reloadTable)];
-//        [self.delegate performSelector:@selector(followButtonPressed:)
-//                            withObject:self];
-//    }];
 }
 
 @end

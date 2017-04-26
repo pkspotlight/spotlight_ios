@@ -28,6 +28,7 @@
 }
 
 - (NSString*)displayName {
+    [self fetchIfNeeded];
     NSString* displayName = self.username;
     if (self.firstName) {
         displayName = self.firstName;
@@ -46,7 +47,6 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:@"SpotLightRefersh" object:nil];
         }
         if (block) {
-            
             block(succeeded,nil);
         }
     }];

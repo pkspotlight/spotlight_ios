@@ -29,6 +29,8 @@
     
 - (void)setKeyboardType:(UIKeyboardType)keyboardType;
 - (void)setIsSecure:(BOOL)isSecure;
+- (void)setAutoCapitalizationType:(UITextAutocapitalizationType)capType;
+
 @property (readonly, nonatomic) NSString *attributeString;
 
 

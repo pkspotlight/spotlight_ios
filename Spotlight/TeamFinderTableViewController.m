@@ -40,8 +40,9 @@
     _teams = [[NSMutableArray alloc] init];
     [self fetchAllPendingRequest];
     [self loadUserTeams:nil];
-    [self.tableView registerNib:[UINib nibWithNibName:@"BasicHeaderView" bundle:nil]
-forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
+    [self.tableView
+     registerNib:[UINib nibWithNibName:@"BasicHeaderView" bundle:nil]
+     forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     refresh = [[UIRefreshControl alloc] init];
     [refresh addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
     [self setRefreshControl:refresh];
@@ -49,8 +50,6 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                             initWithTarget:self
                             action:@selector(dismissKeyboard)];
 }
-
-
 
 - (void)loadUserTeams:(UIRefreshControl*)sender  {
     PFQuery *query = [[[User currentUser] teams] query];
@@ -133,9 +132,6 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     self.teams = filteredArrayOfObjects;
 }
 
-
-
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -153,7 +149,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                                                forIndexPath:indexPath];
         if (self.searchResults == nil) {
             cell.contentView.hidden = YES;
-        }else{
+        } else {
             cell.contentView.hidden = NO;
         }
     } else {
@@ -180,7 +176,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
         TeamDetailsViewController *teamDetails = [storyboard instantiateViewControllerWithIdentifier:@"TeamDetailsViewController"];
         teamDetails.team = team;
         [self.navigationController pushViewController:teamDetails animated:YES];
-
+        
     } else {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Follow This Team?" message:@"A request will be sent to the administrator" preferredStyle:UIAlertControllerStyleAlert];
         [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -189,53 +185,10 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
         [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
         [self presentViewController:alert animated:YES completion:nil];
     }
-    
 }
 
 
 #pragma mark - SearchBar Delegate Methods
-
-//-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-//    //dismiss keyboard
-//    [self.searchBar resignFirstResponder];
-//
-//    //Strip the whitespace off the end of the search text
-//    NSString *searchText = [self.searchBar.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-//
-//    if (![searchText isEqualToString:@""]) {
-//
-//        [refresh beginRefreshing];
-//
-//        PFQuery *firstQuery = [Team query];
-//        PFQuery *secondQuery = [Team query];
-//
-//        [firstQuery whereKey:@"teamName" containsString:searchText];
-//        [secondQuery whereKey:@"town" containsString:searchText];
-//
-//        PFQuery *query = [PFQuery orQueryWithSubqueries:@[firstQuery,
-//                                                          secondQuery]];
-//        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-//            if (!error) {
-//                self.searchResults = objects;
-//                if (objects.count > 0) {
-//                    for (Team *team in objects) {
-//                        NSLog(@"team: %@, %@", team.teamName, team.town);
-//                    }
-//                } else {
-//                    //Show no search results message
-//                }
-//
-//                //reload the tableView after the user searches
-//                [self.tableView reloadData];
-//            } else {
-//
-//            }
-//            [refresh performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:NO];
-//        }];
-//    }
-//}
-//
-
 
 -(void)searchText:(NSString*)searchTeamText{
     
@@ -266,8 +219,6 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                 }
                 
                 [self.tableView reloadData];
-            } else {
-                
             }
             [refresh performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:NO];
         }];
@@ -275,33 +226,24 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
 }
 
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
-    
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     NSString *txtToSearch = [NSString new];
     NSString *substring = [NSString stringWithString:self.searchTxtField.text];
     substring = [substring stringByReplacingCharactersInRange:range withString:string];
     txtToSearch = substring;
-    
-    
     if([txtToSearch isEqualToString:@""] && txtToSearch.length == 0){
         self.searchResults = @[];
         [self.crossImage setHidden:YES];
-        
         [self.tableView reloadData];
-        
-    }
-    else{
+    } else {
         [self.crossImage setHidden:NO];
     }
     return YES; //If you don't your textfield won't get any text in it
 }
 
-
 -(IBAction)searchCancelButtonClicked:(UIButton *)sender {
     self.searchResults =  nil;
     [self.crossImage setHidden:YES];
-    
     self.searchTxtField.text = @"";
     [self.tableView reloadData];
     [refresh endRefreshing];
@@ -338,7 +280,7 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
     [self.searchTxtField resignFirstResponder];
 }
 
--(void)fetchAllPendingRequest{
+-(void)fetchAllPendingRequest {
     
     PFQuery *spotlightQuery = [PFQuery queryWithClassName:@"TeamRequest"];
     [spotlightQuery whereKey:@"user" equalTo:[User currentUser]];
@@ -355,37 +297,14 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                     [pendingRequestArray addObject:request];
                     
                     [request.team fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-                        //   NSString *data =[NSString stringWithFormat:@"%@       %@",request.admin.firstName,request.user.firstName];
-                        
-                        
                     }];
                 }
-                
             }
-            
-            
         }
-        else{
-            //[[[self  tabBar]items] objectAtIndex:2].badgeValue  = nil;
-        }
-        
-        //        for(TeamRequest *request in objects)
-        //        {
-        //            [request.admin fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-        //                //   NSString *data =[NSString stringWithFormat:@"%@       %@",request.admin.firstName,request.user.firstName];
-        //
-        //                NSLog(@"%@",request.admin.firstName);
-        //            }];
-        //
-        //
-        //
-        //        }
         
     }];
     
 }
-
-
 
 - (void)followButtonPressed:(TeamTableViewCell*)teamCell completion:(void (^)(void))completion{
     
@@ -427,54 +346,46 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
         UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Which Child is on this Team?"
                                                                        message:@""
                                                                 preferredStyle:UIAlertControllerStyleActionSheet];
-        [alert addAction:[UIAlertAction actionWithTitle:@"None, I just want to follow it"
-                                                  style:UIAlertActionStyleDefault
-                                                handler:^(UIAlertAction * _Nonnull action) {
-                                                    
-                                                    PFQuery* moderatorQuery = [team.moderators query];
-                                                    [moderatorQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-                                                        if(objects.count==0){
-                                                            [[[UIAlertView alloc] initWithTitle:@""
-                                                                                        message:@"No admin found for this team"
-                                                                                       delegate:nil
-                                                                              cancelButtonTitle:nil
-                                                                              otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
-                                                        }
-                                                        
-                                                        else{
-                                                            for (User* user in objects) {
-                                                                
-                                                                if(![self isRequestAllowed:NO withUser:user withChild:nil withTeam:team]){
-                                                                    [[[UIAlertView alloc] initWithTitle:@""
-                                                                                                message:@"A request to follow this team is already sent to admin."
-                                                                                               delegate:nil
-                                                                                      cancelButtonTitle:nil
-                                                                                      otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
-                                                                }
-                                                                
-                                                                else{
-                                                                    NSString *timestamp =  [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970] * 1000];
-                                                                    
-                                                                    TeamRequest *teamRequest = [[TeamRequest alloc]init];
-                                                                    
-                                                                    [teamRequest saveTeam:team andAdmin:user  followby:[User currentUser] orChild:nil withTimestamp:timestamp isChild:@0 isType:@1  completion:^{
-                                                                        if (completion) {
-                                                                            
-                                                                            completion();
-                                                                        }
-                                                                        [pendingRequestArray addObject:teamRequest];
-                                                                        [self.tableView reloadData];
-                                                                    }];
-                                                                    break;
-                                                                    
-                                                                }
-                                                                
-                                                                
-                                                                
-                                                            }
-                                                        }
-                                                    }];
-                                                }]];
+        [alert addAction:[UIAlertAction
+                          actionWithTitle:@"None, I just want to follow it"
+                          style:UIAlertActionStyleDefault
+                          handler:^(UIAlertAction * _Nonnull action) {
+                              
+                              PFQuery* moderatorQuery = [team.moderators query];
+                              [moderatorQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+                                  if(objects.count==0){
+                                      [[[UIAlertView alloc] initWithTitle:@""
+                                                                  message:@"No admin found for this team"
+                                                                 delegate:nil
+                                                        cancelButtonTitle:nil
+                                                        otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
+                                  } else {
+                                      for (User* user in objects) {
+                                          if(![self isRequestAllowed:NO withUser:user withChild:nil withTeam:team]){
+                                              [[[UIAlertView alloc] initWithTitle:@""
+                                                                          message:@"A request to follow this team has already been sent to the team owner."
+                                                                         delegate:nil
+                                                                cancelButtonTitle:nil
+                                                                otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
+                                          } else {
+                                              NSString *timestamp =  [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970] * 1000];
+                                              
+                                              TeamRequest *teamRequest = [[TeamRequest alloc]init];
+                                              
+                                              [teamRequest saveTeam:team andAdmin:user  followby:[User currentUser] orChild:nil withTimestamp:timestamp isChild:@0 isType:@1  completion:^{
+                                                  if (completion) {
+                                                      
+                                                      completion();
+                                                  }
+                                                  [pendingRequestArray addObject:teamRequest];
+                                                  [self.tableView reloadData];
+                                              }];
+                                              break;
+                                          }
+                                      }
+                                  }
+                              }];
+                          }]];
         for (Child* child in children) {
             [alert addAction:[UIAlertAction actionWithTitle:[child displayName]
                                                       style:UIAlertActionStyleDefault
@@ -488,20 +399,16 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                                                                                            delegate:nil
                                                                                   cancelButtonTitle:nil
                                                                                   otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
-                                                            }
-                                                            
-                                                            else{
+                                                            } else {
                                                                 for (User* user in objects) {
                                                                     
                                                                     if(![self isRequestAllowed:YES withUser:nil withChild:child withTeam:team]){
                                                                         [[[UIAlertView alloc] initWithTitle:@""
-                                                                                                    message:@"A request to follow this team is already sent to admin."
+                                                                                                    message:@"A request to follow this team has already been sent to the team owner."
                                                                                                    delegate:nil
                                                                                           cancelButtonTitle:nil
                                                                                           otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
-                                                                    }
-                                                                    
-                                                                    else{
+                                                                    } else {
                                                                         
                                                                         NSString *timestamp =  [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970] * 1000];
                                                                         
@@ -516,21 +423,10 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                                                                             [self.tableView reloadData];
                                                                         }];
                                                                         break;
-                                                                        
                                                                     }
-                                                                    
                                                                 }
                                                             }
                                                         }];
-                                                        
-                                                        
-                                                        
-                                                        //                                                        [child followTeam:team completion:^{
-                                                        //                                                            if (completion) {
-                                                        //
-                                                        //                                                                completion();
-                                                        //                                                            }
-                                                        //                                                        }];
                                                     }]];
         }
         [alert addAction:[UIAlertAction actionWithTitle:@"Cancel"
@@ -539,7 +435,6 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                                                 }]];
         [self presentViewController:alert animated:YES completion:nil];
     } else {
-        
         PFQuery* moderatorQuery = [team.moderators query];
         [moderatorQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
             if(objects.count==0){
@@ -548,19 +443,18 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                                            delegate:nil
                                   cancelButtonTitle:nil
                                   otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
-            }
-            
-            else{
+            } else {
                 for (User* user in objects) {
                     
                     if(![self isRequestAllowed:NO withUser:[User currentUser] withChild:nil withTeam:team]){
+                        
+                        
                         [[[UIAlertView alloc] initWithTitle:@""
-                                                    message:@"A request to follow this team is already sent to admin."
+                                                    message:@"A request to follow this team has already been sent to team owner."
                                                    delegate:nil
                                           cancelButtonTitle:nil
                                           otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
-                    }
-                    else{
+                    } else {
                         
                         NSString *timestamp =  [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970] * 1000];
                         
@@ -575,8 +469,6 @@ forHeaderFooterViewReuseIdentifier:@"BasicHeaderView"];
                             [self.tableView reloadData];
                         }];
                         break;
-                        
-                        
                     }
                 }
             }

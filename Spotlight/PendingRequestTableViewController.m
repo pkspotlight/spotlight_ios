@@ -132,18 +132,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PendingRequestTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"pendingRequest" forIndexPath:indexPath];
-    
-    
-    if (indexPath.section==0) {
-        TeamRequest* request = self.requestArray[indexPath.row];
-        [cell setData:request.nameOfRequester teamName:request.teamName fromUser:request.user forChild:request.child isChild:request.isChild.boolValue withType:request.type];
-    }
-    else {
-        TeamRequest* request = self.requestFriendArray[indexPath.row];
-        [cell setData:request.nameOfRequester teamName:request.teamName fromUser:request.user forChild:request.child isChild:request.isChild.boolValue withType:request.type];
-        
-    }
-    
+    TeamRequest* request = (indexPath.section == 0) ? self.requestArray[indexPath.row] : self.requestFriendArray[indexPath.row];
+    [cell populatePendingInfoWithTeamRequest:request];
     cell.acceptButton.tag = 1001;
     cell.rejectButton.tag = 1002;
     [cell.acceptButton addTarget:self action:@selector(requestAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -262,7 +252,7 @@
                 
                 [request.team fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
                     if(!error){
-                        if(request.isChild) {
+                        if(request.isChild.boolValue) {
                             while( [request.team.spectatorsArray containsObject:request.child.objectId])
                             {
                                 [request.team.spectatorsArray removeObject:request.child.objectId];
@@ -326,14 +316,17 @@
                     } else{
                         [_requestFriendArray removeObjectAtIndex:indexPath.row];
                     }
-                    
-                    if(_requestArray.count==0&&_requestFriendArray.count == 0){
-                        [self.navigationController popViewControllerAnimated:YES];
-                        
-                    } else{
-                        
-                        [self.tableView reloadData];
-                    }
+                    NSString* msgText = [NSString stringWithFormat:@"%@ is now following you. To follow %@, search %@’s username/email and request to follow him/her.", [request.user displayName], [request.user displayName], [request.user displayName]];
+                    UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"" message:msgText preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                        if(_requestArray.count==0&&_requestFriendArray.count == 0){
+                            [self.navigationController popViewControllerAnimated:YES];
+                        } else{
+                            [self.tableView reloadData];
+                        }
+                    }];
+                    [controller addAction:action];
+                    [self.navigationController presentViewController:controller animated:YES completion:nil];
                 }
                 else
                 {

@@ -27,7 +27,6 @@
 @property (strong, nonatomic) Child* child;
 @property (strong, nonatomic) NSDateFormatter* dateFormatter;
 
-
 @end
 
 
@@ -86,8 +85,6 @@
 
         [self loadTeamSpotlightsForChild:self.child completion:completion];
     } else if (self.team) {
-     
-
         [self loadTeamSpotlights:self.team completion:completion];
     } else {
         
@@ -253,18 +250,10 @@
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    
     Spotlight *spotLight = self.spotlights[indexPath.row];
-    
-    
-        SpotlightTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SpotlightTableViewCell" forIndexPath:indexPath];
-        [cell formatForSpotlight:spotLight dateFormat:self.dateFormatter];
-        return cell;
-   
-    
-    
-    
+    SpotlightTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SpotlightTableViewCell" forIndexPath:indexPath];
+    [cell formatForSpotlight:spotLight dateFormat:self.dateFormatter];
+    return cell;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -279,8 +268,7 @@
 
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    
+
     Spotlight *spotlight = [self.spotlights objectAtIndex:indexPath.row];
     __block BOOL isCreatedByCurrentUser = false;
     PFQuery* moderatorQuery = [spotlight.moderators query];
@@ -288,20 +276,24 @@
         for (User* user in objects) {
             if ([user.objectId isEqualToString:[[User currentUser] objectId]]) {
                 isCreatedByCurrentUser = true;
-                
-                if(isCreatedByCurrentUser)
-                {
+                if(isCreatedByCurrentUser) {
                     if (editingStyle == UITableViewCellEditingStyleDelete) {
-                        //        //add code here for when you hit delete
-                        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Are You Sure ?"
-                                                                          message:nil
-                                                                         delegate:self
-                                                                cancelButtonTitle:@"Yes"
-                                                                otherButtonTitles:@"No",nil];
-                        message.accessibilityValue = @"Delete";
-                        message.tag = indexPath.row;
-                        [message show];
-                        
+                        UIAlertController *sureAlert = [UIAlertController alertControllerWithTitle:@"Are You Sure?"
+                                                                                           message:nil
+                                                                                    preferredStyle:UIAlertControllerStyleAlert];
+                        [sureAlert addAction:[UIAlertAction
+                                              actionWithTitle:@"Delete"
+                                              style:UIAlertActionStyleDestructive
+                                              handler:^(UIAlertAction * _Nonnull action) {
+                                                  Spotlight *spotlight = [self.spotlights objectAtIndex:[indexPath row]];
+                                                  [spotlight deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                                                      if(succeeded){
+                                                          [[NSNotificationCenter defaultCenter] postNotificationName:@"SpotLightRefersh" object:nil];
+                                                      }
+                                                  }];
+                                              }]];
+                        [sureAlert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
+                        [self.delegate presentViewController:sureAlert animated:YES completion:nil];
                     }
                 }
             }
@@ -311,30 +303,7 @@
         {
             [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
         }
-        
     }];
-    
-    }
-
-
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if([alertView.accessibilityValue isEqualToString:@"Delete"]){
-        if(buttonIndex ==0){
-            Spotlight *spotlight = [self.spotlights objectAtIndex:alertView.tag];
-//            MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication].delegate window] animated:YES];
-//            [hud setLabelText:@"Deleting Spotlight..."];
-            
-            [spotlight deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-                if(succeeded){
-                     [[NSNotificationCenter defaultCenter] postNotificationName:@"SpotLightRefersh" object:nil];
-                   // [self.delegate spotlightDeleted:hud];
-                }
-            }];
-        }
-    }
-    
 }
 
 @end

@@ -44,6 +44,10 @@
     [self.valueTextField setSecureTextEntry:isSecure];
 }
 
+- (void)setAutoCapitalizationType:(UITextAutocapitalizationType)capType {
+    self.valueTextField.autocapitalizationType = capType;
+}
+
 - (IBAction)textFieldTextDidChange:(UITextField *)textField {
     [self.delegate accountTextFieldCell:self didChangeToValue:textField.text];
 }

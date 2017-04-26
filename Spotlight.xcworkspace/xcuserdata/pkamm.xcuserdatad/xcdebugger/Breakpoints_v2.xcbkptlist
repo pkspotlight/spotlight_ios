@@ -65,6 +65,53 @@
             endingLineNumber = "787"
             landmarkName = "-openMedia"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__46-[SpotlightCollectionViewController openMedia]_block_invoke"
+                  moduleName = "Spotlight"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pkamm/Documents/spotlight/new_ios/Spotlight/SpotlightCollectionViewController.m"
+                  timestampString = "512588946.387124"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "788"
+                  endingLineNumber = "788"
+                  offsetFromSymbolStart = "96">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__copy_helper_block_.602"
+                  moduleName = "Spotlight"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pkamm/Documents/spotlight/new_ios/Spotlight/SpotlightCollectionViewController.m"
+                  timestampString = "512588946.38846"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "788"
+                  endingLineNumber = "788"
+                  offsetFromSymbolStart = "64">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__destroy_helper_block_.603"
+                  moduleName = "Spotlight"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pkamm/Documents/spotlight/new_ios/Spotlight/SpotlightCollectionViewController.m"
+                  timestampString = "512588946.389742"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "788"
+                  endingLineNumber = "788"
+                  offsetFromSymbolStart = "36">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -84,11 +131,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Spotlight/SignUpTableViewController.m"
-            timestampString = "504216043.467379"
+            timestampString = "506986735.85898"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "215"
-            endingLineNumber = "215"
+            startingLineNumber = "224"
+            endingLineNumber = "224"
             landmarkName = "-logInWithFacebookBtnClicked:"
             landmarkType = "7">
          </BreakpointContent>
@@ -100,11 +147,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Spotlight/SignUpTableViewController.m"
-            timestampString = "503467577.049809"
+            timestampString = "506986735.85898"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
             landmarkName = "-createAccountButtonPressed:"
             landmarkType = "7">
          </BreakpointContent>
@@ -121,7 +168,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "252"
             endingLineNumber = "252"
-            landmarkName = "-searchText:"
+            landmarkName = "-backButtonClicked:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -132,11 +179,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Spotlight/FriendFinderTableViewController.m"
-            timestampString = "503528374.825417"
+            timestampString = "506995935.247222"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "275"
-            endingLineNumber = "275"
+            startingLineNumber = "262"
+            endingLineNumber = "262"
             landmarkName = "-searchTextEditingChanged:"
             landmarkType = "7">
          </BreakpointContent>
@@ -244,12 +291,12 @@
                   moduleName = "Spotlight"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/pkamm/Documents/spotlight/new_ios/Spotlight/UIViewController+MediaAddingFunctionality.m"
-                  timestampString = "504643803.498196"
+                  timestampString = "512588946.414316"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "27"
                   endingLineNumber = "27"
-                  offsetFromSymbolStart = "96">
+                  offsetFromSymbolStart = "88">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -259,7 +306,7 @@
                   moduleName = "Spotlight"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/pkamm/Documents/spotlight/new_ios/Spotlight/UIViewController+MediaAddingFunctionality.m"
-                  timestampString = "504643803.500552"
+                  timestampString = "512588946.415609"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "27"
@@ -274,7 +321,7 @@
                   moduleName = "Spotlight"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/pkamm/Documents/spotlight/new_ios/Spotlight/UIViewController+MediaAddingFunctionality.m"
-                  timestampString = "504643803.502617"
+                  timestampString = "512588946.416884"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "27"
@@ -403,12 +450,12 @@
                   moduleName = "Spotlight"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/pkamm/Documents/spotlight/new_ios/Spotlight/SpotlightTaggedParticipantView.m"
-                  timestampString = "504643803.530665"
+                  timestampString = "512588946.435664"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "92"
                   endingLineNumber = "92"
-                  offsetFromSymbolStart = "240">
+                  offsetFromSymbolStart = "248">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -418,12 +465,12 @@
                   moduleName = "Spotlight"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/pkamm/Documents/spotlight/new_ios/Spotlight/SpotlightTaggedParticipantView.m"
-                  timestampString = "504643803.532833"
+                  timestampString = "512588946.43699"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "92"
                   endingLineNumber = "92"
-                  offsetFromSymbolStart = "256">
+                  offsetFromSymbolStart = "264">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -499,11 +546,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Spotlight/SignUpTableViewController.m"
-            timestampString = "504216056.274452"
+            timestampString = "506986735.85898"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144"
+            startingLineNumber = "153"
+            endingLineNumber = "153"
             landmarkName = "-createAccountButtonPressed:"
             landmarkType = "7">
             <Locations>
@@ -515,12 +562,12 @@
                   moduleName = "Spotlight"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/pkamm/Documents/spotlight/new_ios/Spotlight/SignUpTableViewController.m"
-                  timestampString = "504643803.551935"
+                  timestampString = "512588946.45548"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "145"
-                  endingLineNumber = "145"
-                  offsetFromSymbolStart = "2004">
+                  startingLineNumber = "154"
+                  endingLineNumber = "154"
+                  offsetFromSymbolStart = "2508">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -530,11 +577,11 @@
                   moduleName = "Spotlight"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/pkamm/Documents/spotlight/new_ios/Spotlight/SignUpTableViewController.m"
-                  timestampString = "504643803.554083"
+                  timestampString = "512588946.457591"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "146"
-                  endingLineNumber = "146"
+                  startingLineNumber = "155"
+                  endingLineNumber = "155"
                   offsetFromSymbolStart = "56">
                </Location>
             </Locations>
@@ -552,7 +599,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "121"
             endingLineNumber = "121"
-            landmarkName = "-newPendingFieldDictionary"
+            landmarkName = "-didReceiveMemoryWarning"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -602,38 +649,6 @@
             endingLineNumber = "172"
             landmarkName = "-loadSpotlightsForChildren:completion:"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[SpotlightDataSource loadSpotlightsForChildren:completion:]"
-                  moduleName = "Spotlight"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/pkamm/Documents/spotlight/new_ios/Spotlight/SpotlightDataSource.m"
-                  timestampString = "504643803.605701"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "172"
-                  endingLineNumber = "172"
-                  offsetFromSymbolStart = "88">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__60-[SpotlightDataSource loadSpotlightsForChildren:completion:]_block_invoke"
-                  moduleName = "Spotlight"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/pkamm/Documents/spotlight/new_ios/Spotlight/SpotlightDataSource.m"
-                  timestampString = "504643803.607537"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "174"
-                  endingLineNumber = "174"
-                  offsetFromSymbolStart = "116">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -659,12 +674,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Spotlight/SpotlightDataSource.m"
-            timestampString = "504643693.147046"
+            timestampString = "504643707.218993"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
-            landmarkName = "-loadSpotlights:"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
+            landmarkName = "-loadTeamSpotlightsForChild:completion:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -674,13 +689,125 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Spotlight/SpotlightDataSource.m"
-            timestampString = "504643707.218993"
+            filePath = "Spotlight/IntroViewController.m"
+            timestampString = "506560667.602561"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
-            landmarkName = "-loadTeamSpotlightsForChild:completion:"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
+            landmarkName = "-fetchFbData"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Spotlight/IntroViewController.m"
+            timestampString = "506560669.466759"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
+            landmarkName = "-fetchFbData"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Spotlight/IntroViewController.m"
+            timestampString = "506560671.734151"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "-logInWithFacebookBtnClicked:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[IntroViewController logInWithFacebookBtnClicked:]"
+                  moduleName = "Spotlight"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pkamm/Documents/spotlight/new_ios/Spotlight/IntroViewController.m"
+                  timestampString = "512588946.484791"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "82"
+                  endingLineNumber = "82"
+                  offsetFromSymbolStart = "208">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__51-[IntroViewController logInWithFacebookBtnClicked:]_block_invoke"
+                  moduleName = "Spotlight"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pkamm/Documents/spotlight/new_ios/Spotlight/IntroViewController.m"
+                  timestampString = "512588946.486102"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "83"
+                  endingLineNumber = "83"
+                  offsetFromSymbolStart = "80">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Spotlight/FriendFinderTableViewController.m"
+            timestampString = "506996366.029165"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "352"
+            endingLineNumber = "352"
+            landmarkName = "-tableView:didSelectRowAtIndexPath:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Spotlight/PendingRequestTableViewCell.m"
+            timestampString = "509574331.820834"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "-otherUserInvitedCurrentUserToFollowTeam:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Spotlight/OrganizationTableViewController.m"
+            timestampString = "511823181.90913"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "-loadOrganizations"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

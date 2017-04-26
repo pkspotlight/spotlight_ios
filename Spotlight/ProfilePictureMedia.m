@@ -33,9 +33,6 @@
     if ( (self = [super init]) ) {
         UIImage* thumbImage = [self generateThumbImage:path];
         self.thumbnailImageFile = [PFFile fileWithName:@"thumb.jpg" data:UIImageJPEGRepresentation(thumbImage, .7)];
-        
-        // NSData *videoData = [NSData dataWithContentsOfFile:path];
-        //   BOOL exists = [[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:false];
         NSData *videoData = [[NSFileManager defaultManager] contentsAtPath:path];
         self.isVideo = YES;
         self.mediaFile = [PFFile fileWithName:@"video.mov" data:videoData];

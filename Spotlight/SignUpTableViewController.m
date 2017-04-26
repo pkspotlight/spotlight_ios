@@ -42,8 +42,8 @@
         [self.btnCreateAccount setTitle:@"Login" forState:UIControlStateNormal];
         [self.btnCreateAccount addTarget:self action:@selector(LogInButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     } else {
-        self.userPropertyArray = @[ @"email", @"password", @"username", @"birthdate"];
-        self.userPropertyDisplayArray = @[ @"Email Address", @"Password", @"Username", @"Birthdate"];
+        self.userPropertyArray = @[ @"email", @"password", @"username", @"firstName", @"lastName", @"birthdate"];
+        self.userPropertyDisplayArray = @[ @"Email Address", @"Password", @"Username", @"First Name", @"Last Name", @"Birthdate"];
         self.lblSignUp.text = @"Create An Account";
         [self.btnCreateAccount setTitle:@"Create An Account" forState:UIControlStateNormal];
         [self.btnCreateAccount addTarget:self action:@selector(createAccountButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -91,6 +91,9 @@
         }
         if ([attribute isEqualToString:@"password"]) {
             [(FieldEntryTableViewCell*)cell setIsSecure:YES];
+        }
+        if ([attribute isEqualToString:@"lastName"] || [attribute isEqualToString:@"firstName"]) {
+            [(FieldEntryTableViewCell*)cell setAutoCapitalizationType:UITextAutocapitalizationTypeWords];
         }
     }
     return cell;
@@ -141,6 +144,12 @@
         user.email = self.pendingInputDict[@"email"];
         user.password = self.pendingInputDict[@"password"];
         user.birthdate = self.userDOB;
+        if (self.pendingInputDict[@"firstName"] ) {
+            user.firstName = self.pendingInputDict[@"firstName"];
+        }
+        if (self.pendingInputDict[@"lastName"] ) {
+            user.lastName = self.pendingInputDict[@"lastName"];
+        }
 
         [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (succeeded) {   // Hooray! Let them use the app now.

@@ -166,6 +166,7 @@
 		88F2FFEC1E09905300CADDD6 /* AddMoreTaggedParticipantsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88F2FFEB1E09905300CADDD6 /* AddMoreTaggedParticipantsTableViewCell.xib */; };
 		88FDB88E1C8EA2A1008C9A3D /* TB - Disney Funk 124bpm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 88FDB87E1C8EA2A1008C9A3D /* TB - Disney Funk 124bpm.mp3 */; };
 		88FDB8941C8EA2A1008C9A3D /* DT_TheDuff_CoolKids_INST130.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 88FDB8841C8EA2A1008C9A3D /* DT_TheDuff_CoolKids_INST130.mp3 */; };
+		A85F44111EB12F43001C035D /* openingImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A85F44101EB12F43001C035D /* openingImage.jpg */; };
 		FC4F359EA32F39CBF10D5525 /* libPods-Spotlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DCBB464380C17488F0B2051 /* libPods-Spotlight.a */; };
 /* End PBXBuildFile section */
 
@@ -345,7 +346,7 @@
 		889DEEC71C97370100726D83 /* heart@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart@3x.png"; sourceTree = "<group>"; };
 		889DEECB1C98B90000726D83 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		889DEECF1C98E6E100726D83 /* spotlightWriting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spotlightWriting.png; sourceTree = "<group>"; };
-		88A736D41B91318D00093B27 /* Spotlight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spotlight.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		88A736D41B91318D00093B27 /* BALSA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BALSA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88A736D81B91318D00093B27 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88A736D91B91318D00093B27 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		88A736DB1B91318D00093B27 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -413,6 +414,7 @@
 		88FDB87E1C8EA2A1008C9A3D /* TB - Disney Funk 124bpm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "TB - Disney Funk 124bpm.mp3"; sourceTree = "<group>"; };
 		88FDB8841C8EA2A1008C9A3D /* DT_TheDuff_CoolKids_INST130.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = DT_TheDuff_CoolKids_INST130.mp3; sourceTree = "<group>"; };
 		A18D079BCFAB299658BDF57C /* Pods-Spotlight.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spotlight.release.xcconfig"; path = "Pods/Target Support Files/Pods-Spotlight/Pods-Spotlight.release.xcconfig"; sourceTree = "<group>"; };
+		A85F44101EB12F43001C035D /* openingImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = openingImage.jpg; sourceTree = "<group>"; };
 		C9EF640CCA8ED05A107596FF /* libPods-SpotlightTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SpotlightTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D373EE3193DFC78DC9BEE3E3 /* Pods-Spotlight.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spotlight.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Spotlight/Pods-Spotlight.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -656,11 +658,12 @@
 		88A736CB1B91318D00093B27 = {
 			isa = PBXGroup;
 			children = (
+				A85F44101EB12F43001C035D /* openingImage.jpg */,
 				8811D5071E8EA10E0022C00D /* Big_Little_Skills_Academy.jpg */,
 				88B71EF31E9D641600B59A0F /* balsa_logo.png */,
 				8400ED171D7EA68100E4600A /* Main.storyboard */,
-				84A234251D3F5F0D008AB7C0 /* ThirdParty */,
 				88A736D61B91318D00093B27 /* Spotlight */,
+				84A234251D3F5F0D008AB7C0 /* ThirdParty */,
 				88A736F01B91318D00093B27 /* SpotlightTests */,
 				88A736D51B91318D00093B27 /* Products */,
 				88450BF91BC4CC30004BB6B4 /* Fabric.framework */,
@@ -673,7 +676,7 @@
 		88A736D51B91318D00093B27 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				88A736D41B91318D00093B27 /* Spotlight.app */,
+				88A736D41B91318D00093B27 /* BALSA.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -880,9 +883,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		88A736D31B91318D00093B27 /* Spotlight */ = {
+		88A736D31B91318D00093B27 /* BALSA */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 88A736F71B91318D00093B27 /* Build configuration list for PBXNativeTarget "Spotlight" */;
+			buildConfigurationList = 88A736F71B91318D00093B27 /* Build configuration list for PBXNativeTarget "BALSA" */;
 			buildPhases = (
 				EEF913DF976A2899C3685F9B /* [CP] Check Pods Manifest.lock */,
 				88A736D01B91318D00093B27 /* Sources */,
@@ -896,9 +899,9 @@
 			);
 			dependencies = (
 			);
-			name = Spotlight;
+			name = BALSA;
 			productName = Spotlight;
-			productReference = 88A736D41B91318D00093B27 /* Spotlight.app */;
+			productReference = 88A736D41B91318D00093B27 /* BALSA.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -936,7 +939,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				88A736D31B91318D00093B27 /* Spotlight */,
+				88A736D31B91318D00093B27 /* BALSA */,
 			);
 		};
 /* End PBXProject section */
@@ -973,6 +976,7 @@
 				396C0E771D40F90A009654EA /* PEPhotoCropEditor.bundle in Resources */,
 				398D24871D40D64D00647117 /* ImageSelectedSmallOff@3x.png in Resources */,
 				39574E261D4220B70059029C /* upload@2x.png in Resources */,
+				A85F44111EB12F43001C035D /* openingImage.jpg in Resources */,
 				8893FD731BFC1C4600711779 /* profile@3x.png in Resources */,
 				398D248F1D40D64D00647117 /* PlayButtonOverlayLargeTap@2x.png in Resources */,
 				398D24971D40D64D00647117 /* UIBarButtonItemGrid.png in Resources */,
@@ -1452,7 +1456,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		88A736F71B91318D00093B27 /* Build configuration list for PBXNativeTarget "Spotlight" */ = {
+		88A736F71B91318D00093B27 /* Build configuration list for PBXNativeTarget "BALSA" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				88A736F81B91318D00093B27 /* Debug */,

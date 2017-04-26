@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hOq-mx-7hw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hOq-mx-7hw">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -14,16 +14,16 @@
             <objects>
                 <tableViewController storyboardIdentifier="SpotlightFeedViewController" title="Big &amp; Small" id="8hb-z5-ol4" customClass="SpotlightFeedViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="342" sectionHeaderHeight="22" sectionFooterHeight="22" id="9Pj-Xg-5pY">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="383" height="419"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="sectionIndexBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SpotlightTableViewCell" rowHeight="365" id="cV8-cF-CTj" customClass="SpotlightTableViewCell">
-                                <rect key="frame" x="0.0" y="22" width="375" height="365"/>
+                                <rect key="frame" x="0.0" y="22" width="383" height="365"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" tableViewCell="cV8-cF-CTj" id="6wP-Er-nX9">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="365"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="383" height="365"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1" verticalHuggingPriority="1" horizontalCompressionResistancePriority="1" verticalCompressionResistancePriority="1" image="spotlightCard" translatesAutoresizingMaskIntoConstraints="NO" id="GPI-3R-1PO">
@@ -190,7 +190,7 @@
         <scene sceneID="xo6-Hu-DTm">
             <objects>
                 <collectionViewController storyboardIdentifier="SpotLightCollectionView" id="h9E-yE-X25" customClass="SpotlightCollectionViewController" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="Vyx-SG-6aQ">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Vyx-SG-6aQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.99878907203674316" green="0.94971704483032227" blue="0.95082443952560425" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -487,15 +487,15 @@
             <objects>
                 <tableViewController id="KaG-P1-Sfy" customClass="FriendsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" sectionHeaderHeight="28" sectionFooterHeight="28" id="PTB-dJ-aj2">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="383" height="419"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="FriendTableViewCell" rowHeight="90" id="0AA-B8-lWq" customClass="FriendTableViewCell">
-                                <rect key="frame" x="0.0" y="28" width="375" height="90"/>
+                                <rect key="frame" x="0.0" y="28" width="383" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" tableViewCell="0AA-B8-lWq" id="3Gj-QD-nlj">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="89.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="383" height="89.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UserPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="Qga-jE-Yr7">
@@ -546,10 +546,10 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="ChildTableViewCell" rowHeight="90" id="zae-am-SUL" customClass="ChildTableViewCell">
-                                <rect key="frame" x="0.0" y="118" width="375" height="90"/>
+                                <rect key="frame" x="0.0" y="118" width="383" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" tableViewCell="zae-am-SUL" id="LzF-2n-IIE">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="89.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="383" height="89.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UserPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="XNe-7i-Nz0">
@@ -582,10 +582,10 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="NoResultsTableViewCell" rowHeight="68" id="6Ad-qR-vJw">
-                                <rect key="frame" x="0.0" y="208" width="375" height="68"/>
+                                <rect key="frame" x="0.0" y="208" width="383" height="68"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" tableViewCell="6Ad-qR-vJw" id="42W-Mb-hU8">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="67.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="383" height="67.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Search Results" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0TE-4r-0kN">
@@ -932,7 +932,7 @@
                                 <rect key="frame" x="0.0" y="73" width="375" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" tableViewCell="NKJ-Px-kyO" id="BP6-yR-QV3">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="89.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="89"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unknown_user.png" translatesAutoresizingMaskIntoConstraints="NO" id="wO9-Wt-bN3">
@@ -1021,7 +1021,7 @@
                                 <rect key="frame" x="0.0" y="163" width="375" height="68"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" tableViewCell="KLb-G9-r60" id="xUj-G5-GaI">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="67.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="67"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Search Results" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mJV-7G-rZm">
@@ -1109,7 +1109,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bit-V3-HsO" id="ALX-U4-74s">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -1163,7 +1163,7 @@
             </objects>
             <point key="canvasLocation" x="1436" y="3274"/>
         </scene>
-        <!--Team Details-->
+        <!--Camps Details-->
         <scene sceneID="BsF-1X-Sb2">
             <objects>
                 <viewController storyboardIdentifier="TeamDetailsViewController" id="G7Z-mU-6An" customClass="TeamDetailsViewController" sceneMemberID="viewController">
@@ -1336,7 +1336,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Team Details" id="jZg-c6-Lfn">
+                    <navigationItem key="navigationItem" title="Camps Details" id="jZg-c6-Lfn">
                         <barButtonItem key="rightBarButtonItem" enabled="NO" title="Invite" id="4im-tk-dPv">
                             <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
@@ -1652,7 +1652,7 @@
                                 <rect key="frame" x="0.0" y="73" width="375" height="87"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" tableViewCell="fuH-ye-vV2" id="Byw-Dz-iLN">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="86.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="86"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UserPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="ou5-nl-Anu">
@@ -1745,7 +1745,7 @@
                                 <rect key="frame" x="0.0" y="160" width="375" height="68"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" tableViewCell="wK3-dU-x3M" id="568-Pf-J6U">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="67.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="67"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Search Results" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n6O-NU-LTB">
@@ -1970,7 +1970,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="68"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" tableViewCell="20l-YH-MoY" id="t8f-mZ-SBM">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="67.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="68"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UserPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="6e3-cE-qdz">
@@ -2051,7 +2051,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BackgroundBasketballImage" translatesAutoresizingMaskIntoConstraints="NO" id="AB0-W6-tW3">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="openingImage.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="AB0-W6-tW3">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Big_Little_Skills_Academy.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="tFt-Sb-tW2">
@@ -2132,14 +2132,25 @@
                                     <action selector="privacyPolicyPressed:" destination="cWM-Yi-BmZ" eventType="touchUpInside" id="DpM-B4-tju"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Powered by Spotlight" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2pi-iY-3Sk">
+                                <rect key="frame" x="97.5" y="307" width="181.5" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="4YF-Ku-hOS"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="jmC-mG-TIG" firstAttribute="top" secondItem="b9h-da-XGL" secondAttribute="bottom" constant="28" id="12g-5O-6f3"/>
                             <constraint firstItem="dbW-gv-Omu" firstAttribute="centerX" secondItem="NLl-qY-bQe" secondAttribute="centerX" id="6VJ-ch-SRF"/>
                             <constraint firstItem="AB0-W6-tW3" firstAttribute="leading" secondItem="NLl-qY-bQe" secondAttribute="leading" id="D6t-hF-rEs"/>
+                            <constraint firstItem="2pi-iY-3Sk" firstAttribute="centerX" secondItem="tFt-Sb-tW2" secondAttribute="centerX" id="G0O-AO-Egz"/>
                             <constraint firstItem="zUM-6N-rTd" firstAttribute="centerX" secondItem="NLl-qY-bQe" secondAttribute="centerX" id="Gap-mF-WGP"/>
                             <constraint firstAttribute="trailing" secondItem="AB0-W6-tW3" secondAttribute="trailing" id="Hgi-pb-2IW"/>
+                            <constraint firstItem="2pi-iY-3Sk" firstAttribute="top" secondItem="tFt-Sb-tW2" secondAttribute="bottom" constant="8" id="IUc-H9-qXE"/>
                             <constraint firstItem="dbW-gv-Omu" firstAttribute="top" secondItem="zUM-6N-rTd" secondAttribute="bottom" constant="23" id="NjN-3f-2Fb"/>
                             <constraint firstItem="tFt-Sb-tW2" firstAttribute="centerX" secondItem="NLl-qY-bQe" secondAttribute="centerX" id="WvB-YA-u3l"/>
                             <constraint firstItem="Rky-Sd-j79" firstAttribute="top" secondItem="tFt-Sb-tW2" secondAttribute="bottom" constant="171" id="cJ0-bp-Xmd"/>
@@ -2199,7 +2210,7 @@
                                         <action selector="crossButton:" destination="sWr-Vg-xY0" eventType="touchUpInside" id="gId-sC-VJS"/>
                                     </connections>
                                 </button>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="spotlight_logo_1000px" translatesAutoresizingMaskIntoConstraints="NO" id="mSl-8H-j2q">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="balsa_logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="mSl-8H-j2q">
                                     <rect key="frame" x="68" y="95" width="240" height="101"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="101" id="lWI-4c-QcN"/>
@@ -2526,7 +2537,7 @@
                             <outlet property="delegate" destination="mfN-W3-7S4" id="bRY-Tu-XNe"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Teams" id="aCP-bb-B6G">
+                    <navigationItem key="navigationItem" title="Camps" id="aCP-bb-B6G">
                         <barButtonItem key="rightBarButtonItem" image="AddSpotlight" id="QJp-E3-0Te">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
@@ -2544,11 +2555,11 @@
             </objects>
             <point key="canvasLocation" x="-340" y="2433"/>
         </scene>
-        <!--Teams-->
+        <!--Camps-->
         <scene sceneID="Pue-Qn-wU0">
             <objects>
                 <navigationController id="RSS-gK-EsK" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Teams" image="teamtabbar" selectedImage="teamtabbarselected" id="dI3-sj-JxG"/>
+                    <tabBarItem key="tabBarItem" title="Camps" image="teamtabbar" selectedImage="teamtabbarselected" id="dI3-sj-JxG"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="5HL-v2-fQm">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -2945,7 +2956,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="375" height="149"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="spotlight_logo_1000px" translatesAutoresizingMaskIntoConstraints="NO" id="aMv-FM-Q6n">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="balsa_logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="aMv-FM-Q6n">
                                     <rect key="frame" x="8" y="11" width="359" height="128"/>
                                 </imageView>
                             </subviews>
@@ -2991,7 +3002,7 @@
                                 <rect key="frame" x="0.0" y="171" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="n7e-rk-g2b" id="SFv-fD-d0d">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="0Wp-NN-Kts">
@@ -3715,7 +3726,6 @@
         <image name="AddIcon" width="20" height="35"/>
         <image name="AddSpotlight" width="20" height="20"/>
         <image name="BackImage" width="10" height="20"/>
-        <image name="BackgroundBasketballImage" width="375" height="667"/>
         <image name="Big_Little_Skills_Academy.jpg" width="559" height="570"/>
         <image name="ButtonSelected" width="244" height="47"/>
         <image name="ButtonUnselected" width="244" height="47"/>
@@ -3738,6 +3748,7 @@
         <image name="ViewUnselcetd" width="26" height="35"/>
         <image name="Viewselected" width="26" height="35"/>
         <image name="addiconselected" width="20" height="35"/>
+        <image name="balsa_logo.png" width="618" height="392"/>
         <image name="clock" width="14" height="14"/>
         <image name="createspotlight" width="128" height="30"/>
         <image name="cross" width="15" height="15"/>
@@ -3747,6 +3758,7 @@
         <image name="fbloginselcetd" width="244" height="47"/>
         <image name="friends.png" width="25" height="25"/>
         <image name="logo" width="95" height="25"/>
+        <image name="openingImage.jpg" width="600" height="400"/>
         <image name="profiletabbar" width="17" height="19"/>
         <image name="profiletabbarselceted" width="17" height="19"/>
         <image name="searchicon" width="19" height="18"/>
@@ -3754,7 +3766,6 @@
         <image name="spotlightPalceholder" width="343" height="235"/>
         <image name="spotlightTabBar" width="22" height="22"/>
         <image name="spotlightTabbarSelected" width="22" height="22"/>
-        <image name="spotlight_logo_1000px" width="370" height="349"/>
         <image name="teamPlaceholder" width="36" height="36"/>
         <image name="teamfnsunselected" width="29" height="34"/>
         <image name="teamfrnselected" width="29" height="34"/>
@@ -3763,8 +3774,8 @@
         <image name="unknown_user.png" width="500" height="500"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="M8J-oH-n9R"/>
         <segue reference="oT6-GV-6Bb"/>
-        <segue reference="ef7-JM-cSx"/>
-        <segue reference="fJj-m3-4F5"/>
+        <segue reference="MtQ-jd-zmN"/>
     </inferredMetricsTieBreakers>
 </document>

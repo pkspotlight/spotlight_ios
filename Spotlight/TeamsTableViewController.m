@@ -19,7 +19,7 @@
 #import "PendingRequestTableViewController.h"
 
 
-#define SpotlightTeamBoardingText @"This is the teams page. You can create, search, and find the teams you or your family are apart of or want to follow. Click \"+\" in the top right to create a team or search for an already existing team that you want to be apart of"
+#define SpotlightTeamBoardingText @"This is the camps page. You can create, search, and find the camps you or your family are apart of or want to follow. Click \"+\" in the top right to create a camp or search for an already existing camp that you want to be apart of"
 
 @interface TeamsTableViewController (){
     NSString *pendingRequest;

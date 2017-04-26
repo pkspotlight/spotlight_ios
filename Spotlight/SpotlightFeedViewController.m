@@ -20,7 +20,7 @@
 #import "SpotlightBoardView.h"
 #import "UIViewController+AlertAdditions.h"
 
-#define SpotlightFeedBoardingText @"Click \"+\" on the top right to create a Spotlight for a team you created or follow. A Spotlight is a private group of shared media from a game or event. For example, you can create a Spotlight for a basketball game and share all of the photos and videos you captured to a private community of team members. You can then easily create a Spotlight Reel with music that is easily shared via SMS, Email, and social."
+#define SpotlightFeedBoardingText @"Click \"+\" on the top right to create a Spotlight for a camp you created or follow. A Spotlight is a private group of shared media from a game or event. For example, you can create a Spotlight for a basketball game and share all of the photos and videos you captured to a private community of team members. You can then easily create a Spotlight Reel with music that is easily shared via SMS, Email, and social."
 
 @interface SpotlightFeedViewController ()
 {
@@ -50,10 +50,10 @@
     headerView.frame = CGRectMake(0, 0, self.view.frame.size.width, 70);
 
     UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"balsa_logo"]];
-    imgView.frame = CGRectMake((self.view.frame.size.width-140)/2, 22, 140, 25);
-    imgView.contentMode = UIViewContentModeScaleAspectFill;
+    imgView.frame = CGRectMake((self.view.frame.size.width-166)/2, 8, 160, 68);
+    imgView.contentMode = UIViewContentModeScaleAspectFit;
     
- //   [headerView addSubview:imgView];
+    [headerView addSubview:imgView];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 140;
 

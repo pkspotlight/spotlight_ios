@@ -50,7 +50,8 @@
     }
     self.pendingInputDict = [[NSMutableDictionary alloc] init];
     UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    backgroundImageView.image = [UIImage imageNamed:@"BackgroundBasketballImage"];
+    backgroundImageView.image = [UIImage imageNamed:@"openingImage.jpg"];
+    backgroundImageView.contentMode = UIViewContentModeScaleAspectFill;
     self.tableView.backgroundView = backgroundImageView;
     [[self navigationController] setNavigationBarHidden:YES animated:YES];
 }

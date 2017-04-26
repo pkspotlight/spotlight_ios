@@ -49,16 +49,16 @@
                                 @"email",
                                 @"firstName",
                                 @"lastName",
-                                @"birthdate",
                                 @"homeTown",
-                                @"family" ];
+                                @"family",
+                                @"birthdate"];
     self.userPropertyArrayDisplayText = @[ @"Username",
                                            @"Email",
                                            @"First Name",
                                            @"Last Name",
-                                           @"Birthdate",
                                            @"Hometown",
-                                           @"Family" ];
+                                           @"Family",
+                                           @"Birthdate"];
     
     [self loadChildren:nil];
     [self.user[@"profilePic"] fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
@@ -103,8 +103,6 @@
        
         familyName = [name componentsJoinedByString:@","];
           self.pendingFieldDictionary = [self newPendingFieldDictionary];
-        
-       
     }];
 }
 
@@ -167,7 +165,7 @@
         [(FieldEntryTableViewCell*)cell formatForAttributeString:property
                                                      displayText:self.userPropertyArrayDisplayText[indexPath.row]
                                                        withValue:self.pendingFieldDictionary[property] isCenter:NO];
-        if(indexPath.row == 6 || indexPath.row == 4){
+        if(indexPath.row >= 5){
           
             [[(FieldEntryTableViewCell*)cell valueTextField] setEnabled:NO];
         }

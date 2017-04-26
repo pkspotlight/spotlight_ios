@@ -67,12 +67,12 @@
                      songTitle:(NSString*)songTitle assetURL:(NSURL *)asseturl
                        isShare:(BOOL)isShare
                     completion:(void (^)(AVPlayerItem* item, NSURL* fileURL))completion {
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND,0), ^{
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *documentsDirectory = [paths objectAtIndex:0];
         NSString *myPathDocs =  [documentsDirectory stringByAppendingPathComponent:
                                  [NSString stringWithFormat:@"montage.mov"]];
-        
         NSFileManager *manager = [NSFileManager defaultManager];
 
         self.videoSettings = [self videoSettingsWithCodec:AVVideoCodecH264
@@ -129,7 +129,7 @@
                     [NSThread sleepForTimeInterval:0.05];
                 }
                 asset = [AVURLAsset URLAssetWithURL:fileURL
-                                                        options:nil];
+                                            options:nil];
                 [track insertTimeRange:CMTimeRangeMake(kCMTimeZero, asset.duration)
                                ofTrack:[[asset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0]
                                 atTime:totalDuration
@@ -141,11 +141,7 @@
                 NSLog(@"error: %@", [error localizedDescription]);
             }
         }
-        
-        
-        
-        
-        
+
          if(songTitle){
              
         NSURL *audio_url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:songTitle ofType:@"mp3"]];
@@ -158,10 +154,8 @@
              
          }
         
-        
         if(asseturl){
             
-           
             AVURLAsset  *audioAsset = [[AVURLAsset alloc]initWithURL:asseturl options:nil];
             AVMutableCompositionTrack *audioTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio
                                                                                 preferredTrackID:kCMPersistentTrackID_Invalid];
@@ -170,7 +164,6 @@
             [manager removeItemAtPath:myPathDocs error:nil];
             
         }
-        
         
         NSMutableArray* instructions = [NSMutableArray array];
         
@@ -195,9 +188,6 @@
                 completion(pi,nil);
             });
         } else {
-            //
-            
-            
             AVAssetExportSession *session = [[AVAssetExportSession alloc] initWithAsset:mixComposition presetName:AVAssetExportPresetHighestQuality];
             // session.videoComposition = mutableVideoComposition;
             NSString *fileName2 = [NSString stringWithFormat:@"%@_%@", [[NSProcessInfo processInfo] globallyUniqueString], @"spotlight.mov"];

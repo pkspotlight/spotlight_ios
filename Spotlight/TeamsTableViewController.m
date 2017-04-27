@@ -305,16 +305,16 @@
 }
 
 - (IBAction)addTeamButtonPressed:(id)sender {
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Search/Add a New Team"
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Search/Add a New Camp"
                                                                    message:@""
                                                             preferredStyle:UIAlertControllerStyleActionSheet];
-    [alert addAction:[UIAlertAction actionWithTitle:@"Search Teams"
+    [alert addAction:[UIAlertAction actionWithTitle:@"Search Camps"
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * _Nonnull action) {
                                                 [self performSegueWithIdentifier:@"SearchTeamsSegue"
                                                                           sender:sender];
                                             }]];
-    [alert addAction:[UIAlertAction actionWithTitle:@"Add New Team"
+    [alert addAction:[UIAlertAction actionWithTitle:@"Add New Camp"
                                               style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * _Nonnull action) {
                                                 [self performSegueWithIdentifier:@"CreateTeamSegue"

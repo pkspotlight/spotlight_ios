@@ -331,6 +331,7 @@
 		887EC7611C6974ED001DBDB3 /* FriendFinderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendFinderTableViewController.m; sourceTree = "<group>"; };
 		887EC7631C697778001DBDB3 /* CreateFamilyMemberTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateFamilyMemberTableViewController.h; sourceTree = "<group>"; };
 		887EC7641C697778001DBDB3 /* CreateFamilyMemberTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateFamilyMemberTableViewController.m; sourceTree = "<group>"; };
+		887F0E421EB14EAE005976E0 /* BALSA.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BALSA.entitlements; sourceTree = "<group>"; };
 		887FF4CC1BD530B400F3679D /* Spotlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Spotlight.h; sourceTree = "<group>"; };
 		887FF4CD1BD530B400F3679D /* Spotlight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Spotlight.m; sourceTree = "<group>"; };
 		8893FD701BFC1B5900711779 /* spotlight@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "spotlight@3x.png"; sourceTree = "<group>"; };
@@ -658,6 +659,7 @@
 		88A736CB1B91318D00093B27 = {
 			isa = PBXGroup;
 			children = (
+				887F0E421EB14EAE005976E0 /* BALSA.entitlements */,
 				A85F44101EB12F43001C035D /* openingImage.jpg */,
 				8811D5071E8EA10E0022C00D /* Big_Little_Skills_Academy.jpg */,
 				88B71EF31E9D641600B59A0F /* balsa_logo.png */,
@@ -920,7 +922,7 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
@@ -1298,6 +1300,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = BALSA.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = YKL5CRQW8Z;
@@ -1375,6 +1378,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = BALSA.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = YKL5CRQW8Z;

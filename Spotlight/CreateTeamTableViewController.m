@@ -14,6 +14,7 @@
 #import <MBProgressHUD.h>
 #import <MobileCoreServices/UTCoreTypes.h>
 #import "Child.h"
+#import "Organization.h"
 #import "RecieptAlertView.h"
 @interface CreateTeamTableViewController ()
 
@@ -37,8 +38,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.teamPropertyArray = @[ @"teamName", @"town", @"organization", @"sport", @"grade", @"year", @"season", @"coach"];
-    self.teamPropertyDisplay = @[ @"Team Name", @"Town", @"Organization", @"Sport", @"Grade", @"Year", @"Season", @"Coach"];
+    self.teamPropertyArray = @[ @"teamName", @"town", @"sport", @"grade", @"year", @"season", @"coach"];
+    self.teamPropertyDisplay = @[ @"Camp Name", @"Town", @"Sport", @"Grade", @"Year", @"Season", @"Coach"];
 
     [self.photoUploadIndicator setHidden:YES];
     self.childSelectedarray = [NSMutableArray new];
@@ -50,7 +51,7 @@
     _selfChild.profilePic = [User currentUser].profilePic;
     
     if(self.isEdit){
-        self.navigationItem.title = @"Edit Team";
+        self.navigationItem.title = @"Edit Camp";
 
     }
     
@@ -97,7 +98,7 @@
 
 - (BOOL)hasEnteredRequiredFields{
     if ([self.pendingFieldDictionary[@"teamName"] length] == 0) {
-        [self showAlertforMissingField:@"team name"];
+        [self showAlertforMissingField:@"camp name"];
         return NO;
     } else if ([self.pendingFieldDictionary[@"town"] length] == 0) {
         [self showAlertforMissingField:@"town"];
@@ -139,6 +140,11 @@
         self.team.teamLogoMedia = self.teamLogo;
     }
     [self.team.moderators addObject:[User currentUser]];
+
+    Organization *org = [PFQuery getObjectOfClass:@"Organization"
+                                         objectId:@"63oTE5Je9r"
+                                            error:nil];
+    [self.team.organization addObject:org];
     [self.team saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
             for(Child *child in self.childSelectedarray){
@@ -147,8 +153,12 @@
             User* user = [User currentUser];
             [user.teams addObject:self.team];
             
+            [self dismissViewControllerAnimated:YES completion:nil];
+
+            
             [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-                [self dismissViewControllerAnimated:YES completion:nil];
+
+                
             }];
             [Child saveAllInBackground:self.childSelectedarray block:^(BOOL succeeded, NSError * _Nullable error) {
                 
@@ -166,7 +176,6 @@
     if (![self hasEnteredRequiredFields]) {
         return;
     }
-    
     
     [self.view endEditing:NO];
 

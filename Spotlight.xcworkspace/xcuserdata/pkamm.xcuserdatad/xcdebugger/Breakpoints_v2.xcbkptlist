@@ -55,30 +55,30 @@
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[SpotlightCollectionViewController shareMontageButtonPressed:]"
-                  moduleName = "Spotlight"
+                  moduleName = "BALSA"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/pkamm/Documents/spotlight/new_ios/Spotlight/SpotlightCollectionViewController.m"
-                  timestampString = "514326801.79464"
+                  timestampString = "515014780.873403"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "710"
                   endingLineNumber = "710"
-                  offsetFromSymbolStart = "780">
+                  offsetFromSymbolStart = "871">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "__63-[SpotlightCollectionViewController shareMontageButtonPressed:]_block_invoke.553"
-                  moduleName = "Spotlight"
+                  moduleName = "BALSA"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/pkamm/Documents/spotlight/new_ios/Spotlight/SpotlightCollectionViewController.m"
-                  timestampString = "514326801.796066"
+                  timestampString = "515014780.874901"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "710"
                   endingLineNumber = "710"
-                  offsetFromSymbolStart = "24">
+                  offsetFromSymbolStart = "16">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -273,45 +273,45 @@
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[UIViewController(MediaAddingFunctionality) saveImageWithMediaInfo:title:]"
-                  moduleName = "Spotlight"
+                  moduleName = "BALSA"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/pkamm/Documents/spotlight/new_ios/Spotlight/UIViewController+MediaAddingFunctionality.m"
-                  timestampString = "514326801.820917"
+                  timestampString = "515014780.901677"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "27"
                   endingLineNumber = "27"
-                  offsetFromSymbolStart = "88">
+                  offsetFromSymbolStart = "102">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "__Block_byref_object_copy_"
-                  moduleName = "Spotlight"
+                  moduleName = "BALSA"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/pkamm/Documents/spotlight/new_ios/Spotlight/UIViewController+MediaAddingFunctionality.m"
-                  timestampString = "514326801.82219"
+                  timestampString = "515014780.902982"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "27"
                   endingLineNumber = "27"
-                  offsetFromSymbolStart = "24">
+                  offsetFromSymbolStart = "16">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "__Block_byref_object_dispose_"
-                  moduleName = "Spotlight"
+                  moduleName = "BALSA"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/pkamm/Documents/spotlight/new_ios/Spotlight/UIViewController+MediaAddingFunctionality.m"
-                  timestampString = "514326801.823451"
+                  timestampString = "515014780.904664"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "27"
                   endingLineNumber = "27"
-                  offsetFromSymbolStart = "20">
+                  offsetFromSymbolStart = "16">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -432,30 +432,30 @@
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[SpotlightTaggedParticipantView okBtnClicked:]"
-                  moduleName = "Spotlight"
+                  moduleName = "BALSA"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/pkamm/Documents/spotlight/new_ios/Spotlight/SpotlightTaggedParticipantView.m"
-                  timestampString = "514326801.84247"
+                  timestampString = "515014780.924233"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "92"
                   endingLineNumber = "92"
-                  offsetFromSymbolStart = "248">
+                  offsetFromSymbolStart = "208">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[SpotlightTaggedParticipantView okBtnClicked:]"
-                  moduleName = "Spotlight"
+                  moduleName = "BALSA"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/pkamm/Documents/spotlight/new_ios/Spotlight/SpotlightTaggedParticipantView.m"
-                  timestampString = "514326801.843754"
+                  timestampString = "515014780.925538"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "92"
                   endingLineNumber = "92"
-                  offsetFromSymbolStart = "264">
+                  offsetFromSymbolStart = "216">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -544,30 +544,30 @@
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[SignUpTableViewController createAccountButtonPressed:]"
-                  moduleName = "Spotlight"
+                  moduleName = "BALSA"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/pkamm/Documents/spotlight/new_ios/Spotlight/SignUpTableViewController.m"
-                  timestampString = "514326801.857021"
+                  timestampString = "515014780.938731"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "154"
-                  endingLineNumber = "154"
-                  offsetFromSymbolStart = "2508">
+                  startingLineNumber = "155"
+                  endingLineNumber = "155"
+                  offsetFromSymbolStart = "2812">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "__56-[SignUpTableViewController createAccountButtonPressed:]_block_invoke"
-                  moduleName = "Spotlight"
+                  moduleName = "BALSA"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/pkamm/Documents/spotlight/new_ios/Spotlight/SignUpTableViewController.m"
-                  timestampString = "514326801.858268"
+                  timestampString = "515014780.940026"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "155"
-                  endingLineNumber = "155"
-                  offsetFromSymbolStart = "56">
+                  startingLineNumber = "156"
+                  endingLineNumber = "156"
+                  offsetFromSymbolStart = "58">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -774,6 +774,38 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "139"
             endingLineNumber = "139">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Spotlight/CreateTeamTableViewController.m"
+            timestampString = "515014779.756576"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
+            landmarkName = "-savePendingChangesToTeam:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Spotlight/CreateTeamTableViewController.m"
+            timestampString = "515014779.756576"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "149"
+            endingLineNumber = "149"
+            landmarkName = "-savePendingChangesToTeam:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

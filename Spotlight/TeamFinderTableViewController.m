@@ -178,7 +178,7 @@
         [self.navigationController pushViewController:teamDetails animated:YES];
         
     } else {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Follow This Team?" message:@"A request will be sent to the administrator" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Follow This Camp?" message:@"A request will be sent to the administrator" preferredStyle:UIAlertControllerStyleAlert];
         [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [self followButtonPressed:[tableView cellForRowAtIndexPath:indexPath] completion:nil];
         }]];
@@ -343,7 +343,7 @@
 
 - (void)showAlertWithChildren:(NSArray*)children team:(Team*)team completion:(void (^)(void))completion {
     if (children && [children count] > 0) {
-        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Which Child is on this Team?"
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Which Child is in this Camp?"
                                                                        message:@""
                                                                 preferredStyle:UIAlertControllerStyleActionSheet];
         [alert addAction:[UIAlertAction
@@ -355,7 +355,7 @@
                               [moderatorQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
                                   if(objects.count==0){
                                       [[[UIAlertView alloc] initWithTitle:@""
-                                                                  message:@"No admin found for this team"
+                                                                  message:@"No admin found for this camp"
                                                                  delegate:nil
                                                         cancelButtonTitle:nil
                                                         otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
@@ -363,7 +363,7 @@
                                       for (User* user in objects) {
                                           if(![self isRequestAllowed:NO withUser:user withChild:nil withTeam:team]){
                                               [[[UIAlertView alloc] initWithTitle:@""
-                                                                          message:@"A request to follow this team has already been sent to the team owner."
+                                                                          message:@"A request to follow this team has already been sent to the camp owner."
                                                                          delegate:nil
                                                                 cancelButtonTitle:nil
                                                                 otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
@@ -395,7 +395,7 @@
                                                         [moderatorQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
                                                             if(objects.count==0){
                                                                 [[[UIAlertView alloc] initWithTitle:@""
-                                                                                            message:@"No admin found for this team."
+                                                                                            message:@"No admin found for this camp."
                                                                                            delegate:nil
                                                                                   cancelButtonTitle:nil
                                                                                   otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
@@ -404,7 +404,7 @@
                                                                     
                                                                     if(![self isRequestAllowed:YES withUser:nil withChild:child withTeam:team]){
                                                                         [[[UIAlertView alloc] initWithTitle:@""
-                                                                                                    message:@"A request to follow this team has already been sent to the team owner."
+                                                                                                    message:@"A request to follow this camp has already been sent to the camp owner."
                                                                                                    delegate:nil
                                                                                           cancelButtonTitle:nil
                                                                                           otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
@@ -439,7 +439,7 @@
         [moderatorQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
             if(objects.count==0){
                 [[[UIAlertView alloc] initWithTitle:@""
-                                            message:@"No admin found for this team."
+                                            message:@"No admin found for this camp."
                                            delegate:nil
                                   cancelButtonTitle:nil
                                   otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];
@@ -450,7 +450,7 @@
                         
                         
                         [[[UIAlertView alloc] initWithTitle:@""
-                                                    message:@"A request to follow this team has already been sent to team owner."
+                                                    message:@"A request to follow this camp has already been sent to team owner."
                                                    delegate:nil
                                           cancelButtonTitle:nil
                                           otherButtonTitles:NSLocalizedString(@"Ok", nil), nil] show];

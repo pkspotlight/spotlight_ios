@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "88A736D31B91318D00093B27"
-               BuildableName = "Spotlight.app"
-               BlueprintName = "Spotlight"
+               BuildableName = "BALSA.app"
+               BlueprintName = "BALSA"
                ReferencedContainer = "container:Spotlight.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -57,8 +57,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "88A736D31B91318D00093B27"
-            BuildableName = "Spotlight.app"
-            BlueprintName = "Spotlight"
+            BuildableName = "BALSA.app"
+            BlueprintName = "BALSA"
             ReferencedContainer = "container:Spotlight.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -80,8 +80,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "88A736D31B91318D00093B27"
-            BuildableName = "Spotlight.app"
-            BlueprintName = "Spotlight"
+            BuildableName = "BALSA.app"
+            BlueprintName = "BALSA"
             ReferencedContainer = "container:Spotlight.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -99,8 +99,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "88A736D31B91318D00093B27"
-            BuildableName = "Spotlight.app"
-            BlueprintName = "Spotlight"
+            BuildableName = "BALSA.app"
+            BlueprintName = "BALSA"
             ReferencedContainer = "container:Spotlight.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

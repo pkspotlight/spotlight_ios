@@ -167,6 +167,8 @@
 		88FDB88E1C8EA2A1008C9A3D /* TB - Disney Funk 124bpm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 88FDB87E1C8EA2A1008C9A3D /* TB - Disney Funk 124bpm.mp3 */; };
 		88FDB8941C8EA2A1008C9A3D /* DT_TheDuff_CoolKids_INST130.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 88FDB8841C8EA2A1008C9A3D /* DT_TheDuff_CoolKids_INST130.mp3 */; };
 		A85F44111EB12F43001C035D /* openingImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A85F44101EB12F43001C035D /* openingImage.jpg */; };
+		A8CF22D21EBB9C7A00D519D9 /* TermsOfServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8CF22D01EBB9C7A00D519D9 /* TermsOfServiceViewController.m */; };
+		A8CF22D31EBB9C7A00D519D9 /* TermsOfServiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8CF22D11EBB9C7A00D519D9 /* TermsOfServiceViewController.xib */; };
 		FC4F359EA32F39CBF10D5525 /* libPods-Spotlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DCBB464380C17488F0B2051 /* libPods-Spotlight.a */; };
 /* End PBXBuildFile section */
 
@@ -416,6 +418,9 @@
 		88FDB8841C8EA2A1008C9A3D /* DT_TheDuff_CoolKids_INST130.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = DT_TheDuff_CoolKids_INST130.mp3; sourceTree = "<group>"; };
 		A18D079BCFAB299658BDF57C /* Pods-Spotlight.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spotlight.release.xcconfig"; path = "Pods/Target Support Files/Pods-Spotlight/Pods-Spotlight.release.xcconfig"; sourceTree = "<group>"; };
 		A85F44101EB12F43001C035D /* openingImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = openingImage.jpg; sourceTree = "<group>"; };
+		A8CF22CF1EBB9C7A00D519D9 /* TermsOfServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TermsOfServiceViewController.h; sourceTree = "<group>"; };
+		A8CF22D01EBB9C7A00D519D9 /* TermsOfServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TermsOfServiceViewController.m; sourceTree = "<group>"; };
+		A8CF22D11EBB9C7A00D519D9 /* TermsOfServiceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TermsOfServiceViewController.xib; sourceTree = "<group>"; };
 		C9EF640CCA8ED05A107596FF /* libPods-SpotlightTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SpotlightTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D373EE3193DFC78DC9BEE3E3 /* Pods-Spotlight.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spotlight.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Spotlight/Pods-Spotlight.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -786,6 +791,9 @@
 				8849A1E51BA0CC7A00511DD5 /* SignUpInputTableViewCell.m */,
 				8849A1E71BA2590800511DD5 /* IntroViewController.h */,
 				8849A1E81BA2590800511DD5 /* IntroViewController.m */,
+				A8CF22CF1EBB9C7A00D519D9 /* TermsOfServiceViewController.h */,
+				A8CF22D01EBB9C7A00D519D9 /* TermsOfServiceViewController.m */,
+				A8CF22D11EBB9C7A00D519D9 /* TermsOfServiceViewController.xib */,
 			);
 			name = SignUp;
 			sourceTree = "<group>";
@@ -973,6 +981,7 @@
 				395C8BA81D50B3B100BC6087 /* delete@2x.png in Resources */,
 				84A234451D3F5F0D008AB7C0 /* Overlay.png in Resources */,
 				88A736E81B91318D00093B27 /* LaunchScreen.xib in Resources */,
+				A8CF22D31EBB9C7A00D519D9 /* TermsOfServiceViewController.xib in Resources */,
 				07FCD23C1D46019C0030E8DC /* video_Icon.png in Resources */,
 				84E0DF951D780B89005652F3 /* TaggedParticipantTableViewCell.xib in Resources */,
 				396C0E771D40F90A009654EA /* PEPhotoCropEditor.bundle in Resources */,
@@ -1171,6 +1180,7 @@
 				8849A1E61BA0CC7A00511DD5 /* SignUpInputTableViewCell.m in Sources */,
 				398D24A21D40D64D00647117 /* MWTapDetectingImageView.m in Sources */,
 				84A2343D1D3F5F0D008AB7C0 /* ELCAlbumPickerController.m in Sources */,
+				A8CF22D21EBB9C7A00D519D9 /* TermsOfServiceViewController.m in Sources */,
 				88EC50241C0DB72500077E85 /* FriendProfileViewController.m in Sources */,
 				398D24A01D40D64D00647117 /* MWPhoto.m in Sources */,
 				8862A1941E81CC5E0016139D /* OrganizationTableViewController.m in Sources */,

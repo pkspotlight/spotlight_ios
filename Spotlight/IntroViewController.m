@@ -16,6 +16,7 @@
 #import "SDWebImageManager.h"
 #import "ProfilePictureMedia.h"
 #import "User.h"
+#import "TermsOfServiceViewController.h"
 
 @interface IntroViewController ()
 
@@ -38,7 +39,16 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-        [[self navigationController] setNavigationBarHidden:YES animated:YES];
+    [[self navigationController] setNavigationBarHidden:YES animated:YES];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if(![[NSUserDefaults standardUserDefaults] objectForKey:@"hasAgreedToTOS"] ||
+       ![[[NSUserDefaults standardUserDefaults] objectForKey:@"hasAgreedToTOS"] boolValue] ) {
+        TermsOfServiceViewController* tos = [[TermsOfServiceViewController alloc] init];
+        [self presentViewController:tos animated:YES completion:nil];
+    }
 }
 
 #pragma mark - Navigation
